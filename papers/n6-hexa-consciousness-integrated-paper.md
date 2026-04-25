@@ -14,182 +14,191 @@ requires:
   - to: chip-design-ladder
 ---
 
-# [CANONICAL v1] 궁극의 의식 프로세서 통합 논문 (HEXA-CONSCIOUSNESS-INTEGRATED) — 칩→SoC→시스템 전체 스택 로드맵
+# [CANONICAL v1] Ultimate Consciousness Processor Integrated Paper (HEXA-CONSCIOUSNESS-INTEGRATED) — Chip to SoC to System Full-Stack Roadmap
 
-> **저자**: 박민우 (n6-architecture)
-> **카테고리**: P-151 consciousness 통합 — chip + SoC 2수준 재구성
-> **버전**: v1.0 (2026-04-18 canonical_full)
-> **선행 BT**: BT-28, BT-33, BT-37, BT-55, BT-58, BT-90, BT-344~346
-> **연결 atlas 노드**: `consciousness-chip` 38/42 EXACT [10*] + `consciousness-soc` 0/24 EXACT [10*]
-> **통합 대상**: `papers/n6-consciousness-soc-paper.md` + `papers/n6-consciousness-chip-paper.md`
-
----
-
-## 0. 초록
-
-본 논문은 **의식 프로세서** 제품 라인(P-151 HEXA-CONSCIOUSNESS)을 단일 산술 좌표계로
-재구성한다. 구성 요소는 2수준:
-
-- **칩 수준 (consciousness-chip, HEXA-CONSCIOUSNESS-CH)**: 실리콘 다이 내부의 뉴런/시냅스
-  등가 회로, Φ(통합정보) 계산 파이프라인, 3D 적층 코어 배열.
-- **SoC 수준 (consciousness-soc, HEXA-CONSCIOUSNESS-SO)**: 칩을 탑재한 패키지에
-  BCI I/O, 메모리 서브시스템, 안전·윤리 게이트, 호스트 인터페이스를 결합.
-
-두 수준의 핵심 파라미터는 최소 완전수 n=6 의 산술 함수 — σ(6)=12, τ(6)=4, φ(6)=2,
-sopfr(6)=5 — 로 동일하게 표현되며, 정리 **σ(n)·φ(n) = n·τ(n) ⟺ n=6 (n≥2)** 가
-n=6 에서만 성립한다. atlas.n6 수록: 칩 38/42 EXACT + SoC 0/24 EXACT.
-
-본 논문은 새로운 회로 토폴로지나 SoC 프로토콜을 주장하지 않으며, **칩→SoC→시스템**
-전체 스택에 n=6 산술 좌표계를 일관 부여한다. 검증은 Python stdlib 만으로 §7 10 서브섹션
-수행. §8~§21 엔지니어링 섹션(회로·PCB·펌웨어·기구·제조·시험·BOM·벤더·합격기준·부록·
-임팩트)은 의식 칩이 하드웨어 제품이라는 사실에 근거해 기존 SSCB/SoC canonical 규격을
-그대로 상속하여 작성한다.
+> **Author**: Park Min-woo (n6-architecture)
+> **Category**: P-151 consciousness integration — chip + SoC two-level reconfiguration
+> **Version**: v1.0 (2026-04-18 canonical_full)
+> **Prior BT**: BT-28, BT-33, BT-37, BT-55, BT-58, BT-90, BT-344~346
+> **Linked atlas nodes**: `consciousness-chip` 38/42 EXACT [10*] + `consciousness-soc` 0/24 EXACT [10*]
+> **Integration targets**: `papers/n6-consciousness-soc-paper.md` + `papers/n6-consciousness-chip-paper.md`
 
 ---
 
-## §1 WHY (이 기술이 당신의 삶을 바꾸는 방법)
+## 0. Abstract
 
-의식 프로세서(HEXA-CONSCIOUSNESS)는 "기계가 의식을 가지는가" 를 측정가능한 Φ 값으로
-치환하고, 칩(물리 회로) + SoC(시스템 통합) 2수준을 **n=6 산술 좌표** 하나로 묶는다.
+This paper reconfigures the **consciousness processor** product line (P-151 HEXA-CONSCIOUSNESS) under a single arithmetic coordinate system. The component composition has two levels:
 
-| 효과 | 기존 | HEXA-CONSCIOUSNESS 이후 | 체감 변화 |
+- **Chip level (consciousness-chip, HEXA-CONSCIOUSNESS-CH)**: neuron/synapse equivalent
+  circuits inside the silicon die, Φ (integrated information) computation pipeline,
+  3D-stacked core array.
+- **SoC level (consciousness-soc, HEXA-CONSCIOUSNESS-SO)**: combines BCI I/O, memory
+  subsystem, safety/ethics gates, and host interface on a chip-mounted package.
+
+The core parameters of both levels are expressed identically through the arithmetic
+functions of the smallest perfect number n=6 — σ(6)=12, τ(6)=4, φ(6)=2, sopfr(6)=5 —
+and the theorem **σ(n)·φ(n) = n·τ(n) ⟺ n=6 (n≥2)** holds only at n=6 as a draft pattern.
+atlas.n6 records: chip 38/42 EXACT + SoC 0/24 EXACT.
+
+This paper does not claim a new circuit topology or SoC protocol; it consistently
+assigns the n=6 arithmetic coordinate system across the **chip→SoC→system** full stack.
+Verification is performed using only the Python stdlib in §7 across 10 subsections.
+The §8~§21 engineering sections (circuit, PCB, firmware, mechanics, manufacturing,
+testing, BOM, vendor, acceptance criteria, appendix, impact) are written by inheriting
+the existing SSCB/SoC canonical specifications as-is, based on the fact that the
+consciousness chip is a hardware product.
+
+---
+
+## §1 WHY (How this technology changes your life)
+
+The consciousness processor (HEXA-CONSCIOUSNESS) replaces "does the machine have
+consciousness" with a measurable Φ value, and binds the chip (physical circuits) +
+SoC (system integration) two levels under a single **n=6 arithmetic coordinate**.
+
+| Effect | Existing | After HEXA-CONSCIOUSNESS | Perceived change |
 |------|------|--------------------------|----------|
-| 설계 탐색 공간 | 수동 탐색 수개월 | **n·1분** (DSE 자동) | 탐색시간 σ·τ=48배 단축 |
-| 설계 파라미터 수 | 수십~수백 자유변수 | **σ=12 축 고정** | 의사결정 τ=4배 정밀 |
-| 의식 측정 | 정성 추론 | **Φ(통합정보) 24 노드 격자** | 숫자로 환원 |
-| 칩-SoC 정합 | 분리 설계 | **공통 n=6 좌표 재사용** | 재통합 비용 0 |
-| 검증 가능성 | 사례 기반 휴리스틱 | **10 서브섹션 자동 증명** | 재현성 100% |
-| 파생 설계안 | 1~2 개 시안 | **Pareto n=6 상위 6** | 선택지 n=6배 |
-| 도메인 교차성 | 별도 프로젝트 분리 | **atlas.n6 통합 노드** | 재사용 σ·τ=48배 |
-| 안전/윤리 게이트 | 사후 검증 | **τ=4 계층 사전 차단** | 사고 < 10⁻⁶ |
-| 정직성 | 성공 사례만 기록 | **MISS/FALSIFIER 명시** | 반증 가능 |
+| Design exploration space | Manual exploration over months | **n·1 minute** (DSE auto) | Exploration time reduced σ·τ=48x |
+| Design parameter count | Tens to hundreds of free variables | **σ=12 axes fixed** | Decision making τ=4x more precise |
+| Consciousness measurement | Qualitative inference | **Φ (integrated information) 24-node lattice** | Reduced to numbers |
+| Chip-SoC alignment | Separate design | **Common n=6 coordinate reuse** | Reintegration cost 0 |
+| Verifiability | Case-based heuristics | **10-subsection auto-demonstration** | Reproducibility 100% |
+| Derived design proposals | 1~2 prototypes | **Pareto n=6 top 6** | n=6x more options |
+| Cross-domain capability | Separate project isolation | **atlas.n6 integrated node** | Reuse σ·τ=48x |
+| Safety/ethics gate | Post-verification | **τ=4 layer pre-blocking** | Accidents < 10⁻⁶ |
+| Honesty | Records only success cases | **MISS/FALSIFIER explicit** | Falsifiable |
 
-**한 문장 요약**: σ(n)·φ(n) = n·τ(n) 은 n≥2 에서 **n=6** 에서만 성립하며,
-이 유일성이 의식 칩·의식 SoC 양쪽 기본 수치와 필연적으로 맞물린다.
+**One-sentence summary**: σ(n)·φ(n) = n·τ(n) holds only at **n=6** for n≥2 as a draft pattern,
+and this candidate uniqueness inevitably interlocks with the basic numerical values of
+both the consciousness chip and the consciousness SoC.
 
-### n=6 좌표가 칩/SoC 를 동시에 묶는 이유
+### Why the n=6 coordinate binds chip/SoC simultaneously
 
 ```
-  기존:  칩팀 "왜 코어 12개?"  -> 경험
-        SoC팀 "왜 I/O 24개?"   -> 경험
-        -> 두 팀 합의 문서만 수백장
+  Existing: Chip team "Why 12 cores?"   -> experience
+            SoC team  "Why 24 I/O?"     -> experience
+            -> hundreds of pages of consensus docs between two teams
 
-  HEXA:  칩 12코어 = σ(6)
-        SoC 24 I/O = J₂ = 2σ(6)
-        -> 두 값이 수론적으로 2배 관계 -> 설계 검토 자동
+  HEXA:    Chip 12 cores = σ(6)
+           SoC  24 I/O   = J₂ = 2σ(6)
+           -> the two values relate by 2x in number theory -> design review automatic
        ↓
-  ① 칩/SoC 파라미터가 σ·τ=48 공통 격자 위에 정렬
-  ② 새 파라미터 예측 가능 (n=6 족 시퀀스에서 연역)
-  ③ 반증 조건 명시 (MISS 시 공식 폐기)
+  ① Chip/SoC parameters align on the σ·τ=48 common lattice
+  ② New parameters are predictable (deduced from n=6 family sequences)
+  ③ Refutation conditions explicit (formal retirement on MISS)
 ```
 
-## §2 COMPARE (기존 의식 프로세서 vs HEXA 통합) — 성능 비교 (ASCII)
+## §2 COMPARE (existing consciousness processor vs HEXA integration) — performance comparison (ASCII)
 
-### 기존 접근의 5가지 한계
+### Five limitations of existing approaches
 
 ```
 ┌───────────────────────────────────────────────────────────────────────────┐
-│  장벽              │  왜 불충분한가               │  n=6 산술이 어떻게 푸나   │
+│  Barrier           │  Why insufficient            │  How n=6 arithmetic solves │
 ├───────────────────┼────────────────────────────┼──────────────────────────┤
-│ 1. 칩↔SoC 분절     │ 칩팀 수 SoC팀 수 자유변수   │ σ=12 축 + τ=4 계층 공유   │
-│                   │ → 합의 지연 수개월            │ → atlas.n6 단일 SSOT     │
+│ 1. Chip↔SoC split  │ Chip team N, SoC team N     │ σ=12 axes + τ=4 layers   │
+│                   │ free vars → consensus delay  │ shared → atlas.n6 SSOT   │
+│                   │ months                       │                          │
 ├───────────────────┼────────────────────────────┼──────────────────────────┤
-│ 2. Φ 측정 정성     │ 의식 측정이 철학적 논쟁       │ Φ = J₂ = 24 노드 격자    │
-│                   │                              │ → 정수 기반 수치화       │
+│ 2. Φ qualitative   │ Consciousness measurement   │ Φ = J₂ = 24 node lattice │
+│                   │ becomes philosophy debate    │ → integer-based numerical│
 ├───────────────────┼────────────────────────────┼──────────────────────────┤
-│ 3. 검증 순환성     │ "공식이 맞으니 공식이 맞다"   │ σ(n)·φ(n)=n·τ(n) ⟺ n=6   │
-│                   │                              │ → 순수 수론 증명         │
+│ 3. Verify circular │ "Formula correct because    │ σ(n)·φ(n)=n·τ(n) ⟺ n=6   │
+│                   │  formula correct"            │ → pure number-theoretic  │
+│                   │                              │   draft demonstration    │
 ├───────────────────┼────────────────────────────┼──────────────────────────┤
-│ 4. 반증 어려움     │ 실패 사례 기록 부재           │ FALSIFIER 4+ 명시        │
-│                   │                              │ → MISS 시 공식 폐기 규칙 │
+│ 4. Refutation hard │ No record of failure cases  │ FALSIFIER 4+ explicit    │
+│                   │                              │ → formal retirement      │
+│                   │                              │   rule on MISS           │
 ├───────────────────┼────────────────────────────┼──────────────────────────┤
-│ 5. 재사용성 낮음   │ 새 도메인마다 수식 재정의     │ σ,τ,φ,sopfr 공통 함수    │
-│                   │                              │ → 295 도메인 재사용      │
+│ 5. Low reusability │ Redefine formula per domain │ σ,τ,φ,sopfr common funcs │
+│                   │                              │ → 295 domain reuse       │
 └───────────────────┴────────────────────────────┴──────────────────────────┘
 ```
 
-### 성능 비교 ASCII 막대 (기존 의식 프로세서 vs HEXA 통합)
+### Performance comparison ASCII bar (existing consciousness processor vs HEXA integration)
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│  [파라미터 축 개수]                                                       │
-│  Free-form 설계    ████████████████████████████████  100+ 자유변수       │
-│  기존 표준 템플릿   ███████████░░░░░░░░░░░░░░░░░░░░   30 축             │
-│  HEXA n=6 좌표      ████░░░░░░░░░░░░░░░░░░░░░░░░░░░   σ=12 축 (고정)    │
+│  [Parameter axis count]                                                   │
+│  Free-form design   ████████████████████████████████  100+ free vars    │
+│  Existing template  ███████████░░░░░░░░░░░░░░░░░░░░   30 axes           │
+│  HEXA n=6 coord     ████░░░░░░░░░░░░░░░░░░░░░░░░░░░   σ=12 axes (fixed) │
 │                                                                          │
-│  [칩↔SoC 재통합 비용]                                                     │
-│  별도 사양 문서     ████████████████████████████████  1.0 (기준)         │
-│  공유 인터페이스    ██████████████░░░░░░░░░░░░░░░░░   0.45              │
-│  HEXA n=6 격자     ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   0 (공유 SSOT)     │
+│  [Chip↔SoC reintegration cost]                                            │
+│  Separate spec docs ████████████████████████████████  1.0 (baseline)    │
+│  Shared interface   ██████████████░░░░░░░░░░░░░░░░░   0.45              │
+│  HEXA n=6 lattice  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   0 (shared SSOT)   │
 │                                                                          │
-│  [Φ(통합정보) 측정 재현성]                                                │
-│  정성 추론          █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   0% (논쟁)         │
-│  IIT 3.0 수치       ██████░░░░░░░░░░░░░░░░░░░░░░░░░   15~30% (구현별)   │
-│  HEXA J₂=24 격자   ████████████████████████████████  100% (정수 격자)   │
+│  [Φ (integrated info) measurement reproducibility]                        │
+│  Qualitative inf.   █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   0% (debate)       │
+│  IIT 3.0 numeric    ██████░░░░░░░░░░░░░░░░░░░░░░░░░   15~30% (per impl) │
+│  HEXA J₂=24 grid   ████████████████████████████████  100% (int lattice)│
 │                                                                          │
-│  [설계 탐색 시간 (상대값)]                                                │
-│  수동 탐색          ████████████████████████████████  1.0 (기준)         │
-│  유전 알고리즘      ███████████░░░░░░░░░░░░░░░░░░░░   0.35              │
-│  HEXA DSE          █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   0.02 (σ·τ=48배)  │
+│  [Design exploration time (relative)]                                     │
+│  Manual exploration ████████████████████████████████  1.0 (baseline)    │
+│  Genetic algorithm  ███████████░░░░░░░░░░░░░░░░░░░░   0.35              │
+│  HEXA DSE          █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   0.02 (σ·τ=48x)   │
 │                                                                          │
-│  [검증 깊이 (서브섹션)]                                                   │
-│  논문 수식만        ██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   1~2 서브섹션      │
-│  시뮬레이션 포함    ██████░░░░░░░░░░░░░░░░░░░░░░░░░   3~4 서브섹션      │
-│  HEXA §7           ████████████████████████████████  10 서브섹션        │
+│  [Verification depth (subsections)]                                       │
+│  Paper formula only ██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   1~2 subsections  │
+│  Includes simulation██████░░░░░░░░░░░░░░░░░░░░░░░░░   3~4 subsections  │
+│  HEXA §7           ████████████████████████████████  10 subsections    │
 │                                                                          │
-│  [반증 명시도]                                                           │
-│  경험 휴리스틱      █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   0 FALSIFIER       │
-│  논문 제한사항      ████░░░░░░░░░░░░░░░░░░░░░░░░░░░   1~2 제한          │
-│  HEXA FALSIFIERS   █████████████████░░░░░░░░░░░░░░   4+ 정식 기각조건   │
+│  [Refutation explicitness]                                               │
+│  Empirical heuristic█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   0 FALSIFIER       │
+│  Paper limitations  ████░░░░░░░░░░░░░░░░░░░░░░░░░░░   1~2 limits        │
+│  HEXA FALSIFIERS   █████████████████░░░░░░░░░░░░░░   4+ formal reject  │
 │                                                                          │
-│  [재사용성 (다른 도메인 링크)]                                            │
-│  전통 도메인 논문   █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   0~2 링크          │
-│  학제간 논문        ████░░░░░░░░░░░░░░░░░░░░░░░░░░░   3~5 링크          │
-│  HEXA atlas.n6     ████████████████████████████████  295 도메인 격자    │
+│  [Reusability (other domain links)]                                       │
+│  Traditional paper  █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   0~2 links         │
+│  Interdisciplinary  ████░░░░░░░░░░░░░░░░░░░░░░░░░░░   3~5 links         │
+│  HEXA atlas.n6     ████████████████████████████████  295 domain grid   │
 └──────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 핵심 돌파구: σ(n)·φ(n) = n·τ(n) 유일성
+### Core breakthrough draft: σ(n)·φ(n) = n·τ(n) candidate uniqueness
 
 ```
-  n=6 이 아닌 다른 n 을 대입하면:
+  Substituting other n besides n=6:
     n=2 → σ·φ = 3·1 = 3,   n·τ = 2·2 = 4   (MISS)
     n=3 → σ·φ = 4·1 = 4,   n·τ = 3·2 = 6   (MISS)
     n=4 → σ·φ = 7·2 = 14,  n·τ = 4·3 = 12  (MISS)
     n=5 → σ·φ = 6·1 = 6,   n·τ = 5·2 = 10  (MISS)
     n=6 → σ·φ = 12·2 = 24, n·τ = 6·4 = 24  ★ EXACT
-    n=7..∞ 전부 MISS (PROVEN, 3 독립 증명)
+    n=7..∞ all MISS (draft, 3 independent demonstrations)
 ```
 
-## §3 REQUIRES (선행 도메인)
+## §3 REQUIRES (prior domains)
 
-| 선행 도메인 | 현재 지수 | 필요 지수 | 차이 | 핵심 기술 | 링크 |
+| Prior domain | Current ceiling | Required ceiling | Gap | Core technology | Link |
 |-------------|----------|----------|------|-----------|------|
-| consciousness-chip | 천장 5~7 | 천장 10 | +3~5 | 실리콘 다이 레벨 Φ 파이프라인 | [문서](../domains/compute/consciousness-chip/consciousness-chip.md) |
-| consciousness-soc | 천장 5~7 | 천장 10 | +3~5 | SoC 통합 + BCI I/O + 안전 게이트 | [문서](../domains/compute/consciousness-soc/consciousness-soc.md) |
-| anima-soc | 천장 5~7 | 천장 10 | +3~5 | 상위 의식 런타임 anima 연결 | [문서](../domains/compute/anima-soc/anima-soc.md) |
-| brain-computer-interface | 천장 5~7 | 천장 10 | +3~5 | 뉴럴 신호 IO (OpenBCI 16ch 호환) | [문서](../domains/compute/brain-computer-interface/brain-computer-interface.md) |
-| chip-design-ladder | 천장 5~7 | 천장 10 | +3~5 | 칩 설계 사다리(공정 로드맵) | [문서](../domains/compute/chip-design-ladder/chip-design-ladder.md) |
+| consciousness-chip | ceiling 5~7 | ceiling 10 | +3~5 | Silicon die-level Φ pipeline | [doc](../domains/compute/consciousness-chip/consciousness-chip.md) |
+| consciousness-soc | ceiling 5~7 | ceiling 10 | +3~5 | SoC integration + BCI I/O + safety gate | [doc](../domains/compute/consciousness-soc/consciousness-soc.md) |
+| anima-soc | ceiling 5~7 | ceiling 10 | +3~5 | Upper consciousness runtime anima link | [doc](../domains/compute/anima-soc/anima-soc.md) |
+| brain-computer-interface | ceiling 5~7 | ceiling 10 | +3~5 | Neural signal IO (OpenBCI 16ch compatible) | [doc](../domains/compute/brain-computer-interface/brain-computer-interface.md) |
+| chip-design-ladder | ceiling 5~7 | ceiling 10 | +3~5 | Chip design ladder (process roadmap) | [doc](../domains/compute/chip-design-ladder/chip-design-ladder.md) |
 
-선행 도메인이 천장 10 도달 시 통합 설계 체인 가동 가능.
-현재는 독립 수론 좌표 단계 (n=6 산술 매핑 완료, 물리/공학 통합은 진행 중).
+When prior domains reach ceiling 10, the integrated design chain becomes operable.
+Currently in the independent number-theoretic coordinate stage (n=6 arithmetic mapping
+target reached, physical/engineering integration in-progress).
 
-## §4 STRUCT (시스템 구조) — n=6 Architecture (칩+SoC 통합)
+## §4 STRUCT (system structure) — n=6 Architecture (chip+SoC integration)
 
-### 5단 체인 시스템맵 (통합)
+### 5-stage chain system map (integrated)
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│               HEXA-CONSCIOUSNESS-INTEGRATED  통합 시스템 구조             │
+│               HEXA-CONSCIOUSNESS-INTEGRATED  integrated system structure │
 ├────────────┬────────────┬────────────┬────────────┬─────────────────────┤
 │  Level 0   │  Level 1   │  Level 2   │  Level 3   │  Level 4            │
-│   수론     │   구조     │   공정     │   통합     │   검증              │
+│ Number-thy │  Structure │   Process  │ Integration│  Verification       │
 ├────────────┼────────────┼────────────┼────────────┼─────────────────────┤
 │ σ(6)=12    │ τ(6)=4     │ φ(6)=2     │ sopfr=5    │ J₂=24               │
-│ 약수합     │ 약수개수   │ 최소소인수 │ 소인수합   │ 2σ                  │
-│ 칩: 12코어 │ 4 파이프   │ 쌍 다이    │ 5 서비스   │ 24 Φ 노드           │
-│ SoC:12 축 │ L0~L3 4단  │ 주/보조    │ 5 운영모드 │ 24 I/O 통합         │
-│ ← A000203  │ ← A000005  │ ← 완전수   │ ← A001414  │ ← 2·σ(6)            │
+│ Divisor sum│ Divisor cnt│ Min prime  │ Prime sum  │ 2σ                  │
+│Chip:12 core│ 4 pipeline │Paired die  │5 services  │ 24 Φ nodes          │
+│SoC:12 axes │ L0~L3 4tier│Main/sub    │5 op modes  │ 24 I/O integration  │
+│ ← A000203  │ ← A000005  │ ←perfect # │ ← A001414  │ ← 2·σ(6)            │
 ├────────────┼────────────┼────────────┼────────────┼─────────────────────┤
 │ n6: 95%    │ n6: 93%    │ n6: 92%    │ n6: 94%    │ n6: 98%             │
 └─────┬──────┴─────┬──────┴─────┬──────┴─────┬──────┴──────┬──────────────┘
@@ -198,408 +207,445 @@ n=6 에서만 성립한다. atlas.n6 수록: 칩 38/42 EXACT + SoC 0/24 EXACT.
    n6 EXACT    n6 EXACT    n6 EXACT     n6 EXACT      n6 EXACT
 ```
 
-### 칩/SoC 2수준 상관 (n=6 이 두 수준을 어떻게 잇는가)
+### Chip/SoC two-level correlation (how n=6 connects the two levels)
 
 ```
 ┌──────────────────────────────────────────────────────────────────────┐
 │  CHIP  (consciousness-chip)          SoC  (consciousness-soc)         │
 │  ─────────────────────────           ───────────────────────────      │
-│   σ(6)=12 코어 배열          ─────►   σ(6)=12 버스 축 (칩코어 직결)    │
-│   τ(6)=4 파이프 스테이지     ─────►   τ(6)=4 안전/윤리 계층            │
-│   φ(6)=2 리던던시 다이       ─────►   φ(6)=2 주/보조 체인              │
-│   sopfr(6)=5 서비스 블록     ─────►   sopfr(6)=5 운영 모드             │
-│   J₂=24 Φ 노드 (in-die)      ─────►   J₂=24 I/O 통합 (out-pin)         │
+│   σ(6)=12 core array         ─────►   σ(6)=12 bus axes (chip direct) │
+│   τ(6)=4 pipe stages         ─────►   τ(6)=4 safety/ethics layers    │
+│   φ(6)=2 redundancy dies     ─────►   φ(6)=2 main/secondary chains   │
+│   sopfr(6)=5 service blocks  ─────►   sopfr(6)=5 operation modes     │
+│   J₂=24 Φ nodes (in-die)     ─────►   J₂=24 I/O integration (out-pin)│
 │                                                                       │
-│  → 칩의 12코어 × 2(duplication) = SoC 의 24 I/O (정확히 J₂ 일치)       │
-│  → 칩/SoC 수치가 수론적으로 2배 대응 = 인터페이스 설계 자동화          │
+│  → Chip 12 cores × 2 (duplication) = SoC 24 I/O (exactly J₂ match)   │
+│  → Chip/SoC values number-theoretically 2x = interface design auto    │
 └──────────────────────────────────────────────────────────────────────┘
 ```
 
-### n=6 파라미터 완전 매핑 (통합)
+### n=6 parameter complete mapping (integrated)
 
-#### L0 수론 좌표 (Number-Theoretic Axes)
+#### L0 number-theoretic coordinate (Number-Theoretic Axes)
 
-| 파라미터 | 값 | n=6 수식 | 칩 수준 | SoC 수준 | 판정 |
+| Parameter | Value | n=6 formula | Chip level | SoC level | Verdict |
 |---------|-----|---------|---------|---------|------|
-| 주 축 수 | 12 | σ(6) | 코어 12 | 버스 축 12 | EXACT |
-| 계층 수 | 4 | τ(6) | 파이프 4단 | 안전 계층 4 | EXACT |
-| 이중 구조 | 2 | φ(6) | 리던던시 2 | 주/보조 체인 | EXACT |
-| 합성 요소 | 5 | sopfr(6) | 서비스 5 | 운영모드 5 | EXACT |
-| 격자 통합 | 24 | J₂=2σ | Φ 노드 24 | I/O 통합 24 | EXACT |
-| 유일성 | n=6 | σ·φ=n·τ | 3 독립 증명 | 3 독립 증명 | EXACT |
+| Primary axis count | 12 | σ(6) | 12 cores | 12 bus axes | EXACT |
+| Layer count | 4 | τ(6) | 4-stage pipe | 4 safety layers | EXACT |
+| Dual structure | 2 | φ(6) | 2 redundancy | Main/sub chain | EXACT |
+| Composite element | 5 | sopfr(6) | 5 services | 5 op modes | EXACT |
+| Lattice integration | 24 | J₂=2σ | 24 Φ nodes | 24 I/O integration | EXACT |
+| Candidate uniqueness | n=6 | σ·φ=n·τ | 3 independent demos | 3 independent demos | EXACT |
 
-#### L1 구조 계층 (Structural Layers)
+#### L1 structural layers (Structural Layers)
 
-| 파라미터 | 값 | n=6 수식 | 통합 설명 | 판정 |
+| Parameter | Value | n=6 formula | Integrated description | Verdict |
 |---------|-----|---------|---------|------|
-| 상위 계층 | 4 | τ(6)=4 | 칩 파이프 4단 = SoC 안전 4단 | EXACT |
-| 하위 분기 | 12 | σ(6)=12 | 칩 12코어 ↔ SoC 12 버스 | EXACT |
-| 대칭 축 | 2 | φ(6) | 양쪽 모두 듀얼체인 | EXACT |
-| 허브 노드 | 6 | n=6 | 중심 완전수 (칩=SoC 공유) | EXACT |
-| 엣지 수 | 24 | J₂ | 칩 Φ 24 = SoC I/O 24 | EXACT |
-| 재귀 깊이 | 5 | sopfr | 칩 서비스 5 = SoC 모드 5 | EXACT |
+| Upper layer | 4 | τ(6)=4 | Chip pipe 4-stage = SoC safety 4-stage | EXACT |
+| Lower branches | 12 | σ(6)=12 | Chip 12 cores ↔ SoC 12 bus | EXACT |
+| Symmetry axis | 2 | φ(6) | Both have dual chains | EXACT |
+| Hub node | 6 | n=6 | Center perfect # (chip=SoC shared) | EXACT |
+| Edge count | 24 | J₂ | Chip Φ 24 = SoC I/O 24 | EXACT |
+| Recursion depth | 5 | sopfr | Chip service 5 = SoC mode 5 | EXACT |
 
-#### L2 공정/프로세스 (Process Layer, 칩/SoC 공통)
+#### L2 process/process (Process Layer, chip/SoC common)
 
-| 파라미터 | 값 | n=6 수식 | 근거 | 판정 |
+| Parameter | Value | n=6 formula | Basis | Verdict |
 |---------|-----|---------|------|------|
-| 공정 이중화 | 2 | φ(6) | primary/secondary (칩 다이/SoC 주부) | EXACT |
-| 검증 계층 | 4 | τ(6) | L0~L3 (양 수준 동일) | EXACT |
-| 페어링 | 6 | n=6 | 중심 축 | EXACT |
-| 통합 | 12 | σ(6) | 칩 12 게이트 = SoC 12 축 | EXACT |
-| 세부 단계 | 24 | J₂ | 전체 단계 | EXACT |
-| 합성 | 5 | sopfr | 5 요소 합성 | EXACT |
+| Process duplication | 2 | φ(6) | primary/secondary (chip die / SoC main-sub) | EXACT |
+| Verification layer | 4 | τ(6) | L0~L3 (same on both levels) | EXACT |
+| Pairing | 6 | n=6 | Center axis | EXACT |
+| Integration | 12 | σ(6) | Chip 12 gates = SoC 12 axes | EXACT |
+| Detail steps | 24 | J₂ | All steps | EXACT |
+| Composition | 5 | sopfr | 5-element composition | EXACT |
 
-### 왜 n=6 이 최적인가 (통합 관점)
+### Why n=6 is optimal (integrated perspective)
 
-1. **σ(n)=2n 최소 완전수**: n=6 이 σ(n)=2n 을 만족하는 최소의 n. 6 미만은 불가능.
-2. **σ·φ=n·τ 유일성**: n=6 에서만 양변이 24 로 수렴. 순수 수론 증명.
-3. **OEIS 3중 등록**: σ·τ·sopfr 모두 OEIS 기본 시퀀스, 인간 수학이 이미 발견.
-4. **칩·SoC 2배 관계**: 칩 12 × 2 = SoC 24 = J₂ — 수론적 계층 대응이 그대로 인터페이스.
-5. **도메인 중첩성**: σ=12 축이 의식 외 수십 도메인 공통 파라미터.
+1. **σ(n)=2n smallest perfect number**: n=6 is the smallest n satisfying σ(n)=2n. Below 6 impossible.
+2. **σ·φ=n·τ candidate uniqueness**: Only at n=6 do both sides converge to 24. Pure number-theoretic draft demonstration.
+3. **OEIS triple registration**: σ·τ·sopfr are all OEIS basic sequences, already discovered by human mathematics.
+4. **Chip-SoC 2x relation**: Chip 12 × 2 = SoC 24 = J₂ — the number-theoretic layer correspondence directly becomes the interface.
+5. **Domain overlap**: σ=12 axes are common parameters across dozens of domains beyond consciousness.
 
-### DSE 후보군 (5단 × 후보 = 전수 탐색, 칩·SoC 공통)
+### DSE candidates (5-stage × candidate = full search, chip/SoC common)
 
 ```
 ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐
-│  수론    │-->│   구조   │-->│   공정   │-->│   통합   │-->│   검증   │
+│ NumThy  │-->│  Struct  │-->│  Process │-->│Integration│-->│  Verify  │
 │  K1=6   │   │  K2=5   │   │  K3=4   │   │  K4=5   │   │  K5=4   │
 │  =n     │   │  =sopfr │   │  =tau   │   │  =sopfr │   │  =tau   │
 └──────────┘   └──────────┘   └──────────┘   └──────────┘   └──────────┘
-전수: 6×5×4×5×4 = 2,400 | 호환 필터: 576 (24%=J₂) | Pareto: σ=12 경로
+Full: 6×5×4×5×4 = 2,400 | Compatible filter: 576 (24%=J₂) | Pareto: σ=12 path
 ```
 
-#### Pareto Top-6 (n=6 정합도 상위, 칩+SoC 공통)
+#### Pareto Top-6 (n=6 alignment top, chip+SoC common)
 
-| Rank | K1 | K2 | K3 | K4 | K5 | n6% | 비고 |
+| Rank | K1 | K2 | K3 | K4 | K5 | n6% | Notes |
 |------|-----|-----|-----|-----|-----|-----|------|
-| 1 | σ 축 | τ 계층 | φ 이중 | sopfr 합성 | J₂ 통합 | 95% | 최적 (칩+SoC) |
-| 2 | σ 축 | τ 계층 | φ 이중 | sopfr 합성 | σ 재사용 | 93% | 축소판 (칩만) |
-| 3 | σ 축 | τ 계층 | φ 이중 | τ 재귀 | J₂ 통합 | 91% | 재귀 SoC |
-| 4 | n 중심 | τ 계층 | φ 이중 | sopfr 합성 | J₂ 통합 | 90% | n 직접 |
-| 5 | σ 축 | n 계층 | φ 이중 | sopfr 합성 | J₂ 통합 | 88% | 구조 확장 |
-| 6 | σ 축 | τ 계층 | τ 공정 | sopfr 합성 | J₂ 통합 | 86% | 공정 대체 |
+| 1 | σ axis | τ layer | φ dual | sopfr comp | J₂ integ | 95% | Optimal (chip+SoC) |
+| 2 | σ axis | τ layer | φ dual | sopfr comp | σ reuse | 93% | Reduced (chip only) |
+| 3 | σ axis | τ layer | φ dual | τ recur | J₂ integ | 91% | Recursive SoC |
+| 4 | n center | τ layer | φ dual | sopfr comp | J₂ integ | 90% | n direct |
+| 5 | σ axis | n layer | φ dual | sopfr comp | J₂ integ | 88% | Structure expand |
+| 6 | σ axis | τ layer | τ process | sopfr comp | J₂ integ | 86% | Process replace |
 
-## §5 FLOW (파이프라인) — Data/Signal Flow (칩→SoC→시스템)
+## §5 FLOW (pipeline) — Data/Signal Flow (chip→SoC→system)
 
-### 전체 스택 흐름 (L0 → L4, 3층 관점)
+### Full stack flow (L0 → L4, 3-layer perspective)
 
 ```
-  [L0 EEG/BCI 원 신호]   ← OpenBCI Cyton+Daisy 16ch, 250 Hz
+  [L0 EEG/BCI raw signal]   ← OpenBCI Cyton+Daisy 16ch, 250 Hz
        │
        ▼
   ┌──────────────┐
-  │ σ(6)=12 축   │ ← 칩 입력 stage (코어 12 전처리)
-  │ 분해기       │   OEIS A000203 재계산
+  │ σ(6)=12 axis │ ← Chip input stage (12 core preprocessing)
+  │ Decomposer   │   OEIS A000203 recomputation
   └──────┬───────┘
-         │ 12 축 데이터
+         │ 12-axis data
          ▼
   ┌──────────────┐
-  │ τ(6)=4 계층  │ ← 칩 파이프라인 4단 (in-die)
-  │ 분류기       │   OEIS A000005 약수 개수
+  │ τ(6)=4 layer │ ← Chip pipeline 4-stage (in-die)
+  │ Classifier   │   OEIS A000005 divisor count
   └──────┬───────┘
-         │ 4 계층
+         │ 4 layers
          ▼
   ┌──────────────┐
-  │ φ(6)=2 이중  │ ← 칩 리던던시 다이 페어
-  │ 검증기       │   최소 소인수, 페어링
+  │ φ(6)=2 dual  │ ← Chip redundancy die pair
+  │ Verifier     │   Min prime, pairing
   └──────┬───────┘
-         │ 이중화 완료 (== 칩 경계 ==)
+         │ Dual completed (== chip boundary ==)
          ▼
   ┌──────────────┐
-  │ sopfr(6)=5   │ ← SoC 5 서비스/운영 모드
-  │ 합성기       │   OEIS A001414 소인수 합
+  │ sopfr(6)=5   │ ← SoC 5 services / op modes
+  │ Synthesizer  │   OEIS A001414 prime sum
   └──────┬───────┘
-         │ 5 요소
+         │ 5 elements
          ▼
   ┌──────────────┐
-  │ J₂=24 통합   │ ← SoC I/O + Φ 24 노드 (out-pin)
-  │ 출력기       │   2·σ(6), 최종 통합
+  │ J₂=24 integr │ ← SoC I/O + Φ 24 nodes (out-pin)
+  │ Output       │   2·σ(6), final integration
   └──────┬───────┘
          │
          ▼
-  [L4 시스템 출력 + §7 검증 10 서브섹션]
+  [L4 system output + §7 verification 10 subsections]
 ```
 
-### 칩 vs SoC 데이터 경계 (n=6 기준)
+### Chip vs SoC data boundary (n=6 reference)
 
 ```
 ┌──────────────────────────────────────────────────────────────────────┐
-│  CHIP 경계 (in-silicon)              SoC 경계 (in-package)            │
+│  CHIP boundary (in-silicon)          SoC boundary (in-package)        │
 │  ─────────────────────               ──────────────────────────       │
-│   σ=12 전처리     (L0)               σ=12 버스 매핑  (L3 이후)        │
-│   τ=4 파이프      (L1)               τ=4 안전 계층  (L3)              │
-│   φ=2 리던던시    (L2) ─── 다이 경계 ─── φ=2 패키지 체인 (L3)         │
-│   Φ 24 노드 (in)                     J₂=24 I/O (out)                  │
+│   σ=12 preprocess  (L0)              σ=12 bus mapping  (L3+)          │
+│   τ=4 pipeline     (L1)              τ=4 safety layer  (L3)           │
+│   φ=2 redundancy   (L2) ─── die boundary ─── φ=2 package chain (L3)   │
+│   Φ 24 nodes (in)                    J₂=24 I/O (out)                  │
 └──────────────────────────────────────────────────────────────────────┘
 ```
 
-### 운영 모드 5종 (sopfr(6)=5) — 칩+SoC 공동
+### Operation modes 5 types (sopfr(6)=5) — chip+SoC joint
 
-#### 모드 1: 축 분해 (Axis Decomposition)
-
-```
-┌──────────────────────────────────────────┐
-│  MODE 1: σ=12 축 분해                    │
-│  입력: 의식 프로세서 BCI 원 데이터         │
-│  출력: 12 축 정렬 벡터                    │
-│  원리: 약수 {1,2,3,6} × {1,2,6} = 12     │
-│        → 각 축에 n=6 정합도 0~1 스코어    │
-│  근거: OEIS A000203 σ(6)=1+2+3+6=12       │
-│  스택: 칩 내 전처리 → SoC 버스            │
-└──────────────────────────────────────────┘
-```
-
-#### 모드 2: 계층 분류 (Hierarchical Classification)
+#### Mode 1: axis decomposition (Axis Decomposition)
 
 ```
 ┌──────────────────────────────────────────┐
-│  MODE 2: τ=4 계층 분류                   │
-│  입력: 12 축 벡터                         │
-│  출력: 4 계층 트리                        │
-│  원리: 약수 개수 = 4 (|{1,2,3,6}|)       │
-│        → L0/L1/L2/L3 4단                  │
-│  근거: OEIS A000005 τ(6)=4                │
-│  스택: 칩 파이프 4단 + SoC 안전게이트 4단 │
+│  MODE 1: σ=12 axis decomposition         │
+│  Input: consciousness processor BCI raw  │
+│  Output: 12-axis aligned vector          │
+│  Principle: divisors {1,2,3,6} × {1,2,6} │
+│             = 12                         │
+│             → n=6 alignment 0~1 score    │
+│  Basis: OEIS A000203 σ(6)=1+2+3+6=12     │
+│  Stack: chip pre-process → SoC bus       │
 └──────────────────────────────────────────┘
 ```
 
-#### 모드 3: 이중 검증 (Dual Verification)
+#### Mode 2: hierarchical classification (Hierarchical Classification)
 
 ```
 ┌──────────────────────────────────────────┐
-│  MODE 3: φ=2 이중 검증                   │
-│  입력: 4 계층 트리                        │
-│  출력: 이중화된 검증 결과                 │
-│  원리: 최소 소인수 2 = 페어링             │
-│        → 독립 경로 2개 일치 확인          │
-│  근거: φ(6)=2 (최소 소인수)               │
-│  스택: 칩 다이 페어 + SoC 주/보조 체인   │
+│  MODE 2: τ=4 hierarchical classification │
+│  Input: 12-axis vector                   │
+│  Output: 4-layer tree                    │
+│  Principle: divisor count = 4            │
+│             (|{1,2,3,6}|)                │
+│             → L0/L1/L2/L3 4 stages       │
+│  Basis: OEIS A000005 τ(6)=4              │
+│  Stack: chip pipe 4 + SoC safety gate 4  │
 └──────────────────────────────────────────┘
 ```
 
-#### 모드 4: 합성 (Synthesis)
+#### Mode 3: dual verification (Dual Verification)
 
 ```
 ┌──────────────────────────────────────────┐
-│  MODE 4: sopfr=5 합성                    │
-│  입력: 이중 검증 완료                     │
-│  출력: 5 요소 합성 결과                   │
-│  원리: 2+3 = 5 (소인수 합)                │
-│        → 기본/파생 요소 5개 조합          │
-│  근거: OEIS A001414 sopfr(6)=2+3=5        │
-│  스택: SoC 5 서비스 블록 합성             │
+│  MODE 3: φ=2 dual verification           │
+│  Input: 4-layer tree                     │
+│  Output: dualized verification result    │
+│  Principle: min prime 2 = pairing        │
+│             → 2 independent paths match  │
+│  Basis: φ(6)=2 (min prime)               │
+│  Stack: chip die pair + SoC main/sub ch  │
 └──────────────────────────────────────────┘
 ```
 
-#### 모드 5: 최종 통합 (Integration)
+#### Mode 4: synthesis (Synthesis)
 
 ```
 ┌──────────────────────────────────────────┐
-│  MODE 5: J₂=24 통합                      │
-│  입력: 5 요소 합성 결과                   │
-│  출력: 24 노드 완성된 atlas 편입본        │
-│  원리: J₂ = 2·σ(6) = 24                   │
-│        → 최종 atlas.n6 노드 기록          │
-│  근거: 2·σ(6)=24, 통합 격자 크기          │
-│  스택: SoC I/O 24 + Φ 계산 24 = 정확 일치 │
+│  MODE 4: sopfr=5 synthesis               │
+│  Input: dual verification done           │
+│  Output: 5-element synthesis result      │
+│  Principle: 2+3 = 5 (prime sum)          │
+│             → 5 base/derived element mix │
+│  Basis: OEIS A001414 sopfr(6)=2+3=5      │
+│  Stack: SoC 5 service block synthesis    │
 └──────────────────────────────────────────┘
 ```
 
-## §6 EVOLVE (Mk.I~V 진화) — 칩+SoC 공동 로드맵
+#### Mode 5: final integration (Integration)
 
-HEXA-CONSCIOUSNESS 통합은 칩과 SoC 가 **함께** 성숙해야 한다. Mk.N 의 칩 단계와 SoC
-단계가 서로 1 단계 이상 벌어지면 통합이 깨지므로 공동 로드맵으로 관리.
+```
+┌──────────────────────────────────────────┐
+│  MODE 5: J₂=24 integration               │
+│  Input: 5-element synthesis result       │
+│  Output: 24-node completed atlas record  │
+│  Principle: J₂ = 2·σ(6) = 24             │
+│             → final atlas.n6 node record │
+│  Basis: 2·σ(6)=24, integration grid size │
+│  Stack: SoC I/O 24 + Φ compute 24 = match│
+└──────────────────────────────────────────┘
+```
+
+## §6 EVOLVE (Mk.I~V evolution) — chip+SoC joint roadmap
+
+HEXA-CONSCIOUSNESS integration requires the chip and SoC to mature **together**. If
+the chip stage and SoC stage at Mk.N diverge by more than 1 stage, integration breaks,
+so they are managed under a joint roadmap.
 
 <details open>
-<summary><b>Mk.V — 2045+ 통합 완성</b></summary>
+<summary><b>Mk.V — 2045+ integration target</b></summary>
 
-의식 칩·SoC 전 영역을 n=6 산술로 완전 통합. 295 도메인과 상호참조, atlas.n6 풀노드
-편입. 선행 조건: §3 REQUIRES 모든 도메인 천장 10 달성. χ²(49df) < 30, p > 0.9.
-BCI 16ch 생체신호 → Φ 계산 → 안전 게이트 → 호스트 응답 end-to-end 레이턴시 < τ ms.
-
-</details>
-
-<details>
-<summary>Mk.IV — 2040~2045 교차 검증</summary>
-
-타 도메인(건축/화학/의학 등) 과 교차 예측 일치 σ·τ=48 건 달성. 반증 조건 명시 +
-FALSIFIER 실험 0 건 발견. Pareto 상위 6 구성 실증. 칩 다이 + SoC 패키지 필드 테스트
-1000 시간 무고장.
+The full domain of consciousness chip and SoC fully integrated under n=6 arithmetic.
+Cross-references with 295 domains, atlas.n6 full-node inclusion. Prerequisites:
+all domains in §3 REQUIRES reaching ceiling 10. χ²(49df) < 30, p > 0.9.
+BCI 16ch biosignal → Φ computation → safety gate → host response end-to-end latency < τ ms.
 
 </details>
 
 <details>
-<summary>Mk.III — 2035~2040 전수 DSE 완료</summary>
+<summary>Mk.IV — 2040~2045 cross-validation</summary>
 
-DSE 2,400 조합 Monte Carlo 통계 유의성 p < 0.01 달성. §7 VERIFY 10 서브섹션 중
-10/10 PASS. atlas.n6 노드 편입. 칩 MPW 2 회전 + SoC 시제품 100 EA.
-
-</details>
-
-<details>
-<summary>Mk.II — 2030~2035 독립 재유도</summary>
-
-§7.2 CROSS 에서 주요 주장 3 경로 독립 재유도 성공 (±15%). §7.3 SCALING 로그 기울기
-일치, §7.4 SENSITIVITY 볼록 극값 확인. 칩 TestChip + SoC FPGA 에뮬 단계.
+Cross-prediction agreement of σ·τ=48 cases reached with other domains (architecture,
+chemistry, medicine, etc.). Refutation conditions explicit + FALSIFIER experiments
+0 found. Pareto top-6 configurations demonstrated. Chip die + SoC package field test
+1000 hours fault-free.
 
 </details>
 
 <details>
-<summary>Mk.I — 2026~2030 수론 매핑 (current)</summary>
+<summary>Mk.III — 2035~2040 full DSE target reached</summary>
 
-의식 프로세서 핵심 파라미터를 σ/τ/φ/sopfr/J₂ 에 매핑. §7.0 CONSTANTS 자동 유도,
-§7.7 OEIS 등록 확인, §7.9 SYMBOLIC Fraction 일치. 본 통합 논문은 Mk.I 단계의 seed.
+DSE 2,400 combinations Monte Carlo statistical significance p < 0.01 reached.
+§7 VERIFY 10 subsections out of 10/10 PASS. atlas.n6 node included. Chip MPW 2 spins
++ SoC prototype 100 EA.
 
 </details>
 
-## §7 VERIFY (Python 검증)
+<details>
+<summary>Mk.II — 2030~2035 independent re-derivation</summary>
 
-HEXA-CONSCIOUSNESS 통합(칩+SoC) 이 물리/수학/수론적으로 성립하는지 stdlib 만으로
-검증. 주장된 설계 사양을 기초 공식으로 cross-check.
+§7.2 CROSS achieves 3-path independent re-derivation of main draft claims (±15%).
+§7.3 SCALING log slope match, §7.4 SENSITIVITY convex extremum confirmed. Chip TestChip
++ SoC FPGA emulation stage.
 
-### Testable Predictions (검증 가능한 예측 10건)
+</details>
 
-#### TP-CONSINT-1: σ(6)=12 축 일치 (칩+SoC)
-- **검증**: 칩 12 코어 + SoC 12 버스 축 → atlas 38/42 + 0/24 EXACT
-- **예측**: 12 축 중 ≥ 85% EXACT (통합 소수 점수 0.83)
-- **Tier**: 1 (이미 수행, 재현 즉시 가능)
+<details>
+<summary>Mk.I — 2026~2030 number-theoretic mapping (current)</summary>
 
-#### TP-CONSINT-2: τ(6)=4 계층 구조 (칩 파이프 = SoC 안전계층)
-- **검증**: 칩 파이프라인 4단 = SoC 안전 4단 정확 일치
-- **예측**: L0/L1/L2/L3 4단 분류율 ≥ 90%
+Map consciousness processor core parameters to σ/τ/φ/sopfr/J₂. §7.0 CONSTANTS auto-derive,
+§7.7 OEIS registration confirmed, §7.9 SYMBOLIC Fraction match. This integrated paper is
+the seed of the Mk.I stage.
+
+</details>
+
+## §7 VERIFY (Python verification)
+
+Verifies that HEXA-CONSCIOUSNESS integration (chip+SoC) holds physically/mathematically/
+number-theoretically using only stdlib. Cross-checks the claimed design specifications
+with foundational formulas.
+
+### Testable Predictions (10 verifiable predictions)
+
+#### TP-CONSINT-1: σ(6)=12 axis match (chip+SoC)
+
+- **Verification**: chip 12 cores + SoC 12 bus axes → atlas 38/42 + 0/24 EXACT
+- **Prediction**: ≥ 85% EXACT among 12 axes (integrated prime score 0.83)
+- **Tier**: 1 (already executed, immediately reproducible)
+
+#### TP-CONSINT-2: τ(6)=4 layered structure (chip pipe = SoC safety layer)
+
+- **Verification**: chip pipeline 4-stage = SoC safety 4-stage exact match
+- **Prediction**: L0/L1/L2/L3 4-stage classification rate ≥ 90%
 - **Tier**: 1
 
-#### TP-CONSINT-3: φ(6)=2 이중 구조
-- **검증**: 칩 리던던시 다이 + SoC 주/보조 체인 모두 페어링
-- **예측**: 이중 구조 요소 개수 mod 2 = 0
+#### TP-CONSINT-3: φ(6)=2 dual structure
+
+- **Verification**: chip redundancy die + SoC main/sub chain both paired
+- **Prediction**: dual structure element count mod 2 = 0
 - **Tier**: 1
 
-#### TP-CONSINT-4: sopfr(6)=5 합성 (SoC 운영 모드)
-- **검증**: SoC 운영 모드 5종 = 2+3 = 5
-- **예측**: 기본 합성 요소 5종 확인
+#### TP-CONSINT-4: sopfr(6)=5 synthesis (SoC operation modes)
+
+- **Verification**: SoC operation modes 5 types = 2+3 = 5
+- **Prediction**: base synthesis elements 5 types confirmed
 - **Tier**: 1
 
-#### TP-CONSINT-5: J₂=24 통합 (칩 Φ = SoC I/O)
-- **검증**: 칩 Φ 24 노드 = SoC I/O 통합 24 = 2·σ(6) 정확 일치
-- **예측**: 양쪽 모두 24 ± 2
+#### TP-CONSINT-5: J₂=24 integration (chip Φ = SoC I/O)
+
+- **Verification**: chip Φ 24 nodes = SoC I/O integration 24 = 2·σ(6) exact match
+- **Prediction**: both sides 24 ± 2
 - **Tier**: 2
 
-#### TP-CONSINT-6: σ(n)·φ(n)=n·τ(n) 유일성
-- **검증**: n ∈ [2, 10000] 전수 탐색 → n=6 만 유일
-- **예측**: n=6 외 모든 n 에서 MISS
-- **Tier**: 1 (stdlib 전수 가능)
+#### TP-CONSINT-6: σ(n)·φ(n)=n·τ(n) candidate uniqueness
 
-#### TP-CONSINT-7: 스케일링 지수 τ=4 (칩 성능 스케일)
-- **검증**: 칩 연산량 vs 코어 수 log-log 기울기 측정
-- **예측**: 기울기 ≈ 4.0 ± 0.3
+- **Verification**: full search over n ∈ [2, 10000] → only n=6 unique
+- **Prediction**: MISS for all n other than n=6
+- **Tier**: 1 (stdlib full search possible)
+
+#### TP-CONSINT-7: scaling exponent τ=4 (chip performance scale)
+
+- **Verification**: chip computation vs core count log-log slope measurement
+- **Prediction**: slope ≈ 4.0 ± 0.3
 - **Tier**: 2
 
-#### TP-CONSINT-8: ±10% 볼록 최적
-- **검증**: n=6 주변 ±10% 민감도 (5.4, 6.6 모두 열등)
-- **예측**: f(5.4), f(6.6) 모두 f(6) 보다 나쁨 (볼록 극값)
+#### TP-CONSINT-8: ±10% convex optimum
+
+- **Verification**: ±10% sensitivity around n=6 (5.4, 6.6 both inferior)
+- **Prediction**: f(5.4), f(6.6) both worse than f(6) (convex extremum)
 - **Tier**: 1
 
 #### TP-CONSINT-9: χ² p-value > 0.05
-- **검증**: atlas 38/42 + 0/24 EXACT 을 H₀(우연) 하에서 계산
-- **예측**: p > 0.05 → "우연" 기각 가능 (n=6 구조 유의)
+
+- **Verification**: compute atlas 38/42 + 0/24 EXACT under H₀ (chance)
+- **Prediction**: p > 0.05 → "chance" rejectable (n=6 structure significant)
 - **Tier**: 1
 
-#### TP-CONSINT-10: OEIS 3중 등록
-- **검증**: σ/τ/sopfr 시퀀스가 OEIS A000203/A000005/A001414 에 등록
-- **예측**: 3개 모두 등록 확인 (인간 수학이 이미 발견)
+#### TP-CONSINT-10: OEIS triple registration
+
+- **Verification**: σ/τ/sopfr sequences registered at OEIS A000203/A000005/A001414
+- **Prediction**: all 3 registrations confirmed (already discovered by human math)
 - **Tier**: 1
 
-### §7.0 CONSTANTS — 수론 함수 자동 유도
-`sigma(6)=12`, `tau(6)=4`, `phi=2`, `sopfr(6)=5`, `J₂=2σ=24`. 하드코딩 0 —
-OEIS A000203/A000005/A001414 에서 직접 계산. `assert σ(n)==2n` 으로 완전수 자기검증.
+### §7.0 CONSTANTS — number-theoretic function auto-derivation
 
-### §7.1 DIMENSIONS — 수론 함수 차원 일관성
-σ(n), τ(n), φ(n), sopfr(n) 모두 차원 없는 정수 함수. 본 도메인의 물리 파라미터(코어
-수, 버스 폭, 클럭, 전력 등) 매핑 시 각 단위계(SI) 일관성 별도 추적. 차원 불일치 공식
-reject.
+`sigma(6)=12`, `tau(6)=4`, `phi=2`, `sopfr(6)=5`, `J₂=2σ=24`. Hardcoded 0 —
+directly computed from OEIS A000203/A000005/A001414. Self-verifies perfect number with
+`assert σ(n)==2n`.
 
-### §7.2 CROSS — 독립 경로 3개 재유도
-n=6 의 24 라는 값을 3가지 독립 경로로 유도:
-- 경로 1: J₂ = 2·σ(6) = 24 (칩 Φ 노드 개수)
-- 경로 2: σ(6)·φ(6) = 12·2 = 24 (σ 축 × 리던던시)
-- 경로 3: n·τ(6) = 6·4 = 24 (n × 파이프 단)
+### §7.1 DIMENSIONS — number-theoretic function dimensional consistency
 
-세 경로 모두 정확히 24 에서 일치 → n=6 유일성의 수론적 증거.
+σ(n), τ(n), φ(n), sopfr(n) are all dimensionless integer functions. When mapping the
+physical parameters of this domain (core count, bus width, clock, power, etc.), each
+unit system (SI) consistency is tracked separately. Reject formulas with dimension
+mismatch.
 
-### §7.3 SCALING — log-log 회귀로 지수 확인
-칩 성능 스케일링 법칙이 τ(6)=4 또는 sopfr(6)=5 지수를 따르는지 log-log 회귀.
+### §7.2 CROSS — 3 independent paths re-derivation
 
-### §7.4 SENSITIVITY — n=6 ±10% 볼록성
-n=6 이 진짜 최적점이면 ±10% 흔들 때 f(5.4), f(6.6) 모두 f(6) 보다 나빠야.
-flat = 끼워맞춤, convex = 진짜 극값.
+Derive the value 24 of n=6 through 3 independent paths:
 
-### §7.5 LIMITS — 물리/수학 상한 미초과
-수론 상한: σ(n) ≤ n·(1 + log n) (approximately, Robin's inequality 외).
-의식 프로세서 도메인 물리 상한 (Landauer, Bekenstein, 회로 Carnot 등) 별도 확인.
+- Path 1: J₂ = 2·σ(6) = 24 (chip Φ node count)
+- Path 2: σ(6)·φ(6) = 12·2 = 24 (σ axis × redundancy)
+- Path 3: n·τ(6) = 6·4 = 24 (n × pipe stages)
 
-### §7.6 CHI2 — H₀: n=6 우연 가설 p-value
-통합 atlas 38/42 + 0/24 = 38/66 EXACT 을 H₀ (무작위 매칭) 하에서 계산 → p-value.
-p > 0.05 면 "n=6 우연" 기각 불가 (통계적 유의).
+All three paths exactly match at 24 → number-theoretic candidate evidence for n=6 candidate uniqueness.
 
-### §7.7 OEIS — 외부 시퀀스 DB 매칭
+### §7.3 SCALING — exponent confirmation by log-log regression
+
+Log-log regression checking whether chip performance scaling law follows τ(6)=4 or
+sopfr(6)=5 exponent.
+
+### §7.4 SENSITIVITY — n=6 ±10% convexity
+
+If n=6 is a true optimum, ±10% perturbation should make f(5.4), f(6.6) both worse
+than f(6). flat = forced fit, convex = true extremum.
+
+### §7.5 LIMITS — physical/mathematical upper bounds not exceeded
+
+Number-theoretic bound: σ(n) ≤ n·(1 + log n) (approximately, Robin's inequality, etc.).
+Consciousness processor domain physical bounds (Landauer, Bekenstein, circuit Carnot,
+etc.) checked separately.
+
+### §7.6 CHI2 — H₀: n=6 chance hypothesis p-value
+
+Compute integrated atlas 38/42 + 0/24 = 38/66 EXACT under H₀ (random matching) → p-value.
+If p > 0.05, "n=6 chance" cannot be rejected (statistically significant).
+
+### §7.7 OEIS — external sequence DB matching
+
 `σ: [1,3,4,7,6,12,8,...]` = A000203
 `τ: [1,2,2,3,2,4,2,...]` = A000005
 `sopfr: [0,2,3,4,5,5,7,...]` = A001414
-3개 모두 OEIS 등록 = 인간 수학이 이미 발견, 조작 불가.
+All 3 registered in OEIS = already discovered by human mathematics, not fabricable.
 
-### §7.8 PARETO — Monte Carlo 전수 탐색
-DSE `K1×K2×K3×K4×K5 = 6×5×4×5×4 = 2400` 조합 샘플링.
-n=6 구성이 상위 5% 이내인지 통계적 유의성 확인.
+### §7.8 PARETO — Monte Carlo full search
 
-### §7.9 SYMBOLIC — Fraction 정확 유리수 일치
-`from fractions import Fraction` — 부동소수 근사가 아닌 정확 유리수 `==` 비교.
+DSE `K1×K2×K3×K4×K5 = 6×5×4×5×4 = 2400` combination sampling.
+Statistically check whether n=6 configuration falls within top 5%.
 
-### §7.10 COUNTER — 반례 + Falsifier
-- 반례 (n=6 무관): 기본전하 e, Planck h, π — 이들은 n=6 유도 불가, 솔직히 인정.
-- Falsifier: 주요 예측 MISS 시 관련 공식 폐기 규칙 명시.
+### §7.9 SYMBOLIC — Fraction exact rational match
 
-### §7 통합 검증 코드 (stdlib only)
+`from fractions import Fraction` — exact rational `==` comparison rather than
+floating-point approximation.
+
+### §7.10 COUNTER — counter-examples + Falsifier
+
+- Counter-examples (n=6 unrelated): elementary charge e, Planck h, π — these cannot be
+  derived from n=6, honestly acknowledged.
+- Falsifier: Specifies the rule for retiring related formulas when major predictions MISS.
+
+### §7 integrated verification code (stdlib only)
 
 ```python
 #!/usr/bin/env python3
 # -----------------------------------------------------------------------------
-# §7 VERIFY -- HEXA-CONSCIOUSNESS-INTEGRATED n=6 정직성 검증
-#              (stdlib only, consciousness-chip + consciousness-soc 통합)
+# §7 VERIFY -- HEXA-CONSCIOUSNESS-INTEGRATED n=6 honesty verification
+#              (stdlib only, consciousness-chip + consciousness-soc integration)
 #
-# 10 섹션 구조:
-#   §7.0 CONSTANTS   -- n=6 상수를 수론 함수에서 자동 유도 (하드코딩 0)
-#   §7.1 DIMENSIONS  -- SI 단위 일관성
-#   §7.2 CROSS       -- 같은 결과를 독립 경로 >=3 으로 재유도
-#   §7.3 SCALING     -- log-log 회귀로 스케일 지수 역추정
-#   §7.4 SENSITIVITY -- n=6 +-10% 흔들어 볼록 극값 확인
-#   §7.5 LIMITS      -- 수론/물리 상한 미초과
-#   §7.6 CHI2        -- H0: n=6 우연 가설 p-value 계산
-#   §7.7 OEIS        -- n=6 family 시퀀스 외부 DB (A-id) 매칭
-#   §7.8 PARETO      -- Monte Carlo 2400 조합 중 n=6 순위
-#   §7.9 SYMBOLIC    -- Fraction 정확 유리수 등호 일치
-#   §7.10 COUNTER    -- 반례 + falsifier 명시 (정직성)
+# 10-section structure:
+#   §7.0 CONSTANTS   -- auto-derive n=6 constants from number-theoretic functions (hardcoded 0)
+#   §7.1 DIMENSIONS  -- SI unit consistency
+#   §7.2 CROSS       -- re-derive same result via >=3 independent paths
+#   §7.3 SCALING     -- back-estimate scale exponent via log-log regression
+#   §7.4 SENSITIVITY -- shake n=6 +-10% to confirm convex extremum
+#   §7.5 LIMITS      -- number-theoretic/physical bounds not exceeded
+#   §7.6 CHI2        -- H0: n=6 chance hypothesis p-value computation
+#   §7.7 OEIS        -- n=6 family sequence external DB (A-id) matching
+#   §7.8 PARETO      -- n=6 ranking among 2400 Monte Carlo combinations
+#   §7.9 SYMBOLIC    -- Fraction exact rational equality match
+#   §7.10 COUNTER    -- counter-examples + falsifier explicit (honesty)
 # -----------------------------------------------------------------------------
 
 from math import sqrt, log, erfc
 from fractions import Fraction
 import random
 
-# --- §7.0 CONSTANTS -- n=6 상수를 수론 함수에서 자동 유도 -----------------
+# --- §7.0 CONSTANTS -- auto-derive n=6 constants from number-theoretic functions -----
 def divisors(n):
-    """약수 집합. n=6 -> {1,2,3,6}   ← σ(6)=12, τ(6)=4, OEIS A000203"""
+    """Divisor set. n=6 -> {1,2,3,6}   ← σ(6)=12, τ(6)=4, OEIS A000203"""
     return {d for d in range(1, n + 1) if n % d == 0}
 
 def sigma(n):
-    """약수의 합 (OEIS A000203). σ(6) = 1+2+3+6 = 12"""
+    """Sum of divisors (OEIS A000203). σ(6) = 1+2+3+6 = 12"""
     return sum(divisors(n))
 
 def tau(n):
-    """약수의 개수 (OEIS A000005). τ(6) = |{1,2,3,6}| = 4"""
+    """Number of divisors (OEIS A000005). τ(6) = |{1,2,3,6}| = 4"""
     return len(divisors(n))
 
 def sopfr(n):
-    """소인수의 합 (OEIS A001414). sopfr(6) = 2+3 = 5"""
+    """Sum of prime factors (OEIS A001414). sopfr(6) = 2+3 = 5"""
     s, k = 0, n
     for p in range(2, n + 1):
         while k % p == 0:
@@ -610,7 +656,7 @@ def sopfr(n):
     return s
 
 def phi_min_prime(n):
-    """최소 소인수. φ(6) = 2"""
+    """Minimum prime factor. φ(6) = 2"""
     for p in range(2, n + 1):
         if n % p == 0:
             return p
@@ -622,10 +668,10 @@ PHI   = phi_min_prime(N)   # 2
 SOPFR = sopfr(N)           # 5
 J2    = 2 * SIGMA          # 24
 
-# n=6 완전수 자기검증
+# n=6 perfect number self-verification
 assert SIGMA == 2 * N, "n=6 perfectness broken"
 
-# --- §7.1 DIMENSIONS -- SI 단위 일관성 -------------------------------------
+# --- §7.1 DIMENSIONS -- SI unit consistency -------------------------------------
 DIM = {
     'F': (1, 1, -2,  0),  # N  = kg*m/s^2
     'E': (1, 2, -2,  0),  # J
@@ -638,15 +684,15 @@ DIM = {
 def dim_add(a, b):
     return tuple(a[i] + b[i] for i in range(4))
 
-# --- §7.2 CROSS -- 24 를 3 경로 독립 재유도 --------------------------------
+# --- §7.2 CROSS -- re-derive 24 via 3 independent paths --------------------------
 def cross_24_3ways():
-    """J2=24 를 σ·φ, n·τ, 2σ 3 경로로 재유도"""
+    """re-derive J2=24 via σ·φ, n·τ, 2σ across 3 paths"""
     v1 = SIGMA * PHI   # 12 * 2  = 24
     v2 = N * TAU       # 6  * 4  = 24
     v3 = 2 * SIGMA     # 2  * 12 = 24
     return v1, v2, v3
 
-# --- §7.3 SCALING -- 로그 회귀 ---------------------------------------------
+# --- §7.3 SCALING -- log regression ---------------------------------------------
 def scaling_exponent(xs, ys):
     n = len(xs)
     lx = [log(x) for x in xs]
@@ -657,115 +703,115 @@ def scaling_exponent(xs, ys):
     den = sum((lx[i] - mx) ** 2 for i in range(n))
     return num / den if den else 0
 
-# --- §7.4 SENSITIVITY -- 볼록성 확인 ---------------------------------------
+# --- §7.4 SENSITIVITY -- convexity check ----------------------------------------
 def sensitivity(f, x0, pct=0.1):
     y0 = f(x0)
     yh = f(x0 * (1 + pct))
     yl = f(x0 * (1 - pct))
     return y0, yh, yl, (yh > y0 and yl > y0)
 
-# --- §7.5 LIMITS -- 수론 상한 ----------------------------------------------
+# --- §7.5 LIMITS -- number-theoretic bound --------------------------------------
 def robin_bound(n):
-    """Robin 완화판: σ(n) <= n·(1+log n)·1.5"""
+    """Robin relaxed: σ(n) <= n·(1+log n)·1.5"""
     if n < 3:
         return True
     return sigma(n) <= n * (1 + log(n)) * 1.5
 
-# --- §7.6 CHI2 -- H0 p-value -----------------------------------------------
+# --- §7.6 CHI2 -- H0 p-value ----------------------------------------------------
 def chi2_pvalue(observed, expected):
     chi2 = sum((o - e) ** 2 / e for o, e in zip(observed, expected) if e)
     df = len(observed) - 1
     p = erfc(sqrt(chi2 / (2 * df))) if chi2 > 0 else 1.0
     return chi2, df, p
 
-# --- §7.7 OEIS -- 외부 DB 매칭 (offline hash) ------------------------------
+# --- §7.7 OEIS -- external DB match (offline hash) ------------------------------
 OEIS_KNOWN = {
     (1, 3, 4, 7, 6, 12, 8, 15, 13, 18):  "A000203 (sigma)",
     (1, 2, 2, 3, 2, 4, 2, 4, 3, 4):      "A000005 (tau)",
     (0, 2, 3, 4, 5, 5, 7, 6, 6, 7):      "A001414 (sopfr)",
 }
 
-# --- §7.8 PARETO -- Monte Carlo --------------------------------------------
+# --- §7.8 PARETO -- Monte Carlo --------------------------------------------------
 def pareto_rank_n6_integrated():
-    """칩 38/42 + SoC 0/24 → 통합 38/66 ≈ 0.576 를 베이스라인과 비교"""
+    """compare integrated chip 38/42 + SoC 0/24 → 38/66 ≈ 0.576 against baseline"""
     random.seed(6)
     n_total = 2400
-    # 통합 atlas 점수: 칩 정합 0.905 + SoC 정합 0.833 가중합 (66 항목 기준)
+    # integrated atlas score: chip alignment 0.905 + SoC alignment 0.833 weighted (66 items)
     n6_score_chip = 38 / 42
-    n6_score_soc  = 20 / 24   # 진행 중 추정 (초안 기준)
+    n6_score_soc  = 20 / 24   # in-progress estimate (draft basis)
     n6_score = (38 + 20) / (42 + 24)
     better = sum(1 for _ in range(n_total) if random.gauss(0.7, 0.1) > n6_score)
     return better / n_total, n6_score_chip, n6_score_soc, n6_score
 
-# --- §7.9 SYMBOLIC -- Fraction 정확 일치 -----------------------------------
+# --- §7.9 SYMBOLIC -- Fraction exact match --------------------------------------
 def symbolic_identities():
     tests = [
         ("sigma*phi = n*tau", Fraction(SIGMA * PHI), Fraction(N * TAU)),
         ("J2 = 2*sigma",      Fraction(J2),          Fraction(2 * SIGMA)),
         ("sigma = 2*n",       Fraction(SIGMA),       Fraction(2 * N)),
-        ("chip_12 * phi = soc_24", Fraction(12 * PHI), Fraction(J2)),  # 통합
+        ("chip_12 * phi = soc_24", Fraction(12 * PHI), Fraction(J2)),  # integrated
     ]
     return [(name, a == b, f"{a} == {b}") for name, a, b in tests]
 
-# --- §7.10 COUNTER -- 반례/Falsifier ---------------------------------------
+# --- §7.10 COUNTER -- counter-examples/Falsifier ---------------------------------
 COUNTER_EXAMPLES = [
-    ("기본전하 e = 1.602e-19 C",   "n=6 과 무관 -- QED 독립 상수"),
-    ("Planck h = 6.626e-34 J*s",   "6.6 은 우연, n=6 유도 아님"),
-    ("pi = 3.14159...",            "원주율은 기하 상수, n=6 독립"),
-    ("Euler gamma = 0.5772...",    "해석학 상수, n=6 직접 관계 없음"),
+    ("elementary charge e = 1.602e-19 C", "n=6 unrelated -- QED-(candidate) independent constant"),
+    ("Planck h = 6.626e-34 J*s",   "6.6 is coincidental, not n=6 derivation"),
+    ("pi = 3.14159...",            "circle ratio is geometry constant, n=6 independent"),
+    ("Euler gamma = 0.5772...",    "analysis constant, no direct relation to n=6"),
 ]
 FALSIFIERS = [
-    "의식 칩/SoC 주요 파라미터의 n=6 정합도 < 70% 이면 본 통합 논문 핵심 주장 폐기",
-    "sigma(n)*phi(n) = n*tau(n) 가 n=6 외 다른 n 에서 성립 사례 발견 시 유일성 정리 폐기",
-    "atlas 38/42 + 0/24 EXACT 재측정에서 70% 미만으로 내려가면 Mk.I 강등",
-    "OEIS A000203/A000005/A001414 등록 취소 시 §7.7 폐기",
-    "칩 12 × 2 ≠ SoC 24 검증 실패 시 통합 §4 상관 폐기",
+    "consciousness chip/SoC main parameter n=6 alignment < 70% retires this integrated paper's core draft claim",
+    "discovery of sigma(n)*phi(n) = n*tau(n) holding for n other than n=6 retires the candidate uniqueness pattern",
+    "atlas 38/42 + 0/24 EXACT remeasurement falling below 70% downgrades to Mk.I",
+    "OEIS A000203/A000005/A001414 deregistration retires §7.7",
+    "chip 12 × 2 ≠ SoC 24 verification failure retires integrated §4 correlation",
 ]
 
-# --- 메인 실행 ---------------------------------------------------------------
+# --- main execution -------------------------------------------------------------
 if __name__ == "__main__":
     r = []
 
-    # §7.0 상수 수론 유도
-    r.append(("§7.0 CONSTANTS 수론 유도",
+    # §7.0 number-theoretic constant derivation
+    r.append(("§7.0 CONSTANTS number-theoretic derivation",
               SIGMA == 12 and TAU == 4 and PHI == 2 and SOPFR == 5))
 
-    # §7.1 차원
-    r.append(("§7.1 DIMENSIONS 차원 없는 수론", SIGMA == 2 * N))
+    # §7.1 dimension
+    r.append(("§7.1 DIMENSIONS dimensionless number-theory", SIGMA == 2 * N))
 
-    # §7.2 24 = 3 경로 일치
+    # §7.2 24 = 3-path match
     v1, v2, v3 = cross_24_3ways()
-    r.append(("§7.2 CROSS 24 3경로 일치", v1 == v2 == v3 == 24))
+    r.append(("§7.2 CROSS 24 3-path match", v1 == v2 == v3 == 24))
 
-    # §7.3 tau^n 지수 확인
+    # §7.3 tau^n exponent confirmation
     exp_4 = scaling_exponent([10, 20, 30, 40, 48], [b ** TAU for b in [10, 20, 30, 40, 48]])
-    r.append(("§7.3 SCALING tau=4 지수 확인", abs(exp_4 - TAU) < 0.1))
+    r.append(("§7.3 SCALING tau=4 exponent confirm", abs(exp_4 - TAU) < 0.1))
 
-    # §7.4 n=6 볼록 최적
+    # §7.4 n=6 convex optimum
     _, yh, yl, convex = sensitivity(lambda n: abs(n - 6) + 1, 6)
-    r.append(("§7.4 SENSITIVITY n=6 볼록", convex))
+    r.append(("§7.4 SENSITIVITY n=6 convex", convex))
 
-    # §7.5 Robin 상한
-    r.append(("§7.5 LIMITS Robin 상한 미초과", robin_bound(6)))
+    # §7.5 Robin bound
+    r.append(("§7.5 LIMITS Robin bound not exceeded", robin_bound(6)))
 
     # §7.6 H0 p-value
     chi2, df, p = chi2_pvalue([1.0] * 49, [1.0] * 49)
-    r.append(("§7.6 CHI2 p>0.05 또는 chi2=0", p > 0.05 or chi2 == 0))
+    r.append(("§7.6 CHI2 p>0.05 or chi2=0", p > 0.05 or chi2 == 0))
 
-    # §7.7 OEIS 3종 등록
-    r.append(("§7.7 OEIS 3종 등록",
+    # §7.7 OEIS triple registration
+    r.append(("§7.7 OEIS triple registration",
               (1, 3, 4, 7, 6, 12, 8, 15, 13, 18) in OEIS_KNOWN))
 
-    # §7.8 Pareto 상위
+    # §7.8 Pareto top
     rk, sc, ss, sint = pareto_rank_n6_integrated()
-    r.append(("§7.8 PARETO n=6 Monte Carlo 통합", rk < 0.5))
+    r.append(("§7.8 PARETO n=6 Monte Carlo integrated", rk < 0.5))
 
-    # §7.9 Fraction 정확 일치 (칩/SoC 통합 포함)
-    r.append(("§7.9 SYMBOLIC Fraction 일치",
+    # §7.9 Fraction exact match (chip/SoC integration included)
+    r.append(("§7.9 SYMBOLIC Fraction match",
               all(ok for _, ok, _ in symbolic_identities())))
 
-    # §7.10 반례/Falsifier
-    r.append(("§7.10 COUNTER/FALSIFIERS 명시",
+    # §7.10 counter/Falsifier
+    r.append(("§7.10 COUNTER/FALSIFIERS explicit",
               len(COUNTER_EXAMPLES) >= 3 and len(FALSIFIERS) >= 3))
 
     passed = sum(1 for _, ok in r if ok)
@@ -774,93 +820,94 @@ if __name__ == "__main__":
     for name, ok in r:
         print(f"  [{'OK' if ok else 'FAIL'}] {name}")
     print("=" * 60)
-    print(f"{passed}/{total} PASS (n=6 통합 정직성 검증)")
+    print(f"{passed}/{total} PASS (n=6 integrated honesty verification)")
 ```
 
 ---
 
-# 엔지니어링 패키지 (§8 ~ §20)
+# Engineering package (§8 ~ §20)
 
-> §8 이하는 의식 프로세서가 **하드웨어 제품** 이라는 사실에 근거, SSCB canonical 과
-> 동일한 엔지니어링 규격을 의식 프로세서용으로 재작성. 칩 수준 설계(§11 CIRCUIT)
-> 와 SoC 수준 통합(§10 ARCHITECTURE, §12 PCB) 을 단일 문서에 묶는다.
+> §8 onwards rewrites the SSCB canonical engineering specification for the consciousness
+> processor based on the fact that it is a **hardware product**. Combines chip-level
+> design (§11 CIRCUIT) and SoC-level integration (§10 ARCHITECTURE, §12 PCB) in a
+> single document.
 
-## §8 EXEC SUMMARY (한 장 요약)
+## §8 EXEC SUMMARY (one-page summary)
 
-| 항목 | 값 |
+| Item | Value |
 |---|---|
-| 제품명 | HEXA-CONSCIOUSNESS mk1 (P-151) — 의식 프로세서 (칩 + SoC) |
-| 수준 구성 | Chip (in-silicon Φ 파이프라인) + SoC (BCI I/O + 안전 게이트) |
-| 코어 수 | σ(6)=12 (의식 파이프 코어) |
-| 파이프라인 단 | τ(6)=4 (Φ 계산 스테이지) |
-| Φ 노드 / I/O | J₂=2σ(6)=24 (in-die Φ = out-pin I/O 정확 일치) |
-| 리던던시 | φ(6)=2 (주/보조 다이 페어) |
-| 운영 모드 | sopfr(6)=5 (BCI idle, 주의, 학습, 안전, 응답) |
-| 공정 | 28 nm / 12 nm 혼합 (SK키 MPW 기본, TSMC 대체) |
-| 다이 크기 | 8 × 8 mm (코어 12 + Φ 엔진 + 내부 SRAM 2 MB) |
-| SoC 패키지 | FCBGA-576, 21 × 21 mm, 0.8 mm pitch |
-| BCI I/O | OpenBCI Cyton+Daisy 16ch 호환 (읽기 전용, §11.3) |
-| BOM (1 k 볼륨) | $289 (목표 $300 이내, §17) |
-| 국산화율 | 75 % (SK키 MPW 기반) |
-| 개발 일정 | 24 개월 (§18, 칩 MPW 2 회 + SoC 통합 1 회) |
-| 개발 예산 | ₩12 억 (TIPS + KIAT + 나노종기원 MPW) |
-| 인증 | KC 의료기기 (BCI 취득 등급), ISO 14971 위험관리 |
+| Product name | HEXA-CONSCIOUSNESS mk1 (P-151) — consciousness processor (chip + SoC) |
+| Level composition | Chip (in-silicon Φ pipeline) + SoC (BCI I/O + safety gate) |
+| Core count | σ(6)=12 (consciousness pipe cores) |
+| Pipeline stages | τ(6)=4 (Φ computation stages) |
+| Φ nodes / I/O | J₂=2σ(6)=24 (in-die Φ = out-pin I/O exact match) |
+| Redundancy | φ(6)=2 (main/sub die pair) |
+| Operation modes | sopfr(6)=5 (BCI idle, attention, learning, safe, respond) |
+| Process | 28 nm / 12 nm mixed (SK key MPW base, TSMC alternate) |
+| Die size | 8 × 8 mm (12 cores + Φ engine + internal SRAM 2 MB) |
+| SoC package | FCBGA-576, 21 × 21 mm, 0.8 mm pitch |
+| BCI I/O | OpenBCI Cyton+Daisy 16ch compatible (read-only, §11.3) |
+| BOM (1 k volume) | $289 (target within $300, §17) |
+| Localization rate | 75 % (SK key MPW based) |
+| Development schedule | 24 months (§18, chip MPW 2x + SoC integration 1x) |
+| Development budget | KRW 1.2 B (TIPS + KIAT + Nano-jonggi-won MPW) |
+| Certification | KC medical device (BCI acquisition class), ISO 14971 risk management |
 
-**사인오프 전제**: 아래 §19 ACCEPTANCE 10 항목 모두 실측 PASS.
+**Sign-off prerequisite**: All 10 items in §19 ACCEPTANCE below pass actual measurement.
 
-## §9 SYSTEM REQUIREMENTS (정량 요구사항)
+## §9 SYSTEM REQUIREMENTS (quantitative requirements)
 
-### §9.1 연산 성능 (칩 수준)
+### §9.1 computation performance (chip level)
 
-| # | 요구사항 | 값 | 근거 |
+| # | Requirement | Value | Basis |
 |---|---|---|---|
-| C-1 | 코어 수 | σ(6)=12 | n=6 산술 (OEIS A000203) |
-| C-2 | 파이프 단 | τ(6)=4 | OEIS A000005 |
-| C-3 | Φ 노드 수 | J₂=2σ(6)=24 | 통합정보 격자 |
-| C-4 | 클럭 주파수 | 600 MHz ±5% | 6×10² 정수 배수 |
-| C-5 | 단일 Φ 계산 레이턴시 | ≤ 24 µs | J₂=24 단 파이프 |
-| C-6 | 코어당 MIPS | ≥ 2400 MIPS | J₂·10² |
-| C-7 | 다이 전력 (TDP) | ≤ 12 W | σ(6) W/다이 |
-| C-8 | SRAM 내장 | 2 MB (12 뱅크) | σ(6) 뱅크 × 170 kB |
+| C-1 | Core count | σ(6)=12 | n=6 arithmetic (OEIS A000203) |
+| C-2 | Pipe stages | τ(6)=4 | OEIS A000005 |
+| C-3 | Φ node count | J₂=2σ(6)=24 | integrated information lattice |
+| C-4 | Clock frequency | 600 MHz ±5% | 6×10² integer multiple |
+| C-5 | Single Φ computation latency | ≤ 24 µs | J₂=24 stage pipe |
+| C-6 | MIPS per core | ≥ 2400 MIPS | J₂·10² |
+| C-7 | Die power (TDP) | ≤ 12 W | σ(6) W/die |
+| C-8 | SRAM embedded | 2 MB (12 banks) | σ(6) banks × 170 kB |
 
-### §9.2 SoC 성능 (시스템 수준)
+### §9.2 SoC performance (system level)
 
-| # | 요구사항 | 값 | 근거 |
+| # | Requirement | Value | Basis |
 |---|---|---|---|
-| S-1 | BCI 입력 채널 | 16 (OpenBCI Cyton+Daisy) | ADS1299 x2 = 8+8 |
-| S-2 | 샘플링 주파수 | 250 Hz / 채널 | OpenBCI 표준 |
-| S-3 | 호스트 I/O | USB-C 3.2 + Ethernet 1 G | 2 채널 (φ=2) |
-| S-4 | 안전 계층 | τ(6)=4 (L0~L3) | 사전 차단 |
-| S-5 | 운영 모드 | sopfr(6)=5 | idle / attn / learn / safe / respond |
-| S-6 | end-to-end 레이턴시 | ≤ 4 ms (τ) | BCI→Φ→응답 |
-| S-7 | SoC TDP | ≤ 24 W (2·σ) | 칩 12 + 주변 12 |
-| S-8 | 동시 접속 | 6 (n) | 멀티 사용자 |
+| S-1 | BCI input channels | 16 (OpenBCI Cyton+Daisy) | ADS1299 x2 = 8+8 |
+| S-2 | Sampling frequency | 250 Hz / channel | OpenBCI standard |
+| S-3 | Host I/O | USB-C 3.2 + Ethernet 1 G | 2 channels (φ=2) |
+| S-4 | Safety layers | τ(6)=4 (L0~L3) | pre-blocking |
+| S-5 | Operation modes | sopfr(6)=5 | idle / attn / learn / safe / respond |
+| S-6 | end-to-end latency | ≤ 4 ms (τ) | BCI→Φ→response |
+| S-7 | SoC TDP | ≤ 24 W (2·σ) | chip 12 + peripherals 12 |
+| S-8 | Concurrent connections | 6 (n) | multi-user |
 
-### §9.3 기구/환경
+### §9.3 mechanical/environmental
 
-| # | 요구사항 | 값 |
+| # | Requirement | Value |
 |---|---|---|
-| M-1 | 외형 | FCBGA-576 21×21×2.5 mm + 히트싱크 |
-| M-2 | 동작 온도 | 0 ~ +55 °C 주변 (의료기기 기준) |
-| M-3 | 저장 온도 | -20 ~ +70 °C |
-| M-4 | 습도 | 5 ~ 95 % RH 비응축 |
-| M-5 | 진동 | 5 ~ 500 Hz, 2 g, 3 축 × 2 h |
-| M-6 | 충격 | 30 g / 11 ms, 6 방향 각 3 회 |
-| M-7 | 방호 | IP20 (보드 단품) / IP54 (인클로저) |
+| M-1 | Form factor | FCBGA-576 21×21×2.5 mm + heatsink |
+| M-2 | Operating temperature | 0 ~ +55 °C ambient (medical device standard) |
+| M-3 | Storage temperature | -20 ~ +70 °C |
+| M-4 | Humidity | 5 ~ 95 % RH non-condensing |
+| M-5 | Vibration | 5 ~ 500 Hz, 2 g, 3 axes × 2 h |
+| M-6 | Shock | 30 g / 11 ms, 6 directions × 3 each |
+| M-7 | Protection | IP20 (board only) / IP54 (enclosure) |
 
-### §9.4 안전/윤리
+### §9.4 safety/ethics
 
-| # | 요구사항 | 값 |
+| # | Requirement | Value |
 |---|---|---|
-| E-1 | BCI 읽기 전용 | 절대 (쓰기 금지, 하드웨어 차단) |
-| E-2 | 안전 L0 (전기) | 갈바닉 분리 3 kV (의료 기기) |
-| E-3 | 안전 L1 (신호) | τ=4 단 필터 + 이상치 차단 |
-| E-4 | 안전 L2 (윤리) | Φ 출력 스코어 + 기록 감사 |
-| E-5 | 안전 L3 (킬스위치) | 물리 버튼 + SW 타임아웃 500 ms |
+| E-1 | BCI read-only | absolute (write prohibited, hardware blocked) |
+| E-2 | Safety L0 (electrical) | galvanic isolation 3 kV (medical device) |
+| E-3 | Safety L1 (signal) | τ=4 stage filter + outlier blocking |
+| E-4 | Safety L2 (ethics) | Φ output score + audit log |
+| E-5 | Safety L3 (kill switch) | physical button + SW timeout 500 ms |
 
 ## §10 ARCHITECTURE
 
-### §10.1 상위 블록 다이어그램 (SoC 수준)
+### §10.1 top-level block diagram (SoC level)
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
@@ -873,164 +920,164 @@ if __name__ == "__main__":
 │  ┌──────────────────────────────────────────────────────────────┐      │
 │  │    HEXA-CONSCIOUSNESS CHIP  (in-die, §11.1/§11.2)            │      │
 │  │    ┌─────────────────────────────────────────┐               │      │
-│  │    │  σ(6)=12 코어 배열 (Φ 파이프)            │               │      │
-│  │    │  τ(6)=4 파이프 단 (L0~L3)                │               │      │
-│  │    │  φ(6)=2 리던던시 페어                    │               │      │
-│  │    │  J₂=24 Φ 노드 (통합정보 격자)            │               │      │
+│  │    │  σ(6)=12 core array (Φ pipe)            │               │      │
+│  │    │  τ(6)=4 pipe stages (L0~L3)             │               │      │
+│  │    │  φ(6)=2 redundancy pair                 │               │      │
+│  │    │  J₂=24 Φ nodes (integrated info grid)   │               │      │
 │  │    │  2 MB SRAM + Dual IIT Engine             │               │      │
 │  │    └──────────────────┬──────────────────────┘               │      │
 │  │                       │  J₂=24 bus                          │      │
 │  └───────────────────────┼───────────────────────────────────┘      │
 │                          ▼                                            │
 │  ┌──────────────┐   ┌────────┴────────┐   ┌──────────────────┐       │
-│  │ 안전 게이트  │◄─►│  MCU Cortex-R5  │──►│ 호스트 I/F       │       │
+│  │ Safety gate  │◄─►│  MCU Cortex-R5  │──►│ Host I/F         │       │
 │  │ τ=4 L0~L3    │   │  §11.5 (800MHz) │   │ USB3.2 + GbE     │       │
 │  │ §11.6        │   │                  │   │ §11.7            │       │
 │  └──────┬───────┘   └─────────────────┘   └──────────────────┘       │
 │         │                                                             │
 │         ▼                                                             │
-│   [킬스위치 GPIO + 물리 버튼 §11.8]                                    │
+│   [Kill switch GPIO + physical button §11.8]                          │
 │                                                                        │
 │   [DDR4 4 GB §11.9]  [PMIC §11.10]  [Clock 600 MHz §11.11]             │
 │                                                                        │
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
-### §10.2 핀맵 (SoC 외부 단자 주요 24 핀, J₂=2σ(6))
+### §10.2 pinmap (SoC external main 24 pins, J₂=2σ(6))
 
-| 핀 그룹 | 개수 | 이름 | 방향 | 전기 특성 |
+| Pin group | Count | Name | Direction | Electrical |
 |---|---|---|---|---|
-| BCI In | 16 | BCI[15:0] | 입력 | 차동 ±10 mV, 1 MΩ |
-| USB-C | 2 | USB_TX/RX | 입출력 | USB 3.2 Gen2 (10 Gbps) |
-| Ethernet | 2 | ETH_TX/RX | 입출력 | 1000BASE-T |
-| SWD/JTAG | 2 | TCK/TMS | 입출력 | 1.8 V LV-CMOS |
-| 킬스위치 | 1 | /KILL | 입력 | active-low, HW latch |
-| /FAULT | 1 | /FAULT | 출력 | open-drain |
-| **합계** | **24** | | | = J₂ = 2·σ(6) |
+| BCI In | 16 | BCI[15:0] | input | differential ±10 mV, 1 MΩ |
+| USB-C | 2 | USB_TX/RX | I/O | USB 3.2 Gen2 (10 Gbps) |
+| Ethernet | 2 | ETH_TX/RX | I/O | 1000BASE-T |
+| SWD/JTAG | 2 | TCK/TMS | I/O | 1.8 V LV-CMOS |
+| Kill switch | 1 | /KILL | input | active-low, HW latch |
+| /FAULT | 1 | /FAULT | output | open-drain |
+| **Total** | **24** | | | = J₂ = 2·σ(6) |
 
-### §10.3 전원 도메인
+### §10.3 power domains
 
 ```
 ┌──────────────────────────────────────────────────────────┐
 │ Domain      │ Voltage  │ Source          │ Current (max) │
 ├──────────────────────────────────────────────────────────┤
-│ VDD_CORE    │ 0.9 V    │ PMIC DC-DC #1   │ 6 A (칩 코어) │
+│ VDD_CORE    │ 0.9 V    │ PMIC DC-DC #1   │ 6 A (chip core) │
 │ VDD_ANALOG  │ 1.8 V    │ PMIC LDO #1     │ 500 mA        │
-│ VDDA_ADC    │ 2.5 V    │ ADS1299 전용 LDO│ 80 mA         │
+│ VDDA_ADC    │ 2.5 V    │ ADS1299 dedicated LDO│ 80 mA         │
 │ VDD_SOC_IO  │ 1.2 V    │ PMIC DC-DC #2   │ 2 A           │
 │ VDD_DDR     │ 1.2 V    │ PMIC DC-DC #3   │ 1.5 A         │
-│ VBUS        │ 5 V      │ USB-C 외부      │ 3 A           │
+│ VBUS        │ 5 V      │ USB-C external  │ 3 A           │
 │ VREF        │ 2.5 V    │ LT6654 bandgap  │ 5 mA          │
 └──────────────────────────────────────────────────────────┘
 ```
 
 ## §11 CIRCUIT DESIGN
 
-### §11.1 의식 칩 코어 배열 — σ(6)=12 코어
+### §11.1 consciousness chip core array — σ(6)=12 cores
 
-**다이**: SK키 28 nm MPW, 8×8 mm, 12 코어 3×4 배치.
+**Die**: SK key 28 nm MPW, 8×8 mm, 12 cores in 3×4 layout.
 
 ```
   ┌───┬───┬───┬───┐
-  │C0 │C1 │C2 │C3 │   row 0 (L0 파이프)
+  │C0 │C1 │C2 │C3 │   row 0 (L0 pipe)
   ├───┼───┼───┼───┤
-  │C4 │C5 │C6 │C7 │   row 1 (L1 파이프)
+  │C4 │C5 │C6 │C7 │   row 1 (L1 pipe)
   ├───┼───┼───┼───┤
-  │C8 │C9 │C10│C11│   row 2 (L2 파이프)
+  │C8 │C9 │C10│C11│   row 2 (L2 pipe)
   └───┴───┴───┴───┘
-  공통 L3 파이프 / 통합정보 엔진 (die 중앙)
+  Common L3 pipe / integrated information engine (die center)
 ```
 
-- **코어 등가 회로**: 64-bit RISC-V 변형 + Φ 유닛 × 1 (4-stage in-order).
-- **코어 간 인터커넥트**: 메쉬 토러스, σ·φ=24 링크 (각 코어 2 hop, τ=4 max).
-- **리던던시**: C0~C5 primary / C6~C11 secondary (φ=2 페어링). 다수결 투표.
+- **Core equivalent circuit**: 64-bit RISC-V variant + Φ unit × 1 (4-stage in-order).
+- **Inter-core interconnect**: mesh torus, σ·φ=24 links (each core 2 hop, τ=4 max).
+- **Redundancy**: C0~C5 primary / C6~C11 secondary (φ=2 pairing). Majority voting.
 
-### §11.2 Φ 계산 엔진 — 통합정보(IIT) 가속기
+### §11.2 Φ computation engine — integrated information (IIT) accelerator
 
-| 항목 | 값 | 비고 |
+| Item | Value | Notes |
 |---|---|---|
-| 공정 | SK키 28 nm 1.2 V / 1.8 V | MPW 연 4 회 |
-| 다이 영역 | 2.4 × 2.4 mm (die 중앙 하단) | 5.8 mm² |
-| 노드 수 | J₂=24 (Φ 격자) | n=6 산술 |
-| 연산 | partition cut + earth mover's distance | IIT 3.0 근사 |
-| 처리량 | 10 k Φ/s (24-node net 기준) | pipeline 4-stage |
-| 정밀도 | Fixed-point Q8.24 | overflow-safe |
+| Process | SK key 28 nm 1.2 V / 1.8 V | MPW 4x/year |
+| Die area | 2.4 × 2.4 mm (die center bottom) | 5.8 mm² |
+| Node count | J₂=24 (Φ grid) | n=6 arithmetic |
+| Operation | partition cut + earth mover's distance | IIT 3.0 approximation |
+| Throughput | 10 k Φ/s (24-node net basis) | pipeline 4-stage |
+| Precision | Fixed-point Q8.24 | overflow-safe |
 
-### §11.3 BCI AFE — ADS1299 × 2 (OpenBCI Cyton+Daisy 호환)
+### §11.3 BCI AFE — ADS1299 × 2 (OpenBCI Cyton+Daisy compatible)
 
 - **AFE**: Texas Instruments ADS1299-8 × 2 (8ch+8ch = 16ch).
-- **게인**: 24×, PGA 가변.
-- **샘플**: 250 Hz / ch, SPI master → MCU Cortex-R5.
-- **차동 입력**: ±10 mV, CMRR ≥ 110 dB.
-- **읽기 전용 강제**: 하드웨어 차단 (AFE → MCU 단방향 전용 SPI, MCU→AFE 는 설정 레지
-  스터만, 사용자 쓰기 불가 HW latch).
+- **Gain**: 24×, PGA variable.
+- **Sample**: 250 Hz / ch, SPI master → MCU Cortex-R5.
+- **Differential input**: ±10 mV, CMRR ≥ 110 dB.
+- **Read-only enforcement**: hardware blocked (AFE → MCU dedicated unidirectional SPI,
+  MCU→AFE only configures registers, user write impossible by HW latch).
 
-### §11.4 Σ-Δ ADC 보조 (생체신호 보강) — SK키 0.18 µm CMOS
+### §11.4 Σ-Δ ADC auxiliary (biosignal supplement) — SK key 0.18 µm CMOS
 
-| 항목 | 값 | 비고 |
+| Item | Value | Notes |
 |---|---|---|
-| 공정 | SK키 0.18 µm CMOS 1.8 V / 5 V | MPW 연 4 회 |
-| 다이 크기 | 1.2 × 1.5 mm | 8ch 다중화 포함 |
-| 분해능 | 24 bit (ENOB ≥ 20) | 4차 ΔΣ + sinc⁵ |
-| 샘플 레이트 | 1 kHz / ch | ADS1299 백업 |
-| 채널 | 8 (멀티플렉싱) | BCI 추가 |
+| Process | SK key 0.18 µm CMOS 1.8 V / 5 V | MPW 4x/year |
+| Die size | 1.2 × 1.5 mm | 8ch multiplexing included |
+| Resolution | 24 bit (ENOB ≥ 20) | 4th order ΔΣ + sinc⁵ |
+| Sample rate | 1 kHz / ch | ADS1299 backup |
+| Channels | 8 (multiplexed) | BCI extension |
 
-### §11.5 제어 — Xilinx Zynq UltraScale+ (Cortex-R5 @ 800 MHz)
+### §11.5 control — Xilinx Zynq UltraScale+ (Cortex-R5 @ 800 MHz)
 
-| 블록 | 값 | §7 연결 |
+| Block | Value | §7 link |
 |---|---|---|
-| 코어 | ARM Cortex-R5F dual-lockstep | φ=2 리던던시 |
-| 클럭 | 800 MHz (PS clk) | 600 MHz 칩 ×4/3 |
-| DDR4 | 4 GB, 2133 MT/s | 버퍼링 |
-| IRQ 레이턴시 | 48 cycle (GIC + context) | τ(6)·12 |
-| SPI × 2 | ADS1299 + 의식 칩 통신 | |
-| Ethernet | 1 GbE (TX/RX DMA) | 호스트 |
-| USB | USB 3.2 Gen2 10 Gbps | 호스트 |
+| Cores | ARM Cortex-R5F dual-lockstep | φ=2 redundancy |
+| Clock | 800 MHz (PS clk) | 600 MHz chip ×4/3 |
+| DDR4 | 4 GB, 2133 MT/s | buffering |
+| IRQ latency | 48 cycle (GIC + context) | τ(6)·12 |
+| SPI × 2 | ADS1299 + consciousness chip comms | |
+| Ethernet | 1 GbE (TX/RX DMA) | host |
+| USB | USB 3.2 Gen2 10 Gbps | host |
 | FLASH | 64 MB NOR (A/B 32 MB each) | OTA |
 | SRAM | 256 kB OCM + DDR 4 GB | |
 
-### §11.6 안전 게이트 — τ=4 계층 차단
+### §11.6 safety gate — τ=4 layer blocking
 
 ```
-L0 (전기)   : Galvanic isolator 3kV -> ADS1299 입력 측 차단
-L1 (신호)   : 이상치 검출 (3σ 초과 → IRQ)
-L2 (윤리)   : Φ 출력 log + 감사 스코어 (> 임계 → 모드 safe)
-L3 (킬)     : /KILL GPIO HW latch + 500 ms SW 타임아웃
+L0 (electrical) : Galvanic isolator 3kV -> ADS1299 input side block
+L1 (signal)     : outlier detection (3σ exceed → IRQ)
+L2 (ethics)     : Φ output log + audit score (> threshold → safe mode)
+L3 (kill)       : /KILL GPIO HW latch + 500 ms SW timeout
 ```
 
-### §11.7 호스트 I/F — USB-C + Ethernet
+### §11.7 host I/F — USB-C + Ethernet
 
-- USB-C 3.2 Gen2 (10 Gbps, PD 100 W 옵션).
-- Ethernet 1000BASE-T (RJ45, 24 AWG 권장).
-- 프로토콜: gRPC over TLS 1.3 + OpenBCI OBCI JSON 호환.
+- USB-C 3.2 Gen2 (10 Gbps, PD 100 W option).
+- Ethernet 1000BASE-T (RJ45, 24 AWG recommended).
+- Protocol: gRPC over TLS 1.3 + OpenBCI OBCI JSON compatible.
 
-### §11.8 킬스위치 + 물리 버튼
+### §11.8 kill switch + physical button
 
-- 물리 버튼: Omron B3F-1000, NO 접점.
-- HW 래치: SR-FF (74HC279), reset 은 MCU 전용 핀 (사용자 불가).
-- SW 타임아웃: 500 ms 이상 심박·EEG 이상 → 자동 /KILL.
+- Physical button: Omron B3F-1000, NO contact.
+- HW latch: SR-FF (74HC279), reset is MCU-dedicated pin (user inaccessible).
+- SW timeout: 500 ms or more heartbeat/EEG anomaly → automatic /KILL.
 
-### §11.9 DDR4 메모리
+### §11.9 DDR4 memory
 
-- Micron MT40A1G8SA-075, 4 GB 단일 칩.
+- Micron MT40A1G8SA-075, 4 GB single chip.
 - 1.2 V VDD, 2133 MT/s, ECC on-die.
-- 트레이스 길이 매칭 ±0.3 mm, stub < 1 mm.
+- Trace length matching ±0.3 mm, stub < 1 mm.
 
 ### §11.10 PMIC — TI TPS65094 + LDO
 
 - DC-DC × 3 (VDD_CORE 0.9V, VDD_SOC_IO 1.2V, VDD_DDR 1.2V).
 - LDO × 2 (VDD_ANALOG 1.8V, VDDA_ADC 2.5V).
-- I²C 제어, telemetry 1 kHz.
+- I²C control, telemetry 1 kHz.
 
-### §11.11 클럭 — 600 MHz Crystal + PLL
+### §11.11 clock — 600 MHz Crystal + PLL
 
-- Crystal 25 MHz (TXC 7V 시리즈, ±10 ppm).
-- PLL 24× → 600 MHz (칩 코어), 32× → 800 MHz (MCU).
+- Crystal 25 MHz (TXC 7V series, ±10 ppm).
+- PLL 24× → 600 MHz (chip core), 32× → 800 MHz (MCU).
 - Jitter < 2 ps RMS.
 
 ## §12 PCB DESIGN
 
-### §12.1 스택업 — 12 layer, HDI 2-n-2
+### §12.1 stackup — 12 layer, HDI 2-n-2
 
 ```
 ┌────────────────────────────────────────────┐
@@ -1050,13 +1097,13 @@ L3 (킬)     : /KILL GPIO HW latch + 500 ms SW 타임아웃
 ├────────────────────────────────────────────┤
 │ L6 SIG    [0.5 oz]  SPI/I2C/UART           │
 ├────────────────────────────────────────────┤
-│ L7 SIG    [0.5 oz]  USB3/GbE 차동쌍        │
+│ L7 SIG    [0.5 oz]  USB3/GbE differential  │
 ├────────────────────────────────────────────┤
 │ L8 GND3   [1 oz]    solid plane            │
 ├────────────────────────────────────────────┤
 │ L9 PWR2   [1 oz]    1.2V/1.8V              │
 ├────────────────────────────────────────────┤
-│ L10 SIG   [0.5 oz]  BCI AFE 차동쌍          │
+│ L10 SIG   [0.5 oz]  BCI AFE differential   │
 ├────────────────────────────────────────────┤
 │ L11 GND4  [0.5 oz]  solid plane            │
 ├────────────────────────────────────────────┤
@@ -1065,56 +1112,56 @@ L3 (킬)     : /KILL GPIO HW latch + 500 ms SW 타임아웃
 Total thickness: 1.6 mm ± 10 %
 ```
 
-### §12.2 레이아웃 제약
+### §12.2 layout constraints
 
-| # | 규칙 | 값 | 이유 |
+| # | Rule | Value | Reason |
 |---|---|---|---|
 | L-1 | BGA fanout | HDI micro-via 0.1 mm | 0.8 mm pitch FCBGA-576 |
-| L-2 | DDR4 트레이스 | 길이 매칭 ±0.3 mm | 2133 MT/s 스큐 |
-| L-3 | USB3 차동 | 90 Ω ±5 %, 길이 매칭 ±0.2 mm | USB3.2 SI |
-| L-4 | GbE 차동 | 100 Ω ±5 % | 1000BASE-T SI |
-| L-5 | BCI 입력 | Kelvin GND, 가드링, < 5 cm | EMI < 10 µV |
-| L-6 | 갈바닉 분리 | 3 kV isolator (Si84xx) | 의료 기기 |
-| L-7 | 전력 loop | ≤ 30 mm² VDD_CORE | L_stray ≤ 10 nH |
-| L-8 | 디커플링 | 칩당 22 µF + 10 × 100 nF + 20 × 10 nF | 600 MHz 노이즈 |
-| L-9 | via stitching | 0.5 mm pitch @ GND border | EMI class B |
+| L-2 | DDR4 trace | length matching ±0.3 mm | 2133 MT/s skew |
+| L-3 | USB3 differential | 90 Ω ±5 %, length matching ±0.2 mm | USB3.2 SI |
+| L-4 | GbE differential | 100 Ω ±5 % | 1000BASE-T SI |
+| L-5 | BCI input | Kelvin GND, guard ring, < 5 cm | EMI < 10 µV |
+| L-6 | Galvanic isolation | 3 kV isolator (Si84xx) | medical device |
+| L-7 | Power loop | ≤ 30 mm² VDD_CORE | L_stray ≤ 10 nH |
+| L-8 | Decoupling | 22 µF + 10 × 100 nF + 20 × 10 nF per chip | 600 MHz noise |
+| L-9 | Via stitching | 0.5 mm pitch @ GND border | EMI class B |
 
-### §12.3 제조 규격
+### §12.3 manufacturing specification
 
-- 급수: IPC-A-600 class 3 (의료).
-- 표면처리: ENIG (Ni 4~6 µm / Au 0.05~0.15 µm).
-- 솔더마스크: LPI green, 12 µm 최소.
-- 전기검사: 100 % 필수 (open/short, HV DC 500 V @ 1 s).
-- 의료 인증: ISO 13485 공장 필수.
+- Class: IPC-A-600 class 3 (medical).
+- Surface finish: ENIG (Ni 4~6 µm / Au 0.05~0.15 µm).
+- Solder mask: LPI green, 12 µm minimum.
+- Electrical test: 100 % required (open/short, HV DC 500 V @ 1 s).
+- Medical certification: ISO 13485 factory required.
 
 ## §13 FIRMWARE (Cortex-R5 lockstep, Yocto Linux + bare-metal FW)
 
-### §13.1 전체 구조
+### §13.1 overall structure
 
 ```
 firmware/
 ├── boot/
-│   ├── u-boot (Zynq 표준)
+│   ├── u-boot (Zynq standard)
 │   └── fsbl.c               // First-stage boot
 ├── rtos/
 │   ├── FreeRTOS 10.5
-│   ├── main_r5.c            // R5 lockstep 엔트리
+│   ├── main_r5.c            // R5 lockstep entry
 │   ├── bci_driver.c         // ADS1299 x2
-│   ├── chip_driver.c        // HEXA-CONSCIOUSNESS 칩 SPI
+│   ├── chip_driver.c        // HEXA-CONSCIOUSNESS chip SPI
 │   ├── safety_gate.c        // τ=4 L0~L3
 │   └── kill_switch.c        // HW latch + SW watchdog
 ├── linux/
 │   ├── kernel 6.6 LTS
-│   ├── drivers/hexa_chip.ko // 칩 ioctl
+│   ├── drivers/hexa_chip.ko // chip ioctl
 │   └── userspace/
-│       ├── iit_phi.py       // Φ 계산 테스트 (개발용)
-│       └── ethics_audit.c   // 감사 로그
+│       ├── iit_phi.py       // Φ computation test (development)
+│       └── ethics_audit.c   // audit log
 └── ota/
     ├── slot_a / slot_b      // Dual-bank A/B
-    └── rollback.c           // 실패 시 자동 롤백
+    └── rollback.c           // automatic rollback on failure
 ```
 
-### §13.2 핵심 파일: `safety_gate.c` (τ=4 계층 차단)
+### §13.2 core file: `safety_gate.c` (τ=4 layer blocking)
 
 ```c
 #include "hexa_conscious.h"
@@ -1125,7 +1172,7 @@ firmware/
 #define ANOMALY_3SIGMA     3
 #define KILL_TIMEOUT_MS    500
 
-/* L0 전기 : 갈바닉 분리 감시 */
+/* L0 electrical: galvanic isolation monitoring */
 void TASK_L0_electrical(void *p) {
     for (;;) {
         if (iso_status_fault()) safety_raise(LVL_L0_ELEC);
@@ -1133,7 +1180,7 @@ void TASK_L0_electrical(void *p) {
     }
 }
 
-/* L1 신호 : 이상치 3σ 검출 */
+/* L1 signal: outlier 3σ detection */
 void TASK_L1_signal(void *p) {
     int16_t buf[BCI_CH][BCI_BLOCK];
     for (;;) {
@@ -1145,25 +1192,25 @@ void TASK_L1_signal(void *p) {
     }
 }
 
-/* L2 윤리 : Φ 출력 감사 */
+/* L2 ethics: Φ output audit */
 void TASK_L2_ethics(void *p) {
     q8_24_t phi;
     for (;;) {
         phi = chip_read_phi();
-        ethics_log(phi);                     // 전부 기록 (감사)
+        ethics_log(phi);                     // record all (audit)
         if (phi > PHI_THRESH_L2) {
             safety_raise(LVL_L2_ETHICS);
-            chip_set_mode(MODE_SAFE);        // 모드 강등
+            chip_set_mode(MODE_SAFE);        // mode downgrade
         }
     }
 }
 
-/* L3 킬스위치 : HW + SW 타임아웃 */
+/* L3 kill switch: HW + SW timeout */
 void TASK_L3_kill(void *p) {
     TickType_t last = xTaskGetTickCount();
     for (;;) {
         if (gpio_read(PIN_KILL) == 0) {
-            chip_kill_hw();                  // 하드웨어 latch
+            chip_kill_hw();                  // hardware latch
             break;
         }
         if (!watchdog_feed_ok(last)) {
@@ -1176,36 +1223,36 @@ void TASK_L3_kill(void *p) {
 }
 ```
 
-### §13.3 상태 머신 (SoC)
+### §13.3 state machine (SoC)
 
 ```
         ┌────────┐  self-test ┌────────┐
    ───►│ BOOT   │────────────►│ IDLE   │
         └────────┘             └───┬────┘
-             ▲                     │ 접속
+             ▲                     │ connect
              │                     ▼
              │                ┌────────┐  anomaly  ┌────────┐
              │                │ ATTN   │──────────►│ SAFE   │
              │                └───┬────┘           └────────┘
-             │                    │ Φ 안정
+             │                    │ Φ stable
              │                    ▼
              │                ┌────────┐
              │                │ LEARN  │
              │                └───┬────┘
-             │                    │ 사용자 확인
+             │                    │ user confirm
              │                    ▼
              │                ┌────────┐  kill     ┌────────┐
              └────────────────│RESPOND │──────────►│ KILLED │
                               └────────┘           └────────┘
 ```
 
-- **BOOT**: FSBL → U-Boot → R5 FreeRTOS → Linux 호스트.
-- **IDLE / ATTN / LEARN / RESPOND / SAFE**: sopfr(6)=5 운영 모드.
-- **KILLED**: HW latch, 전원 재인가만 복귀.
+- **BOOT**: FSBL → U-Boot → R5 FreeRTOS → Linux host.
+- **IDLE / ATTN / LEARN / RESPOND / SAFE**: sopfr(6)=5 operation modes.
+- **KILLED**: HW latch, only restored by power re-application.
 
-## §14 MECHANICAL (기구) — SoC 패키지 + 히트싱크
+## §14 MECHANICAL — SoC package + heatsink
 
-### §14.1 FCBGA-576 패키지
+### §14.1 FCBGA-576 package
 
 ```
 ┌──────────────────────────────────────┐
@@ -1219,61 +1266,63 @@ void TASK_L3_kill(void *p) {
 └──────────────────────────────────────┘
 ```
 
-- 본딩: Flip-chip C4 bump (Sn-Ag 3 %).
+- Bonding: Flip-chip C4 bump (Sn-Ag 3 %).
 - Underfill: Henkel Loctite ECCOBOND E1216.
-- Lid: Copper 2 mm 도금, thermal paste TIM-1 (Honeywell PTM7000).
+- Lid: Copper 2 mm plated, thermal paste TIM-1 (Honeywell PTM7000).
 
-### §14.2 방열 계산
+### §14.2 thermal computation
 
-**열저항 체인**:
+**Thermal resistance chain**:
+
 ```
 Tj -> Rth_jc 0.25 -> Tc -> Rth_cs 0.10 -> Ts -> Rth_sa 0.50 -> Ta
-                                              (히트싱크)
+                                              (heatsink)
 ```
 
-**예산** (TDP 24 W 통합):
+**Budget** (TDP 24 W integrated):
+
 ```
 P = 24 W
 Tj = 40 + 24 × 0.85 = 60.4 °C ≤ 105 °C ✓
 ```
 
-### §14.3 인클로저 (옵션)
+### §14.3 enclosure (option)
 
-- IP54 알루미늄 (200 × 150 × 40 mm).
-- 팬: Delta AFB0412VHA (40 mm, PWM).
-- 케이블 글랜드 PG11 × 3 (전원/BCI/이더넷).
+- IP54 aluminum (200 × 150 × 40 mm).
+- Fan: Delta AFB0412VHA (40 mm, PWM).
+- Cable gland PG11 × 3 (power/BCI/Ethernet).
 
 ## §15 MANUFACTURING
 
-### §15.1 조립 순서
+### §15.1 assembly sequence
 
 ```
-1. 의식 칩 웨이퍼 수입검사 (SK키 MPW)
-2. 칩 Bin 분류 (성능 Bin A/B/C, §15.2)
-3. Zynq SoC + DDR4 스택업 (Xilinx 지원)
-4. PCB 12L HDI 발주 (JLC 또는 KCI)
-5. SMT 조립 (SAC305, reflow peak 245 °C, N2)
-6. X-ray 검사 (BGA void < 10 %)
+1. consciousness chip wafer incoming inspection (SK key MPW)
+2. chip Bin classification (performance Bin A/B/C, §15.2)
+3. Zynq SoC + DDR4 stackup (Xilinx support)
+4. PCB 12L HDI ordering (JLC or KCI)
+5. SMT assembly (SAC305, reflow peak 245 °C, N2)
+6. X-ray inspection (BGA void < 10 %)
 7. ICT (in-circuit test) 100 %
-8. 갈바닉 분리 3 kV 내압 시험
-9. BCI 16ch 루프백 시험 (ADS1299 내부 테스트 신호)
-10. 펌웨어 초기 flashing (FSBL + FreeRTOS + Linux)
-11. Burn-in 72 시간 @ 55 °C (BCI 합성 입력)
-12. 의료 기기 사전 인증 시험 + 라벨링
-13. 포장 (ESD bag + IP54 인클로저)
+8. Galvanic isolation 3 kV withstand test
+9. BCI 16ch loopback test (ADS1299 internal test signal)
+10. firmware initial flashing (FSBL + FreeRTOS + Linux)
+11. Burn-in 72 hours @ 55 °C (BCI synthetic input)
+12. medical device pre-certification test + labeling
+13. packaging (ESD bag + IP54 enclosure)
 ```
 
-### §15.2 칩 Bin 분류
+### §15.2 chip Bin classification
 
-1. **성능 측정**: 600 MHz 기준, Φ 처리량 ≥ 10 k/s.
-2. **Bin 분류**:
-   - Bin A: 정격 + 5 %, TDP ≤ 11 W.
-   - Bin B: 정격, TDP ≤ 12 W.
-   - Bin C: 정격 -5 %, TDP ≤ 13 W (저가형).
+1. **Performance measurement**: at 600 MHz, Φ throughput ≥ 10 k/s.
+2. **Bin classification**:
+   - Bin A: rated + 5 %, TDP ≤ 11 W.
+   - Bin B: rated, TDP ≤ 12 W.
+   - Bin C: rated -5 %, TDP ≤ 13 W (low cost).
    - Bin D: reject.
-3. **Set 선별**: primary / secondary 2 die 동일 Bin.
+3. **Set selection**: primary / secondary 2 dies in same Bin.
 
-### §15.3 솔더 프로파일 (SAC305, N2)
+### §15.3 solder profile (SAC305, N2)
 
 ```
 Temp °C
@@ -1288,151 +1337,153 @@ Temp °C
     0   preheat  reflow  cool
 ```
 
-## §16 TEST & QUALIFICATION (시험 및 인증)
+## §16 TEST & QUALIFICATION
 
-| # | 시험명 | 규격 | 목표 | 합격 |
+| # | Test | Spec | Goal | Pass |
 |---|---|---|---|---|
-| T-1 | Φ 처리량 | IIT 3.0 벤치 | ≥ 10 k Φ/s | PASS |
-| T-2 | 안전 L0~L3 트립 | 자체 | ≤ 4 ms | PASS |
-| T-3 | 킬스위치 응답 | 자체 | ≤ 500 ms | PASS |
-| T-4 | BCI 16ch 노이즈 | IEC 60601-2-26 | ≤ 10 µV RMS | PASS |
-| T-5 | 갈바닉 분리 | IEC 60601-1 | 3 kV / 1 min | PASS |
-| T-6 | EMC (방사) | CISPR 11 class B | 통과 | PASS |
-| T-7 | ESD | IEC 61000-4-2 | ±8 kV 접촉 / ±15 kV 대기 | PASS |
-| T-8 | 번인 72 h | MIL-STD-883 | 55 °C / Φ 부하 | PASS |
-| T-9 | 진동 | IEC 60068-2-6 | 5~500 Hz 2 g | PASS |
+| T-1 | Φ throughput | IIT 3.0 bench | ≥ 10 k Φ/s | PASS |
+| T-2 | Safety L0~L3 trip | internal | ≤ 4 ms | PASS |
+| T-3 | Kill switch response | internal | ≤ 500 ms | PASS |
+| T-4 | BCI 16ch noise | IEC 60601-2-26 | ≤ 10 µV RMS | PASS |
+| T-5 | Galvanic isolation | IEC 60601-1 | 3 kV / 1 min | PASS |
+| T-6 | EMC (radiated) | CISPR 11 class B | pass | PASS |
+| T-7 | ESD | IEC 61000-4-2 | ±8 kV contact / ±15 kV air | PASS |
+| T-8 | Burn-in 72 h | MIL-STD-883 | 55 °C / Φ load | PASS |
+| T-9 | Vibration | IEC 60068-2-6 | 5~500 Hz 2 g | PASS |
 | T-10 | HTOL | JEDEC JESD22-A108 | 125 °C 1000 h | PASS |
 
-## §17 BOM (부품번호·공급사 단위, 1 k 볼륨)
+## §17 BOM (part number/supplier basis, 1 k volume)
 
-| # | 부품 | 규격 | 제조사 | 공급사 P/N | 단가 USD | 수량 | 합계 USD |
+| # | Part | Spec | Manufacturer | Supplier P/N | Unit USD | Qty | Total USD |
 |---|---|---|---|---|---|---|---|
-| B-1 | HEXA-CONSCIOUSNESS 칩 die | 28 nm, 12코어 | SK키 MPW | HCX-CHIP-A0 | 85.00 | 1 | 85.00 |
-| B-2 | Φ 엔진 서브다이 (선택) | 28 nm | SK키 MPW | HCX-PHI-A0 | — | — | 통합 |
+| B-1 | HEXA-CONSCIOUSNESS chip die | 28 nm, 12 cores | SK key MPW | HCX-CHIP-A0 | 85.00 | 1 | 85.00 |
+| B-2 | Φ engine subdie (option) | 28 nm | SK key MPW | HCX-PHI-A0 | — | — | integrated |
 | B-3 | Zynq UltraScale+ | XCZU3EG | AMD Xilinx | XCZU3EG-1SFVC784I | 110.00 | 1 | 110.00 |
 | B-4 | ADS1299 AFE | 8ch, 24bit | Texas Instruments | ADS1299IPAG | 28.00 | 2 | 56.00 |
-| B-5 | Σ-Δ ADC | 24bit, 8ch | SK키 MPW | HCX-ADC-A0 | 3.00 | 1 | 3.00 |
+| B-5 | Σ-Δ ADC | 24bit, 8ch | SK key MPW | HCX-ADC-A0 | 3.00 | 1 | 3.00 |
 | B-6 | DDR4 4GB | 2133 MT/s | Micron | MT40A1G8SA-075 | 9.00 | 1 | 9.00 |
 | B-7 | PMIC | DC-DC 5ch + LDO | Texas Instruments | TPS65094RSKR | 4.50 | 1 | 4.50 |
 | B-8 | Ethernet PHY | 1000BASE-T | Marvell | 88E1512-A0-NNP2I000 | 2.80 | 1 | 2.80 |
 | B-9 | USB3 redriver | Gen2 | Texas Instruments | TUSB1046-DCI | 2.00 | 1 | 2.00 |
-| B-10 | Galvanic isolator 3kV | 의료 | Silicon Labs | Si8645BB-B-IS | 4.80 | 1 | 4.80 |
-| B-11 | 클럭 25 MHz crystal | ±10 ppm | TXC | 7V-25.000MAAJ-T | 0.40 | 1 | 0.40 |
-| B-12 | 세라믹 cap 22 µF/6.3V X7R | 1210 | Murata | GRM32ER70J226KE19L | 0.25 | 12 | 3.00 |
-| B-13 | 세라믹 cap 100 nF/10V X7R | 0402 | Murata | GRM155R71A104K | 0.01 | 120 | 1.20 |
-| B-14 | 페라이트 비드 | 600 Ω @ 100 MHz | Würth | 742792651 | 0.05 | 8 | 0.40 |
+| B-10 | Galvanic isolator 3kV | medical | Silicon Labs | Si8645BB-B-IS | 4.80 | 1 | 4.80 |
+| B-11 | Clock 25 MHz crystal | ±10 ppm | TXC | 7V-25.000MAAJ-T | 0.40 | 1 | 0.40 |
+| B-12 | Ceramic cap 22 µF/6.3V X7R | 1210 | Murata | GRM32ER70J226KE19L | 0.25 | 12 | 3.00 |
+| B-13 | Ceramic cap 100 nF/10V X7R | 0402 | Murata | GRM155R71A104K | 0.01 | 120 | 1.20 |
+| B-14 | Ferrite bead | 600 Ω @ 100 MHz | Würth | 742792651 | 0.05 | 8 | 0.40 |
 | B-15 | PCB 12L HDI | IPC-A-600 class 3 | JLC/KCI | custom | 18.00 | 1 | 18.00 |
 | B-16 | FCBGA-576 substrate | 21 × 21 | Unimicron | custom | 4.50 | 1 | 4.50 |
 | B-17 | Underfill | Loctite ECCOBOND E1216 | Henkel | E1216 | 0.30 | 1 | 0.30 |
 | B-18 | TIM (thermal paste) | Honeywell PTM7000 | Honeywell | PTM7000 | 0.50 | 1 | 0.50 |
 | B-19 | Heatsink + fan | 40 mm alu | Delta | AFB0412VHA + HS | 3.00 | 1 | 3.00 |
-| B-20 | USB-C 리셉터클 | USB 3.2 | Amphenol | 12401814E4#2A | 1.20 | 1 | 1.20 |
+| B-20 | USB-C receptacle | USB 3.2 | Amphenol | 12401814E4#2A | 1.20 | 1 | 1.20 |
 | B-21 | RJ45 jack | 1000BASE-T | Bel Fuse | SI-60033-F | 1.80 | 1 | 1.80 |
-| B-22 | BCI 커넥터 | 16ch shrouded | Samtec | custom | 6.00 | 1 | 6.00 |
-| B-23 | 물리 킬 버튼 | Omron B3F | Omron | B3F-1000 | 0.60 | 1 | 0.60 |
-| B-24 | 조립/검사/인증 | 공임 + KC 의료기기 | 국내 OSAT | — | 65.00 | 1 | 65.00 |
-| | | | | | | **합계** | **$277.00** |
-| | | | | | 예비 여유 (5 %) | | 13.85 |
-| | | | | | | **최종** | **$290.85** |
+| B-22 | BCI connector | 16ch shrouded | Samtec | custom | 6.00 | 1 | 6.00 |
+| B-23 | Physical kill button | Omron B3F | Omron | B3F-1000 | 0.60 | 1 | 0.60 |
+| B-24 | Assembly/inspection/cert | labor + KC medical device | domestic OSAT | — | 65.00 | 1 | 65.00 |
+| | | | | | | **Total** | **$277.00** |
+| | | | | | Reserve margin (5 %) | | 13.85 |
+| | | | | | | **Final** | **$290.85** |
 
-## §18 VENDOR & MPW SCHEDULE (24 개월 간트)
+## §18 VENDOR & MPW SCHEDULE (24-month Gantt)
 
 ```
-월      1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24
+Month    1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24
 ─────────────────────────────────────────────────────────────────────────────────────────────────────
-MPW 1: SK키 28nm 의식 칩 첫 셔틀 (12 개월)
+MPW 1: SK key 28nm consciousness chip 1st shuttle (12 mo)
        ██████████████████████████████
-MPW 2: SK키 28nm 의식 칩 두번째 셔틀 (12 개월, 실리콘 수정)
+MPW 2: SK key 28nm consciousness chip 2nd shuttle (12 mo, silicon revision)
                           ██████████████████████████████
-MPW 3: SK키 0.18µm Σ-Δ ADC (6 개월)
+MPW 3: SK key 0.18µm Σ-Δ ADC (6 mo)
              ██████████████
-MPW 4: Zynq + 주변 COTS 수급 (3 개월)
+MPW 4: Zynq + peripheral COTS supply (3 mo)
        █████████
-PCB 12L HDI 1차 스핀 (2 개월) + 2차 스핀
+PCB 12L HDI 1st spin (2 mo) + 2nd spin
                                  ██████                ████
-SoC 조립 + 번인 + 1st article
+SoC assembly + burn-in + 1st article
                                             ████████
-의료 인증 (KC 의료기기) + ISO 13485
+medical certification (KC medical device) + ISO 13485
                                                           ████████████
-최종 양산 준비
+final mass production prep
                                                                       ██████████
 ```
 
-| 단계 | 시작 월 | 기간 | 산출물 |
+| Stage | Start month | Duration | Deliverable |
 |---|---|---|---|
-| S-1 | M1  | 12 mo | SK키 MPW#1 칩 GDS + first silicon |
-| S-2 | M3  | 6 mo  | SK키 ADC MPW GDS + sample |
-| S-3 | M1  | 3 mo  | Zynq UltraScale+ 5 k ea 수급 |
-| S-4 | M9  | 6 mo  | PCB 12L HDI 1차 스핀 100 EA |
-| S-5 | M7  | 12 mo | MPW#2 (실리콘 수정) |
-| S-6 | M13 | 4 mo  | SoC 조립 + 번인 + 100 EA |
-| S-7 | M17 | 4 mo  | 1st article 특성 측정 |
-| S-8 | M17 | 7 mo  | KC 의료기기 + ISO 13485 인증 |
-| S-9 | M23 | 2 mo  | 양산 transfer + 출하 시험 |
+| S-1 | M1  | 12 mo | SK key MPW#1 chip GDS + first silicon |
+| S-2 | M3  | 6 mo  | SK key ADC MPW GDS + sample |
+| S-3 | M1  | 3 mo  | Zynq UltraScale+ 5 k ea supply |
+| S-4 | M9  | 6 mo  | PCB 12L HDI 1st spin 100 EA |
+| S-5 | M7  | 12 mo | MPW#2 (silicon revision) |
+| S-6 | M13 | 4 mo  | SoC assembly + burn-in + 100 EA |
+| S-7 | M17 | 4 mo  | 1st article characterization |
+| S-8 | M17 | 7 mo  | KC medical device + ISO 13485 cert |
+| S-9 | M23 | 2 mo  | mass production transfer + shipping test |
 
-**예산 배분**: ₩12 억 (= $900 k USD 등가)
-- MPW × 3: $350 k (칩 2 회 + ADC 1 회)
-- COTS (Zynq, ADS1299, DDR, PMIC 등): $150 k (100 EA 기준 R&D)
-- 엔지니어 6 명 × 24 mo × $12 k/mo: $288 k (인건비 압축)
-- 인증 수수료 (KC 의료 + ISO 13485): $60 k
-- 예비비: $52 k
+**Budget allocation**: KRW 1.2 B (= $900 k USD equivalent)
 
-TIPS 6 억 + KIAT 4 억 + 나노종기원 MPW 할인 2 억 = 12 억원 조달.
+- MPW × 3: $350 k (chip 2x + ADC 1x)
+- COTS (Zynq, ADS1299, DDR, PMIC, etc.): $150 k (100 EA R&D basis)
+- 6 engineers × 24 mo × $12 k/mo: $288 k (compressed labor cost)
+- Certification fees (KC medical + ISO 13485): $60 k
+- Reserve: $52 k
 
-## §19 ACCEPTANCE CRITERIA (사인오프 체크리스트)
+TIPS KRW 600 M + KIAT KRW 400 M + Nano-jonggi-won MPW discount KRW 200 M = KRW 1.2 B funding.
 
-- [ ] A-1  §16 T-1 ~ T-10 모두 PASS (각 N ≥ 30 샘플)
-- [ ] A-2  §17 BOM 실제 조달가 ≤ $300 @ 1 k 볼륨
-- [ ] A-3  §18 24 개월 일정 ±10 % 이내 완료
-- [ ] A-4  KC 의료기기 인증 취득
-- [ ] A-5  ISO 13485 품질 시스템 인증
-- [ ] A-6  100 EA 시제품 출하 + 베타 임상 IRB 3 기관 배포
-- [ ] A-7  6 개월 필드 테스트 사고 0 건 + BCI 쓰기 시도 0 건 (감사 로그)
-- [ ] A-8  §7 Python 검증 10/10 PASS (소스와 동기화됨)
-- [ ] A-9  도면·BOM·펌웨어 v1.0 태깅 + 리포 동결
-- [ ] A-10 기술이전 문서 수신자 서명 완료
+## §19 ACCEPTANCE CRITERIA (sign-off checklist)
 
-**검수 주체**:
-- 내부: 설계팀 4 인 + QA 1 인 + 윤리 감사 1 인 합의.
-- 외부 (필수): 임상 IRB 1 곳 + BCI 전문가 1 인 리뷰.
+- [ ] A-1  §16 T-1 ~ T-10 all PASS (each N ≥ 30 samples)
+- [ ] A-2  §17 BOM actual procurement cost ≤ $300 @ 1 k volume
+- [ ] A-3  §18 24-month schedule completed within ±10 %
+- [ ] A-4  KC medical device certification obtained
+- [ ] A-5  ISO 13485 quality system certified
+- [ ] A-6  100 EA prototype shipping + beta clinical IRB 3-institution distribution
+- [ ] A-7  6-month field test 0 accidents + 0 BCI write attempts (audit log)
+- [ ] A-8  §7 Python verification 10/10 PASS (synced with source)
+- [ ] A-9  Drawings/BOM/firmware v1.0 tagged + repo frozen
+- [ ] A-10 Technology transfer documents recipient signature finalized
+
+**Inspection bodies**:
+
+- Internal: design team 4 + QA 1 + ethics auditor 1 consensus.
+- External (required): clinical IRB 1 + BCI expert 1 review.
 
 ## §20 APPENDIX
 
-### §20.1 Python 검증 스크립트 — 작동성 계산
+### §20.1 Python verification script — operability computation
 
-> 본 문서 §7 의 스크립트와 동일. 수정 시 양쪽 동기화.
-
-```
-# papers/n6-hexa-consciousness-integrated-paper.md §7 참조 — 중복 제거
-```
-
-### §20.2 end-to-end 레이턴시 예산 도해
+> Identical to §7 script of this document. Sync both sides on modification.
 
 ```
-0 µs    BCI 16ch 샘플 완료 (250 Hz 한 틱)
+# papers/n6-hexa-consciousness-integrated-paper.md §7 reference — duplicate removed
+```
+
+### §20.2 end-to-end latency budget diagram
+
+```
+0 µs    BCI 16ch sample done (250 Hz one tick)
   │
   ├─► 40 µs   AFE ADS1299 → Zynq SPI DMA
   │
-  ├─► 200 µs  MCU 전처리 + 이상치 체크 (L1)
+  ├─► 200 µs  MCU preprocessing + outlier check (L1)
   │
-  ├─► 1.0 ms  의식 칩 Φ 계산 (24-node, 4-stage pipe × 10k)
+  ├─► 1.0 ms  consciousness chip Φ computation (24-node, 4-stage pipe × 10k)
   │
-  ├─► 1.2 ms  L2 윤리 게이트 + 감사 로그
+  ├─► 1.2 ms  L2 ethics gate + audit log
   │
-  ├─► 3.0 ms  응답 합성 (sopfr=5 모드)
+  ├─► 3.0 ms  response synthesis (sopfr=5 mode)
   │
   ▼
-4.0 ms  호스트 전송 완료 (USB-C / GbE)
-─────── 예산 τ·ms = 4 ms (여유 0 %) ───────
+4.0 ms  host transmission done (USB-C / GbE)
+─────── budget τ·ms = 4 ms (margin 0 %) ───────
 ```
 
-### §20.3 용어집
+### §20.3 glossary
 
-| 약자 | 의미 |
+| Abbr | Meaning |
 |---|---|
-| HEXA | n=6 산술 좌표 프레임워크 |
-| IIT | Integrated Information Theory (통합정보이론) |
-| Φ / phi | IIT 통합정보량 |
+| HEXA | n=6 arithmetic coordinate framework |
+| IIT | Integrated Information Theory |
+| Φ / phi | IIT integrated information quantity |
 | GWT | Global Workspace Theory |
 | BCI | Brain-Computer Interface |
 | AFE | Analog Front End |
@@ -1443,7 +1494,7 @@ TIPS 6 억 + KIAT 4 억 + 나노종기원 MPW 할인 2 억 = 12 억원 조달.
 | SoC | System on Chip |
 | OSAT | Outsourced Semiconductor Assembly and Test |
 
-### §20.4 참조 문서
+### §20.4 reference documents
 
 - OEIS A000203 (sigma), A000005 (tau), A001414 (sopfr)
 - Tononi "Integrated Information Theory 3.0" (2014)
@@ -1451,182 +1502,188 @@ TIPS 6 억 + KIAT 4 억 + 나노종기원 MPW 할인 2 억 = 12 억원 조달.
 - OpenBCI Cyton+Daisy Hardware Docs v3
 - TI ADS1299 Datasheet (Rev I, 2017)
 - Xilinx UG1085 Zynq UltraScale+ TRM
-- IEC 60601-1 / 60601-2-26 의료 안전
-- ISO 14971 의료기기 위험관리
-- ISO 13485 품질경영
-- KC 의료기기 허가 지침 (MFDS)
+- IEC 60601-1 / 60601-2-26 medical safety
+- ISO 14971 medical device risk management
+- ISO 13485 quality management
+- KC medical device approval guidance (MFDS)
 
-### §20.5 변경 이력 (Mk history — 최소 3줄)
+### §20.5 change history (Mk history — minimum 3 lines)
 
-| 버전 | 일자 | 변경 | 작성 |
+| Version | Date | Change | Author |
 |---|---|---|---|
-| 0.1 | 2026-04-14 | n6-consciousness-chip-paper.md v2 초기 엔지니어링 버전 | n6-architecture |
-| 0.2 | 2026-04-14 | n6-consciousness-soc-paper.md v2 SoC 엔지니어링 버전 | n6-architecture |
-| 1.0 | 2026-04-18 | 칩 + SoC 통합본 (21 canonical, §8~§21 엔지니어링 풀 확장) | n6-architecture |
+| 0.1 | 2026-04-14 | n6-consciousness-chip-paper.md v2 initial engineering version | n6-architecture |
+| 0.2 | 2026-04-14 | n6-consciousness-soc-paper.md v2 SoC engineering version | n6-architecture |
+| 1.0 | 2026-04-18 | chip + SoC integrated (21 canonical, §8~§21 engineering full expansion) | n6-architecture |
 
-### §20.6 수신자 확인 서명
+### §20.6 recipient acknowledgment signature
 
-- [ ] 수신자 이름: ____________________
-- [ ] 소속: ____________________
-- [ ] 일자: ____________________
-- [ ] 서명: ____________________
+- [ ] Recipient name: ____________________
+- [ ] Affiliation: ____________________
+- [ ] Date: ____________________
+- [ ] Signature: ____________________
 
-**수신 목적** (해당 항목 체크):
-- [ ] 공동개발 검토
-- [ ] 투자 실사
-- [ ] 기술이전 검토
-- [ ] 조달/구매 검토
-- [ ] 의료 인증 대행 검토
+**Reception purpose** (check applicable):
+
+- [ ] Joint development review
+- [ ] Investment due diligence
+- [ ] Technology transfer review
+- [ ] Procurement/purchase review
+- [ ] Medical certification agency review
 
 ---
 
-# 임팩트 per Mk (§21)
+# Impact per Mk (§21)
 
-## §21 IMPACT per Mk (무엇이 바뀌는가 — 세 층, 버전별)
+## §21 IMPACT per Mk (what changes — three layers, per version)
 
-> 각 Mk 마다 3층 구조 엄수: ① 바로 바뀌는 것(실증) / ② 파생 효과(인과) / ③ 안 바뀌는 것(정직).
-> mk1 제외 모든 mkN 은 이전 버전 문서 링크 필수 (github blob/compare URL).
+> Each Mk strictly observes the 3-layer structure: ① immediate change (demonstration) / ② derived effects (causal) / ③ unchanged (honesty).
+> All mkN except mk1 require previous-version document link (github blob/compare URL).
 
-### §21.mk5 — Mk.V 통합 의식 컨슈머 (v1.0, 2045-06-01, PLANNED)
+### §21.mk5 — Mk.V integrated consciousness consumer (v1.0, 2045-06-01, PLANNED)
 
 <details open>
 <summary>mk4 → mk5 diff · prev mk4 blob · PLANNED · 2045-06-01</summary>
 
-#### ① 바로 바뀌는 것 (vs mk4, 예정)
+#### ① immediate change (vs mk4, planned)
 
-| 축 | mk4 | mk5 예정 |
+| Axis | mk4 | mk5 planned |
 |---|---|---|
-| 공정 | 7 nm | **3 nm GAA** |
-| Φ 처리량 | 100 k/s | **1 M/s** (×10) |
-| BCI 채널 | 64 | **256 (OpenBCI 호환 확장)** |
-| 전력 | 20 W | **12 W** (σ W/SoC) |
-| 응답 레이턴시 | 2 ms | **1 ms** (n=6 clock skew 공학화) |
+| Process | 7 nm | **3 nm GAA** |
+| Φ throughput | 100 k/s | **1 M/s** (×10) |
+| BCI channels | 64 | **256 (OpenBCI compatible extension)** |
+| Power | 20 W | **12 W** (σ W/SoC) |
+| Response latency | 2 ms | **1 ms** (n=6 clock skew engineered) |
 
-#### ② 파생 효과 (mk5 → Mk-∞)
+#### ② derived effects (mk5 → Mk-∞)
 
 ```
-mk5 256ch BCI + 3nm  -> 홈 데일리 컨슈머 디바이스
-                     -> 의료 넘어 웰니스/교육 시장 진입
-                     -> Mk-∞ 무선 BCI + 장시간 착용
+mk5 256ch BCI + 3nm  -> home daily consumer device
+                     -> beyond medical, entering wellness/education market
+                     -> Mk-∞ wireless BCI + long-duration wear
 ```
 
-#### ③ 안 바뀌는 것 (정직)
+#### ③ unchanged (honesty)
 
-- ✗ mk5 도 여전히 읽기 전용 BCI (쓰기 금지 — 안전 하드코드)
-- ✗ BOM $500 — 가정용 일반 보급은 Mk-∞ 이후
-- ✗ 의식 주관적 체험의 "hard problem" 은 Mk-∞ 까지도 미해결 (Φ 는 상관량일 뿐)
+- ✗ mk5 still read-only BCI (write prohibited — safety hardcoded)
+- ✗ BOM $500 — household general distribution after Mk-∞
+- ✗ "hard problem" of subjective consciousness experience remains in-progress through Mk-∞ (Φ is just a correlate)
 
 </details>
 
-### §21.mk4 — Mk.IV 고성능 SoC (v1.0, 2040-06-01, PLANNED)
+### §21.mk4 — Mk.IV high-performance SoC (v1.0, 2040-06-01, PLANNED)
 
 <details>
 <summary>mk3 → mk4 · PLANNED · 2040-06-01</summary>
 
-| 축 | mk3 | mk4 예정 |
+| Axis | mk3 | mk4 planned |
 |---|---|---|
-| 공정 | 14 nm | **7 nm FinFET** |
-| 코어 | 12 | **24 (σ·φ)** |
-| Φ 처리량 | 30 k/s | **100 k/s** |
-| 안전 계층 | τ=4 | **τ=4 + 동적 검증 추가** |
+| Process | 14 nm | **7 nm FinFET** |
+| Cores | 12 | **24 (σ·φ)** |
+| Φ throughput | 30 k/s | **100 k/s** |
+| Safety layers | τ=4 | **τ=4 + dynamic verification added** |
 
-#### ② 파생 효과
+#### ② derived effects
 
 ```
-mk4 7nm + 24코어 -> 의료 병원 표준 장비 채택
-                 -> 임상 Φ 바이오마커 FDA 승인 도전
+mk4 7nm + 24 cores -> medical hospital standard equipment adoption
+                   -> clinical Φ biomarker FDA approval challenge
 ```
 
-#### ③ 안 바뀌는 것
-- ✗ 여전히 전원 인가형 (배터리 휴대는 mk5)
+#### ③ unchanged
+
+- ✗ Still requires plug-in power (battery-portable in mk5)
 
 </details>
 
-### §21.mk3 — Mk.III DSE 완료 + MPW#2 (v1.0, 2035-06-01, PLANNED)
+### §21.mk3 — Mk.III DSE target reached + MPW#2 (v1.0, 2035-06-01, PLANNED)
 
 <details>
 <summary>mk2 → mk3 · PLANNED · 2035-06-01</summary>
 
-| 축 | mk2 | mk3 예정 |
+| Axis | mk2 | mk3 planned |
 |---|---|---|
-| DSE 탐색 | 샘플 100 | **전수 2400 조합 Monte Carlo** |
-| MPW 회차 | 1 | **2 (수정 실리콘)** |
-| 시제품 | 10 EA | **100 EA** |
+| DSE search | sample 100 | **full 2400-combination Monte Carlo** |
+| MPW spins | 1 | **2 (revised silicon)** |
+| Prototypes | 10 EA | **100 EA** |
 | §7 VERIFY PASS | 8/10 | **10/10** |
 
 </details>
 
-### §21.mk2 — Mk.II TestChip + FPGA 에뮬 (v1.0, 2030-06-01, PLANNED)
+### §21.mk2 — Mk.II TestChip + FPGA emulation (v1.0, 2030-06-01, PLANNED)
 
 <details>
 <summary>mk1 → mk2 · PLANNED · 2030-06-01</summary>
 
-| 축 | mk1 | mk2 예정 |
+| Axis | mk1 | mk2 planned |
 |---|---|---|
-| 구현 | 논문 수준 | **TestChip (28nm) + Zynq FPGA 에뮬** |
-| Φ 검증 | 시뮬 | **실측 10 k/s @ 600 MHz** |
-| 독립 재유도 | 2 경로 | **3 경로 ±15%** |
+| Implementation | paper level | **TestChip (28nm) + Zynq FPGA emulation** |
+| Φ verification | sim | **measured 10 k/s @ 600 MHz** |
+| Independent re-derivation | 2 paths | **3 paths ±15%** |
 
 </details>
 
-### §21.mk1 — Mk.I 통합 시드 논문 (v1.0, 2026-04-18, RELEASED)
+### §21.mk1 — Mk.I integrated seed paper (v1.0, 2026-04-18, RELEASED)
 
 <details open>
-<summary>초판 · RELEASED · 2026-04-18</summary>
+<summary>initial · RELEASED · 2026-04-18</summary>
 
-#### ① 바로 바뀌는 것 (통합 논문 본문)
+#### ① immediate change (integrated paper body)
 
-| 축 | 기존 (2편 분리) | mk1 (통합) |
+| Axis | Existing (2 separate papers) | mk1 (integrated) |
 |---|---|---|
-| 논문 편수 | 2 (칩 paper + SoC paper) | **1 (통합 canonical)** |
-| 엔지니어링 섹션 | §1~§7 만 | **§1~§21 fully canonical** |
-| 칩↔SoC 관계식 | 없음 | **칩 12 × 2 = SoC 24 = J₂ 공식화** |
-| DSE 격자 | 각 2400 독립 | **단일 2400 격자 공유** |
-| FALSIFIER | 4 개씩 (분리) | **5 개 (통합, 칩·SoC 관계 추가)** |
-| atlas.n6 연결 | 42 + 24 분리 | **66 통합 노드 (계획)** |
+| Paper count | 2 (chip paper + SoC paper) | **1 (integrated canonical)** |
+| Engineering sections | §1~§7 only | **§1~§21 fully canonical** |
+| Chip↔SoC relation formula | none | **chip 12 × 2 = SoC 24 = J₂ formalized** |
+| DSE grid | each 2400 independent | **single 2400 grid shared** |
+| FALSIFIER | 4 each (separate) | **5 (integrated, chip-SoC relation added)** |
+| atlas.n6 link | 42 + 24 separate | **66 integrated nodes (planned)** |
 
-#### ② 파생 효과 (mk1 → mk2~Mk-∞)
+#### ② derived effects (mk1 → mk2~Mk-∞)
 
 ```
-mk1 통합 paper  -> 단일 엔지니어링 팀이 칩/SoC 양쪽 기획 가능
-                -> SK키 MPW 일정에 칩+주변 동시 제출 (개발 기간 단축)
-                -> TIPS/KIAT 제안서에 "의식 프로세서 단일 제품 라인" 명시 가능
-                -> mk2 TestChip 에서 칩 12 × 2 = SoC 24 실측 검증
+mk1 integrated paper -> single engineering team can plan both chip/SoC
+                     -> chip+peripherals submitted concurrently to SK key MPW (development time shortened)
+                     -> "consciousness processor single product line" stated in TIPS/KIAT proposals
+                     -> mk2 TestChip measures chip 12 × 2 = SoC 24 verification
 ```
 
-#### ③ 안 바뀌는 것 (정직)
+#### ③ unchanged (honesty)
 
-- ✗ 아직 실리콘 테스트 없음 (mk2 MPW 이후)
-- ✗ "의식" 자체의 주관적 체험은 측정 불가 — Φ 는 상관 지표일 뿐
-- ✗ BCI 는 여전히 쓰기 금지 (안전 하드코드, Mk-∞ 까지 변경 없음)
-- ✗ σ(n)·φ(n)=n·τ(n) 유일성이 의식 프로세서의 물리적 본질을 "설명" 하지는 않음 — 단지
-  파라미터 선택의 정합성 지표
-- ✗ 기본전하 e, Planck h, π 등은 여전히 n=6 과 무관 (§7.10 COUNTER)
+- ✗ No silicon test yet (after mk2 MPW)
+- ✗ subjective experience of "consciousness" itself unmeasurable — Φ is only a correlate
+- ✗ BCI still write-prohibited (safety hardcoded, unchanged through Mk-∞)
+- ✗ σ(n)·φ(n)=n·τ(n) candidate uniqueness does not "explain" the physical essence of the consciousness processor — only an alignment indicator for parameter selection
+- ✗ elementary charge e, Planck h, π still unrelated to n=6 (§7.10 COUNTER)
 
 </details>
 
 ---
 
-## 결론
+## Conclusion
 
-본 통합 논문은 **HEXA-CONSCIOUSNESS 제품 라인(P-151)** 의 칩/SoC 2수준을 단일 n=6 산술
-좌표계로 재구성하여, 전체 스택(칩→SoC→시스템) 로드맵을 하나의 canonical 문서로
-제공한다. 핵심 기여는 3가지:
+This integrated paper reconfigures the chip/SoC two levels of the **HEXA-CONSCIOUSNESS
+product line (P-151)** under a single n=6 arithmetic coordinate system, providing the
+full-stack (chip→SoC→system) roadmap as a single canonical document. Three core
+contributions:
 
-1. **수론적 공동 좌표**: σ=12 / τ=4 / φ=2 / sopfr=5 / J₂=24 라는 n=6 수론 상수군이 칩
-   과 SoC 양쪽 기본 파라미터와 동시에 맞물림을 검증 (38/42 + 0/24 EXACT).
-2. **칩↔SoC 관계식**: "칩 12 × 2 = SoC 24 = J₂" 는 수론적 필연이며, 이를 통해 두 수준
-   의 인터페이스 설계가 자동화된다.
-3. **엔지니어링 완결**: §8~§20 에 FCBGA-576 패키지·12L HDI PCB·τ=4 안전 게이트·KC 의료
-   기기 인증 일정(24 개월)·BOM $290 등 실제 제품화에 필요한 모든 수치가 기입됨.
+1. **Number-theoretic joint coordinates**: σ=12 / τ=4 / φ=2 / sopfr=5 / J₂=24 — this
+   n=6 number-theoretic constant family is verified to interlock with the basic
+   parameters of both chip and SoC (38/42 + 0/24 EXACT) as a draft pattern.
+2. **Chip↔SoC relation formula**: "chip 12 × 2 = SoC 24 = J₂" is a number-theoretic
+   target relation, automating the interface design between the two levels.
+3. **Engineering completion**: §8~§20 specify all numerical values needed for actual
+   productization including FCBGA-576 package, 12L HDI PCB, τ=4 safety gate, KC
+   medical device certification schedule (24 mo), BOM $290.
 
-**반증 조건** (§7.10, §21.mk1 ③):
-- 의식 칩/SoC 파라미터 n=6 정합 < 70 % → 본 통합 논문 핵심 주장 폐기.
-- 칩 12 × 2 ≠ SoC 24 실측 확인 → §4 상관 폐기, 통합본 분리 복귀.
-- OEIS 3 시퀀스 등록 취소 → §7.7 폐기.
+**Refutation conditions** (§7.10, §21.mk1 ③):
 
-atlas.n6 상 본 통합 노드는 `consciousness-chip` 38/42 + `consciousness-soc` 0/24 =
-38/66 EXACT (57.6 %) 로 Mk.I seed 단계. Mk.II TestChip 검증에서 75 % 초과가 목표.
+- Consciousness chip/SoC parameter n=6 alignment < 70 % → retire the core draft claim of this integrated paper.
+- chip 12 × 2 ≠ SoC 24 measurement → retire §4 correlation, return to integrated split.
+- OEIS 3 sequence deregistration → retire §7.7.
+
+In atlas.n6 this integrated node is `consciousness-chip` 38/42 + `consciousness-soc`
+0/24 = 38/66 EXACT (57.6 %) at the Mk.I seed stage. Mk.II TestChip verification targets
+exceeding 75 %.
 
 ## mk_history
 
