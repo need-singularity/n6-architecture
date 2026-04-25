@@ -1,0 +1,310 @@
+{
+  "baseline": "2026-04-25",
+  "task": "N-hypothesis promotion [N?] -> [N!]",
+  "total_n_question": 61,
+  "promote_eligible": 0,
+  "hold_count": 61,
+  "promote_entries": [],
+  "hold_sample": [
+    {
+      "id": "MILL-PX-A1b-d158-ricci-conditional",
+      "line": 17866,
+      "type": "@R",
+      "domain": "n6atlas",
+      "has_eq": false,
+      "has_converge": false,
+      "has_apply": false,
+      "n_deps": 3
+    },
+    {
+      "id": "MILL-PX-A12-moonshine-barrier-L5",
+      "line": 17883,
+      "type": "@R",
+      "domain": "n6atlas",
+      "has_eq": false,
+      "has_converge": false,
+      "has_apply": false,
+      "n_deps": 3
+    },
+    {
+      "id": "MEGA-INTEGRATION-06-triple-stack-budget-pred",
+      "line": 18468,
+      "type": "@R",
+      "domain": "n6atlas",
+      "has_eq": false,
+      "has_converge": false,
+      "has_apply": false,
+      "n_deps": 2
+    },
+    {
+      "id": "HEXA-CLOAK-08-field-attenuation",
+      "line": 18495,
+      "type": "@R",
+      "domain": "sf-ufo",
+      "has_eq": false,
+      "has_converge": false,
+      "has_apply": false,
+      "n_deps": 2
+    },
+    {
+      "id": "HEXA-CLOAK-09-thermal-suppress",
+      "line": 18498,
+      "type": "@R",
+      "domain": "sf-ufo",
+      "has_eq": false,
+      "has_converge": false,
+      "has_apply": false,
+      "n_deps": 2
+    },
+    {
+      "id": "HEXA-CLOAK-11-octave-coverage",
+      "line": 18504,
+      "type": "@R",
+      "domain": "sf-ufo",
+      "has_eq": false,
+      "has_converge": false,
+      "has_apply": false,
+      "n_deps": 2
+    },
+    {
+      "id": "ANTIMATTER-10-ufo-prerequisite",
+      "line": 18579,
+      "type": "@R",
+      "domain": "n6atlas",
+      "has_eq": false,
+      "has_converge": false,
+      "has_apply": false,
+      "n_deps": 2
+    },
+    {
+      "id": "HEXA-SC-11-Tc-universal-limit",
+      "line": 18663,
+      "type": "@R",
+      "domain": "n6atlas",
+      "has_eq": false,
+      "has_converge": false,
+      "has_apply": false,
+      "n_deps": 3
+    },
+    {
+      "id": "HEXA-SC-12-pred-gap-ratio-cap-6",
+      "line": 18666,
+      "type": "@R",
+      "domain": "n6atlas",
+      "has_eq": false,
+      "has_converge": false,
+      "has_apply": false,
+      "n_deps": 2
+    },
+    {
+      "id": "HEXA-SC-13-pred-AZ-no-11th-class",
+      "line": 18669,
+      "type": "@R",
+      "domain": "n6atlas",
+      "has_eq": false,
+      "has_converge": false,
+      "has_apply": false,
+      "n_deps": 2
+    },
+    {
+      "id": "SC-HEXA-RTSC-Tc-300K",
+      "line": 18675,
+      "type": "@F",
+      "domain": "material",
+      "has_eq": false,
+      "has_converge": false,
+      "has_apply": false,
+      "n_deps": 2
+    },
+    {
+      "id": "SC-HEXA-lambda-ep",
+      "line": 18679,
+      "type": "@F",
+      "domain": "material",
+      "has_eq": false,
+      "has_converge": false,
+      "has_apply": false,
+      "n_deps": 2
+    },
+    {
+      "id": "SC-HEXA-mu-star",
+      "line": 18683,
+      "type": "@F",
+      "domain": "material",
+      "has_eq": false,
+      "has_converge": false,
+      "has_apply": false,
+      "n_deps": 2
+    },
+    {
+      "id": "SC-HEXA-omega-log",
+      "line": 18687,
+      "type": "@F",
+      "domain": "material",
+      "has_eq": false,
+      "has_converge": false,
+      "has_apply": false,
+      "n_deps": 2
+    },
+    {
+      "id": "SC-HEXA-BCS-gap-ratio",
+      "line": 18691,
+      "type": "@F",
+      "domain": "material",
+      "has_eq": false,
+      "has_converge": false,
+      "has_apply": false,
+      "n_deps": 2
+    },
+    {
+      "id": "SC-HEXA-kappa-GL",
+      "line": 18695,
+      "type": "@F",
+      "domain": "material",
+      "has_eq": false,
+      "has_converge": false,
+      "has_apply": false,
+      "n_deps": 2
+    },
+    {
+      "id": "SC-HEXA-isotope-alpha",
+      "line": 18699,
+      "type": "@F",
+      "domain": "material",
+      "has_eq": false,
+      "has_converge": false,
+      "has_apply": false,
+      "n_deps": 2
+    },
+    {
+      "id": "HEXA-FUSION-MK5-06-beta-n-troyon-n6",
+      "line": 18721,
+      "type": "@R",
+      "domain": "n6atlas",
+      "has_eq": false,
+      "has_converge": false,
+      "has_apply": false,
+      "n_deps": 2
+    },
+    {
+      "id": "HEXA-FUSION-MK5-07-power-density-phi-sopfr",
+      "line": 18724,
+      "type": "@R",
+      "domain": "n6atlas",
+      "has_eq": false,
+      "has_converge": false,
+      "has_apply": false,
+      "n_deps": 2
+    },
+    {
+      "id": "HEXA-TELE-04-l-sat-600km",
+      "line": 18742,
+      "type": "@R",
+      "domain": "sf-ufo",
+      "has_eq": false,
+      "has_converge": false,
+      "has_apply": false,
+      "n_deps": 2
+    },
+    {
+      "id": "HEXA-TELE-05-macro-bell-J2-24",
+      "line": 18745,
+      "type": "@R",
+      "domain": "sf-ufo",
+      "has_eq": false,
+      "has_converge": false,
+      "has_apply": false,
+      "n_deps": 2
+    },
+    {
+      "id": "HEXA-TELE-06-holo-code-distance-10",
+      "line": 18748,
+      "type": "@R",
+      "domain": "sf-ufo",
+      "has_eq": false,
+      "has_converge": false,
+      "has_apply": false,
+      "n_deps": 2
+    },
+    {
+      "id": "FPP-12-outer-radius-tabletop",
+      "line": 18787,
+      "type": "@R",
+      "domain": "n6atlas",
+      "has_eq": false,
+      "has_converge": false,
+      "has_apply": false,
+      "n_deps": 2
+    },
+    {
+      "id": "TABLETOP-ANTIMATTER-LOSS-RATE",
+      "line": 18805,
+      "type": "@R",
+      "domain": "n6atlas",
+      "has_eq": false,
+      "has_converge": false,
+      "has_apply": false,
+      "n_deps": 2
+    },
+    {
+      "id": "TABLETOP-ANTIMATTER-LIFETIME",
+      "line": 18808,
+      "type": "@R",
+      "domain": "n6atlas",
+      "has_eq": false,
+      "has_converge": false,
+      "has_apply": false,
+      "n_deps": 2
+    },
+    {
+      "id": "TABLETOP-ANTIMATTER-PRODUCTION-RATE",
+      "line": 18811,
+      "type": "@R",
+      "domain": "n6atlas",
+      "has_eq": false,
+      "has_converge": false,
+      "has_apply": false,
+      "n_deps": 2
+    },
+    {
+      "id": "TABLETOP-ANTIMATTER-COST-PER-MG",
+      "line": 18814,
+      "type": "@R",
+      "domain": "n6atlas",
+      "has_eq": false,
+      "has_converge": false,
+      "has_apply": false,
+      "n_deps": 2
+    },
+    {
+      "id": "TABLETOP-ANTIMATTER-3PATH-HYBRID",
+      "line": 18817,
+      "type": "@R",
+      "domain": "n6atlas",
+      "has_eq": false,
+      "has_converge": false,
+      "has_apply": false,
+      "n_deps": 2
+    },
+    {
+      "id": "TTF-05-Pbldg-kW",
+      "line": 18841,
+      "type": "@R",
+      "domain": "n6atlas",
+      "has_eq": false,
+      "has_converge": false,
+      "has_apply": false,
+      "n_deps": 2
+    },
+    {
+      "id": "TTF-06-Q-tabletop",
+      "line": 18844,
+      "type": "@R",
+      "domain": "n6atlas",
+      "has_eq": false,
+      "has_converge": false,
+      "has_apply": false,
+      "n_deps": 2
+    }
+  ]
+}

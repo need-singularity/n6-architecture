@@ -1,0 +1,215 @@
+{
+  "sealed_at": "2026-04-25T03:51:21.095368Z",
+  "baseline_date": "2026-04-25",
+  "dry_run": true,
+  "atlas_path": "/Users/ghost/core/n6-architecture/atlas/atlas.n6",
+  "atlas_total_entries": 9615,
+  "tasks": {
+    "grade10_to_grade10_star": {
+      "pool": 1954,
+      "promote_eligible": 5,
+      "hold_count": 1949,
+      "promote_entries": [
+        {
+          "id": "n6-sigma",
+          "line": 16967,
+          "type": "@P",
+          "domain": "foundation",
+          "expr": "divisor_sum(6) = 12",
+          "n_deps_total": 1,
+          "n_atlas_deps": 1,
+          "n_atlas_deps_ok": 1,
+          "n_doc_refs": 0,
+          "n_missing": 0,
+          "has_verify_script": false,
+          "has_eq": true,
+          "has_apply": true,
+          "has_converge": false,
+          "has_breakthrough": false,
+          "reason": "T2 expr + continuation (==/~>/=>)",
+          "round": 1
+        },
+        {
+          "id": "n6-n",
+          "line": 16972,
+          "type": "@P",
+          "domain": "foundation",
+          "expr": "6",
+          "n_deps_total": 0,
+          "n_atlas_deps": 0,
+          "n_atlas_deps_ok": 0,
+          "n_doc_refs": 0,
+          "n_missing": 0,
+          "has_verify_script": false,
+          "has_eq": true,
+          "has_apply": true,
+          "has_converge": false,
+          "has_breakthrough": false,
+          "reason": "T2 expr + continuation (==/~>/=>)",
+          "round": 1
+        },
+        {
+          "id": "n6-phi",
+          "line": 16976,
+          "type": "@P",
+          "domain": "foundation",
+          "expr": "euler_totient(6) = 2",
+          "n_deps_total": 1,
+          "n_atlas_deps": 1,
+          "n_atlas_deps_ok": 1,
+          "n_doc_refs": 0,
+          "n_missing": 0,
+          "has_verify_script": false,
+          "has_eq": true,
+          "has_apply": true,
+          "has_converge": false,
+          "has_breakthrough": false,
+          "reason": "T2 expr + continuation (==/~>/=>)",
+          "round": 1
+        },
+        {
+          "id": "n6-j2",
+          "line": 17008,
+          "type": "@P",
+          "domain": "foundation",
+          "expr": "jordan_totient(6,2) = 24",
+          "n_deps_total": 1,
+          "n_atlas_deps": 1,
+          "n_atlas_deps_ok": 1,
+          "n_doc_refs": 0,
+          "n_missing": 0,
+          "has_verify_script": false,
+          "has_eq": true,
+          "has_apply": true,
+          "has_converge": false,
+          "has_breakthrough": false,
+          "reason": "T2 expr + continuation (==/~>/=>)",
+          "round": 1
+        },
+        {
+          "id": "n6-tau",
+          "line": 17025,
+          "type": "@P",
+          "domain": "foundation",
+          "expr": "divisor_count(6) = 4",
+          "n_deps_total": 1,
+          "n_atlas_deps": 1,
+          "n_atlas_deps_ok": 1,
+          "n_doc_refs": 0,
+          "n_missing": 0,
+          "has_verify_script": false,
+          "has_eq": true,
+          "has_apply": true,
+          "has_converge": false,
+          "has_breakthrough": false,
+          "reason": "T2 expr + continuation (==/~>/=>)",
+          "round": 1
+        }
+      ],
+      "hold_by_reason": {
+        "H? unclassified": 6,
+        "H2 unverified atlas dep": 93,
+        "H4 P/X/? primitive claim (manual)": 903,
+        "H4b expr only, no continuation": 431,
+        "H4c definitional axiom (no deps, manual review)": 145,
+        "H3 pure axiom": 39,
+        "H1b unknown dep (['blowup_quantum'])": 1,
+        "H1b unknown dep (['CHIP-P7-1'])": 1,
+        "H1 cross-doc dep (1)": 10,
+        "H1b unknown dep (['CHIP-P8-1'])": 1,
+        "H1b unknown dep (['CHIP-P8-3'])": 1,
+        "H1 cross-doc dep (2)": 314,
+        "H1 cross-doc dep (3)": 2,
+        "H1b unknown dep (['BYPASS-PX-1'])": 1,
+        "H1 cross-doc dep (4)": 1
+      }
+    },
+    "n_hypothesis_to_n_breakthrough": {
+      "pool": 61,
+      "promote_eligible": 0,
+      "hold_count": 61
+    },
+    "unknown_type_classification": {
+      "pool": 12,
+      "recommendations": [
+        {
+          "line": 148,
+          "id": "dark_energy_ratio",
+          "recommend": "@P",
+          "rationale": "cosmological observable"
+        },
+        {
+          "line": 152,
+          "id": "fine_structure",
+          "recommend": "@P",
+          "rationale": "physical constant"
+        },
+        {
+          "line": 155,
+          "id": "hubble_tension",
+          "recommend": "@P",
+          "rationale": "cosmological observable"
+        },
+        {
+          "line": 15923,
+          "id": "n6-bt-787",
+          "recommend": "@R",
+          "rationale": "n * s11 numeric relation"
+        },
+        {
+          "line": 15925,
+          "id": "n6-bt-788",
+          "recommend": "@R",
+          "rationale": "n * s12 numeric relation"
+        },
+        {
+          "line": 15926,
+          "id": "n6-bt-789",
+          "recommend": "@R",
+          "rationale": "n * s13 numeric relation"
+        },
+        {
+          "line": 15928,
+          "id": "n6-bt-790",
+          "recommend": "@R",
+          "rationale": "n + s20 numeric relation"
+        },
+        {
+          "line": 15930,
+          "id": "n6-bt-791",
+          "recommend": "@R",
+          "rationale": "n * s22 numeric relation"
+        },
+        {
+          "line": 17765,
+          "id": "fep-free-energy-alpha",
+          "recommend": "@P",
+          "rationale": "physical scaling"
+        },
+        {
+          "line": 17768,
+          "id": "orch-or-13-protofilament",
+          "recommend": "@P",
+          "rationale": "structural observable"
+        },
+        {
+          "line": 17798,
+          "id": "ouroboros-bernoulli-hierarchy",
+          "recommend": "@R",
+          "rationale": "hierarchy relation"
+        },
+        {
+          "line": 17805,
+          "id": "fisher-symmetric-dof-6",
+          "recommend": "@R",
+          "rationale": "symmetric dof relation"
+        }
+      ]
+    }
+  },
+  "analyzer_version": "v3-fixpoint",
+  "sources": [
+    "/tmp/atlas_analysis/promote_v3.py",
+    "/tmp/atlas_analysis/promote_n_hypo.py"
+  ]
+}
