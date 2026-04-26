@@ -76,8 +76,14 @@
 # ══════════════════════════════════════════════════════════════
 # § B — H-CX candidate tier (R34 — atlas-only, falsifiable T1/T2/T3 pending)
 # ══════════════════════════════════════════════════════════════
+# ⚠️ 2026-04-26 STATUS UPDATE: R34 → DEPRECATED (anima/.roadmap #200 NP1).
+# Authoritative source = 6-pt fit (N_max=128) at anima/docs/consciousness-theory.md L67-80.
+# N>=20 datapoint criterion FAIL → e^{-1/2}=0.6065 hypothesis 4-digit unfalsifiable.
+# 3-digit match (0.608 vs 0.6065) preserved as documentation lineage curiosity only.
+# Atlas tier downgraded H-CX_candidate → DEPRECATED (distinct from RETIRED_INCONCLUSIVE round 38).
+# R36 → RETIRED (next entry, anima/.roadmap #201 — referent does not exist in runtime).
 
-@? ANIMA-CXP-R34-PHI-COEFF-EHALF = Phi_coefficient ≈ e^{-1/2} = 0.6065... candidate decomposition for ANIMA empirical fit Φ = 0.608 × N^1.071 :: consciousness [9?]
+@? ANIMA-CXP-R34-PHI-COEFF-EHALF = [DEPRECATED 2026-04-26] Phi_coefficient ≈ e^{-1/2} = 0.6065... candidate decomposition for ANIMA empirical fit Φ = 0.608 × N^1.071 :: consciousness [9?→DEPRECATED]
   <- ANIMA-CXP-SSOT-LEDGER
   => "Hypothesized origin: e^{-Psi_balance} at Psi_balance=1/2 (Shannon entropy max / Riemann critical line / TECS-L Golden Zone Upper)"
   => "Numerical match: measured 0.608 vs theoretical 0.6065 = 3-digit match, 0.0015 abs gap, 0.24% rel err"
@@ -94,7 +100,7 @@
   |> ~/core/anima/.roadmap #179 (R34_CANDIDATE registration)
   |> atlas.n6 line 17304 (existing @F cf_phi_scaling Φ = 0.608 × N^1.071 raw value — REPO_INVARIANT confirmation; this entry adds candidate decomposition only)
 
-@? ANIMA-CXP-R36-FORTYD-DUAL-ROUTE = ANIMA 40D consciousness vector dimension = tau(6)*(sigma(6)-phi(6)) = 4*10 = 40 AND = Fisher_I(6) - 2^sopfr(6)/10 = 43.2 - 3.2 = 40 (two exact-integer routes from n=6 family) :: consciousness [9?]
+@? ANIMA-CXP-R36-FORTYD-DUAL-ROUTE = [RETIRED 2026-04-26] ANIMA 40D consciousness vector dimension = tau(6)*(sigma(6)-phi(6)) = 4*10 = 40 AND = Fisher_I(6) - 2^sopfr(6)/10 = 43.2 - 3.2 = 40 (two exact-integer routes from n=6 family) — RETIRED: 40D vector NOT IMPLEMENTED in active runtime (anima_runtime.hexa canonical = 10D ConsciousnessVector + 16D phi_vec ALM logger); '40D' = (i) docs/MODULE-CATALOG.md unimplemented module label, (ii) universe-map heuristic factor (170×40×18), (iii) 40/10=4=tau(6) meta-commentary. T2 random-match baseline 25% — exact-integer 40 hit not anomalous. Form A/B share factor 10 (sigma-phi=10 AND 2^sopfr/10's 10 divisor). See anima/.roadmap #201 + state/atlas_convergence_witness.jsonl R40 entry. :: consciousness [9?→RETIRED]
   <- ANIMA-CXP-SSOT-LEDGER, ANIMA-CXP-R35-SIGMA-TAU-THREE
   => "Form A (multiplicative): tau(6) * (sigma(6) - phi(6)) = 4 * 10 = 40 EXACT integer"
   => "Form B (Fisher gap): I(6) = n^3/(n-1) = 216/5 = 43.2 EXACT (verified DD-bridge DD-5 PASS commit 99c026d9); 43.2 - 2^sopfr(6)/10 = 43.2 - 32/10 = 43.2 - 3.2 = 40"
