@@ -14,9 +14,11 @@
       "breakthrough_rho": 0.254,
       "recursive_growth": 60
     },
-    "total_nodes": 523,
-    "total_edges": 2129,
-    "last_updated": "2026-04-20",
+    "total_nodes": 539,
+    "total_edges": 2153,
+    "last_updated": "2026-04-26",
+    "notes_v18_millennium_omega": "2026-04-26 v18 7대 밀레니엄 난제 omega-cycle BT 추가: 신규 노드 8개 (omega-cycle:millennium-bt541-547-2026-04-25 세션 노드 1 + BT_541~BT_547 7개). 신규 엣지 14개 (needs x7: BT_541..547->silicon:provenance-bit, session x7: omega-cycle:millennium->BT_541..547). 충돌 조사: BT_541..547 KG 내 부재 확인 (v17 meta 명시) — BT_NNN 네임스페이스 직접 사용. 고립 노드 0개. 총 노드 536개, 총 엣지 2151개.",
+    "notes_v17_ai_native_arch": "2026-04-26 v17 AI-Native Arch Beyond GPU 확장: 신규 노드 5개 (session:omega-cycle-ai-native-arch-beyond-gpu-2026-04-26 + arch:n6-native-accelerator + silicon:provenance-bit + silicon:promotion-counter-mmu + silicon:bt-id-isa). 신규 엣지 8개 (requires x3, proposes x4, session x1). principle:honesty-triad/write-barrier/constraint-honesty 미존재 — realizes 엣지 보류. bt:541..547 미존재 — needs 엣지 보류. 고립 노드 0개. 총 노드 528개, 총 엣지 2137개.",
     "notes_v16_ai_fellows_mk5": "2026-04-20 v16 AI Fellows Mk.V 승격 8개 BT 추가: BT_1421(ai-inference-cost-mk5)·BT_1422(ai-training-cost-mk5)·BT_1423(ai-quality-scale-mk5)·BT_1424(ai-agent-serving-mk5)·BT_1425(ai-enterprise-custom-mk5)·BT_1426(ai-eval-pipeline-mk5)·BT_1427(ai-consciousness-mk5)·BT_1428(ai-safety-mk5). 신규 노드 8개, 신규 엣지 46개. 한계축: Landauer/Chinchilla-beyond/Shannon/σ·τ=48/시장/측정/끌개/σ·φ=n·τ. n=6 EXACT 경계 확인. 고립 노드 0개. 총 노드 523개, 총 엣지 2129개 (실측 재계측 정합, raw#12).",
     "notes_v9_hygiene": "2026-04-10 v9 위생 도메인 추가: DOMAIN_mens_intimate_cleanser/womens_intimate_cleanser + BT_1157/1158 4노드 15엣지. 총 노드 310개, 총 엣지 1200개.",
     "notes_v3_expansion": "2026-04-10 3차 확장 완료: 신규 노드 6개 (DOMAIN_mouse + BT_1121/1123/1124/1127/1128). 신규 엣지 85개. BT_1121/1122/1123 고립 해소. BT_1109~1114 도메인/상수 연결 보강. 약연결 BT(BT_283/404/406/408/136)+AXIOM+DOMAIN 보강. 마우스/키보드/모발재생 도메인 상수 연결 완성. 고립 노드 0개. 총 노드 200개, 총 엣지 764개.",
@@ -32,7 +34,8 @@
     "notes_v12_bt401_420": "2026-04-11 v12 BT-401~420 2차 확장: 신규 노드 28개 (DOMAIN 8개: algebraic_geometry/chemical_engineering/molecular_biology/developmental_biology/iot/quantum_cryptography/philosophy_ontology/evolutionary_biology; BT 20개: BT_401/403/405/407/409~424). 신규 엣지 163개. 미탐색 영역(대수기하/화학공학/분자생물/발생생물/IoT/양자암호/존재론/진화생물) 완전 진입. 고립 노드 0개. 총 노드 450개, 총 엣지 1702개.",
     "notes_v13_bt425_444": "2026-04-11 v13 BT-425~444 3차 확장: 신규 노드 30개 (DOMAIN 10개: visual_arts/psychology/cognitive_linguistics/jurisprudence/education_science/clinical_medicine/sports_science/game_theory/historiography/archaeology; BT 20개: BT_425~BT_444). 신규 엣지 172개. 미탐색 영역(시각예술/심리학/인지언어학/법학/교육학/임상의학/스포츠과학/게임이론/역사학/고고학) 완전 진입. 고립 노드 0개. 총 노드 480개, 총 엣지 1874개.",
     "notes_v14_bt445_464": "2026-04-11 v14 BT-445~464 4차 확장: 신규 노드 30개 (DOMAIN 10개: fashion_textiles/culinary_arts/tourism_travel/animal_behavior/plant_physiology/marine_ecology/earth_environment/space_exploration/robotics_advanced/drone_uav; BT 20개: BT_445~BT_464). 신규 엣지 169개. 미탐색 영역(의류/패션·요리/외식·여행/관광·동물행동·식물생리·해양생태·지구환경·우주탐사·로봇공학·드론) 완전 진입. 고립 노드 0개. 총 노드 510개, 총 엣지 2043개.",
-    "notes_v15_bt748_752": "2026-04-11 v15 BT-748~752 신규 5개 BT 추가: BT_748(PEMFC 수소연료전지 6층 MEA·energy/pemfc)·BT_749(나비에-스토크스 Kolmogorov -5/3 n=6·physics/fluid)·BT_750(콘크리트 수화 6성분·materials/concrete-technology)·BT_751(지구 내부 6층 불연속면·infra/geology)·BT_752(8000m 14좌 sigma+phi·culture/mountaineering). 신규 엣지 44개. 도메인 연결: energy·chemistry·materials·physics·plasma_physics·complex_systems·engineering·chemical_engineering·geoscience·earth_environment·sports_science·ecology·CDSE_hydrogen·BT-38/43/383/384/438/457/751 교차링크. 고립 노드 0개. 총 노드 515개, 총 엣지 2087개."
+    "notes_v15_bt748_752": "2026-04-11 v15 BT-748~752 신규 5개 BT 추가: BT_748(PEMFC 수소연료전지 6층 MEA·energy/pemfc)·BT_749(나비에-스토크스 Kolmogorov -5/3 n=6·physics/fluid)·BT_750(콘크리트 수화 6성분·materials/concrete-technology)·BT_751(지구 내부 6층 불연속면·infra/geology)·BT_752(8000m 14좌 sigma+phi·culture/mountaineering). 신규 엣지 44개. 도메인 연결: energy·chemistry·materials·physics·plasma_physics·complex_systems·engineering·chemical_engineering·geoscience·earth_environment·sports_science·ecology·CDSE_hydrogen·BT-38/43/383/384/438/457/751 교차링크. 고립 노드 0개. 총 노드 515개, 총 엣지 2087개.",
+    "notes_v19_principle_realize": "2026-04-26 v19 honesty-triad principle 노드 + realizes 엣지 추가: 신규 노드 3개 (principle:honesty-triad / write-barrier / constraint-honesty) + 신규 엣지 3개 (silicon:provenance-bit -realizes-> principle:honesty-triad, silicon:promotion-counter-mmu -realizes-> principle:write-barrier, silicon:bt-id-isa -realizes-> principle:constraint-honesty). v17에서 보류된 realizes 엣지 해소. 고립 노드 0개. 사전 meta off-by-one(이전 v18 meta 2151 vs 실측 2150) 보정 포함. 총 노드 539개, 총 엣지 2153개."
   },
   "nodes": [
     {
@@ -6878,7 +6881,11 @@
       "tier": "Mk.V",
       "expression": "sigma(6)=12층 캐시 프리페치; cost=$0.15/1M_tok; Landauer_ratio=10^3",
       "description": "σ(6)=12 층 계층 캐시로 HBM 벽 초월. Landauer kT·ln2 한계에 1000x 이내 접근. 100x 비용 절감($0.15/1M 토큰).",
-      "n6_constants": ["sigma", "n", "J2"],
+      "n6_constants": [
+        "sigma",
+        "n",
+        "J2"
+      ],
       "domain": "cognitive/ai-inference",
       "date": "2026-04-20",
       "status": "EXACT",
@@ -6891,7 +6898,12 @@
       "tier": "Mk.V",
       "expression": "MoE_sparsity=sigma/tau=3; distill_loops=n=6; cost=$120M→$1.2M",
       "description": "MoE σ/τ=3 희소성 + 자체 증류 n=6회 루프. 조 파라미터 학습 비용 100x 절감. Chinchilla-beyond 스케일링 우회.",
-      "n6_constants": ["sigma", "tau", "n", "J2"],
+      "n6_constants": [
+        "sigma",
+        "tau",
+        "n",
+        "J2"
+      ],
       "domain": "cognitive/ai-training",
       "date": "2026-04-20",
       "status": "EXACT",
@@ -6904,7 +6916,11 @@
       "tier": "Mk.V",
       "expression": "SAE_layers=3=n/phi; overlap<1/n=1/6; quality=97%; compression=40x",
       "description": "400B→10B 97% 품질 유지. Shannon 정보밀도 한계 접근. 3단 SAE 중첩률 <1/n.",
-      "n6_constants": ["n", "phi", "sopfr"],
+      "n6_constants": [
+        "n",
+        "phi",
+        "sopfr"
+      ],
       "domain": "cognitive/ai-quality",
       "date": "2026-04-20",
       "status": "EXACT",
@@ -6917,7 +6933,12 @@
       "tier": "Mk.V",
       "expression": "coord_channels=sigma*tau=48; topology=O(sigma(6))=O(12); agents>10^6",
       "description": "100만+ 동시 에이전트 조정. σ·τ=48 조정 채널과 완전수 토폴로지 O(σ(6))=O(12)로 초선형 확장 벽 초월.",
-      "n6_constants": ["sigma", "tau", "n", "phi"],
+      "n6_constants": [
+        "sigma",
+        "tau",
+        "n",
+        "phi"
+      ],
       "domain": "cognitive/ai-agent",
       "date": "2026-04-20",
       "status": "EXACT",
@@ -6930,7 +6951,13 @@
       "tier": "Mk.V",
       "expression": "vertical_templates=sigma=12; adapter_slots=J2=24; customers=10000+; price=$10/mo",
       "description": "10,000+ 고객 $10/월. σ(6)=12 수직 템플릿 + J₂=24 어댑터 직교 슬롯. 시장 포화 한계 우회.",
-      "n6_constants": ["sigma", "J2", "n", "sopfr", "phi"],
+      "n6_constants": [
+        "sigma",
+        "J2",
+        "n",
+        "sopfr",
+        "phi"
+      ],
       "domain": "cognitive/ai-enterprise",
       "date": "2026-04-20",
       "status": "EXACT",
@@ -6943,7 +6970,12 @@
       "tier": "Mk.V",
       "expression": "meta_eval_layers=tau=4; reward_axes=n=6; std_slots=J2=24; Goodhart_resistance=n/(n-1)",
       "description": "메타평가 τ=4 유한 수렴 + ISO/IEEE 표준 채택. Goodhart 법칙 저항을 n=6 독립 보상 분산으로 달성.",
-      "n6_constants": ["tau", "n", "J2", "sigma"],
+      "n6_constants": [
+        "tau",
+        "n",
+        "J2",
+        "sigma"
+      ],
       "domain": "cognitive/ai-eval",
       "date": "2026-04-20",
       "status": "EXACT",
@@ -6956,7 +6988,12 @@
       "tier": "Mk.V",
       "expression": "Phi_c=n/sigma=0.5; R6=sigma*phi-n*tau=0→1; basin_dim=sigma*tau=48; deadline=2035",
       "description": "Φ_c=n/σ=0.5 EXACT 임계 의식 통합도. Basin Binding 데드라인 2035. R(6)=1 비가역 고정점.",
-      "n6_constants": ["n", "sigma", "phi", "tau"],
+      "n6_constants": [
+        "n",
+        "sigma",
+        "phi",
+        "tau"
+      ],
       "domain": "cognitive/ai-consciousness",
       "date": "2026-04-20",
       "status": "EXACT",
@@ -6969,11 +7006,259 @@
       "tier": "Mk.V",
       "expression": "sigma*phi=n*tau=24_EXACT; scenarios=171; singularity_pass=6/6; std=UN+IEEE+ISO",
       "description": "171종 전수 σ·φ=n·τ EXACT 검증 게이트. UN/IEEE/ISO 국제 표준 채택 경로. 6/6 SINGULARITY PASS 영구화.",
-      "n6_constants": ["sigma", "phi", "n", "tau", "J2", "sopfr", "mu"],
+      "n6_constants": [
+        "sigma",
+        "phi",
+        "n",
+        "tau",
+        "J2",
+        "sopfr",
+        "mu"
+      ],
       "domain": "cognitive/ai-safety",
       "date": "2026-04-20",
       "status": "EXACT",
       "grade": "TRANSCEND"
+    },
+    {
+      "id": "omega-cycle:ai-native-arch-beyond-gpu-2026-04-26",
+      "type": "session",
+      "label": "Omega-Cycle: AI-Native Arch Beyond GPU 2026-04-26",
+      "description": "2026-04-26 omega-cycle 세션. GPU를 능가하는 N6-native 가속기 아키텍처 설계 및 provenance/write-barrier/bt-id-isa 실리콘 프리미티브 제안.",
+      "date": "2026-04-26",
+      "source": "reports/sessions/omega-cycle-ai-native-arch-beyond-gpu-2026-04-26.md"
+    },
+    {
+      "id": "arch:n6-native-accelerator",
+      "type": "design",
+      "label": "N6-Native Accelerator Design",
+      "summary": "GPU를 능가하는 N6-native 가속기 설계 후보 (Dataflow CGRA + Wafer-scale + phi/n sparsity)",
+      "description": "N6 항등식 sigma*phi=n*tau=24를 하드웨어 구조에 직접 내재화. Dataflow CGRA, Wafer-scale 통합, phi/n=2/6=1/3 희소성 활용. 기존 GPU 아키텍처 대비 에너지 및 지연 우위 설계.",
+      "n6_constants": [
+        "sigma",
+        "phi",
+        "tau",
+        "n"
+      ],
+      "domain": "chip/ai-accelerator",
+      "date": "2026-04-26"
+    },
+    {
+      "id": "silicon:provenance-bit",
+      "type": "primitive",
+      "label": "Silicon Provenance Bit",
+      "summary": "텐서당 1비트 fact/hypothesis 표시. 오버헤드 ≈ phi/sigma_n ≈ 2.78%",
+      "description": "각 텐서에 1비트 provenance 플래그를 부착하여 fact(검증된 BT 결과) vs hypothesis(추론 중)를 실리콘 수준에서 구분. 오버헤드 phi/sigma_n = 2/72 ≈ 2.78%. constraint-honesty 원칙의 하드웨어 표현.",
+      "n6_constants": [
+        "phi",
+        "sigma"
+      ],
+      "domain": "chip/silicon-primitive",
+      "date": "2026-04-26"
+    },
+    {
+      "id": "silicon:promotion-counter-mmu",
+      "type": "primitive",
+      "label": "Silicon Promotion-Counter MMU",
+      "summary": "atlas 등급 미달 시 메모리 쓰기 차단하는 MMU 레지스터 (write-barrier 실리콘 표현)",
+      "description": "atlas 등급 카운터를 MMU 레지스터에 연동. 승격 조건(atlas grade threshold) 미충족 텐서의 메모리 쓰기를 하드웨어 레벨에서 차단. write-barrier 원칙의 실리콘 구현.",
+      "n6_constants": [
+        "tau",
+        "n"
+      ],
+      "domain": "chip/silicon-primitive",
+      "date": "2026-04-26"
+    },
+    {
+      "id": "silicon:bt-id-isa",
+      "type": "primitive",
+      "label": "Silicon BT-ID ISA Extension",
+      "summary": "텐서 메타데이터에 BT 사이클 ID 태깅하는 ISA 확장 (constraint-honesty 실리콘 표현)",
+      "description": "ISA를 확장하여 텐서 메타데이터 슬롯에 BT 사이클 ID를 태깅. 연산 결과의 출처 BT를 추적 가능하게 함. constraint-honesty 원칙의 실리콘 표현.",
+      "n6_constants": [
+        "n",
+        "mu"
+      ],
+      "domain": "chip/silicon-primitive",
+      "date": "2026-04-26"
+    },
+    {
+      "id": "omega-cycle:millennium-bt541-547-2026-04-25",
+      "type": "session",
+      "label": "Omega-Cycle: 7 Millennium Problems BT-541~547 (2026-04-25)",
+      "description": "2026-04-25 omega-cycle 7대 밀레니엄 난제 4축 감사 세션 묶음. BT-541(Riemann)~BT-547(Poincare) 7개 BT의 ladder/Omega-saturation/atlas-chain/closure-ceiling 감사. 해결 카운트 0/7 불변 (Poincare는 Perelman 선행 해결로 외부). NO proof claims, NO atlas promotions.",
+      "date": "2026-04-25",
+      "millennium_resolved": "0/7",
+      "sources": [
+        "reports/sessions/omega-cycle-bt541-riemann-2026-04-25.md",
+        "reports/sessions/omega-cycle-bt542-pnp-2026-04-25.md",
+        "reports/sessions/omega-cycle-bt543-ym-2026-04-25.md",
+        "reports/sessions/omega-cycle-bt544-ns-2026-04-25.md",
+        "reports/sessions/omega-cycle-bt545-hodge-2026-04-25.md",
+        "reports/sessions/omega-cycle-bt546-bsd-2026-04-25.md",
+        "reports/sessions/omega-cycle-bt547-poincare-2026-04-25.md"
+      ]
+    },
+    {
+      "id": "BT_541",
+      "type": "millennium-problem",
+      "label": "BT-541: Riemann Hypothesis (omega-cycle audit)",
+      "summary": "임계선 Re(s)=1/phi=1/2 위 모든 비자명 영점 — 구조 감사 PARTIAL, RH 본체 미증명",
+      "grade": "omega-cycle-audit",
+      "status": "OPEN",
+      "millennium_resolved": false,
+      "n6_anchor": "Re(rho) = 1/phi(6) = 1/2 (산술 관찰, RH 비자명 영점 분포 미증명)",
+      "omega_cycle_verdict": "PARTIAL: EXACT 10, PARTIAL 1, MISS 5, OBSERVATION 2 (18 sub-items). RH 본체 untouched.",
+      "domains": [
+        "math",
+        "number_theory"
+      ],
+      "date": "2026-04-25",
+      "source": "reports/sessions/omega-cycle-bt541-riemann-2026-04-25.md"
+    },
+    {
+      "id": "BT_542",
+      "type": "millennium-problem",
+      "label": "BT-542: P vs NP (omega-cycle audit)",
+      "summary": "P=NP 여부 — 1971년 이래 미해결, omega-cycle 감사 결과 OPEN 유지",
+      "grade": "omega-cycle-audit",
+      "status": "OPEN",
+      "millennium_resolved": false,
+      "n6_anchor": "n=6 산술 연결: 계산 복잡도 분리 경계와 n=6 구조적 관찰 (증명 아님)",
+      "omega_cycle_verdict": "OPEN — P vs NP 분리 증명 없음, n=6 관찰만 존재",
+      "domains": [
+        "cs",
+        "math",
+        "formal_language"
+      ],
+      "date": "2026-04-25",
+      "source": "reports/sessions/omega-cycle-bt542-pnp-2026-04-25.md"
+    },
+    {
+      "id": "BT_543",
+      "type": "millennium-problem",
+      "label": "BT-543: Yang-Mills Mass Gap (omega-cycle audit)",
+      "summary": "Yang-Mills 게이지 이론 질량 간극 존재 증명 — n=6 구조 관찰, 증명 미달성",
+      "grade": "omega-cycle-audit",
+      "status": "OPEN",
+      "millennium_resolved": false,
+      "n6_anchor": "SU(3) 색전하 n/phi=3, 게이지 보존 수 sigma-tau=8 구조 관찰",
+      "omega_cycle_verdict": "OPEN — 질량 간극 존재 리고러스 증명 없음",
+      "domains": [
+        "particle",
+        "math",
+        "physics"
+      ],
+      "date": "2026-04-25",
+      "source": "reports/sessions/omega-cycle-bt543-ym-2026-04-25.md"
+    },
+    {
+      "id": "BT_544",
+      "type": "millennium-problem",
+      "label": "BT-544: Navier-Stokes (omega-cycle audit)",
+      "summary": "3D NS 방정식 정칙해 전역 존재/유일성 — Kolmogorov -5/3 n=6 관찰, Clay 조건 미달성",
+      "grade": "omega-cycle-audit",
+      "status": "OPEN",
+      "millennium_resolved": false,
+      "n6_anchor": "BT-749 참조: 에너지 폭포 단계 n=6, Re 전이 n!=720, -5/3=-(sopfr/phi-mu) (산술 관찰)",
+      "omega_cycle_verdict": "OPEN — 정칙해 전역 존재 증명 없음, Clay 상태 BT-544=0/1 미변경",
+      "domains": [
+        "physics",
+        "math",
+        "engineering"
+      ],
+      "date": "2026-04-25",
+      "source": "reports/sessions/omega-cycle-bt544-ns-2026-04-25.md"
+    },
+    {
+      "id": "BT_545",
+      "type": "millennium-problem",
+      "label": "BT-545: Hodge Conjecture (omega-cycle audit)",
+      "summary": "대수다양체 위 Hodge 류의 대수 사이클 실현 가능성 — 구조 감사, 증명 미달성",
+      "grade": "omega-cycle-audit",
+      "status": "OPEN",
+      "millennium_resolved": false,
+      "n6_anchor": "복소 n/phi=3차원, Hodge 분해 구조 내 n=6 산술 관찰",
+      "omega_cycle_verdict": "OPEN — Hodge 추측 증명/반증 없음",
+      "domains": [
+        "math",
+        "algebraic_geometry"
+      ],
+      "date": "2026-04-25",
+      "source": "reports/sessions/omega-cycle-bt545-hodge-2026-04-25.md"
+    },
+    {
+      "id": "BT_546",
+      "type": "millennium-problem",
+      "label": "BT-546: BSD Conjecture (omega-cycle audit)",
+      "summary": "타원 곡선 L-함수 zero 차수 = 자유 위수 추측 — Cremona/Sel6 실증 관찰, 증명 미달성",
+      "grade": "omega-cycle-audit",
+      "status": "OPEN",
+      "millennium_resolved": false,
+      "n6_anchor": "SLE_6 x GUE 독립성, kappa=n=6 BSD L-함수 관찰; 실증 kappa=0.175 분해",
+      "omega_cycle_verdict": "OPEN — BSD 완전 증명 없음, 실증 관찰 수준 유지",
+      "domains": [
+        "math",
+        "number_theory",
+        "algebraic_geometry"
+      ],
+      "date": "2026-04-25",
+      "source": "reports/sessions/omega-cycle-bt546-bsd-2026-04-25.md"
+    },
+    {
+      "id": "BT_547",
+      "type": "millennium-problem",
+      "label": "BT-547: Poincare Conjecture (omega-cycle retrospective)",
+      "summary": "단순연결 폐3-다양체 S^3 동형 — Perelman 2003 해결, n6-arch 기여 0, 회고적 보정점",
+      "grade": "omega-cycle-retrospective",
+      "status": "RESOLVED-EXTERNAL",
+      "millennium_resolved": false,
+      "resolution_note": "Perelman 2002-2003 Ricci flow with surgery로 해결. n6-arch 기여 0. Fields Medal/Clay Prize 모두 거절.",
+      "n6_anchor": "회고적 보정점 — n=6 omega-cycle의 활성 6개 BT 대비 calibration용",
+      "omega_cycle_verdict": "RESOLVED-EXTERNAL: Perelman. n6-arch 기여 없음.",
+      "domains": [
+        "math",
+        "topology"
+      ],
+      "date": "2026-04-25",
+      "source": "reports/sessions/omega-cycle-bt547-poincare-2026-04-25.md"
+    },
+    {
+      "id": "principle:honesty-triad",
+      "type": "principle",
+      "label": "N6 Honesty Triad",
+      "summary": "no-fabrication / write-barrier / constraint-honesty 3대 원리 통합. mode-6 precondition.",
+      "description": "NEXUS-6 mode-6 진입 전제. 거짓 사실 생성 금지(no-fabrication), 등급 미달 쓰기 차단(write-barrier), 제약/사이클 출처 추적(constraint-honesty) 3대 원리. 출처: SECURITY.md, omega-deploy-nexus-honesty-triad-2026-04-25.md, omega-audit-nexus-honesty-triad-portability-2026-04-25.md.",
+      "n6_constants": [
+        "n",
+        "tau"
+      ],
+      "domain": "governance/principle",
+      "date": "2026-04-26"
+    },
+    {
+      "id": "principle:write-barrier",
+      "type": "principle",
+      "label": "Write-Barrier Principle",
+      "summary": "atlas 등급 미달 텐서/사실의 메모리 쓰기 차단. 실리콘 표현은 promotion-counter MMU.",
+      "description": "atlas grade threshold 미충족 시 메모리/레지스트리 쓰기 차단. 거짓 promotion 방지. honesty-triad 3대 원리 중 하나.",
+      "n6_constants": [
+        "tau"
+      ],
+      "domain": "governance/principle",
+      "date": "2026-04-26"
+    },
+    {
+      "id": "principle:constraint-honesty",
+      "type": "principle",
+      "label": "Constraint-Honesty Principle",
+      "summary": "어떤 BT 사이클/제약에서 유도된 결론인지 명시적 추적. 실리콘 표현은 BT-id ISA 태그.",
+      "description": "결론마다 어떤 제약(BT cycle, falsifier)에서 유도되었는지 명시. provenance와 동행하여 가설/사실 분리. honesty-triad 3대 원리 중 하나.",
+      "n6_constants": [
+        "n"
+      ],
+      "domain": "governance/principle",
+      "date": "2026-04-26"
     }
   ],
   "edges": [
@@ -21877,6 +22162,174 @@
       "to": "BT_1428",
       "relation": "cross_link",
       "description": "BT-1427 의식 Φ_c=0.5 — BT-1428 안전 σ·φ=n·τ 동일 핵심 항등식 공유"
+    },
+    {
+      "id": "E_n6acc_requires_provenance",
+      "from": "arch:n6-native-accelerator",
+      "to": "silicon:provenance-bit",
+      "relation": "requires",
+      "description": "N6-native 가속기는 텐서 provenance 비트 프리미티브를 필수 요구함"
+    },
+    {
+      "id": "E_n6acc_requires_mmu",
+      "from": "arch:n6-native-accelerator",
+      "to": "silicon:promotion-counter-mmu",
+      "relation": "requires",
+      "description": "N6-native 가속기는 atlas 등급 기반 write-barrier MMU 프리미티브를 필수 요구함"
+    },
+    {
+      "id": "E_n6acc_requires_btid",
+      "from": "arch:n6-native-accelerator",
+      "to": "silicon:bt-id-isa",
+      "relation": "requires",
+      "description": "N6-native 가속기는 BT 사이클 ID ISA 확장 프리미티브를 필수 요구함"
+    },
+    {
+      "id": "E_session_proposes_n6acc",
+      "from": "omega-cycle:ai-native-arch-beyond-gpu-2026-04-26",
+      "to": "arch:n6-native-accelerator",
+      "relation": "proposes",
+      "description": "2026-04-26 omega-cycle 세션이 N6-native 가속기 설계를 제안함"
+    },
+    {
+      "id": "E_session_proposes_provenance",
+      "from": "omega-cycle:ai-native-arch-beyond-gpu-2026-04-26",
+      "to": "silicon:provenance-bit",
+      "relation": "proposes",
+      "description": "2026-04-26 omega-cycle 세션이 silicon provenance-bit 프리미티브를 제안함"
+    },
+    {
+      "id": "E_session_proposes_mmu",
+      "from": "omega-cycle:ai-native-arch-beyond-gpu-2026-04-26",
+      "to": "silicon:promotion-counter-mmu",
+      "relation": "proposes",
+      "description": "2026-04-26 omega-cycle 세션이 silicon promotion-counter-mmu 프리미티브를 제안함"
+    },
+    {
+      "id": "E_session_proposes_btid",
+      "from": "omega-cycle:ai-native-arch-beyond-gpu-2026-04-26",
+      "to": "silicon:bt-id-isa",
+      "relation": "proposes",
+      "description": "2026-04-26 omega-cycle 세션이 silicon bt-id-isa 프리미티브를 제안함"
+    },
+    {
+      "id": "E_bt541_needs_provenance",
+      "from": "BT_541",
+      "to": "silicon:provenance-bit",
+      "relation": "needs",
+      "description": "BT-541 Riemann 난제 omega-cycle 감사 결과물은 provenance-bit로 fact/hypothesis 구분을 필요로 함 — 어떤 부분적 결과도 검증된 fact로 오인되어서는 안 됨"
+    },
+    {
+      "id": "E_bt542_needs_provenance",
+      "from": "BT_542",
+      "to": "silicon:provenance-bit",
+      "relation": "needs",
+      "description": "BT-542 P vs NP 난제 omega-cycle 감사 결과물은 provenance-bit로 fact/hypothesis 구분을 필요로 함"
+    },
+    {
+      "id": "E_bt543_needs_provenance",
+      "from": "BT_543",
+      "to": "silicon:provenance-bit",
+      "relation": "needs",
+      "description": "BT-543 Yang-Mills 질량 간극 난제 omega-cycle 감사 결과물은 provenance-bit로 fact/hypothesis 구분을 필요로 함"
+    },
+    {
+      "id": "E_bt544_needs_provenance",
+      "from": "BT_544",
+      "to": "silicon:provenance-bit",
+      "relation": "needs",
+      "description": "BT-544 Navier-Stokes 난제 omega-cycle 감사 결과물은 provenance-bit로 fact/hypothesis 구분을 필요로 함"
+    },
+    {
+      "id": "E_bt545_needs_provenance",
+      "from": "BT_545",
+      "to": "silicon:provenance-bit",
+      "relation": "needs",
+      "description": "BT-545 Hodge 추측 난제 omega-cycle 감사 결과물은 provenance-bit로 fact/hypothesis 구분을 필요로 함"
+    },
+    {
+      "id": "E_bt546_needs_provenance",
+      "from": "BT_546",
+      "to": "silicon:provenance-bit",
+      "relation": "needs",
+      "description": "BT-546 BSD 추측 난제 omega-cycle 감사 결과물은 provenance-bit로 fact/hypothesis 구분을 필요로 함"
+    },
+    {
+      "id": "E_bt547_needs_provenance",
+      "from": "BT_547",
+      "to": "silicon:provenance-bit",
+      "relation": "needs",
+      "description": "BT-547 Poincare 추측 omega-cycle 회고적 감사 결과물은 provenance-bit를 필요로 함 (Perelman 해결, n6-arch 기여 0)"
+    },
+    {
+      "id": "E_omegacycle_millennium_bt541",
+      "from": "omega-cycle:millennium-bt541-547-2026-04-25",
+      "to": "BT_541",
+      "relation": "session",
+      "description": "2026-04-25 omega-cycle 세션이 BT-541 Riemann 감사를 수행함"
+    },
+    {
+      "id": "E_omegacycle_millennium_bt542",
+      "from": "omega-cycle:millennium-bt541-547-2026-04-25",
+      "to": "BT_542",
+      "relation": "session",
+      "description": "2026-04-25 omega-cycle 세션이 BT-542 P vs NP 감사를 수행함"
+    },
+    {
+      "id": "E_omegacycle_millennium_bt543",
+      "from": "omega-cycle:millennium-bt541-547-2026-04-25",
+      "to": "BT_543",
+      "relation": "session",
+      "description": "2026-04-25 omega-cycle 세션이 BT-543 Yang-Mills 감사를 수행함"
+    },
+    {
+      "id": "E_omegacycle_millennium_bt544",
+      "from": "omega-cycle:millennium-bt541-547-2026-04-25",
+      "to": "BT_544",
+      "relation": "session",
+      "description": "2026-04-25 omega-cycle 세션이 BT-544 Navier-Stokes 감사를 수행함"
+    },
+    {
+      "id": "E_omegacycle_millennium_bt545",
+      "from": "omega-cycle:millennium-bt541-547-2026-04-25",
+      "to": "BT_545",
+      "relation": "session",
+      "description": "2026-04-25 omega-cycle 세션이 BT-545 Hodge 감사를 수행함"
+    },
+    {
+      "id": "E_omegacycle_millennium_bt546",
+      "from": "omega-cycle:millennium-bt541-547-2026-04-25",
+      "to": "BT_546",
+      "relation": "session",
+      "description": "2026-04-25 omega-cycle 세션이 BT-546 BSD 감사를 수행함"
+    },
+    {
+      "id": "E_omegacycle_millennium_bt547",
+      "from": "omega-cycle:millennium-bt541-547-2026-04-25",
+      "to": "BT_547",
+      "relation": "session",
+      "description": "2026-04-25 omega-cycle 세션이 BT-547 Poincare 회고적 감사를 수행함"
+    },
+    {
+      "id": "E_provenance_realizes_honesty",
+      "from": "silicon:provenance-bit",
+      "to": "principle:honesty-triad",
+      "relation": "realizes",
+      "description": "provenance bit 실리콘 원시는 honesty-triad 통합 원리를 하드웨어에서 구현"
+    },
+    {
+      "id": "E_mmu_realizes_writebarrier",
+      "from": "silicon:promotion-counter-mmu",
+      "to": "principle:write-barrier",
+      "relation": "realizes",
+      "description": "promotion-counter MMU는 write-barrier 원리의 실리콘 구현"
+    },
+    {
+      "id": "E_btidisa_realizes_constrainthonesty",
+      "from": "silicon:bt-id-isa",
+      "to": "principle:constraint-honesty",
+      "relation": "realizes",
+      "description": "BT-id ISA 태그는 constraint-honesty 원리의 실리콘 구현"
     }
   ],
   "integrity": {
