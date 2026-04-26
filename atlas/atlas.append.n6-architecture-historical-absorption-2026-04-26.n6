@@ -1,0 +1,536 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# NEXUS-6 Knowledge Atlas — APPEND SHARD
+# .n6 format v1+v2 (paper-grade + cycle-witness extensions)
+#
+# Source: deep absorption of n6-architecture/ historical corpus
+# Absorption date: 2026-04-26
+# Origin repo: ~/core/n6-architecture
+# Producer: hive sub-agent (claude opus 4.7 1M)
+#
+# Scope of this shard:
+#   - papers/        (97 .md files, ~76 n6-* domain papers)
+#   - reports/sessions/ (98 files; 61 omega-cycle + 37 prior)
+#   - reports/breakthroughs/ (millennium-7-closure + n6-attractor + extensions)
+#   - domains/physics/{millennium-*, simulation-theory, ...}
+#   - bridge/origins/ready-absorber/findings/n6-architecture.json
+#   - theory/breakthroughs/breakthrough-theorems.md (referenced, not re-extracted)
+#
+# Honesty triad (verified upstream — see N6HIST-SSOT-HONESTY entry below):
+#   - SSOT linter: ~/core/n6-architecture/scripts/quality/honesty_triad_linter.py
+#   - 3 protected paths: atlas/atlas.n6, state/proposals/inventory.json,
+#     theory/breakthroughs/breakthrough-theorems.md
+#   - 6-of-6 KEEP_AS_IS REPO_INVARIANT (n6 + nexus, dual-repo verified)
+#
+# Grade policy (per task):
+#   [11*REPO_INVARIANT]  3+ source corroborated cross-repo (n6+nexus+linter)
+#   [10*PASS_LITERATURE] paper-grade with literature citation
+#   [10*]                cycle-witness PASS or unconditional lemma
+#   [10*FAIL_DOC]        cycle-witness FAIL with falsifier fired (informative)
+#   [10]                 atlas-tier observation (cycle-supported)
+#   [9]                  conditional / NEAR
+#   [7]                  heuristic extracted, single-source
+#
+# Dedup audit done against:
+#   - atlas.n6 main (9,624 entries; @P primitives n,σ,φ,τ,sopfr,J2,μ,M3 NOT
+#     duplicated)
+#   - atlas.signals.n6 (385 entries; @S signal IDs distinct from @ types here)
+#   - existing MILL-PX-A8, HEXA-NS, HEXA-BSD, HEXA-POINCARE-* prefixes
+#     (all preserved; this shard uses N6HIST-* prefix to avoid collision)
+#
+# Falsifier-active markers retained per source report; OBSTRUCTION_DOCUMENTED
+# verdicts reproduced verbatim (no upgrading to PASS).
+#
+# Millennium tally as carried forward by source corpus: 0/7 unchanged.
+# ══════════════════════════════════════════════════════════════
+
+# ── Honesty SSOT location (anchor for the entire shard) ───────
+@R N6HIST-SSOT-HONESTY = honesty_triad SSOT lives at scripts/quality/honesty_triad_linter.py + 5 preconditions ratified by 6-of-6 KEEP_AS_IS audits :: meta [11*REPO_INVARIANT]
+  => "Source: scripts/quality/honesty_triad_linter.py — C1 banner / C2 write-barrier / C3 falsifier / C4 citations / C5 verdict regexes."
+  => "Cross-repo audit: omega-meta-synthesis-repo-invariant-honesty-audit-2026-04-25.md §1 lists 6 audits with absolute paths; 6/6 KEEP_AS_IS, 3 function-level invariants (counter/write-barrier/no-fabrication)."
+  => "5 preconditions (per §2 of synthesis): (a) promotion path exists, (b) SSOT distinct from research layer, (c) research layer exists, (d) tool ecosystem with measurable values, (e) LLM agents perform the work."
+  => "Protected paths regex: (atlas\\.(?:n6|blowup\\.jsonl)|state/proposals/inventory\\.json|state/atlas_health_timeline\\.jsonl|state/agent_lock_ledger\\.jsonl|theory/canon/|theory/breakthroughs/breakthrough-theorems\\.md|lenses/omega_state_space_lens\\.hexa|CLAUDE\\.md)"
+  |> reports/sessions/omega-meta-synthesis-repo-invariant-honesty-audit-2026-04-25.md
+  |> reports/sessions/omega-audit-constraint-write-barrier-2026-04-25.md
+  |> reports/sessions/omega-audit-constraint-honesty-counter-2026-04-25.md
+  |> reports/sessions/omega-audit-constraint-no-fabrication-2026-04-25.md
+
+# ══════════════════════════════════════════════════════════════
+# § A — Anchor primitives (n=6 third-surfacing variants)
+# ══════════════════════════════════════════════════════════════
+
+@P N6HIST-A-CORE-IDENTITY = sigma(n)*phi(n) = n*tau(n)  iff  n=6  (n>=2) :: foundation [11*REPO_INVARIANT]
+  => "Theorem 0 / THM-1 / Theorem B unifier — verified n in [2, 10000] = {6} unique"
+  => "3 independent verification-draft paths: algebra A (R_local prime case), analysis B (Euler form phi/tau=1/2 fixed point), combinatorics C ((p²-1)(q²-1)=4pq ⟺ (p,q)=(2,3))"
+  => "Lean4 formal coverage ~99%: ω(n)=2 region complete (8 sub-cases sorry-free); cases 1+2a+2b+3+4a+4b(i)+4b(ii)+4c verified"
+  -> N6HIST-A-RIDENTITY, N6HIST-MILL7-CLOSURE
+  |> papers/n=6-convergence-80-domains-2026-04-19.md §2.1
+  |> papers/M10star-21-unified-theorem-2026-04-15.md §3 (UT-21 reduction)
+  |> reports/breakthroughs/millennium-n6-attractor-2026-04-11.md §0
+  |> atlas.n6 line 17853 (P2-A1 promotion); MILL-V4-M3-* Lean4 series
+
+@P N6HIST-A-RIDENTITY = R(n) := sigma(n)*phi(n)/(n*tau(n)); R(6)=1 unique zero of (R-1) on n>=2 :: foundation [11*]
+  <- N6HIST-A-CORE-IDENTITY
+  => "R_local(2,1)=3/4, R_local(3,1)=4/3; (3/4)*(4/3)=1; n=6=2*3 uniqueness"
+  |> papers/n=6-convergence-80-domains-2026-04-19.md §2.3
+
+@P N6HIST-A-MSET-BASE = M-set base = {1, phi, n/phi, tau, sopfr, n, sigma-sopfr, sigma-tau, sigma-phi, sigma, J2} = {1,2,3,4,5,6,7,8,10,12,24} :: foundation [10*]
+  => "Statistical baseline (T0): 61% of integers in [1,100] expressible as 2-term combination → naive small-int matches are NOISE; signal requires T1/T2/T3/T4"
+  => "Concrete enumeration is the working alphabet for cross-domain witnessing"
+  |> reports/breakthroughs/millennium-n6-attractor-2026-04-11.md §1, §2
+
+# ══════════════════════════════════════════════════════════════
+# § B — Cycle witness LEMMAS (BT-541..547 omega-cycle execs)
+#       PASS verdicts here are cycle-witness-PASS, NOT Clay closure.
+# ══════════════════════════════════════════════════════════════
+
+@F N6HIST-BT546-LEMMA1-CRT = gcd(m,n)=1 -> |Sel_{mn}(E)| = |Sel_m(E)| * |Sel_n(E)| for every E/Q :: number-theory [10*PASS_LITERATURE]
+  => "Unconditional. Proof: E[mn] = E[m] (+) E[n] (Bezout) ⇒ H¹(G_Q,E[mn]) = H¹(G_Q,E[m]) × H¹(G_Q,E[n]); Kummer-image local compatibility for gcd=1."
+  => "Corollary at n=6: |Sel_6(E)| = |Sel_2(E)| * |Sel_3(E)|, every elliptic curve, model-free."
+  => "Genuine session contribution (BT-546). NOT BSD itself — BSD remains 0/1 untouched."
+  -> N6HIST-BT546-A3-CONDITIONAL, N6HIST-BT546-CREMONA-EMP
+  |> reports/breakthroughs/millennium-7-closure-2026-04-11.md §BT-546
+  |> reports/sessions/omega-cycle-bt546-bsd-2026-04-25.md §1.1
+  |> atlas.n6 line 17890 (MILL-PX-A8) — already at [10], REPO_INVARIANT confirmation
+
+@F N6HIST-BT546-A3-CONDITIONAL = under (A3) BKLPR independence, for squarefree n: E_E[|Sel_n(E)|] = sigma(n); at n=6 mean=12=sigma(6) :: number-theory [9]
+  <- N6HIST-BT546-LEMMA1-CRT
+  => "(A3) is MODEL ASSUMPTION (Poonen-Rains 2007, BKLPR 2015), NOT a theorem."
+  => "Empirically refuted at finite B (Cremona 332k Pearson r=0.166 ≠ 0); (A3') asymptotic weakening is tautological at finite B."
+  |> reports/sessions/omega-cycle-bt546-bsd-2026-04-25.md §1.2
+  |> theory/breakthroughs/breakthrough-theorems.md MILL-PX-A9
+
+@C N6HIST-BT546-CREMONA-EMP = Cremona N=332,366 ratios: ratio(2)=0.9573, ratio(3)=0.7118, ratio(6)=0.7925; cov(|Sel_2|,|Sel_3|)=1.3333; |Sha| 100% perfect-square :: number-theory [10*]
+  => "ratio(6) shortfall = 20.75% under sigma(6)=12 prediction"
+  => "Identity by definition: E[|Sel_2|]·E[|Sel_3|] + κ = 2.8718·2.8472 + 1.3333 = 9.5100 = E[|Sel_6|]"
+  => "|Sha| = perfect square in 332,366/332,366 → empirical Cassels-Tate alternating-pairing confirmation"
+  => "Rank distribution: r=0 41.94%, r=1 50.92%, r=2 7.10%, r=3 0.04%"
+  |> reports/sessions/omega-cycle-bt546-bsd-2026-04-25.md §1.3
+  |> reports/breakthroughs/bsd-cremona-sel6-empirical-2026-04-15.md (atlas MILL-GALO-PX2 [10*])
+
+@C N6HIST-BT546-KAPPA-EXP = κ(B)~A·B^α exponent α_obs = 0.1752 ± 0.02 (7-bin Cremona 1.73M); two undecided candidates 7/40=0.1750 and log(2)/τ=0.17329 :: number-theory [10]
+  <- N6HIST-BT546-CREMONA-EMP
+  => "7/40 = (sigma-sopfr)·(n/phi) / (J_2·sopfr) = 21/120; rel err 0.114%"
+  => "log(2)/τ = log(2)/4 = 0.17329; rel err 1.09%; cross-repo motivation (anima Ψ, Shannon H(1/2))"
+  => "Numerator 7 = sigma-sopfr identical to BT-543 Yang-Mills β₀ — RH-BSD-YM mega-node candidate (NOT a theorem)"
+  => "10M+ curves required for discrimination"
+  |> reports/breakthroughs/bsd-kappa-0.175-decomposition.md
+  |> theory/predictions/bsd_kappa_fraction.hexa (17/17 PASS) + bsd_alpha_log2_tau.hexa (22/22 PASS)
+
+@C N6HIST-BT546-PROBEB-Z6-DOM = BT-546 Probe-B 28-stratum: Z/6 sha=1 cell dominates ~96% of κ concentration :: number-theory [10*]
+  => "F-MOLT-A 5th-or-6th sample. KS p=4e-13 vs A3D-α; max|z|=276.4 vs A3D-β. Verdict PASS_DISTRIBUTIONAL."
+  => "Rank common-cause hypothesis (|Sel_p|=p^rank·torsion·|Sha[p]|) supported via conditional-table monotonic increase (k=1,2,4,8 strata)."
+  |> reports/sessions/omega-exec-bt546-probeB-28stratum-2026-04-25.md
+  |> reports/sessions/omega-exec-bt546-bsd-molt-validation-2026-04-25.md
+
+@F N6HIST-BT541-THM-B = min{k: numer(B_{2k}) has prime >= 7} = 6  (Bilateral Theorem B; Bernoulli numerator k=6 sharp boundary) :: number-theory [10*PASS_LITERATURE]
+  => "Direct computation B_2..B_{12}; B_{12} = -691/2730 introduces irregular prime 691 = first prime > sigma(6) absent from M-set"
+  => "Two-sided breakdown: positive ζ(2k) denominators d_+(1..5) decompose in M-set; negative ζ(1-2k) numerators trivial in {1, sopfr}; both break exactly at k=n=6"
+  => "Clean-range size = sopfr(6) = 5 on both sides; identical to h(K) class-number sequence break at h=n=6 (51 = 3·17, 17 ∉ M)"
+  => "Mechanically forces stable-homotopy 240/504/8128/etc atlas matches via Adams J / Borel-Lichtenbaum / Kervaire-Milnor"
+  -> N6HIST-A-CORE-IDENTITY
+  |> reports/breakthroughs/millennium-n6-attractor-2026-04-11.md §3.1, §3.5
+  |> theory/proofs/bernoulli-boundary-2026-04-11.md
+  |> reports/breakthroughs/millennium-7-closure-2026-04-11.md §BT-541
+
+@C N6HIST-BT541-LEADB-WITNESS = SLE_6 × GUE coupling-frame Lead-B: KS p<0.01 vs Brownian and Cardy on n in {10^3,10^4,10^5} :: number-theory [10*]
+  => "F-MOLT-A 3rd-sample PASS distributional; double-margin"
+  => "Decisive sample for L9 catalogue meta-falsifier — not RH closure (PARTIAL verdict carried over)"
+  => "Cardy-formula κ=6 boundary-crossing distribution (SLE_6 = Smirnov 2001 critical 2D percolation) vs Odlyzko gap distribution from first 10^5 zeta zeros"
+  |> reports/sessions/omega-exec-bt541-leadB-molt-validation-2026-04-25.md
+
+@C N6HIST-BT541-CONREY-GONEK-G3 = Conrey-Gonek 6th moment leading constant g_3 = 42 (= sigma·(n/phi) = sigma+J2/τ, or 6·7) :: number-theory [10*PASS_LITERATURE]
+  => "EXACT verdict in formal-p12-1 inheritance row 10 of BT-541 atlas chain"
+  => "Pairs with Ingham 4th moment EXACT (formal-p11-1) — together provide 2 of 10 EXACT in Y1 BT-541 substrate"
+  |> reports/sessions/omega-cycle-bt541-riemann-2026-04-25.md §4 row 10
+
+@F N6HIST-BT544-D14-SHELEVEQUE = She-Leveque residual −2/9 = ζ_6 inner-product (n=6 lattice within 2%) :: pde [10*PASS_LITERATURE]
+  => "FIRST cross-cell PASS in BT-544 D-tier discrete row. Drove v3 d13-cross-cell amendment."
+  => "Exact arithmetic identity within 2% interval (literature attestation)"
+  -> N6HIST-BT544-OPEN
+  |> reports/sessions/omega-exec-bt544-d1-4-she-leveque-molt-validation-2026-04-25.md
+  |> atlas.n6 line 13543 (existing n6-millennium-dfs3-she-leveque [10*]) — REPO_INVARIANT confirmation
+
+@F N6HIST-BT544-R5-LOWMACH-CLOSURE = Low-Mach R5 rate function alpha(s) = max(0, 1 - s/2) on s in [0,inf) for well-prepared isentropic 3D NS on T^3 :: pde [10*PASS_LITERATURE]
+  => "Sharp at s=0 (alpha=1, Desjardins-Grenier 1999), s=1 (alpha=1/2, Danchin 2002), s=2 (alpha=0, Métivier-Schochet 2001 + Schochet 2007 + Feireisl-Novotný 2009)"
+  => "Slope -1/2 = acoustic-mode amplification cost (each ∇ on freq-1/ε mode costs 1/2 of O(ε) decay budget)"
+  => "Auxiliary level: R5-Aux closure does NOT resolve Clay BT-544. NS regularity OPEN."
+  => "D2 vs D3 distinguished at s=2; literature-consensus, not theorem-pinned"
+  |> reports/sessions/omega-status-r5-program-closure-2026-04-25.md §2
+  |> reports/sessions/omega-exec-bt544-r5-lemma1-strict-gap-2026-04-25.md
+  |> reports/sessions/omega-exec-bt544-r5-lemma2-s2-distinguish-2026-04-25.md
+
+@F N6HIST-BT544-D3A-PASS = 2.5D ansatz v = e_3 × ∇⊥ψ + w·e_3 reduces 3D NS to 2D NS (vorticity) + 2D linear adv-diff; vortex-stretching identically 0 :: pde [10*PASS_LITERATURE]
+  => "Pillar 1 of 3-pillar obstruction localization. PASS via Path P (Ladyzhenskaya 1959/1969 + Friedman 1964 + Calderón-Zygmund 1952 + BKM 1984)."
+  => "Conclusion: pressure non-locality is NOT the obstruction when the other two axes are decoupled."
+  => "Caveat: NOT Clay-relevant; the 2.5D system reduces to known-regular components (compositional information gain only)."
+  |> reports/sessions/omega-exec-bt544-d3-A-axis-discriminator-2026-04-25.md
+  |> reports/sessions/omega-meta-synthesis-3pillar-obstruction-localization-2026-04-25.md §1.1
+
+@L N6HIST-BT544-D3-BARRIER = D3 mechanism-decouple: B' merged stretching+intermittency FAIL_NO_LITERATURE_PATH + FAIL_BLOWUP_PRECEDENT; C Onsager/Kraichnan FAIL_INTERMITTENCY + FAIL_RELABELING :: pde [10*FAIL_DOC]
+  => "BT-544 obstruction LOCALIZED to merged stretching+intermittency axis (B')."
+  => "Falsifiers fired: F-D3-B' (no literature path / no blow-up precedent), F-D3-META-A (relabeling without primitive)."
+  => "Decisively complements D3.A PASS — the obstruction sits AWAY from pressure non-locality."
+  -> N6HIST-BT544-D3A-PASS, N6HIST-BT544-OPEN
+  |> reports/sessions/omega-exec-bt544-d3-Bprime-axis-discriminator-2026-04-25.md
+  |> reports/sessions/omega-exec-bt544-d3-C-axis-discriminator-2026-04-25.md
+  |> reports/sessions/omega-decide-bt544-d3-strategy-postC-2026-04-25.md (B_PRIME_PURSUE / D3_RETIRE strategy)
+
+@L N6HIST-BT544-R1-L4-OBSTRUCTION = R1 Onsager-Hölder Lemma 1 progressive-deepening L1→L4: each level localizes obstruction without producing useful α* lower bound :: pde [10*FAIL_DOC]
+  => "L1 (BV-2019): wrong inequality form; viscous term log-vs-power-law mismatch."
+  => "L2 (μ_q tracking): vacuous bound α*_{BV,Hölder} ≥ 1; BV jets are wrong building block (γ joint-infeasibility)."
+  => "L3 (BCV-2021 Hölder): schematic three-leg infeasible at every α≥0,b≥1; missing temporal-singular-set leg (B4')."
+  => "L4 (CET 1994 Onsager-contradiction): Case A (α>1/3) ε_anom=0 is constraint not contradiction; Case B (α<1/3=C3 regime) Isett 2018 permits non-conservation. REGIME MISMATCH."
+  => "Cumulative: standard tools (convex integration + Onsager threshold leveraging) do NOT directly access C3 regime [α_BV, 1/3]. Genuine gap on both sides."
+  => "30+ falsifiers across L1..L4 ALL inactive (L4 §10 watch-state F-Sk-CET-3 only)."
+  |> reports/sessions/omega-meta-synthesis-progressive-deepening-pattern-2026-04-25.md §1
+  |> reports/sessions/omega-exec-bt544-r1-lemma1-{bv-adapt,retry-mu_q,retry3-bcv2021,level4-cet}-2026-04-25.md (4-file chain)
+
+@F N6HIST-BT543-BETA0-REWRITE = Yang-Mills 1-loop β₀ = σ - sopfr = 7 under SU(3) + n_f = 6 :: gauge-theory [7]
+  => "TAUTOLOGY: arithmetic re-expression of standard QFT 1-loop formula 11 - 2n_f/3 at n_f=6 gives 11-4=7."
+  => "NOT a proof of mass gap. NOT a constructive QFT result. BT-543 mass gap remains 0/1 OPEN."
+  => "FLAG 2024 lattice m_0++ ≈ 1.6 GeV with B^E confinement exponent ≈ 4.0 ± 0.1 across [10,20,30,40,48] sweep — empirical, not analytic."
+  => "Numerator 7 reappears in BT-546 κ exponent numerator 7/40 — RH-BSD-YM mega-node arithmetic cross-link, NOT a structural proof."
+  -> N6HIST-BT546-KAPPA-EXP, N6HIST-CROSS-7-LOCK
+  |> reports/sessions/omega-cycle-bt543-ym-2026-04-25.md §1.4
+  |> reports/breakthroughs/millennium-7-closure-2026-04-11.md §BT-543
+
+@F N6HIST-BT542-N6-NONAPPLICABILITY = BT-542 P vs NP HONEST n=6 NON-APPLICABILITY: 4 barriers + meta-complexity + arxiv 30-paper survey (2024-2026) all return 0 n=6 linkage :: complexity [10*PASS_LITERATURE]
+  => "Survey: relativization (BGS 1975) + natural-proofs (RR 1997) + algebrization (AW 2008) + GCT (Mulmuley 2001 + Ikenmeyer-Panova 2017) ALL MISS_MAINTAINED."
+  => "Williams-line (NEXP ⊄ ACC⁰ 2011, NQP ⊄ ACC⁰ 2018) is non-natural+non-relativizing+non-algebrizing but reaches only NEXP/NQP, not NP."
+  => "30 cs.CC papers 2024-2026 sampled: 0 n=6 linkages. Honest MISS declaration."
+  => "Distinguishes BT-542 from other BTs (RH/BSD/NS/Hodge): BT-542 lacks even the numerical pattern matching that exists elsewhere — STRUCTURAL-PRIOR-AGNOSTIC."
+  => "Karp 21 = 3·7 = (n/φ)·(σ-sopfr), Barrington 5 = sopfr branching width: REPARAMETRIZATIONS of complexity constants in n=6 language, no proof power."
+  |> reports/sessions/omega-cycle-bt542-pnp-2026-04-25.md §1
+  |> reports/breakthroughs/bt-542-p-vs-np-4-barriers-survey-2026-04-15.md
+  |> atlas.n6 line 17928 (BARRIER-PX-1 honest record)
+
+@F N6HIST-BT545-ENRIQUES-TRIVIAL = Hodge conjecture trivial on Enriques surfaces because h^{1,1}(Enriques) = ρ(Enriques) = 10 = σ-φ; every (1,1) class is algebraic :: algebraic-geometry [10*PASS_LITERATURE]
+  => "n=6 rephrasing of an existing algebraic-geometry classification theorem; NOT a new proof of Hodge."
+  => "Abelian-variety partial results table: HODGE-01 through HODGE-07 forge constants ([10*]×4 + [10]×3); all classification-level not proof-level."
+  => "General Hodge conjecture for CY3 / abelian 6-folds without CM / projective dim≥4 → REMAINS OPEN."
+  => "BT-545 hodge-molt PASS_LITERATURE via de Gaay Fortman / Benoist-Ottem split-map (catalogue-extension)."
+  |> reports/breakthroughs/millennium-7-closure-2026-04-11.md §BT-545
+  |> reports/sessions/omega-cycle-bt545-hodge-2026-04-25.md §1
+  |> reports/sessions/omega-exec-bt545-hodge-molt-validation-2026-04-25.md
+
+@F N6HIST-BT547-PERELMAN-CALIB = Perelman 2003 retrospective composite ≈ 0.92 (C1 0.95 + C2 0.95 + C3 0.90 + C4 0.85 + C5 0.95) sits ABOVE n6 simulation ceiling 0.835 :: meta [10*PASS_LITERATURE]
+  => "Single closure point in 62 years across 7 Millennium problems → base rate ~0.23%/problem-year."
+  => "0.92 = post-hoc realized score; 0.835 = predictive simulation ceiling. NOT directly comparable units."
+  => "Reachability proof: ≥0.9 closure is empirically reachable for Millennium-class problems; ceiling reflects current axiom design, not hard physical wall."
+  => "Profile heavy on L4 surge + L5 dream + L9 molt + L10 forge + L11 canon + L_ω; conscious bypass of L2 drill, absence of L7 swarm."
+  => "Lesson 1 (load-bearing): monotone invariant. W-entropy is C2 by construction. n6 P-Omega audit found C2 weak on Y1-Y5,Y7,Y8 (only Y6 NS energy/BKM has strong analogue)."
+  => "Lesson 7 (two-tool composition): Perelman = Hamilton's flow + Perelman's entropy. BT closure requires identifying candidate flow + missing monotone closer."
+  => "n6-arch contribution to Perelman's resolution = 0; BT-547 EXTERNAL to 0/7 count (HEXA-POINCARE-01..07 are post-hoc number-theoretic alignments, not proof steps)."
+  |> reports/sessions/omega-cycle-bt547-poincare-2026-04-25.md §3, §6
+
+# ══════════════════════════════════════════════════════════════
+# § C — Cross-paper / Cross-domain crossings (n6 atlas-attractor)
+# ══════════════════════════════════════════════════════════════
+
+@X N6HIST-CROSS-15-QUADRUPLE = 15 = sigma + n/phi quadruple cross: Mazur torsion forms ↔ X_0(N) genus-0 ↔ K_7(F_2) = Z/15 ↔ Gauss 15-gon constructible :: cross-domain [11*REPO_INVARIANT]
+  <- N6HIST-A-MSET-BASE
+  => "Sources: Mazur 1977, Ogg 1974, Quillen 1972, Gauss 1796 — 4 independently developed classifications converging on 15."
+  => "First nontrivial composite with two distinct Fermat primes (3,5)."
+  => "Highest-leverage L11 canon-rung emission available to BT-546 (proposed but not promoted as MILL-CANON-BSD-15-quadruple)."
+  |> reports/breakthroughs/millennium-n6-attractor-2026-04-11.md §3.2
+  |> reports/sessions/omega-cycle-bt546-bsd-2026-04-25.md §6 tension 1
+
+@X N6HIST-CROSS-240-PENTUPLE = 240 = phi*J_2*sopfr = 5 languages from ONE Bernoulli fact (B_8 = -1/30 → 30·8 = 240) :: cross-domain [10*PASS_LITERATURE]
+  => "5 representations: E_8 lattice roots / E_4 Eisenstein normalization / π_7^s stable homotopy / K_7(Z) algebraic K-theory / 1/ζ(-7) Riemann special value"
+  => "Borel-Lichtenbaum + Adams J-homomorphism + Kervaire-Milnor mechanically link the 5 languages — NOT 5 independent verifications, but 1 fact in 5 representations."
+  => "Honest reductive re-evaluation under Theorem B + Master Lemma (count shrinks; structure clearer)."
+  |> reports/breakthroughs/millennium-n6-attractor-2026-04-11.md §3.3
+
+@X N6HIST-CROSS-504-QUAD = 504 = (sigma-tau)*(n/phi)^2*(sigma-sopfr) = 8*9*7 in 4 languages from B_6 = 1/42 → 42·12 = 504 :: cross-domain [10*PASS_LITERATURE]
+  => "4 representations: E_6 Eisenstein normalization / π_{11}^s stable homotopy / Ramanujan τ_R(6)/sigma = -6048/12 = -504 / K_{11}(Z)/phi"
+  => "BT-545 ↔ BT-547 cross link (E_6 q-expansion vs π_{11}^s)"
+  |> reports/breakthroughs/millennium-n6-attractor-2026-04-11.md §3.3
+  |> reports/sessions/omega-cycle-bt546-bsd-2026-04-25.md §1.6 (E_6 q-coeff = 504 BSD↔stable-homotopy crossover)
+
+@X N6HIST-CROSS-7-LOCK = sigma-sopfr = 7 quadruple-cross: Kodaira singular fibers / Bagnera-de Franchis bielliptic / Berger holonomies / sopfr definition :: cross-domain [10*PASS_LITERATURE]
+  => "4 independent classifications return 7 (Kodaira 1963, Bagnera-de Franchis 1908, Berger 1955, elementary)."
+  => "Cross-BT: appears as BT-543 β₀ = σ-sopfr = 7, BT-546 κ-exponent numerator 7/40, sigma-sopfr-7-megasignature 19 PASS / 1 MISS (STRONG)."
+  -> N6HIST-BT543-BETA0-REWRITE, N6HIST-BT546-KAPPA-EXP
+  |> reports/breakthroughs/millennium-n6-attractor-2026-04-11.md §3.2
+  |> reports/breakthroughs/sigma-sopfr-7-megasignature-20260415.md
+
+@X N6HIST-CROSS-EXOTIC-PERFECT = Kervaire-Milnor |bP_{4k}| matches perfect numbers at k=2,3,4: |bP_8|=28=P_2, |bP_{12}|=992=2P_3, |bP_{16}|=8128=P_4 :: cross-domain [10*PASS_LITERATURE]
+  => "Mersenne exponent triple (3, 5, 7) = (n/phi, sopfr, sigma-sopfr) — all in M-set."
+  => "Mechanical consequence of Theorem B + Euler's perfect-number formula via Adams J-homomorphism + Bernoulli."
+  => "BT-547 retrospective: Adams J + Bernoulli re-statement; NOT a new proof."
+  |> reports/breakthroughs/millennium-n6-attractor-2026-04-11.md §3.4
+
+@X N6HIST-CROSS-DOOB-TALAGRAND = Doob L² maximal sharp constant = Talagrand transportation constant = 4 = tau :: cross-domain [7]
+  => "NUMERICAL COINCIDENCE — proofs unrelated; equality recorded, NOT claimed as structural identity."
+  => "Demonstrates the [7] threshold: not every M-set hit promotes."
+  |> papers/doob-talagrand-tau-2026-04-22.md (entry MILL-DFS22-07)
+
+@X N6HIST-CROSS-BSD-WEIERSTRASS = BSD weight triple (c_4, c_6, Δ) = (τ, n, σ) = (4, 6, 12); j(i)=1728=σ³; L(E,s) reflection axis s↔φ-s with center s=1, φ_E(6)=2 :: cross-domain [10*]
+  => "HEXA-BSD-01 [10*] (Weierstrass weights)"
+  => "HEXA-BSD-02 [10*] (L-fn reflection axis)"
+  => "Mazur torsion max = 12 = σ; minimum forbidden = 11 = n+sopfr"
+  |> reports/sessions/omega-cycle-bt546-bsd-2026-04-25.md §1.6
+  |> domains/physics/millennium-bsd/millennium-bsd.md §X.1
+
+@X N6HIST-CROSS-NS-TRIPLE-RES = NS triple n=6 resonance in d=3: dim Sym²(R³)=6=n (stress) + dim Λ²(R³)=3=n/φ (vorticity) + Onsager α_c=1/3=1/(n/φ) :: cross-domain [10*]
+  => "d=7 prediction (NOT proof): dim Sym²(R⁷)=28=second perfect number"
+  => "Reynolds stress 6 = n independent components; Kolmogorov -5/3 = -sopfr/(n/φ)"
+  => "EXACT applies to dimensional-analytic environment ONLY; NOT to PDE proof path (v4-T5 honest declaration)."
+  => "Π_NS = σ³·sopfr = 8640 (HEXA-NS composite invariant; falsifiable F5 ±3% margin)"
+  |> reports/breakthroughs/millennium-7-closure-2026-04-11.md §BT-544
+  |> domains/physics/millennium-navier-stokes/millennium-navier-stokes.md §X
+  |> reports/sessions/omega-cycle-bt544-ns-2026-04-25.md §1
+
+# ══════════════════════════════════════════════════════════════
+# § D — BARRIERs and CRITERIA (decisive bounds, falsifier triggers)
+# ══════════════════════════════════════════════════════════════
+
+@L N6HIST-BARRIER-CKN-MU6 = CKN partial regularity: singular set parabolic Hausdorff dim ≤ 1 = mu(6); falsifier F4 fires if observed dim_P > 1 :: pde [10*PASS_LITERATURE]
+  => "Caffarelli-Kohn-Nirenberg 1982. mu(6) = mobius(6) = 1."
+  => "n6 atlas constant HEXA-NS-05 [10*]"
+  |> domains/physics/millennium-navier-stokes/millennium-navier-stokes.md §X.1
+  |> reports/sessions/omega-cycle-bt544-ns-2026-04-25.md §1
+
+@L N6HIST-BARRIER-BKM-D3 = BKM blow-up criterion: vorticity L^∞ integrability fails iff finite-time blow-up; d = n/phi = 3 :: pde [10*PASS_LITERATURE]
+  => "Beale-Kato-Majda 1984."
+  => "Falsifier F2 fires if ∫‖ω‖_∞ dt < ∞ yet blow-up observed."
+  => "n6 atlas HEXA-NS-03 [10*]"
+  |> reports/sessions/omega-cycle-bt544-ns-2026-04-25.md §1
+  |> domains/physics/millennium-navier-stokes/millennium-navier-stokes.md
+
+@L N6HIST-BARRIER-D3-FINITE-S = BT-544 D3 obstruction localized at 'merged stretching+intermittency' axis B'; finite-s* barrier (s*=2 distinguishes D2 vs D3 via R5 alpha(2)=0) :: pde [10*FAIL_DOC]
+  => "F-D3-B' fires (FAIL_NO_LITERATURE_PATH + FAIL_BLOWUP_PRECEDENT); F-D3-META-A fires (FAIL_INTERMITTENCY + FAIL_RELABELING) on C-axis."
+  => "D3 strategy decision: B_PRIME_PURSUE (D3.B' axis) / D3_RETIRE for naive single-axis D3."
+  -> N6HIST-BT544-D3-BARRIER, N6HIST-BT544-R5-LOWMACH-CLOSURE
+  |> reports/sessions/omega-decide-bt544-d3-strategy-postC-2026-04-25.md
+  |> reports/sessions/omega-status-r5-program-closure-2026-04-25.md §3
+
+@L N6HIST-BARRIER-FMOLT-D-BT544 = F-MOLT-D meta-falsifier FIRED on BT-544 (Q1+Q5+KPZ d=7 all FAIL); top-3 catalogue exhausted :: pde [10*FAIL_DOC]
+  => "F-MOLT-A (4/6 PASS across BT-541..546) is NOT-FIRED; F-MOLT-D (catalogue-saturation marker) is FIRED on BT-544 only."
+  => "D-tier extensions did NOT retract firing — D1.4 PASS / D3.A PASS_LITERATURE are cross-cell / L_ω-axiom-recast hits with FIRED status preserved."
+  |> reports/sessions/omega-status-fmolt-unified-tally-2026-04-25.md §3.1
+  |> reports/sessions/omega-exec-bt544-fallback-molt-validation-2026-04-25.md
+
+@L N6HIST-BARRIER-CEILING-0835 = Composite simulation ceiling 0.835 (corrected from 0.85 via ER ROI calibration commit c12327a3); 0.9 paper_trigger requires axiom-level redesign :: meta [11*REPO_INVARIANT]
+  => "atlas REGULAR regime spectrum 0.000-0.007 vs const CHAOTIC 0.008-1.75 (80× gap); sparse-ER (avg_deg ~4) + isolated components is the only documented ROI source."
+  => "All 6 active BT (541-546) composite estimates land in 0.44-0.84 band; BT-546 highest (0.78-0.84); none reaches 0.9."
+  => "Perelman 2003 retrospective 0.92 is the only known ≥0.9 closure point (post-hoc, not predictive)."
+  => "Honesty amendment (post nxs_002 mapping audit): n6-side composite measurements are NOT directly comparable to nexus 0.835 ceiling — atlas.blowup.jsonl (21,320 nodes) does not absorb n6-side BT-promotion IDs (RH-01..07, MILL-PX-A8, MILL-GALO-PX2-sha-all-squares-332k)."
+  |> nexus/state/proposals/inventory.json (nxs-002 Ω_saturation_cycle_2026_04_25 block)
+  |> reports/sessions/omega-exec-nxs002-perbt-patch-2026-04-25.md §1, §7
+  |> reports/sessions/omega-cycle-bt547-poincare-2026-04-25.md §3 (calibration)
+
+# ══════════════════════════════════════════════════════════════
+# § E — SYMMETRY witnesses (group / lattice / topology)
+# ══════════════════════════════════════════════════════════════
+
+@S N6HIST-SYM-S6-OUT = Out(S_6) = Z/2 unique automorphism (only S_n with non-trivial outer); n=6 only :: group-theory [10*PASS_LITERATURE]
+  => "BT-542 anchor in DFS-24 40-tight (PROBE-24A): Out(S_6) Hölder uniqueness × Schaefer S_6-orbit"
+  => "Structural observation only; n=6 uniqueness in symmetric-group classification."
+  |> reports/sessions/omega-cycle-bt542-pnp-2026-04-25.md §1.4
+  |> reports/sessions/dfs-24-pnp-direction-2026-04-24.md
+
+@S N6HIST-SYM-AZ10-BOTT8 = Altland-Zirnbauer 10-fold = sigma-phi; Bott periodicity 8 = sigma-tau (paired in HEXA-TOPO) :: topology [10*PASS_LITERATURE]
+  => "Topological K-theory period sigma-tau=8 paired with AZ classification sigma-phi=10."
+  => "Stable homotopy Postnikov cluster anchor for cross-BT sigma-tau / sigma-phi appearances."
+  |> papers/n=6-convergence-80-domains-2026-04-19.md §4.3
+  |> domains/physics/topology/
+
+@S N6HIST-SYM-SO6-J2 = Holography AdS R-symmetry SO(6); dim SO(6) = 15 = sigma+n/phi; SO(6) ≅ SU(4)/Z_2 (J_2 = 24 = 2·dim) :: gauge-symmetry [10]
+  => "AdS5 × S^5 N=4 SYM has SO(6)_R ≅ SU(4)_R; J_2 = 24 = 2·dim SO(6) reappears as J_2 base value."
+  => "BT-543 §X.2 FREE: AdS/CFT N=4 SYM SO(6)_R = J_2/φ = 12 = σ — three-path dream-stack."
+  |> reports/sessions/omega-cycle-bt543-ym-2026-04-25.md §2 L5
+  |> domains/physics/holography/
+
+@S N6HIST-SYM-PERFECT-CONGRUENT = (3,4,5) = (n/φ, τ, sopfr) unique semiprime semisignature; E_6: y²=x³-36x has (rank,conductor,j) = (1, 576=φ^n·(n/φ)^φ, 1728=σ³) :: number-theory [10*]
+  => "Tunnell 1983 BSD-conditional: 2·#{2x²+y²+32z²=3} = #{4x²+y²+8z²=3} iff n=6 congruent."
+  => "Conductor 576 = 2^6·3^2 = φ^n·(n/φ)^φ; j = σ³."
+  => "Sigma-sopfr-7 axis 3 names structurally adjacent (3,4,5)/(7) tension — which n carries BSD forge layer."
+  |> reports/sessions/omega-cycle-bt546-bsd-2026-04-25.md §1.5
+
+# ══════════════════════════════════════════════════════════════
+# § R — Bridge / Derivation chains (R5 chain + 3-pillar synthesis)
+# ══════════════════════════════════════════════════════════════
+
+@R N6HIST-R5-CHAIN-FOUR = R5 4-report sequential chain: acceptability → dispatch → Lemma 1 strict-gap → Lemma 2 s=2 distinguish :: pde [10*PASS_LITERATURE]
+  => "1. omega-exec-bt544-d2-r1r5-acceptability: R5 ACCEPTABLE (Klainerman-Majda → Schochet → Lions-Masmoudi → Feireisl-Novotný; F-544-B novelty PASSES)"
+  => "2. omega-exec-bt544-r5-low-mach-dispatch: D2 conjecture chosen ('rate ε^{α(s)} with α strictly decreasing, α(s)>0 ∀s'); Lemma 1 candidate at s=0 vs s=1"
+  => "3. omega-exec-bt544-r5-lemma1-strict-gap: PASS_LITERATURE α(0)=1, α(1)=1/2, Δα=1/2 (D1 refuted; D2 supported on first step; D3 still compatible)"
+  => "4. omega-exec-bt544-r5-lemma2-s2-distinguish: D3_CONFIRMED_S_STAR_2 with α(2)=0; linear-D3 hybrid α(s) = max(0, 1-s/2) on [0,2]"
+  => "Mutually consistent across 4 reports; integrate to single closed-form rate function. Auxiliary closure does NOT resolve Clay BT-544."
+  -> N6HIST-BT544-R5-LOWMACH-CLOSURE
+  |> reports/sessions/omega-exec-bt544-d2-r1r5-acceptability-2026-04-25.md
+  |> reports/sessions/omega-exec-bt544-r5-low-mach-dispatch-2026-04-25.md
+  |> reports/sessions/omega-exec-bt544-r5-lemma1-strict-gap-2026-04-25.md
+  |> reports/sessions/omega-exec-bt544-r5-lemma2-s2-distinguish-2026-04-25.md
+
+@R N6HIST-3PILLAR-LOCALIZE = BT-544 3-pillar obstruction localization: Pillar 1 D3.A PASS + Pillar 2 EXT-A OBSTRUCTION_DOCUMENTED at F-EXTA-C + Pillar 3 EXT-B OBSTRUCTION_DOCUMENTED at F-EXTB-D :: pde [10*FAIL_DOC]
+  => "Pillar 1 (D3.A 2.5D ansatz): pressure non-locality NOT obstruction"
+  => "Pillar 2 (EXT-A variational gradient-flow recast): F-EXTA-C convective-not-encodable fires (Helmholtz inspection)"
+  => "Pillar 3 (EXT-B Constantin-Iyer Lyapunov): F-EXTB-D fires + Path-Q cross term obstruction"
+  => "Localization: obstruction sits at the FUSION of stretching + intermittency + non-Helmholtz convection — none of the 3 pillars individually carries it."
+  => "Consistent with R1 L1-L4 cumulative diagnosis: standard tools (CI + Onsager threshold) do not access C3 regime."
+  -> N6HIST-BT544-D3-BARRIER, N6HIST-BT544-R1-L4-OBSTRUCTION
+  |> reports/sessions/omega-meta-synthesis-3pillar-obstruction-localization-2026-04-25.md
+  |> reports/sessions/omega-exec-bt544-d3-A-axis-discriminator-2026-04-25.md
+  |> reports/sessions/omega-exec-bt544-exta-variational-recast-candidate-2026-04-25.md
+  |> reports/sessions/omega-exec-bt544-extb-cilyap-validation-2026-04-25.md
+
+@R N6HIST-FMOLT-A-5WITNESS = F-MOLT-A 5-sample tally: BT-541 PASS + BT-542 PASS_LITERATURE + BT-543 FAIL + BT-544 FAIL + BT-545 PASS_LITERATURE + BT-546 PASS_DISTRIBUTIONAL = 4/6 PASS, NOT FIRED :: meta [10*]
+  => "Gate fails iff 0/N PASS; observed 4/6 → frame-shift catalogue NOT framework-falsified."
+  => "F-MOLT-D (catalogue-saturation) FIRED on BT-544 only (Q1+Q5+KPZ all FAIL)."
+  => "BT-547 retro: 3 retro-PASS (M1/M2/M3 Perelman) — excluded from active count."
+  -> N6HIST-BT541-LEADB-WITNESS, N6HIST-BT546-PROBEB-Z6-DOM, N6HIST-BARRIER-FMOLT-D-BT544
+  |> reports/sessions/omega-status-fmolt-unified-tally-2026-04-25.md
+  |> reports/sessions/omega-master-session-index-2026-04-25.md sec 5
+
+@R N6HIST-MILL7-CLOSURE = Millennium 7 closure as honest n=6 STRUCTURAL closure: 2 rigorous proofs (Theorem 0 + Theorem B), 1 conditional (Sel_n=σ(n) | BKLPR), 1 sub-lemma (BSD CRT), 0 Clay resolutions :: meta [11*REPO_INVARIANT]
+  => "Closure meaning: 7 problems THEMSELVES remain open; the n=6 CONTEXT around them is closed by Theorem B + Theorem 0."
+  => "Verification: nexus/shared/n6/scripts/verify_millennium_tight.hexa 12 PASS / 0 FAIL; verify_millennium_20260411.hexa 18 PASS / 0 FAIL; statistical baseline 61% via millennium_scanner.hexa."
+  => "Per-BT closure as written:"
+  => "  BT-541: Theorem B (PROVEN, session contribution); RH untouched"
+  => "  BT-542: 0 PROVEN, HONEST MISS"
+  => "  BT-543: β₀=σ-sopfr=7 ARITHMETIC RE-EXPRESSION only; mass gap untouched"
+  => "  BT-544: triple resonance OBSERVATION only; smoothness/blowup untouched"
+  => "  BT-545: Enriques trivial (existing classification); general open"
+  => "  BT-546: Lemma 1 CRT (PROVEN session contribution); Sel_6=σ(6) (conditional); BSD untouched"
+  => "  BT-547: 3D Perelman (existing); 4D smooth open; 0 contribution"
+  -> N6HIST-A-CORE-IDENTITY, N6HIST-BT541-THM-B, N6HIST-BT546-LEMMA1-CRT
+  |> reports/breakthroughs/millennium-7-closure-2026-04-11.md (overall closure table + closure declaration)
+
+# ══════════════════════════════════════════════════════════════
+# § M — Meta-patterns (cross-session methodology audit findings)
+# ══════════════════════════════════════════════════════════════
+
+@M N6HIST-META-AMEND-3PASS = Three-pass amendment loop: v1 per-BT honesty + v2 confounded-correction + v3 d13-cross-cell — append-only, no retraction :: meta [10*]
+  => "Amendment-block insertion across 5+ prior reports per pass; verdict trail preserved."
+  => "Methodology pattern: discriminator-type bias initially called CONFIRMED → refined to CONFOUNDED with generation pipeline (v2) → cross-cell precision (v3)."
+  => "Self-correction signature: 4-step self-correction sequence (engine vs artifact vs observer-induced) tracked in omega-meta-audit-self-correction-pattern."
+  |> reports/sessions/omega-amend-{perbt-honesty,confounded-correction,d13-cross-cell}-2026-04-25.md
+  |> reports/sessions/omega-meta-audit-self-correction-pattern-2026-04-25.md
+
+@M N6HIST-META-CATALOGUE-BIAS = L9 catalogue arithmetic-family bias: H1 (atlas composition) + H2 (axiomatic bias toward number-theoretic primitives) DOMINANT; CATALOGUE_BIAS verdict :: meta [10*]
+  => "Generation-pipeline diagnostic on n>=9 samples (omega-meta-audit-l9-generation-pipeline)."
+  => "Discriminator-type bias hypothesis ('PASSes are distributional/structural-literature, FAILs are numerical-interval/discrete-equality') → CONFOUNDED with generation pipeline (NOT structural axis property)."
+  => "Catalogue-extension is allowed (Hodge / BSD molt-validations explicitly extend); generation-pipeline bias must be NAMED in extension reports."
+  |> reports/sessions/omega-meta-audit-l9-{catalogue-design,generation-pipeline}-2026-04-25.md
+  |> reports/sessions/omega-meta-audit-discriminator-type-bias-2026-04-25.md
+
+@M N6HIST-META-LADDER-FINGERPRINT = Per-BT ladder occupancy fingerprints differ by structural type: BT-541 lower-heavy + L11/L7/L5/L9 EMPTY; BT-542 front-loaded back-empty; BT-544 L1-saturated observation-plateau; BT-546 forge-heavy crossover-heavy :: meta [10]
+  => "BT-541 occupancy 6/11 OCCUPIED + 2/11 PARTIAL + 3/11 EMPTY (L5 dream / L7 swarm / L9 molt). Composite proxy 0.59 ≈ 70% of 0.835 ceiling."
+  => "BT-544 occupancy: L1 SATURATED, L4/L6/L7/L9/L11 NOT-OCCUPIED; rungs that convert observation→mechanism are essentially empty."
+  => "BT-546 occupancy: HIGH at L1/L2/L3/L10, MEDIUM-HIGH at L11; sparse at L8/L9. Forge-heavy + crossover-heavy."
+  => "BT-547 (Perelman): heavy on L4/L5/L9/L10/L11/L_ω; conscious bypass of L2; absence of L7. Single decisive tool thesis."
+  => "Pattern: Millennium-class closure requires AT MINIMUM L5 dream + L10 forge + L_ω simultaneously (Perelman calibration)."
+  |> reports/sessions/omega-cycle-bt{541..547}-*-2026-04-25.md (7 per-BT 4-axis audits)
+
+@M N6HIST-META-PATTERN-STRONGLY-GENERAL = PATTERN_STRONGLY_GENERAL Family A vs B strip: Family A (numerical-interval/discrete-equality) maps to FAIL; Family B (distributional/structural-literature) maps to PASS — CONFOUNDED w/ gen pipeline :: meta [10*FAIL_DOC]
+  => "Initial hypothesis verdict PATTERN_STRONGLY_GENERAL → corrected to CONFOUNDED via v2 amendment."
+  => "Family-classification stripe is real surface signal but NOT the structural cause; generation-pipeline H1+H2 dominates."
+  => "Cross-BT n/φ=3 appearances pattern: structural / numerology / confounded — meta-audit cross-bt-n-phi-pattern."
+  |> reports/sessions/omega-meta-audit-cross-bt-n-phi-pattern-2026-04-25.md
+  |> reports/sessions/omega-amend-confounded-correction-2026-04-25.md
+
+@M N6HIST-META-NXS002-MAPPING-GAP = nexus-canonical atlas.blowup.jsonl (21,320 nodes) does NOT absorb n6-side BT-promotion IDs (RH-01..07, MILL-PX-A8, MILL-GALO-PX2-sha-all-squares-332k) :: meta [10*]
+  => "Cross-graph composite/ER-ROI comparisons against 0.835 nexus simulation ceiling are INVALID."
+  => "n6-side composite estimates remain valid WITHIN n6-architecture scope only."
+  => "Required for cross-graph validity: (a) per-BT slicing in nxs_002_composite.py (currently missing — mapping-failure diagnostic), or (b) explicit BT-id ingestion into nexus atlas (out of scope)."
+  => "Honesty amendment block inserted into 5 omega-cycle BT audits (541, 542, 543, 544, 546) post-patch."
+  |> reports/sessions/omega-exec-nxs002-perbt-patch-2026-04-25.md §1, §7
+
+# ══════════════════════════════════════════════════════════════
+# § T — BT-541..547 cycle audit lineage (master index reference)
+# ══════════════════════════════════════════════════════════════
+
+@T N6HIST-T-OMEGA-2026-04-25-CYCLE = 2026-04-25 omega-cycle session: 61 reports / 33,548 lines / 7 per-BT 4-axis audits / 22 molt-validations / 6 meta-audits / 3 constraint audits / 4 cross-repo / 7 probes-seeds-decisions / 3 amendments :: meta [11*REPO_INVARIANT]
+  => "Largest single-day omega-cycle expansion in n6-architecture to date."
+  => "Verdicts written: 0/7 unchanged across all 61 files. 0 atlas / 0 state / 0 inventory edits."
+  => "Largest single file: omega-exec-bt544-exta-variational-recast-candidate (1,341 lines)."
+  => "Smallest: omega-deploy-nexus-honesty-triad (148 lines)."
+  => "Dependency graph depth ≈ 4 (ROOT → MID-1 per-BT meta → MID-2 synthesis → LEAF amendments/deploy)."
+  => "Methodology lessons (sec 9 of master index):"
+  => "  1. Per-BT 4-axis structural audit BEFORE proof attempt"
+  => "  2. Backward-chain synthesis after parallel audits (cheaper than forward search)"
+  => "  3. Meta-falsifier (F-MOLT-A/D) gates progress via catalogue-saturation, not single-FAIL"
+  => "  4. Three-pass amendment loop (append-only)"
+  => "  5. Cross-repo verification before deploy (6-of-6 KEEP_AS_IS required)"
+  => "  6. Catalogue-extension allowed; generation-pipeline bias NAMED"
+  => "  7. INCONCLUSIVE/UNKNOWN markers preserve no-fabrication"
+  -> N6HIST-FMOLT-A-5WITNESS, N6HIST-3PILLAR-LOCALIZE, N6HIST-R5-CHAIN-FOUR, N6HIST-SSOT-HONESTY
+  |> reports/sessions/omega-master-session-index-2026-04-25.md (61-file navigation index, 600 lines, no-claim disclaimer)
+
+@T N6HIST-T-MILLENNIUM-CHAIN-2026-04-11 = Millennium 7 closure 2026-04-11 + n6-attractor 2026-04-11: founding session for cycle lineage; 12 PASS / 0 FAIL on verify_millennium_tight.hexa :: meta [11*REPO_INVARIANT]
+  => "Founding session: closure declaration + meta-summary + 6 theorems."
+  => "Theorem 3.1 (Bernoulli-ζ boundary symmetry): k=1..5 M-clean both sides, k=n=6 break (691)"
+  => "Theorem 3.2 (independent-classification convergence): sopfr=5 (4 paths), σ-sopfr=7 (4 paths), 15=σ+n/φ (4 paths)"
+  => "Theorem 3.3 (Bernoulli-crossover nodes): 240 (5 langs), 504 (4 langs)"
+  => "Theorem 3.4 (exotic sphere × perfect number): |bP_8|=28, |bP_{12}|=992, |bP_{16}|=8128"
+  => "Theorem 3.5 (h(K) imaginary quadratic parallel): h=1..5 M-clean, h=n=6 break (51)"
+  => "Theorem 3.6 (BSD conditional): Lemma 1 unconditional + Sel_n=σ(n) under BKLPR"
+  -> N6HIST-MILL7-CLOSURE, N6HIST-A-CORE-IDENTITY
+  |> reports/breakthroughs/millennium-n6-attractor-2026-04-11.md
+  |> reports/breakthroughs/millennium-7-closure-2026-04-11.md
+  |> reports/sessions/millennium-lemmas-2026-04-11.md
+
+@T N6HIST-T-V4-LEAN-COVERAGE = Lean4 N6/TheoremB.lean: ω(n)=2 region complete (8 sub-cases sorry-free); ~99% formal coverage of σφ=nτ⟺n=6 :: meta [10*PASS_LITERATURE]
+  => "v4 M3 chain (loop 22-28+): cases 1+2a+2b+3+4a+4b(i)+4b(ii) all sorry-free."
+  => "Sub-cases verified: prime p, n=2q (q odd prime), pq odd·odd distinct, p^a a≥2, pqr 3 distinct primes, 2·q^b q≥3 odd b≥2, 2^a·q^b mixed."
+  => "Mathlib v4.30.0-rc1 dependency; lake update 1309-1312 jobs built."
+  => "n=6 uniqueness in σφ=nτ⟺n=6 confirmed by formal proof in case 2a q=3 sub-region."
+  => "REMAINING: case 4b(iii) 2^a·q^b higher mixed powers + case 4c general ω(n)≥3 with powers (multiplicative+key-inequality pattern)."
+  |> atlas.n6 lines 18072-18111 (MILL-V4-M3-* series)
+  |> lean4-n6/N6/TheoremB*.lean (skeleton + 8 case files)
+
+# ══════════════════════════════════════════════════════════════
+# § META — shard self-audit (honesty fence)
+# ══════════════════════════════════════════════════════════════
+
+@? N6HIST-SELF-SCOPE = This shard introduces NO new mathematics; all entries cite sources that already exist in n6-architecture/ :: meta [11*REPO_INVARIANT]
+  => "Millennium tally introduced by this shard: 0/7 (unchanged)."
+  => "Atlas writes: 0 (this is APPEND-ONLY shard, never merged into atlas.n6 main)."
+  => "state/ writes: 0. inventory.json writes: 0. theory/canon/ writes: 0."
+  => "Source files cited: 30+ session reports + 5 papers + 3 breakthroughs + 1 SSOT linter + 1 simulation-theory domain doc."
+  => "Honesty triad preserved: write-barrier (this shard lives in atlas/ but is a separate file, not edits to atlas.n6) / honesty-counter (0/7 explicit) / no-fabrication (UNKNOWN where audit-depth exceeded; verbatim verdict reuse)."
+  => "Falsifier inheritance: per-source falsifier rosters retained (F-MOLT-A inactive 4/6 PASS, F-MOLT-D fired BT-544; F-D3-B' fired; F-EXTA-C fired; F-EXTB-D fired; 30+ Lemma-1 chain falsifiers inactive)."
+  |> [self-audit; shard producer = hive sub-agent]
+
+# ══════════════════════════════════════════════════════════════
+# Shard manifest
+# ══════════════════════════════════════════════════════════════
+# Total entries this shard: 51
+#   @P primitives (anchor surfacings):           3
+#   @C constants (cycle measurements):           5
+#   @F formulas / lemmas (cycle witnesses):     10
+#   @L laws / barriers / criteria:               7
+#   @R bridge / derivation chains:               5
+#   @S symmetries:                                4
+#   @X cross-paper / cross-domain crossings:     8
+#   @M meta-patterns:                             5
+#   @T BT-541..547 cycle lineage:                 3
+#   @? meta self-audit:                           1
+#
+# Grade distribution (counts derived from in-line tags above):
+#   [11*REPO_INVARIANT]:  8 (cross-repo n6+nexus, 3+ source corroborated)
+#   [10*PASS_LITERATURE]:19 (paper-grade w/ literature citation)
+#   [10*]:               11 (cycle-witness PASS / unconditional / atlas EXACT)
+#   [10*FAIL_DOC]:        6 (cycle-witness FAIL with falsifier fired, informative)
+#   [11*]:                1 (foundation primitive variant)
+#   [10]:                 3 (atlas-tier observation)
+#   [9]:                  1 (conditional / NEAR)
+#   [7]:                  2 (heuristic single-source / coincidence)
+#
+# ══════════════════════════════════════════════════════════════
+# § Z — omega-cycle-ai-native-arch-beyond-gpu-2026-04-26 추가 (1 entry)
+# ══════════════════════════════════════════════════════════════
+@C provenance_bit_overhead = phi/sigma_n = 1/36 :: architecture [10*]
+  <- phi, sigma_n
+  => "텐서당 provenance bit 오버헤드 = phi/sigma_n = 2/72 = 1/36 ≈ 2.78%"
+  => "AI-native 아키텍처 honesty-triad 실리콘 구현 비용; phi=euler_totient(6)=2, sigma_n=sigma*n=72"
+  ~> phi = 2, sigma_n = 72: phi/sigma_n = 2/72 = 1/36 = 0.02778
+  |> reports/sessions/omega-cycle-ai-native-arch-beyond-gpu-2026-04-26.md §4
+
+# Dedup: All N6HIST-* IDs distinct from atlas.n6 main (MILL-*, HEXA-*, BT-*, SIG-*).
+# Cycle reference: 2026-04-25 omega-cycle session (61 reports / 33,548 lines).
+# 2026-04-26 add: provenance_bit_overhead (omega-cycle-ai-native-arch).
+# End of shard.
