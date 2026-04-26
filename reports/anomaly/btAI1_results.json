@@ -1,0 +1,181 @@
+{
+  "args": {
+    "force_disabled": false,
+    "max_gsm": 25,
+    "max_mmlu": 100,
+    "probe_only": false,
+    "results_out": "reports/anomaly/btAI1_results.json",
+    "seeds": "0"
+  },
+  "arms": [
+    {
+      "error": "ImportError(\"cannot import name 'AutoModelForCausalLM' from 'transformers' (unknown location)\")",
+      "gsm8k": {
+        "acc": 0.0,
+        "ci95": 0.0,
+        "n": 0,
+        "se": 0.0
+      },
+      "mask_counts": {},
+      "mmlu": {
+        "acc": 0.0,
+        "ci95": 0.0,
+        "n": 0,
+        "se": 0.0
+      },
+      "mode": "dense",
+      "seed": 0,
+      "wall_seconds": 0.0
+    },
+    {
+      "error": "ImportError(\"cannot import name 'AutoModelForCausalLM' from 'transformers' (unknown location)\")",
+      "gsm8k": {
+        "acc": 0.0,
+        "ci95": 0.0,
+        "n": 0,
+        "se": 0.0
+      },
+      "mask_counts": {},
+      "mmlu": {
+        "acc": 0.0,
+        "ci95": 0.0,
+        "n": 0,
+        "se": 0.0
+      },
+      "mode": "structured",
+      "seed": 0,
+      "wall_seconds": 0.0
+    },
+    {
+      "error": "ImportError(\"cannot import name 'AutoModelForCausalLM' from 'transformers' (unknown location)\")",
+      "gsm8k": {
+        "acc": 0.0,
+        "ci95": 0.0,
+        "n": 0,
+        "se": 0.0
+      },
+      "mask_counts": {},
+      "mmlu": {
+        "acc": 0.0,
+        "ci95": 0.0,
+        "n": 0,
+        "se": 0.0
+      },
+      "mode": "random",
+      "seed": 0,
+      "wall_seconds": 0.0
+    }
+  ],
+  "atlas_citations": [
+    "atlas/atlas.n6:81 -> @C meta_fp = 1/3 :: meta [10*!]"
+  ],
+  "atlas_constants": {
+    "meta_fp_phi_over_n": 0.3333333333333333,
+    "n": 6,
+    "nm_block_M": 6,
+    "nm_keep_N": 2
+  },
+  "domain": "ai-native-architecture",
+  "eval_data_label": "MICRO-PROXY (real-load-failed: AttributeError(\"module 'transformers' has no attribute 'PreTrainedTokenizerBase'\"))",
+  "experiment": "BT-AI1",
+  "falsifiers": {
+    "F_AI1_A": {
+      "dense_mmlu_acc": 0.0,
+      "drop_pp": 0.0,
+      "max_drop_pp": 3.0,
+      "name": "structured 1/3 sparsity vs dense MMLU drop",
+      "structured_mmlu_acc": 0.0,
+      "verdict": "HOLD"
+    },
+    "F_AI1_B": {
+      "name": "structured 1/3 vs random 1/3 difference vs noise floor",
+      "noise_floor_pp": 0.00019999999999999998,
+      "noise_floor_sigmas": 2.0,
+      "random_mmlu_acc": 0.0,
+      "structured_minus_random_pp": 0.0,
+      "verdict": "HOLD"
+    },
+    "note": "falsifier suspended because the run uses a smaller proxy model; raw measurement is reported but the F-AI1-A/B contract is not applied (BT-AI1-PROXY).",
+    "verdict": "HOLD-PROXY"
+  },
+  "kg_nodes_referenced": [
+    "arch:n6-native-accelerator",
+    "principle:honesty-triad"
+  ],
+  "label": "BT-AI1-PROXY",
+  "parent_session": "reports/sessions/omega-cycle-ai-native-arch-beyond-gpu-2026-04-26.md",
+  "path_decision": {
+    "device": "mps",
+    "falsifier_mode": "hold-proxy",
+    "label": "BT-AI1-PROXY",
+    "path": "proxy",
+    "reason": "no cuda; MPS available; small-model proxy run",
+    "selected_model": "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
+  },
+  "resource_probe": {
+    "candidate_models_cached": [
+      "Qwen/Qwen2.5-14B",
+      "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+      "gpt2",
+      "mistralai/Mistral-7B-v0.1",
+      "mistralai/Mistral-7B-v0.3",
+      "unsloth/Meta-Llama-3.1-8B",
+      "unsloth/Meta-Llama-3.1-8B-Instruct"
+    ],
+    "cpu": "arm",
+    "cuda_device_count": 0,
+    "cuda_device_name": null,
+    "datasets_version": "4.8.4",
+    "has_cuda": false,
+    "has_datasets": true,
+    "has_mps": true,
+    "has_torch": true,
+    "has_transformers": true,
+    "hf_cache_dir": "/Users/ghost/.cache/huggingface/hub",
+    "hf_token_present": false,
+    "network_huggingface_co": true,
+    "notes": [
+      "transformers import failed: AttributeError(\"module 'transformers' has no attribute '__version__'\")"
+    ],
+    "ram_bytes": 25769803776,
+    "torch_version": "2.10.0",
+    "transformers_version": null
+  },
+  "schema_version": 1,
+  "summary": {
+    "dense": {
+      "gsm8k_mean_acc": 0.0,
+      "gsm8k_se_acc": 0.0,
+      "gsm8k_std_acc": 0.0,
+      "mmlu_mean_acc": 0.0,
+      "mmlu_se_acc": 0.0,
+      "mmlu_std_acc": 0.0,
+      "n_gsm8k_items": 0,
+      "n_mmlu_items": 0,
+      "n_seeds": 1
+    },
+    "random": {
+      "gsm8k_mean_acc": 0.0,
+      "gsm8k_se_acc": 0.0,
+      "gsm8k_std_acc": 0.0,
+      "mmlu_mean_acc": 0.0,
+      "mmlu_se_acc": 0.0,
+      "mmlu_std_acc": 0.0,
+      "n_gsm8k_items": 0,
+      "n_mmlu_items": 0,
+      "n_seeds": 1
+    },
+    "structured": {
+      "gsm8k_mean_acc": 0.0,
+      "gsm8k_se_acc": 0.0,
+      "gsm8k_std_acc": 0.0,
+      "mmlu_mean_acc": 0.0,
+      "mmlu_se_acc": 0.0,
+      "mmlu_std_acc": 0.0,
+      "n_gsm8k_items": 0,
+      "n_mmlu_items": 0,
+      "n_seeds": 1
+    }
+  },
+  "wall_seconds": 0.007715940475463867
+}
