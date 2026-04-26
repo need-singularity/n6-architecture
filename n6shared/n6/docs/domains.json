@@ -2,9 +2,9 @@
   "_meta": {
     "schema": "n6_domains/2.0",
     "updated": 1776691731,
-    "note": "마이그레이션 from papers/_products.json (2026-04-19). SSOT -staged화. + tabletop-antimatter independent domains separation (2026-04-19). + hexa-6stage + 9 prereqdomains 15 items added (2026-04-20).",
-    "total_domains": 194,
-    "description": "N6 domains documentation index cataloging 194 product domains with axis, mk stage, alien readiness, path, and history metadata under the n6_domains/2.0 schema."
+    "note": "마이그레이션 from papers/_products.json (2026-04-19). SSOT -staged화. + tabletop-antimatter independent domains separation (2026-04-19). + hexa-6stage + 9 prereqdomains 15 items added (2026-04-20). + ai-native-architecture (Y_compute candidate, omega-cycle 2026-04-26) added (2026-04-26).",
+    "total_domains": 195,
+    "description": "N6 domains documentation index cataloging 195 product domains with axis, mk stage, alien readiness, path, and history metadata under the n6_domains/2.0 schema."
   },
   "entries": [
     {
@@ -6335,6 +6335,39 @@
         {
           "label": "doc",
           "path": "domains/compute/chip-design/hexa-superconducting/hexa-superconducting.md"
+        }
+      ]
+    },
+    {
+      "id": "ai-native-architecture",
+      "axis": "compute",
+      "name_ko": "AI-native Architecture (beyond GPU)",
+      "product_line": "AI-native Accelerator",
+      "mk_current": "mk0",
+      "mk_target": "mk_infinity",
+      "alien_now": 6,
+      "alien_target": 10,
+      "path": "domains/compute/ai-native-architecture/ai-native-architecture.md",
+      "requires": [],
+      "history": [
+        {
+          "mk": "mk0",
+          "tag": "ai-native-architecture-init",
+          "at": 1777881600
+        }
+      ],
+      "section_id": "chip",
+      "section_title": "Chip/Semiconductor",
+      "section_heading": "Chip & Semiconductor",
+      "icon": "🧠",
+      "ceiling": false,
+      "visible": true,
+      "type": "product",
+      "description": "AI accelerator / compute substrate domain — Y_compute candidate (missing axis in Y1..Y9 governance). Honesty-triad silicon: provenance bit (~2.78%=phi/sigma_n overhead), promotion-counter MMU, BT-id ISA. Selection: dataflow CGRA + wafer-scale + phi/n=1/3 sparsity (Cerebras + SambaNova hybrid). Sessions: omega-cycle-ai-native-arch-beyond-gpu-2026-04-26. Cycles: BT-AI1 (phi/n N:M sparsity on Llama-3 7B, MMLU/GSM8K), BT-AI2 (6-tile honesty-bit scheduler simulator, SimPy). Verdict MEDIUM (design-HIGH / silicon-LOW). Atlas writes 0 (4 candidates only).",
+      "links": [
+        {
+          "label": "session",
+          "path": "reports/sessions/omega-cycle-ai-native-arch-beyond-gpu-2026-04-26.md"
         }
       ]
     }
