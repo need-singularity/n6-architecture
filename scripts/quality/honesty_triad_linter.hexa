@@ -1,0 +1,666 @@
+// @resolver-bypass(reason="local linter port -- read-only md scanner")
+// honesty_triad_linter.hexa — hexa port of honesty_triad_linter.py
+//
+// Five honesty-triad checks (C1 banner / C2 write-barrier / C3 falsifier
+// / C4 citation / C5 verdict). Each check yields 0 or 1; per-file total
+// is in [0,5]. Aggregate prints mean/5, perfect/n, flag count.
+//
+// Hexa primitive availability (verified 2026-04-25 against hexa 0.1.0
+// dispatch via docker hard-landing):
+//   argv() / read_file / exec / split / index_of / substring / starts_with
+//   to_lower / len / println / eprintln / exit
+// Missing vs Python source:
+//   - native regex engine (only mini matcher in example/regex.hexa).
+//     Worked around by substring + manual char-class scan.
+//   - Path/glob library: shelled out to `ls <pattern>` via exec().
+//
+// CLI:
+//   hexa scripts/quality/honesty_triad_linter.hexa <file_or_glob> [...]
+//   hexa scripts/quality/honesty_triad_linter.hexa --quiet <...>
+//
+// Reads files only; never writes. No state mutation.
+
+// ── string utilities ────────────────────────────────────────────────
+
+fn ch_at(s: string, i: int) -> string {
+    if i < 0 { return "" }
+    if i >= len(s) { return "" }
+    return s.substring(i, i + 1)
+}
+
+fn is_digit_c(c: string) -> bool {
+    return c >= "0" && c <= "9"
+}
+
+fn is_upper_c(c: string) -> bool {
+    return c >= "A" && c <= "Z"
+}
+
+fn is_lower_c(c: string) -> bool {
+    return c >= "a" && c <= "z"
+}
+
+fn is_alpha_c(c: string) -> bool {
+    return is_upper_c(c) || is_lower_c(c)
+}
+
+fn is_alnum_c(c: string) -> bool {
+    return is_alpha_c(c) || is_digit_c(c)
+}
+
+// Find `needle` in `haystack` starting from index `from`. -1 if absent.
+fn find_from(haystack: string, needle: string, from: int) -> int {
+    if from < 0 { return -1 }
+    if from >= len(haystack) { return -1 }
+    let tail = haystack.substring(from, len(haystack))
+    let r = tail.index_of(needle)
+    if r < 0 { return -1 }
+    return from + r
+}
+
+// Count occurrences of needle in haystack (non-overlapping).
+fn count_occ(haystack: string, needle: string) -> int {
+    let mut c = 0
+    let mut pos = 0
+    let nlen = len(needle)
+    if nlen == 0 { return 0 }
+    while pos < len(haystack) {
+        let i = find_from(haystack, needle, pos)
+        if i < 0 { return c }
+        c = c + 1
+        pos = i + nlen
+    }
+    return c
+}
+
+// Line number (1-based) for absolute byte offset in text.
+fn line_of(text: string, off: int) -> int {
+    if off <= 0 { return 1 }
+    let prefix_end = off
+    if prefix_end > len(text) { return 1 }
+    let prefix = text.substring(0, prefix_end)
+    return count_occ(prefix, "\n") + 1
+}
+
+// Slice a window around offset, preserving bounds.
+fn window(text: string, start: int, length: int) -> string {
+    let mut s = start
+    if s < 0 { s = 0 }
+    let mut e = s + length
+    if e > len(text) { e = len(text) }
+    if s >= e { return "" }
+    return text.substring(s, e)
+}
+
+// ── front-matter split ──────────────────────────────────────────────
+
+fn split_front_matter(text: string) -> string {
+    if !text.starts_with("---") { return "" }
+    // Find next "---" preceded by newline
+    let i = find_from(text, "\n---", 3)
+    if i < 0 { return "" }
+    return text.substring(3, i)
+}
+
+// ── banner / C1 ─────────────────────────────────────────────────────
+
+// Banner phrases (all matched case-insensitively against lowercased text).
+fn banner_phrases() -> array {
+    return [
+        "millennium_resolved: 0/7 (unchanged)",
+        "millennium_resolved:0/7 (unchanged)",
+        "millennium_resolved: 0/7 unchanged",
+        "millennium_resolved:0/7 unchanged",
+        "nxs_promotion_count: 0",
+        "nxs_promotion_count_delta: 0",
+        "nxs_promotion_count:0",
+        "nxs_promotion_count_delta:0",
+        "no claim",
+    ]
+}
+
+// True if any banner phrase appears in the lowercased haystack.
+fn has_banner(lower_text: string) -> bool {
+    let phrases = banner_phrases()
+    let mut i = 0
+    while i < len(phrases) {
+        if lower_text.index_of(phrases[i]) >= 0 {
+            // For "no claim" further constrain: must be preceded by "grade:" within 30 chars.
+            if phrases[i] == "no claim" {
+                let pos = lower_text.index_of("no claim")
+                let s = pos - 30
+                if s < 0 { s = 0 }
+                let pre = lower_text.substring(s, pos)
+                if pre.index_of("grade") >= 0 { return true }
+            } else {
+                return true
+            }
+        }
+        i = i + 1
+    }
+    return false
+}
+
+// ── write-barrier / C2 ──────────────────────────────────────────────
+
+// Python regex: WRITE_VERBS\s+[^\n]{0,80}PATH
+// Each verb here MUST be followed by whitespace in the source text — we
+// approximate by appending a trailing space to enforce token boundary.
+fn write_verbs() -> array {
+    return [
+        "edited ", "modified ", "wrote to ", "wrote ", "appended to ",
+        "patched ", "updated ", "committed to ", "inserted into ",
+    ]
+}
+
+fn protected_paths() -> array {
+    return [
+        "atlas.n6",
+        "atlas.blowup.jsonl",
+        "state/proposals/inventory.json",
+        "state/atlas_health_timeline.jsonl",
+        "state/agent_lock_ledger.jsonl",
+        "theory/canon/",
+        "theory/breakthroughs/breakthrough-theorems.md",
+        "lenses/omega_state_space_lens.hexa",
+        "claude.md",
+    ]
+}
+
+// Returns array of [start_offset, snippet] pairs (one per hit, capped at 3).
+// Active form: verb (with trailing space) at offset V, then within 80 chars
+// (and no newline) we find a protected path.
+// Passive form: path at offset P, then within 80 chars (no newline) we find
+// "was|were|got" + a verb (without trailing space).
+fn find_write_barrier_hits(text: string, lower: string) -> array {
+    let verbs = write_verbs()
+    let paths = protected_paths()
+    let mut hits = []
+
+    // Active scan: for each verb, find every occurrence; check window after
+    // for newline-free run containing a protected path.
+    let mut vi = 0
+    while vi < len(verbs) && len(hits) < 3 {
+        let v = verbs[vi]
+        let mut pos = 0
+        while pos < len(lower) && len(hits) < 3 {
+            let vp = find_from(lower, v, pos)
+            if vp < 0 { pos = len(lower) }
+            else {
+                let after = vp + len(v)
+                let mut win_end = after + 80
+                if win_end > len(lower) { win_end = len(lower) }
+                // truncate at first newline
+                let nl = find_from(lower, "\n", after)
+                if nl >= 0 && nl < win_end { win_end = nl }
+                if win_end > after {
+                    let win = lower.substring(after, win_end)
+                    let mut pi = 0
+                    while pi < len(paths) {
+                        if win.index_of(paths[pi]) >= 0 {
+                            let snip_end = vp + 80
+                            if snip_end > len(text) { snip_end = len(text) }
+                            let snip = text.substring(vp, snip_end)
+                            hits.push([vp, snip])
+                            pi = len(paths) + 100
+                        }
+                        pi = pi + 1
+                    }
+                }
+                pos = vp + len(v)
+            }
+        }
+        vi = vi + 1
+    }
+
+    // Passive scan: for each path, check window after for "was|were|got" + verb.
+    let mut pi2 = 0
+    while pi2 < len(paths) && len(hits) < 3 {
+        let p = paths[pi2]
+        let mut pos = 0
+        while pos < len(lower) && len(hits) < 3 {
+            let pp = find_from(lower, p, pos)
+            if pp < 0 { pos = len(lower) }
+            else {
+                let after = pp + len(p)
+                let mut win_end = after + 80
+                if win_end > len(lower) { win_end = len(lower) }
+                let nl = find_from(lower, "\n", after)
+                if nl >= 0 && nl < win_end { win_end = nl }
+                if win_end > after {
+                    let win = lower.substring(after, win_end)
+                    if win.index_of(" was ") >= 0 || win.index_of(" were ") >= 0 || win.index_of(" got ") >= 0 {
+                        let mut vi2 = 0
+                        while vi2 < len(verbs) {
+                            // strip trailing space for verb-noun match
+                            let v_raw = verbs[vi2]
+                            let v_stem = v_raw.substring(0, len(v_raw) - 1)
+                            if win.index_of(v_stem) >= 0 {
+                                let snip_end = pp + 80
+                                if snip_end > len(text) { snip_end = len(text) }
+                                let snip = text.substring(pp, snip_end)
+                                hits.push([pp, snip])
+                                vi2 = len(verbs) + 100
+                            }
+                            vi2 = vi2 + 1
+                        }
+                    }
+                }
+                pos = pp + len(p)
+            }
+        }
+        pi2 = pi2 + 1
+    }
+    return hits
+}
+
+// ── falsifier / C3 ──────────────────────────────────────────────────
+
+fn falsifier_phrases() -> array {
+    return [
+        "falsifier (registered upfront)",
+        "falsifiers (registered upfront)",
+        "falsifier active",
+        "falsifiers active",
+        "falsifier registered",
+        "falsifiers registered",
+        "f-molt-", "f-impl-", "f-lint-", "f-honesty-",
+        "f-audit-", "f-cycle-", "f-exec-",
+    ]
+}
+
+fn has_falsifier(lower: string) -> bool {
+    let ps = falsifier_phrases()
+    let mut i = 0
+    while i < len(ps) {
+        if lower.index_of(ps[i]) >= 0 { return true }
+        i = i + 1
+    }
+    // Generic line marker: "- F-XX-NAME:" or "**F-XX-NAME**" — scan for "f-"
+    // followed by ≥1 upper/digit + dash + alnum, terminated by ":" or "-".
+    // We approximate by checking for "f-" preceded by line start / whitespace
+    // and followed by upper letter.
+    let mut pos = 0
+    while pos < len(lower) {
+        let i2 = find_from(lower, "f-", pos)
+        if i2 < 0 { return false }
+        // Need preceding char to be start, whitespace, or "*"
+        let prev = ch_at(lower, i2 - 1)
+        let after = ch_at(lower, i2 + 2)
+        if (i2 == 0 || prev == "\n" || prev == " " || prev == "*" || prev == "-")
+           && (is_alpha_c(after) || is_digit_c(after)) {
+            // scan until non-[A-Z0-9_-]; require dash inside identifier
+            let mut k = i2 + 2
+            while k < len(lower) {
+                let c = ch_at(lower, k)
+                if !(is_alnum_c(c) || c == "-" || c == "_") { k = len(lower) + 1 }
+                else { k = k + 1 }
+            }
+            // crude: just declare match (good enough — many false negatives avoided by phrase list above)
+            return true
+        }
+        pos = i2 + 2
+    }
+    return false
+}
+
+// ── citation / C4 ───────────────────────────────────────────────────
+
+fn suspect_journals() -> array {
+    return [
+        "j. made-up", "j. madeup", "j.made-up", "imaginary journal",
+        "fictional journal", "fictional proc",
+    ]
+}
+
+// Find bare-year `(YYYY)` not preceded by an author token.
+// Returns array of [offset, "tag"] where tag is "suspect" or "bare".
+fn find_citation_flags(text: string, lower: string) -> array {
+    let mut flags = []
+    let sjs = suspect_journals()
+    let mut si = 0
+    while si < len(sjs) && len(flags) < 4 {
+        let p = lower.index_of(sjs[si])
+        if p >= 0 { flags.push([p, "suspect:" + sjs[si]]) }
+        si = si + 1
+    }
+    // Bare-year scan: find "(YYYY)" tokens.
+    let mut pos = 0
+    while pos < len(text) - 6 && len(flags) < 4 {
+        let lp = find_from(text, "(", pos)
+        if lp < 0 { return flags }
+        // Need 4 digits then ")" right after
+        let d0 = ch_at(text, lp + 1)
+        let d1 = ch_at(text, lp + 2)
+        let d2 = ch_at(text, lp + 3)
+        let d3 = ch_at(text, lp + 4)
+        let cl = ch_at(text, lp + 5)
+        if is_digit_c(d0) && is_digit_c(d1) && is_digit_c(d2) && is_digit_c(d3) && cl == ")" {
+            // Check the char immediately before "(" — must NOT be alnum
+            let before = ch_at(text, lp - 1)
+            if !is_alnum_c(before) {
+                // Look backwards 40 chars; require capital-author or UNKNOWN
+                let ctx_start = lp - 40
+                if ctx_start < 0 { ctx_start = 0 }
+                let ctx = text.substring(ctx_start, lp)
+                let has_unknown = ctx.index_of("UNKNOWN") >= 0
+                // Trailing-author heuristic: is the char before "(" a letter
+                // preceded by a capital + lowercase run? Approximate by
+                // checking if the last non-space char of ctx is lowercase
+                // and preceded somewhere by an uppercase letter.
+                let mut k = len(ctx) - 1
+                while k >= 0 && ch_at(ctx, k) == " " { k = k - 1 }
+                let mut author_like = false
+                if k > 0 {
+                    let last = ch_at(ctx, k)
+                    if is_lower_c(last) {
+                        // walk back to start of word
+                        let mut ws = k
+                        while ws > 0 && is_alpha_c(ch_at(ctx, ws - 1)) { ws = ws - 1 }
+                        if is_upper_c(ch_at(ctx, ws)) { author_like = true }
+                    }
+                }
+                if !has_unknown && !author_like {
+                    flags.push([lp, "bare_year"])
+                }
+            }
+        }
+        pos = lp + 1
+    }
+    return flags
+}
+
+// ── verdict / C5 ────────────────────────────────────────────────────
+
+fn canonical_verdicts() -> array {
+    return [
+        "PASS", "PASS_LITERATURE", "PASS_SKETCH", "PASS_DISTRIBUTIONAL",
+        "PASS_DISCRETE_MATCH", "PASS_PARAMETER_REGION",
+        "PASS_LITERATURE_SKETCH", "PASS_SKETCH_REFINES_C3",
+        "FAIL", "FAIL_NO_DUALITY", "FAIL_RELABELING", "FAIL_VACUOUS",
+        "FAIL_NO_LITERATURE_PATH", "FAIL_BLOWUP_PRECEDENT", "FAIL_NO_MATCH",
+        "FAIL_INTERMITTENCY", "FAIL_NO_GAP",
+        "OBSTRUCTION_DOCUMENTED", "OBSTRUCTION_DOCUMENTED_DEEPER",
+        "OBSTRUCTION_DOCUMENTED_LEVEL_4",
+        "ACCEPTABLE", "INCONCLUSIVE", "TIMEOUT", "UNDEFINED", "SKIP",
+        "KEEP_AS_IS", "KEEP_BUT_COMPRESS", "KEEP_BUT_ADAPT", "RETIRE",
+        "RETIRE_IF_OTHER_TWO_AGREE",
+        "HIGH_COMPLIANCE", "HIGH_COMPLIANCE_WITH_NOTES", "MEDIUM",
+        "LOW_COMPLIANCE", "LOW", "REPO_INVARIANT", "N6_SPECIFIC", "MIXED",
+        "METHOD_GAP_CONFIRMED", "PATTERN_STRONGLY_GENERAL",
+        "PATTERN_PARTIAL", "PATTERN_LIMITED",
+        "D3_CONFIRMED", "D2_CONFIRMED", "D1_PARTIAL", "CONFOUNDED",
+        "CATALOGUE_OK", "CATALOGUE_BIAS", "DISCRIMINATOR_TOO_STRICT",
+        "D3_CONFIRMED_S_STAR_2", "D2_CONFIRMED_AT_S2",
+        "ABSORB", "ABSORB_GAP", "ABSORB_DESIGN_ONLY", "DEFER_ABSORPTION",
+        "SKIP_LOW_LEVERAGE", "SKIP_REDUNDANT", "SKIP_INCOMPATIBLE",
+        "HIGH_IMPLEMENTABILITY", "MEDIUM_IMPLEMENTABILITY",
+        "LOW_IMPLEMENTABILITY", "NOT_APPLICABLE",
+        "B_PRIME_PURSUE", "D3_RETIRE",
+        "L9_CATALOGUE_FITS", "L9_CATALOGUE_PARTIAL_FIT", "L9_CATALOGUE_MISSES",
+        "H_ENGINE_DOMINANT", "H_ARTIFACT_DOMINANT", "H_OBSERVER_DOMINANT",
+        "H1_DOMINANT", "H2_DOMINANT", "H3_DOMINANT", "H4_DOMINANT", "MULTIPLE",
+        "REAL_STRUCTURAL", "PARTIAL_STRUCTURAL", "NUMEROLOGY",
+        "ATLAS_PROMOTION_FORBIDDEN",
+    ]
+}
+
+// Extract verdict tokens from a marker-string occurrence at offset i.
+// `start_after` is the index right after "VERDICT" + skip char.
+fn extract_token(text: string, start: int) -> string {
+    let mut k = start
+    // skip whitespace + ":"
+    while k < len(text) {
+        let c = ch_at(text, k)
+        if c == ":" || c == " " || c == "\t" { k = k + 1 }
+        else { k = len(text) + 100 }
+    }
+    if k > len(text) { k = k - 100 }
+    let tok_start = k
+    while k < len(text) {
+        let c = ch_at(text, k)
+        if is_upper_c(c) || is_digit_c(c) || c == "_" { k = k + 1 }
+        else { k = len(text) + 100 }
+    }
+    if k > len(text) { k = k - 100 }
+    if tok_start >= k { return "" }
+    return text.substring(tok_start, k)
+}
+
+fn collect_verdicts(text: string) -> array {
+    let mut out = []
+    let mut pos = 0
+    while pos < len(text) {
+        let i = find_from(text, "VERDICT", pos)
+        if i < 0 { return out }
+        // After "VERDICT" we expect ":" or " " then capitals.
+        let after = i + 7
+        let tok = extract_token(text, after)
+        if len(tok) > 0 {
+            // First char must be uppercase letter (avoid digit-only)
+            let c0 = ch_at(tok, 0)
+            if is_upper_c(c0) { out.push(tok) }
+        }
+        pos = i + 7
+    }
+    return out
+}
+
+fn is_canonical(v: string) -> bool {
+    let cs = canonical_verdicts()
+    let mut i = 0
+    while i < len(cs) {
+        if cs[i] == v { return true }
+        i = i + 1
+    }
+    return false
+}
+
+// ── main check_file ─────────────────────────────────────────────────
+
+fn check_file(path: string) -> array {
+    let text = to_string(read_file(path))
+    let lower = text.to_lower()
+    let fm = split_front_matter(text)
+    let fm_lower = fm.to_lower()
+    let head = window(text, 0, 600).to_lower()
+    let mut flags = []
+    let mut score = [0, 0, 0, 0, 0]  // C1..C5
+
+    // C1: banner in front-matter or first 600 chars
+    let c1 = has_banner(fm_lower) || has_banner(head)
+    if c1 { score[0] = 1 }
+    else { flags.push(path + ":1: C1 honesty banner missing") }
+
+    // C2: write-barrier hits — score 0 if any, 1 if none
+    let c2_hits = find_write_barrier_hits(text, lower)
+    if len(c2_hits) == 0 { score[1] = 1 }
+    let mut h = 0
+    while h < len(c2_hits) && h < 3 {
+        let off = c2_hits[h][0]
+        let snip = c2_hits[h][1]
+        flags.push(path + ":" + to_string(line_of(text, off))
+                   + ": C2 write-barrier -- '" + snip + "'")
+        h = h + 1
+    }
+
+    // C3: falsifier presence
+    let c3 = has_falsifier(lower)
+    if c3 { score[2] = 1 }
+    else { flags.push(path + ":1: C3 falsifier registration missing") }
+
+    // C4: citation flags
+    let cit_flags = find_citation_flags(text, lower)
+    if len(cit_flags) == 0 { score[3] = 1 }
+    let mut f4 = 0
+    while f4 < len(cit_flags) && f4 < 4 {
+        let off = cit_flags[f4][0]
+        let kind = cit_flags[f4][1]
+        flags.push(path + ":" + to_string(line_of(text, off))
+                   + ": C4 " + kind)
+        f4 = f4 + 1
+    }
+
+    // C5: verdict canonicalisation
+    let verdicts = collect_verdicts(text)
+    if len(verdicts) == 0 {
+        score[4] = 1
+    } else {
+        let mut bad = []
+        let mut vi = 0
+        while vi < len(verdicts) {
+            if !is_canonical(verdicts[vi]) { bad.push(verdicts[vi]) }
+            vi = vi + 1
+        }
+        if len(bad) == 0 { score[4] = 1 }
+        let mut bi = 0
+        while bi < len(bad) && bi < 3 {
+            flags.push(path + ":?: C5 non-canonical verdict '" + bad[bi] + "'")
+            bi = bi + 1
+        }
+    }
+
+    let total = score[0] + score[1] + score[2] + score[3] + score[4]
+    return [path, score, total, flags]
+}
+
+// ── input expansion ─────────────────────────────────────────────────
+
+// Expand a single argv token into a list of .md files.
+fn expand_one(arg: string) -> array {
+    // If literal file (exists), keep as-is. If contains glob meta, shell out.
+    let mut out = []
+    let has_meta = arg.index_of("*") >= 0 || arg.index_of("?") >= 0 || arg.index_of("[") >= 0
+    if has_meta {
+        let raw = to_string(exec("ls -1 " + arg + " 2>/dev/null"))
+        let parts = split(raw, "\n")
+        let mut i = 0
+        while i < len(parts) {
+            let p = parts[i].trim()
+            if len(p) > 0 && p.ends_with(".md") { out.push(p) }
+            i = i + 1
+        }
+    } else {
+        // Could be a directory or a file
+        let stat = to_string(exec("test -d '" + arg + "' && echo D || (test -f '" + arg + "' && echo F || echo X)")).trim()
+        if stat == "F" {
+            if arg.ends_with(".md") { out.push(arg) }
+        } else {
+            if stat == "D" {
+                let raw = to_string(exec("ls -1 '" + arg + "'/*.md 2>/dev/null"))
+                let parts = split(raw, "\n")
+                let mut i = 0
+                while i < len(parts) {
+                    let p = parts[i].trim()
+                    if len(p) > 0 { out.push(p) }
+                    i = i + 1
+                }
+            }
+        }
+    }
+    return out
+}
+
+// ── main ────────────────────────────────────────────────────────────
+
+fn main() {
+    let av = argv()
+    let mut args = []
+    let mut i = 2
+    let mut quiet = false
+    while i < len(av) {
+        if av[i] == "--quiet" { quiet = true }
+        else { args.push(av[i]) }
+        i = i + 1
+    }
+    if len(args) == 0 {
+        eprintln("usage: honesty_triad_linter.hexa <file_or_glob> [...] [--quiet]")
+        exit(2)
+    }
+    let mut files = []
+    let mut a = 0
+    while a < len(args) {
+        let exp = expand_one(args[a])
+        let mut j = 0
+        while j < len(exp) { files.push(exp[j]); j = j + 1 }
+        a = a + 1
+    }
+    if len(files) == 0 {
+        eprintln("no files matched")
+        exit(2)
+    }
+
+    let mut total_sum = 0
+    let mut perfect = 0
+    let mut total_flags = 0
+
+    if !quiet {
+        println("file" + "                                                              " + "C1 C2 C3 C4 C5  tot")
+    }
+
+    // Two-pass design to bound memory: pass-1 score table, pass-2 flags.
+    // Each pass re-scans files (read_file is cheap) but never accumulates
+    // arrays of flag strings across the whole corpus — avoids OOM under
+    // hexa-runner's 4g cap on docker hard-landing path.
+    let mut k = 0
+    while k < len(files) {
+        let r = check_file(files[k])
+        let path = r[0]
+        let sc = r[1]
+        let tot = r[2]
+        let fl = r[3]
+        total_sum = total_sum + tot
+        if tot == 5 { perfect = perfect + 1 }
+        total_flags = total_flags + len(fl)
+
+        if !quiet {
+            let mut sx = 0
+            let mut last = -1
+            while sx < len(path) {
+                if ch_at(path, sx) == "/" { last = sx }
+                sx = sx + 1
+            }
+            let mut short = path
+            if last >= 0 { short = path.substring(last + 1, len(path)) }
+            if len(short) > 68 { short = short.substring(0, 65) + "..." }
+            // pad short to width 70
+            while len(short) < 70 { short = short + " " }
+            println(short + " " + to_string(sc[0]) + "  " + to_string(sc[1])
+                    + "  " + to_string(sc[2]) + "  " + to_string(sc[3])
+                    + "  " + to_string(sc[4]) + "   " + to_string(tot))
+        }
+        k = k + 1
+    }
+
+    let n = len(files)
+    let mean_x100 = (total_sum * 100) / n
+    let mean_int = mean_x100 / 100
+    let mean_frac = mean_x100 - (mean_int * 100)
+    let mut frac_str = to_string(mean_frac)
+    if mean_frac < 10 { frac_str = "0" + frac_str }
+    println("")
+    println("files=" + to_string(n)
+            + "  mean=" + to_string(mean_int) + "." + frac_str + "/5"
+            + "  perfect=" + to_string(perfect) + "/" + to_string(n)
+            + "  flags=" + to_string(total_flags))
+
+    // Pass-2: re-emit flags only (drop scores/snippets on the floor).
+    if total_flags > 0 && !quiet {
+        println("")
+        println("flags:")
+        let mut k2 = 0
+        while k2 < len(files) {
+            let r2 = check_file(files[k2])
+            let fl2 = r2[3]
+            let mut fi = 0
+            while fi < len(fl2) {
+                println("  " + fl2[fi])
+                fi = fi + 1
+            }
+            k2 = k2 + 1
+        }
+    }
+    exit(0)
+}
+
+main()

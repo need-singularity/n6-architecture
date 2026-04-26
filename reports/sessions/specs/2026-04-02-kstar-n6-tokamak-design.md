@@ -2,7 +2,7 @@
 
 **Date**: 2026-04-04
 **Status**: Design Document v3.1 (Alien Index 10 - Physical Limit + Singularity)
-**Scope**: n=6 산술 원리 기반 차세대 KSTAR 업그레이드 토카막 설계 + 100% 정상 상태 + Q→∞ 점화
+**Scope**: next-generation KSTAR upgrade tokamak design based on n=6 arithmetic principles + 100% steady-state + Q→∞ ignition (target candidate)
 **Dependencies**: BT-5, BT-27, BT-38, BT-43, BT-62, BT-74, BT-97~104, BT-291~298, BT-310~317
 **Source Hypotheses**: H-FU-1~60, H-TK-1~60, H-SM-1~60
 **DSE Path**: DT_Li6 + Tokamak_N6 + N6_TriHeat + N6_Li6_Blanket + N6_Brayton6
@@ -11,72 +11,71 @@
 
 ---
 
-## 이 기술이 당신의 삶을 바꾸는 방법
+## How this technology could change your life
 
-핵융합은 "인공 태양"이다. 바닷물에서 연료를 뽑아 태양이 빛나는 원리로 전기를 만든다.
-KSTAR-N6는 대한민국이 세계 최초로 실현할 수 있는 차세대 핵융합 발전소의 핵심 설계이다.
+Fusion is an "artificial sun" candidate. Fuel is extracted from seawater and electricity is generated using the same principle by which the sun shines.
+KSTAR-N6 is a core design candidate for a next-generation fusion power plant that South Korea may potentially be first in the world to realize.
 
-### 일상생활 변화 비교
+### Daily life change comparison (indicative, candidate)
 
-| 영역 | 지금 (2026) | KSTAR-N6 이후 (2045~) | 체감 변화 |
+| Area | Today (2026) | After KSTAR-N6 (2045~) | Perceived change |
 |------|------------|---------------------|----------|
-| **전기료** | 월 ~10만원 (4인 가구) | 월 ~2만원 | 80% 절감 (연료비 거의 0) |
-| **미세먼지** | 석탄발전 → PM2.5 | 핵융합 = 배출 0 | 맑은 하늘 365일 |
-| **탄소 배출** | 한국 연 6억톤 CO₂ | 전력 부문 0톤 | 기후위기 근본 해결 |
-| **에너지 안보** | 원유/가스 수입 의존 99% | 바닷물 = 무한 연료 | 수입 의존 탈출 |
-| **방사능 걱정** | 원전 폐기물 수만년 보관 | 핵융합 폐기물 = 100년 뒤 무해 | 걱정 없는 원자력 |
-| **정전 위험** | 여름 피크 전력 부족 | 300MWe 24시간 안정 공급 | 에어컨 마음껏 |
-| **일자리** | 에너지 수입 → 돈 유출 | 핵융합 수출 → 고급 일자리 | 반도체급 산업 탄생 |
-| **온수/난방** | 가스보일러 월 15만원 | 핵융합 열 직접 공급 | 난방비 90% 절감 |
+| **Electricity bill** | ~100,000 KRW/month (4-person household) | ~20,000 KRW/month (candidate) | ~80% reduction target (fuel cost near 0) |
+| **Fine dust** | Coal power → PM2.5 | Fusion = 0 emissions | Clear skies 365 days (target) |
+| **Carbon emissions** | Korea ~600 Mt CO2/yr | Power sector 0 tonnes (target) | Fundamental climate-crisis mitigation candidate |
+| **Energy security** | 99% oil/gas import dependence | Seawater = effectively unlimited fuel | Escape from import dependence (candidate) |
+| **Radiation concerns** | Fission waste stored for tens of thousands of years | Fusion waste candidate: harmless after ~100 yr | Lower-risk nuclear candidate |
+| **Blackout risk** | Summer peak power shortage | Target ~300 MWe 24-hour stable supply | Ample air-conditioning (candidate) |
+| **Jobs** | Energy imports → capital outflow | Fusion exports → high-grade jobs (candidate) | Semiconductor-class industry birth (candidate) |
+| **Hot water/heating** | Gas boiler 150,000 KRW/month | Fusion heat direct supply (candidate) | Heating cost ~90% reduction target |
 
-### 숫자로 보는 KSTAR-N6
+### KSTAR-N6 by the numbers (design candidate)
 
 ```
-  발전 용량:  ~300 MWe (서울 강남구 전체 전력 공급 가능)
-  연료:      바닷물 1톤에서 중수소 추출 → 석유 300톤과 같은 에너지
-  연간 연료: 중수소 ~150kg + 리튬 ~300kg (트럭 한 대면 1년치)
-  CO₂ 배출:  0 (완전 탄소 제로)
-  방사성 폐기물: 극소량 (100년 이내 자연 감쇠, 고준위 폐기물 없음)
-  운전 시간:  ∞ (100% 비유도 정상 상태, AT mode Q→∞ 점화)
-  안전성:    연료 공급 중단 시 자동 정지 (원전과 달리 폭주 불가)
+  Power capacity:  ~300 MWe (can supply power to all of Seoul Gangnam-gu, target)
+  Fuel:            deuterium extracted from 1 tonne seawater → energy equivalent to 300 tonnes of oil
+  Annual fuel:     deuterium ~150 kg + lithium ~300 kg (one truckload per year)
+  CO2 emissions:   0 (complete carbon-zero, target)
+  Radioactive waste: very small (natural decay within ~100 years, no high-level waste target)
+  Operation time:  infinity target (100% non-inductive steady-state, AT-mode Q->infinity ignition candidate)
+  Safety:          automatic shutdown on fuel-supply interruption (unlike fission, runaway not possible)
 ```
 
-### 한국이 왜 유리한가
+### Why Korea may be well-positioned
 
-- **KSTAR 세계 기록**: 2024년 1억도 300초 달성 (세계 1위)
-- **초전도 기술**: 세계 최초 전초전도 토카막 운전 경험 20년+
-- **반도체 인력**: HTS 초전도 코일 제작에 반도체 공정 인력 활용 가능
-- **대전 핵융합연**: KFE(한국핵융합에너지연구원) = 세계 3대 핵융합 연구소
-- **K-DEMO 계획**: 2050년 핵융합 실증로 건설 국가 로드맵 이미 수립
+- **KSTAR world record**: 100 million degrees for 300 seconds achieved in 2024 (world 1st)
+- **Superconducting technology**: world-first fully-superconducting tokamak operation experience 20+ years
+- **Semiconductor workforce**: semiconductor process workforce can be leveraged for HTS superconducting coil fabrication
+- **Daejeon Fusion Institute**: KFE (Korea Fusion Energy Institute) = world top-3 fusion research institute
+- **K-DEMO plan**: 2050 fusion demonstration reactor construction national roadmap already established
 
-### 비유로 이해하기
+### Understanding by analogy
 
-> **석탄 발전** = 장작 태우기 (더럽고, 위험하고, 한정됨)
-> **원자력 발전** = 우라늄 쪼개기 (강력하지만 폐기물 수만년)
-> **핵융합 발전** = 인공 태양 만들기 (깨끗하고, 무한하고, 안전)
+> **Coal power** = burning firewood (dirty, dangerous, limited)
+> **Fission power** = splitting uranium (powerful but waste lasts tens of thousands of years)
+> **Fusion power** = making an artificial sun candidate (clean, effectively unlimited, safer)
 >
-> KSTAR-N6는 이 "인공 태양"을 가장 효율적으로 만드는 설계도이다.
-> 바닷물에서 뽑은 연료로, CO₂ 없이, 방사능 걱정 없이, 거의 무한한 전기를 만든다.
+> KSTAR-N6 is a blueprint candidate for making this "artificial sun" most efficiently.
+> With fuel extracted from seawater, with no CO2, with lower radiation concerns, it targets almost-unlimited electricity.
 
 ---
 
-## 1. 설계 철학 (Design Philosophy)
+## 1. Design Philosophy
 
-KSTAR-N6는 완전수 6의 산술 항등식 sigma(6)*phi(6) = 6*tau(6) = 24에서 도출된 설계 파라미터로
-차세대 핵융합 토카막을 최적화한다.
+KSTAR-N6 aims to optimize a next-generation fusion tokamak design candidate using parameters derived from the perfect-number-6 arithmetic identity sigma(6)*phi(6) = 6*tau(6) = 24.
 
-**핵심 원리**:
-- 물리적 필연과 수론적 일치를 명확히 구분한다
-- ITER/SPARC/KSTAR 실측 데이터를 기준으로 정직하게 검증한다
-- n=6 일치도(EXACT/CLOSE/WEAK)를 매 파라미터마다 기록한다
-- DSE 최적 경로(fusion.toml)에 기반하여 설계한다
+**Core principles**:
+- Clearly distinguish physical necessity from number-theoretic coincidence
+- Honestly verify against ITER/SPARC/KSTAR measured data as benchmark
+- Record the n=6 match grade (EXACT/CLOSE/WEAK) for every parameter
+- Design based on the DSE optimal path (fusion.toml)
 
-**정직한 고백**: 토카막 파라미터는 플라즈마 물리(MHD 평형, 수송, 안정성)에 의해 결정된다.
-n=6 산술과의 일치는 흥미로운 수적 패턴이지만, 설계의 물리적 타당성이 최우선이다.
+**Honest disclosure**: tokamak parameters are determined by plasma physics (MHD equilibrium, transport, stability).
+Matches with n=6 arithmetic are interesting numerical patterns but physical validity of the design takes precedence.
 
 ---
 
-## 2. n=6 상수 레퍼런스 (Constants Reference)
+## 2. n=6 Constants Reference
 
 ```
   n = 6          phi(6) = 2       tau(6) = 4       sigma(6) = 12
@@ -86,17 +85,17 @@ n=6 산술과의 일치는 흥미로운 수적 패턴이지만, 설계의 물리
   sigma*tau = 48  n/phi = 3       sigma(sigma-tau) = 96
   phi*sigma(sigma-tau) = 192      sigma/(sigma-phi) = 1.2
 
-  Egyptian fraction: 1/2 + 1/3 + 1/6 = 1  (BT-5: q=1 MHD 안정성)
+  Egyptian fraction: 1/2 + 1/3 + 1/6 = 1  (BT-5: q=1 MHD stability)
   Core identity: sigma(6)*phi(6) = n*tau(6) = 24 = J_2(6)
 ```
 
 ---
 
-## 3. 핵심 플라즈마 파라미터 (Core Plasma Parameters)
+## 3. Core Plasma Parameters
 
-### 3.1 기하학적 파라미터
+### 3.1 Geometric parameters
 
-| 파라미터 | KSTAR (현재) | ITER | SPARC | **KSTAR-N6** | n=6 표현 | Grade |
+| Parameter | KSTAR (current) | ITER | SPARC | **KSTAR-N6** | n=6 expression | Grade |
 |---------|-------------|------|-------|-------------|---------|-------|
 | Major radius R_0 [m] | 1.8 | 6.2 | 1.85 | **6.0** | n = 6 | EXACT |
 | Minor radius a [m] | 0.5 | 2.0 | 0.57 | **2.0** | phi = 2 | EXACT |
@@ -106,240 +105,240 @@ n=6 산술과의 일치는 흥미로운 수적 패턴이지만, 설계의 물리
 | Plasma volume V [m^3] | ~18 | ~830 | ~26 | **~473** | 2*pi^2*R*a^2*kappa | calc. |
 | Plasma surface [m^2] | ~47 | ~680 | ~53 | **~474** | approx. | calc. |
 
-**물리적 근거**:
-- R_0 = 6.0m: ITER급 규모. 대형 장치가 에너지 가둠 시간(tau_E ~ a^2)에서 유리
-- A = 3.0: MHD 안정성 최적 구간(2.5~3.5). 낮은 A는 높은 beta, 높은 A는 안정성 향상
-- kappa = 2.0: 수직 안정성 한계(kappa < 2.2) 이내. KSTAR 실증 값
-- delta = 1/3 = 0.333: ITER 설계 값(0.33)과 실질적으로 동일. 높은 삼각도는 ELM 억제에 유리
+**Physical basis**:
+- R_0 = 6.0 m: ITER-class scale. Larger devices are favorable for energy confinement time (tau_E ~ a^2)
+- A = 3.0: MHD stability optimal range (2.5~3.5). Low A gives higher beta, high A improves stability
+- kappa = 2.0: within the vertical stability limit (kappa < 2.2). KSTAR-validated value
+- delta = 1/3 = 0.333: essentially identical to ITER design value (0.33). High triangularity is favorable for ELM suppression
 
 ```
-  Plasma Volume 계산:
+  Plasma Volume calculation:
     V = 2*pi^2 * R_0 * a^2 * kappa
     V = 2 * pi^2 * 6.0 * 4.0 * 2.0
     V = 2 * 9.87 * 48.0
-    V ≈ 947 m^3  (정밀 계산)
+    V ~= 947 m^3  (precise calculation)
 
-  실용 보정 (D-shape, delta 효과):
-    V_eff ≈ V * (1 + delta^2/4) ≈ 947 * 1.028 ≈ 974 m^3
+  Practical correction (D-shape, delta effect):
+    V_eff ~= V * (1 + delta^2/4) ~= 947 * 1.028 ~= 974 m^3
 
-  참고: ITER V ≈ 830 m^3 (R=6.2m, a=2.0m, kappa=1.85)
-  KSTAR-N6는 kappa=2.0으로 ITER보다 ~17% 큰 체적
+  Reference: ITER V ~= 830 m^3 (R=6.2m, a=2.0m, kappa=1.85)
+  KSTAR-N6 has kappa=2.0 giving volume ~17% larger than ITER
 ```
 
-### 3.2 자기장 파라미터
+### 3.2 Magnetic field parameters
 
-| 파라미터 | KSTAR | ITER | SPARC | **KSTAR-N6** | n=6 표현 | Grade |
+| Parameter | KSTAR | ITER | SPARC | **KSTAR-N6** | n=6 expression | Grade |
 |---------|-------|------|-------|-------------|---------|-------|
 | Toroidal field B_T [T] | 3.5 | 5.3 | 12.2 | **12.0** | sigma = 12 | EXACT |
 | Plasma current I_p [MA] | 2.0 | 15.0 | 8.7 | **12.0** | sigma = 12 | EXACT |
 | Safety factor q_95 | 3.0~5.0 | 3.0 | 3.4 | **5.0** | sopfr = 5 | EXACT |
 | Safety factor q_0 (axis) | ~1.0 | ~1.0 | ~1.0 | **1.0** | R(6) = 1 | EXACT |
-| q = 1 surface | 존재 | 존재 | 존재 | **존재** | BT-5: 1/2+1/3+1/6=1 | EXACT |
+| q = 1 surface | present | present | present | **present** | BT-5: 1/2+1/3+1/6=1 | EXACT |
 
-**물리적 근거**:
-- B_T = 12.0T: HTS-REBCO 기술로 도달 가능. SPARC (12.2T) 이미 실증 설계 단계
-  - LTS (NbTi/Nb3Sn) 한계: ~11.8T (ITER TF 코일 피크)
-  - HTS (REBCO) 한계: >20T (laboratory), 12T on-axis는 보수적 운전점
-  - H-SM-68: LTS->HTS 전환점이 정확히 ~12T = sigma(6), 물리적으로 검증됨
-- I_p = 12.0MA: Troyon beta limit으로부터:
+**Physical basis**:
+- B_T = 12.0 T: reachable with HTS-REBCO technology. SPARC (12.2 T) already at demonstration design stage
+  - LTS (NbTi/Nb3Sn) limit: ~11.8 T (ITER TF coil peak)
+  - HTS (REBCO) limit: >20 T (laboratory), 12 T on-axis is a conservative operating point
+  - H-SM-68: LTS->HTS transition point is precisely ~12 T = sigma(6), physically verified (candidate observation)
+- I_p = 12.0 MA: from the Troyon beta limit:
 
 ```
   Troyon Beta Limit:
     beta_N = beta_T * a * B_T / I_p  [% m T / MA]
-    beta_N ≤ 3.5 (이상적), ~2.8 (실용)
+    beta_N <= 3.5 (ideal), ~2.8 (practical)
 
-  I_p 결정:
-    q_95 ≈ (5 * a^2 * B_T * (1 + kappa^2)) / (2 * R_0 * I_p)  [cylindrical approx.]
-    q_95 = 5.0 → I_p ≈ (5 * 4.0 * 12.0 * 5.0) / (2 * 6.0 * 5.0)
-    I_p ≈ 1200 / 60 = 20 MA  [cylindrical]
+  I_p determination:
+    q_95 ~= (5 * a^2 * B_T * (1 + kappa^2)) / (2 * R_0 * I_p)  [cylindrical approx.]
+    q_95 = 5.0 -> I_p ~= (5 * 4.0 * 12.0 * 5.0) / (2 * 6.0 * 5.0)
+    I_p ~= 1200 / 60 = 20 MA  [cylindrical]
 
-  실용 보정 (toroidal geometry + shaping):
-    toroidal 보정: 약 0.6~0.7 계수
-    I_p ≈ 20 * 0.6 = 12 MA ✓
+  Practical correction (toroidal geometry + shaping):
+    toroidal correction: factor ~0.6~0.7
+    I_p ~= 20 * 0.6 = 12 MA (check)
 
   Greenwald Density Limit:
-    n_GW = I_p / (pi * a^2) = 12 / (pi * 4) = 0.955 × 10^20 m^-3
-    운전 밀도: n_e = 0.85 * n_GW = 0.81 × 10^20 m^-3
+    n_GW = I_p / (pi * a^2) = 12 / (pi * 4) = 0.955 x 10^20 m^-3
+    Operating density: n_e = 0.85 * n_GW = 0.81 x 10^20 m^-3
 ```
 
-- q_95 = 5.0: kink 안정성(q > 2) 충족. 높은 q_95는 disruption 회피에 유리
-- q_0 = 1.0: BT-5 항등식. 완전수 정의 1/2+1/3+1/6=1 = Kruskal-Shafranov 안정성 한계
+- q_95 = 5.0: satisfies kink stability (q > 2). High q_95 is favorable for disruption avoidance
+- q_0 = 1.0: BT-5 identity. Perfect-number definition 1/2+1/3+1/6=1 = Kruskal-Shafranov stability limit
 
-### 3.3 성능 목표
+### 3.3 Performance targets (candidates)
 
-| 파라미터 | KSTAR | ITER | SPARC | **KSTAR-N6** | n=6 표현 | Grade |
+| Parameter | KSTAR | ITER | SPARC | **KSTAR-N6** | n=6 expression | Grade |
 |---------|-------|------|-------|-------------|---------|-------|
-| Energy gain Q | N/A | 10 | >2 | **10** | sigma-phi = 10 | EXACT |
-| Fusion power P_fus [MW] | 0 | 500 | ~140 | **~600** | calc. | N/A |
-| Neutron wall load [MW/m^2] | 0 | 0.57 | ~1.2 | **1.0** | mu = 1 | EXACT |
-| Greenwald fraction f_GW | ~0.5 | 0.85 | ~0.5 | **0.85** | 표준 | N/A |
-| Bootstrap fraction f_BS | ~15% | ~20% | ~10% | **50%** | 1/phi = 0.5 | EXACT |
+| Energy gain Q | N/A | 10 | >2 | **10 (target)** | sigma-phi = 10 | EXACT |
+| Fusion power P_fus [MW] | 0 | 500 | ~140 | **~600 (target)** | calc. | N/A |
+| Neutron wall load [MW/m^2] | 0 | 0.57 | ~1.2 | **1.0 (target)** | mu = 1 | EXACT |
+| Greenwald fraction f_GW | ~0.5 | 0.85 | ~0.5 | **0.85** | standard | N/A |
+| Bootstrap fraction f_BS | ~15% | ~20% | ~10% | **50% (target)** | 1/phi = 0.5 | EXACT |
 | H-factor H_98(y,2) | ~1.0 | 1.0 | ~1.7 | **1.0** | mu = 1 | EXACT |
-| Pulse length [s] | 300+ | 400 | 10 | **∞** | AT mode 100% NI | EXACT |
-| Normalized beta beta_N | ~2.0 | 1.8 | ~1.0 | **2.8** | 운전 목표 | N/A |
+| Pulse length [s] | 300+ | 400 | 10 | **infinity (target)** | AT mode 100% NI | EXACT |
+| Normalized beta beta_N | ~2.0 | 1.8 | ~1.0 | **2.8** | operating target | N/A |
 
-**핵융합 출력 계산**:
+**Fusion power calculation (candidate scaling)**:
 ```
   Fusion Power (0-D scaling):
-    P_fus ∝ n_e^2 * <sigma*v> * V * E_fus
+    P_fus prop. n_e^2 * <sigma*v> * V * E_fus
 
-  IPB98(y,2) scaling 기반:
+  IPB98(y,2) scaling:
     tau_E = H * C * I_p^0.93 * B_T^0.15 * n_e^0.41 * P^{-0.69} * R^1.97 * a^{-0.58} * kappa^0.78 * M^0.19
 
-  KSTAR-N6 예상:
-    R=6.0m, B=12T, I=12MA → tau_E ≈ 3~5s (H=1.0)
-    T_i ≈ 14 keV (= sigma + phi, H-FU-9 CLOSE)
-    n_e ≈ 0.81 × 10^20 m^-3
-    P_fus ≈ 500~700 MW range
-    Q = P_fus / P_aux = 600 / 60 ≈ 10
+  KSTAR-N6 projection:
+    R=6.0m, B=12T, I=12MA -> tau_E ~= 3~5 s (H=1.0)
+    T_i ~= 14 keV (= sigma + phi, H-FU-9 CLOSE)
+    n_e ~= 0.81 x 10^20 m^-3
+    P_fus ~= 500~700 MW range (target)
+    Q = P_fus / P_aux = 600 / 60 ~= 10 (target)
 
   Triple Product:
-    n * T * tau_E ≈ 0.81e20 * 14keV * 4s = 4.5 × 10^21 keV·s/m^3
-    Lawson 점화 조건: n*T*tau_E > 3 × 10^21 keV·s/m^3 → 충족
+    n * T * tau_E ~= 0.81e20 * 14 keV * 4 s = 4.5 x 10^21 keV*s/m^3
+    Lawson ignition condition: n*T*tau_E > 3 x 10^21 keV*s/m^3 -> satisfied (candidate)
 ```
 
 ---
 
-## 4. 자석 시스템 (Magnet System)
+## 4. Magnet System
 
-### 4.1 시스템 구성 — n/phi = 3 유형
+### 4.1 System configuration - n/phi = 3 types
 
-토카막 자석은 3가지(= n/phi = 3) 독립 시스템으로 구성된다 (H-SM-1, CLOSE):
+The tokamak magnet system is composed of 3 (= n/phi = 3) independent systems (H-SM-1, CLOSE):
 
 ```
   ┌─────────────────────────────────────────────────────────────────────┐
   │                   KSTAR-N6 Magnet System                            │
   │                                                                     │
-  │  [1] TF (Toroidal Field)    : 18개 코일 = 3n                        │
-  │      → 토로이달 자기장 B_T = 12T = sigma                             │
+  │  [1] TF (Toroidal Field)    : 18 coils = 3n                        │
+  │      -> toroidal field B_T = 12 T = sigma                           │
   │                                                                     │
-  │  [2] PF (Poloidal Field)    : 6개 코일 = n                           │
-  │      → 플라즈마 위치/형태 제어 (kappa=2, delta=1/3)                   │
+  │  [2] PF (Poloidal Field)    : 6 coils = n                           │
+  │      -> plasma position/shape control (kappa=2, delta=1/3)          │
   │                                                                     │
-  │  [3] CS (Central Solenoid)  : 6개 모듈 = n                           │
-  │      → 유도 전류 (I_p = 12MA 생성) + 장펄스 운전                      │
+  │  [3] CS (Central Solenoid)  : 6 modules = n                         │
+  │      -> inductive current (I_p = 12 MA generation) + long pulse     │
   │                                                                     │
-  │  총 자석 수: 18 + 6 + 6 = 30 = sopfr * n                            │
+  │  Total magnet count: 18 + 6 + 6 = 30 = sopfr * n                   │
   └─────────────────────────────────────────────────────────────────────┘
 ```
 
-### 4.2 TF 코일 (Toroidal Field)
+### 4.2 TF coil (Toroidal Field)
 
-| 파라미터 | KSTAR | ITER | SPARC | **KSTAR-N6** | n=6 표현 | Grade |
+| Parameter | KSTAR | ITER | SPARC | **KSTAR-N6** | n=6 expression | Grade |
 |---------|-------|------|-------|-------------|---------|-------|
-| 코일 수 | 16 | 18 | 18 | **18** | 3n = 18 | EXACT |
+| Coil count | 16 | 18 | 18 | **18** | 3n = 18 | EXACT |
 | On-axis field [T] | 3.5 | 5.3 | 12.2 | **12.0** | sigma = 12 | EXACT |
 | Peak field [T] | ~7 | 11.8 | ~20 | **18.0** | 3n = 18 | EXACT |
-| 소재 | Nb3Sn+NbTi | Nb3Sn | HTS-REBCO | **HTS-REBCO** | - | - |
-| 운전 온도 [K] | 4.5 | 4.5 | ~20 | **20** | J_2-tau = 20 | EXACT |
-| D-shape 높이 [m] | ~3.6 | ~14.5 | ~3.4 | **~12** | sigma = 12 | CLOSE |
+| Material | Nb3Sn+NbTi | Nb3Sn | HTS-REBCO | **HTS-REBCO** | - | - |
+| Operating temp [K] | 4.5 | 4.5 | ~20 | **20** | J_2-tau = 20 | EXACT |
+| D-shape height [m] | ~3.6 | ~14.5 | ~3.4 | **~12** | sigma = 12 | CLOSE |
 | Stored energy [GJ] | ~0.5 | ~41 | ~7 | **~35** | calc. | N/A |
 
-**물리적 근거**:
+**Physical basis**:
 ```
-  TF 코일 수 = 18:
-    Toroidal field ripple: delta_B/B ∝ exp(-N_TF * sqrt(2*delta_r/R))
-    N_TF = 18 → ripple < 0.5% at plasma edge (fast ion 손실 억제)
-    ITER/SPARC/JT-60SA 모두 18개 채택 — 산업 표준
+  TF coil count = 18:
+    Toroidal field ripple: delta_B/B prop. exp(-N_TF * sqrt(2*delta_r/R))
+    N_TF = 18 -> ripple < 0.5% at plasma edge (suppresses fast-ion loss)
+    ITER/SPARC/JT-60SA all adopt 18 coils - industry standard
 
   B_T = 12T on-axis, Peak = 18.0T on coil (= 3n EXACT):
-    B_peak = B_0 × R_0 / R_inner (토로이달 1/R 법칙)
-    R_inner = B_0 × R_0 / B_peak = 12 × 6.0 / 18.0 = 4.0m (TF 내측 반경)
-    → R_inner = 4.0m = tau × mu = φ² 설계점
-    검증: B_peak = 12 × 6.0 / 4.0 = 18.0T ✓ = 3n EXACT
-    REBCO B_c2 > 100T @4.2K → 18T에서 운전 마진 > 5배
+    B_peak = B_0 * R_0 / R_inner (toroidal 1/R law)
+    R_inner = B_0 * R_0 / B_peak = 12 * 6.0 / 18.0 = 4.0 m (TF inner radius)
+    -> R_inner = 4.0 m = tau * mu = phi^2 design point
+    Check: B_peak = 12 * 6.0 / 4.0 = 18.0 T = 3n EXACT
+    REBCO B_c2 > 100 T @4.2K -> operating margin > 5x at 18 T
 
-  HTS-REBCO 필수성:
-    LTS 한계: Nb3Sn B_c2 ≈ 27T @4.2K, 실용 Jc 한계 ~12T
-    REBCO: B_c2 > 100T @4.2K, 20K 운전에서도 12T 충분
-    SPARC TF: REBCO, 12.2T 실증 설계 (MIT-CFS, 2025 시작)
-    KSTAR-N6: SPARC 기술 직접 스케일업
+  HTS-REBCO necessity:
+    LTS limit: Nb3Sn B_c2 ~= 27 T @4.2K, practical Jc limit ~12 T
+    REBCO: B_c2 > 100 T @4.2K, 12 T achievable even at 20 K operation
+    SPARC TF: REBCO, 12.2 T demonstration design (MIT-CFS, started 2025)
+    KSTAR-N6: direct scale-up of SPARC technology (candidate)
 
-  운전 온도 20K = J_2 - tau = 24 - 4:
-    REBCO는 20K에서 높은 Jc 유지 (4.2K의 60~70%)
-    냉각 비용: 4.2K 대비 ~1/10 (Carnot 효율)
-    열 마진 증가: 퀀치 여유 +15K 확보
-    크라이오쿨러 가능 (액체 헬륨 불필요)
+  Operating temperature 20 K = J_2 - tau = 24 - 4:
+    REBCO retains high Jc at 20 K (~60~70% of 4.2K value)
+    Cooling cost: ~1/10 of 4.2 K (Carnot efficiency)
+    Increased thermal margin: quench margin +15 K
+    Cryocooler feasible (no liquid helium required)
 ```
 
-### 4.3 PF 코일 (Poloidal Field)
+### 4.3 PF coil (Poloidal Field)
 
-| 파라미터 | KSTAR | ITER | **KSTAR-N6** | n=6 표현 | Grade |
+| Parameter | KSTAR | ITER | **KSTAR-N6** | n=6 expression | Grade |
 |---------|-------|------|-------------|---------|-------|
-| 코일 수 | 7 | 6 | **6** | n = 6 | EXACT |
-| 배치 | 내측+외측 | 외측 6개 | **외측 6개** | ITER 동일 | N/A |
-| 최대 전류 [kA] | ~25 | ~45 | **~48** | sigma*tau = 48 | EXACT |
-| 기능 | 형태 제어 | 형태+위치 | **형태+위치+ELM** | - | - |
+| Coil count | 7 | 6 | **6** | n = 6 | EXACT |
+| Arrangement | inner+outer | 6 outer | **6 outer** | same as ITER | N/A |
+| Max current [kA] | ~25 | ~45 | **~48** | sigma*tau = 48 | EXACT |
+| Function | shape control | shape+position | **shape+position+ELM** | - | - |
 
-**물리적 근거**:
+**Physical basis**:
 ```
-  PF 코일 6개 = ITER 동일:
-    ITER PF1~PF6: 각 코일이 독립적 형태 제어 자유도 제공
-    필요 자유도: 수직 위치, 수평 위치, kappa, delta, 상/하 비대칭, 갭
-    → 6 자유도 ≈ 6 코일 (최소 제어 요건)
+  PF 6 coils = same as ITER:
+    ITER PF1~PF6: each coil provides an independent shape-control degree of freedom
+    Required DoF: vertical position, radial position, kappa, delta, up/down asymmetry, gap
+    -> 6 DoF ~= 6 coils (minimum control requirement)
 
-  배치 전략:
-    PF1, PF2: 상부 (수직 안정성)
-    PF3, PF4: 중면 외측 (형태 + 수평 위치)
-    PF5, PF6: 하부 (디버터 + X-점 제어)
+  Arrangement strategy:
+    PF1, PF2: upper (vertical stability)
+    PF3, PF4: midplane outer (shape + radial position)
+    PF5, PF6: lower (divertor + X-point control)
 ```
 
-### 4.4 CS 모듈 (Central Solenoid)
+### 4.4 CS module (Central Solenoid)
 
-| 파라미터 | KSTAR | ITER | **KSTAR-N6** | n=6 표현 | Grade |
+| Parameter | KSTAR | ITER | **KSTAR-N6** | n=6 expression | Grade |
 |---------|-------|------|-------------|---------|-------|
-| 모듈 수 | 8 (연속) | 6 | **6** | n = 6 | EXACT |
-| 최대 field [T] | ~8 | 13.5 | **12.0** | sigma = 12 | EXACT |
+| Module count | 8 (continuous) | 6 | **6** | n = 6 | EXACT |
+| Max field [T] | ~8 | 13.5 | **12.0** | sigma = 12 | EXACT |
 | Flux swing [Wb] | ~6 | ~280 | **~240** | calc. | N/A |
-| 소재 | Nb3Sn | Nb3Sn | **HTS-REBCO** | 전체 HTS | N/A |
+| Material | Nb3Sn | Nb3Sn | **HTS-REBCO** | fully HTS | N/A |
 
-**물리적 근거**:
+**Physical basis**:
 ```
-  CS 6 모듈 = ITER 동일:
-    ITER CS1U~CS3L: 6개 모듈 독립 제어
-    각 모듈 순차 방전 → plasma current ramp 최적화
-    6모듈 → 6 시간 구간 제어 (startup, ramp-up, flat-top, ...)
+  CS 6 modules = same as ITER:
+    ITER CS1U~CS3L: 6 modules independently controlled
+    Sequential discharge of each module -> plasma current ramp optimization
+    6 modules -> 6 time segments controlled (startup, ramp-up, flat-top, ...)
 
-  Flux swing 계산:
-    Phi = B_CS * A_CS (CS 단면적)
-    A_CS = pi * (R_outer^2 - R_inner^2) ≈ pi * (1.5^2 - 0.5^2) = pi * 2 ≈ 6.28 m^2
-    Phi_full = 2 * 12 * 6.28 ≈ 150 Wb (단순)
-    실용: 다중 모듈 + 시간 분배 → ~240 Wb achievable
+  Flux swing calculation:
+    Phi = B_CS * A_CS (CS cross-section)
+    A_CS = pi * (R_outer^2 - R_inner^2) ~= pi * (1.5^2 - 0.5^2) = pi * 2 ~= 6.28 m^2
+    Phi_full = 2 * 12 * 6.28 ~= 150 Wb (simple)
+    Practical: multi-module + time distribution -> ~240 Wb achievable
 
   HTS-REBCO CS:
-    ITER CS는 Nb3Sn (13.5T peak, 46kA)
-    KSTAR-N6: REBCO → 12T peak에서 더 높은 Jc, 20K 운전 가능
-    CS와 TF 동일 소재 → 공급망/유지보수 통일
+    ITER CS: Nb3Sn (13.5T peak, 46kA)
+    KSTAR-N6: REBCO -> higher Jc at 12T peak, 20K operation feasible
+    CS and TF share same material -> unified supply chain/maintenance
 ```
 
-### 4.5 자석 시스템 비교 요약
+### 4.5 Magnet system comparison summary
 
 ```
   ┌──────────┬──────────┬──────────┬──────────┬──────────────┐
   │          │ KSTAR    │ ITER     │ SPARC    │ KSTAR-N6     │
   ├──────────┼──────────┼──────────┼──────────┼──────────────┤
-  │ TF 코일   │ 16 NbTi  │ 18 Nb3Sn │ 18 REBCO │ 18 REBCO     │
+  │ TF coils │ 16 NbTi  │ 18 Nb3Sn │ 18 REBCO │ 18 REBCO     │
   │ B_T [T]  │ 3.5      │ 5.3      │ 12.2     │ 12.0=sigma   │
-  │ PF 코일   │ 7        │ 6        │ 6        │ 6=n          │
-  │ CS 모듈   │ 8        │ 6        │ n/a      │ 6=n          │
-  │ 소재      │ LTS      │ LTS      │ HTS      │ HTS          │
+  │ PF coils │ 7        │ 6        │ 6        │ 6=n          │
+  │ CS mod.  │ 8        │ 6        │ n/a      │ 6=n          │
+  │ Material │ LTS      │ LTS      │ HTS      │ HTS          │
   │ T_op [K] │ 4.5      │ 4.5      │ ~20      │ 20           │
-  │ 총 자석 수 │ 31       │ 30       │ 24       │ 30=5n        │
+  │ Total    │ 31       │ 30       │ 24       │ 30=5n        │
   └──────────┴──────────┴──────────┴──────────┴──────────────┘
 ```
 
 ---
 
-## 5. 가열 시스템 (Heating System)
+## 5. Heating System
 
-### 5.1 가열 방법 — n/phi = 3 독립 시스템 (H-FU-17)
+### 5.1 Heating methods - n/phi = 3 independent systems (H-FU-17)
 
 ```
   ┌────────────────────────────────────────────────────────────────────┐
   │              KSTAR-N6 Heating Architecture                         │
   │                                                                    │
-  │  방법 수: 3 = n/phi  (NBI + ICRH + ECRH)                          │
-  │  총 출력: 24 MW = J_2(6)  (fusion power ≠ heating)                │
+  │  Method count: 3 = n/phi  (NBI + ICRH + ECRH)                      │
+  │  Total power: 24 MW = J_2(6)  (fusion power != heating)            │
   │                                                                    │
   │  ┌────────┐   ┌────────┐   ┌─────────┐                            │
   │  │  NBI   │   │  ICRH  │   │  ECRH   │                            │
@@ -349,360 +348,360 @@ n=6 산술과의 일치는 흥미로운 수적 패턴이지만, 설계의 물리
   │  │120 keV │   │40~80MHz│   │170 GHz  │                            │
   │  └────────┘   └────────┘   └─────────┘                            │
   │                                                                    │
-  │  배분: 8/24 = 1/3,  6/24 = 1/4,  10/24 = 5/12                    │
+  │  Shares: 8/24 = 1/3,  6/24 = 1/4,  10/24 = 5/12                   │
   │  NBI = 1/n/phi = Egyptian component                                │
   │  ICRH = 1/tau                                                      │
   └────────────────────────────────────────────────────────────────────┘
 ```
 
-### 5.2 가열 시스템 상세
+### 5.2 Heating system details
 
-| 시스템 | KSTAR | ITER | **KSTAR-N6** | n=6 표현 | Grade |
+| System | KSTAR | ITER | **KSTAR-N6** | n=6 expression | Grade |
 |--------|-------|------|-------------|---------|-------|
 | **NBI** | 8 MW | 33 MW | **8 MW** | sigma-tau = 8 | EXACT |
-| NBI 에너지 | 120 keV | 1 MeV | **120 keV** | sigma*(sigma-phi)=120 | EXACT |
-| NBI 빔라인 | 2 | 2+1 | **2** | phi = 2 | EXACT |
+| NBI energy | 120 keV | 1 MeV | **120 keV** | sigma*(sigma-phi)=120 | EXACT |
+| NBI beamlines | 2 | 2+1 | **2** | phi = 2 | EXACT |
 | **ICRH** | 6 MW | 20 MW | **6 MW** | n = 6 | EXACT |
-| ICRH 주파수 | 30~60 MHz | 40~55 MHz | **48 MHz** | sigma*tau = 48 | EXACT |
-| ICRH 안테나 | 2 | 2 | **2** | phi = 2 | EXACT |
+| ICRH freq. | 30~60 MHz | 40~55 MHz | **48 MHz** | sigma*tau = 48 | EXACT |
+| ICRH antennas | 2 | 2 | **2** | phi = 2 | EXACT |
 | **ECRH** | 1 MW | - | **10 MW** | sigma-phi = 10 | EXACT |
-| ECRH 주파수 | 84/110 GHz | 170 GHz | **170 GHz** | 표준 | N/A |
-| ECRH 자이로트론 | 2 | - | **5** | sopfr = 5 | EXACT |
-| **총 가열** | 15 MW | 73 MW | **24 MW** | J_2 = 24 | EXACT |
-| **방법 수** | 3 | 3+ | **3** | n/phi = 3 | EXACT |
+| ECRH freq. | 84/110 GHz | 170 GHz | **170 GHz** | standard | N/A |
+| ECRH gyrotrons | 2 | - | **5** | sopfr = 5 | EXACT |
+| **Total heating** | 15 MW | 73 MW | **24 MW** | J_2 = 24 | EXACT |
+| **Method count** | 3 | 3+ | **3** | n/phi = 3 | EXACT |
 
-**물리적 근거**:
+**Physical basis**:
 ```
-  NBI 8MW @ 120keV:
-    KSTAR 검증 값 그대로. 120keV는 R=6m 플라즈마 core 도달 가능.
-    빔 침투 깊이: lambda ∝ E^{3/2} / n_e → 120keV에서 core 가열 충분.
-    8MW는 Q=10 운전 시 보조 가열의 1/3 (Egyptian fraction 1/3).
+  NBI 8 MW @ 120 keV:
+    KSTAR-validated value. 120 keV penetrates to the core of R=6m plasma.
+    Beam penetration depth: lambda prop. E^{3/2} / n_e -> sufficient core heating at 120 keV.
+    8 MW is 1/3 of auxiliary heating at Q=10 operation (Egyptian fraction 1/3).
 
-  ICRH 6MW @ 48MHz:
-    KSTAR 검증 값. Minority heating scheme (H minority in D-T plasma).
-    48MHz = 2차 D 공명(B=3T) 또는 기본 H 공명(B=3.2T).
-    6MW → KSTAR 실적으로 기술 성숙도 충분.
+  ICRH 6 MW @ 48 MHz:
+    KSTAR-validated value. Minority heating scheme (H minority in D-T plasma).
+    48 MHz = second-harmonic D resonance (B=3 T) or fundamental H resonance (B=3.2 T).
+    6 MW -> KSTAR operational record provides sufficient technology maturity.
 
-  ECRH 10MW @ 170GHz:
-    KSTAR 현재 1MW → 10MW로 대폭 업그레이드 (핵심 신규 투자).
-    170GHz = 2*omega_ce at B=3T (2차 고조파 중심 가열).
-    NTM 억제 + 전류 분포 제어의 핵심 도구.
-    5개 자이로트론 × 2MW/unit = 10MW.
-    W7-X(5.6MW ECRH), EAST(4MW) 실적으로 기술 성숙.
+  ECRH 10 MW @ 170 GHz:
+    KSTAR current 1 MW -> major upgrade to 10 MW (key new investment, target).
+    170 GHz = 2*omega_ce at B=3 T (second-harmonic central heating).
+    Core tool for NTM suppression + current profile control.
+    5 gyrotrons x 2 MW/unit = 10 MW.
+    W7-X (5.6 MW ECRH), EAST (4 MW) records provide technology maturity.
 
-  총 24MW = J_2:
-    Q=10 운전: P_fus = 24*10 = 240MW → alpha heating = 48MW (20%)
-    자체 가열 포함 총 72MW → tau_E 조건 충족
-    실제 P_fus 목표(~600MW)와의 차이는 alpha self-heating에 의존
+  Total 24 MW = J_2:
+    Q=10 operation: P_fus = 24*10 = 240 MW -> alpha heating = 48 MW (20%)
+    Total with self-heating 72 MW -> tau_E condition satisfied
+    Difference from actual P_fus target (~600 MW) depends on alpha self-heating
 ```
 
-### 5.3 가열 에너지 배분 — Egyptian Fraction 매핑
+### 5.3 Heating energy distribution - Egyptian Fraction mapping
 
 ```
-  총 가열: 24 MW = J_2(6)
+  Total heating: 24 MW = J_2(6)
 
-  NBI  :  8/24 = 1/3   → Egyptian fraction 성분 ✓
-  ICRH :  6/24 = 1/4   → 1/tau(6) ✓
-  ECRH : 10/24 = 5/12  → sopfr/sigma ✓
+  NBI  :  8/24 = 1/3   -> Egyptian fraction component (check)
+  ICRH :  6/24 = 1/4   -> 1/tau(6) (check)
+  ECRH : 10/24 = 5/12  -> sopfr/sigma (check)
 
-  합계: 1/3 + 1/4 + 5/12 = 4/12 + 3/12 + 5/12 = 12/12 = 1 ✓
+  Sum: 1/3 + 1/4 + 5/12 = 4/12 + 3/12 + 5/12 = 12/12 = 1 (check)
 
   BT-5 Egyptian connection:
-    1/2 + 1/3 + 1/6 = 1 (완전수 정의)
-    → q=1 MHD 안정성 한계와 동일 구조
+    1/2 + 1/3 + 1/6 = 1 (perfect-number definition)
+    -> same structure as q=1 MHD stability limit
 
-  주의: 가열 배분의 1/3 + 1/4 + 5/12 = 1은 BT-5의
-  1/2 + 1/3 + 1/6 = 1과 다른 분해이다. 정직하게 CLOSE로 등급.
-  → Grade: CLOSE (Egyptian structure 존재하지만 정확한 약수 분해는 아님)
+  Note: the 1/3 + 1/4 + 5/12 = 1 heating distribution differs from BT-5's
+  1/2 + 1/3 + 1/6 = 1 decomposition. Honestly graded as CLOSE.
+  -> Grade: CLOSE (Egyptian structure present but not exact divisor decomposition)
 ```
 
 ---
 
-## 6. 제1벽 및 블랭킷 (First Wall & Blanket)
+## 6. First Wall and Blanket
 
-### 6.1 구조 개요
+### 6.1 Structural overview
 
 ```
   ┌────────────────────────────────────────────────────────────────────┐
   │              KSTAR-N6 Blanket Architecture                         │
   │                                                                    │
-  │  벽 재질: SiC/SiC composite (first wall + structural)              │
-  │  증식재: Li-6 enriched LiPb (A=6=n, EXACT)                        │
-  │  TBR 목표: 7/6 ≈ 1.167 (= (n+mu)/n, self-sufficient + margin)    │
-  │  증식 경로: 2 = phi (Li-6 + Li-7 reactions)                        │
+  │  Wall material: SiC/SiC composite (first wall + structural)        │
+  │  Breeder: Li-6 enriched LiPb (A=6=n, EXACT)                        │
+  │  TBR target: 7/6 ~= 1.167 (= (n+mu)/n, self-sufficient + margin)   │
+  │  Breeding paths: 2 = phi (Li-6 + Li-7 reactions)                   │
   │                                                                    │
   │  ┌─────────┐  ┌────────────┐  ┌────────────────┐                   │
-  │  │ First   │→│ Breeding   │→│ Neutron Shield  │                   │
+  │  │ First   │->│ Breeding   │->│ Neutron Shield  │                  │
   │  │ Wall    │  │ Zone (LiPb)│  │ (SS316 + Water)│                   │
   │  │ SiC/SiC │  │ Li-6 90%   │  │ + Vacuum Vessel│                   │
   │  └─────────┘  └────────────┘  └────────────────┘                   │
   │                                                                    │
-  │  두께: FW 10mm + BZ 600mm + Shield 400mm + VV 200mm               │
-  │  총 두께: ~1,210 mm ≈ sigma * (sigma-mu) * 10 = 1,320 CLOSE      │
+  │  Thickness: FW 10mm + BZ 600mm + Shield 400mm + VV 200mm           │
+  │  Total thickness: ~1,210 mm ~= sigma * (sigma-mu) * 10 = 1,320 CLOSE│
   └────────────────────────────────────────────────────────────────────┘
 ```
 
-### 6.2 삼중수소 증식 (Tritium Breeding)
+### 6.2 Tritium Breeding
 
-| 파라미터 | ITER TBM | **KSTAR-N6** | n=6 표현 | Grade |
+| Parameter | ITER TBM | **KSTAR-N6** | n=6 expression | Grade |
 |---------|---------|-------------|---------|-------|
-| 증식재 | LiPb / Li-ceramic | **Li-6 enriched LiPb** | Li-6: A=6=n | EXACT |
-| Li-6 농축도 | 30~90% | **90%** | - | N/A |
-| TBR 목표 | >1.0 | **7/6 = 1.167** | (n+mu)/n | EXACT |
-| 증식 반응 수 | 2 | **2** | phi = 2 | EXACT |
-| 블랭킷 모듈 수 | 6+3 | **12** | sigma = 12 | EXACT |
-| 출구 온도 [C] | 500~700 | **600** | sigma*sopfr*(sigma-phi) = 600 | EXACT |
+| Breeder | LiPb / Li-ceramic | **Li-6 enriched LiPb** | Li-6: A=6=n | EXACT |
+| Li-6 enrichment | 30~90% | **90%** | - | N/A |
+| TBR target | >1.0 | **7/6 = 1.167** | (n+mu)/n | EXACT |
+| Breeding reaction count | 2 | **2** | phi = 2 | EXACT |
+| Blanket module count | 6+3 | **12** | sigma = 12 | EXACT |
+| Outlet temperature [C] | 500~700 | **600** | sigma*sopfr*(sigma-phi) = 600 | EXACT |
 
-**물리적 근거**:
+**Physical basis**:
 ```
-  Li-6 Breeding (핵심 반응):
-    ⁶Li + n → T + ⁴He + 4.78 MeV   (exothermic, thermal neutron)
-    ⁷Li + n → T + ⁴He + n' - 2.47 MeV (endothermic, fast neutron)
+  Li-6 Breeding (core reactions):
+    6Li + n -> T + 4He + 4.78 MeV   (exothermic, thermal neutron)
+    7Li + n -> T + 4He + n' - 2.47 MeV (endothermic, fast neutron)
 
-    반응 수 = 2 = phi(6) ✓ (H-FU-30 EXACT)
-    Li-6 질량수 = 6 = n ✓ (EXACT)
+    Reaction count = 2 = phi(6) (H-FU-30 EXACT)
+    Li-6 mass number = 6 = n (EXACT)
 
-  TBR = 7/6 ≈ 1.167:
+  TBR = 7/6 ~= 1.167:
     7/6 = (n+mu)/n
-    TBR > 1.0 필수 (삼중수소 자급자족)
-    TBR ≈ 1.15~1.20 업계 목표 → 7/6 = 1.167 정확히 구간 내
+    TBR > 1.0 required (tritium self-sufficiency)
+    TBR ~= 1.15~1.20 industry target -> 7/6 = 1.167 precisely within range
 
-  블랭킷 12 모듈:
-    ITER: 9개 VV 섹터 → 각 섹터 내 블랭킷 모듈
-    KSTAR-N6: 18 TF 코일 사이 18 공간 → 12 대형 모듈 배치
-    (상부 6 + 하부 6, 디버터 영역 제외)
+  Blanket 12 modules:
+    ITER: 9 VV sectors -> blanket modules per sector
+    KSTAR-N6: 18 spaces between 18 TF coils -> 12 large modules arranged
+    (6 upper + 6 lower, divertor region excluded)
 
   SiC/SiC First Wall:
-    700C 이상 운전 가능 → Brayton cycle 고효율
-    낮은 방사화: C, Si 모두 저방사화 원소
-    SiC: Si(Z=14) + C(Z=6=n) → 탄소 성분 n=6 (BT-93)
-    강도: >300 MPa @1000C
+    Operation above 700C feasible -> high-efficiency Brayton cycle
+    Low activation: C, Si both low-activation elements
+    SiC: Si (Z=14) + C (Z=6=n) -> carbon component n=6 (BT-93)
+    Strength: >300 MPa @1000C
 ```
 
-### 6.3 중성자 차폐 및 방사선 관리
+### 6.3 Neutron shielding and radiation management
 
 ```
-  14.1 MeV 중성자 flux:
+  14.1 MeV neutron flux:
     Gamma_n = P_fus * 0.8 / (E_n * 4*pi*R^2)
-    ≈ 600MW * 0.8 / (14.1MeV * 4*pi*36)
-    ≈ 1.06 × 10^14 n/cm^2/s
+    ~= 600MW * 0.8 / (14.1MeV * 4*pi*36)
+    ~= 1.06 x 10^14 n/cm^2/s
 
-  차폐 요건:
-    TF 코일 수명: 100 dpa 이내 (SiC)
-    진공용기: 1 × 10^22 n/m^2 (총 fluence)
-    크라이오스탯: ~10 uSv/h 이하
+  Shielding requirements:
+    TF coil lifetime: within 100 dpa (SiC)
+    Vacuum vessel: 1 x 10^22 n/m^2 (total fluence)
+    Cryostat: <= ~10 uSv/h
 
-  차폐 구성:
-    1. SiC/SiC FW: 10mm (감속 시작)
-    2. LiPb BZ: 600mm (증식 + 감속)
-    3. SS316L 차폐: 400mm (고속 중성자 차단)
-    4. 진공용기 이중벽: 200mm + 차폐수 (phi=2 벽, H-TK-3)
-    → 총 1,210 mm blanket-shield 두께
+  Shielding composition:
+    1. SiC/SiC FW: 10mm (moderation start)
+    2. LiPb BZ: 600mm (breeding + moderation)
+    3. SS316L shield: 400mm (fast neutron blocking)
+    4. Vacuum vessel double wall: 200mm + shielding water (phi=2 walls, H-TK-3)
+    -> Total 1,210 mm blanket-shield thickness
 ```
 
 ---
 
-## 7. 디버터 시스템 (Divertor)
+## 7. Divertor System
 
-### 7.1 설계 파라미터
+### 7.1 Design parameters
 
-| 파라미터 | KSTAR | ITER | **KSTAR-N6** | n=6 표현 | Grade |
+| Parameter | KSTAR | ITER | **KSTAR-N6** | n=6 expression | Grade |
 |---------|-------|------|-------------|---------|-------|
-| 구성 | lower single-null | LSN | **Double-null (DN)** | phi=2 null points | EXACT |
-| 소재 | Carbon | W monoblock | **W + SiC** | W=Z=74, Si+C=20=J_2-tau | CLOSE |
-| 열 부하 [MW/m^2] | ~5 | 10~20 | **~12** | sigma = 12 | EXACT |
-| Target 각도 | ~5 deg | 2.7 deg | **~3 deg** | n/phi = 3 | EXACT |
-| Cassette 수 | - | 54 | **48** | sigma*tau = 48 | EXACT |
-| 수명 [년] | - | 2 | **3** | n/phi = 3 | EXACT |
+| Configuration | lower single-null | LSN | **Double-null (DN)** | phi=2 null points | EXACT |
+| Material | Carbon | W monoblock | **W + SiC** | W=Z=74, Si+C=20=J_2-tau | CLOSE |
+| Heat load [MW/m^2] | ~5 | 10~20 | **~12** | sigma = 12 | EXACT |
+| Target angle | ~5 deg | 2.7 deg | **~3 deg** | n/phi = 3 | EXACT |
+| Cassette count | - | 54 | **48** | sigma*tau = 48 | EXACT |
+| Lifetime [yr] | - | 2 | **3** | n/phi = 3 | EXACT |
 
-**물리적 근거**:
+**Physical basis**:
 ```
-  Double-null 디버터:
-    상부 + 하부 X-점 → 열 부하 분산 (factor 2 = phi)
-    각 X-점에서 독립 ELM/MHD 제어
-    bootstrap current 최적화에 유리 (up-down 대칭)
+  Double-null divertor:
+    Upper + lower X-points -> heat load distribution (factor 2 = phi)
+    Independent ELM/MHD control at each X-point
+    Favorable for bootstrap current optimization (up-down symmetry)
 
-  열 부하 12 MW/m^2:
-    ITER 정상 상태: 10 MW/m^2
-    ITER 과도: ~20 MW/m^2
-    12 MW/m^2: detached 디버터 운전 시 달성 가능
-    텅스텐 모노블록 한계: ~20 MW/m^2
+  Heat load 12 MW/m^2:
+    ITER steady-state: 10 MW/m^2
+    ITER transient: ~20 MW/m^2
+    12 MW/m^2: achievable with detached divertor operation
+    Tungsten monoblock limit: ~20 MW/m^2
 
-  48 Cassette:
-    toroidal: 18 TF 사이 18 공간
-    poloidal: 내측 + 외측 + dome = 약 2.7/space
-    총 48 ≈ 18 × 2.67 (실용 배분)
+  48 cassettes:
+    toroidal: 18 TF coils with 18 spaces between
+    poloidal: inner + outer + dome ~= 2.7/space
+    Total 48 ~= 18 x 2.67 (practical distribution)
 ```
 
 ---
 
-## 8. 진단 시스템 (Diagnostics)
+## 8. Diagnostic Systems
 
-### 8.1 6대 진단 카테고리 (= n)
+### 8.1 Six main diagnostic categories (= n)
 
 ```
   ┌──────────────────────────────────────────────────────────────────┐
   │          KSTAR-N6 Diagnostic Categories (n=6)                    │
   │                                                                  │
-  │  [1] 자기 (Magnetic)                                             │
+  │  [1] Magnetic                                                    │
   │      Rogowski coils, flux loops, Mirnov probes, MSE              │
-  │      → q-profile, I_p, 자기 평형 재구성                            │
+  │      -> q-profile, I_p, magnetic equilibrium reconstruction      │
   │                                                                  │
-  │  [2] 열적 (Thermal)                                              │
+  │  [2] Thermal                                                     │
   │      Thomson scattering, ECE, CXRS ion temperature               │
-  │      → T_e, T_i profiles                                         │
+  │      -> T_e, T_i profiles                                        │
   │                                                                  │
-  │  [3] 입자 (Particle)                                             │
+  │  [3] Particle                                                    │
   │      Interferometry, reflectometry, Langmuir probes              │
-  │      → n_e profile, Zeff, impurity content                       │
+  │      -> n_e profile, Zeff, impurity content                      │
   │                                                                  │
-  │  [4] 방사선 (Radiation)                                          │
+  │  [4] Radiation                                                   │
   │      Bolometry, neutron diagnostics, gamma detectors             │
-  │      → P_rad, neutron rate (fusion power), nuclear safety        │
+  │      -> P_rad, neutron rate (fusion power), nuclear safety       │
   │                                                                  │
-  │  [5] 분광 (Spectroscopy)                                        │
+  │  [5] Spectroscopy                                                │
   │      VUV/XUV spectrometers, Halpha, CXRS species                │
-  │      → 불순물 종류/농도, 연료 비율 (D/T), 회전 속도               │
+  │      -> impurity species/concentration, fuel ratio (D/T), rotation│
   │                                                                  │
-  │  [6] 영상 (Imaging)                                              │
+  │  [6] Imaging                                                     │
   │      IR cameras, visible cameras, fast cameras, SXR tomography   │
-  │      → 디버터 열 부하, ELM 구조, 내벽 상태, 먼지 추적              │
+  │      -> divertor heat load, ELM structure, wall state, dust track│
   └──────────────────────────────────────────────────────────────────┘
 
-  총 진단 카테고리: 6 = n ✓ (EXACT)
-  각 카테고리 내 주요 시스템: ~4개 (= tau)
-  총 진단 시스템 수: ~24 = J_2 (CLOSE — 실제 대형 토카막 진단 수 20~40)
+  Total diagnostic categories: 6 = n (EXACT)
+  Main systems per category: ~4 (= tau)
+  Total diagnostic system count: ~24 = J_2 (CLOSE - actual large-tokamak diagnostics are 20~40)
 ```
 
-### 8.2 핵심 진단 — ITER 기준 비교
+### 8.2 Core diagnostics - ITER-based comparison
 
-| 진단 | ITER 진단 수 | **KSTAR-N6** | 목적 |
+| Diagnostic | ITER count | **KSTAR-N6** | Purpose |
 |------|------------|-------------|------|
-| Thomson scattering | 5 채널세트 | **5** = sopfr | T_e, n_e (core+edge) |
-| ECE radiometer | 2 시스템 | **2** = phi | T_e profile (실시간) |
-| Interferometry | 4 채널 | **4** = tau | 선 적분 밀도 |
-| CXRS | 2 시스템 | **2** = phi | T_i, rotation, impurity |
-| Bolometry | 4 카메라세트 | **4** = tau | 방사 손실 분포 |
-| Neutron monitor | 3 시스템 | **3** = n/phi | fusion rate |
-| Mirnov arrays | 2 세트 | **2** = phi | MHD mode 검출 |
-| SXR tomography | 2 카메라 | **2** = phi | 내부 구조 영상화 |
+| Thomson scattering | 5 channel sets | **5** = sopfr | T_e, n_e (core+edge) |
+| ECE radiometer | 2 systems | **2** = phi | T_e profile (real-time) |
+| Interferometry | 4 channels | **4** = tau | line-integrated density |
+| CXRS | 2 systems | **2** = phi | T_i, rotation, impurity |
+| Bolometry | 4 camera sets | **4** = tau | radiative loss distribution |
+| Neutron monitor | 3 systems | **3** = n/phi | fusion rate |
+| Mirnov arrays | 2 sets | **2** = phi | MHD mode detection |
+| SXR tomography | 2 cameras | **2** = phi | internal structure imaging |
 
 ---
 
-## 9. 플라즈마 제어 시스템 (Plasma Control)
+## 9. Plasma Control System
 
-### 9.1 6대 제어 루프 (= n)
+### 9.1 Six main control loops (= n)
 
 ```
   ┌────────────────────────────────────────────────────────────────────┐
   │          KSTAR-N6 Control Loops (n=6)                              │
   │                                                                    │
-  │  [1] 밀도 제어 (Density Control)                                   │
+  │  [1] Density control                                               │
   │      actuator: gas puff + pellet injection                         │
-  │      feedback: interferometry n_e → valve command                  │
+  │      feedback: interferometry n_e -> valve command                 │
   │      target: f_GW = 0.85                                           │
   │                                                                    │
-  │  [2] 온도 제어 (Temperature Control)                               │
-  │      actuator: NBI + ECRH + ICRH power modulation                 │
-  │      feedback: ECE T_e, CXRS T_i → heating power                  │
-  │      target: T_i ≈ 14 keV (H-FU-9)                                │
+  │  [2] Temperature control                                           │
+  │      actuator: NBI + ECRH + ICRH power modulation                  │
+  │      feedback: ECE T_e, CXRS T_i -> heating power                  │
+  │      target: T_i ~= 14 keV (H-FU-9)                                │
   │                                                                    │
-  │  [3] 회전 제어 (Rotation Control)                                  │
+  │  [3] Rotation control                                              │
   │      actuator: NBI tangential injection (co/counter)               │
-  │      feedback: CXRS toroidal rotation → NBI balance                │
+  │      feedback: CXRS toroidal rotation -> NBI balance               │
   │      target: RWM stabilization threshold                           │
   │                                                                    │
-  │  [4] 형태 제어 (Shape Control)                                     │
+  │  [4] Shape control                                                 │
   │      actuator: PF coil currents (6 coils)                          │
-  │      feedback: magnetic probes → EFIT reconstruction → PF command  │
+  │      feedback: magnetic probes -> EFIT reconstruction -> PF command│
   │      target: kappa=2, delta=1/3, X-point position                  │
   │                                                                    │
-  │  [5] 위치 제어 (Position Control)                                  │
+  │  [5] Position control                                              │
   │      actuator: PF + CS balance                                     │
-  │      feedback: flux loops, Rogowski → gap measurement              │
-  │      target: 수직/수평 위치, 갭 유지                                │
+  │      feedback: flux loops, Rogowski -> gap measurement             │
+  │      target: vertical/radial position, gap maintenance             │
   │                                                                    │
-  │  [6] 전류 분포 제어 (Current Profile Control)                      │
-  │      actuator: ECRH (ECCD) + LHCD + bootstrap optimization        │
-  │      feedback: MSE q-profile → ECCD steering                       │
+  │  [6] Current profile control                                       │
+  │      actuator: ECRH (ECCD) + LHCD + bootstrap optimization         │
+  │      feedback: MSE q-profile -> ECCD steering                      │
   │      target: q_95 = 5, reversed shear for ITB                      │
   └────────────────────────────────────────────────────────────────────┘
 
-  총 제어 루프: 6 = n ✓ (EXACT)
-  제어 사이클: ~1 ms (실시간 피드백)
+  Total control loops: 6 = n (EXACT)
+  Control cycle: ~1 ms (real-time feedback)
 ```
 
-### 9.2 Disruption 회피 — tau = 4 전략
+### 9.2 Disruption avoidance - tau = 4 strategies
 
 ```
   ┌────────────────────────────────────────────────────────────────────┐
-  │          Disruption Avoidance Strategies (tau=4)                    │
+  │          Disruption Avoidance Strategies (tau=4)                   │
   │                                                                    │
-  │  [1] 예측 (Prediction)                                             │
-  │      ML 기반 disruption predictor (30ms+ 사전 경고)                │
-  │      입력: locked mode amplitude, radiated power fraction,         │
-  │            q_min, li, beta_N — KSTAR 실증 기술                     │
+  │  [1] Prediction                                                    │
+  │      ML-based disruption predictor (30 ms+ advance warning)        │
+  │      Inputs: locked mode amplitude, radiated power fraction,       │
+  │              q_min, li, beta_N - KSTAR-validated technology        │
   │                                                                    │
-  │  [2] 회피 (Avoidance)                                              │
-  │      경고 시 → ECRH NTM stabilization + density ramp-down          │
-  │      q_min > 1 유지, beta_N < 안정 한계 80%                        │
+  │  [2] Avoidance                                                     │
+  │      On warning -> ECRH NTM stabilization + density ramp-down      │
+  │      Maintain q_min > 1, beta_N < 80% of stable limit              │
   │                                                                    │
-  │  [3] 완화 (Mitigation)                                             │
-  │      SPI (Shattered Pellet Injection): Ne/D2 혼합 pellet          │
-  │      열 부하 분산 + RE seed 억제                                    │
-  │      ITER 표준 방식 채택                                            │
+  │  [3] Mitigation                                                    │
+  │      SPI (Shattered Pellet Injection): Ne/D2 mixed pellet          │
+  │      Heat load distribution + RE seed suppression                  │
+  │      Adopts ITER-standard method                                   │
   │                                                                    │
-  │  [4] 복구 (Recovery)                                               │
-  │      Soft landing → 재시작 시퀀스                                   │
-  │      CS flux 예비 + 가열 재투입 → ramp-up 복귀                      │
+  │  [4] Recovery                                                      │
+  │      Soft landing -> restart sequence                              │
+  │      CS flux reserve + heating reinjection -> return to ramp-up    │
   └────────────────────────────────────────────────────────────────────┘
 
-  전략 수: 4 = tau(6) ✓ (EXACT)
-  SPI 주입기: 2 = phi (상부 + 하부)
+  Strategy count: 4 = tau(6) (EXACT)
+  SPI injectors: 2 = phi (upper + lower)
 ```
 
 ---
 
 ## 10. Balance of Plant (BOP)
 
-### 10.1 발전 사이클 — n=6 Brayton
+### 10.1 Power cycle - n=6 Brayton
 
-| 파라미터 | ITER (비발전) | DEMO (계획) | **KSTAR-N6** | n=6 표현 | Grade |
+| Parameter | ITER (non-power) | DEMO (planned) | **KSTAR-N6** | n=6 expression | Grade |
 |---------|-------------|-----------|-------------|---------|-------|
-| 사이클 | 없음 | Rankine/Brayton | **sCO2 Brayton** | - | N/A |
-| 단 수 | - | 2~4 | **6** | n = 6 | EXACT |
-| 열효율 eta | - | 33~45% | **50%** | sigma/J_2 = 1/2 | EXACT |
-| 전기 출력 [MWe] | 0 | 300~500 | **~300** | calc. | N/A |
-| 냉각수 유량 [m^3/s] | ~33 | - | **~12** | sigma = 12 | CLOSE |
-| Grid 연결 | 100+ MWe 소비 | 발전 | **발전** | 60Hz (BT-62) | N/A |
+| Cycle | none | Rankine/Brayton | **sCO2 Brayton** | - | N/A |
+| Stages | - | 2~4 | **6** | n = 6 | EXACT |
+| Thermal efficiency eta | - | 33~45% | **50% (target)** | sigma/J_2 = 1/2 | EXACT |
+| Electric output [MWe] | 0 | 300~500 | **~300 (target)** | calc. | N/A |
+| Coolant flow [m^3/s] | ~33 | - | **~12** | sigma = 12 | CLOSE |
+| Grid connection | 100+ MWe consumption | generation | **generation** | 60Hz (BT-62) | N/A |
 
-**물리적 근거**:
+**Physical basis**:
 ```
   sCO2 Brayton Cycle:
-    입구 온도: ~600C (SiC/LiPb 블랭킷 출구)
-    출구 온도: ~150C
-    Carnot 효율: 1 - 423/873 = 51.5%
-    실용 효율: ~50% (재열 + 중간 냉각 포함)
+    Inlet temperature: ~600C (SiC/LiPb blanket outlet)
+    Outlet temperature: ~150C
+    Carnot efficiency: 1 - 423/873 = 51.5%
+    Practical efficiency: ~50% (including reheat + intercooling)
 
-  전기 출력:
-    P_th = P_fus * 1.17 (에너지 증배: 4.78MeV breeding + 14.1MeV + 3.5MeV)
-    P_th ≈ 600 * 1.17 ≈ 702 MW
+  Electric output:
+    P_th = P_fus * 1.17 (energy multiplication: 4.78MeV breeding + 14.1MeV + 3.5MeV)
+    P_th ~= 600 * 1.17 ~= 702 MW
     P_el = P_th * eta - P_aux - P_cryo - P_pump
-    P_el ≈ 702 * 0.50 - 24 - 30 - 20 ≈ 277 MWe net
-    → ~300 MWe (최적화 시)
+    P_el ~= 702 * 0.50 - 24 - 30 - 20 ~= 277 MWe net
+    -> ~300 MWe (at optimization, target)
 
-  6단 압축-팽창:
-    3 압축기 (intercooled) + 3 터빈 (reheated)
-    = n/phi 압축 + n/phi 팽창 = n 총 단수
+  6-stage compression-expansion:
+    3 compressors (intercooled) + 3 turbines (reheated)
+    = n/phi compression + n/phi expansion = n total stages
 ```
 
 ---
 
-## 11. n=6 스코어카드 (N6 Scorecard)
+## 11. n=6 Scorecard
 
-### 11.1 전체 파라미터 EXACT/CLOSE/MISS 평가
+### 11.1 Full-parameter EXACT/CLOSE/MISS assessment
 
-| # | 파라미터 | 값 | n=6 표현 | Grade |
+| # | Parameter | Value | n=6 expression | Grade |
 |---|---------|-----|---------|-------|
 | 1 | R_0 [m] | 6.0 | n = 6 | EXACT |
 | 2 | a [m] | 2.0 | phi = 2 | EXACT |
@@ -750,218 +749,218 @@ n=6 산술과의 일치는 흥미로운 수적 패턴이지만, 설계의 물리
 | 44 | Neutron wall load [MW/m^2] | 1.0 | mu = 1 | EXACT |
 | 45 | Blanket outlet [C] | 600 | sigma*sopfr*(sigma-phi) = 600 | EXACT |
 
-### 11.2 스코어 요약
+### 11.2 Score summary
 
 ```
   ┌─────────────────────────────────────────────────────┐
-  │           KSTAR-N6 Scorecard Summary                 │
+  │           KSTAR-N6 Scorecard Summary                │
   │                                                     │
-  │  EXACT:  45 / 45 = 100.0%  ★★★ PERFECT ★★★        │
-  │  CLOSE:   0 / 45 =   0.0%                          │
-  │  N/A:     0 / 45 =   0.0%                          │
-  │  MISS:    0 / 45 =   0.0%                          │
+  │  EXACT:  45 / 45 = 100.0%  *** PERFECT (candidate) ***│
+  │  CLOSE:   0 / 45 =   0.0%                           │
+  │  N/A:     0 / 45 =   0.0%                           │
+  │  MISS:    0 / 45 =   0.0%                           │
   │                                                     │
-  │  n6_match = 45 / 45 = 100.0%                       │
+  │  n6_match = 45 / 45 = 100.0% (candidate)            │
   │                                                     │
-  │  ★ 특이점 돌파: 45/45 EXACT = 물리한계 완전 수렴 ★  │
+  │  * Singularity target candidate: 45/45 EXACT = full physical-limit convergence *│
   └─────────────────────────────────────────────────────┘
 ```
 
-**v2 → v3 업그레이드 (CLOSE/N/A → EXACT 보정):**
-- #43 Peak B: ~18T → 18.0T (TF 내측 반경 R_inner = B_0·R_0/B_peak = 12×6/18 = 4.0m 정밀 설계)
-- #44 Wall load: ~1.0 → 1.0 MW/m² (P_fus = 592MW → P_n = 474MW / A_wall = 474m² = 1.00)
-- #45 Blanket outlet: 600°C = σ·sopfr·(σ-φ) = 12×5×10 = 600 (n=6 삼중곱 발견)
+**v2 -> v3 upgrade (CLOSE/N/A -> EXACT correction):**
+- #43 Peak B: ~18 T -> 18.0 T (TF inner radius R_inner = B_0*R_0/B_peak = 12*6/18 = 4.0 m precise design)
+- #44 Wall load: ~1.0 -> 1.0 MW/m^2 (P_fus = 592 MW -> P_n = 474 MW / A_wall = 474 m^2 = 1.00)
+- #45 Blanket outlet: 600 C = sigma*sopfr*(sigma-phi) = 12*5*10 = 600 (n=6 triple-product finding, candidate)
 
-### 11.3 장치간 비교
+### 11.3 Device-to-device comparison
 
-| 장치 | 총 파라미터 | EXACT | CLOSE | n6_match |
+| Device | Total params | EXACT | CLOSE | n6_match |
 |------|-----------|-------|-------|----------|
-| **KSTAR-N6 v3** | 45 | **45** | 0 | **100.0%** ★ |
+| **KSTAR-N6 v3 (candidate)** | 45 | **45** | 0 | **100.0% (target)** |
 | **ITER** | 45 | ~12 | ~8 | ~36% |
 | **SPARC** | 45 | ~8 | ~6 | ~25% |
-| **KSTAR (현재)** | 45 | ~5 | ~4 | ~16% |
+| **KSTAR (current)** | 45 | ~5 | ~4 | ~16% |
 
 ```
-  ITER n=6 일치 항목 (주요):
-    TF=18=3n EXACT, PF=6=n EXACT, A≈3.1≈n/phi CLOSE
-    가열 방법 3가지 EXACT, q_95≈3 CLOSE
-    Li-6 breeding EXACT, phi=2 반응 EXACT
-    → ~12 EXACT, ~8 CLOSE → n6_match ≈ 36%
+  ITER n=6 matching items (main):
+    TF=18=3n EXACT, PF=6=n EXACT, A~=3.1~=n/phi CLOSE
+    3 heating methods EXACT, q_95~=3 CLOSE
+    Li-6 breeding EXACT, phi=2 reactions EXACT
+    -> ~12 EXACT, ~8 CLOSE -> n6_match ~= 36%
 
-  SPARC n=6 일치 항목 (주요):
-    B_T=12.2≈sigma EXACT, TF=18=3n EXACT
-    HTS 소재 일치, 가열 방법
-    → ~8 EXACT → n6_match ≈ 25%
+  SPARC n=6 matching items (main):
+    B_T=12.2~=sigma EXACT, TF=18=3n EXACT
+    HTS material match, heating methods
+    -> ~8 EXACT -> n6_match ~= 25%
 
-  KSTAR 현재 n=6 일치 항목:
+  KSTAR current n=6 matching items:
     kappa=2.0=phi EXACT, NBI 8MW=sigma-tau EXACT
     ICRH 6MW=n EXACT, NBI 120keV EXACT
-    가열 방법 3=n/phi EXACT
-    → ~5 EXACT → n6_match ≈ 16%
+    Heating methods 3=n/phi EXACT
+    -> ~5 EXACT -> n6_match ~= 16%
 ```
 
 ---
 
-## 12. 공학적 실현 가능성 평가 (Engineering Feasibility)
+## 12. Engineering Feasibility
 
-### 12.1 기술 성숙도 (TRL Assessment)
+### 12.1 Technology Readiness Level (TRL) assessment
 
-| 기술 | TRL | 근거 | 리스크 |
+| Technology | TRL | Basis | Risk |
 |------|-----|------|-------|
-| HTS-REBCO TF 코일 | 5~6 | SPARC 2025 착공, KSTAR 부분 교체 계획 | HTS 대형 코일 제작 경험 부족 |
-| HTS-REBCO CS | 4~5 | SPARC CS 설계 중, 소형 시연 완료 | 대전류 접합부 기술 |
-| SiC/SiC 블랭킷 | 3~4 | NITE 공정 개발 중, 소형 샘플 조사 시험 | 대형 제작 + 접합 |
-| LiPb TBM | 5 | ITER TBM 프로그램 (EU-DCLL, KO-HCLL) | TBR 실측 미완 |
-| sCO2 Brayton | 5 | 10MWe급 시범 플랜트 (미국 DOE) | 600C급 열교환기 |
-| Double-null 디버터 | 7 | KSTAR/DIII-D 실증 운전 | 비대칭 부하 제어 |
-| 170GHz 자이로트론 | 7 | 2MW/unit 장시간 운전 실증 | 10MW 총출력 통합 |
-| ML disruption predictor | 6 | KSTAR/JET/DIII-D 실증 | 다른 장치 이식성 |
+| HTS-REBCO TF coil | 5~6 | SPARC construction started 2025, KSTAR partial replacement planned | limited HTS large-coil fabrication experience |
+| HTS-REBCO CS | 4~5 | SPARC CS under design, small demo complete | high-current joint technology |
+| SiC/SiC blanket | 3~4 | NITE process under development, small-sample irradiation tests | large-scale fabrication + joining |
+| LiPb TBM | 5 | ITER TBM program (EU-DCLL, KO-HCLL) | TBR direct measurement pending |
+| sCO2 Brayton | 5 | 10 MWe-class demo plant (US DOE) | 600 C-class heat exchangers |
+| Double-null divertor | 7 | KSTAR/DIII-D demonstrated operation | asymmetric load control |
+| 170 GHz gyrotron | 7 | 2 MW/unit long-duration demonstration | 10 MW total-output integration |
+| ML disruption predictor | 6 | KSTAR/JET/DIII-D demonstrated | portability across devices |
 
-### 12.2 부지 요건 (Site Requirements)
+### 12.2 Site requirements
 
 ```
-  전력 소비:
-    자석 냉각 (크라이오): ~30 MWe (20K HTS, 기존 4.5K 대비 ~1/3)
-    가열 시스템: ~60 MWe (wall-plug → plasma 효율 ~40%)
-    보조 시스템: ~30 MWe (펌프, 진공, 제어, 건물)
-    총 소비: ~120 MW = sigma * (sigma-phi) (EXACT!)
-    Peak: ~150 MW (pulse 운전 시)
+  Electric consumption (estimates):
+    Magnet cooling (cryo): ~30 MWe (20K HTS, ~1/3 of legacy 4.5K)
+    Heating systems: ~60 MWe (wall-plug -> plasma efficiency ~40%)
+    Auxiliary systems: ~30 MWe (pumps, vacuum, control, buildings)
+    Total consumption: ~120 MW = sigma * (sigma-phi) (EXACT)
+    Peak: ~150 MW (during pulse operation)
 
-  냉각수:
-    총 방열: ~400 MWth (융합 출력 + 보조)
-    냉각탑 또는 하천수: ~12 m^3/s (sigma, CLOSE)
+  Coolant:
+    Total heat rejection: ~400 MWth (fusion output + auxiliary)
+    Cooling tower or river water: ~12 m^3/s (sigma, CLOSE)
 
-  부지 면적:
-    토카막 빌딩: ~100m × 80m
-    전력 공급 빌딩: ~60m × 40m
-    삼중수소 처리: ~50m × 30m
-    기타 (사무실, 핫셀, 창고): ~200m × 100m
-    총 부지: ~20 hectare (ITER 급)
+  Site area:
+    Tokamak building: ~100m x 80m
+    Power-supply building: ~60m x 40m
+    Tritium handling: ~50m x 30m
+    Other (offices, hot cell, storage): ~200m x 100m
+    Total site: ~20 hectares (ITER class)
 
-  지질 요건:
-    내진 설계: 0.2g (한국 기준)
-    지반 지지력: >300 kPa (자석 중량 고려)
-    지하수: 삼중수소 격리 확보
+  Geological requirements:
+    Seismic design: 0.2 g (Korean standard)
+    Ground-bearing capacity: >300 kPa (magnet weight consideration)
+    Groundwater: tritium isolation secured
 ```
 
-### 12.3 타임라인 추정
+### 12.3 Timeline estimate (target candidate)
 
 ```
   ┌─────────────────────────────────────────────────────────────────┐
-  │              KSTAR-N6 Development Timeline                       │
+  │              KSTAR-N6 Development Timeline (candidate)          │
   │                                                                 │
-  │  Phase 0: 개념 설계 (2026~2028)          3년                     │
-  │    - 물리 설계 확정 (0-D → 1.5D → 3D MHD)                       │
-  │    - HTS 코일 기술 검증 (SPARC 결과 반영)                         │
-  │    - SiC/SiC 블랭킷 재료 조사 시험                                │
+  │  Phase 0: Conceptual design (2026~2028)          3 years        │
+  │    - Physics design finalization (0-D -> 1.5D -> 3D MHD)        │
+  │    - HTS coil technology verification (reflecting SPARC results)│
+  │    - SiC/SiC blanket material irradiation testing               │
   │                                                                 │
-  │  Phase 1: 상세 설계 (2028~2031)          3년 = n/phi             │
-  │    - TF/PF/CS 코일 상세 설계                                     │
-  │    - 진공용기/크라이오스탯 설계                                    │
-  │    - 부지 선정 + 인허가                                           │
+  │  Phase 1: Detailed design (2028~2031)        3 years = n/phi    │
+  │    - TF/PF/CS coil detailed design                              │
+  │    - Vacuum vessel/cryostat design                              │
+  │    - Site selection + licensing                                 │
   │                                                                 │
-  │  Phase 2: 제작/건설 (2031~2037)          6년 = n                  │
-  │    - HTS 코일 제작 (18 TF + 6 PF + 6 CS)                        │
-  │    - 진공용기 제작/조립                                           │
-  │    - 건물/인프라 건설                                             │
+  │  Phase 2: Fabrication/Construction (2031~2037)   6 years = n    │
+  │    - HTS coil fabrication (18 TF + 6 PF + 6 CS)                 │
+  │    - Vacuum vessel fabrication/assembly                         │
+  │    - Building/infrastructure construction                       │
   │                                                                 │
-  │  Phase 3: 통합/시운전 (2037~2039)        2년 = phi                │
-  │    - 자석 시스템 냉각 시험                                        │
-  │    - First plasma                                                │
-  │    - 가열 시스템 통합                                             │
+  │  Phase 3: Integration/Commissioning (2037~2039) 2 years = phi   │
+  │    - Magnet system cooling test                                 │
+  │    - First plasma                                               │
+  │    - Heating system integration                                 │
   │                                                                 │
-  │  Phase 4: 연구 운전 (2039~2045)          6년 = n                  │
-  │    - H-mode 달성, Q=10 도전                                      │
-  │    - 장펄스 300s+ 달성                                            │
-  │    - 블랭킷 TBR 실증                                             │
+  │  Phase 4: Research operation (2039~2045)         6 years = n    │
+  │    - H-mode achievement, Q=10 attempt (target)                  │
+  │    - Long pulse 300 s+ achievement (target)                     │
+  │    - Blanket TBR demonstration (target)                         │
   │                                                                 │
-  │  총 기간: 2026~2039 (first plasma) = 13년                        │
-  │  총 기간: 2026~2045 (Q=10 달성) = 19년                           │
+  │  Total period: 2026~2039 (first plasma) = 13 years (candidate)  │
+  │  Total period: 2026~2045 (Q=10 target achievement candidate) = 19 years│
   │                                                                 │
-  │  참고: ITER 1988→2025 = 37년, SPARC 2018→2025 = 7년             │
+  │  Reference: ITER 1988->2025 = 37 yrs, SPARC 2018->2025 = 7 yrs  │
   └─────────────────────────────────────────────────────────────────┘
 ```
 
-### 12.4 핵심 기술 리스크
+### 12.4 Key technology risks
 
-| # | 리스크 | 영향도 | 확률 | 대응 |
+| # | Risk | Impact | Probability | Response |
 |---|--------|-------|------|------|
-| 1 | HTS 코일 대형화 실패 | 치명적 | 중 | SPARC 결과 대기, 백업으로 Nb3Sn 12T 설계 병행 |
-| 2 | SiC/SiC 블랭킷 조사 열화 | 높음 | 중 | RAFM 강 (EUROFER) 백업, 다중 재료 시험 |
-| 3 | TBR < 1.0 (삼중수소 자급 실패) | 높음 | 저 | Li-6 농축도 95%까지 증가, Be 중성자 증배기 |
-| 4 | Disruption 빈도 > 1/1000 | 높음 | 중 | 보수적 beta_N, ML 예측 + RMP ELM 억제 |
-| 5 | sCO2 Brayton 600C 열교환기 | 중 | 중 | 단계적 T 상승, Rankine 백업 |
-| 6 | 삼중수소 취급 인허가 | 높음 | 저 | ITER/KSTAR 경험, 한국 원자력안전위원회 협력 |
+| 1 | HTS coil scale-up failure | Critical | Medium | Await SPARC results, parallel Nb3Sn 12T backup design |
+| 2 | SiC/SiC blanket irradiation degradation | High | Medium | RAFM steel (EUROFER) backup, multi-material testing |
+| 3 | TBR < 1.0 (tritium self-sufficiency failure) | High | Low | Increase Li-6 enrichment to 95%, Be neutron multiplier |
+| 4 | Disruption frequency > 1/1000 | High | Medium | Conservative beta_N, ML prediction + RMP ELM suppression |
+| 5 | sCO2 Brayton 600 C heat exchanger | Medium | Medium | Stepwise T increase, Rankine backup |
+| 6 | Tritium handling licensing | High | Low | ITER/KSTAR experience, Korea NSSC cooperation |
 
 ---
 
-## 13. 비용 추정 (Cost Estimate)
+## 13. Cost Estimate
 
 ```
   ┌────────────────────────────────────────────────────────────────┐
-  │              KSTAR-N6 Cost Breakdown (rough order)              │
+  │              KSTAR-N6 Cost Breakdown (rough order, candidate)  │
   │                                                                │
-  │  자석 시스템 (HTS TF+PF+CS):  ~3,000 M USD  (40%)             │
-  │  진공용기 + 블랭킷:            ~1,000 M USD  (13%)             │
-  │  가열 시스템 (NBI+ICRH+ECRH):   ~500 M USD   (7%)             │
-  │  디버터:                         ~200 M USD   (3%)             │
-  │  진단 + 제어:                    ~300 M USD   (4%)             │
-  │  크라이오 + 냉각:                ~400 M USD   (5%)             │
-  │  BOP (Brayton cycle):           ~600 M USD   (8%)             │
-  │  건물/인프라:                    ~800 M USD  (11%)             │
-  │  설계/관리/예비:                 ~700 M USD   (9%)             │
+  │  Magnet system (HTS TF+PF+CS):  ~3,000 M USD  (40%)            │
+  │  Vacuum vessel + blanket:        ~1,000 M USD  (13%)           │
+  │  Heating (NBI+ICRH+ECRH):          ~500 M USD   (7%)           │
+  │  Divertor:                         ~200 M USD   (3%)           │
+  │  Diagnostics + control:            ~300 M USD   (4%)           │
+  │  Cryo + cooling:                   ~400 M USD   (5%)           │
+  │  BOP (Brayton cycle):              ~600 M USD   (8%)           │
+  │  Buildings/infrastructure:         ~800 M USD  (11%)           │
+  │  Design/management/contingency:    ~700 M USD   (9%)           │
   │  ────────────────────────────────────────────────              │
-  │  총 비용:                      ~7,500 M USD                    │
+  │  Total cost (target):              ~7,500 M USD                │
   │                                                                │
-  │  참고:                                                         │
-  │    ITER:    ~22,000 M USD (2024 기준)                          │
-  │    SPARC:   ~2,500 M USD (compact)                             │
-  │    KSTAR:     ~300 M USD (1990년대)                            │
-  │    ARC(MIT):~5,000 M USD (설계 연구)                           │
+  │  Reference:                                                    │
+  │    ITER:    ~22,000 M USD (as of 2024)                         │
+  │    SPARC:    ~2,500 M USD (compact)                            │
+  │    KSTAR:      ~300 M USD (1990s)                              │
+  │    ARC(MIT):  ~5,000 M USD (design study)                      │
   │                                                                │
-  │  KSTAR-N6 ≈ 1/3 ITER 비용 (HTS 효과 + 최적화)                 │
+  │  KSTAR-N6 ~= 1/3 of ITER cost (HTS effect + optimization, candidate)│
   └────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 14. DSE 최적 경로와의 정합성 (DSE Alignment)
+## 14. DSE Alignment
 
-fusion.toml DSE 최적 경로: **DT_Li6 + Tokamak_N6 + N6_TriHeat + N6_Li6_Blanket + N6_Brayton6**
+fusion.toml DSE optimal path: **DT_Li6 + Tokamak_N6 + N6_TriHeat + N6_Li6_Blanket + N6_Brayton6**
 
-| DSE Level | 최적 후보 | KSTAR-N6 적용 | n6 score | 일치 |
+| DSE Level | Optimal candidate | KSTAR-N6 application | n6 score | Match |
 |-----------|----------|--------------|----------|------|
-| Fuel | DT_Li6 | D-T + Li-6 breeding cycle | 1.00 | 완전 일치 |
-| Confinement | Tokamak_N6 | TF=18, PF=6, A=3, B=12T | 1.00 | 완전 일치 |
-| Heating | N6_TriHeat | NBI+ICRH+ECRH = 24MW | 1.00 | 완전 일치 |
-| Blanket | N6_Li6_Blanket | Li-6 LiPb, TBR=7/6 | 1.00 | 완전 일치 |
-| Plant | N6_Brayton6 | sCO2 6-stage, eta=50% | 1.00 | 완전 일치 |
+| Fuel | DT_Li6 | D-T + Li-6 breeding cycle | 1.00 | full match |
+| Confinement | Tokamak_N6 | TF=18, PF=6, A=3, B=12T | 1.00 | full match |
+| Heating | N6_TriHeat | NBI+ICRH+ECRH = 24MW | 1.00 | full match |
+| Blanket | N6_Li6_Blanket | Li-6 LiPb, TBR=7/6 | 1.00 | full match |
+| Plant | N6_Brayton6 | sCO2 6-stage, eta=50% | 1.00 | full match |
 
-**DSE 경로 n6 평균: 1.00 (5/5 최적 후보 전수 채택)**
+**DSE path n6 average: 1.00 (5/5 optimal candidates all adopted)**
 
 ---
 
-## 15. 관련 BT/가설 연결 (Cross-Reference)
+## 15. Related BT/Hypothesis Cross-Reference
 
-| BT/가설 | 내용 | KSTAR-N6 반영 |
+| BT/Hypothesis | Content | KSTAR-N6 reflection |
 |---------|------|-------------|
-| **BT-5** | q=1 = 1/2+1/3+1/6 = MHD stability | q_0=1 안정성 한계 (EXACT) |
-| **BT-27** | Carbon-6 energy chain | Li-6 증식 + SiC first wall |
-| **BT-38** | Hydrogen quadruplet | D-T 연료 물리 |
-| **BT-62** | Grid frequency 60Hz = sigma*sopfr | Grid 연결 60Hz |
-| **BT-74** | 95/5 cross-domain resonance | beta_plasma ≈ 5% target |
-| **H-FU-1** | D-T nucleon sopfr=5 | 연료 핵자수 2+3=5 (EXACT) |
-| **H-FU-9** | T_i optimal = 14keV ≈ sigma+phi | 운전 이온 온도 14keV |
-| **H-FU-17** | 가열 방법 3종 = n/phi | NBI+ICRH+ECRH (EXACT) |
-| **H-FU-30** | Li-6 isotope A=6=n | 증식 연료 (EXACT) |
-| **H-SM-1** | 자석 3유형 = n/phi | TF+PF+CS (EXACT) |
-| **H-SM-2** | ITER TF=18=3n | TF 18코일 (EXACT) |
-| **H-SM-68** | HTS/LTS boundary ≈ 12T=sigma | HTS 12T 운전 (EXACT) |
-| **H-TK-2** | 포트 3유형 = n/phi | 상/수평/하 포트 (EXACT) |
+| **BT-5** | q=1 = 1/2+1/3+1/6 = MHD stability | q_0=1 stability limit (EXACT) |
+| **BT-27** | Carbon-6 energy chain | Li-6 breeding + SiC first wall |
+| **BT-38** | Hydrogen quadruplet | D-T fuel physics |
+| **BT-62** | Grid frequency 60Hz = sigma*sopfr | Grid connection 60Hz |
+| **BT-74** | 95/5 cross-domain resonance | beta_plasma ~= 5% target |
+| **H-FU-1** | D-T nucleon sopfr=5 | fuel nucleon count 2+3=5 (EXACT) |
+| **H-FU-9** | T_i optimal = 14 keV ~= sigma+phi | operating ion temperature 14 keV |
+| **H-FU-17** | 3 heating methods = n/phi | NBI+ICRH+ECRH (EXACT) |
+| **H-FU-30** | Li-6 isotope A=6=n | breeding fuel (EXACT) |
+| **H-SM-1** | 3 magnet types = n/phi | TF+PF+CS (EXACT) |
+| **H-SM-2** | ITER TF=18=3n | TF 18 coils (EXACT) |
+| **H-SM-68** | HTS/LTS boundary ~= 12T=sigma | HTS 12 T operation (EXACT) |
+| **H-TK-2** | 3 port types = n/phi | top/horizontal/bottom ports (EXACT) |
 
 ---
 
-## 16. 요약 (Executive Summary)
+## 16. Executive Summary
 
 ```
   ╔═══════════════════════════════════════════════════════════════════════╗
@@ -979,269 +978,268 @@ fusion.toml DSE 최적 경로: **DT_Li6 + Tokamak_N6 + N6_TriHeat + N6_Li6_Blank
   ║  Fusion power P_fus            ║  ~600 MW thermal                    ║
   ║  Electric output P_el          ║  ~300 MWe net                       ║
   ║  Blanket TBR                   ║  7/6 = 1.167                        ║
-  ║  n6_match score                ║  100.0% (45/45 EXACT) ★ PERFECT     ║
-  ║  Steady-state                  ║  ∞ (100% non-inductive, AT mode)    ║
-  ║  Q (AT ignition)               ║  → ∞ (self-sustaining at 20keV)     ║
-  ║  Estimated cost                ║  ~7.5 B USD                         ║
-  ║  First plasma target           ║  2039                               ║
+  ║  n6_match score                ║  100.0% (45/45 EXACT, candidate)    ║
+  ║  Steady-state                  ║  infinity (100% non-inductive, AT)  ║
+  ║  Q (AT ignition, candidate)    ║  -> infinity target (self-sustaining at 20 keV)│
+  ║  Estimated cost (target)       ║  ~7.5 B USD                         ║
+  ║  First plasma target candidate ║  2039                               ║
   ╚═════════════════════════════════╩═════════════════════════════════════╝
 ```
 
-**KSTAR-N6 v3는 n=6 산술 프레임워크에서 도출된 파라미터가 현대 핵융합 물리/공학과
-완전 수렴(100.0%)을 달성하고, 특이점(Q→∞ 점화)을 돌파한 차세대 토카막 설계이다.**
+**KSTAR-N6 v3 is a next-generation tokamak design candidate in which parameters derived from the n=6 arithmetic framework may converge (100.0%) with modern fusion physics/engineering and reach a singularity target (Q->infinity ignition candidate).**
 
-핵심 혁신 4가지:
-1. **HTS-REBCO 12T**: SPARC 기술 스케일업, sigma=12 자기장으로 ITER급 성능 달성
-2. **Li-6 완전 연료 사이클**: A=6=n 동위원소로 삼중수소 자급자족 + TBR=7/6
-3. **100% 비유도 정상 상태**: Egyptian Fraction 전류 분해 (2/3+1/6+1/12+1/12=1)
-4. **Q→∞ 자기 점화**: AT mode + ITB + T_i=20keV(=J₂-τ) → 특이점 돌파
+Four core innovation candidates:
+1. **HTS-REBCO 12 T**: SPARC technology scale-up, ITER-class performance target via sigma=12 field
+2. **Li-6 complete fuel cycle**: tritium self-sufficiency + TBR=7/6 target via A=6=n isotope
+3. **100% non-inductive steady-state (target)**: Egyptian Fraction current decomposition (2/3+1/6+1/12+1/12=1)
+4. **Q -> infinity self-ignition (target candidate)**: AT mode + ITB + T_i=20 keV (=J_2-tau) -> singularity breakthrough candidate
 
 ---
 
-## 17. 플라즈마 물리 방정식에서 n=6 필연성 (N6 Necessity from Plasma Equations)
+## 17. n=6 Necessity from Plasma Equations
 
-### 17.1 Grad-Shafranov 방정식과 q=1 표면
+### 17.1 Grad-Shafranov equation and the q=1 surface
 
-MHD 평형을 지배하는 Grad-Shafranov (GS) 방정식:
+The Grad-Shafranov (GS) equation governing MHD equilibrium:
 
 ```
   R * d/dR (1/R * dPsi/dR) + d^2Psi/dZ^2 = -mu_0 * R^2 * dp/dPsi - F * dF/dPsi
 
-  여기서:
-    Psi = 폴로이달 자기 플럭스 함수
-    p(Psi) = 압력 프로파일
-    F(Psi) = R * B_phi (토로이달 자기장 함수)
+  where:
+    Psi = poloidal magnetic flux function
+    p(Psi) = pressure profile
+    F(Psi) = R * B_phi (toroidal field function)
     q(Psi) = safety factor = (1/2*pi) * oint (F / R^2 * |grad Psi|^{-1}) dl
 ```
 
-**q=1 표면의 물리적 필연성**:
+**Physical necessity of the q=1 surface**:
 
-GS 방정식의 해에서 축(magnetic axis)의 safety factor q_0는 전류 분포 j(r)에 의해 결정된다:
+In solutions of the GS equation the on-axis (magnetic axis) safety factor q_0 is determined by the current distribution j(r):
 
 ```
   q(r) = r * B_T / (R_0 * B_theta(r))
 
-  축 근방 (r → 0):
+  Near-axis (r -> 0):
     j(0) = 2*B_T / (mu_0 * R_0 * q_0)
 
-  q_0 = 1이 특별한 이유:
-    1. Kruskal-Shafranov 한계: 내부 킹크 불안정 → q < 1이면 (m=1,n=1) sawtooth 발생
-    2. H-mode 플라즈마에서 q_0 ≈ 0.9~1.0으로 자연 수렴 (sawtooth mixing)
-    3. 정상 상태 운전: q_0 = 1 표면이 에너지 재분배의 자연 경계
+  Why q_0 = 1 is special:
+    1. Kruskal-Shafranov limit: internal kink instability -> for q < 1 an (m=1,n=1) sawtooth appears
+    2. In H-mode plasmas q_0 ~= 0.9~1.0 converges naturally (sawtooth mixing)
+    3. Steady-state operation: the q_0 = 1 surface is the natural boundary of energy redistribution
 
-  BT-5 연결:
-    q = 1 = 1/2 + 1/3 + 1/6  (완전수 6의 약수 역수 합)
+  BT-5 connection:
+    q = 1 = 1/2 + 1/3 + 1/6  (sum of reciprocals of proper divisors of perfect number 6)
 
-    이것은 수론적 우연인가, 물리적 필연인가?
-    → 정직한 평가: q=1은 물리적 필연 (kink stability boundary)
-    → 1/2+1/3+1/6=1은 수론적 정체성 (perfect number definition)
-    → 두 사실이 같은 "1"을 공유하지만, 인과 관계는 아님
-    → Grade: EXACT (값 일치) / 인과성: WEAK (우연적 일치)
+    Is this number-theoretic coincidence or physical necessity?
+    -> Honest assessment: q=1 is a physical necessity (kink stability boundary)
+    -> 1/2+1/3+1/6=1 is a number-theoretic identity (perfect-number definition)
+    -> The two facts share the same "1" but are not causally related
+    -> Grade: EXACT (value match) / Causality: WEAK (coincidental match)
 ```
 
-### 17.2 Lawson 기준과 tau(6)=4 차원 분석
+### 17.2 Lawson criterion and tau(6)=4 dimensional analysis
 
-핵융합 점화 조건 (Lawson criterion):
+Fusion ignition condition (Lawson criterion):
 
 ```
-  n_e * T_i * tau_E > 3 × 10^{21} keV · s / m^3   (D-T 반응)
+  n_e * T_i * tau_E > 3 x 10^{21} keV * s / m^3   (D-T reaction)
 
-  이 조건은 3개 독립 변수의 곱 ("triple product"):
-    (1) n_e  : 전자 밀도 [m^{-3}]
-    (2) T_i  : 이온 온도 [keV]
-    (3) tau_E : 에너지 가둠 시간 [s]
+  This condition is the product of 3 independent variables ("triple product"):
+    (1) n_e   : electron density [m^{-3}]
+    (2) T_i   : ion temperature [keV]
+    (3) tau_E : energy confinement time [s]
 
-  차원 분석:
+  Dimensional analysis:
     [n_e * T_i * tau_E] = m^{-3} * keV * s
 
-    물리적 독립 차원 수: 4개
-      길이 (m), 시간 (s), 에너지 (keV = kg·m^2/s^2), 입자수 (무차원이지만 m^{-3}로 등장)
+    Number of physically independent dimensions: 4
+      length (m), time (s), energy (keV = kg*m^2/s^2), particle count (dimensionless but appears as m^{-3})
 
-    Buckingham Pi 정리:
-      물리 변수 7개 (n, T, tau, B, R, a, P_heat) - 독립 차원 4개 = 3개 무차원군
-      → n=6 연결: tau(6) = 4 = 독립 차원 수? → WEAK
+    Buckingham Pi theorem:
+      7 physical variables (n, T, tau, B, R, a, P_heat) - 4 independent dimensions = 3 dimensionless groups
+      -> n=6 connection: tau(6) = 4 = number of independent dimensions? -> WEAK
 
-  triple product = 3 변수:
-    n/phi = 3 = 변수 수? → 구조적 일치이나 자명한 물리학적 이유 존재
-    (밀도 × 온도 × 시간 = 단순히 에너지 밀도 × 체류 시간)
+  triple product = 3 variables:
+    n/phi = 3 = variable count? -> structural match, but the physical reason is obvious
+    (density x temperature x time = simply energy density x residence time)
 
-  정직한 평가:
-    - triple product의 "3"은 에너지 수지 방정식에서 필연적으로 나오는 3개 변수
-    - n/phi = 3과의 일치는 우연 (어떤 산술 체계든 3은 등장)
-    - Grade: WEAK (숫자 3은 너무 흔함)
+  Honest assessment:
+    - The "3" in triple product is necessarily the 3 variables in the energy balance equation
+    - Match with n/phi = 3 is coincidental (3 appears in any arithmetic system)
+    - Grade: WEAK (the number 3 is too common)
 ```
 
-### 17.3 Troyon 스케일링과 beta_N 한계
+### 17.3 Troyon scaling and beta_N limit
 
 Troyon beta limit:
 
 ```
   beta_N = beta_T [%] * a [m] * B_T [T] / I_p [MA]
 
-  이상적 벽 없음: beta_N ≤ 2.8  (Troyon 1984)
-  이상적 벽 있음: beta_N ≤ 3.5  (resistive wall feedback)
-  피드백 포함:    beta_N ≤ 4.0~5.0 (advanced tokamak)
+  Ideal wall absent: beta_N <= 2.8  (Troyon 1984)
+  Ideal wall present: beta_N <= 3.5  (resistive wall feedback)
+  With feedback:      beta_N <= 4.0~5.0 (advanced tokamak)
 
-  n=6 연결 시도:
-    beta_N = 3.5 = n/phi + mu/phi + mu = 3 + 0.5 + 0 → 맞지 않음
-    beta_N = 3.5 = (sigma - mu) / (n/phi) = 11/3 = 3.667 → MISS
-    beta_N = 3.5 = 7/2 = (sigma + phi) / tau = 14/4 = 3.5 → EXACT!
+  n=6 connection attempts:
+    beta_N = 3.5 = n/phi + mu/phi + mu = 3 + 0.5 + 0 -> does not match
+    beta_N = 3.5 = (sigma - mu) / (n/phi) = 11/3 = 3.667 -> MISS
+    beta_N = 3.5 = 7/2 = (sigma + phi) / tau = 14/4 = 3.5 -> EXACT!
 
-    (sigma + phi) / tau = (12 + 2) / 4 = 14/4 = 3.5 ✓
+    (sigma + phi) / tau = (12 + 2) / 4 = 14/4 = 3.5 (check)
 
-  물리적 근거:
-    Troyon 한계 3.5는 이상적 MHD 안정성의 수치적 결과 (PEST, DCON 코드)
-    경험적으로 ~2.8(no wall)~4.5(advanced) 범위에서 운전 체제에 따라 변동
-    3.5라는 정확한 수는 이상적 벽 모델의 근사값
+  Physical basis:
+    Troyon limit 3.5 is a numerical result of ideal MHD stability (PEST, DCON codes)
+    Empirically varies over ~2.8 (no wall) to ~4.5 (advanced) depending on operating regime
+    The exact value 3.5 is an approximation from the ideal-wall model
 
-  정직한 평가:
-    - (sigma+phi)/tau = 3.5는 깔끔한 n=6 표현
-    - 그러나 Troyon 한계는 정확히 3.5가 아닌 ~3.0~4.0 범위의 근사값
-    - 실제 운전: beta_N = 2.8 (KSTAR-N6 목표) → 이 값은 n=6 표현이 불분명
-    - Grade: CLOSE (값 근사, 표현은 존재하지만 물리적 인과성 없음)
+  Honest assessment:
+    - (sigma+phi)/tau = 3.5 is a clean n=6 expression
+    - However Troyon limit is not exactly 3.5 but an approximation in the ~3.0~4.0 range
+    - Actual operation: beta_N = 2.8 (KSTAR-N6 target) -> this value has unclear n=6 expression
+    - Grade: CLOSE (approximate value, expression exists but no physical causality)
 ```
 
-### 17.4 IPB98(y,2) 가둠 스케일링 지수 분석
+### 17.4 IPB98(y,2) confinement scaling exponent analysis
 
-ITER Physics Basis (1998) 에너지 가둠 시간 스케일링:
+ITER Physics Basis (1998) energy confinement time scaling:
 
 ```
   tau_E = H * 0.0562 * I_p^0.93 * B_T^0.15 * n_e19^0.41 * P^{-0.69}
           * R^1.97 * (a/R)^0.58 * kappa^0.78 * (A_i/2)^0.19
 
-  지수 분석 (n=6 상수와 비교):
+  Exponent analysis (vs n=6 constants):
 
-  | 변수 | 지수 | 근사 n=6 표현 | 오차 | 판정 |
+  | Variable | Exponent | Approximate n=6 expression | Error | Verdict |
   |------|------|-------------|------|------|
-  | I_p | 0.93 | ? | - | n=6 표현 없음 |
+  | I_p | 0.93 | ? | - | no n=6 expression |
   | B_T | 0.15 | 1/(sigma-phi) = 0.10? | 50% off | MISS |
-  | n_e | 0.41 | ? | - | n=6 표현 없음 |
+  | n_e | 0.41 | ? | - | no n=6 expression |
   | P | -0.69 | -ln(2) = -0.693? | 0.4% | EXACT (ln2)* |
   | R | 1.97 | phi = 2 | 1.5% | CLOSE |
   | a/R | 0.58 | ln(2) - phi*0.06? | - | MISS |
-  | kappa | 0.78 | ? | - | n=6 표현 없음 |
-  | A_i | 0.19 | ? | - | n=6 표현 없음 |
+  | kappa | 0.78 | ? | - | no n=6 expression |
+  | A_i | 0.19 | ? | - | no n=6 expression |
 
-  * P^{-0.69} ≈ P^{-ln(2)}: ln(2) = 0.6931... 은 n=6 상수 ln(4/3) = 0.2877과 다름.
-    그러나 ln(2) = ln(phi) 이므로 n=6 체계 내 유효한 상수.
+  * P^{-0.69} ~= P^{-ln(2)}: ln(2) = 0.6931... differs from n=6 constant ln(4/3) = 0.2877.
+    However ln(2) = ln(phi), hence a valid constant within the n=6 system.
 
-  합산:
-    8개 지수 중 n=6 의미 있는 일치: 1개 (R^{1.97} ≈ R^phi)
-    가능한 일치: 1개 (P^{-0.69} ≈ P^{-ln(phi)})
-    불일치: 6개
+  Sum:
+    Meaningful n=6 matches among 8 exponents: 1 (R^{1.97} ~= R^phi)
+    Possible matches: 1 (P^{-0.69} ~= P^{-ln(phi)})
+    Mismatches: 6
 
-  정직한 평가:
-    - IPB98(y,2)는 수백 개 실험 데이터의 multi-regression fitting 결과
-    - 지수들은 물리적 의미보다 통계적 최적화의 산물
-    - R^2 ≈ R^phi 는 차원 분석(tau_E ~ a^2/D_B 확산 스케일링)에서 자연스러운 2승
-    - P^{-0.69}는 Connor-Taylor 자기유사 스케일링에서 유도 가능
-    - n=6 산술과의 연결은 매우 약함
-    - Grade: WEAK (8개 지수 중 의미 있는 일치 1~2개, 대부분 불일치)
+  Honest assessment:
+    - IPB98(y,2) is a multi-regression fit of hundreds of experimental data points
+    - The exponents are products of statistical optimization, not physical meaning
+    - R^2 ~= R^phi is a natural square from dimensional analysis (tau_E ~ a^2/D_B diffusion scaling)
+    - P^{-0.69} derivable from Connor-Taylor self-similar scaling
+    - Connection with n=6 arithmetic is very weak
+    - Grade: WEAK (1~2 meaningful matches of 8 exponents, most mismatches)
 ```
 
-### 17.5 Bohm 확산과 phi^tau = 16
+### 17.5 Bohm diffusion and phi^tau = 16
 
-Bohm 확산 계수:
+Bohm diffusion coefficient:
 
 ```
   D_Bohm = k_B * T / (16 * e * B)
 
-  여기서 16 = phi^tau = 2^4
+  Here 16 = phi^tau = 2^4
 
-  역사적 배경:
-    David Bohm (1949): 실험적으로 D ∝ T/B를 관찰
-    16이라는 계수: 초기 방전 실험의 fitting 결과
-    이론적 유도: 정확한 유도는 없음 — 경험적 상수
+  Historical background:
+    David Bohm (1949): experimentally observed D prop. T/B
+    Coefficient 16: fitting result of early discharge experiments
+    Theoretical derivation: no exact derivation - empirical constant
 
   phi^tau = 2^4 = 16:
-    이것이 n=6에서 필연적인가?
-    → 16 = 2^4는 매우 흔한 정수 (컴퓨터 바이트, 16진법 등)
-    → Bohm의 16은 물리적 근본이 아닌 경험적 피팅 상수
-    → 현대 토카막은 Bohm 확산보다 훨씬 좋은 가둠을 달성 (sub-Bohm)
-    → ITER H-mode: tau_E(실측) / tau_E(Bohm) ≈ 50~100배
+    Is this necessary from n=6?
+    -> 16 = 2^4 is a very common integer (computer byte, hexadecimal, etc.)
+    -> Bohm's 16 is an empirical fitting constant, not a fundamental physical quantity
+    -> Modern tokamaks achieve confinement far better than Bohm diffusion (sub-Bohm)
+    -> ITER H-mode: tau_E(measured) / tau_E(Bohm) ~= 50~100x
 
-  정직한 평가:
-    - Bohm 확산의 16 = 2^4 = phi^tau는 수적으로 정확
-    - 그러나 16은 편재하는 숫자이고, Bohm 계수의 물리적 의미가 불명확
-    - 현대 핵융합은 Bohm 확산을 극복하는 것이 목표 → 설계와 무관
-    - Grade: CLOSE (수적 일치, 물리적 연관 불명, 설계 영향 없음)
+  Honest assessment:
+    - 16 = 2^4 = phi^tau for Bohm diffusion is numerically exact
+    - However 16 is a ubiquitous number and the physical meaning of the Bohm coefficient is unclear
+    - Modern fusion aims to overcome Bohm diffusion -> design irrelevant
+    - Grade: CLOSE (numerical match, physical relation unclear, no design impact)
 ```
 
-### 17.6 저항벽 모드 (RWM)와 Alfven 주파수
+### 17.6 Resistive Wall Mode (RWM) and Alfven frequency
 
 ```
   Resistive Wall Mode (RWM):
-    성장률: gamma_RWM = 1 / tau_wall * (beta_N - beta_N^{no-wall}) / (beta_N^{ideal} - beta_N)
+    Growth rate: gamma_RWM = 1 / tau_wall * (beta_N - beta_N^{no-wall}) / (beta_N^{ideal} - beta_N)
 
     tau_wall = mu_0 * sigma_wall * d * R
-    여기서 d = 벽 두께, sigma_wall = 전기 전도도
+    where d = wall thickness, sigma_wall = electrical conductivity
 
-    KSTAR-N6 벽 시간 상수:
-      tau_wall ≈ 10~50 ms (스테인리스 이중벽)
-      안정화: NBI 회전 + 능동 코일 피드백
+    KSTAR-N6 wall time constant:
+      tau_wall ~= 10~50 ms (stainless double wall)
+      Stabilization: NBI rotation + active coil feedback
 
-  Alfven 주파수:
+  Alfven frequency:
     omega_A = v_A / (q * R_0)
-    v_A = B / sqrt(mu_0 * n_i * m_i)  (Alfven 속도)
+    v_A = B / sqrt(mu_0 * n_i * m_i)  (Alfven velocity)
 
     KSTAR-N6:
       v_A = 12 / sqrt(4*pi*1e-7 * 0.81e20 * 3.34e-27) = 12 / sqrt(3.42e-13)
-      v_A ≈ 12 / 5.85e-7 ≈ 2.05 × 10^7 m/s (D-T 평균)
-      omega_A ≈ 2.05e7 / (5.0 * 6.0) ≈ 6.83 × 10^5 rad/s
-      f_A ≈ 109 kHz
+      v_A ~= 12 / 5.85e-7 ~= 2.05 x 10^7 m/s (D-T average)
+      omega_A ~= 2.05e7 / (5.0 * 6.0) ~= 6.83 x 10^5 rad/s
+      f_A ~= 109 kHz
 
     Toroidal Alfven Eigenmode (TAE) gap frequency:
-      f_TAE = v_A / (4 * pi * q * R_0) ≈ f_A / 2 ≈ 54 kHz
+      f_TAE = v_A / (4 * pi * q * R_0) ~= f_A / 2 ~= 54 kHz
 
-    n=6 연결:
-      f_TAE ≈ 54 kHz → sigma * tau + n = 54? → 48 + 6 = 54 CLOSE
-      → 그러나 이 값은 B, n_i, q, R에 강하게 의존하므로 설계 파라미터 함수
+    n=6 connection:
+      f_TAE ~= 54 kHz -> sigma * tau + n = 54? -> 48 + 6 = 54 CLOSE
+      -> However this value depends strongly on B, n_i, q, R, so it is a function of design parameters
 
-  정직한 평가:
-    - RWM/Alfven 물리에서 n=6 직접 연결은 발견 안 됨
-    - TAE 주파수 ≈ 54kHz는 설계 파라미터(B=12T, R=6m 등)에서 파생 → 순환 논증
-    - Grade: N/A (독립적 n=6 연결 없음, 설계 파라미터의 2차 결과일 뿐)
+  Honest assessment:
+    - No direct n=6 connection found in RWM/Alfven physics
+    - TAE frequency ~= 54 kHz is derived from design parameters (B=12T, R=6m, etc.) -> circular
+    - Grade: N/A (no independent n=6 connection, merely a secondary consequence of design parameters)
 ```
 
-### 17.7 방정식 분석 종합 스코어
+### 17.7 Equation analysis summary score
 
 ```
   ┌─────────────────────────────────────────────────────────────────────────┐
-  │              플라즈마 방정식 n=6 연결 정직한 평가 종합                      │
+  │        Plasma-equation n=6 connection: honest-assessment summary        │
   ├──────────────────────┬──────────┬────────────────────────────────────────┤
-  │ 방정식               │ Grade    │ 판단 근거                               │
+  │ Equation             │ Grade    │ Judgment basis                         │
   ├──────────────────────┼──────────┼────────────────────────────────────────┤
-  │ GS → q=1             │ EXACT*   │ 값 일치 O, 인과 X (물리적 필연)         │
-  │ Lawson triple product│ WEAK     │ "3"은 보편적, n/phi 연결 자명            │
-  │ Troyon beta_N=3.5    │ CLOSE    │ (sigma+phi)/tau 표현 가능, 물리적 우연   │
-  │ IPB98(y,2) 지수들     │ WEAK     │ 8개 중 1~2개만 근사 일치                │
-  │ Bohm 확산 16         │ CLOSE    │ phi^tau=16 수적 일치, 설계 무관           │
-  │ RWM / Alfven         │ N/A      │ 독립적 연결 없음 (순환 논증)             │
+  │ GS -> q=1            │ EXACT*   │ value match yes, causality no (physics)│
+  │ Lawson triple product│ WEAK     │ "3" universal, n/phi match trivial     │
+  │ Troyon beta_N=3.5    │ CLOSE    │ (sigma+phi)/tau expressible, coincident│
+  │ IPB98(y,2) exponents │ WEAK     │ 1~2 approximate matches of 8           │
+  │ Bohm diffusion 16    │ CLOSE    │ phi^tau=16 numeric match, unrelated    │
+  │ RWM / Alfven         │ N/A      │ no independent connection (circular)   │
   ├──────────────────────┼──────────┼────────────────────────────────────────┤
-  │ 종합                 │ WEAK~    │ 방정식 수준의 필연성은 약함.              │
-  │                      │ CLOSE    │ n=6의 강점은 설계 파라미터 수준에 있음.   │
+  │ Summary              │ WEAK~    │ Necessity at equation level is weak.   │
+  │                      │ CLOSE    │ n=6 strength lies at design-param level│
   └──────────────────────┴──────────┴────────────────────────────────────────┘
 
-  * q=1은 물리적으로 필연적인 안정성 경계이고, 1=1/2+1/3+1/6은 수론적 정체성.
-    두 사실은 독립적이지만 같은 값에서 만난다 — 이것이 BT-5의 핵심 관찰.
+  * q=1 is a physically necessary stability boundary and 1=1/2+1/3+1/6 is a number-theoretic identity.
+    The two facts are independent but meet at the same value - this is BT-5's key observation.
 ```
 
 ---
 
-## 18. MHD 불안정성 모드 완전 해부 (Complete MHD Mode Analysis)
+## 18. Complete MHD Mode Analysis
 
-### 18.1 기본 MHD 모드 분류
+### 18.1 Basic MHD mode classification
 
-MHD 불안정성은 모드 수 (m, n)으로 특성화된다:
-- m = 폴로이달 모드 수 (poloidal mode number)
-- n = 토로이달 모드 수 (toroidal mode number)
-- 공명 조건: q(r_s) = m/n 에서 불안정성 발생
+MHD instabilities are characterized by mode numbers (m, n):
+- m = poloidal mode number
+- n = toroidal mode number
+- Resonance condition: instability occurs at q(r_s) = m/n
 
 ```
-  KSTAR-N6 q-profile (정상 상태):
+  KSTAR-N6 q-profile (steady-state candidate):
 
   q(r) profile:
-    q_0 = 1.0 (축)  ───────→  q_95 = 5.0 (95% 플럭스면)
+    q_0 = 1.0 (axis)  ----->  q_95 = 5.0 (95% flux surface)
 
        q
     5 ─┤                                              ●  q_95 = 5 = sopfr
@@ -1257,21 +1255,21 @@ MHD 불안정성은 모드 수 (m, n)으로 특성화된다:
     0 ─┼──────┬──────┬──────┬──────┬──────┬──→ r/a
        0     0.2    0.4    0.6    0.8    1.0
 
-  공명면 위치 (q = m/n):
-    q = 1   → r/a ≈ 0.25~0.35  (sawtooth 역전 반경)
-    q = 3/2 → r/a ≈ 0.55~0.65  (NTM 위치)
-    q = 2   → r/a ≈ 0.70~0.80  (kink/tearing 위치)
-    q = 3   → r/a ≈ 0.90~0.95  (edge 근방)
+  Rational-surface positions (q = m/n):
+    q = 1   -> r/a ~= 0.25~0.35  (sawtooth inversion radius)
+    q = 3/2 -> r/a ~= 0.55~0.65  (NTM location)
+    q = 2   -> r/a ~= 0.70~0.80  (kink/tearing location)
+    q = 3   -> r/a ~= 0.90~0.95  (near edge)
 ```
 
-### 18.2 전체 MHD 모드 테이블 — n=6 매핑
+### 18.2 Full MHD mode table - n=6 mapping
 
 ```
   ┌────────────────────────────────────────────────────────────────────────────────┐
-  │                    전체 MHD 불안정성 모드 — n=6 분석                              │
+  │                    Full MHD instability modes - n=6 analysis                   │
   ├─────┬─────┬──────────┬──────────────────────┬──────────┬──────┬───────────────┤
-  │ m   │ n   │ q = m/n  │ 모드명                │ 위험도    │ n=6  │ 판정          │
-  │     │     │          │                      │          │ 매핑 │               │
+  │ m   │ n   │ q = m/n  │ Mode name            │ Risk     │ n=6  │ Verdict       │
+  │     │     │          │                      │          │ map  │               │
   ├─────┼─────┼──────────┼──────────────────────┼──────────┼──────┼───────────────┤
   │ 1   │ 1   │ 1        │ Internal kink        │ ★★★☆☆   │ R(6) │ EXACT: q=1=   │
   │     │     │          │ (sawtooth)           │          │ =1   │ 1/2+1/3+1/6   │
@@ -1301,105 +1299,105 @@ MHD 불안정성은 모드 수 (m, n)으로 특성화된다:
   │     │     │          │ (edge)               │          │      │ m=sopfr       │
   ├─────┼─────┼──────────┼──────────────────────┼──────────┼──────┼───────────────┤
   │ 1   │ 0   │ inf      │ Vertical             │ ★★★★★   │      │ N/A:          │
-  │     │     │          │ Displacement Event   │          │      │ 축대칭 모드    │
+  │     │     │          │ Displacement Event   │          │      │ axisymmetric  │
   │     │     │          │ (VDE)                │          │      │ n_tor=0       │
   └─────┴─────┴──────────┴──────────────────────┴──────────┴──────┴───────────────┘
 ```
 
-### 18.3 위험 모드의 div(6) 분석
+### 18.3 div(6) analysis of dangerous modes
 
-6의 약수: div(6) = {1, 2, 3, 6}
-
-```
-  핵심 질문: 위험한 MHD 모드의 (m, n)이 모두 div(6) 원소인가?
-
-  위험도 ★★★ 이상 모드:
-    (1,1) → m=1 ∈ div(6), n=1 ∈ div(6)     ✓
-    (2,1) → m=2 ∈ div(6), n=1 ∈ div(6)     ✓
-    (3,2) → m=3 ∈ div(6), n=2 ∈ div(6)     ✓
-    (2,2) → m=2 ∈ div(6), n=2 ∈ div(6)     ✓
-    (4,3) → m=4 ∉ div(6), n=3 ∈ div(6)     ✗ (m=4=tau)
-    (1,0) → n=0 ∉ div(6)                    ✗ (VDE)
-
-  결과: 6개 위험 모드 중 4개가 m,n ∈ div(6) → 67%
-
-  정직한 평가:
-    - div(6) = {1,2,3,6}은 1~6 사이 정수의 67% (4/6)를 차지
-    - MHD 모드는 주로 저차 모드 (m,n ≤ 5)가 위험
-    - 저차 정수 중 {1,2,3}이 위험하다는 것은 물리적으로 당연 (저차 = 글로벌 구조)
-    - n=6 특유의 현상이 아닌, 저차 정수의 보편적 중요성
-    - Grade: CLOSE (값 일치율 높지만, 물리적 이유는 "저차 모드 우세"라는 일반 원리)
-```
-
-### 18.4 ELM (Edge Localized Mode) 분석
+Divisors of 6: div(6) = {1, 2, 3, 6}
 
 ```
-  ELM 유형 및 모드 수:
+  Key question: are (m, n) of dangerous MHD modes all elements of div(6)?
 
-  | ELM Type | 토로이달 모드 n | Peeling-Ballooning 경계 | 위험도 |
+  Modes with risk *** or above:
+    (1,1) -> m=1 in div(6), n=1 in div(6)     (check)
+    (2,1) -> m=2 in div(6), n=1 in div(6)     (check)
+    (3,2) -> m=3 in div(6), n=2 in div(6)     (check)
+    (2,2) -> m=2 in div(6), n=2 in div(6)     (check)
+    (4,3) -> m=4 not in div(6), n=3 in div(6)  (miss; m=4=tau)
+    (1,0) -> n=0 not in div(6)                 (miss; VDE)
+
+  Result: 4 of 6 dangerous modes have m,n in div(6) -> 67%
+
+  Honest assessment:
+    - div(6) = {1,2,3,6} covers 67% (4/6) of integers from 1 to 6
+    - MHD modes are mainly dangerous for low-order (m,n <= 5)
+    - Among low-order integers, {1,2,3} being dangerous is physically natural (low order = global structure)
+    - Not a phenomenon specific to n=6, but the universal importance of low-order integers
+    - Grade: CLOSE (high value-match rate, but physical reason is the general "low-order mode dominance" principle)
+```
+
+### 18.4 ELM (Edge Localized Mode) analysis
+
+```
+  ELM types and mode numbers:
+
+  | ELM Type | Toroidal mode n | Peeling-Ballooning boundary | Risk |
   |----------|---------------|----------------------|-------|
-  | Type I   | n = 3~10      | 고압력 구배 + 부트스트랩 전류 | ★★★★★ |
-  | Type II  | n > 10        | 고삼각도 운전 시 발생        | ★★☆☆☆ |
-  | Type III | n = 1~5       | 저전력 H-mode 전이 근방     | ★★★☆☆ |
-  | QH mode  | n = 1~3       | 카운터 NBI 회전으로 안정화    | ★☆☆☆☆ |
-  | RMP ELM  | 적용 n        | 인위적 공명 섭동으로 억제     | 제어 |
+  | Type I   | n = 3~10      | high pressure gradient + bootstrap current | ***** |
+  | Type II  | n > 10        | occurs at high triangularity operation    | **    |
+  | Type III | n = 1~5       | near low-power H-mode transition          | ***   |
+  | QH mode  | n = 1~3       | stabilized by counter-NBI rotation        | *     |
+  | RMP ELM  | applied n     | suppressed by artificial resonant perturbation | control |
   |  suppression| = 3 (n/phi) |                        |       |
 
-  KSTAR-N6 ELM 제어 전략:
-    1. RMP (Resonant Magnetic Perturbation) 코일:
-       - 토로이달 모드 수: n = 1, 2, 3 적용 가능
-       - KSTAR 실증: n=1,2 RMP로 Type I ELM 완전 억제 (세계 최초, 2011~)
-       - KSTAR-N6: n=1 + n=2 + n=3 = n/phi 가지 모드 적용 (EXACT)
+  KSTAR-N6 ELM control strategy:
+    1. RMP (Resonant Magnetic Perturbation) coils:
+       - Toroidal mode numbers: n = 1, 2, 3 applicable
+       - KSTAR demonstrated: Type I ELM fully suppressed with n=1,2 RMP (world-first, 2011~)
+       - KSTAR-N6: n=1 + n=2 + n=3 = n/phi modes applied (EXACT)
 
     2. Pellet ELM pacing:
-       - 고빈도 소형 pellet → ELM 트리거 (에너지 분산)
-       - 빈도: ~60Hz = sigma * sopfr (BT-62, CLOSE)
+       - High-frequency small pellets -> ELM trigger (energy distribution)
+       - Frequency: ~60 Hz = sigma * sopfr (BT-62, CLOSE)
 
-  n=6 연결:
-    - ELM 위험 모드 n = 3~10: 이 범위에 n/phi=3, sopfr=5, n=6 포함
-    - RMP 적용 모드 n=1,2,3: 모두 div(6) 원소
-    - Grade: CLOSE (범위 내 일치, 그러나 1~3은 가장 기본적인 모드 수)
+  n=6 connection:
+    - ELM dangerous modes n = 3~10: this range includes n/phi=3, sopfr=5, n=6
+    - RMP-applied modes n=1,2,3: all div(6) elements
+    - Grade: CLOSE (match within range, but 1~3 are the most fundamental mode numbers)
 ```
 
-### 18.5 Alfven Eigenmode (AE) 분석
+### 18.5 Alfven Eigenmode (AE) analysis
 
 ```
-  토로이달 Alfven 고유모드 (TAE):
-    발생 조건: v_fast_ion / v_Alfven > 1/3  (= 1/(n/phi)?)
+  Toroidal Alfven Eigenmode (TAE):
+    Onset condition: v_fast_ion / v_Alfven > 1/3  (= 1/(n/phi)?)
 
-    위험한 TAE 모드 수:
-      n = 1~10 (토로이달), m = n*q ± 1 (폴로이달)
+    Dangerous TAE mode numbers:
+      n = 1~10 (toroidal), m = n*q +/- 1 (poloidal)
 
-    KSTAR-N6에서 TAE 안정성:
-      v_NBI = sqrt(2 * 120keV / m_D) ≈ 3.39 × 10^6 m/s
-      v_A ≈ 2.05 × 10^7 m/s (17.5절 계산)
-      v_NBI / v_A ≈ 0.165 < 1/3
+    TAE stability in KSTAR-N6:
+      v_NBI = sqrt(2 * 120 keV / m_D) ~= 3.39 x 10^6 m/s
+      v_A ~= 2.05 x 10^7 m/s (Section 17.5 calculation)
+      v_NBI / v_A ~= 0.165 < 1/3
 
-    → NBI 120keV 이온은 TAE 공명 아래 → TAE 안정 (EXACT 설계 효과!)
+    -> NBI 120 keV ions below TAE resonance -> TAE stable (EXACT design effect)
 
-    알파 입자:
-      v_alpha = sqrt(2 * 3.5MeV / m_He) ≈ 1.30 × 10^7 m/s
-      v_alpha / v_A ≈ 0.63 → 1/3 < 0.63 < 1 → TAE 공명 가능
+    Alpha particles:
+      v_alpha = sqrt(2 * 3.5 MeV / m_He) ~= 1.30 x 10^7 m/s
+      v_alpha / v_A ~= 0.63 -> 1/3 < 0.63 < 1 -> TAE resonance possible
 
-    → 알파 입자 TAE 억제:
-      q_min = 1.0, q 프로파일 shear → TAE gap closing
-      ECRH 전류 구동으로 q 프로파일 조절 → 핵심 제어 수단
+    -> Alpha-particle TAE suppression:
+      q_min = 1.0, q-profile shear -> TAE gap closing
+      ECRH current drive for q-profile tuning -> key control tool
 
-  정직한 평가:
-    - v_NBI/v_A < 1/3의 "1/3"은 TAE gap 구조에서 나오는 물리적 한계
-    - 1/(n/phi) = 1/3과의 일치는 흥미롭지만, 1/3은 일반적으로 흔한 분수
-    - 120keV NBI가 TAE를 피하는 것은 좋은 설계 결과
-    - Grade: CLOSE (설계 호환성은 우수, n=6 필연성은 약함)
+  Honest assessment:
+    - The "1/3" in v_NBI/v_A < 1/3 is a physical limit from TAE gap structure
+    - Match with 1/(n/phi) = 1/3 is interesting, but 1/3 is a generally common fraction
+    - 120 keV NBI avoiding TAE is a good design outcome
+    - Grade: CLOSE (excellent design compatibility, n=6 necessity weak)
 ```
 
 ---
 
-## 19. HTS 자석 물리 심화 (HTS Magnet Physics Deep-Dive)
+## 19. HTS Magnet Physics Deep-Dive
 
-### 19.1 REBCO 임계 전류 밀도 J_c(B, T) 곡선
+### 19.1 REBCO critical current density J_c(B, T) curve
 
 ```
-  REBCO (REBa₂Cu₃O₇₋δ) 임계 전류 밀도 곡선:
+  REBCO (REBa2Cu3O7-delta) critical current density curve:
 
   J_c [A/mm^2]
   10000 ─┤
@@ -1410,11 +1408,11 @@ MHD 불안정성은 모드 수 (m, n)으로 특성화된다:
          │     ○ ○
    1000 ─┤      ○  ○ 20K
          │       ○  ○
-    500 ─┤        ○  ○ ← 20K (운전점)
+    500 ─┤        ○  ○ ← 20K (operating point)
          │         ○  ○
-    200 ─┤          ○  ○ ← Nb₃Sn 4.2K 한계선
+    200 ─┤          ○  ○ ← Nb3Sn 4.2K limit line
          │           ○  ○
-    100 ─┤    ....... ×  ○   (Nb₃Sn B_c2 ≈ 27T, 실용 ≈ 12T)
+    100 ─┤    ....... ×  ○   (Nb3Sn B_c2 ~= 27T, practical ~= 12T)
          │          ╎  ×  ○  77K
      50 ─┤          ╎     ○
          │          ╎      ○
@@ -1423,1080 +1421,1082 @@ MHD 불안정성은 모드 수 (m, n)으로 특성화된다:
       0 ─┼────┬────╎┬────┬────┬────┬────┬──→ B [T]
          0    5   10╎   15   20   25   30
                     ╎
-               12T = sigma (KSTAR-N6 운전점)
+               12T = sigma (KSTAR-N6 operating point)
                     ╎
-         LTS→HTS 전환점 ≈ 11.8~12T
+         LTS->HTS transition point ~= 11.8~12T
 
-  핵심 데이터 (대표값, SuperPower/SuNam 테이프 기준):
-    J_c(12T, 4.2K)  ≈ 1,500~2,000 A/mm^2
-    J_c(12T, 20K)   ≈ 800~1,200 A/mm^2  ← KSTAR-N6 운전점
-    J_c(12T, 77K)   ≈ 50~100 A/mm^2
-    J_c(12T, Nb₃Sn) ≈ 100~200 A/mm^2   ← LTS 한계 근방
+  Core data (representative, SuperPower/SuNam tape basis):
+    J_c(12T, 4.2K)  ~= 1,500~2,000 A/mm^2
+    J_c(12T, 20K)   ~= 800~1,200 A/mm^2  <- KSTAR-N6 operating point
+    J_c(12T, 77K)   ~= 50~100 A/mm^2
+    J_c(12T, Nb3Sn) ~= 100~200 A/mm^2    <- near LTS limit
 
-  → 12T에서 REBCO(20K)는 Nb₃Sn(4.2K) 대비 4~6배 높은 J_c
-  → 이것이 "12T = sigma = LTS→HTS 전환점"의 물리적 실체
+  -> At 12 T, REBCO (20 K) gives 4~6x higher J_c than Nb3Sn (4.2 K)
+  -> This is the physical substance of "12 T = sigma = LTS->HTS transition point"
 ```
 
-### 19.2 12T 운전점의 물리적 특별함
+### 19.2 Physical specialness of the 12 T operating point
 
 ```
-  왜 12T가 물리적 전환점인가?
+  Why is 12 T a physical transition point?
 
-  1. Nb₃Sn의 strain 한계:
-     - B_c2(Nb₃Sn) ≈ 27T @4.2K, 0 strain
-     - 실용 코일에서 strain 0.3~0.5% → B_c2 → ~20T
-     - J_c 실용 한계: B ≈ 12T에서 J_c(Nb₃Sn) ≈ 150 A/mm^2 (코일 설계 하한)
-     - ITER TF: B_peak = 11.8T → Nb₃Sn의 실질적 한계
+  1. Nb3Sn strain limit:
+     - B_c2(Nb3Sn) ~= 27 T @4.2 K, 0 strain
+     - In practical coils with strain 0.3~0.5% -> B_c2 -> ~20 T
+     - J_c practical limit: at B ~= 12 T, J_c(Nb3Sn) ~= 150 A/mm^2 (coil-design lower bound)
+     - ITER TF: B_peak = 11.8 T -> effective limit of Nb3Sn
 
-  2. NbTi → Nb₃Sn → REBCO 전환 사다리:
-     - NbTi: B < 8T (sigma - tau) ← n=6!
-     - Nb₃Sn: 8T < B < 12T (sigma - tau → sigma) ← n=6!
-     - REBCO: B > 12T (sigma 이상)
+  2. NbTi -> Nb3Sn -> REBCO transition ladder:
+     - NbTi: B < 8 T (sigma - tau) <- n=6!
+     - Nb3Sn: 8 T < B < 12 T (sigma - tau -> sigma) <- n=6!
+     - REBCO: B > 12 T (sigma and above)
 
      ┌──────────────────────────────────────────────────────────┐
-     │        초전도 소재 영역 — n=6 자기장 사다리                  │
+     │      Superconductor material regions - n=6 field ladder  │
      │                                                          │
      │  0T────── 8T ─────── 12T ────── 20T ────── 40T+         │
-     │  │← NbTi →│← Nb₃Sn →│←── REBCO (실용) ──→│             │
-     │  │sigma-tau│sigma-tau │sigma                │             │
-     │  │  = 8    │  → sigma │ = 12               │             │
-     │  │         │  = 12    │                     │             │
-     │  └─────────┴──────────┴─────────────────────┘            │
+     │  │<- NbTi ->│<- Nb3Sn ->│<── REBCO (practical) ──>│      │
+     │  │sigma-tau │sigma-tau  │sigma                     │      │
+     │  │  = 8     │  -> sigma │ = 12                     │      │
+     │  │          │  = 12     │                          │      │
+     │  └──────────┴───────────┴──────────────────────────┘     │
      └──────────────────────────────────────────────────────────┘
 
-  3. 물리적 근거:
-     - 8T (NbTi→Nb₃Sn): NbTi의 B_c2 ≈ 10.5T @4.2K, 실용 ≈ 8T
-       → sigma - tau = 8 ← n=6 일치!
-     - 12T (Nb₃Sn→REBCO): Nb₃Sn의 J_c 실용 한계
-       → sigma = 12 ← n=6 일치!
+  3. Physical basis:
+     - 8 T (NbTi->Nb3Sn): B_c2(NbTi) ~= 10.5 T @4.2 K, practical ~= 8 T
+       -> sigma - tau = 8 <- n=6 match!
+     - 12 T (Nb3Sn->REBCO): J_c practical limit of Nb3Sn
+       -> sigma = 12 <- n=6 match!
 
-  정직한 평가:
-    - 8T, 12T는 초전도체 물성(B_c2, 결정 구조, phonon spectrum)에서 결정
-    - 이 값들이 n=6 상수와 일치하는 것은 주목할 만함 (H-SM-68)
-    - 그러나: 8과 12는 흔한 정수이며, 초전도 물성은 n=6과 무관한 BCS 이론에서 유도
-    - Grade: EXACT (수적 일치 정확), 인과성: WEAK (독립적 물리 메커니즘)
+  Honest assessment:
+    - 8 T, 12 T are determined by superconductor properties (B_c2, crystal structure, phonon spectrum)
+    - The match of these values with n=6 constants is noteworthy (H-SM-68)
+    - However: 8 and 12 are common integers, and superconductor properties derive from BCS theory unrelated to n=6
+    - Grade: EXACT (numerical match exact), causality: WEAK (independent physical mechanism)
 ```
 
-### 19.3 퀀치 보호 — n=6 검출 임계값
+### 19.3 Quench protection - n=6 detection thresholds
 
 ```
-  퀀치(Quench): 초전도 → 상전도 전이 (catastrophic event)
+  Quench: superconducting -> normal transition (catastrophic event)
 
-  퀀치 검출 체계 (KSTAR-N6):
-    검출 기준: dV/dt > V_threshold
+  Quench detection scheme (KSTAR-N6):
+    Detection criterion: dV/dt > V_threshold
 
     ┌─────────────────────────────────────────────────────────────────┐
     │              Quench Detection & Protection                       │
     │                                                                 │
-    │  Level 1 (경고):  V_th = 100 mV   (10^{-1} = 1/(sigma-phi))    │
-    │    → ECRH 정지, 가열 차단                                        │
+    │  Level 1 (warning): V_th = 100 mV   (10^{-1} = 1/(sigma-phi))  │
+    │    -> ECRH stop, heating cutoff                                 │
     │                                                                 │
-    │  Level 2 (보호):  V_th = 500 mV   (sopfr × 100 mV)             │
-    │    → 전류 램프다운 시작 (I_p → 0 in 6s = n)                      │
+    │  Level 2 (protection): V_th = 500 mV (sopfr x 100 mV)          │
+    │    -> current ramp-down start (I_p -> 0 in 6 s = n)             │
     │                                                                 │
-    │  Level 3 (비상):  V_th = 1.0 V    (mu = 1)                      │
-    │    → 에너지 덤프: 저항기로 자기 에너지 방출                        │
-    │    → 덤프 저항: 6 세트 = n                                       │
-    │    → 덤프 시간: tau_dump < 12s = sigma                           │
+    │  Level 3 (emergency): V_th = 1.0 V (mu = 1)                     │
+    │    -> energy dump: release magnetic energy into resistors       │
+    │    -> dump resistors: 6 sets = n                                │
+    │    -> dump time: tau_dump < 12 s = sigma                        │
     │                                                                 │
-    │  자석 보호 에너지:                                                │
-    │    E_stored(TF) = 1/2 * L * I^2                                  │
-    │    L(TF) ≈ 0.5 H (18 코일 전체)                                  │
-    │    I_op ≈ 60 kA (= sigma * sopfr)                                │
-    │    E ≈ 0.5 * 0.5 * 60000^2 = 900 MJ ≈ 1 GJ                     │
+    │  Magnet protection energy:                                      │
+    │    E_stored(TF) = 1/2 * L * I^2                                 │
+    │    L(TF) ~= 0.5 H (total for 18 coils)                          │
+    │    I_op ~= 60 kA (= sigma * sopfr)                              │
+    │    E ~= 0.5 * 0.5 * 60000^2 = 900 MJ ~= 1 GJ                    │
     │                                                                 │
-    │  온도 한계: T_max < 150K (REBCO 비가역 손상 방지)                 │
-    │  전압 한계: V_max < 5 kV (= sopfr kV, 절연 파괴 방지)            │
+    │  Temperature limit: T_max < 150 K (prevent REBCO irreversible damage)│
+    │  Voltage limit: V_max < 5 kV (= sopfr kV, prevent insulation breakdown)│
     └─────────────────────────────────────────────────────────────────┘
 
-  정직한 평가:
-    - 검출 임계값 100mV, 500mV, 1V는 설계 선택이지 물리적 필연은 아님
-    - 실제 퀀치 검출은 노이즈 대비 S/N에 의해 결정
-    - n=6 숫자를 임계값에 배정하는 것은 가능하지만 공학적 최적화와 별개
-    - Grade: N/A (설계 선택, 물리적 제약 아님)
+  Honest assessment:
+    - Detection thresholds 100 mV, 500 mV, 1 V are design choices, not physical necessities
+    - Actual quench detection is determined by S/N versus noise
+    - Assigning n=6 numbers to thresholds is possible but separate from engineering optimization
+    - Grade: N/A (design choice, not physical constraint)
 ```
 
-### 19.4 로렌츠 힘 응력 분석 — 12T에서의 구조적 도전
+### 19.4 Lorentz-force stress analysis - structural challenge at 12 T
 
 ```
-  자기 압력 (Magnetic Pressure):
+  Magnetic Pressure:
     P_B = B^2 / (2 * mu_0)
 
-    B = 12T:
+    B = 12 T:
       P_B = 144 / (2 * 4*pi*1e-7) = 144 / 2.513e-6
-      P_B ≈ 5.73 × 10^7 Pa = 57.3 MPa
+      P_B ~= 5.73 x 10^7 Pa = 57.3 MPa
 
-    B = 18T (peak on coil):
+    B = 18 T (peak on coil):
       P_B = 324 / 2.513e-6
-      P_B ≈ 129 MPa
+      P_B ~= 129 MPa
 
-  n=6 관찰:
-    - B^2 = sigma^2 = 144 → P_B ∝ 144 = sigma^2 = sigma * sigma
+  n=6 observations:
+    - B^2 = sigma^2 = 144 -> P_B prop. 144 = sigma^2 = sigma * sigma
     - B_peak^2 = (3n)^2 = 9n^2 = 324
     - P_B(12T) / P_B(18T) = 144/324 = 4/9 = tau / (n/phi)^2
 
-  구조적 요건:
+  Structural requirements:
     ┌────────────────────────────────────────────────────────────────────┐
     │              Lorentz Force on TF Coil                              │
     │                                                                    │
-    │  Centering force (inward): F_c ∝ B^2 * A_coil / mu_0              │
-    │    단일 TF 코일: F_c ≈ 200~400 MN (ITER: ~400 MN)                │
-    │    → 중앙 원통(central vault) + 쐐기(wedge) 구조로 지탱            │
+    │  Centering force (inward): F_c prop. B^2 * A_coil / mu_0           │
+    │    Single TF coil: F_c ~= 200~400 MN (ITER: ~400 MN)              │
+    │    -> supported by central vault + wedge structure                 │
     │                                                                    │
-    │  Out-of-plane force: F_oop ∝ I_TF * B_p                           │
-    │    → 외부 구조물(intercoil structure)로 지탱                        │
+    │  Out-of-plane force: F_oop prop. I_TF * B_p                        │
+    │    -> supported by external intercoil structure                    │
     │                                                                    │
-    │  재료 요건:                                                        │
-    │    REBCO 테이프: Hastelloy 기판 → 항복 강도 ~800 MPa              │
-    │    보강 구조: 고강도 강 (JK2LB급) → 항복 ~900 MPa @4K              │
-    │    안전 계수: > 2 = phi                                             │
-    │    → 허용 응력 < 400 MPa = 129 MPa(peak) × 안전 계수 포함 → 충족    │
+    │  Material requirements:                                            │
+    │    REBCO tape: Hastelloy substrate -> yield strength ~800 MPa      │
+    │    Reinforcement structure: high-strength steel (JK2LB class) -> yield ~900 MPa @4K│
+    │    Safety factor: > 2 = phi                                        │
+    │    -> allowable stress < 400 MPa = 129 MPa(peak) incl. safety factor -> satisfied│
     └────────────────────────────────────────────────────────────────────┘
 
-  정직한 평가:
-    - P_B ∝ B^2 = sigma^2 = 144는 정확한 물리 관계 (Maxwell stress tensor)
-    - 12T 운전은 구조적으로 도전적이지만 SPARC 기술로 달성 가능
-    - n=6 연결은 B=12=sigma를 사용한 결과이므로 순환 논증
-    - Grade: N/A (물리적 결과, 독립적 n=6 연결 아님)
+  Honest assessment:
+    - P_B prop. B^2 = sigma^2 = 144 is an exact physical relation (Maxwell stress tensor)
+    - 12 T operation is structurally challenging but achievable with SPARC technology (candidate)
+    - The n=6 connection uses B=12=sigma and so is circular
+    - Grade: N/A (physical result, not independent n=6 connection)
 ```
 
 ---
 
-## 20. 에너지 흐름 정밀 분석 (Detailed Power Balance)
+## 20. Detailed Power Balance
 
-### 20.1 핵융합 에너지 분배
+### 20.1 Fusion energy distribution
 
 ```
-  D-T 핵융합 반응:
-    D + T → He-4 (3.52 MeV) + n (14.06 MeV)
+  D-T fusion reaction:
+    D + T -> He-4 (3.52 MeV) + n (14.06 MeV)
 
-  에너지 분배:
+  Energy distribution:
     E_alpha = 3.52 MeV  (= 20% of 17.58 MeV)
     E_neutron = 14.06 MeV (= 80% of 17.58 MeV)
 
-    비율: E_alpha / E_neutron = 3.52 / 14.06 ≈ 1/4.0 = mu/tau
+    Ratio: E_alpha / E_neutron = 3.52 / 14.06 ~= 1/4.0 = mu/tau
 
-    → 1:4 = mu:tau = 정확히 n=6 상수!
+    -> 1:4 = mu:tau = exactly an n=6 constant!
 
-  정직한 평가:
-    - D-T 반응 에너지는 핵 물리(Q-value)에서 결정 → n=6과 무관
-    - 3.52/14.06 = 0.2504 ≈ 1/4는 실제로 정확한 관계
-    - mu/tau = 1/4 = 0.25와 거의 일치 (0.2% 오차)
-    - 그러나 1:4 비율은 4He 질량 + 중성자 운동학의 결과
-    - Grade: EXACT (수적 일치 정확, 물리적 인과성은 핵역학)
+  Honest assessment:
+    - D-T reaction energy determined by nuclear physics (Q-value) -> unrelated to n=6
+    - 3.52/14.06 = 0.2504 ~= 1/4 is actually an exact relation
+    - Nearly matches mu/tau = 1/4 = 0.25 (0.2% error)
+    - However the 1:4 ratio is a result of 4He mass + neutron kinematics
+    - Grade: EXACT (numerical match exact, physical causality is nuclear dynamics)
 ```
 
-### 20.2 가열 출력 배분 — J_2 = 24 MW
+### 20.2 Heating power distribution - J_2 = 24 MW
 
 ```
-  가열 시스템 전력 흐름:
+  Heating system power flow:
 
   ┌─────────────────────────────────────────────────────────────────────────┐
   │                                                                         │
-  │  Wall-plug 전력                     플라즈마 흡수                        │
+  │  Wall-plug power                   Plasma absorbed                      │
   │  ─────────────                     ─────────────                        │
-  │  NBI:   ~20 MWe  ──[효율 40%]──→   8 MW (sigma-tau)                    │
-  │  ICRH:  ~12 MWe  ──[효율 50%]──→   6 MW (n)                           │
-  │  ECRH:  ~25 MWe  ──[효율 40%]──→  10 MW (sigma-phi)                   │
+  │  NBI:   ~20 MWe  --[eff. 40%]-->   8 MW (sigma-tau)                     │
+  │  ICRH:  ~12 MWe  --[eff. 50%]-->   6 MW (n)                             │
+  │  ECRH:  ~25 MWe  --[eff. 40%]-->  10 MW (sigma-phi)                     │
   │  ─────────────                     ─────────────                        │
-  │  총:    ~57 MWe                     24 MW = J_2                         │
+  │  Total: ~57 MWe                    24 MW = J_2                          │
   │                                                                         │
-  │  Wall-plug 효율:                                                        │
-  │    NBI:  중성 빔 → 가속기 → 중성화 → 플라즈마 (40%)                      │
-  │    ICRH: RF generator → 전송선 → 안테나 → 플라즈마 (50%)                │
-  │    ECRH: 자이로트론 → 도파관 → 미러 → 플라즈마 (40%)                    │
+  │  Wall-plug efficiency:                                                  │
+  │    NBI:  neutral beam -> accelerator -> neutralization -> plasma (40%)  │
+  │    ICRH: RF generator -> transmission -> antenna -> plasma (50%)        │
+  │    ECRH: gyrotron -> waveguide -> mirror -> plasma (40%)                │
   │                                                                         │
-  │  총 가열 효율: 24 / 57 ≈ 42% (= σ/J₂ × τ/sopfr? → 복잡, WEAK)        │
+  │  Total heating efficiency: 24 / 57 ~= 42% (= sigma/J_2 x tau/sopfr? -> complex, WEAK)│
   └─────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 20.3 Q=10 유도 — 제1원리에서
+### 20.3 Q=10 derivation from first principles
 
 ```
-  Q = P_fusion / P_heating (외부 가열 대비 핵융합 출력)
+  Q = P_fusion / P_heating (fusion output vs external heating)
 
-  제1원리 접근:
+  First-principles approach:
 
-  1. 에너지 수지:
+  1. Energy balance:
      dW/dt = P_alpha + P_heat - P_loss - P_rad
 
-     정상 상태 (dW/dt = 0):
+     Steady-state (dW/dt = 0):
      P_alpha + P_heat = P_loss + P_rad
 
-  2. 알파 가열:
-     P_alpha = P_fus / 5  (3.52/17.58 ≈ 1/5)
+  2. Alpha heating:
+     P_alpha = P_fus / 5  (3.52/17.58 ~= 1/5)
 
-  3. 대입:
+  3. Substituting:
      P_fus/5 + P_heat = P_loss + P_rad
 
-  4. Q 정의:
+  4. Q definition:
      Q = P_fus / P_heat
 
-     P_fus = Q * P_heat 대입:
+     Substitute P_fus = Q * P_heat:
      Q*P_heat/5 + P_heat = P_loss + P_rad
      P_heat * (Q/5 + 1) = P_loss + P_rad
      P_heat = (P_loss + P_rad) / (Q/5 + 1)
 
-  5. Q=10 조건:
+  5. Q=10 condition:
      P_heat = (P_loss + P_rad) / (10/5 + 1) = (P_loss + P_rad) / 3
 
-     → 외부 가열 = 총 손실의 1/3 = 1/(n/phi)
-     → 알파 가열 = 총 손실의 2/3 = phi/(n/phi)
-     → 이것이 "burning plasma" 정의: 자체 가열 > 외부 가열
+     -> External heating = 1/3 of total losses = 1/(n/phi)
+     -> Alpha heating = 2/3 of total losses = phi/(n/phi)
+     -> This is the "burning plasma" definition: self-heating > external heating
 
-  6. n=6 연결:
+  6. n=6 connection:
      Q = 10 = sigma - phi
      Q/5 + 1 = 3 = n/phi
-     1/(Q/5 + 1) = 1/3 = Egyptian fraction 성분
+     1/(Q/5 + 1) = 1/3 = Egyptian fraction component
 
-  7. KSTAR-N6 구체적 수치:
+  7. KSTAR-N6 concrete values:
      P_heat = 24 MW = J_2
-     P_fus = Q * P_heat = 10 * 24 = 240 MW (최소)
+     P_fus = Q * P_heat = 10 * 24 = 240 MW (minimum)
 
-     실제로는 자체 가열 루프에 의해:
+     Actually via self-heating loop:
      P_alpha = 240/5 = 48 MW = sigma * tau = 48!
-     총 가열 = 24 + 48 = 72 MW
-     → tau_E 기반 P_loss ≈ 72 MW → 정상 상태 성립
+     Total heating = 24 + 48 = 72 MW
+     -> tau_E-based P_loss ~= 72 MW -> steady state satisfied
 
-     더 높은 밀도/온도에서:
-     P_fus 증가 → P_alpha 증가 → 양성 피드백 → P_fus ≈ 600 MW 가능
-     P_alpha(600MW) = 120 MW = sigma * (sigma-phi)
-     총 가열 = 24 + 120 = 144 MW = sigma^2 = sigma * sigma!
+     At higher density/temperature:
+     P_fus increases -> P_alpha increases -> positive feedback -> P_fus ~= 600 MW possible (candidate)
+     P_alpha(600 MW) = 120 MW = sigma * (sigma-phi)
+     Total heating = 24 + 120 = 144 MW = sigma^2 = sigma * sigma!
 
   ┌──────────────────────────────────────────────────────────────────────┐
-  │           n=6 에너지 흐름 — 주요 수치                                 │
+  │           n=6 energy flow - key numbers                              │
   │                                                                      │
   │  24 MW (J_2)           48 MW (sigma*tau)      600 MW (P_fus)         │
-  │  외부 가열    +        알파 가열      =       핵융합 출력 × 1/5       │
-  │                         ↑                      ↓                     │
-  │                         └────── 120 MW ←──── 20% ──────┘             │
+  │  External heating +    Alpha heating   =      fusion output x 1/5    │
+  │                         ^                      v                     │
+  │                         L──── 120 MW <──── 20% ──────┘               │
   │                               (sigma*(sigma-phi))                    │
   │                                                                      │
-  │  P_alpha(최소) = 48 = sigma*tau = J_2*phi ✓                          │
-  │  P_alpha(최대) = 120 = sigma*(sigma-phi) ✓                           │
-  │  P_total(최대) = 144 = sigma^2 ✓                                     │
-  │  Q = 10 = sigma - phi ✓                                              │
+  │  P_alpha(min) = 48 = sigma*tau = J_2*phi (check)                     │
+  │  P_alpha(max) = 120 = sigma*(sigma-phi) (check)                      │
+  │  P_total(max) = 144 = sigma^2 (check)                                │
+  │  Q = 10 = sigma - phi (check)                                        │
   └──────────────────────────────────────────────────────────────────────┘
 
-  정직한 평가:
-    - Q=10은 ITER 목표와 동일하며, 플라즈마 물리에서 자연스러운 목표값
-    - Q=10에서 알파 가열 분율 = 2/3은 burning plasma 정의
-    - sigma-phi = 10은 깔끔한 n=6 표현
-    - P_alpha = 48 = sigma*tau는 P_heat = J_2 = 24와 P_alpha = P_fus/5에서 필연적으로 도출
-      → 24 * 10 / 5 = 48 = 24 * 2 = J_2 * phi
-    - 이것은 순환 논증: P_heat = J_2로 설정했으므로 P_alpha = J_2*phi는 자동
-    - Grade: EXACT (수적 일관성 우수), 독립성: WEAK (입력에서 파생)
+  Honest assessment:
+    - Q=10 matches ITER target, a natural target value from plasma physics
+    - At Q=10 the alpha-heating fraction = 2/3 is the burning-plasma definition
+    - sigma-phi = 10 is a clean n=6 expression
+    - P_alpha = 48 = sigma*tau follows necessarily from P_heat = J_2 = 24 and P_alpha = P_fus/5
+      -> 24 * 10 / 5 = 48 = 24 * 2 = J_2 * phi
+    - This is circular: P_heat = J_2 was set as input, so P_alpha = J_2*phi is automatic
+    - Grade: EXACT (numerical consistency excellent), Independence: WEAK (derived from inputs)
 ```
 
-### 20.4 핵융합→전기 에너지 변환 흐름 (Sankey 다이어그램)
+### 20.4 Fusion -> electrical energy conversion flow (Sankey diagram)
 
 ```
   ╔══════════════════════════════════════════════════════════════════════════════╗
-  ║                    KSTAR-N6 에너지 흐름 Sankey 다이어그램                      ║
+  ║                    KSTAR-N6 Energy Flow Sankey Diagram                       ║
   ║                                                                            ║
-  ║  D-T 연료 주입                                                              ║
+  ║  D-T fuel injection                                                        ║
   ║  ═══════════                                                                ║
-  ║       │                                                                    ║
-  ║       ▼                                                                    ║
+  ║       |                                                                    ║
+  ║       v                                                                    ║
   ║  ┌─────────────────────────────────────────────────────────────────┐        ║
-  ║  │                    핵융합 반응                                    │        ║
-  ║  │                    P_fus = 600 MW                                │        ║
+  ║  │                    Fusion reaction                               │        ║
+  ║  │                    P_fus = 600 MW (target)                       │        ║
   ║  └──────────┬────────────────────────┬─────────────────────────────┘        ║
   ║             │                        │                                     ║
-  ║        ▼ 20%                    ▼ 80%                                      ║
+  ║        v 20%                    v 80%                                      ║
   ║  ┌──────────────┐         ┌──────────────────┐                             ║
-  ║  │ Alpha 가열    │         │ 14 MeV 중성자      │                             ║
-  ║  │ 120 MW       │         │ 480 MW             │                             ║
-  ║  │ = sigma *    │         │                    │                             ║
-  ║  │  (sigma-phi) │         │                    │                             ║
-  ║  └──────┬───────┘         └────────┬───────────┘                            ║
+  ║  │ Alpha heating│         │ 14 MeV neutron   │                             ║
+  ║  │ 120 MW       │         │ 480 MW           │                             ║
+  ║  │ = sigma *    │         │                  │                             ║
+  ║  │  (sigma-phi) │         │                  │                             ║
+  ║  └──────┬───────┘         └────────┬─────────┘                             ║
   ║         │                          │                                       ║
-  ║    ▼ 플라즈마 재가열          ▼ 블랭킷 흡수                                  ║
+  ║    v plasma reheat            v blanket absorb                             ║
   ║  ┌──────────────┐    ┌──────────────────────────────┐                       ║
-  ║  │ P_loss 방출   │    │ 블랭킷 열 에너지              │                       ║
-  ║  │ → 디버터      │    │ 480 + 56* = 536 MW            │                       ║
-  ║  │ + 벽 방사     │    │ (*Li-6 발열 반응: +4.78MeV/n)  │                       ║
+  ║  │ P_loss       │    │ Blanket thermal energy        │                       ║
+  ║  │ -> divertor  │    │ 480 + 56* = 536 MW            │                       ║
+  ║  │ + wall rad.  │    │ (*Li-6 exothermic: +4.78 MeV/n)│                       ║
   ║  └──────┬───────┘    └──────────┬───────────────────┘                       ║
   ║         │                       │                                          ║
-  ║    ▼ 120 MW                ▼ 536 MW                                        ║
+  ║    v 120 MW                v 536 MW                                        ║
   ║  ┌──────────────┐    ┌──────────────────────────────┐                       ║
-  ║  │ 디버터 냉각   │    │ 1차 냉각 루프 (LiPb)          │                       ║
-  ║  │ (water)      │    │ T_out = 600C                   │                       ║
+  ║  │ Divertor cool│    │ 1st coolant loop (LiPb)       │                       ║
+  ║  │ (water)      │    │ T_out = 600 C                  │                       ║
   ║  └──────┬───────┘    └──────────┬───────────────────┘                       ║
   ║         │                       │                                          ║
-  ║    ▼ 폐열                  ▼ 열교환기                                       ║
+  ║    v waste heat            v heat exchanger                                ║
   ║  ┌──────────────┐    ┌──────────────────────────────┐                       ║
-  ║  │ 냉각탑 방출   │    │ sCO2 Brayton Cycle            │                       ║
-  ║  │ ~120 MW      │    │ 6단 (n=6)                      │                       ║
-  ║  │              │    │ eta = 50% (1/phi)               │                       ║
+  ║  │ Cooling tower│    │ sCO2 Brayton Cycle            │                       ║
+  ║  │ ~120 MW      │    │ 6 stages (n=6)                 │                       ║
+  ║  │              │    │ eta = 50% (1/phi, target)       │                       ║
   ║  └──────────────┘    └──────────┬───────────────────┘                       ║
   ║                                 │                                          ║
   ║                       ┌────────┴────────┐                                  ║
   ║                       │                  │                                  ║
-  ║                  ▼ 50%              ▼ 50%                                   ║
+  ║                  v 50%              v 50%                                   ║
   ║          ┌─────────────┐    ┌─────────────┐                                 ║
-  ║          │ 전기 출력     │    │ 폐열          │                                ║
-  ║          │ ~268 MWe    │    │ ~268 MW      │                                ║
-  ║          └──────┬──────┘    └──────────────┘                                ║
+  ║          │ Electric out│    │ Waste heat  │                                ║
+  ║          │ ~268 MWe    │    │ ~268 MW     │                                ║
+  ║          └──────┬──────┘    └─────────────┘                                ║
   ║                 │                                                          ║
-  ║            ▼ 자체 소비                                                      ║
+  ║            v self-consumption                                              ║
   ║          ┌─────────────────────────┐                                        ║
-  ║          │ 자석 냉각:    30 MWe     │                                        ║
-  ║          │ 가열 wall-plug: 57 MWe  │ (→ 24 MW 플라즈마)                      ║
-  ║          │ 보조 시스템:   30 MWe    │                                        ║
-  ║          │ 합계:       ~117 MWe    │                                        ║
+  ║          │ Magnet cooling: 30 MWe  │                                        ║
+  ║          │ Heating wall-plug: 57 MWe│ (-> 24 MW plasma)                      ║
+  ║          │ Auxiliary: 30 MWe       │                                        ║
+  ║          │ Subtotal:  ~117 MWe     │                                        ║
   ║          └──────┬──────────────────┘                                        ║
   ║                 │                                                          ║
-  ║            ▼ 순 출력                                                        ║
+  ║            v net output                                                    ║
   ║          ┌─────────────┐                                                    ║
-  ║          │ P_net ≈ 150 │                                                    ║
+  ║          │ P_net ~= 150│                                                    ║
   ║          │  ~200 MWe   │                                                    ║
-  ║          │ (보수적 추정)│                                                    ║
+  ║          │ (conservative estimate)│                                         ║
   ║          └─────────────┘                                                    ║
   ║                                                                            ║
-  ║  전체 효율: P_net / P_fus ≈ 150~200 / 600 ≈ 25~33%                        ║
-  ║  공학적 Q: Q_eng = P_el(gross) / P_consumed ≈ 268 / 117 ≈ 2.3             ║
+  ║  Overall efficiency: P_net / P_fus ~= 150~200 / 600 ~= 25~33% (candidate)  ║
+  ║  Engineering Q: Q_eng = P_el(gross) / P_consumed ~= 268 / 117 ~= 2.3       ║
   ╚══════════════════════════════════════════════════════════════════════════════╝
 
-  에너지 흐름 n=6 수치 요약:
+  Energy flow n=6 numerical summary:
   ┌──────────────────────────────────────────────────────────┐
-  │ 구간              │ 에너지 [MW]    │ n=6 표현            │
+  │ Segment            │ Energy [MW]   │ n=6 expression      │
   ├──────────────────────────────────────────────────────────┤
-  │ 외부 가열 (플라즈마)│ 24            │ J_2 = 24            │
-  │ Alpha 가열         │ 120           │ sigma*(sigma-phi)    │
-  │ 총 플라즈마 가열    │ 144           │ sigma^2 = 144       │
-  │ 핵융합 출력        │ 600           │ sopfr * sigma * 10   │
-  │ 중성자 에너지      │ 480           │ J_2 * (J_2 - tau)    │
-  │ 블랭킷 열          │ ~536          │ -                    │
-  │ Brayton 입력       │ ~536          │ -                    │
-  │ 전기 총 출력       │ ~268          │ -                    │
-  │ 자체 소비         │ ~117          │ -                    │
-  │ 순 전기 출력       │ ~150          │ -                    │
+  │ External heat (plasma) │ 24        │ J_2 = 24            │
+  │ Alpha heating      │ 120           │ sigma*(sigma-phi)   │
+  │ Total plasma heating│ 144          │ sigma^2 = 144       │
+  │ Fusion output      │ 600           │ sopfr * sigma * 10  │
+  │ Neutron energy     │ 480           │ J_2 * (J_2 - tau)   │
+  │ Blanket heat       │ ~536          │ -                   │
+  │ Brayton input      │ ~536          │ -                   │
+  │ Electric gross out │ ~268          │ -                   │
+  │ Self-consumption   │ ~117          │ -                   │
+  │ Net electric out   │ ~150          │ -                   │
   └──────────────────────────────────────────────────────────┘
 
-  참고: 본문 Section 10에서 P_el ≈ 300 MWe 추정과 차이가 있음.
-  이는 Section 10이 P_th = 702 MW (에너지 증배 포함)를 사용한 반면,
-  여기서는 블랭킷 효율과 디버터 열 손실을 더 보수적으로 적용한 결과.
-  실제 설계에서는 디버터 열 회수, 블랭킷 효율 최적화로 200~300 MWe 범위.
+  Note: Section 10 estimated P_el ~= 300 MWe, which differs from above.
+  That is because Section 10 used P_th = 702 MW (including energy multiplication),
+  whereas here blanket efficiency and divertor heat loss are applied more conservatively.
+  In an actual design, divertor heat recovery and blanket efficiency optimization yield the 200~300 MWe range (candidate).
 ```
 
 ---
 
-## 21. 약점 정직한 분석 및 완화 (Honest Weakness Analysis & Mitigation)
+## 21. Honest Weakness Analysis and Mitigation
 
-### 21.1 우연적 일치 vs 물리적 필연 분류
+### 21.1 Coincidental match vs physical necessity classification
 
 ```
   ┌──────────────────────────────────────────────────────────────────────────────┐
-  │           42개 EXACT 파라미터 — 정직한 분류                                    │
+  │           42 EXACT parameters - honest classification                         │
   ├──────────────────────────┬─────────────────────────────────────────────────────┤
-  │ 카테고리                  │ 항목                                                │
+  │ Category                  │ Items                                              │
   ├──────────────────────────┼─────────────────────────────────────────────────────┤
   │                          │                                                    │
-  │ A. 물리적 필연 (4개)      │ q_0 = 1 (MHD 안정성 경계)                           │
-  │   (물리 법칙이 값 결정)    │ Li-6 질량수 = 6 (핵종 특성)                          │
-  │                          │ 증식 반응 2가지 (Li-6 + Li-7)                        │
-  │                          │ 가열 방법 3종 (NBI/ICRH/ECRH = 산업 표준)            │
-  │                          │                                                    │
-  ├──────────────────────────┼─────────────────────────────────────────────────────┤
-  │                          │                                                    │
-  │ B. 산업 표준 일치 (8개)   │ TF = 18 (ITER/SPARC/JT-60SA 표준)                  │
-  │   (현존 장치들도 동일)     │ PF = 6 (ITER 동일)                                  │
-  │                          │ CS = 6 (ITER 동일)                                  │
-  │                          │ NBI 빔라인 = 2 (KSTAR 동일)                          │
-  │                          │ ICRH 안테나 = 2 (표준)                               │
-  │                          │ 제어 루프 6 (대형 토카막 표준)                        │
-  │                          │ SPI = 2 (ITER 표준)                                 │
-  │                          │ T_op = 20K (SPARC HTS 표준)                         │
+  │ A. Physical necessity (4) │ q_0 = 1 (MHD stability boundary)                    │
+  │   (physical law fixes val)│ Li-6 mass number = 6 (nuclide property)             │
+  │                          │ 2 breeding reactions (Li-6 + Li-7)                  │
+  │                          │ 3 heating methods (NBI/ICRH/ECRH = industry standard)│
   │                          │                                                    │
   ├──────────────────────────┼─────────────────────────────────────────────────────┤
   │                          │                                                    │
-  │ C. 물리적으로 합리적이나  │ B_T = 12T (HTS 전환점 ≈ 12T, H-SM-68)              │
-  │    n=6에 맞춘 것 (12개)  │ I_p = 12MA (q_95와 B_T에서 유도 가능)               │
-  │   (타당한 범위 내에서     │ q_95 = 5 (3~6 범위에서 선택)                        │
-  │    n=6 값 선택)          │ A = 3.0 (2.5~3.5 범위에서 선택)                      │
-  │                          │ kappa = 2.0 (1.7~2.2 범위에서 선택)                  │
-  │                          │ delta = 1/3 (0.25~0.5 범위에서 선택)                 │
-  │                          │ NBI = 8MW (5~15MW 범위에서 선택)                     │
-  │                          │ ICRH = 6MW (3~10MW 범위에서 선택)                    │
-  │                          │ ECRH = 10MW (5~20MW 범위에서 선택)                   │
-  │                          │ 총 가열 = 24MW (15~40MW 범위에서 선택)               │
-  │                          │ 블랭킷 12 모듈 (8~18 범위에서 선택)                  │
-  │                          │ f_BS = 50% (20~60% 범위에서 선택)                    │
+  │ B. Industry-std match (8) │ TF = 18 (ITER/SPARC/JT-60SA standard)              │
+  │   (existing machines same)│ PF = 6 (ITER same)                                  │
+  │                          │ CS = 6 (ITER same)                                  │
+  │                          │ NBI beamlines = 2 (KSTAR same)                      │
+  │                          │ ICRH antennas = 2 (standard)                        │
+  │                          │ Control loops 6 (large-tokamak standard)            │
+  │                          │ SPI = 2 (ITER standard)                             │
+  │                          │ T_op = 20K (SPARC HTS standard)                     │
   │                          │                                                    │
   ├──────────────────────────┼─────────────────────────────────────────────────────┤
   │                          │                                                    │
-  │ D. 설계 자유 선택 (14개) │ R_0 = 6m (설계 선택 — 물리적 제약 넓음)              │
-  │   (다른 값도 가능)        │ a = 2m (R_0/A에서 유도)                              │
-  │                          │ Q = 10 (ITER 목표와 동일 — 독립 근거 있음)            │
-  │                          │ NBI 에너지 = 120keV (KSTAR 값 차용)                  │
-  │                          │ ICRH 주파수 = 48MHz (B에 따라 조절 가능)             │
-  │                          │ ECRH 자이로트론 = 5 (2MW×5 선택)                     │
-  │                          │ 진단 카테고리 = 6 (5~8로 분류 가능)                   │
-  │                          │ disruption 전략 = 4 (3~6으로 분류 가능)               │
-  │                          │ 총 자석 = 30 (18+6+6 = 합산)                        │
-  │                          │ TBR = 7/6 (1.15~1.20 범위에서 선택)                  │
-  │                          │ H-factor = 1.0 (0.8~1.5 가능)                       │
-  │                          │ 디버터 DN, 열부하, cassette, target angle, 수명       │
-  │                          │ Brayton 6단, eta=50%                                │
+  │ C. Physically reasonable │ B_T = 12T (HTS transition ~12T, H-SM-68)            │
+  │    but tuned to n=6 (12)  │ I_p = 12MA (derivable from q_95 and B_T)            │
+  │   (n=6 value chosen       │ q_95 = 5 (chosen within 3~6 range)                  │
+  │    within valid range)    │ A = 3.0 (chosen within 2.5~3.5 range)               │
+  │                          │ kappa = 2.0 (chosen within 1.7~2.2 range)           │
+  │                          │ delta = 1/3 (chosen within 0.25~0.5 range)          │
+  │                          │ NBI = 8MW (chosen within 5~15MW range)              │
+  │                          │ ICRH = 6MW (chosen within 3~10MW range)             │
+  │                          │ ECRH = 10MW (chosen within 5~20MW range)            │
+  │                          │ Total heating = 24MW (chosen within 15~40MW range)  │
+  │                          │ Blanket 12 modules (chosen within 8~18 range)       │
+  │                          │ f_BS = 50% (chosen within 20~60% range)             │
   │                          │                                                    │
   ├──────────────────────────┼─────────────────────────────────────────────────────┤
   │                          │                                                    │
-  │ E. 파생 값 (4개)         │ V(체적), Flux swing, P_fus, 냉각수                   │
-  │   (다른 파라미터에서 계산) │ → 독립적 n=6 평가 불가                               │
+  │ D. Free design choice (14)│ R_0 = 6m (design choice - physical constraint wide)│
+  │   (other values possible) │ a = 2m (derived from R_0/A)                         │
+  │                          │ Q = 10 (same as ITER target - independent basis)    │
+  │                          │ NBI energy = 120keV (KSTAR value adopted)           │
+  │                          │ ICRH frequency = 48MHz (tunable with B)             │
+  │                          │ ECRH gyrotrons = 5 (2MW x 5 choice)                 │
+  │                          │ Diagnostic categories = 6 (could group as 5~8)      │
+  │                          │ Disruption strategies = 4 (could group as 3~6)      │
+  │                          │ Total magnets = 30 (18+6+6 = sum)                   │
+  │                          │ TBR = 7/6 (chosen within 1.15~1.20 range)           │
+  │                          │ H-factor = 1.0 (0.8~1.5 possible)                   │
+  │                          │ Divertor DN, heat load, cassette, target angle, life│
+  │                          │ Brayton 6-stage, eta=50%                           │
+  │                          │                                                    │
+  ├──────────────────────────┼─────────────────────────────────────────────────────┤
+  │                          │                                                    │
+  │ E. Derived values (4)     │ V (volume), Flux swing, P_fus, coolant              │
+  │   (computed from others)  │ -> independent n=6 assessment not possible          │
   │                          │                                                    │
   └──────────────────────────┴─────────────────────────────────────────────────────┘
 
-  정직한 스코어 재계산:
+  Honest score recomputation:
 
-    물리적 필연:    4개 → 진정한 n=6 연결 (grade A)
-    산업 표준:      8개 → n=6 이전에 이미 결정된 값 (grade B)
-    합리적 선택:   12개 → 범위 내에서 n=6 값 선택 (grade C)
-    자유 선택:     14개 → n=6에 맞추기 위한 설계 (grade D)
-    파생:           4개 → 독립 평가 불가 (grade E)
+    Physical necessity: 4 -> genuine n=6 connection (grade A)
+    Industry standard:  8 -> values already set before n=6 (grade B)
+    Reasonable choice: 12 -> n=6 value chosen within range (grade C)
+    Free choice:       14 -> design tuned to n=6 (grade D)
+    Derived:            4 -> independent assessment not possible (grade E)
 
-    "진정한" n=6 일치 = A + B = 12/42 = 28.6%
-    "합리적" n=6 일치 = A + B + C = 24/42 = 57.1%
-    "설계 포함" 전체 = A + B + C + D = 38/42 = 90.5%
+    "Genuine" n=6 match = A + B = 12/42 = 28.6%
+    "Reasonable" n=6 match = A + B + C = 24/42 = 57.1%
+    "Including design" total = A + B + C + D = 38/42 = 90.5%
 ```
 
-### 21.2 통계적 유의성 분석 — 무작위 대조군 비교
+### 21.2 Statistical significance analysis - random control comparison
 
 ```
-  질문: 1~24 범위의 정수를 무작위로 배정하면 42/45 일치율에 도달할 확률은?
+  Question: if integers in 1~24 are randomly assigned, what is the probability of reaching 42/45 match rate?
 
-  모델:
-    - 45개 파라미터, 각각에 1~24 사이 정수 무작위 배정
-    - n=6 상수 집합: {1, 2, 3, 4, 5, 6, 8, 10, 11, 12, 16, 18, 20, 24, 28, 48, 64, ...}
-    - 1~24 범위에서 n=6으로 표현 가능한 정수: 약 14개/24 ≈ 58%
+  Model:
+    - 45 parameters, each assigned an integer in 1~24 at random
+    - n=6 constant set: {1, 2, 3, 4, 5, 6, 8, 10, 11, 12, 16, 18, 20, 24, 28, 48, 64, ...}
+    - Integers in 1~24 expressible by n=6: about 14/24 ~= 58%
       (1,2,3,4,5,6,8,10,11,12,16,18,20,24)
 
-  무작위 시뮬레이션 추정:
-    - 각 파라미터가 1~24에서 독립 균등 → n=6 표현 확률 ≈ 14/24 ≈ 58%
-    - 45개 중 EXACT 기대값: 45 × 0.58 = 26.1개
-    - 42개 이상 EXACT 확률: P(X ≥ 42) where X ~ Binomial(45, 0.58)
-    - P(X ≥ 42) ≈ 2.3 × 10^{-8} (매우 낮음)
+  Random simulation estimate:
+    - Each parameter independent uniform in 1~24 -> n=6 expressibility prob. ~= 14/24 ~= 58%
+    - Expected EXACT among 45: 45 x 0.58 = 26.1
+    - P(>= 42 EXACT): P(X >= 42) where X ~ Binomial(45, 0.58)
+    - P(X >= 42) ~= 2.3 x 10^{-8} (very low)
 
-  그러나 이 분석에는 심각한 편향이 있다:
+  However this analysis has serious biases:
 
-  편향 1: 파라미터 범위가 1~24가 아님
-    - R_0 ∈ {1.5~8.0m}, B_T ∈ {3~20T} 등 각각 다른 범위
-    - 범위를 좁히면 n=6 일치 확률 증가
+  Bias 1: parameter ranges are not 1~24
+    - R_0 in {1.5~8.0m}, B_T in {3~20T}, etc., each a different range
+    - Narrowing the range increases n=6 match probability
 
-  편향 2: 선택의 자유
-    - 42개 중 14개(카테고리 D)는 n=6에 맞추기 위해 선택됨
-    - 이들을 제외하면 28/31 = 90% → 여전히 높지만 표본이 다름
+  Bias 2: freedom of choice
+    - 14 of 42 (category D) were chosen to fit n=6
+    - Excluding them: 28/31 = 90% -> still high but different sample
 
-  편향 3: 표현의 유연성
-    - n=6 상수로 표현 가능한 산술 조합이 매우 많음
-    - {n, phi, tau, sigma, sopfr, mu, J_2, R, P_2} + 사칙연산 → 수백 개 정수 커버
-    - 100 이하 정수 중 n=6으로 표현 가능한 비율 추정:
-      간단한 조합만으로: 1,2,3,4,5,6,7(sigma-sopfr),8,10,11,12,14,16,18,20,24,28,30,
+  Bias 3: flexibility of expression
+    - Many arithmetic combinations of n=6 constants exist
+    - {n, phi, tau, sigma, sopfr, mu, J_2, R, P_2} + basic ops -> hundreds of integers covered
+    - Estimate of integers <= 100 expressible by n=6:
+      from simple combinations alone: 1,2,3,4,5,6,7(sigma-sopfr),8,10,11,12,14,16,18,20,24,28,30,
       36,48,60,64,72,96,120,144,...
-    - → 100 이하에서 ~25+개 = 25%+ 커버
-    - 복잡한 조합 포함 시: 50% 이상
+    - -> ~25+ below 100 = 25%+ coverage
+    - With complex combinations: over 50%
 
-  편향 4: 사후 분석 (post-hoc fitting)
-    - 42개 EXACT 판정은 먼저 값을 결정한 후 n=6 표현을 찾은 것
-    - 사전에 n=6 표현을 예측하고 물리 값과 비교한 것이 아님
-    - → confirmation bias 가능성 높음
+  Bias 4: post-hoc fitting
+    - The 42 EXACT judgment was made after fixing values, then finding n=6 expressions
+    - It is not prediction of n=6 expressions in advance then comparing with physical values
+    - -> high confirmation-bias risk
 
-  수정된 유의성 추정:
-    - 카테고리 A+B (물리적 필연 + 산업 표준): 12개 중 12개 일치
-    - 이 12개의 무작위 일치 확률: (14/24)^12 ≈ 0.58^12 ≈ 0.0013 = 0.13%
-    - → p-value ≈ 0.001, 통계적으로 유의 (p < 0.05)
-    - 그러나: 이조차 "n=6 상수가 1~24를 넓게 커버"하기 때문
+  Corrected significance estimate:
+    - Category A+B (physical necessity + industry standard): 12 of 12 match
+    - Random match probability for these 12: (14/24)^12 ~= 0.58^12 ~= 0.0013 = 0.13%
+    - -> p-value ~= 0.001, statistically significant (p < 0.05)
+    - However: even this is because "n=6 constants cover 1~24 broadly"
 
-  결론:
-    전체 42/45 = 93.3%는 인상적이지만, 설계 자유도를 고려하면 과대 평가.
-    물리/산업 필연 12/12 = 100%는 주목할 만하나, n=6 표현의 유연성 때문에
-    확정적 결론은 불가. 정직한 평가: "흥미로운 수적 패턴이나, 물리적 인과 아님."
+  Conclusion:
+    Overall 42/45 = 93.3% is impressive, but considering design freedom it is overstated.
+    Physical/industry necessity 12/12 = 100% is notable, but due to n=6 expression flexibility
+    a firm conclusion is not possible. Honest assessment: "interesting numerical pattern, not physical causation."
 ```
 
-### 21.3 대조군 분석 — n=8, n=12, n=28과 비교
+### 21.3 Control-group analysis - comparison with n=8, n=12, n=28
 
 ```
-  n=8 (완전수 아님, tau(8)=4, sigma(8)=15, phi(8)=4):
-    상수 집합: {1,2,4,8,15,16,32,60,64,...}
-    핵심 테스트:
-      TF = 18 → 15+3? 8+10? → 직접 표현 어려움 ✗
-      B_T = 12T → 15-3? 8+4? → 가능하지만 복잡 △
-      가열 3종 → ? → 직접 표현 없음 ✗
-      q_0 = 1 → sigma(8)/15? → 자명하지 않음 ✗
-      Q = 10 → 15-sopfr(8)? → sopfr(8)=5 → 가능 △
+  n=8 (not a perfect number, tau(8)=4, sigma(8)=15, phi(8)=4):
+    Constant set: {1,2,4,8,15,16,32,60,64,...}
+    Core tests:
+      TF = 18 -> 15+3? 8+10? -> direct expression difficult FAIL
+      B_T = 12T -> 15-3? 8+4? -> possible but complex PARTIAL
+      3 heating methods -> ? -> no direct expression FAIL
+      q_0 = 1 -> sigma(8)/15? -> not self-evident FAIL
+      Q = 10 -> 15-sopfr(8)? -> sopfr(8)=5 -> possible PARTIAL
 
-    추정 n8_match: ~40~50% (n=6 대비 현저히 낮음)
+    Estimated n8_match: ~40~50% (markedly lower than n=6)
 
-  n=12 (완전수 아님, tau(12)=6, sigma(12)=28, phi(12)=4):
-    상수 집합: {1,2,3,4,6,12,28,48,96,...}
-    핵심 테스트:
-      TF = 18 → 28-10? → 직접 표현 어려움 ✗
-      B_T = 12T → n=12 EXACT ✓
-      가열 3종 → tau(12)/2=3? → 가능 △
-      q_0 = 1 → 28/28? → 자명 ✓
-      Q = 10 → 28-18? → 부자연스러움 ✗
-      PF = 6 → tau(12)=6 EXACT ✓
-      NBI 8MW → sigma(12)-tau(12)·(?) → 복잡 ✗
+  n=12 (not perfect, tau(12)=6, sigma(12)=28, phi(12)=4):
+    Constant set: {1,2,3,4,6,12,28,48,96,...}
+    Core tests:
+      TF = 18 -> 28-10? -> direct expression difficult FAIL
+      B_T = 12T -> n=12 EXACT OK
+      3 heating methods -> tau(12)/2=3? -> possible PARTIAL
+      q_0 = 1 -> 28/28? -> trivial OK
+      Q = 10 -> 28-18? -> unnatural FAIL
+      PF = 6 -> tau(12)=6 EXACT OK
+      NBI 8MW -> sigma(12)-tau(12)*(?) -> complex FAIL
 
-    추정 n12_match: ~50~60% (n=6보다 낮지만, 12 자체가 등장하므로 부분 일치)
+    Estimated n12_match: ~50~60% (lower than n=6, partial match since 12 itself appears)
 
-  n=28 (완전수, tau(28)=6, sigma(28)=56, phi(28)=12):
-    상수 집합: {1,2,4,6,7,12,14,28,56,...}
-    핵심 테스트:
-      TF = 18 → 28-10? → 직접 표현 어려움 ✗
-      B_T = 12T → phi(28)=12 EXACT ✓
-      가열 3종 → ? → 직접 표현 없음 ✗
-      q_0 = 1 → sigma/56? → 불일치 ✗
-      Q = 10 → ? → 직접 표현 없음 ✗
-      PF = 6 → tau(28)=6 EXACT ✓
-      총 가열 24MW → (?) → 직접 표현 어려움 ✗
+  n=28 (perfect number, tau(28)=6, sigma(28)=56, phi(28)=12):
+    Constant set: {1,2,4,6,7,12,14,28,56,...}
+    Core tests:
+      TF = 18 -> 28-10? -> direct expression difficult FAIL
+      B_T = 12T -> phi(28)=12 EXACT OK
+      3 heating methods -> ? -> no direct expression FAIL
+      q_0 = 1 -> sigma/56? -> mismatch FAIL
+      Q = 10 -> ? -> no direct expression FAIL
+      PF = 6 -> tau(28)=6 EXACT OK
+      Total heating 24MW -> (?) -> direct expression difficult FAIL
 
-    추정 n28_match: ~30~40%
+    Estimated n28_match: ~30~40%
 
-  비교 요약:
+  Comparison summary:
   ┌──────────┬────────────┬──────────┬─────────────────────────┐
-  │ 체계     │ 추정 match │ n=6 대비 │ 핵심 차이                │
+  │ System   │ Est. match │ vs n=6   │ Core difference          │
   ├──────────┼────────────┼──────────┼─────────────────────────┤
-  │ n=6      │ ~93%       │ 기준     │ {1,2,3,4,5,6,8,10,12,  │
-  │ (완전수) │ (42/45)    │          │  16,18,20,24,48} 풍부   │
+  │ n=6      │ ~93%       │ baseline │ {1,2,3,4,5,6,8,10,12,   │
+  │ (perfect)│ (42/45)    │          │  16,18,20,24,48} rich   │
   ├──────────┼────────────┼──────────┼─────────────────────────┤
-  │ n=8      │ ~45%       │ -48%p    │ phi(8)=4로 {2,3} 약함   │
+  │ n=8      │ ~45%       │ -48%p    │ phi(8)=4 weakens {2,3}  │
   ├──────────┼────────────┼──────────┼─────────────────────────┤
-  │ n=12     │ ~55%       │ -38%p    │ 12 자체는 강하나 나머지 약│
+  │ n=12     │ ~55%       │ -38%p    │ 12 itself strong, rest  │
+  │          │            │          │ weak                    │
   ├──────────┼────────────┼──────────┼─────────────────────────┤
-  │ n=28     │ ~35%       │ -58%p    │ 상수가 크고 토카막 파라미 │
-  │ (완전수) │            │          │ 터(1~24)에 안 맞음       │
+  │ n=28     │ ~35%       │ -58%p    │ constants large, do not │
+  │ (perfect)│            │          │ fit tokamak params(1~24)│
   └──────────┴────────────┴──────────┴─────────────────────────┘
 
-  왜 n=6이 가장 잘 맞는가 (정직한 분석):
-    1. n=6의 약수 {1,2,3,6}이 저차 정수를 빈틈없이 커버
-    2. sigma(6)=12가 공학적으로 중요한 범위(10~20)에 위치
-    3. phi(6)=2는 가장 기본적인 이진 구조와 일치
-    4. 핵융합 파라미터가 대부분 1~24 범위의 정수 → n=6 상수 집합이 최적
-    5. n=28의 sigma=56은 너무 크고, n=8의 상수 집합은 {3} 누락
+  Why does n=6 fit best (honest analysis):
+    1. Divisors of n=6 {1,2,3,6} cover low-order integers without gaps
+    2. sigma(6)=12 sits in the engineering-important range (10~20)
+    3. phi(6)=2 matches the most fundamental binary structure
+    4. Most fusion parameters are integers in 1~24 -> n=6 constant set is optimal
+    5. n=28's sigma=56 is too large, n=8's constant set lacks {3}
 
-  결론:
-    n=6이 다른 체계보다 유의미하게 더 잘 맞는다 (p < 0.01 수준).
-    그러나 이는 n=6 상수 집합이 "1~24 범위 정수를 가장 잘 커버"하기 때문이며,
-    완전수의 심오한 물리적 의미보다는 산술적 편의성(combinatorial coverage)에
-    기인할 가능성이 높다.
+  Conclusion:
+    n=6 fits significantly better than other systems (p < 0.01 level).
+    However this is because the n=6 constant set "covers 1~24 best",
+    and is likely due to arithmetic convenience (combinatorial coverage)
+    rather than any deep physical meaning of the perfect number.
 ```
 
-### 21.4 물리적 제약과 n=6 선택의 충돌
+### 21.4 Conflicts between physical constraints and n=6 choice
 
 ```
-  물리적 최적과 n=6 선택이 충돌하는 경우:
+  Cases where the physical optimum conflicts with the n=6 choice:
 
   ┌──────────────────────────────────────────────────────────────────────────────┐
-  │ # │ 파라미터      │ n=6 선택 │ 물리적 최적 │ 충돌 여부    │ 영향도          │
+  │ # │ Parameter     │ n=6 choice│ Physical opt│ Conflict?    │ Impact          │
   ├──────────────────────────────────────────────────────────────────────────────┤
-  │ 1 │ R_0 = 6m     │ n=6      │ compact ≤3m│ 충돌!        │ 비용 2~3배 증가 │
-  │   │              │          │ (SPARC 1.85m)│             │                 │
-  │   │              │          │ 또는 ITER급 │              │ R=6은 ITER급,   │
-  │   │              │          │ 6.2m 가능   │ 경미한 충돌  │ compact 아님    │
+  │ 1 │ R_0 = 6m     │ n=6       │ compact <=3m│ Conflict!    │ cost 2~3x up    │
+  │   │              │           │ (SPARC 1.85m)│             │                 │
+  │   │              │           │ or ITER-class│             │ R=6 is ITER-    │
+  │   │              │           │ 6.2m possible│ minor conflict│ class, not compact│
   ├──────────────────────────────────────────────────────────────────────────────┤
-  │ 2 │ B_T = 12T    │ sigma    │ 높을수록    │ 충돌 없음    │ HTS로 달성 가능 │
-  │   │              │          │ 좋음(>12T)  │ (보수적)     │ 20T도 가능     │
+  │ 2 │ B_T = 12T    │ sigma     │ higher is    │ No conflict  │ achievable with HTS│
+  │   │              │           │ better(>12T) │ (conservative)│ 20T also possible│
   ├──────────────────────────────────────────────────────────────────────────────┤
-  │ 3 │ A = 3.0      │ n/phi    │ 2.5~3.5    │ 충돌 없음    │ 최적 범위 중앙  │
-  │   │              │          │ (최적 3.1)  │              │                 │
+  │ 3 │ A = 3.0      │ n/phi     │ 2.5~3.5     │ No conflict  │ center of optimal range│
+  │   │              │           │ (opt 3.1)    │              │                 │
   ├──────────────────────────────────────────────────────────────────────────────┤
-  │ 4 │ q_95 = 5.0   │ sopfr    │ 3.0~4.0    │ 약간 충돌    │ 높은 q_95는    │
-  │   │              │          │ (disruption │              │ 안전하지만     │
-  │   │              │          │  회피 최적)  │              │ beta 활용 낮음 │
+  │ 4 │ q_95 = 5.0   │ sopfr     │ 3.0~4.0     │ minor conflict│ high q_95 is    │
+  │   │              │           │ (disruption  │              │ safe but        │
+  │   │              │           │  avoid opt)  │              │ low beta use    │
   ├──────────────────────────────────────────────────────────────────────────────┤
-  │ 5 │ 총 가열      │ J_2=24MW │ 40~80MW    │ 충돌!        │ Q=10 달성에    │
-  │   │ = 24MW       │          │ (ITER급)    │              │ 제한될 수 있음 │
+  │ 5 │ Total heating│ J_2=24MW  │ 40~80MW     │ Conflict!    │ may limit Q=10  │
+  │   │ = 24MW       │           │ (ITER-class) │              │ achievement     │
   ├──────────────────────────────────────────────────────────────────────────────┤
-  │ 6 │ H-factor=1.0 │ mu=1     │ 1.0~1.5    │ 충돌 없음    │ 보수적 (좋음)  │
-  │   │              │          │ (H=1 보수적)│              │                 │
+  │ 6 │ H-factor=1.0 │ mu=1      │ 1.0~1.5     │ No conflict  │ conservative (good)│
+  │   │              │           │ (H=1 conserv.)│             │                 │
   ├──────────────────────────────────────────────────────────────────────────────┤
-  │ 7 │ NBI = 8MW    │ sigma-tau│ 15~33MW    │ 충돌!        │ core 가열 부족 │
-  │   │              │          │ (ITER 33MW) │              │ 가능성         │
+  │ 7 │ NBI = 8MW    │ sigma-tau │ 15~33MW     │ Conflict!    │ core heating may │
+  │   │              │           │ (ITER 33MW)  │              │ be insufficient │
   ├──────────────────────────────────────────────────────────────────────────────┤
-  │ 8 │ 디버터 열부하 │ sigma=12 │ <10 목표   │ 약간 충돌    │ 12는 도전적    │
-  │   │ = 12 MW/m^2  │          │ (detached)  │              │ (detached 필요)│
+  │ 8 │ Divertor heat│ sigma=12  │ <10 target  │ minor conflict│ 12 is challenging│
+  │   │ = 12 MW/m^2  │           │ (detached)   │              │ (detached needed)│
   └──────────────────────────────────────────────────────────────────────────────┘
 
-  심각한 충돌 (#1, #5, #7):
+  Serious conflicts (#1, #5, #7):
 
   #1 R_0 = 6m:
-    현대 핵융합 트렌드는 "compact" (R ≤ 3m, 높은 B로 보상)
-    R=6m은 ITER급 대형 장치 → 비용 ~7.5B USD
-    R=3m, B=20T라면 비용 ~2.5B USD, 동등 성능 가능
-    → n=6을 위해 비용 3배 증가 감수?
-    → 완화: "ITER 성능 클래스"로 포지셔닝하면 R=6m은 합리적
+    Modern fusion trend is "compact" (R <= 3m, compensated by high B)
+    R=6m is ITER-class large device -> cost ~7.5B USD
+    R=3m, B=20T -> cost ~2.5B USD, equivalent performance possible
+    -> Accept 3x cost for n=6?
+    -> Mitigation: positioning as "ITER performance class" makes R=6m reasonable
 
-  #5 총 가열 24MW:
-    Q=10 달성에 24MW로 충분한가?
-    P_fus = Q × P_heat = 240MW (최소) → alpha 48MW → 총 72MW
-    tau_E(ITER physics) @ R=6, B=12 → tau_E ≈ 3~5s
-    필요 P_heat ≈ W / tau_E ≈ (0.81e20 × 14keV × 974m^3) / 4s
-    ≈ 1.1e24 eV / 4s ≈ 44 MW
-    → 24MW 외부 + alpha 48MW = 72MW > 44MW → 충족 가능
-    그러나 margin 적음 → H-factor > 1.0 필요할 수 있음
-    → 완화: ECRH 10→20MW 업그레이드 예비 공간 확보
+  #5 Total heating 24MW:
+    Is 24MW sufficient for Q=10?
+    P_fus = Q * P_heat = 240MW (minimum) -> alpha 48MW -> total 72MW
+    tau_E(ITER physics) @ R=6, B=12 -> tau_E ~= 3~5s
+    Required P_heat ~= W / tau_E ~= (0.81e20 * 14keV * 974m^3) / 4s
+    ~= 1.1e24 eV / 4s ~= 44 MW
+    -> 24MW external + alpha 48MW = 72MW > 44MW -> satisfied
+    But margin is small -> may require H-factor > 1.0
+    -> Mitigation: reserve space for ECRH 10->20MW upgrade
 
   #7 NBI 8MW:
-    KSTAR에서 이미 8MW NBI 실증 → 기술 리스크 낮음
-    그러나 core fueling, rotation drive에 추가 NBI 필요 가능
-    → 완화: 2호기 NBI beamline 추가 공간 예비 (총 16MW까지)
+    8MW NBI already demonstrated at KSTAR -> low technology risk
+    However, additional NBI may be needed for core fueling, rotation drive
+    -> Mitigation: reserve space for a second NBI beamline (up to 16MW total)
 ```
 
-### 21.5 종합 평가 — 정직한 결론
+### 21.5 Overall assessment - honest conclusion
 
 ```
   ╔══════════════════════════════════════════════════════════════════════════════╗
-  ║                KSTAR-N6 정직한 종합 평가                                     ║
+  ║                KSTAR-N6 honest overall assessment                            ║
   ╠══════════════════════════════════════════════════════════════════════════════╣
   ║                                                                            ║
-  ║  강점 (genuine):                                                           ║
+  ║  Strengths (genuine):                                                      ║
   ║  ─────────────                                                             ║
-  ║  1. n=6 상수 집합이 핵융합 파라미터 범위를 자연스럽게 커버                     ║
-  ║  2. B_T = 12T = sigma는 LTS→HTS 전환점과 실제로 일치 (H-SM-68)              ║
-  ║  3. q=1 안정성 경계 = 완전수 정의는 두 독립 분야의 교차점                     ║
-  ║  4. Li-6 핵종이 핵융합 연료 사이클의 핵심 = n=6 직접 연결                    ║
-  ║  5. 모든 파라미터가 물리적으로 합리적인 범위 내에 있음                        ║
-  ║  6. 대조군(n=8, n=12, n=28) 대비 유의미하게 높은 일치율                     ║
+  ║  1. n=6 constant set naturally covers fusion parameter range                ║
+  ║  2. B_T = 12T = sigma matches the LTS->HTS transition point (H-SM-68)       ║
+  ║  3. q=1 stability boundary = perfect-number identity is a cross-disciplinary meeting║
+  ║  4. Li-6 nuclide central to fusion fuel cycle = direct n=6 connection       ║
+  ║  5. All parameters are within physically reasonable ranges                  ║
+  ║  6. Significantly higher match rate than control (n=8, n=12, n=28)          ║
   ║                                                                            ║
-  ║  약점 (honest):                                                            ║
+  ║  Weaknesses (honest):                                                      ║
   ║  ─────────────                                                             ║
-  ║  1. 42/45 EXACT의 ~33% (14개)는 설계 자유도를 이용한 맞춤                   ║
-  ║  2. n=6 산술 조합의 표현력이 높아 사후 일치(post-hoc) 편향 존재              ║
-  ║  3. R=6m 선택은 compact 트렌드와 충돌 (비용 증가)                           ║
-  ║  4. 총 가열 24MW는 마진이 적음 (40~80MW가 안전)                             ║
-  ║  5. 플라즈마 방정식 수준의 n=6 필연성은 약함 (Section 17 결론)               ║
-  ║  6. "수적 패턴"과 "물리적 인과"의 경계가 불명확                              ║
+  ║  1. ~33% (14) of 42/45 EXACT are fits using design freedom                  ║
+  ║  2. Post-hoc bias exists because n=6 arithmetic is very expressive          ║
+  ║  3. R=6m conflicts with compact trend (cost increase)                       ║
+  ║  4. Total heating 24MW has small margin (40~80MW would be safer)            ║
+  ║  5. n=6 necessity at plasma-equation level is weak (Section 17 conclusion)  ║
+  ║  6. Boundary between "numerical pattern" and "physical causation" unclear   ║
   ║                                                                            ║
-  ║  수정된 스코어:                                                              ║
+  ║  Corrected scores:                                                           ║
   ║  ──────────────                                                             ║
-  ║  공식 스코어:     42/45 = 93.3% (섹션 11 기준)                              ║
-  ║  보수적 스코어:   24/42 = 57.1% (A+B+C, 자유 선택 제외)                     ║
-  ║  엄격 스코어:     12/42 = 28.6% (A+B만, 물리/산업 필연)                     ║
+  ║  Official score:     42/45 = 93.3% (Section 11 basis)                       ║
+  ║  Conservative score: 24/42 = 57.1% (A+B+C, excluding free choice)           ║
+  ║  Strict score:       12/42 = 28.6% (A+B only, physical/industry necessity)  ║
   ║                                                                            ║
-  ║  권장 인용:                                                                ║
-  ║  "KSTAR-N6 설계는 n=6 산술 프레임워크와 93% 수적 일치를 보이며,             ║
-  ║   이 중 약 57%는 물리적으로 합리적인 범위 내 선택이고,                       ║
-  ║   약 29%는 물리적 필연 또는 산업 표준과의 자연 일치이다."                    ║
+  ║  Recommended citation:                                                      ║
+  ║  "The KSTAR-N6 design shows 93% numerical match with the n=6 arithmetic     ║
+  ║   framework; of these, roughly 57% are choices within physically reasonable ║
+  ║   ranges, and roughly 29% are natural matches with physical necessity or    ║
+  ║   industry standard."                                                       ║
   ║                                                                            ║
-  ║  미래 검증 방법:                                                            ║
+  ║  Future verification methods:                                               ║
   ║  ──────────────                                                             ║
-  ║  1. SPARC B=12.2T 실측 후 → 12T 운전점의 J_c 커브 최적성 확인              ║
-  ║  2. ITER Q=10 달성 시 → alpha/neutron 비율 1:4 정밀 측정                    ║
-  ║  3. K-DEMO 설계 시 → n=6 프레임워크의 독립 예측력 테스트                    ║
-  ║     (파라미터를 사전 예측 → 사후 비교)                                      ║
-  ║  4. 다른 완전수(n=28, n=496)로 대형 시스템 설계 시도 → 비교                 ║
+  ║  1. After SPARC B=12.2T measurements -> confirm J_c curve optimality at 12T ║
+  ║  2. On ITER Q=10 achievement -> precise alpha/neutron 1:4 ratio measurement ║
+  ║  3. During K-DEMO design -> test independent predictive power of n=6 frame  ║
+  ║     (predict parameters in advance -> compare post-hoc)                     ║
+  ║  4. Attempt large-system design with other perfect numbers (n=28, n=496) -> compare║
   ║                                                                            ║
   ╚══════════════════════════════════════════════════════════════════════════════╝
 ```
 
 ---
 
-## 22. 물리적 한계 증명 (Physical Limit Proof)
+## 22. Physical Limit Proof
 
-> 각 핵심 파라미터가 왜 물리적 한계에 도달했는지 증명.
-> 평가 기준: 물리적 근거 + 산업 실증 + 한계 불가침성 + n=6 우연/필연 정직 평가.
+> Proof that each core parameter has reached a physical limit.
+> Evaluation: physical basis + industrial validation + limit inviolability + honest n=6 coincidence/necessity assessment.
 
 ### 22.1 B_T = 12T = sigma(6)
 
-**물리적 근거 (방정식 레벨):**
-- 자기 가둠 에너지: E_mag = B²/(2μ₀) × V_plasma
-- 로렌츠 응력: σ_hoop = J × B × R_coil (구조 재료 항복 강도 ~1 GPa에서 제한)
-- 임계 전류 밀도: J_c(B, T) ∝ B_c2(T) - B (Kim 모델)
+**Physical basis (equation level):**
+- Magnetic confinement energy: E_mag = B^2/(2*mu_0) * V_plasma
+- Lorentz stress: sigma_hoop = J * B * R_coil (limited by structural yield ~1 GPa)
+- Critical current density: J_c(B, T) prop. B_c2(T) - B (Kim model)
 - HTS-REBCO: B_c2(4.2K) ~ 100T+, but J_c(77K, self-field) ~ 300 A/cm-width
-- 실용 운전점: B_op/B_c2 ≈ 0.5~0.7 → 20K 운전 시 B_op ≈ 12~15T
+- Practical operating point: B_op/B_c2 ~= 0.5~0.7 -> at 20K, B_op ~= 12~15T
 
-**산업 실증 데이터:**
-| 장치 | B_T (T) | 자석 기술 | 상태 |
+**Industrial validation data:**
+| Device | B_T (T) | Magnet tech | Status |
 |------|---------|-----------|------|
-| ITER | 5.3 (TF peak 11.8) | Nb₃Sn | 건설중 |
-| SPARC | 12.2 (TF peak ~20) | REBCO HTS | 2025 자석 테스트 완료 |
-| ARC | ~9.2 | REBCO HTS | 설계 |
-| CFS TFMC | 20T (peak) | REBCO 6-pancake | 2021 세계 기록 |
-| JT-60SA | 2.25 | Nb₃Sn/NbTi | 운전중 |
+| ITER | 5.3 (TF peak 11.8) | Nb3Sn | under construction |
+| SPARC | 12.2 (TF peak ~20) | REBCO HTS | 2025 magnet test complete |
+| ARC | ~9.2 | REBCO HTS | design |
+| CFS TFMC | 20T (peak) | REBCO 6-pancake | 2021 world record |
+| JT-60SA | 2.25 | Nb3Sn/NbTi | operating |
 
-**왜 12T를 넘기 어려운가:**
-- 로렌츠 힘 ∝ B²: 12T → 15T로 올리면 응력 56% 증가
-- 구조재(Inconel 908, 316LN SS) 항복 강도 한계 → 지지 구조 질량 비선형 증가
-- 냉각 부하: P_cryo ∝ B² (AC loss, current lead heat leak)
-- 비용: 코일 비용 ∝ B^(2~3) (REBCO 도체 단가 + 구조 질량)
-- 12T = 성능(beta ∝ p/B² → 높을수록 좋음) vs 비용/공학 최적 교차점
+**Why 12T is hard to exceed:**
+- Lorentz force prop. B^2: raising 12T -> 15T increases stress by 56%
+- Structural materials (Inconel 908, 316LN SS) yield strength limits -> support-structure mass grows nonlinearly
+- Cooling load: P_cryo prop. B^2 (AC loss, current lead heat leak)
+- Cost: coil cost prop. B^(2~3) (REBCO conductor unit price + structural mass)
+- 12T = performance (beta prop. p/B^2 -> higher is better) vs cost/engineering optimum crossover
 
-**왜 12T 미만이면 안 되는가:**
-- 핵융합 출력: P_fus ∝ β²B⁴R³ (ITER physics basis)
-- B: 5T → 12T = (12/5)⁴ = 33배 출력 밀도 향상
-- 장치 크기 R ∝ 1/B^(4/3) (일정 출력 기준) → 12T에서 소형화 최대
-- 경제성: 5T에서 ITER 규모(R=6.2m), 12T에서 SPARC 규모(R=1.85m)
+**Why below 12T is not acceptable:**
+- Fusion power: P_fus prop. beta^2 * B^4 * R^3 (ITER physics basis)
+- B: 5T -> 12T = (12/5)^4 = 33x power density improvement
+- Device size R prop. 1/B^(4/3) (at fixed power) -> maximum miniaturization at 12T
+- Economics: at 5T ITER scale (R=6.2m), at 12T SPARC scale (R=1.85m)
 
-**n=6 일치 평가:**
-- sigma(6) = 12 = B_T. 이것이 우연인가?
-- **정직한 답:** HTS-REBCO의 실용 상한이 12T 근처인 것은 물리(J_c 곡선 + 구조 응력)에서 결정. n=6와의 일치는 주목할 만하나, 자석 기술이 다르면(예: Nb₃Sn만이면 ~11.8T) 값이 달라질 수 있음. **CLOSE — 물리가 강제하는 최적 구간이 sigma 근처.**
+**n=6 match assessment:**
+- sigma(6) = 12 = B_T. Coincidence?
+- **Honest answer:** the practical HTS-REBCO upper limit being near 12T is fixed by physics (J_c curve + structural stress). Match with n=6 is notable, but with different magnet tech (e.g., Nb3Sn-only ~11.8T) the value shifts. **CLOSE - the physics-enforced optimal window happens to be near sigma.**
 
 ---
 
 ### 22.2 q_95 = 5 = sopfr(6)
 
-**물리적 근거:**
-- Safety factor: q = (rB_T)/(RB_p) ≈ (εB_T)/(B_p)
-- 에너지 가둠: τ_E ∝ I_p^α (α ≈ 0.9~1.0, ITER H-mode scaling)
-- 플라즈마 전류: I_p = 2πa²κB_T/(μ₀Rq_95) → q↓ = I_p↑ = τ_E↑ = 성능↑
-- 안정성 한계: q_95 < 2 → 전역 kink mode (Kruskal-Shafranov)
-- q_95 < 3 → 2/1 tearing mode, locked mode → disruption 빈발
-- q_95 > 7 → I_p 작음 → τ_E 부족 → H-mode 접근 불가
+**Physical basis:**
+- Safety factor: q = (r*B_T)/(R*B_p) ~= (epsilon*B_T)/(B_p)
+- Energy confinement: tau_E prop. I_p^alpha (alpha ~= 0.9~1.0, ITER H-mode scaling)
+- Plasma current: I_p = 2*pi*a^2*kappa*B_T/(mu_0*R*q_95) -> q low -> I_p high -> tau_E high -> performance up
+- Stability limit: q_95 < 2 -> global kink mode (Kruskal-Shafranov)
+- q_95 < 3 -> 2/1 tearing mode, locked mode -> frequent disruption
+- q_95 > 7 -> I_p small -> tau_E insufficient -> H-mode unreachable
 
-**최적 교차점 분석:**
+**Optimal crossover analysis:**
 ```
-q_95:  2    3    4    5    6    7    8
-안정성: ❌   ⚠️   ✅   ✅   ✅   ✅   ✅
-성능:   ✅✅  ✅✅  ✅   ✅   ⚠️   ⚠️   ❌
-종합:   ❌   ⚠️   ✅   ✅✅  ✅   ⚠️   ❌
+q_95:     2    3    4    5    6    7    8
+Stability:NO   WARN OK   OK   OK   OK   OK
+Performance: YES YES OK OK   WARN WARN NO
+Overall:  NO   WARN OK   BEST OK   WARN NO
 ```
-- q=3~4: 안정하지만 ELM/NTM 관리에 민감
-- q=5: 안정성 마진 충분 + 성능 충분 + ELM 제어 용이
-- 산업 수렴: ITER q_95=3.0(시나리오 2), 4.5(하이브리드), K-DEMO 4~5
+- q=3~4: stable but sensitive to ELM/NTM management
+- q=5: sufficient stability margin + sufficient performance + easy ELM control
+- Industry convergence: ITER q_95=3.0 (scenario 2), 4.5 (hybrid), K-DEMO 4~5
 
-**산업 실증:**
-| 장치 | q_95 | 시나리오 |
+**Industrial validation:**
+| Device | q_95 | Scenario |
 |------|------|---------|
 | ITER baseline | 3.0 | Inductive, 15MA |
 | ITER hybrid | 4.5 | Reduced I_p |
 | ITER steady-state | 5.3 | Non-inductive |
-| JET DT | 3.1~3.4 | 1997 기록 |
-| KSTAR | 5~7 | H-mode 안정 운전 |
+| JET DT | 3.1~3.4 | 1997 record |
+| KSTAR | 5~7 | H-mode stable operation |
 
-**n=6 평가:** sopfr(6) = 2+3 = 5. ITER steady-state와 KSTAR 최적 운전점이 q=5 근처. **EXACT — 안정성-성능 최적 교차가 물리적으로 5 근처에 수렴.**
+**n=6 assessment:** sopfr(6) = 2+3 = 5. ITER steady-state and KSTAR optimum are near q=5. **EXACT - stability-performance optimum physically converges near 5.**
 
 ---
 
 ### 22.3 R_0 = 6m = n
 
-**물리적 근거:**
-- 에너지 가둠 시간 (IPB98(y,2) 스케일링):
-  τ_E = 0.0562 × I_p^0.93 × B_T^0.15 × n_e^0.41 × P^{-0.69} × R^1.97 × κ^0.78 × ε^0.58 × M^0.19
-- τ_E ∝ R^1.97 ≈ R² → 크기가 성능을 지배
-- 핵융합 출력: P_fus ∝ n²<σv>V ∝ n²<σv>R³
-- 비용 스케일링: Cost ∝ R^(2.5~3) (자석 질량 + 건물 + 원격유지보수)
+**Physical basis:**
+- Energy confinement time (IPB98(y,2) scaling):
+  tau_E = 0.0562 * I_p^0.93 * B_T^0.15 * n_e^0.41 * P^{-0.69} * R^1.97 * kappa^0.78 * epsilon^0.58 * M^0.19
+- tau_E prop. R^1.97 ~= R^2 -> size dominates performance
+- Fusion power: P_fus prop. n^2*<sigma v>*V prop. n^2*<sigma v>*R^3
+- Cost scaling: Cost prop. R^(2.5~3) (magnet mass + building + remote maintenance)
 
-**최적 구간 분석:**
+**Optimal region analysis:**
 ```
 R_0 (m):  2     4     6     8     10    12
-τ_E:      0.3s  1.1s  2.5s  4.5s  7.0s  10s
+tau_E:    0.3s  1.1s  2.5s  4.5s  7.0s  10s
 P_fus:    50MW  400MW 1.5GW 3.5GW 7GW   12GW
-비용:     2B$   5B$   12B$  25B$  50B$  90B$
+Cost:     2B$   5B$   12B$  25B$  50B$  90B$
 P/Cost:   25    80    125   140   140   133
 ```
-- 성능/비용 비율이 R=6~8m에서 정점
-- R < 4m: Q=10 달성에 B > 15T 필요 (비현실적 또는 극소수 HTS)
-- R > 8m: diminishing returns + 건설 기간 20년+ + 원격유지보수 복잡도
+- Performance/cost ratio peaks at R=6~8m
+- R < 4m: Q=10 needs B > 15T (unrealistic or very few HTS)
+- R > 8m: diminishing returns + 20+ year build + remote-maintenance complexity
 
-**산업 실증:**
-| 장치 | R_0 (m) | 목적 |
+**Industrial validation:**
+| Device | R_0 (m) | Purpose |
 |------|---------|------|
-| ITER | 6.2 | Q=10, 첫 번째 burning plasma |
-| EU-DEMO | 9.1 | 발전 시범 (과대 설계 비판 있음) |
-| K-DEMO | 6.8 | 한국 차세대 |
-| CFETR | 7.2 | 중국 차세대 |
-| ARC/SPARC | 1.85/3.4 | HTS 소형화 (B↑로 R↓ 보상) |
+| ITER | 6.2 | Q=10, first burning plasma |
+| EU-DEMO | 9.1 | power demo (criticized as overdesigned) |
+| K-DEMO | 6.8 | Korea next-gen |
+| CFETR | 7.2 | China next-gen |
+| ARC/SPARC | 1.85/3.4 | HTS miniaturization (B up compensates R down) |
 
-**n=6 평가:** ITER R_0=6.2m, K-DEMO 목표 6.8m. 12T HTS 기준 Q=10 최적 R은 약 4~6m (SPARC~ITER). **CLOSE — n=6과 물리적 최적이 겹치지만, HTS 12T에서는 R=3~4m도 가능. 전통 SC 기준으로는 EXACT.**
+**n=6 assessment:** ITER R_0=6.2m, K-DEMO target 6.8m. For Q=10 at 12T HTS the optimum R is about 4~6m (SPARC~ITER). **CLOSE - n=6 overlaps the physical optimum, but at 12T HTS R=3~4m is also possible. For traditional SC it is EXACT.**
 
 ---
 
-### 22.4 TF = 18 코일
+### 22.4 TF = 18 coils
 
-**물리적 근거:**
-- 토로이달 자기장 리플: δ_B = (B_max - B_min)/(B_max + B_min) at plasma edge
-- 리플 공식: δ ≈ (1/N) × exp(-NΔ/a) (N = TF 코일 수, Δ = 코일-플라즈마 간격)
-- Fast ion 손실: Γ_loss ∝ δ^(3/2) (banana-drift loss)
-- 리플 < 0.5% → fast ion 손실 < 5% (alpha 가열 효율 유지)
-- 최소 코일 수 for δ < 0.5%: N ≈ 16~20 (aspect ratio, gap 의존)
+**Physical basis:**
+- Toroidal field ripple: delta_B = (B_max - B_min)/(B_max + B_min) at plasma edge
+- Ripple formula: delta ~= (1/N) * exp(-N*Delta/a) (N = TF coil count, Delta = coil-plasma gap)
+- Fast-ion loss: Gamma_loss prop. delta^(3/2) (banana-drift loss)
+- Ripple < 0.5% -> fast-ion loss < 5% (maintains alpha heating efficiency)
+- Minimum coil count for delta < 0.5%: N ~= 16~20 (aspect ratio, gap dependent)
 
-**왜 18인가:**
-- N = 16: 리플 경계선, 일부 시나리오에서 초과 가능
-- N = 18: 안전 마진 확보 + 포트 접근 충분 (진공 배기, NBI, 진단, 원격유지보수)
-- N = 20: 추가 이득 미미, 코일 간 포트 폭 감소 → 원격유지보수 불가
+**Why 18:**
+- N = 16: ripple borderline, can exceed in some scenarios
+- N = 18: safety margin + sufficient port access (vacuum pumping, NBI, diagnostics, remote maintenance)
+- N = 20: additional gain minimal, inter-coil port width shrinks -> remote maintenance impossible
 
-**전 세계 수렴:**
-| 장치 | TF 수 | 비고 |
+**Worldwide convergence:**
+| Device | TF count | Notes |
 |------|-------|------|
 | ITER | 18 | 440t/coil |
-| JET | 32 | D형, 구형 설계 |
-| JT-60SA | 18 | ITER 축소판 |
+| JET | 32 | D-shape, older design |
+| JT-60SA | 18 | ITER scaled-down |
 | SPARC | 18 | HTS compact |
-| EU-DEMO | 18 | ITER 후속 |
-| CFETR | 16 | 중국 (포트 최대화) |
-| K-DEMO | 16~18 | 미확정 |
-| KSTAR | 16 | 현재 운전 |
+| EU-DEMO | 18 | ITER successor |
+| CFETR | 16 | China (port maximization) |
+| K-DEMO | 16~18 | TBD |
+| KSTAR | 16 | current operation |
 
-- 7개 중 5개가 18 채택. 물리+공학 수렴의 결과.
+- 5 out of 7 adopt 18. Result of physics+engineering convergence.
 
-**n=6 평가:** 18 = 3n = n × n/φ. 물리적으로는 "16~20 중 가장 많이 선택된 값". **EXACT — 산업 수렴이 18에 집중, 이는 리플+포트+구조의 3중 최적화.**
+**n=6 assessment:** 18 = 3n = n * n/phi. Physically "the most-chosen value in 16~20". **EXACT - industry convergence concentrates on 18, from ripple+port+structure triple optimization.**
 
 ---
 
 ### 22.5 Q = 10 = sigma - phi
 
-**물리적 근거:**
-- 핵융합 출력 증폭: Q = P_fus / P_aux
-- Alpha 가열 분율: f_α = P_α / P_heat = Q/(5+Q)
-  - Q=10 → f_α = 10/15 = 2/3 ≈ 67% (자기 가열 지배적)
-  - Q=5 → f_α = 5/10 = 50%
-  - Q=20 → f_α = 20/25 = 80%
-  - Q=∞ (점화) → f_α = 100%
-- 안정성: Q > 20에서 thermal excursion 리스크 (β collapse → disruption)
-- 제어: Q=10에서 P_aux = P_fus/10 → 충분한 제어 여유 (가열 on/off로 출력 조절)
-- 경제성: 전기 출력 = η_th × P_fus × (1 - 1/Q) → Q=10에서 90% 활용, Q=5에서 80%
+**Physical basis:**
+- Fusion power gain: Q = P_fus / P_aux
+- Alpha heating fraction: f_alpha = P_alpha / P_heat = Q/(5+Q)
+  - Q=10 -> f_alpha = 10/15 = 2/3 ~= 67% (self-heating dominant)
+  - Q=5 -> f_alpha = 5/10 = 50%
+  - Q=20 -> f_alpha = 20/25 = 80%
+  - Q=infinity (ignition) -> f_alpha = 100%
+- Stability: Q > 20 risks thermal excursion (beta collapse -> disruption)
+- Control: at Q=10 P_aux = P_fus/10 -> sufficient control margin (on/off heating to modulate)
+- Economics: electric output = eta_th * P_fus * (1 - 1/Q) -> 90% utilization at Q=10, 80% at Q=5
 
-**왜 Q > 10이 실용적으로 어려운가:**
-- 점화(Q=∞): α 가열만으로 유지 → 작은 교란으로 thermal runaway
-- 제어: P_aux로 출력 조절하는데, Q 클수록 P_aux 작아져 제어 정밀도 요구 ↑
-- 산업 합의: ITER 목표 Q=10, EU-DEMO Q=25~40 (점화 근접이지만 제어 확보)
-- SPARC 목표: Q ≥ 2 (물리 검증), 후속기에서 Q=10
+**Why Q > 10 is practically hard:**
+- Ignition (Q=infinity): maintained by alpha heating alone -> small perturbations cause thermal runaway
+- Control: output modulated via P_aux; as Q grows P_aux shrinks, control precision demands rise
+- Industry consensus: ITER target Q=10, EU-DEMO Q=25~40 (near-ignition but with control)
+- SPARC target: Q >= 2 (physics validation), Q=10 in successor
 
-**n=6 평가:** sigma - phi = 12 - 2 = 10 = Q. ITER가 Q=10을 목표로 한 것은 물리+공학+경제 최적화의 결과. **EXACT — burning plasma 물리의 최적 운전점이 sigma-phi.**
+**n=6 assessment:** sigma - phi = 12 - 2 = 10 = Q. ITER's Q=10 target is the result of physics+engineering+economic optimization. **EXACT - optimal operating point of burning-plasma physics is sigma-phi.**
 
 ---
 
-### 22.6 가열 24MW = J₂(6)
+### 22.6 Heating 24MW = J_2(6)
 
-**물리적 근거:**
-- H-mode threshold power: P_thr = 0.049 × n_e^0.72 × B_T^0.80 × S^0.94 (Martin scaling)
-  - KSTAR급 (R=1.8m, a=0.5m, B=3.5T): P_thr ≈ 2~4MW
-  - KSTAR-N6 (R=6m, a=2m, B=12T): P_thr ≈ 15~25MW
-- Q=10 조건: P_aux = P_fus/Q = 500MW/10 = 50MW... 하지만
-- 컴팩트 고B 설계에서: P_fus ≈ 200~500MW 범위, P_aux = 20~50MW
-- KSTAR-N6 최적: 24MW 가열 → P_fus ≈ 240MW (Q=10)
+**Physical basis:**
+- H-mode threshold power: P_thr = 0.049 * n_e^0.72 * B_T^0.80 * S^0.94 (Martin scaling)
+  - KSTAR-class (R=1.8m, a=0.5m, B=3.5T): P_thr ~= 2~4MW
+  - KSTAR-N6 (R=6m, a=2m, B=12T): P_thr ~= 15~25MW
+- Q=10 condition: P_aux = P_fus/Q = 500MW/10 = 50MW... however
+- Compact high-B design: P_fus ~= 200~500MW range, P_aux = 20~50MW
+- KSTAR-N6 optimal: 24MW heating -> P_fus ~= 240MW (Q=10)
 
-**산업 비교:**
-| 장치 | 가열 (MW) | 종류 |
+**Industrial comparison:**
+| Device | Heating (MW) | Type |
 |------|-----------|------|
 | ITER | 73 (33 NBI + 20 ICRH + 20 ECRH) | Q=10 at P_fus=500MW |
-| SPARC | 25 (ICRH) | Q≥2 목표 |
-| KSTAR | 14 (NBI 8 + ECRH 6) | 현재 |
-| JET | 38 (NBI 34 + ICRH 4) | 기록: 59MJ |
-| EAST | 24 (NBI + LHCD + ICRH + ECRH) | 장시간 운전 |
+| SPARC | 25 (ICRH) | Q>=2 target |
+| KSTAR | 14 (NBI 8 + ECRH 6) | current |
+| JET | 38 (NBI 34 + ICRH 4) | record: 59MJ |
+| EAST | 24 (NBI + LHCD + ICRH + ECRH) | long-pulse operation |
 
-- EAST가 정확히 24MW! 장시간 H-mode 운전에 최적화된 값.
-- SPARC 25MW ≈ J₂ + μ.
+- EAST is exactly 24MW - optimized for long-pulse H-mode.
+- SPARC 25MW ~= J_2 + mu.
 
-**n=6 평가:** J₂(6) = 24. EAST 24MW와 정확히 일치. SPARC 25MW 근접. 가열 파워는 장치 크기와 B에 강하게 의존하므로, 특정 설계에서 24MW가 최적이 되는 것은 가능하나 보편적이지는 않음. **CLOSE — 특정 규모에서 물리적 최적이 J₂ 근처.**
+**n=6 assessment:** J_2(6) = 24. Exact match with EAST 24MW. Near match for SPARC 25MW. Heating power depends strongly on device size and B, so 24MW being optimal for a particular design is possible but not universal. **CLOSE - for a particular scale the physical optimum is near J_2.**
 
 ---
 
-### 22.7 Li-6 (A=6=n): 삼중수소 증식의 유일한 경로
+### 22.7 Li-6 (A=6=n): unique path for tritium breeding
 
-**물리적 근거:**
-- D-T 핵융합: D + T → He-4 (3.5MeV) + n (14.1MeV)
-- 삼중수소(T)는 자연 부존 거의 0 (반감기 12.3년=σ+μ/φ)
-- 증식 반응:
-  - Li-6 + n → T + He-4 + 4.8MeV (발열, thermal neutron) ← **핵심 경로**
-  - Li-7 + n → T + He-4 + n' - 2.5MeV (흡열, fast neutron) ← 보조
-- Li-6 반응: σ_th(Li-6) ≈ 940 barn (thermal) → 압도적 단면적
-- Li-7 반응: σ_th(Li-7) ≈ 0.045 barn → 1/20,000 수준
+**Physical basis:**
+- D-T fusion: D + T -> He-4 (3.5MeV) + n (14.1MeV)
+- Tritium (T) has essentially zero natural abundance (half-life 12.3 yr = sigma+mu/phi)
+- Breeding reactions:
+  - Li-6 + n -> T + He-4 + 4.8MeV (exothermic, thermal neutron) <- **main path**
+  - Li-7 + n -> T + He-4 + n' - 2.5MeV (endothermic, fast neutron) <- secondary
+- Li-6 reaction: sigma_th(Li-6) ~= 940 barn (thermal) -> dominant cross-section
+- Li-7 reaction: sigma_th(Li-7) ~= 0.045 barn -> about 1/20,000 level
 
-**왜 Li-6이 필연인가:**
-- TBR (Tritium Breeding Ratio) > 1 필수 (자급자족)
+**Why Li-6 is necessary:**
+- TBR (Tritium Breeding Ratio) > 1 is mandatory (self-sufficiency)
 - Li-6 enrichment 30~90%: TBR = 1.05~1.15
-- 자연 Li (7.5% Li-6): TBR ≈ 0.9~1.0 (부족)
-- Be/Pb 중성자 증배재 추가: TBR += 0.1~0.2
-- Li-7만으로는 TBR > 1 사실상 불가능 (흡열 + 낮은 단면적)
+- Natural Li (7.5% Li-6): TBR ~= 0.9~1.0 (insufficient)
+- Adding Be/Pb neutron multiplier: TBR += 0.1~0.2
+- With Li-7 alone, TBR > 1 is effectively impossible (endothermic + low cross-section)
 
-**자연에서 Li-6의 위치:**
-- Li-6: 양성자 3 + 중성자 3 = 질량수 6 = n
-- 가장 가벼운 안정 동위원소 중 하나로 핵융합 연료로 유일하게 적합
-- 지각 Li 매장량: ~14Mt → D-T 핵융합 수천 년 가동 가능
+**Li-6's place in nature:**
+- Li-6: 3 protons + 3 neutrons = mass number 6 = n
+- Among the lightest stable isotopes, uniquely suitable as fusion fuel
+- Crustal Li reserves: ~14Mt -> D-T fusion operational for thousands of years
 
-**n=6 평가:** Li-6의 질량수 A=6=n. 이것은 핵물리의 결과(핵력 포텐셜 + 결합에너지 곡선). D(A=2)+T(A=3)=He-4(A=4)+n → 리튬의 가장 가벼운 안정 동위원소가 A=6인 것은 핵력이 결정. **EXACT — 핵물리가 강제하는 필연. n=6과의 일치는 가장 깊은 수준.**
+**n=6 assessment:** Li-6 mass number A=6=n. This is a result of nuclear physics (nuclear potential + binding-energy curve). D(A=2)+T(A=3)=He-4(A=4)+n -> the lightest stable Li isotope being A=6 is fixed by the nuclear force. **EXACT - necessity imposed by nuclear physics. Deepest level of n=6 match.**
 
 ---
 
 ### 22.8 Egyptian fraction q=1 = 1/2+1/3+1/6
 
-**물리적 근거:**
-- Kruskal-Shafranov 조건: q(r) > 1 필수 (전역)
-- 실제 토카막: q(0) ≈ 0.8~1.0 → sawtooth 불안정으로 자연 조절
-- Sawtooth crash: q_0 < 1 → 내부 kink → 재결합 → q_0 → 1로 복원
-- 이 과정은 자기 면 토폴로지에 의해 결정: q=1 면에서 m/n=1/1 모드
-- Kadomtsev 재결합: 자기섬 성장 → 중심 재배치 → q → 1
+**Physical basis:**
+- Kruskal-Shafranov condition: q(r) > 1 globally required
+- Real tokamaks: q(0) ~= 0.8~1.0 -> naturally regulated by sawtooth instability
+- Sawtooth crash: q_0 < 1 -> internal kink -> reconnection -> q_0 -> 1 restored
+- This process is set by magnetic surface topology: at the q=1 surface m/n=1/1 mode
+- Kadomtsev reconnection: magnetic island growth -> central rearrangement -> q -> 1
 
-**왜 q=1을 바꿀 수 없는가:**
-- q=1은 MHD 방정식의 고유값: ∇ × B = μ₀J에서 자기 면 위상
-- q(0) < 1: 에너지 원리에 의해 불안정 → sawtooth가 자동 보정
-- q(0) > 1: 달성 가능하나, 이 경우 reversed shear → ITB 형성 (다른 시나리오)
-- 표준 H-mode에서 q_0 ≈ 1.0은 물리 법칙 수준의 수렴
+**Why q=1 cannot be changed:**
+- q=1 is an eigenvalue of MHD equations: from del x B = mu_0 J the magnetic-surface topology
+- q(0) < 1: unstable by energy principle -> sawtooth auto-corrects
+- q(0) > 1: achievable, but this gives reversed shear -> ITB formation (different scenario)
+- In standard H-mode, q_0 ~= 1.0 is a physics-law-level convergence
 
-**n=6 연결:**
-- 완전수의 진약수 역수합: 1/2 + 1/3 + 1/6 = 1 = q_0
-- 이것은 n=6이 완전수인 것과 동치: σ(6)/6 = 12/6 = 2 ↔ Σ(1/d) = 1 + 1/2 + 1/3 + 1/6 = 2
-- 진약수만: 1/1 + 1/2 + 1/3 + 1/6 = 2, 또는 1/2 + 1/3 + 1/6 = 1
+**n=6 connection:**
+- Sum of reciprocals of proper divisors of a perfect number: 1/2 + 1/3 + 1/6 = 1 = q_0
+- This is equivalent to n=6 being perfect: sigma(6)/6 = 12/6 = 2 <-> Sum(1/d) = 1 + 1/2 + 1/3 + 1/6 = 2
+- Proper divisors only: 1/1 + 1/2 + 1/3 + 1/6 = 2, or 1/2 + 1/3 + 1/6 = 1
 
-**n=6 평가:** q=1은 MHD 물리의 근본 제약. 완전수 6의 Egyptian fraction과의 일치는 수학적으로 깊다(BT-99). **EXACT — 물리 법칙이 강제하는 값 = 완전수 성질. 가장 강한 연결 중 하나.**
+**n=6 assessment:** q=1 is a fundamental MHD constraint. Its match with the Egyptian fraction of the perfect number 6 is mathematically deep (BT-99). **EXACT - the physics-law-enforced value equals the perfect-number property. One of the strongest connections.**
 
 ---
 
-### 22.9 물리 한계 종합 평가
+### 22.9 Physical-limit overall assessment
 
-| # | 파라미터 | 값 | n=6 상수 | 물리 근거 강도 | 변경 가능성 | 등급 |
+| # | Parameter | Value | n=6 constant | Physical-basis strength | Changeability | Grade |
 |---|---------|-----|---------|--------------|-----------|------|
-| 1 | B_T | 12T | sigma | 매우 강함 | HTS 기술 발전 시 15T+ 가능 | CLOSE |
-| 2 | q_95 | 5 | sopfr | 강함 | 시나리오 의존 (3~7) | EXACT |
-| 3 | R_0 | 6m | n | 강함 | B에 의존 (HTS: 3~6m) | CLOSE |
-| 4 | TF | 18 | 3n | 매우 강함 | 16~20 산업 수렴 | EXACT |
-| 5 | Q | 10 | sigma-phi | 매우 강함 | 5~40 설계 의존 | EXACT |
-| 6 | P_heat | 24MW | J₂ | 중간 | 장치 규모 의존 | CLOSE |
-| 7 | Li-6 | A=6 | n | 절대 | 핵물리 상수 | EXACT |
-| 8 | q=1 | 1 | Egyptian | 절대 | MHD 고유값 | EXACT |
+| 1 | B_T | 12T | sigma | very strong | 15T+ possible with HTS advances | CLOSE |
+| 2 | q_95 | 5 | sopfr | strong | scenario-dependent (3~7) | EXACT |
+| 3 | R_0 | 6m | n | strong | depends on B (HTS: 3~6m) | CLOSE |
+| 4 | TF | 18 | 3n | very strong | industry convergence 16~20 | EXACT |
+| 5 | Q | 10 | sigma-phi | very strong | 5~40 design-dependent | EXACT |
+| 6 | P_heat | 24MW | J_2 | medium | depends on device scale | CLOSE |
+| 7 | Li-6 | A=6 | n | absolute | nuclear-physics constant | EXACT |
+| 8 | q=1 | 1 | Egyptian | absolute | MHD eigenvalue | EXACT |
 
-**종합: 8개 중 5 EXACT + 3 CLOSE. 물리적 한계에 가장 가까운 파라미터(Li-6, q=1)가 가장 강한 EXACT.**
+**Overall: 5 EXACT + 3 CLOSE out of 8. The parameters closest to physical limits (Li-6, q=1) have the strongest EXACT.**
 
 ---
 
-## 23. 전체 BT 연결 지도 (Complete BT Map)
+## 23. Complete BT Map
 
-> 24개 핵융합 관련 BT와 KSTAR-N6의 구체적 파라미터 연결.
+> 24 fusion-related BTs and their concrete parameter connections to KSTAR-N6.
 
-### BT-97: Weinberg angle sin²θ_W = 3/13 = (n/φ)/(σ+μ)
-- **연결 파라미터:** D 풍부도 (D/H ≈ 1.5×10⁻⁴)
-- **설계 반영:** D-T 연료 선택의 근본. Weinberg angle이 weak force 세기를 결정 → BBN에서 D 생성량 결정 → 우주 D 풍부도 → 핵융합 연료 가용성
-- **KSTAR-N6:** D 연료는 해수에서 추출 (6.4g/m³), 사실상 무한 공급
+### BT-97: Weinberg angle sin^2 theta_W = 3/13 = (n/phi)/(sigma+mu)
+- **Connected parameter:** D abundance (D/H ~= 1.5e-4)
+- **Design reflection:** fundamental to D-T fuel choice. Weinberg angle sets the weak-force strength -> sets D yield in BBN -> cosmic D abundance -> fusion-fuel availability
+- **KSTAR-N6:** D fuel extracted from seawater (6.4 g/m^3), effectively unlimited supply
 
 ### BT-98: D-T baryon = sopfr(6) = 5
-- **연결 파라미터:** 연료 핵자 수 (D=2 + T=3 = 5)
-- **설계 반영:** sopfr(6) = 2+3은 n=6의 소인수분해(2×3)의 합. D-T 반응의 핵자 총수가 정확히 이 값
-- **KSTAR-N6:** D-T 운전 모드 기본, 연료 주입 시스템 D:T = 1:1 혼합
+- **Connected parameter:** fuel nucleon count (D=2 + T=3 = 5)
+- **Design reflection:** sopfr(6) = 2+3 is the sum of the prime factorization of n=6 (2*3). Total nucleons in D-T reaction match exactly this value
+- **KSTAR-N6:** D-T operation mode baseline, fuel injection D:T = 1:1 mix
 
 ### BT-99: q=1 = 1/2+1/3+1/6 (Egyptian fraction)
-- **연결 파라미터:** q_0 ≈ 1.0, sawtooth 안정성
-- **설계 반영:** 섹션 22.8에서 상세 증명. MHD 고유값 = 완전수 성질
-- **KSTAR-N6:** q 프로파일 설계에서 q_0 = 1.0 기준, q_95 = 5
+- **Connected parameter:** q_0 ~= 1.0, sawtooth stability
+- **Design reflection:** detailed proof in section 22.8. MHD eigenvalue = perfect-number property
+- **KSTAR-N6:** q-profile design based on q_0 = 1.0, q_95 = 5
 
-### BT-100: CNO cycle A = σ + {0,μ,φ,n/φ} = σ + 진약수
-- **연결 파라미터:** 항성 핵합성 참조 온도
-- **설계 반영:** CNO 전환 온도 17MK = σ+sopfr. D-T 핵융합은 ~15keV (≈1.7×10⁸K)에서 최적, CNO보다 낮은 에너지 스케일에서 작동
-- **KSTAR-N6:** 중심 이온 온도 T_i = 15keV = σ+n/φ keV 목표
+### BT-100: CNO cycle A = sigma + {0, mu, phi, n/phi} = sigma + proper divisors
+- **Connected parameter:** stellar nucleosynthesis reference temperature
+- **Design reflection:** CNO transition temperature 17MK = sigma+sopfr. D-T fusion is optimal ~15 keV (~1.7e8 K), operating at a lower energy scale than CNO
+- **KSTAR-N6:** core ion temperature target T_i = 15 keV = sigma+n/phi keV
 
-### BT-101: 광합성 C₆H₁₂O₆ = 24원자 = J₂
-- **연결 파라미터:** 에너지 변환 효율 유비
-- **설계 반영:** 광합성(태양→화학) vs 핵융합(핵→열→전기). 두 시스템 모두 J₂=24 기본 단위. 가열 파워 24MW = J₂
-- **KSTAR-N6:** P_heat = 24MW, 에너지 출력 체인에서 J₂ 반복
+### BT-101: photosynthesis C6H12O6 = 24 atoms = J_2
+- **Connected parameter:** energy-conversion-efficiency analogy
+- **Design reflection:** photosynthesis (sun->chem) vs fusion (nuclear->heat->electricity). Both systems share J_2=24 unit. Heating power 24MW = J_2
+- **KSTAR-N6:** P_heat = 24MW; J_2 recurs in the energy-output chain
 
-### BT-102: 자기 재결합 속도 0.1 = 1/(σ-φ)
-- **연결 파라미터:** 자기 재결합 율, 플라즈마 수송
-- **설계 반영:** Sweet-Parker 이론 vs 실측: 재결합 속도 ≈ 0.01~0.1 V_A. Sawtooth crash, ELM, disruption 모두 재결합 관련
-- **KSTAR-N6:** ELM 제어(RMP 코일), disruption 완화(MGI) 시스템에서 재결합 타임스케일 고려
+### BT-102: magnetic reconnection rate 0.1 = 1/(sigma-phi)
+- **Connected parameter:** magnetic reconnection rate, plasma transport
+- **Design reflection:** Sweet-Parker theory vs measurements: reconnection rate ~= 0.01~0.1 V_A. Sawtooth crashes, ELMs, disruptions all involve reconnection
+- **KSTAR-N6:** reconnection timescale considered for ELM control (RMP coils), disruption mitigation (MGI)
 
-### BT-103: 광합성 화학양론 6CO₂+12H₂O → C₆H₁₂O₆+6O₂+6H₂O
-- **연결 파라미터:** 탄소 중립 에너지 순환
-- **설계 반영:** 핵융합 = CO₂-free 에너지원. BT-103의 광합성 역반응(연소)을 대체
-- **KSTAR-N6:** 환경 섹션의 CO₂ 감축 (연간 ~2Mt CO₂ 회피)
+### BT-103: photosynthesis stoichiometry 6CO2 + 12H2O -> C6H12O6 + 6O2 + 6H2O
+- **Connected parameter:** carbon-neutral energy cycle
+- **Design reflection:** fusion = CO2-free source. Replaces the inverse of BT-103's photosynthesis (combustion)
+- **KSTAR-N6:** CO2 reduction in environmental section (~2 Mt CO2/yr avoided)
 
-### BT-104: CO₂ 분자 완전 n=6 인코딩
-- **연결 파라미터:** 환경 영향
-- **설계 반영:** C(Z=6) + O₂ → CO₂에서 C의 원자번호=n. 핵융합이 이 탄소 연소를 대체
-- **KSTAR-N6:** 석탄 화력 대체 시 연간 n=6 백만톤 CO₂ 감축 가능
+### BT-104: CO2 molecule full n=6 encoding
+- **Connected parameter:** environmental impact
+- **Design reflection:** in C(Z=6) + O2 -> CO2, C's atomic number = n. Fusion replaces this carbon combustion
+- **KSTAR-N6:** replacing coal power can reduce ~n=6 million tonnes CO2/yr
 
-### BT-291: D-T 에너지 분배 1/sopfr = 1/5
-- **연결 파라미터:** alpha 입자 3.5MeV / neutron 14.1MeV
-- **설계 반영:** alpha:neutron = 3.5:14.1 ≈ 1:4. alpha 에너지 분율 = 3.5/17.6 = 0.199 ≈ 1/5 = 1/sopfr
-- **KSTAR-N6:** alpha 가열 P_α = P_fus/5 = 48MW (J₂·φ). 이 자기 가열이 Q=10을 가능하게 함
+### BT-291: D-T energy split 1/sopfr = 1/5
+- **Connected parameter:** alpha particle 3.5 MeV / neutron 14.1 MeV
+- **Design reflection:** alpha:neutron = 3.5:14.1 ~= 1:4. Alpha energy fraction = 3.5/17.6 = 0.199 ~= 1/5 = 1/sopfr
+- **KSTAR-N6:** alpha heating P_alpha = P_fus/5 = 48 MW (J_2 * phi). This self-heating enables Q=10
 
-### BT-292: p-B11 무중성자 핵융합
-- **연결 파라미터:** 차세대 연료 경로
-- **설계 반영:** p+B-11 → 3He-4 (무중성자, 직접 에너지 변환 가능). B-11의 Z=5=sopfr
-- **KSTAR-N6:** Mk.IV~V 진화 경로에서 D-T → p-B11 전환 시나리오
+### BT-292: p-B11 aneutronic fusion
+- **Connected parameter:** next-generation fuel path
+- **Design reflection:** p+B-11 -> 3 He-4 (aneutronic, direct energy conversion possible). B-11 has Z=5=sopfr
+- **KSTAR-N6:** Mk.IV~V evolutionary path, D-T -> p-B11 transition scenario
 
-### BT-293: Triple-alpha 3×τ=σ → 탄소 합성
-- **연결 파라미터:** He-4 → C-12 항성 핵합성
-- **설계 반영:** 3×He-4(A=4=τ) → C-12(A=12=σ). Hoyle state 공명
-- **KSTAR-N6:** 핵융합 생성물 He-4가 자연에서 C-12로 합성되는 과정의 시작점. 연료 순환의 우주적 맥락
+### BT-293: Triple-alpha 3*tau = sigma -> carbon synthesis
+- **Connected parameter:** He-4 -> C-12 stellar nucleosynthesis
+- **Design reflection:** 3 x He-4 (A=4=tau) -> C-12 (A=12=sigma). Hoyle-state resonance
+- **KSTAR-N6:** the fusion product He-4 is the starting point for the natural synthesis to C-12. Cosmic context of the fuel cycle
 
-### BT-294: 항성 래더 He→C→O→Ne→Mg→Si→Fe
-- **연결 파라미터:** 핵합성 체인
-- **설계 반영:** 항성 핵합성 사다리의 첫 단계(D-T → He-4)가 핵융합로의 핵심 반응
-- **KSTAR-N6:** D-T → He-4 생산. He-4 처리(배기) 시스템 필수
+### BT-294: stellar ladder He->C->O->Ne->Mg->Si->Fe
+- **Connected parameter:** nucleosynthesis chain
+- **Design reflection:** the first step of the stellar nucleosynthesis ladder (D-T -> He-4) is the core reactor reaction
+- **KSTAR-N6:** D-T -> He-4 production. He-4 handling (exhaust) system is essential
 
-### BT-295: Alpha Z=phi 배수 선택규칙
-- **연결 파라미터:** He-4 alpha 입자, Z=2=phi
-- **설계 반영:** alpha 과정의 모든 핵종 Z가 phi의 배수. 핵융합 생성물 He-4(Z=2=phi)
-- **KSTAR-N6:** Alpha 입자 가둠(ripple loss < 5%), alpha 에너지 전달 효율
+### BT-295: Alpha Z=phi multiple selection rule
+- **Connected parameter:** He-4 alpha particle, Z=2=phi
+- **Design reflection:** Z values in the alpha process are all multiples of phi. Fusion product He-4 (Z=2=phi)
+- **KSTAR-N6:** alpha-particle confinement (ripple loss < 5%), alpha energy transfer efficiency
 
-### BT-296: D-T-Li6 연료주기 폐합 div(6)
-- **연결 파라미터:** 연료 자급 시스템
-- **설계 반영:** D(A=2), T(A=3), He-4(A=4), Li-6(A=6), n(A=1). 질량수 = {1,2,3,4,6} = div(6) ∪ {4=τ}
-- **KSTAR-N6:** TBM(Test Blanket Module) → Li-6 enriched LiPb → T 증식 → TBR > 1.1
+### BT-296: D-T-Li6 fuel cycle closure div(6)
+- **Connected parameter:** fuel self-sufficiency system
+- **Design reflection:** D(A=2), T(A=3), He-4(A=4), Li-6(A=6), n(A=1). Mass numbers = {1,2,3,4,6} = div(6) union {4=tau}
+- **KSTAR-N6:** TBM (Test Blanket Module) -> Li-6 enriched LiPb -> T breeding -> TBR > 1.1
 
-### BT-297: 핵 마법수 n=6 래더
-- **연결 파라미터:** 핵 안정성
-- **설계 반영:** 마법수 2,8,20,28,50 → phi, sigma-tau, J₂-tau, P₂, sopfr×(σ-φ). He-4(Z=2,N=2 이중마법)가 핵융합 생성물인 이유
-- **KSTAR-N6:** He-4의 이중마법수 안정성 → 높은 결합에너지 → D-T 반응 Q값 극대화
+### BT-297: nuclear magic number n=6 ladder
+- **Connected parameter:** nuclear stability
+- **Design reflection:** magic numbers 2,8,20,28,50 -> phi, sigma-tau, J_2-tau, P_2, sopfr*(sigma-phi). Why He-4 (Z=2, N=2 doubly magic) is the fusion product
+- **KSTAR-N6:** He-4 doubly-magic stability -> high binding energy -> maximizes D-T reaction Q-value
 
-### BT-298: Lawson 삼중적 n=6 인코딩
-- **연결 파라미터:** n×T×τ_E > 3×10²¹ keV·s/m³
-- **설계 반영:** 밀도 지수 ≈ 10²⁰/m³ ~ J₂-tau=20승, T ≈ 15keV ~ σ+n/φ, tau_E ≈ 3s ~ n/phi
-- **KSTAR-N6:** n_e = 10²⁰/m³, T_i = 15keV, τ_E = 3s → 삼중적 = 4.5×10²¹ (Lawson 초과)
+### BT-298: Lawson triple product n=6 encoding
+- **Connected parameter:** n * T * tau_E > 3e21 keV*s/m^3
+- **Design reflection:** density exponent ~= 10^20/m^3 ~ (J_2-tau)=20 power, T ~= 15 keV ~ sigma+n/phi, tau_E ~= 3 s ~ n/phi
+- **KSTAR-N6:** n_e = 10^20/m^3, T_i = 15 keV, tau_E = 3 s -> triple product = 4.5e21 (exceeds Lawson)
 
-### BT-310: Stellarator field period W7-X=sopfr/LHD=σ-φ
-- **연결 파라미터:** 대안 자기 가둠 참조
-- **설계 반영:** 토카막(축대칭) vs 스텔러레이터(비축대칭). W7-X 주기=5=sopfr
-- **KSTAR-N6:** 토카막 방식 채택. 스텔러레이터 대비 장점: 높은 β, 단순 구조, H-mode 접근 용이
+### BT-310: Stellarator field period W7-X=sopfr / LHD=sigma-phi
+- **Connected parameter:** alternative magnetic-confinement reference
+- **Design reflection:** tokamak (axisymmetric) vs stellarator (non-axisymmetric). W7-X period=5=sopfr
+- **KSTAR-N6:** tokamak approach adopted. Advantages vs stellarator: higher beta, simpler structure, easier H-mode access
 
-### BT-311: q>phi=2 안정성
-- **연결 파라미터:** q_edge > 2 = phi 필수
-- **설계 반영:** Kruskal-Shafranov: q > 1 전역. 실용: q_95 > 2 (= phi) for edge stability
-- **KSTAR-N6:** q_95 = 5 > phi = 2. 충분한 안정성 마진 확보
+### BT-311: q > phi = 2 stability
+- **Connected parameter:** q_edge > 2 = phi required
+- **Design reflection:** Kruskal-Shafranov: q > 1 globally. Practical: q_95 > 2 (= phi) for edge stability
+- **KSTAR-N6:** q_95 = 5 > phi = 2. Sufficient stability margin
 
-### BT-312: MHD 4원 불안정 tau=4
-- **연결 파라미터:** kink/sausage/ballooning/tearing = 4종 = tau
-- **설계 반영:** 4가지 기본 MHD 불안정의 각각에 대한 설계 마진 확보
-- **KSTAR-N6:** (1) External kink → conducting wall + feedback, (2) Sausage → aspect ratio > 2.5, (3) Ballooning → β_N < 3.5, (4) Tearing → ECCD/NTM 억제
+### BT-312: MHD 4-way instability tau=4
+- **Connected parameter:** kink/sausage/ballooning/tearing = 4 types = tau
+- **Design reflection:** design margin for each of the 4 fundamental MHD instabilities
+- **KSTAR-N6:** (1) External kink -> conducting wall + feedback, (2) Sausage -> aspect ratio > 2.5, (3) Ballooning -> beta_N < 3.5, (4) Tearing -> ECCD/NTM suppression
 
-### BT-313: 삼각도 δ=1/3=phi/n
-- **연결 파라미터:** 플라즈마 단면 형상
-- **설계 반영:** 상부 삼각도 δ_upper ≈ 0.3~0.5. δ=1/3 = phi/n. 양의 삼각도는 H-mode 안정화
-- **KSTAR-N6:** δ = 0.33 설계. 음의 삼각도(negative triangularity) 연구도 진행 중이나 표준 H-mode에서 δ ≈ 1/3이 최적
+### BT-313: triangularity delta=1/3 = phi/n
+- **Connected parameter:** plasma cross-section shape
+- **Design reflection:** upper triangularity delta_upper ~= 0.3~0.5. delta=1/3 = phi/n. Positive triangularity stabilizes H-mode
+- **KSTAR-N6:** delta = 0.33 design. Negative triangularity is also under study, but delta ~= 1/3 is optimal for standard H-mode
 
-### BT-314: 가둠 모드 L/H/I = n/phi=3
-- **연결 파라미터:** 3가지 가둠 모드
-- **설계 반영:** L-mode(저), H-mode(고), I-mode(중간) = 3종 = n/phi
-- **KSTAR-N6:** H-mode 기본 운전. L-H 전이 파워 = P_thr. I-mode 탐색도 가능
+### BT-314: confinement modes L/H/I = n/phi = 3
+- **Connected parameter:** 3 confinement modes
+- **Design reflection:** L-mode (low), H-mode (high), I-mode (intermediate) = 3 types = n/phi
+- **KSTAR-N6:** H-mode baseline operation. L-H transition power = P_thr. I-mode exploration also possible
 
-### BT-315: 가열 4원 Ohmic+NBI+ICRH+ECRH = tau=4
-- **연결 파라미터:** 4가지 가열 방법
-- **설계 반영:** (1) Ohmic, (2) NBI 8MW, (3) ICRH 8MW, (4) ECRH 8MW = 총 24MW + Ohmic
-- **KSTAR-N6:** 4종 가열 시스템 전부 탑재. NBI:ICRH:ECRH = 8:8:8 = σ-τ (각각)
+### BT-315: heating 4-way Ohmic+NBI+ICRH+ECRH = tau=4
+- **Connected parameter:** 4 heating methods
+- **Design reflection:** (1) Ohmic, (2) NBI 8MW, (3) ICRH 8MW, (4) ECRH 8MW = total 24MW + Ohmic
+- **KSTAR-N6:** all 4 heating systems onboard. NBI:ICRH:ECRH = 8:8:8 = sigma-tau (each)
 
-### BT-316: 물질 상태 4원 tau=4
-- **연결 파라미터:** 고체/액체/기체/플라즈마 = 4상 = tau
-- **설계 반영:** 핵융합로에서 4가지 상태 모두 존재: (1) 구조체(고체), (2) 냉각수/LiPb(액체), (3) 배기가스(기체), (4) 플라즈마(제4상태)
-- **KSTAR-N6:** 다이버터(고체W) + 블랭킷(액체LiPb) + 배기(기체He) + 코어(플라즈마)
+### BT-316: 4 states of matter tau=4
+- **Connected parameter:** solid/liquid/gas/plasma = 4 phases = tau
+- **Design reflection:** all 4 states present in a fusion reactor: (1) structure (solid), (2) coolant/LiPb (liquid), (3) exhaust gas (gas), (4) plasma (4th state)
+- **KSTAR-N6:** divertor (solid W) + blanket (liquid LiPb) + exhaust (gaseous He) + core (plasma)
 
-### BT-317: 토카막 완전 맵 12/12 EXACT
-- **연결 파라미터:** 전체 토카막 파라미터 12개
-- **설계 반영:** 메타-정리. KSTAR-N6의 12개 핵심 파라미터가 전부 n=6 상수로 매핑
-- **KSTAR-N6:** 본 문서 전체가 BT-317의 실현. 12/12 매핑 = sigma(6)개 파라미터 전부 EXACT
+### BT-317: tokamak complete map 12/12 EXACT
+- **Connected parameter:** all 12 tokamak parameters
+- **Design reflection:** meta-theorem. The 12 core KSTAR-N6 parameters all map to n=6 constants
+- **KSTAR-N6:** this document as a whole realizes BT-317. 12/12 mapping = all sigma(6) parameters EXACT
 
 ---
 
-### 23.1 BT 연결 밀도 분석
+### 23.1 BT connection-density analysis
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│  BT 연결 밀도: KSTAR-N6 토카막                               │
+│  BT connection density: KSTAR-N6 tokamak                     │
 ├──────────────────────────────────────────────────────────────┤
 │                                                              │
-│  직접 설계 반영 (핵심 파라미터):                               │
+│  Direct design reflection (core parameters):                 │
 │    BT-98,99,291,296,298,311,312,313,314,315,317    (11 BTs) │
 │    ████████████████████████████████████████████     (46%)    │
 │                                                              │
-│  물리 근거 제공 (설계 근거):                                   │
+│  Physical basis provided (design rationale):                 │
 │    BT-97,100,102,293,294,295,297,310,316           (9 BTs)  │
 │    ████████████████████████████████                 (37%)    │
 │                                                              │
-│  맥락/환경 연결 (외부 시너지):                                 │
+│  Context/environment (external synergy):                     │
 │    BT-101,103,104,292                              (4 BTs)  │
 │    ████████████████                                (17%)    │
 │                                                              │
-│  총 24 BTs / 343 전체 = 7.0% (단일 도메인 최다)              │
+│  Total 24 BTs / 343 overall = 7.0% (most in a single domain) │
 └──────────────────────────────────────────────────────────────┘
 ```
 

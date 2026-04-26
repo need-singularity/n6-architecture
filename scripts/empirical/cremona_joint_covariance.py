@@ -6,11 +6,23 @@
 
 import json
 import sys
+import random
 from pathlib import Path
 from collections import Counter, defaultdict
 import math
 
-ROOT = Path("/Users/ghost/Dev/n6-architecture")
+# Resolve ROOT robustly: prefer current repo (n6-architecture) over the
+# legacy hardcoded /Users/ghost/Dev/n6-architecture path.
+_HERE = Path(__file__).resolve()
+_CANDIDATES = [
+    _HERE.parents[2],                          # repo containing scripts/
+    Path("/Users/ghost/core/n6-architecture"),
+    Path("/Users/ghost/Dev/n6-architecture"),
+]
+ROOT = next(
+    (p for p in _CANDIDATES if (p / "data" / "cremona" / "allbsd").is_dir()),
+    _CANDIDATES[0],
+)
 DATA_DIR = ROOT / "data" / "cremona" / "allbsd"
 
 
@@ -48,7 +60,130 @@ def sel3(r, t, sha):
     return (3 ** r) * tf * sp
 
 
+def _load_pairs():
+    """Stream all curves and return parallel lists (s2, s3, t, sha)."""
+    shards = sorted(DATA_DIR.glob("allbsd.*"))
+    s2_all, s3_all, t_all, sha_all = [], [], [], []
+    for s in shards:
+        with s.open() as f:
+            for line in f:
+                c = parse(line)
+                if c:
+                    _, r, t, sha = c
+                    s2_all.append(sel2(r, t, sha))
+                    s3_all.append(sel3(r, t, sha))
+                    t_all.append(t)
+                    sha_all.append(sha)
+    return s2_all, s3_all, t_all, sha_all
+
+
+def _sha_class(sha):
+    if sha == 1:
+        return 1
+    if sha == 4:
+        return 4
+    if sha == 9:
+        return 9
+    return ">9"
+
+
+def _kappa_with_bootstrap(xs, ys, n_boot=1000, seed=20260425):
+    n = len(xs)
+    if n < 2:
+        return float("nan"), float("nan"), float("nan"), float("nan")
+    try:
+        import numpy as np
+        xa = np.asarray(xs, dtype=np.float64)
+        ya = np.asarray(ys, dtype=np.float64)
+        kappa = float(np.mean((xa - xa.mean()) * (ya - ya.mean())))
+        rng = np.random.default_rng(seed)
+        boots = np.empty(n_boot, dtype=np.float64)
+        for b in range(n_boot):
+            idx = rng.integers(0, n, size=n)
+            sx = xa[idx]
+            sy = ya[idx]
+            boots[b] = float(np.mean((sx - sx.mean()) * (sy - sy.mean())))
+        se = float(boots.std(ddof=0))
+        lo = float(np.quantile(boots, 0.025))
+        hi = float(np.quantile(boots, 0.975))
+        return kappa, se, lo, hi
+    except ImportError:
+        pass
+    mx = sum(xs) / n
+    my = sum(ys) / n
+    kappa = sum((xs[i] - mx) * (ys[i] - my) for i in range(n)) / n
+    rng = random.Random(seed)
+    boots = []
+    for _ in range(n_boot):
+        sample = [rng.randrange(n) for _ in range(n)]
+        sx = [xs[k] for k in sample]
+        sy = [ys[k] for k in sample]
+        smx = sum(sx) / n
+        smy = sum(sy) / n
+        boots.append(sum((sx[i] - smx) * (sy[i] - smy) for i in range(n)) / n)
+    boots.sort()
+    mu = sum(boots) / len(boots)
+    var = sum((b - mu) ** 2 for b in boots) / len(boots)
+    se = math.sqrt(var)
+    lo = boots[int(0.025 * len(boots))]
+    hi = boots[int(0.975 * len(boots)) - 1]
+    return kappa, se, lo, hi
+
+
+def main_per_stratum():
+    print("[BT-546 Probe B] 28-stratum joint covariance run", file=sys.stderr)
+    print(f"[ROOT] {ROOT}", file=sys.stderr)
+    s2_all, s3_all, t_all, sha_all = _load_pairs()
+    N = len(s2_all)
+    print(f"[N] {N} curves loaded", file=sys.stderr)
+
+    torsion_strata = [1, 2, 3, 4, 6, 8, 12]
+    sha_strata = [1, 4, 9, ">9"]
+    cells = defaultdict(lambda: ([], []))
+    for i in range(N):
+        t = t_all[i]
+        if t not in torsion_strata:
+            continue
+        sc = _sha_class(sha_all[i])
+        cells[(t, sc)][0].append(s2_all[i])
+        cells[(t, sc)][1].append(s3_all[i])
+
+    rows = []
+    for t in torsion_strata:
+        for sc in sha_strata:
+            xs, ys = cells.get((t, sc), ([], []))
+            ncell = len(xs)
+            if ncell >= 2:
+                k, se, lo, hi = _kappa_with_bootstrap(xs, ys, n_boot=1000)
+            else:
+                k = se = lo = hi = float("nan")
+            rows.append({
+                "torsion": t,
+                "sha_class": sc,
+                "N_cell": ncell,
+                "kappa": k,
+                "se": se,
+                "conf_lo": lo,
+                "conf_hi": hi,
+            })
+
+    out = {
+        "tool": "cremona_joint_covariance.py --per-stratum",
+        "data": str(DATA_DIR),
+        "N_total": N,
+        "torsion_strata": torsion_strata,
+        "sha_strata": sha_strata,
+        "n_bootstrap": 1000,
+        "seed": 20260425,
+        "rows": rows,
+    }
+    print(json.dumps(out, indent=2, ensure_ascii=False))
+
+
 def main():
+    if "--per-stratum" in sys.argv:
+        main_per_stratum()
+        return
     shards = sorted(DATA_DIR.glob("allbsd.*"))
     print(f"[GALO-PX-1] Cremona joint distribution 정밀 분석", file=sys.stderr)
     s2_all, s3_all = [], []

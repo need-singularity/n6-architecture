@@ -1,7 +1,7 @@
 {
   "schema": "n6-architecture.proposal_inventory.v1",
   "id_prefix": "n6a",
-  "updated_ts": "2026-04-23T04:13:35Z",
+  "updated_ts": "2026-04-25T03:38:30Z",
   "entries": [
     {
       "id": "n6a-20260422-001",
@@ -71,6 +71,17 @@
       "submitted_ts": "2026-04-22T15:54:31Z",
       "in_progress_ts": "2026-04-22T17:31:48Z",
       "done_ts": "2026-04-23T04:13:35Z"
+    },
+    {
+      "id": "n6a-20260425-001",
+      "kind": "advisory",
+      "title": "atlas.n6 abstraction-exhaustion track — [10*] ceiling 도달 (현 66.2% / gap 33.8%)",
+      "from_repo": "nexus",
+      "user_status": "pending",
+      "score_priority": 95,
+      "submitted_ts": "2026-04-25T03:38:30Z",
+      "category": "atlas_gap",
+      "priority_reason": "cross_repo_blocker floor >= 95 (auto)"
     }
   ],
   "proposals": [],

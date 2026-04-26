@@ -1,9 +1,9 @@
 {
   "schema": "n6-architecture/n6_blockers/1",
-  "ts": "2026-04-24T12:34:19Z",
-  "head": "fb054980786520fb3cf871078cb281ccf96b0dbf",
+  "ts": "2026-04-26T10:19:24Z",
+  "head": "eafd5b9cb973512ce983b7113739913c9f45a36e",
   "inputs": {
-    "atlas_n6_bytes": 1503957,
+    "atlas_n6_bytes": 1503962,
     "atlas_signals_n6_bytes": 289669,
     "engine_hexa_total": 17,
     "engine_selftest_ok": 16,
@@ -14,16 +14,16 @@
     "build_log_fail": 0,
     "loop_rules_total": 2,
     "loop_rules_drift": 0,
-    "nexus_reach": true,
-    "nexus_mode": "remote",
+    "nexus_reach": false,
+    "nexus_mode": "unreachable",
     "build_log_fail_stale_suppressed": 1
   },
   "summary": {
     "critical": 0,
     "high": 0,
-    "med": 0,
+    "med": 1,
     "low": 0,
-    "cross_repo_blocker_count": 0,
+    "cross_repo_blocker_count": 1,
     "cross_repo_priority_floor": 95
   },
   "convention": "config/cross_repo_blocker_convention.json (n6a-20260422-004)"

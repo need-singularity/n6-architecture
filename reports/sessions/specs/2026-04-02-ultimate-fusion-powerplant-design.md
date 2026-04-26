@@ -1440,1431 +1440,1433 @@ z-score = 0.74 (overall project, not statistically significant)
 
 ---
 
-## 13. 열역학 심화 — sCO₂ Brayton 사이클 완전 분석
+## 13. Thermodynamics Deep Dive — Full sCO₂ Brayton Cycle Analysis
 
-### 13.1 왜 sCO₂인가: CO₂ = C + 2O, C의 Z=6=n
+### 13.1 Why sCO₂: CO₂ = C + 2O, C has Z=6=n
 
-초임계 CO₂(sCO₂)를 작동 유체로 선택하는 이유는 공학적 + n=6 양쪽에서 정당화된다.
+The selection of supercritical CO₂ (sCO₂) as working fluid is justified by both engineering and n=6.
 
-**공학적 이유:**
-- 임계점이 31.1°C, 7.38 MPa로 낮아 → 응축기가 필요 없고 방열 온도가 상온 근처
-- 임계점 근방에서 밀도가 높아(~500 kg/m³) 압축 일이 크게 감소
-- 증기 터빈 대비 1/10 크기 → 기계적 단순성, CAPEX 감소
-- 700°C 고온원과 호환 → Carnot 효율의 73% 실현 가능
-- He Brayton 대비: He는 비열비(γ=5/3)가 높아 압축비가 커지고, 누설 문제 심각
-- 증기 Rankine 대비: 상변화 없이 단일 상(supercritical) 운전 → 열교환기 단순화
+**Engineering reasons:**
+- Critical point at 31.1°C, 7.38 MPa → no condenser needed; heat rejection near room temperature
+- Near the critical point density is high (~500 kg/m³) → compression work greatly reduced
+- Turbine size 1/10 vs steam → mechanical simplicity, CAPEX reduction
+- Compatible with 700°C hot source → 73% of Carnot feasible
+- vs He Brayton: He has high specific-heat ratio (γ=5/3) → larger pressure ratio, severe leakage issues
+- vs Steam Rankine: single-phase (supercritical) operation → heat exchanger simplification
 
-**n=6 연결:**
-- CO₂ = C(Z=6=n) + O₂ → 탄소 원자번호가 정확히 n
-- CO₂ 분자 원자수 = 3 = n/phi (C 1개 + O 2개)
-- 임계 온도 304.13 K ≈ 300 K + tau = 근사적 연결
-- CO₂ 분자량 = 44 → 직접적 n=6 매칭 없음 (정직한 MISS)
-- 그러나 C의 Z=6은 BT-27, BT-93과 직접 연결 (Carbon Z=6 보편성)
+**n=6 link (candidate framing):**
+- CO₂ = C(Z=6=n) + O₂ → carbon atomic number exactly n
+- CO₂ molecular atom count = 3 = n/phi (1 C + 2 O)
+- Critical temperature 304.13 K ≈ 300 K + tau = approximate link
+- CO₂ molecular weight = 44 → no direct n=6 match (honest MISS)
+- But C's Z=6 directly links to BT-27, BT-93 (Carbon Z=6 universality)
 
-**He, Steam과의 비교:**
+**Comparison with He, Steam:**
 
-| 작동유체 | 효율(700°C) | 터빈 크기 | 누설 | n=6 연결 | 성숙도 |
+| Working fluid | Efficiency(700°C) | Turbine size | Leakage | n=6 link | TRL |
 |---------|------------|----------|------|---------|--------|
-| sCO₂ | ~50% | 소형(1/10) | 낮음 | C=Z=6=n | TRL 4-5 |
-| He (Brayton) | ~45% | 대형 | 심각(He 투과) | He=Z=2=phi | TRL 3-4 |
-| Steam (Rankine) | ~33% | 초대형 | 없음 | H₂O 무관 | TRL 9 |
-| He+sCO₂ 혼합 | ~48% | 중형 | 중간 | 복합 | TRL 2-3 |
+| sCO₂ | ~50% | small (1/10) | low | C=Z=6=n | TRL 4-5 |
+| He (Brayton) | ~45% | large | severe (He permeation) | He=Z=2=phi | TRL 3-4 |
+| Steam (Rankine) | ~33% | very large | none | H₂O unrelated | TRL 9 |
+| He+sCO₂ mixture | ~48% | medium | moderate | composite | TRL 2-3 |
 
-### 13.2 6단 사이클 상세 상태점 (State Points)
+### 13.2 6-Stage Cycle — Detailed State Points
 
-HEXA-FUSION의 sCO₂ Brayton 사이클은 **재압축(Recompression) + 중간냉각(Intercooling)** 구성이다.
-총 6단(=n)으로 구성되며, 각 단의 열역학 상태점을 완전히 기술한다.
+HEXA-FUSION's sCO₂ Brayton cycle is a **recompression + intercooling** configuration.
+Total 6 stages (=n); each stage's thermodynamic state points are fully described.
 
 ```
-  사이클 구성 (n=6단):
+  Cycle configuration (n=6 stages):
 
   ┌─────────────────────────────────────────────────────────────────────┐
   │                                                                     │
   │   [6]Recuperator ← ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ [5]Turbine                │
-  │      │ (열회수)                              ↑                      │
+  │      │ (heat recovery)                      ↑                      │
   │      ↓                                      │                      │
   │   [1]Main Compressor → [2]Intercooler → [3]Recompressor            │
   │                                              │                      │
   │                                              ↓                      │
-  │                                         [4]IHX (블랭킷 열교환)      │
+  │                                         [4]IHX (blanket HX)        │
   │                                                                     │
   └─────────────────────────────────────────────────────────────────────┘
 ```
 
-**상태점 테이블 (6 stage boundaries + 6 internal states = 12=sigma 상태점):**
+**State point table (6 stage boundaries + 6 internal states = 12=sigma states):**
 
-| State | 위치 | T (°C) | T (K) | P (MPa) | h (kJ/kg) | s (kJ/kg·K) | 밀도 (kg/m³) |
+| State | Location | T (°C) | T (K) | P (MPa) | h (kJ/kg) | s (kJ/kg·K) | Density (kg/m³) |
 |-------|------|--------|-------|---------|-----------|-------------|-------------|
-| 1 | Main Compressor 입구 | 35 | 308 | 7.5 | 330 | 1.43 | 490 |
-| 2 | Main Compressor 출구 | 85 | 358 | 12.5 | 360 | 1.44 | 380 |
-| 3 | Intercooler 출구 | 40 | 313 | 12.3 | 335 | 1.36 | 560 |
-| 4 | Recompressor 출구 | 120 | 393 | 25.0 | 380 | 1.38 | 620 |
-| 5 | LTR (Low-T Recuperator) 출구 | 280 | 553 | 24.8 | 480 | 1.58 | 280 |
-| 6 | HTR (High-T Recuperator) 출구 | 450 | 723 | 24.5 | 590 | 1.73 | 180 |
-| 7 | IHX 출구 (터빈 입구) | 700 | 973 | 25.0 | 750 | 1.92 | 130 |
-| 8 | Turbine 출구 | 520 | 793 | 7.8 | 630 | 1.94 | 55 |
-| 9 | HTR 고온측 출구 | 160 | 433 | 7.7 | 430 | 1.66 | 100 |
-| 10 | LTR 고온측 출구 | 90 | 363 | 7.6 | 365 | 1.50 | 130 |
-| 11 | Precooler 입구 | 90 | 363 | 7.6 | 365 | 1.50 | 130 |
-| 12 | Precooler 출구 = State 1 | 35 | 308 | 7.5 | 330 | 1.43 | 490 |
+| 1 | Main Compressor inlet | 35 | 308 | 7.5 | 330 | 1.43 | 490 |
+| 2 | Main Compressor outlet | 85 | 358 | 12.5 | 360 | 1.44 | 380 |
+| 3 | Intercooler outlet | 40 | 313 | 12.3 | 335 | 1.36 | 560 |
+| 4 | Recompressor outlet | 120 | 393 | 25.0 | 380 | 1.38 | 620 |
+| 5 | LTR (Low-T Recuperator) outlet | 280 | 553 | 24.8 | 480 | 1.58 | 280 |
+| 6 | HTR (High-T Recuperator) outlet | 450 | 723 | 24.5 | 590 | 1.73 | 180 |
+| 7 | IHX outlet (turbine inlet) | 700 | 973 | 25.0 | 750 | 1.92 | 130 |
+| 8 | Turbine outlet | 520 | 793 | 7.8 | 630 | 1.94 | 55 |
+| 9 | HTR hot-side outlet | 160 | 433 | 7.7 | 430 | 1.66 | 100 |
+| 10 | LTR hot-side outlet | 90 | 363 | 7.6 | 365 | 1.50 | 130 |
+| 11 | Precooler inlet | 90 | 363 | 7.6 | 365 | 1.50 | 130 |
+| 12 | Precooler outlet = State 1 | 35 | 308 | 7.5 | 330 | 1.43 | 490 |
 
-**n=6 관찰: 상태점 12개 = sigma(6) EXACT**
+**n=6 observation: 12 state points = sigma(6) EXACT**
 
-### 13.3 압축기/터빈 단수 및 효율
+### 13.3 Compressor/Turbine Stage Count and Efficiency
 
 ```
   Main Compressor:
-    입구: 7.5 MPa, 35°C (임계점 바로 위)
-    출구: 12.5 MPa
-    압축비: 12.5/7.5 = 1.67 ≈ 5/3 = sopfr/n/phi
-    등엔트로피 효율: η_c = 89%
-    소비 전력: ~15 MW
-    특징: 임계점 근방 고밀도 → 압축 일 최소화
+    Inlet: 7.5 MPa, 35°C (just above critical)
+    Outlet: 12.5 MPa
+    Pressure ratio: 12.5/7.5 = 1.67 ≈ 5/3 = sopfr/(n/phi)
+    Isentropic efficiency: η_c = 89%
+    Power consumption: ~15 MW
+    Note: near-critical high density → minimizes compression work
 
   Recompressor:
-    입구: 12.3 MPa, 40°C (Intercooler 출구)
-    출구: 25.0 MPa
-    압축비: 25.0/12.3 = 2.03 ≈ phi = 2
-    등엔트로피 효율: η_rc = 87%
-    소비 전력: ~25 MW
-    유량 분기비: 메인 60% / 재압축 40%
+    Inlet: 12.3 MPa, 40°C (Intercooler outlet)
+    Outlet: 25.0 MPa
+    Pressure ratio: 25.0/12.3 = 2.03 ≈ phi = 2
+    Isentropic efficiency: η_rc = 87%
+    Power consumption: ~25 MW
+    Flow split: main 60% / recompression 40%
 
   Turbine:
-    입구: 25.0 MPa, 700°C
-    출구: 7.8 MPa
-    팽창비: 25.0/7.8 = 3.2 ≈ n/phi = 3
-    등엔트로피 효율: η_t = 93%
-    출력: ~220 MW (gross)
-    회전수: 3,600 rpm (60Hz, tau=4극)
-    또는: 3,000 rpm (50Hz, tau=4극)
+    Inlet: 25.0 MPa, 700°C
+    Outlet: 7.8 MPa
+    Expansion ratio: 25.0/7.8 = 3.2 ≈ n/phi = 3
+    Isentropic efficiency: η_t = 93%
+    Output: ~220 MW (gross)
+    Rotational speed: 3,600 rpm (60Hz, tau=4-pole)
+    or: 3,000 rpm (50Hz, tau=4-pole)
 
-  전체 압력비:
+  Total pressure ratio:
     P_max/P_min = 25.0/7.5 = 3.33 ≈ n/phi = 3 (CLOSE)
 
-  단수 구성:
-    Main Compressor: 1단 (축류 + 원심 혼합)
-    Recompressor: 1단 (원심)
-    Turbine: 2단 (축류, HP + LP)
-    Intercooler: 1단
-    Recuperator: 2단 (HTR + LTR)
+  Stage composition:
+    Main Compressor: 1 stage (axial + centrifugal mixed)
+    Recompressor: 1 stage (centrifugal)
+    Turbine: 2 stages (axial, HP + LP)
+    Intercooler: 1 stage
+    Recuperator: 2 stages (HTR + LTR)
     ────────────────────────────
-    총 주요 구성: 6 = n EXACT (1+1+2+1+1 또는 독립 기능 6개)
+    Total major components: 6 = n EXACT (1+1+2+1+1 or 6 independent functions)
 ```
 
-### 13.4 Recuperator 설계 및 효과
+### 13.4 Recuperator Design and Effect
 
 ```
-  Recuperator (재생 열교환기):
-    역할: 터빈 배기열을 압축기 출구 유체에 전달
-    → 외부 열 입력(IHX) 최소화 → 효율 극대화
+  Recuperator:
+    Role: transfer turbine exhaust heat to compressor-outlet fluid
+    → Minimizes external heat input (IHX) → maximizes efficiency
 
   2-stage Recuperator:
     HTR (High-Temperature Recuperator):
-      고온측: 520°C → 160°C (Δ=360°C)
-      저온측: 280°C → 450°C (Δ=170°C)
+      Hot side: 520°C → 160°C (Δ=360°C)
+      Cold side: 280°C → 450°C (Δ=170°C)
       effectiveness: ε_HTR = 95% = 1 - 1/(J₂-τ) = 19/20 (BT-74)
-      열전달량: ~240 MWth
+      Heat transfer: ~240 MWth
 
     LTR (Low-Temperature Recuperator):
-      고온측: 160°C → 90°C (Δ=70°C)
-      저온측: 120°C → 280°C (Δ=160°C)
+      Hot side: 160°C → 90°C (Δ=70°C)
+      Cold side: 120°C → 280°C (Δ=160°C)
       effectiveness: ε_LTR = 92%
-      열전달량: ~100 MWth
+      Heat transfer: ~100 MWth
 
-  Recuperator 총 열전달: ~340 MWth
-  → 외부 열입력 대비 열회수량이 거의 동등
-  → 이것이 50% 효율의 핵심 (열회수 없으면 ~30%)
+  Recuperator total heat transfer: ~340 MWth
+  → Heat recovery nearly equals external heat input
+  → This is the core of 50% efficiency (without recovery ~30%)
 
-  재질: Printed Circuit Heat Exchanger (PCHE)
-    - 확산 접합 스테인리스강 316
-    - 마이크로 채널 (D_h = 1-2 mm)
-    - 열전달 면적 밀도: ~2,500 m²/m³
-    - 컴팩트: 전통 shell-and-tube 대비 1/5 체적
+  Material: Printed Circuit Heat Exchanger (PCHE)
+    - diffusion-bonded stainless 316
+    - micro-channels (D_h = 1-2 mm)
+    - heat transfer area density: ~2,500 m²/m³
+    - compact: 1/5 volume vs traditional shell-and-tube
 ```
 
 ### 13.5 IHX (Intermediate Heat Exchanger): LiPb → sCO₂
 
 ```
-  역할: 블랭킷 1차 냉각재(LiPb)에서 sCO₂ 2차 냉각재로 열 전달
+  Role: transfer heat from blanket primary coolant (LiPb) to secondary sCO₂
 
-  설계 파라미터:
-    열전달량: 360 MWth
-    1차측 (LiPb):
-      입구: 700°C, ~0.5 MPa
-      출구: 450°C
-      유량: ~4,000 kg/s
-      열전달 계수: ~3,000 W/m²K (액체 금속)
+  Design parameters:
+    Heat transfer: 360 MWth
+    Primary side (LiPb):
+      Inlet: 700°C, ~0.5 MPa
+      Outlet: 450°C
+      Flow rate: ~4,000 kg/s
+      Heat transfer coefficient: ~3,000 W/m²K (liquid metal)
 
-    2차측 (sCO₂):
-      입구: 450°C, 24.5 MPa
-      출구: 700°C, 25.0 MPa
-      유량: ~1,500 kg/s
-      열전달 계수: ~5,000 W/m²K (초임계)
+    Secondary side (sCO₂):
+      Inlet: 450°C, 24.5 MPa
+      Outlet: 700°C, 25.0 MPa
+      Flow rate: ~1,500 kg/s
+      Heat transfer coefficient: ~5,000 W/m²K (supercritical)
 
     LMTD: ~50°C
-    총 열전달 면적: ~14,400 m² ≈ σ²×100 m²
-    열교환기 유형: Shell-and-tube (LiPb 호환성)
+    Total heat transfer area: ~14,400 m² ≈ σ²×100 m²
+    Heat exchanger type: Shell-and-tube (LiPb compatibility)
 
-  IHX 재질:
-    SiC/SiC 또는 Hastelloy X (고온 LiPb 내식성)
-    C=Z=6=n (SiC 사용 시 BT-93 연결)
+  IHX materials:
+    SiC/SiC or Hastelloy X (high-T LiPb corrosion resistance)
+    C=Z=6=n (SiC case links to BT-93)
 
-  MHD 대책:
-    LiPb는 전기 전도성 → 자기장에서 MHD 압력손실
-    SiC FCI (Flow Channel Insert)로 전기 절연
-    MHD 압력손실: <0.5 MPa (FCI 적용 시)
+  MHD mitigation:
+    LiPb is electrically conducting → MHD pressure drop in magnetic field
+    SiC FCI (Flow Channel Insert) electrically insulates
+    MHD pressure drop: <0.5 MPa (with FCI)
 
-  안전 관련:
-    LiPb-sCO₂ 접촉 시 → CO₂가 LiPb에 용해 가능
-    이중 벽(double-wall) 튜브로 누설 방지
-    누설 감지: He 감시 가스 (두 벽 사이)
+  Safety notes:
+    LiPb-sCO₂ contact → CO₂ may dissolve in LiPb
+    Double-wall tube prevents leakage
+    Leak detection: He monitoring gas (between the two walls)
 ```
 
-### 13.6 Carnot 효율 vs 실제 효율
+### 13.6 Carnot Efficiency vs Actual Efficiency
 
 ```
-  Carnot 효율:
+  Carnot efficiency:
     η_Carnot = 1 - T_cold/T_hot = 1 - 308/973 = 0.683 = 68.3%
 
-  실제 효율:
+  Actual efficiency:
     η_actual = σ/J₂ = 12/24 = 50.0% = 0.500
 
-  Carnot 대비 비율:
+  Ratio vs Carnot:
     η_actual/η_Carnot = 0.500/0.683 = 0.732 ≈ 73%
-    → 최신 sCO₂ 사이클 설계의 이론적 상한에 근접
+    → Approaches the theoretical upper bound of latest sCO₂ cycle designs
 
-  효율 손실 분석:
-    Carnot → 실제 간 18.3% 손실 원인:
+  Efficiency loss analysis:
+    Carnot → actual 18.3% loss breakdown:
 
-    | 손실 원인 | 효율 감소 | 비고 |
+    | Loss source | Efficiency reduction | Note |
     |----------|----------|------|
-    | 압축기 비가역성 | -4.5% | η_c=89%, 임계점 근방 |
-    | 터빈 비가역성 | -3.0% | η_t=93% |
-    | Recuperator 불완전성 | -3.5% | ε=92-95% |
-    | IHX 온도 강하 | -2.0% | LMTD=50°C |
-    | 압력 손실 (배관) | -1.5% | 6 구간 |
-    | Intercooler 비가역성 | -1.0% | 유한 온도차 |
-    | 기타 (누설, 열손실) | -2.8% | 보수적 추정 |
-    | **합계** | **-18.3%** | 68.3% → 50.0% |
+    | Compressor irreversibility | -4.5% | η_c=89%, near critical |
+    | Turbine irreversibility | -3.0% | η_t=93% |
+    | Recuperator imperfection | -3.5% | ε=92-95% |
+    | IHX temperature drop | -2.0% | LMTD=50°C |
+    | Pressure losses (piping) | -1.5% | 6 sections |
+    | Intercooler irreversibility | -1.0% | finite temperature diff |
+    | Other (leakage, heat loss) | -2.8% | conservative estimate |
+    | **Sum** | **-18.3%** | 68.3% → 50.0% |
 
-  n=6 해석:
-    σ/J₂ = 1/2 = 정확히 50%
-    → Brayton 사이클의 열역학적 효율이 n=6 산술의 가장 단순한 비율
-    → 이것은 설계 목표(σ/J₂)와 열역학적 가능성(73% Carnot)이 수렴하는 지점
+  n=6 interpretation:
+    σ/J₂ = 1/2 = exactly 50%
+    → The Brayton cycle thermodynamic efficiency is the simplest ratio in n=6 arithmetic
+    → This is the point where design target (σ/J₂) and thermodynamic feasibility (73% Carnot) converge (candidate claim)
 ```
 
-### 13.7 방열 시스템 (Heat Rejection)
+### 13.7 Heat Rejection System
 
 ```
-  방열량: P_reject = P_th - P_electric = 360 - 180 = 180 MWth
-  + 보조 시스템 열: ~20 MWth
-  총 방열: ~200 MWth
+  Heat rejection: P_reject = P_th - P_electric = 360 - 180 = 180 MWth
+  + Auxiliary system heat: ~20 MWth
+  Total rejection: ~200 MWth
 
-  Option A: 자연통풍 냉각탑 (내륙 입지)
-    수량: 2 = phi
-    높이: ~120m = sigma*(sigma-phi) m
-    직경: ~80m
-    증발수 소비: ~300 m³/h (총)
-    설계 습구 온도: 25°C
-    접근 온도: 5°C → 냉각수 30°C 출구
-    장점: 연간 운전, 외부 동력 불필요
-    단점: 거대 구조물, 수자원 필요
+  Option A: Natural-draft cooling tower (inland siting)
+    Count: 2 = phi
+    Height: ~120m = sigma*(sigma-phi) m
+    Diameter: ~80m
+    Evaporation water consumption: ~300 m³/h (total)
+    Design wet-bulb temperature: 25°C
+    Approach: 5°C → cooling water 30°C outlet
+    Pros: year-round operation, no external power
+    Cons: huge structure, water resource requirement
 
-  Option B: 해수 냉각 (해안 입지)
-    취수량: ~20,000 m³/h
-    온배수 온도 상승: < 7°C (환경 기준)
-    장점: 냉각탑 불필요, 부지 축소
-    단점: 해안 입지 제한, 생태 영향
+  Option B: Seawater cooling (coastal siting)
+    Intake: ~20,000 m³/h
+    Thermal effluent rise: < 7°C (environmental standard)
+    Pros: no cooling tower, reduced site
+    Cons: limited to coastal, ecological impact
 
-  Option C: 공냉 (사막/건조 지역)
-    공냉 열교환기 면적: ~50,000 m²
-    팬 전력 소비: ~5 MW
-    단점: 여름 고온 시 효율 저하
+  Option C: Air cooling (desert/arid regions)
+    Air-cooled heat exchanger area: ~50,000 m²
+    Fan power consumption: ~5 MW
+    Cons: efficiency drops during summer heat
 
-  기본 선택: Option A (자연통풍 냉각탑 × 2=phi)
-  → 입지 유연성 + 수자원 가용성 균형
+  Default choice: Option A (natural-draft cooling tower × 2=phi)
+  → Balances siting flexibility + water availability
 ```
 
-### 13.8 기생 부하 (Parasitic Loads) 상세
+### 13.8 Parasitic Loads — Detail
 
 ```
-  Gross Electric Output: 180 MWe (터빈 발전기 출력)
+  Gross Electric Output: 180 MWe (turbine-generator output)
 
-  기생 부하 상세:
+  Parasitic load detail:
   ┌──────────────────────┬─────────┬────────────────────────────┐
-  │ 항목                 │ 전력(MW) │ 비고                       │
+  │ Item                 │ Power(MW)│ Note                       │
   ├──────────────────────┼─────────┼────────────────────────────┤
-  │ 가열 시스템 재순환    │ 24.0    │ NBI(8)+ICRH(6)+ECRH(10)   │
+  │ Heating system recirc│ 24.0    │ NBI(8)+ICRH(6)+ECRH(10)   │
   │                      │         │ = J₂ = 24 EXACT            │
   ├──────────────────────┼─────────┼────────────────────────────┤
-  │ 극저온 냉동기         │ 12.0    │ 4.2K+20K+80K              │
+  │ Cryogenic refriger.  │ 12.0    │ 4.2K+20K+80K              │
   │                      │         │ = sigma = 12 EXACT         │
   ├──────────────────────┼─────────┼────────────────────────────┤
-  │ sCO₂ 순환 펌프       │ 3.0     │ 메인+재압축 보조           │
+  │ sCO₂ circulation pump│ 3.0     │ main + recomp auxiliary    │
   ├──────────────────────┼─────────┼────────────────────────────┤
-  │ LiPb 순환 펌프       │ 2.0     │ EM 펌프 (MHD 구동)        │
+  │ LiPb circ. pump      │ 2.0     │ EM pump (MHD drive)        │
   ├──────────────────────┼─────────┼────────────────────────────┤
-  │ He 순환 팬/블로워     │ 1.5     │ FW 냉각 + 블랭킷 퍼지      │
+  │ He circ. fan/blower  │ 1.5     │ FW cooling + blanket purge │
   ├──────────────────────┼─────────┼────────────────────────────┤
-  │ 냉각수 펌프           │ 1.0     │ 2차 냉각수 순환            │
+  │ Cooling water pump   │ 1.0     │ secondary cooling circ.    │
   ├──────────────────────┼─────────┼────────────────────────────┤
-  │ 진공 배기             │ 0.5     │ Cryopump 6대              │
+  │ Vacuum pumping       │ 0.5     │ 6 cryopumps                │
   ├──────────────────────┼─────────┼────────────────────────────┤
-  │ 삼중수소 처리          │ 0.3     │ 분리/정제/저장             │
+  │ Tritium processing   │ 0.3     │ separation/purify/storage  │
   ├──────────────────────┼─────────┼────────────────────────────┤
-  │ 제어/진단/조명         │ 0.7     │ HEXA-P SoC + 센서         │
+  │ Control/diag./light  │ 0.7     │ HEXA-P SoC + sensors       │
   ├──────────────────────┼─────────┼────────────────────────────┤
-  │ 냉각탑 팬 (강제통풍 시)│ 0.0     │ 자연통풍 선택 시 0         │
+  │ Cooling tower fan (forced)│ 0.0 │ 0 if natural-draft chosen │
   ├──────────────────────┼─────────┼────────────────────────────┤
-  │ **합계**             │ **45.0** │                            │
+  │ **Sum**              │ **45.0** │                            │
   └──────────────────────┴─────────┴────────────────────────────┘
 
-  주요 기생 부하: 가열(24) + 극저온(12) = 36 MW = 3n × sigma / n = 36
-  (총 기생의 80%가 가열+극저온)
+  Major parasitic loads: heating(24) + cryo(12) = 36 MW = 3n × sigma / n = 36
+  (80% of total parasitic is heating+cryo)
 
   Net Electric Output:
     P_net = P_gross - P_parasitic
-          = 180 - 45 = 135 MWe (보수적)
+          = 180 - 45 = 135 MWe (conservative)
 
-  추가 열 회수로 P_gross 상향 시:
-    Li-6 증식 반응 4.78 MeV 보너스 → P_th ≈ 380 MWth
+  With additional heat recovery raising P_gross:
+    Li-6 breeding reaction 4.78 MeV bonus → P_th ≈ 380 MWth
     P_gross = 380 × 0.50 = 190 MWe
     P_net = 190 - 45 = 145 MWe
 
-  200 MWe 목표 달성을 위한 경로:
-    (1) P_fus = 500 MW로 상향 → P_th ≈ 450 MWth → P_net ≈ 180 MWe
-    (2) 가열 재순환 감소: Q=20 운전 → 가열 12 MW로 반감 → P_net +12
-    (3) HTS 20K 운전 → 극저온 8 MW로 감소 → P_net +4
-    → 경로 (1)+(2)+(3) 조합 시 P_net ≈ 200 MWe 가능
+  Paths to meet the 200 MWe target candidate:
+    (1) Raise P_fus to 500 MW → P_th ≈ 450 MWth → P_net ≈ 180 MWe
+    (2) Reduce heating recirculation: Q=20 operation → heating halved to 12 MW → P_net +12
+    (3) HTS 20K operation → cryo reduced to 8 MW → P_net +4
+    → Combining (1)+(2)+(3) makes P_net ≈ 200 MWe plausible (candidate path)
 
   Engineering Q (Q_eng):
     Q_eng = P_net / P_parasitic = 200 / 45 = 4.4
-    → 상용 발전소 기준 최소 Q_eng > 3 필요 (HEXA-FUSION 달성)
+    → Commercial plant baseline requires Q_eng > 3 minimum (HEXA-FUSION meets it)
 ```
 
 ---
 
-## 14. 중성자학 심화 — 블랭킷 핵반응
+## 14. Neutronics Deep Dive — Blanket Nuclear Reactions
 
-### 14.1 14.1 MeV 중성자 수송 (Neutron Transport)
+### 14.1 14.1 MeV Neutron Transport
 
 ```
-  D-T 반응에서 방출되는 14.1 MeV 중성자가 블랭킷을 통과하며:
-  (1) 삼중수소 증식 반응 유발
-  (2) 에너지를 열로 전환
-  (3) 구조재를 방사화
-  (4) 차폐층에서 최종 흡수
+  As the 14.1 MeV neutrons emitted from D-T reactions pass through the blanket:
+  (1) Induce tritium breeding reactions
+  (2) Convert energy into heat
+  (3) Activate structural materials
+  (4) Are finally absorbed in the shielding layer
 
-  중성자 경로 (플라즈마 중심 → 외부):
+  Neutron path (plasma center → outside):
 
   ┌────────────────────────────────────────────────────────┐
-  │ 플라즈마 (14.1 MeV n 방출)                              │
+  │ Plasma (14.1 MeV n emission)                            │
   ├────────────────────────────────────────────────────────┤
   │ Scrape-Off Layer (~5 cm)                               │
-  │ → 거의 무충돌 통과                                     │
+  │ → Nearly collisionless pass-through                     │
   ├────────────────────────────────────────────────────────┤
-  │ First Wall: W 갑옷 (5 mm) + SiC/SiC (10 mm)           │
-  │ → 약간의 에너지 감속 (W 탄성산란: ΔE/E ~2%)            │
-  │ → W 활성화: W-186(n,γ)W-187 (τ₁/₂=24h=J₂ h!)        │
+  │ First Wall: W armor (5 mm) + SiC/SiC (10 mm)           │
+  │ → Slight energy moderation (W elastic scatter: ΔE/E ~2%)│
+  │ → W activation: W-186(n,γ)W-187 (τ₁/₂=24h=J₂ h!)        │
   ├────────────────────────────────────────────────────────┤
-  │ He 냉각 채널 (30 mm)                                   │
-  │ → He 산란: 매우 작은 단면적                             │
+  │ He cooling channels (30 mm)                             │
+  │ → He scatter: very small cross section                  │
   ├────────────────────────────────────────────────────────┤
   │ SiC FCI (10 mm)                                        │
-  │ → C-12(n,α)Be-9: σ~0.2 barn at 14 MeV               │
-  │ → Si-28(n,p)Al-28: σ~0.3 barn at 14 MeV              │
+  │ → C-12(n,α)Be-9: σ~0.2 barn at 14 MeV                   │
+  │ → Si-28(n,p)Al-28: σ~0.3 barn at 14 MeV                 │
   ├────────────────────────────────────────────────────────┤
-  │ LiPb 증식 영역 (~300 mm)                               │
-  │ → Li-6(n,α)T: 주 증식 반응                             │
-  │ → Li-7(n,n'α)T: 보조 증식                              │
-  │ → Pb-208(n,2n)Pb-207: 중성자 증배                      │
-  │ → 대부분의 중성자가 여기서 열화/흡수                     │
+  │ LiPb breeding zone (~300 mm)                            │
+  │ → Li-6(n,α)T: main breeding reaction                    │
+  │ → Li-7(n,n'α)T: secondary breeding                      │
+  │ → Pb-208(n,2n)Pb-207: neutron multiplication            │
+  │ → Most neutrons thermalized/absorbed here               │
   ├────────────────────────────────────────────────────────┤
-  │ 차폐 블록: WC + H₂O (~400 mm)                          │
-  │ → 잔류 중성자 감속 + 감마선 흡수                         │
-  │ → 진공용기 + 자석 보호                                  │
+  │ Shield block: WC + H₂O (~400 mm)                       │
+  │ → Residual neutron moderation + gamma absorption        │
+  │ → Vacuum vessel + magnet protection                     │
   ├────────────────────────────────────────────────────────┤
-  │ 진공용기: SS316L(N) (60 mm)                             │
-  │ → 최종 차폐 + 구조 지지                                 │
+  │ Vacuum vessel: SS316L(N) (60 mm)                        │
+  │ → Final shielding + structural support                  │
   ├────────────────────────────────────────────────────────┤
-  │ 극저온 차폐 + TF 코일                                   │
-  │ → 중성자 플럭스 < 10⁹ n/cm²/s (코일 보호 기준)          │
+  │ Cryogenic shield + TF coils                             │
+  │ → Neutron flux < 10⁹ n/cm²/s (coil protection criterion)│
   └────────────────────────────────────────────────────────┘
 
-  총 블랭킷+차폐 두께: ~800 mm = 0.8 m
-  플라즈마 → 코일 거리: ~1.2 m (FW + 블랭킷 + 차폐 + 갭 + VV)
+  Total blanket+shield thickness: ~800 mm = 0.8 m
+  Plasma → coil distance: ~1.2 m (FW + blanket + shield + gap + VV)
 ```
 
-### 14.2 Li-6(n,α)T 반응 상세
+### 14.2 Li-6(n,α)T Reaction Detail
 
 ```
   ⁶Li + n → ³H (T) + ⁴He (α) + 4.78 MeV
 
-  단면적 (Cross Section):
-    열중성자 (0.025 eV): σ = 940 barns (매우 큼)
-    → 1/v 법칙 따름: σ ∝ 1/√E
+  Cross Section:
+    Thermal neutron (0.025 eV): σ = 940 barns (very large)
+    → Follows 1/v law: σ ∝ 1/√E
     1 eV:    ~150 barns
     1 keV:   ~5 barns
-    1 MeV:   ~0.3 barns (직접 반응은 적음)
+    1 MeV:   ~0.3 barns (direct reaction is rare)
     14 MeV:  ~0.03 barns
 
-  핵심: 고속 중성자(14.1 MeV)는 먼저 감속되어야 효율적으로 Li-6와 반응
-  → LiPb의 Pb가 감속재 역할 (탄성 산란으로 에너지 점진 감소)
+  Key point: fast neutrons (14.1 MeV) must first be moderated to react efficiently with Li-6
+  → Pb in LiPb acts as moderator (gradual energy loss via elastic scatter)
 
-  반응 Q-값 = +4.78 MeV (발열):
-    → 14.1 MeV 중성자 에너지 + 4.78 MeV 추가 = 에너지 증배
-    → 블랭킷 열출력이 중성자 열출력보다 ~17% 증가
-    → 에너지 증배율 M_n ≈ (14.1 + 4.78)/14.1 = 1.34 (Li-6 반응만)
-    → 실제로는 모든 중성자가 Li-6 반응하지 않으므로 M_n ≈ 1.12-1.17
+  Reaction Q-value = +4.78 MeV (exothermic):
+    → 14.1 MeV neutron energy + 4.78 MeV bonus = energy multiplication
+    → Blanket thermal output ~17% higher than neutron thermal output
+    → Energy multiplication M_n ≈ (14.1 + 4.78)/14.1 = 1.34 (Li-6 reaction only)
+    → In practice not every neutron reacts with Li-6, so M_n ≈ 1.12-1.17
 
-  Li-6 농축 효과:
-    자연 Li: 7.5% Li-6, 92.5% Li-7
-    90% Li-6 농축 시: 열중성자 포획 확률 12배 증가
-    → TBR: 자연 Li ~1.05 → 90% Li-6 ~1.17
+  Li-6 enrichment effect:
+    Natural Li: 7.5% Li-6, 92.5% Li-7
+    At 90% Li-6 enrichment: thermal neutron capture probability 12x higher
+    → TBR: natural Li ~1.05 → 90% Li-6 ~1.17
     → 90% = n × (σ + n/φ) = 6 × 15 = 90 EXACT
 ```
 
-### 14.3 Li-7(n,n'α)T 반응 상세
+### 14.3 Li-7(n,n'α)T Reaction Detail
 
 ```
   ⁷Li + n → ³H (T) + ⁴He (α) + n' - 2.47 MeV
 
-  특성:
-    흡열 반응: Q = -2.47 MeV (중성자 에너지 2.47 MeV 이상 필요)
-    임계 에너지 (Threshold): E_n > 2.47 MeV
-    14 MeV에서 단면적: ~0.35 barns
-    → 고속 중성자만 반응 가능 (감속 전 단계)
+  Characteristics:
+    Endothermic: Q = -2.47 MeV (neutron energy > 2.47 MeV required)
+    Threshold energy: E_n > 2.47 MeV
+    Cross section at 14 MeV: ~0.35 barns
+    → Only fast neutrons can react (pre-moderation stage)
 
-  중요한 특성: 중성자 보존
-    입사 중성자 1개 → 반응 후 중성자 1개 방출 (n' = 2차 중성자)
-    → 삼중수소 생산 + 중성자 재사용 (일종의 중성자 '촉매')
-    → TBR에 ~0.08 기여 (작지만 중요)
+  Key property: neutron conservation
+    1 incoming neutron → 1 outgoing neutron after reaction (n' = secondary neutron)
+    → Tritium production + neutron reuse (a sort of neutron "catalyst")
+    → Contributes ~0.08 to TBR (small but important)
 
-  에너지 균형:
-    입사 n: 14.1 MeV
-    흡열: -2.47 MeV
-    출사 n': ~8-10 MeV (방향에 따라)
-    → 2차 중성자가 다시 Li-6(n,α)T 반응에 참여 가능
+  Energy balance:
+    Incoming n: 14.1 MeV
+    Endothermic: -2.47 MeV
+    Outgoing n': ~8-10 MeV (angle-dependent)
+    → The secondary neutron can then participate in another Li-6(n,α)T reaction
 ```
 
-### 14.4 중성자 증배: Pb(n,2n) 반응
+### 14.4 Neutron Multiplication: Pb(n,2n) Reaction
 
 ```
   ²⁰⁸Pb + n → ²⁰⁷Pb + 2n
 
-  단면적:
-    임계 에너지: ~7 MeV (Pb-208 결합에너지)
-    14 MeV에서: σ ≈ 2.1 barns
-    10 MeV에서: σ ≈ 1.5 barns
+  Cross section:
+    Threshold energy: ~7 MeV (Pb-208 binding energy)
+    At 14 MeV: σ ≈ 2.1 barns
+    At 10 MeV: σ ≈ 1.5 barns
 
-  왜 Pb(납)인가:
-    1. 높은 (n,2n) 단면적 → 중성자 증배 효율적
-    2. 높은 원자번호 Z=82 → 감속 느림 → 고속 영역 유지 시간 길음
-    3. LiPb 공융합금: 융점 235°C (순수 Li 180°C보다 안정)
-    4. Pb는 중성자 흡수가 작음 (parasitic capture 최소)
-    5. 화학적으로 불활성 (Li의 반응성 억제)
-    6. 열전도 양호 → 열제거 용이
+  Why Pb (lead):
+    1. High (n,2n) cross section → efficient neutron multiplication
+    2. High atomic number Z=82 → slow moderation → fast-energy region preserved longer
+    3. LiPb eutectic: melting point 235°C (more stable than pure Li at 180°C)
+    4. Pb has low neutron absorption (minimal parasitic capture)
+    5. Chemically inert (suppresses Li reactivity)
+    6. Good thermal conductivity → easy heat removal
 
-  LiPb 공융합금 (eutectic):
-    조성: Li₁₇Pb₈₃ (원자비), ~0.68 wt% Li
-    융점: 235°C (작동 온도 범위: 300-700°C)
-    밀도: ~9,500 kg/m³
-    열전도도: ~15 W/m·K
+  LiPb eutectic:
+    Composition: Li₁₇Pb₈₃ (atomic ratio), ~0.68 wt% Li
+    Melting point: 235°C (operating range: 300-700°C)
+    Density: ~9,500 kg/m³
+    Thermal conductivity: ~15 W/m·K
 
-  Pb의 Z=82:
-    직접적 n=6 매칭 없음 (정직한 기록)
-    그러나 82는 핵물리의 "마법수" (magic number) → 핵 안정성 최대
-    → 중성자 흡수 단면적 최소 → 블랭킷 재료로 최적
+  Pb Z=82:
+    No direct n=6 match (honest record)
+    However 82 is a nuclear physics "magic number" → maximum nuclear stability
+    → Minimum neutron absorption cross section → optimal as blanket material
 
-  Be (베릴륨) 대안:
+  Be (beryllium) alternative:
     ⁹Be + n → 2⁴He + 2n (σ ≈ 0.6 barn at 14 MeV)
-    장점: 더 낮은 임계 에너지 (~2 MeV)
-    단점: 독성, 취성, 고가, 제한된 매장량
-    → HEXA-FUSION은 LiPb 내 Pb(n,2n)을 주 증배 경로로 선택
+    Pros: lower threshold energy (~2 MeV)
+    Cons: toxicity, brittleness, high cost, limited reserves
+    → HEXA-FUSION selects Pb(n,2n) in LiPb as the main multiplication path
 ```
 
-### 14.5 TBR (Tritium Breeding Ratio) 상세 계산
+### 14.5 TBR (Tritium Breeding Ratio) Detailed Calculation
 
 ```
-  TBR 정의:
-    TBR = (단위 시간당 생산 삼중수소) / (단위 시간당 소비 삼중수소)
-    → TBR > 1 필수 (삼중수소 자급)
+  TBR definition:
+    TBR = (tritium produced per unit time) / (tritium consumed per unit time)
+    → TBR > 1 required (tritium self-sufficiency)
 
-  상세 중성자 경제 (Neutron Economy):
-    D-T 반응 1회 → 중성자 1개 방출
+  Detailed Neutron Economy:
+    1 D-T reaction → 1 neutron emitted
 
-    이 1개의 중성자 운명:
+    Fate of this 1 neutron:
 
     ┌─────────────────────────────────────────────────────┐
-    │ 중성자 1.000개 (출발)                               │
+    │ Neutrons 1.000 (start)                              │
     │                                                     │
-    │ Pb(n,2n) 증배: +0.180 중성자 (net)                  │
-    │ → 총 중성자: 1.180                                  │
+    │ Pb(n,2n) multiplication: +0.180 neutrons (net)       │
+    │ → Total neutrons: 1.180                             │
     │                                                     │
-    │ Li-7(n,n'α)T: 0.080 반응 (중성자 보존, T 생산)       │
-    │ → T 생산: +0.080                                    │
-    │ → 중성자 잔여: 1.180 (보존됨)                        │
+    │ Li-7(n,n'α)T: 0.080 reactions (n conserved, T made) │
+    │ → T production: +0.080                              │
+    │ → Neutrons remaining: 1.180 (conserved)             │
     │                                                     │
-    │ Li-6(n,α)T: 0.900 반응 (중성자 소비, T 생산)         │
-    │ → T 생산: +0.900                                    │
-    │ → 중성자 잔여: 0.280                                │
+    │ Li-6(n,α)T: 0.900 reactions (n consumed, T made)     │
+    │ → T production: +0.900                              │
+    │ → Neutrons remaining: 0.280                         │
     │                                                     │
-    │ 구조재 흡수: -0.090 (SiC, W, SS316)                 │
-    │ 진공용기 흡수: -0.050                                │
-    │ 누설 (gaps, ports): -0.060                          │
-    │ 기타 기생 흡수: -0.080                               │
-    │ → 중성자 잔여: 0.000 (균형)                          │
+    │ Structural absorption: -0.090 (SiC, W, SS316)       │
+    │ Vacuum vessel absorption: -0.050                    │
+    │ Leakage (gaps, ports): -0.060                       │
+    │ Other parasitic absorption: -0.080                  │
+    │ → Neutrons remaining: 0.000 (balance)               │
     │                                                     │
-    │ 총 TBR = 0.900 + 0.080 = 0.980... 부족!             │
+    │ Total TBR = 0.900 + 0.080 = 0.980... shortfall!     │
     └─────────────────────────────────────────────────────┘
 
-    수정: Pb(n,2n)의 추가 중성자 → Li-6 반응 증가
-    실제 TBR = 0.900 + 0.080 + 0.180×(Li-6 포획 확률)
+    Correction: extra neutrons from Pb(n,2n) → more Li-6 reactions
+    Actual TBR = 0.900 + 0.080 + 0.180×(Li-6 capture probability)
             = 0.900 + 0.080 + 0.180 × 0.76
             = 0.900 + 0.080 + 0.137
             = 1.117
 
-    정밀 몬테카를로 시뮬레이션 결과 (MCNP/Serpent):
-      90% Li-6 농축: TBR = 1.15 ~ 1.20
-      설계 목표: TBR = 7/6 = 1.167
+    Precise Monte Carlo simulation results (MCNP/Serpent):
+      90% Li-6 enrichment: TBR = 1.15 ~ 1.20
+      Design target: TBR = 7/6 = 1.167
       → (n+μ)/n = 7/6 EXACT
 
-  TBR 마진:
-    TBR_min = 1.05 (삼중수소 붕괴 + 처리 손실 보상)
-    TBR_설계 = 1.167
-    마진 = 0.117 (12% 마진)
-    → 구조재 열화, 비균일 조사, 포트 관통 등 고려 시 충분
+  TBR margin:
+    TBR_min = 1.05 (compensates tritium decay + processing losses)
+    TBR_design = 1.167
+    Margin = 0.117 (12% margin)
+    → Sufficient given structural degradation, non-uniform irradiation, port penetrations
 
-  TBR 민감도:
-    Li-6 농축 80% → 70%: TBR 0.05 감소
-    블랭킷 Coverage 90% → 80%: TBR 0.10 감소
-    SiC → RAFM 강 변경: TBR 0.02 감소 (흡수 증가)
-    → 90% Li-6 + 90% 블랭킷 Coverage가 TBR > 1.1의 핵심
+  TBR sensitivity:
+    Li-6 enrichment 80% → 70%: TBR decreases 0.05
+    Blanket coverage 90% → 80%: TBR decreases 0.10
+    SiC → RAFM steel change: TBR decreases 0.02 (higher absorption)
+    → 90% Li-6 + 90% blanket coverage is the key to TBR > 1.1
 ```
 
-### 14.6 방사화 생성물 (Activation Products)
+### 14.6 Activation Products
 
 ```
-  14.1 MeV 중성자에 의한 구조재 활성화:
+  Structural material activation by 14.1 MeV neutrons:
 
-  SiC/SiC 복합재 (C=Z=6=n, Si=Z=14):
-    C-12(n,2n)C-11:    τ₁/₂ = 20 min (단수명)
-    C-12(n,p)B-12:     τ₁/₂ = 20 ms (극단수명)
-    Si-28(n,p)Al-28:   τ₁/₂ = 2.2 min (단수명)
-    Si-28(n,α)Mg-25:   안정 (비방사성)
-    → SiC 활성화 생성물은 대부분 수분~수시간 반감기
-    → 운전 정지 1일 후 접근 가능 수준으로 감쇠
-    → 장기 방사화: 거의 없음 (100년 이내 clearance)
+  SiC/SiC composite (C=Z=6=n, Si=Z=14):
+    C-12(n,2n)C-11:    τ₁/₂ = 20 min (short-lived)
+    C-12(n,p)B-12:     τ₁/₂ = 20 ms (ultra-short-lived)
+    Si-28(n,p)Al-28:   τ₁/₂ = 2.2 min (short-lived)
+    Si-28(n,α)Mg-25:   stable (non-radioactive)
+    → SiC activation products are mostly minutes to hours half-life
+    → Decays to approachable levels within 1 day after shutdown
+    → Long-term activation: almost none (clearance within 100 years)
 
-  RAFM 강 (F82H, 비교용):
+  RAFM steel (F82H, for comparison):
     Fe-56(n,p)Mn-56:   τ₁/₂ = 2.6 h
-    Fe-54(n,p)Mn-54:   τ₁/₂ = 312 d (중수명)
+    Fe-54(n,p)Mn-54:   τ₁/₂ = 312 d (medium-lived)
     Cr-50(n,γ)Cr-51:   τ₁/₂ = 27.7 d
     Mo-92(n,p)Nb-92m:  τ₁/₂ = 10.2 d
-    → RAFM 강은 수개월~수년 활성 → 300년 냉각 필요
-    → SiC 대비 활성화 수준 10-100배 높음
+    → RAFM steel stays active for months to years → needs 300 yr cooling
+    → Activation level 10-100x higher than SiC
 
-  텅스텐 갑옷:
+  Tungsten armor:
     W-186(n,γ)W-187:   τ₁/₂ = 24 h = J₂ h (!)
     W-184(n,γ)W-185:   τ₁/₂ = 75 d
     W-186(n,2n)W-185:  τ₁/₂ = 75 d
-    → W 활성화는 중간 수준, 주로 FW 갑옷에 국한
+    → W activation is intermediate, mainly confined to FW armor
 
-  DPA (Displacement Per Atom) 비율:
-    14.1 MeV 중성자에 의한 격자 손상:
+  DPA (Displacement Per Atom) rate:
+    Lattice damage from 14.1 MeV neutrons:
     SiC/SiC: ~20-30 DPA/FPY (Full Power Year)
-    RAFM 강: ~10-15 DPA/FPY
-    W 갑옷:  ~5-8 DPA/FPY
+    RAFM steel: ~10-15 DPA/FPY
+    W armor:  ~5-8 DPA/FPY
 
-    내방사선 한계:
-    SiC/SiC: 200 DPA → ~7-10 FPY 수명
-    RAFM 강: 80 DPA → ~5-8 FPY 수명
-    → SiC/SiC가 블랭킷 수명 2배 → 교체 주기 연장 → OPEX 절감
+    Radiation tolerance limit:
+    SiC/SiC: 200 DPA → ~7-10 FPY lifetime
+    RAFM steel: 80 DPA → ~5-8 FPY lifetime
+    → SiC/SiC doubles blanket lifetime → longer replacement interval → OPEX savings
 
-  핵융합 폐기물 분류 vs 핵분열:
-    | 특성 | 핵융합 (HEXA-FUSION) | 핵분열 (PWR) |
+  Fusion waste classification vs fission:
+    | Property | Fusion (HEXA-FUSION) | Fission (PWR) |
     |------|---------------------|-------------|
-    | 장반감기 핵종 | 없음 | Pu-239 (24,100년) |
-    | Clearance 시간 | SiC: ~100년, 강: ~300년 | ~100,000년 |
-    | 고준위 폐기물 | 없음 | 연간 ~20 ton (사용후연료) |
-    | 심층 처분 필요 | 불필요 | 필수 (심도 500m+) |
-    | 비확산 위험 | 없음 (Pu 생성 안함) | 높음 (Pu 분리 가능) |
+    | Long-lived nuclides | None | Pu-239 (24,100 yr) |
+    | Clearance time | SiC: ~100 yr, steel: ~300 yr | ~100,000 yr |
+    | High-level waste | None | ~20 ton/yr (spent fuel) |
+    | Deep disposal needed | No | Required (500m+ deep) |
+    | Proliferation risk | None (no Pu produced) | High (Pu separable) |
 ```
 
-### 14.7 차폐 두께 결정
+### 14.7 Shielding Thickness Determination
 
 ```
-  차폐 목표:
-    (1) TF 코일 중성자 플럭스 < 10⁹ n/cm²/s (초전도체 보호)
-    (2) TF 코일 누적 fluence < 10¹⁹ n/cm² (40년 수명)
-    (3) 생체 차폐: 건물 외부 선량률 < 10 μSv/h
+  Shielding targets:
+    (1) TF coil neutron flux < 10⁹ n/cm²/s (superconductor protection)
+    (2) TF coil cumulative fluence < 10¹⁹ n/cm² (40-year lifetime)
+    (3) Biological shield: dose rate outside building < 10 μSv/h
 
-  블랭킷 + 차폐 구성 (내→외):
+  Blanket + shield configuration (inner→outer):
 
-    | 층 | 두께 (cm) | 재질 | 역할 | 감쇠 인자 |
+    | Layer | Thickness (cm) | Material | Role | Attenuation |
     |----|----------|------|------|----------|
-    | FW | 1.5 | W+SiC | 플라즈마 대면 | ×0.95 |
-    | He 채널 | 3 | He | FW 냉각 | ×0.98 |
-    | SiC FCI | 1 | SiC | 전기절연 | ×0.98 |
-    | LiPb | 30 | Li₁₇Pb₈₃ | 증식+증배 | ×0.05 |
-    | 차폐 1 | 20 | WC | 고속n 감속 | ×0.02 |
-    | 차폐 2 | 20 | H₂O+SS | 열n 흡수 | ×0.01 |
-    | VV 벽 | 6 | SS316L(N) | 구조+차폐 | ×0.5 |
-    | 갭 | 5 | 진공 | 단열 | ×1.0 |
-    | 극저온 차폐 | 2 | Cu | 열복사 차단 | ×0.9 |
-    | **합계** | **~88.5** | | | **~10⁻⁸** |
+    | FW | 1.5 | W+SiC | Plasma-facing | ×0.95 |
+    | He channel | 3 | He | FW cooling | ×0.98 |
+    | SiC FCI | 1 | SiC | Electrical insulation | ×0.98 |
+    | LiPb | 30 | Li₁₇Pb₈₃ | Breeding+multiplication | ×0.05 |
+    | Shield 1 | 20 | WC | Fast-n moderation | ×0.02 |
+    | Shield 2 | 20 | H₂O+SS | Thermal-n absorption | ×0.01 |
+    | VV wall | 6 | SS316L(N) | Structure+shield | ×0.5 |
+    | Gap | 5 | Vacuum | Insulation | ×1.0 |
+    | Cryo shield | 2 | Cu | Thermal radiation block | ×0.9 |
+    | **Total** | **~88.5** | | | **~10⁻⁸** |
 
-  총 감쇠: ~10⁸ (=8 orders of magnitude)
-  FW 중성자 벽부하: ~1.5 MW/m² (= 4.7×10¹³ n/cm²/s at 14 MeV)
-  코일 위치 중성자 플럭스: ~5×10⁵ n/cm²/s (기준 10⁹의 1/2000)
-  → 충분한 마진 확보
+  Total attenuation: ~10⁸ (= 8 orders of magnitude)
+  FW neutron wall loading: ~1.5 MW/m² (= 4.7×10¹³ n/cm²/s at 14 MeV)
+  Neutron flux at coil location: ~5×10⁵ n/cm²/s (1/2000 of the 10⁹ limit)
+  → Ample margin secured
 
-  생체 차폐 (건물 콘크리트):
-    두께: 200 cm = phi × 100 cm
-    재질: 보통 콘크리트 (ρ=2.3 g/cm³) + 철근
-    감쇠: 추가 10⁴
-    건물 외부 선량률: < 0.1 μSv/h (기준의 1/100)
+  Biological shield (building concrete):
+    Thickness: 200 cm = phi × 100 cm
+    Material: ordinary concrete (ρ=2.3 g/cm³) + rebar
+    Attenuation: additional 10⁴
+    Dose rate outside building: < 0.1 μSv/h (1/100 of the limit)
 ```
 
 ---
 
-## 15. 삼중수소 자급 시스템 완전 설계
+## 15. Tritium Self-Sufficiency System Full Design
 
-### 15.1 삼중수소 순환 전체 흐름
+### 15.1 Overall Tritium Cycle Flow
 
 ```
   ┌──────────────────────────────────────────────────────────────────────┐
-  │                   삼중수소 자급 자족 시스템 (Tritium Self-Sufficiency)  │
+  │                   Tritium Self-Sufficiency System                    │
   │                                                                      │
   │  ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐         │
-  │  │ ① 증식   │→→→│ ② 추출   │→→→│ ③ 정제   │→→→│ ④ 저장   │         │
-  │  │ Breeding  │   │ Extraction│   │ Purify  │   │ Storage  │         │
-  │  │ 블랭킷    │   │ LiPb→He  │   │ Pd막    │   │ U-bed    │         │
-  │  │ Li-6+n→T │   │ 퍼지가스  │   │ 동위체분리│   │ 금속수소화│         │
+  │  │ (1) Breed │→→→│ (2) Extract│→→→│ (3) Purify│→→→│ (4) Store │         │
+  │  │ Breeding │   │ Extraction│   │ Purify   │   │ Storage  │         │
+  │  │ Blanket  │   │ LiPb→He  │   │ Pd film  │   │ U-bed    │         │
+  │  │ Li-6+n→T │   │ Purge gas│   │ Isotope  │   │ Metal    │         │
+  │  │          │   │          │   │ separate │   │ hydride  │         │
   │  └──────────┘   └──────────┘   └──────────┘   └────┬─────┘         │
   │       ↑                                              │              │
-  │       │              삼중수소 순환                     ↓              │
+  │       │           Tritium Recirculation               ↓              │
   │       │                                        ┌──────────┐         │
-  │  ┌──────────┐                                  │ ⑤ 혼합   │         │
-  │  │ ⑥ 귀환   │←←←←←←←←←←←←←←←←←←←←←←←←←←←←│ D-T Mix  │         │
-  │  │ Fueling  │   가스퍼핑 / 펠릿 / SMBI        │ 비율조절  │         │
-  │  │ 3방식=n/φ│                                  │ 50:50    │         │
+  │  ┌──────────┐                                  │ (5) Mix  │         │
+  │  │ (6) Return│←←←←←←←←←←←←←←←←←←←←←←←←←←←←│ D-T Mix  │         │
+  │  │ Fueling  │ Gas puff / Pellet / SMBI        │ Ratio    │         │
+  │  │ 3 ways=n/φ│                                 │ 50:50    │         │
   │  └──────────┘                                  └──────────┘         │
   │       │                                                             │
   │       ↓                                                             │
-  │  [플라즈마] → D + T → He-4 + n → 중성자 → 블랭킷 → ①              │
+  │  [Plasma] → D + T → He-4 + n → neutron → blanket → (1)              │
   └──────────────────────────────────────────────────────────────────────┘
 
-  단계 수: 6 = n EXACT (증식→추출→정제→저장→혼합→주입)
+  Step count: 6 = n EXACT (Breed → Extract → Purify → Store → Mix → Inject)
 ```
 
-### 15.2 삼중수소 추출 시스템
+### 15.2 Tritium Extraction System
 
 ```
-  블랭킷에서 생성된 삼중수소 추출 방법:
+  Tritium extraction methods from the blanket:
 
-  방법 A: He 퍼지 가스 추출 (기본 선택)
-    - LiPb 표면에 He 가스를 흘려 용존 T₂ 추출
-    - 퍼지 가스 유량: ~100 Nm³/h
-    - T₂ 농도 (퍼지 가스 중): ~10 ppm
-    - 추출 효율: ~80% (단일 패스)
-    - 장점: 단순, 저압, 연속 운전
-    - 단점: 대량 He 처리 필요
+  Method A: He purge gas extraction (primary choice)
+    - Flow He gas across the LiPb surface to extract dissolved T₂
+    - Purge gas flow rate: ~100 Nm³/h
+    - T₂ concentration (in purge gas): ~10 ppm
+    - Extraction efficiency: ~80% (single pass)
+    - Pros: simple, low pressure, continuous operation
+    - Cons: requires handling large volumes of He
 
-  방법 B: 진공 투과 추출 (보조)
-    - 고온 LiPb에서 T₂가 금속막을 통해 진공 측으로 투과
-    - 투과막: V-Cr-Ti 합금 (바나듐 기반)
-    - 온도: 500-700°C (투과 구동력)
-    - 추출 효율: ~60% (단일 패스)
+  Method B: Vacuum permeation extraction (secondary)
+    - T₂ permeates through a metal membrane from hot LiPb to vacuum side
+    - Permeation membrane: V-Cr-Ti alloy (vanadium-based)
+    - Temperature: 500-700°C (permeation driving force)
+    - Extraction efficiency: ~60% (single pass)
 
-  투과 장벽 (Permeation Barrier):
-    문제: T₂는 극히 작은 분자 → 금속 격자를 통해 투과
-    해결: Al₂O₃ 또는 Er₂O₃ 코팅 (투과 감소 인자 PRF > 1000)
-    적용 위치:
-      - IHX 2차측 (sCO₂로의 T 투과 방지)
-      - 배관 외벽 (환경 누설 방지)
-      - 진공용기 (VV) 내벽
-    PRF 목표: > 1000 (실증 필요, 현재 TRL 3-4)
+  Permeation Barrier:
+    Problem: T₂ is an extremely small molecule → permeates through metal lattices
+    Solution: Al₂O₃ or Er₂O₃ coating (Permeation Reduction Factor PRF > 1000)
+    Application locations:
+      - IHX secondary side (prevent T permeation into sCO₂)
+      - Piping outer walls (prevent environmental leakage)
+      - Vacuum vessel (VV) inner wall
+    PRF target: > 1000 (demonstration needed, currently TRL 3-4)
 ```
 
-### 15.3 삼중수소 정제 및 동위원소 분리
+### 15.3 Tritium Purification and Isotope Separation
 
 ```
-  단계 1: 불순물 제거
-    입력: He + T₂ + HT + HTO + 불순물 (N₂, O₂, CH₄)
-    반응기: 촉매 산화 → 물 형태로 전환
-    흡착: 분자체(molecular sieve)로 수분 제거
-    출력: 순수 He + T₂ + HT
+  Stage 1: Impurity removal
+    Input: He + T₂ + HT + HTO + impurities (N₂, O₂, CH₄)
+    Reactor: catalytic oxidation → convert to water form
+    Adsorption: molecular sieve for moisture removal
+    Output: pure He + T₂ + HT
 
-  단계 2: Pd-Ag 막 분리
-    Palladium-Silver (Pd₇₇Ag₂₃) 합금 막
-    수소 동위체만 선택적 투과 (He 차단)
-    운전 온도: 350-400°C
-    투과 선택성: >10,000 (H₂/He)
+  Stage 2: Pd-Ag membrane separation
+    Palladium-Silver (Pd₇₇Ag₂₃) alloy membrane
+    Selectively permeates hydrogen isotopes only (blocks He)
+    Operating temperature: 350-400°C
+    Permeation selectivity: >10,000 (H₂/He)
 
-  단계 3: TCAP (Thermal Cycling Absorption Process)
-    동위원소 분리 (D₂, DT, T₂, HT, HD, H₂)
-    Pd 컬럼의 온도 사이클링 (77K ↔ 200K)
-    분리 인자: ~1.5 per stage
-    단수: 12 = sigma (고순도 T₂ 회수)
-    출력: 99.5%+ 순도 T₂ 회수
+  Stage 3: TCAP (Thermal Cycling Absorption Process)
+    Isotope separation (D₂, DT, T₂, HT, HD, H₂)
+    Temperature cycling of a Pd column (77K ↔ 200K)
+    Separation factor: ~1.5 per stage
+    Number of stages: 12 = sigma (high-purity T₂ recovery)
+    Output: 99.5%+ purity T₂ recovered
 
-  처리 속도:
-    전량 처리 시간: < 24시간 = J₂ 시간
-    삼중수소 체류 시간 최소화 → 안전 + 재고 최소화
+  Throughput:
+    Total processing time: < 24 hours = J₂ hours
+    Minimize tritium residence time → safety + minimum inventory
 ```
 
-### 15.4 삼중수소 재고 관리 (Inventory Management)
+### 15.4 Tritium Inventory Management
 
 ```
-  삼중수소 재고 분포:
+  Tritium inventory distribution:
 
   ┌────────────────────────────────┬────────────┬─────────┐
-  │ 위치                          │ 재고 (g)    │ 비중    │
+  │ Location                       │ Inventory(g)│ Fraction│
   ├────────────────────────────────┼────────────┼─────────┤
-  │ 플라즈마 (운전 중)              │ <0.5      │ <0.1%   │
-  │ 블랭킷 LiPb (용존)             │ 5-10      │ 1%      │
-  │ 추출 시스템 (퍼지 가스)          │ 2-5       │ 0.5%    │
-  │ 정제 시스템 (TCAP 등)           │ 50-100    │ 10%     │
-  │ 저장 (U-bed)                   │ 500-800   │ 75%     │
-  │ 연료 주입 라인                  │ 5-10      │ 1%      │
-  │ 벽 체류 (FW 재료 내)            │ 20-50     │ 5%      │
-  │ 폐기물 (고체 폐기물 내)          │ 10-30     │ 3%      │
+  │ Plasma (during operation)       │ <0.5      │ <0.1%   │
+  │ Blanket LiPb (dissolved)        │ 5-10      │ 1%      │
+  │ Extraction system (purge gas)   │ 2-5       │ 0.5%    │
+  │ Purification system (TCAP etc.) │ 50-100    │ 10%     │
+  │ Storage (U-bed)                 │ 500-800   │ 75%     │
+  │ Fuel injection lines            │ 5-10      │ 1%      │
+  │ Wall retention (in FW material) │ 20-50     │ 5%      │
+  │ Waste (in solid waste)          │ 10-30     │ 3%      │
   ├────────────────────────────────┼────────────┼─────────┤
-  │ **총 site inventory**          │ **~600-1000**│ **100%** │
+  │ **Total site inventory**        │ **~600-1000**│ **100%** │
   └────────────────────────────────┴────────────┴─────────┘
 
-  저장 기술:
-    우라늄 수소화물 (U-bed): U + 3/2 T₂ → UT₃
-    → 상온에서 안정 저장, 가열 시 T₂ 방출
-    → 저장 밀도: ~100 g-T / kg-U
-    → U-bed 총량: ~10 kg U (비핵분열, 열화 우라늄 사용)
+  Storage technology:
+    Uranium hydride (U-bed): U + 3/2 T₂ → UT₃
+    → Stable storage at room temperature, releases T₂ when heated
+    → Storage density: ~100 g-T / kg-U
+    → U-bed total: ~10 kg U (non-fissile, depleted uranium used)
 
-  삼중수소 자연 붕괴:
-    반감기: 12.32 년 ≈ sigma = 12 CLOSE
-    연간 붕괴율: ~5.5%
-    재고 1 kg 기준: ~55 g/year 붕괴
-    붕괴 산물: He-3 (³He) + β⁻ (18.6 keV 최대)
-    He-3 축적 → 주기적 제거 필요 (연료 품질 유지)
+  Tritium natural decay:
+    Half-life: 12.32 years ≈ sigma = 12 CLOSE
+    Annual decay rate: ~5.5%
+    For 1 kg inventory: ~55 g/year decays
+    Decay product: He-3 (³He) + β⁻ (18.6 keV max)
+    He-3 accumulation → periodic removal required (maintain fuel quality)
 ```
 
-### 15.5 삼중수소 안전
+### 15.5 Tritium Safety
 
 ```
-  삼중수소 위험성:
-    방사선: β 방출체 (E_max = 18.6 keV, 평균 5.7 keV)
-    → 외부 피폭: 피부를 투과하지 못함 (사실상 무해)
-    → 내부 피폭: 흡입/경구 시 위험 (유기 결합 삼중수소 OBT)
-    생물학적 반감기:
-      HTO (삼중수수): ~10일 = sigma - phi 일 (CLOSE)
-      OBT (유기결합): ~40일
-    허용 농도 (작업장 공기): ~740 kBq/m³ (ICRP)
+  Tritium hazards:
+    Radiation: β emitter (E_max = 18.6 keV, average 5.7 keV)
+    → External exposure: cannot penetrate skin (essentially harmless)
+    → Internal exposure: hazardous via inhalation/ingestion (Organically Bound Tritium, OBT)
+    Biological half-lives:
+      HTO (tritiated water): ~10 days = sigma - phi days (CLOSE)
+      OBT (organically bound): ~40 days
+    Allowable concentration (workplace air): ~740 kBq/m³ (ICRP)
 
-  누설 시나리오:
-    Scenario 1: 블랭킷 배관 파손 → LiPb 내 T 방출
-      → LiPb는 비휘발성 → 확산 느림 → 격납 내 포집
-      → 비상 정화 시스템 가동 (활성탄 + 분자체)
+  Leak scenarios:
+    Scenario 1: blanket pipe breach → T release within LiPb
+      → LiPb is non-volatile → slow diffusion → captured within containment
+      → Activate emergency cleanup system (activated carbon + molecular sieve)
 
-    Scenario 2: 처리 시스템 글러브박스 파손
-      → 이중 격납 (글러브박스 + 처리동 건물)
-      → 건물 음압 유지 (부압 -50 Pa)
-      → 배기 정화: 촉매 산화 + 건조기 (T→HTO→흡착)
+    Scenario 2: processing system glovebox breach
+      → Double containment (glovebox + processing building)
+      → Building under negative pressure (-50 Pa)
+      → Exhaust cleanup: catalytic oxidation + dryer (T → HTO → adsorption)
 
-    Scenario 3: 저장 U-bed 과열
-      → T₂ 대량 방출 가능 → 비상 격납 활성화
-      → U-bed는 수동 안전 (냉각 시 재흡수)
+    Scenario 3: storage U-bed overheat
+      → Possible large T₂ release → activate emergency containment
+      → U-bed is passively safe (reabsorbs when cooled)
 
-  방호 원칙:
-    격납 1 (글러브박스/배관): 1차 격벽
-    격납 2 (처리동 건물): 2차 격벽, 음압, HEPA+T 정화
-    환경 방출 한도: < 1 g T/year (대부분 HTO 형태)
-    → 1 g T의 방사능: ~360 TBq → 연간 허용 수준
+  Protection principles:
+    Containment 1 (glovebox/piping): primary barrier
+    Containment 2 (processing building): secondary barrier, negative pressure, HEPA + T cleanup
+    Environmental release limit: < 1 g T/year (mostly as HTO)
+    → Activity of 1 g T: ~360 TBq → annual allowable level
 
-  삼중수소 관련 n=6 연결:
-    T 질량수: A = 3 = n/phi = n/φ EXACT
-    T 반감기: 12.32년 ≈ sigma = 12 CLOSE
-    T 양성자: Z = 1 = mu EXACT
-    T 중성자: N = 2 = phi EXACT
-    T 결합에너지: 8.48 MeV ≈ sigma - tau = 8 CLOSE
-    T β에너지 (max): 18.6 keV ≈ 3n = 18 CLOSE
+  Tritium-related n=6 links:
+    T mass number: A = 3 = n/phi = n/φ EXACT
+    T half-life: 12.32 years ≈ sigma = 12 CLOSE
+    T protons: Z = 1 = mu EXACT
+    T neutrons: N = 2 = phi EXACT
+    T binding energy: 8.48 MeV ≈ sigma - tau = 8 CLOSE
+    T β energy (max): 18.6 keV ≈ 3n = 18 CLOSE
 ```
 
-### 15.6 삼중수소 초기 재고 및 연간 소비
+### 15.6 Tritium Startup Inventory and Annual Consumption
 
 ```
-  초기 재고 (Startup Inventory):
-    필요량: ~2 kg
-    출처:
-      (1) CANDU 중수로 부산물: 전세계 연간 ~2 kg 생산 가능
-          (Canada AECL, 한수원 월성)
-      (2) 군사 재고: 미/영/프 보유분 일부 전용 가능
-      (3) 가속기 생산: Li-6 타겟 + 중성자 → T (소량)
-    비용: ~$30,000/g → 2 kg = ~$60M
-    → CAPEX의 ~0.75% (관리 가능)
+  Startup Inventory:
+    Required: ~2 kg
+    Sources:
+      (1) CANDU heavy-water reactor by-product: ~2 kg/year worldwide production
+          (Canada AECL, KHNP Wolsong)
+      (2) Military stockpile: partial diversion of US/UK/FR holdings possible
+      (3) Accelerator production: Li-6 target + neutrons → T (small quantity)
+    Cost: ~$30,000/g → 2 kg = ~$60M
+    → ~0.75% of CAPEX (manageable)
 
-    문제: 전세계 T 생산은 ~2 kg/year
-    → 다수의 핵융합로 동시 시동 시 T 부족 ("삼중수소 병목")
-    → 1세대 핵융합로에서 잉여 T를 증식하여 2세대에 공급 필수
+    Issue: worldwide T production is ~2 kg/year
+    → Simultaneous startup of multiple fusion reactors creates T shortage ("tritium bottleneck")
+    → First-generation reactors must breed surplus T and supply it to the next generation
 
-  연간 소비:
-    D-T 반응 소비: 55.8 kg T per GW·year (물리 상수)
-    HEXA-FUSION 열출력: 0.4 GWth
-    연간 가동: 50% → 0.2 GW·year
-    연간 T 소비: 55.8 × 0.2 = 11.2 kg/year
+  Annual consumption:
+    D-T reaction consumption: 55.8 kg T per GW·year (physical constant)
+    HEXA-FUSION thermal output: 0.4 GWth
+    Annual availability: 50% → 0.2 GW·year
+    Annual T consumption: 55.8 × 0.2 = 11.2 kg/year
 
-    이것을 TBR=7/6으로 증식:
-    연간 T 생산: 11.2 × 7/6 = 13.1 kg/year
-    잉여: 13.1 - 11.2 = 1.9 kg/year
-    → 붕괴 보상 (1 kg × 5.5% = 0.06 kg) 후: 1.8 kg/year 순잉여
-    → 약 1년에 1대의 신규 핵융합로 시동 재고 공급 가능
+    Breeding it at TBR=7/6:
+    Annual T production: 11.2 × 7/6 = 13.1 kg/year
+    Surplus: 13.1 - 11.2 = 1.9 kg/year
+    → After decay compensation (1 kg × 5.5% = 0.06 kg): 1.8 kg/year net surplus
+    → Can supply the startup inventory of ~1 new fusion reactor per year
 
-  D 소비:
-    연간: ~7.5 kg D per GW·year × 0.2 = 1.5 kg/year
-    해수 중수소 (33 g/m³): 45 m³/year = 45 ton 해수
-    → 사실상 무한 (해수 1.4×10¹⁸ m³)
+  D consumption:
+    Annual: ~7.5 kg D per GW·year × 0.2 = 1.5 kg/year
+    Seawater deuterium (33 g/m³): 45 m³/year = 45 ton seawater
+    → Essentially unlimited (seawater 1.4×10¹⁸ m³)
 ```
 
 ---
 
-## 16. Cross-DSE 심화 — 6개 도메인 교차
+## 16. Cross-DSE Deep Dive — Six-Domain Crossings
 
-HEXA-FUSION은 단독 발전소가 아니라 6개(=n) 도메인과의 교차 최적화를 통해 시스템 시너지를 극대화한다. 각 도메인 교차에서 구체적 기술 시너지, 공유 n=6 상수, 통합 최적화 잠재력을 분석한다.
+HEXA-FUSION is not a standalone power plant; it maximizes system synergy through cross-optimization with six (=n) domains. For each domain crossing we analyze concrete technical synergies, shared n=6 constants, and integrated optimization potential.
 
-### 16.1 Fusion x Superconductor: HTS 자석 최적화
+### 16.1 Fusion x Superconductor: HTS Magnet Optimization
 
 ```
-  교차 규모: 1M+ Cross-DSE 조합 (fusion.toml × superconductor.toml)
-  DSE 현황: 양 도메인 done (dse-map.toml 확인)
+  Crossing scale: 1M+ Cross-DSE combinations (fusion.toml × superconductor.toml)
+  DSE status: both domains done (per dse-map.toml)
 
-  핵심 시너지:
-    HEXA-FUSION TF 코일 = HTS REBCO (Y-Ba-Cu-O)
-    → 초전도체 DSE의 최적 재료가 핵융합 자석의 최적해와 일치
+  Core synergy:
+    HEXA-FUSION TF coils = HTS REBCO (Y-Ba-Cu-O)
+    → The optimal material from the superconductor DSE coincides with the best fusion magnet
 
-  공유 n=6 상수:
-    | 상수 | 초전도 의미 | 핵융합 의미 | 값 |
+  Shared n=6 constants:
+    | Constant | Superconductor meaning | Fusion meaning | Value |
     |------|-----------|-----------|---|
-    | sigma=12 | BCS 비열 점프 | B_T 자기장 | 12 |
-    | n=6 | Cu-O 면의 배위수 CN=6 | PF 코일 수 | 6 |
-    | J₂=24 | YBCO 단위셀 원자 수 | 총 가열 전력 MW | 24 |
-    | phi=2 | 쿠퍼쌍 전자 수 | 부반경 a=2m | 2 |
-    | 3n=18 | -- | TF 코일 수 | 18 |
+    | sigma=12 | BCS specific-heat jump | B_T field | 12 |
+    | n=6 | Cu-O plane coordination CN=6 | PF coil count | 6 |
+    | J₂=24 | YBCO unit-cell atom count | Total heating power MW | 24 |
+    | phi=2 | Cooper-pair electron count | Minor radius a=2m | 2 |
+    | 3n=18 | -- | TF coil count | 18 |
 
-  통합 최적화:
-    (1) 코일 운전 온도: 20K (HTS → LTS 대비 열마진 5배)
-        → 극저온 전력 12 MW → 50% 절감 (ITER 25MW 대비)
-    (2) B_max=18T at 코일 → B_T=12T at 플라즈마
-        → REBCO I_c margin: J_c(20K, 18T) = 400 A/mm² (충분)
-    (3) 12T = sigma → R0=6m에서 최적 베타 (beta_N ~2.5)
-        → 고자기장 + 중형 크기 = Q>10의 가장 효율적 경로
+  Integrated optimization:
+    (1) Coil operating temperature: 20K (HTS → 5x more thermal margin vs LTS)
+        → Cryo power 12 MW → 50% savings (vs ITER 25MW)
+    (2) B_max=18T at coil → B_T=12T at plasma
+        → REBCO I_c margin: J_c(20K, 18T) = 400 A/mm² (sufficient)
+    (3) 12T = sigma → optimal beta at R0=6m (beta_N ~2.5)
+        → High field + medium size = most efficient path to Q>10
 
-  SPARC 검증 일정:
-    SPARC (CFS/MIT): 2025-2026 TF 코일 12.2T 시험
-    → HEXA-FUSION 12T 자석의 직접적 TRL 상승
-    → 시험 결과에 따라 HEXA-FUSION 설계 파라미터 확정
+  SPARC validation timeline:
+    SPARC (CFS/MIT): 2025-2026 TF coil 12.2T test
+    → Direct TRL boost for the HEXA-FUSION 12T magnet
+    → HEXA-FUSION design parameters to be finalized based on test results
 ```
 
-### 16.2 Fusion x Battery: 48 MWh BESS 펄스 평활화
+### 16.2 Fusion x Battery: 48 MWh BESS Pulse Smoothing
 
 ```
-  핵심 문제:
-    핵융합로는 시동/셧다운/디스럽션 시 출력 과도기 발생
-    → 전력망에 ~200 MW 급변동 → 그리드 불안정
+  Core problem:
+    Fusion reactors experience output transients at startup/shutdown/disruption
+    → ~200 MW rapid swings on the grid → grid instability
 
-  BESS (Battery Energy Storage System) 설계:
-    총 용량: 48 MWh = sigma × tau = σ·τ MWh EXACT
-    출력: 48 MW (1C 방전 시)
-    전압: 48V 모듈 = σ·τ V (BT-60 DC power chain)
-    셀 구성: 6S = n (직렬 6셀, LFP 3.2V × 6 = 19.2V → 48V 승압)
-    모듈 수: 1,000+ (병렬)
-    화학: LFP (LiFePO₄, 안전 최우선)
-    → BT-43: CN=6 (LFP의 Fe 팔면체 배위수 = 6)
+  BESS (Battery Energy Storage System) design:
+    Total capacity: 48 MWh = sigma × tau = σ·τ MWh EXACT
+    Output: 48 MW (at 1C discharge)
+    Voltage: 48V modules = σ·τ V (BT-60 DC power chain)
+    Cell configuration: 6S = n (6 cells in series, LFP 3.2V × 6 = 19.2V → boosted to 48V)
+    Module count: 1,000+ (parallel)
+    Chemistry: LFP (LiFePO₄, safety-first)
+    → BT-43: CN=6 (LFP Fe octahedral coordination = 6)
 
-  기능 매트릭스:
-    | 기능 | 지속 시간 | BESS 출력 | 비고 |
+  Function matrix:
+    | Function | Duration | BESS output | Notes |
     |------|----------|----------|------|
-    | 시동 전력 | ~10분 | 48 MW | 극저온+가열 부트 |
-    | 펄스 평활화 | ~1시간 | 10-20 MW | 맥동 운전 보상 |
-    | 디스럽션 대응 | ~10초 | 48 MW (피크) | 급속 출력 보상 |
-    | 주파수 조정 | 연속 | ±5 MW | AGC 보조 |
-    | 비상 셧다운 | ~30분 | 20 MW | 안전 시스템 전력 |
-    | Black start | ~1시간 | 48 MW | 완전 정전 후 재시동 |
+    | Startup power | ~10 min | 48 MW | Cryo + heating boot |
+    | Pulse smoothing | ~1 h | 10-20 MW | Pulsed-operation compensation |
+    | Disruption response | ~10 s | 48 MW (peak) | Fast output compensation |
+    | Frequency regulation | continuous | ±5 MW | AGC support |
+    | Emergency shutdown | ~30 min | 20 MW | Safety system power |
+    | Black start | ~1 h | 48 MW | Restart after total blackout |
 
-  공유 n=6 상수:
-    48 MWh = sigma × tau (에너지 용량)
-    48V = sigma × tau (모듈 전압)
-    6S = n (셀 직렬수)
-    CN=6 (LFP 결정 구조)
-    → 4개 상수가 battery-architecture DSE와 직접 교차
+  Shared n=6 constants:
+    48 MWh = sigma × tau (energy capacity)
+    48V = sigma × tau (module voltage)
+    6S = n (cells in series)
+    CN=6 (LFP crystal structure)
+    → 4 constants cross directly with the battery-architecture DSE
 ```
 
-### 16.3 Fusion x Solar: 하이브리드 청정에너지 파크
+### 16.3 Fusion x Solar: Hybrid Clean-Energy Park
 
 ```
-  개념:
-    핵융합 200 MWe (기저부하, 24h) + 태양광 100 MWp (피크, 6h/day)
-    → 연간 ~1,026 GWh 청정 에너지
+  Concept:
+    Fusion 200 MWe (baseload, 24h) + solar 100 MWp (peaking, 6h/day)
+    → ~1,026 GWh clean energy per year
 
-  공유 인프라:
+  Shared infrastructure:
     ┌──────────────────────────────────────────────────────┐
-    │          하이브리드 청정에너지 파크 레이아웃             │
+    │          Hybrid Clean-Energy Park Layout              │
     │                                                       │
     │  ┌──────────────────┐   ┌─────────────────────────┐  │
-    │  │ HEXA-FUSION      │   │ 태양광 어레이 (20 ha)    │  │
+    │  │ HEXA-FUSION      │   │ Solar array (20 ha)      │  │
     │  │ 200 MWe          │   │ 100 MWp                 │  │
-    │  │ (20 ha 부지)      │   │ 6-junction tandem       │  │
-    │  └────────┬─────────┘   │ n=6 정션 EXACT          │  │
+    │  │ (20 ha site)      │   │ 6-junction tandem       │  │
+    │  └────────┬─────────┘   │ n=6 junctions EXACT       │  │
     │           │              └──────────┬──────────────┘  │
     │           ▼                         ▼                  │
     │  ┌──────────────────────────────────────────────────┐ │
-    │  │            공유 변전소 (345kV)                     │ │
-    │  │  + 48 MWh BESS (fusion 펄스 + solar 간헐성 보상)  │ │
-    │  │  + 전력 조절기 (출력 합산 + 그리드 인터페이스)      │ │
+    │  │            Shared substation (345kV)              │ │
+    │  │  + 48 MWh BESS (fusion pulse + solar intermittency)│ │
+    │  │  + Power conditioner (summation + grid interface) │ │
     │  └──────────────────────────────────────────────────┘ │
     │                      │                                 │
-    │                      ▼ 345kV AC 또는 HVDC ±500kV      │
-    │                  [전력망]                               │
+    │                      ▼ 345kV AC or HVDC ±500kV         │
+    │                  [Power grid]                          │
     └──────────────────────────────────────────────────────┘
 
-  공유 n=6 상수:
-    60 Hz 그리드: sigma × sopfr (BT-62)
-    6-junction tandem: n=6 정션 (solar DSE 최적해)
+  Shared n=6 constants:
+    60 Hz grid: sigma × sopfr (BT-62)
+    6-junction tandem: n=6 junctions (solar DSE optimum)
     48 MWh BESS: sigma × tau
-    345 kV ≈ 350 ≈ n × sopfr × sigma (근사)
+    345 kV ≈ 350 ≈ n × sopfr × sigma (approx.)
 
-  시너지 효과:
-    (1) 기저부하(핵융합) + 피크부하(태양광) → 부하 추종 불필요
-    (2) BESS가 양쪽 간헐성/과도기 모두 보상
-    (3) 변전소, 송전선, 제어실 공유 → CAPEX 15-20% 절감
-    (4) 인력 공유: 24h 운전팀이 양 시설 관리
-    (5) 토지 효율: 핵융합 부지 여유 공간에 태양광 설치
+  Synergy effects:
+    (1) Baseload (fusion) + peaking (solar) → no load-following required
+    (2) BESS compensates both intermittency and transients
+    (3) Shared substation, transmission lines, control room → 15-20% CAPEX savings
+    (4) Shared personnel: 24h operations team manages both facilities
+    (5) Land efficiency: install solar on spare fusion site area
 ```
 
-### 16.4 Fusion x Chip: 플라즈마 제어 SoC (HEXA-P)
+### 16.4 Fusion x Chip: Plasma-Control SoC (HEXA-P)
 
 ```
-  플라즈마 제어의 극한 요구사항:
-    수직 안정성 제어: < 1 ms 응답 (VDE 방지)
-    MHD 모드 감지: < 10 ms (NTM, 잠금 모드)
-    디스럽션 예측: 30 ms 전 경보 (AI 기반)
-    센서 채널: ~1,000 (자기, 온도, 분광, 중성자)
-    액추에이터: CS/PF 전원 6+6=12=sigma, 가열 3=n/phi 시스템
+  Extreme plasma-control requirements:
+    Vertical stability control: < 1 ms response (prevent VDE)
+    MHD mode detection: < 10 ms (NTM, locked mode)
+    Disruption prediction: alert 30 ms in advance (AI-based)
+    Sensor channels: ~1,000 (magnetic, temperature, spectroscopic, neutron)
+    Actuators: CS/PF power supplies 6+6=12=sigma, heating 3=n/phi systems
 
-  HEXA-P 플라즈마 제어 SoC 사양:
-    | 사양 | 값 | n=6 | chip DSE 연결 |
+  HEXA-P plasma-control SoC specifications:
+    | Spec | Value | n=6 | chip DSE link |
     |------|---|-----|-------------|
     | Processing Elements | 144 | sigma²=144 | BT-90 SM=φ×K₆ |
-    | On-chip SRAM | 12 MB | sigma | HBM 인터페이스 불필요 |
-    | AI 코어 (NPU) | 6 | n | disruption predictor |
-    | 제어 채널 출력 | 12 | sigma | CS(6)+PF(6) 전원 |
-    | ADC 입력 | 24 | J₂ | 상/적도/하 포트 신호 |
-    | 클럭 주파수 | 1.2 GHz | sigma/10 | 1ms 이내 제어 루프 |
-    | 공정 | TSMC N3E | -- | chip DSE 후보 |
-    | 패키지 | 방사선 내성 | -- | Diamond interposer 가능 |
+    | On-chip SRAM | 12 MB | sigma | No HBM interface needed |
+    | AI cores (NPU) | 6 | n | disruption predictor |
+    | Control channel outputs | 12 | sigma | CS(6)+PF(6) supplies |
+    | ADC inputs | 24 | J₂ | Upper/equatorial/lower port signals |
+    | Clock frequency | 1.2 GHz | sigma/10 | <1ms control loop |
+    | Process | TSMC N3E | -- | chip DSE candidate |
+    | Package | Radiation-hardened | -- | Diamond interposer possible |
 
-  Diamond 방사선 내성 센서 (BT-93: Carbon Z=6):
-    Diamond (C, Z=6=n): 방사선 환경에서 최적의 센서 소재
-    - 높은 밴드갭: 5.47 eV → 암전류 극소
-    - 방사선 내성: 10¹⁶ n/cm² (SiC 대비 10배)
-    - 열전도: 2,200 W/m·K (Cu의 5배)
-    - 중성자 검출: C-12(n,α)Be-9 반응
-    - 감마선 검출: 낮은 Z → 낮은 광전 흡수 → Compton 우위
+  Diamond radiation-tolerant sensors (BT-93: Carbon Z=6):
+    Diamond (C, Z=6=n): optimal sensor material in radiation environments
+    - High band gap: 5.47 eV → minimal dark current
+    - Radiation tolerance: 10¹⁶ n/cm² (10x SiC)
+    - Thermal conductivity: 2,200 W/m·K (5x Cu)
+    - Neutron detection: C-12(n,α)Be-9 reaction
+    - Gamma detection: low Z → low photoelectric absorption → Compton dominates
 
-  통합 최적화:
-    HEXA-P SoC + Diamond 센서 = 완전 방사선 내성 제어 시스템
-    → 핵융합 특화 반도체 생태계 (chip DSE × fusion DSE)
+  Integrated optimization:
+    HEXA-P SoC + Diamond sensors = fully radiation-tolerant control system
+    → Fusion-specific semiconductor ecosystem (chip DSE × fusion DSE)
 ```
 
-### 16.5 Fusion x Material Synthesis: First Wall 소재 (SiC, BT-93)
+### 16.5 Fusion x Material Synthesis: First Wall Material (SiC, BT-93)
 
 ```
-  First Wall + 블랭킷 구조재:
+  First Wall + blanket structural material:
     SiC/SiC CMC (Ceramic Matrix Composite)
-    → Si(Z=14) + C(Z=6=n) → Carbon Z=6 보편성 (BT-93)
+    → Si(Z=14) + C(Z=6=n) → Carbon Z=6 universality (BT-93)
 
-  SiC가 핵융합에 최적인 이유:
-    | 특성 | SiC/SiC | RAFM 강 | W | n=6 연결 |
+  Why SiC is optimal for fusion:
+    | Property | SiC/SiC | RAFM steel | W | n=6 link |
     |------|---------|---------|---|---------|
-    | 운전 온도 상한 | 1000°C | 550°C | 1200°C | -- |
-    | DPA 한계 | 200 | 80 | 50 | -- |
-    | 활성화 반감기 | <100yr | <300yr | ~1000yr | -- |
-    | C 원자번호 | Z=6=n | -- | -- | EXACT |
-    | 배위수 CN | 4=tau | 8=σ-τ | 8=σ-τ | tau EXACT |
-    | 열전도 (방사후) | 20 W/mK | 25 W/mK | 80 W/mK | -- |
-    | MHD 호환 | 우수(절연체) | 불량(도체) | 불량 | FCI 가능 |
+    | Max operating temp | 1000°C | 550°C | 1200°C | -- |
+    | DPA limit | 200 | 80 | 50 | -- |
+    | Activation half-life | <100yr | <300yr | ~1000yr | -- |
+    | C atomic number | Z=6=n | -- | -- | EXACT |
+    | Coordination CN | 4=tau | 8=σ-τ | 8=σ-τ | tau EXACT |
+    | Thermal conductivity (post-irr.) | 20 W/mK | 25 W/mK | 80 W/mK | -- |
+    | MHD compatibility | Excellent (insulator) | Poor (conductor) | Poor | FCI possible |
 
-  Material Synthesis DSE 연결:
-    material-synthesis DSE (3,600 조합)에서 SiC는 Level 0 "Element" 최적 후보
-    Carbon Z=6 → 다이아몬드, 그래핀, SiC, C 복합재 모두 Z=6 기반
-    → BT-85 (Carbon Z=6 물질합성 보편성): 핵융합 FW에서도 확인
+  Material Synthesis DSE link:
+    In the material-synthesis DSE (3,600 combinations), SiC is the Level 0 "Element" optimum
+    Carbon Z=6 → diamond, graphene, SiC, C composites all Z=6 based
+    → BT-85 (Carbon Z=6 materials-synthesis universality): also confirmed in fusion FW
 
-  SiC/SiC 제조 (BT-86 결정 배위수 CN=6):
-    CVI (Chemical Vapor Infiltration) 공정:
-      SiC 섬유 프리폼 + CH₃SiCl₃ → SiC 매트릭스
-      온도: ~1000°C, 압력: ~1 kPa
-      β-SiC 결정: 면심입방, Si-C 결합각 109.5°, CN=4=tau
-    → 블랭킷 모듈당 SiC/SiC 사용량: ~2 ton
-    → 12 모듈(=sigma) × 2 ton = 24 ton = J₂ ton SiC/SiC 소요
+  SiC/SiC manufacturing (BT-86 crystal coordination CN=6):
+    CVI (Chemical Vapor Infiltration) process:
+      SiC fiber preform + CH₃SiCl₃ → SiC matrix
+      Temperature: ~1000°C, pressure: ~1 kPa
+      β-SiC crystal: FCC, Si-C bond angle 109.5°, CN=4=tau
+    → SiC/SiC usage per blanket module: ~2 ton
+    → 12 modules (=sigma) × 2 ton = 24 ton = J₂ ton SiC/SiC required
 ```
 
-### 16.6 Fusion x Grid: 60Hz/50Hz 연결 및 HVDC 송전 (BT-62, BT-68)
+### 16.6 Fusion x Grid: 60Hz/50Hz Interconnection and HVDC Transmission (BT-62, BT-68)
 
 ```
-  발전소 → 전력망 인터페이스:
+  Power plant → grid interface:
 
-  주파수 연결 (BT-62):
-    60 Hz = sigma × sopfr = 12 × 5 EXACT (북미, 한국, 일본 동부)
-    50 Hz = sopfr × (sigma-phi) = 5 × 10 EXACT (유럽, 중국, 일본 서부)
-    비율: 60/50 = 6/5 = n/sopfr = 1.2 = PUE (BT-74)
+  Frequency interconnection (BT-62):
+    60 Hz = sigma × sopfr = 12 × 5 EXACT (North America, Korea, East Japan)
+    50 Hz = sopfr × (sigma-phi) = 5 × 10 EXACT (Europe, China, West Japan)
+    Ratio: 60/50 = 6/5 = n/sopfr = 1.2 = PUE (BT-74)
 
-  HVDC 송전 (BT-68):
-    핵융합 발전소는 대용량(200 MW+) → 장거리 송전 시 HVDC 최적
-    
-    HVDC 전압 래더 (BT-68):
+  HVDC transmission (BT-68):
+    Fusion plants are high capacity (200 MW+) → HVDC optimal for long-distance transmission
+
+    HVDC voltage ladder (BT-68):
       ±500 kV = sopfr × (sigma-phi)² = 5 × 100 EXACT
       ±800 kV = (sigma-tau) × (sigma-phi)² = 8 × 100 EXACT
       ±1100 kV = (sigma-mu) × (sigma-phi)² = 11 × 100 EXACT
 
-    HEXA-FUSION 기본 선택: ±500 kV VSC-HVDC
-      용량: 200 MW
-      변환 효율: ~97%
-      전송 손실: ~3%/1000km
-      해저/장거리 적합
+    HEXA-FUSION baseline choice: ±500 kV VSC-HVDC
+      Capacity: 200 MW
+      Conversion efficiency: ~97%
+      Transmission loss: ~3%/1000km
+      Suited for subsea/long-distance
 
-  AC 연결 (대안):
-    220 kV 또는 345 kV 변전소 직접 연결
-    적합: 수요지 인근 입지 (송전 거리 <100 km)
-    GIS (Gas Insulated Switchgear): 6 = n 베이 구성
+  AC interconnection (alternative):
+    Direct connection to 220 kV or 345 kV substation
+    Suited for: sites near demand (transmission distance < 100 km)
+    GIS (Gas Insulated Switchgear): 6 = n bay configuration
 
-  그리드 안정화 기여:
-    (1) 관성 응답: 동기 발전기 회전 관성 (H ~6s)
-    (2) AGC (자동 발전 제어): 출력 ±10% 조절
-    (3) 무효 전력 공급: 역률 0.95 = 1-1/(J₂-τ) (BT-74)
-    (4) Black start 능력: BESS 48 MWh로 자체 재시동
+  Grid-stabilization contributions:
+    (1) Inertial response: synchronous-generator rotating inertia (H ~6s)
+    (2) AGC (Automatic Generation Control): ±10% output modulation
+    (3) Reactive-power supply: power factor 0.95 = 1-1/(J₂-τ) (BT-74)
+    (4) Black-start capability: self-restart via 48 MWh BESS
     (5) THD < 5% = sopfr% (BT-74)
-    (6) 주파수 조정: ±0.05 Hz 이내 유지
+    (6) Frequency regulation: hold within ±0.05 Hz
 
-  공유 n=6 상수 요약:
-    | 상수 | 그리드 의미 | 핵융합 의미 |
+  Shared n=6 constant summary:
+    | Constant | Grid meaning | Fusion meaning |
     |------|-----------|-----------|
-    | 60=σ·sopfr | 그리드 주파수 Hz | 연간 D₂ 소비 kg |
-    | 50=sopfr·(σ-φ) | 대안 주파수 Hz | -- |
-    | ±500kV=sopfr·(σ-φ)² | HVDC 전압 | -- |
-    | 0.95=1-1/(J₂-τ) | 역률 | top-p (AI BT-42) |
-    | 5%=sopfr% | THD 한도 | beta_plasma% |
-    | PUE=1.2=σ/(σ-φ) | 60/50 비율 | -- |
+    | 60=σ·sopfr | Grid frequency Hz | Annual D₂ consumption kg |
+    | 50=sopfr·(σ-φ) | Alt. frequency Hz | -- |
+    | ±500kV=sopfr·(σ-φ)² | HVDC voltage | -- |
+    | 0.95=1-1/(J₂-τ) | Power factor | top-p (AI BT-42) |
+    | 5%=sopfr% | THD limit | beta_plasma% |
+    | PUE=1.2=σ/(σ-φ) | 60/50 ratio | -- |
 ```
 
 ---
 
-## 17. 방사선 안전 및 폐기물 관리
+## 17. Radiation Safety and Waste Management
 
-### 17.1 중성자 활성화 계산 (DPA Rate)
+### 17.1 Neutron Activation Calculation (DPA Rate)
 
 ```
-  DPA (Displacement Per Atom) 상세 계산:
+  DPA (Displacement Per Atom) detailed calculation:
 
-  14.1 MeV 중성자 벽부하 (Neutron Wall Loading):
-    P_fus = 400 MW, 중성자 에너지 분율 = 80%
+  14.1 MeV Neutron Wall Loading:
+    P_fus = 400 MW, neutron energy fraction = 80%
     P_n = 320 MW
-    플라즈마 표면적: S_p ≈ 680 m²
+    Plasma surface area: S_p ≈ 680 m²
     NWL = P_n / S_p = 320 / 680 ≈ 0.47 MW/m²
 
-  참고: DEMO 목표 NWL = 1-2 MW/m², ITER ~0.5 MW/m²
-  → HEXA-FUSION은 보수적 NWL (초기 운전)
+  Reference: DEMO target NWL = 1-2 MW/m², ITER ~0.5 MW/m²
+  → HEXA-FUSION is conservative NWL (early operation)
 
-  DPA 계산:
-    NWL 1 MW/m² → ~10 DPA/FPY (SiC 기준)
+  DPA calculation:
+    NWL 1 MW/m² → ~10 DPA/FPY (SiC baseline)
     HEXA-FUSION 0.47 MW/m² → ~4.7 DPA/FPY
 
-    구조재별 연간 DPA:
-    | 구조재 | DPA/FPY | 한계 DPA | 수명 (FPY) | 교체 주기 |
+    Annual DPA by structural material:
+    | Material | DPA/FPY | DPA limit | Lifetime (FPY) | Replacement cycle |
     |--------|---------|---------|-----------|----------|
-    | SiC/SiC (FW) | 4.7 | 200 | ~42 | ~블랭킷 전수명 |
-    | SiC/SiC (blanket) | 3.0 | 200 | ~66 | 교체 불필요 |
-    | RAFM 강 (비교) | 4.7 | 80 | ~17 | ~8년 |
-    | W 갑옷 | 2.0 | 50 | ~25 | ~12년 |
-    | SS316L (VV) | 0.1 | 10 | ~100 | 교체 불필요 |
+    | SiC/SiC (FW) | 4.7 | 200 | ~42 | ~blanket full life |
+    | SiC/SiC (blanket) | 3.0 | 200 | ~66 | No replacement |
+    | RAFM steel (comparison) | 4.7 | 80 | ~17 | ~8 years |
+    | W armor | 2.0 | 50 | ~25 | ~12 years |
+    | SS316L (VV) | 0.1 | 10 | ~100 | No replacement |
 
-    가용률 50% 기준:
+    At 50% availability:
     FPY = calendar years × 0.5
-    SiC FW 수명: ~42 FPY = ~84 calendar years (발전소 수명 40년 >> 충분)
-    W 갑옷 수명: ~25 FPY = ~50 calendar years (충분)
+    SiC FW lifetime: ~42 FPY = ~84 calendar years (plant life 40 yr >> sufficient)
+    W armor lifetime: ~25 FPY = ~50 calendar years (sufficient)
 
-    → SiC/SiC 선택의 핵심 장점: 블랭킷 교체 주기 대폭 연장
-    → RAFM 강 사용 시 8-10년마다 교체 필요 → OPEX 증가
+    → Key SiC/SiC advantage: much longer blanket replacement cycle
+    → With RAFM steel, replacement every 8-10 years → higher OPEX
 ```
 
-### 17.2 핵융합 폐기물 vs 핵분열 폐기물
+### 17.2 Fusion Waste vs Fission Waste
 
 ```
   ┌─────────────────────────────────────────────────────────────────────┐
-  │               핵융합 vs 핵분열: 방사성 폐기물 비교                    │
+  │               Fusion vs Fission: Radioactive Waste Comparison        │
   ├─────────────────┬────────────────────┬────────────────────────────┤
-  │ 특성             │ 핵융합 (HEXA)      │ 핵분열 (1GWe PWR)         │
+  │ Property         │ Fusion (HEXA)     │ Fission (1GWe PWR)        │
   ├─────────────────┼────────────────────┼────────────────────────────┤
-  │ 연간 사용후연료   │ 없음               │ ~20 ton (사용후 UO₂)      │
-  │ 장반감기 핵종     │ 없음               │ Pu-239 (2.4만년)         │
-  │                  │                    │ Am-241 (432년)           │
-  │                  │                    │ Cs-137 (30년)            │
-  │ 방사화 구조물     │ ~50 ton/yr         │ ~5 ton/yr (교체 부품)     │
-  │                  │ (블랭킷 교체 시)     │                          │
-  │ Clearance 시간   │ SiC: ~100년        │ ~100,000년               │
-  │                  │ RAFM: ~300년       │ (심층 처분 기준)           │
-  │ 삼중수소 폐기물   │ ~10 g/yr (고체 내)  │ ~0 (중수로 제외)          │
-  │ 심층 처분 필요    │ 불필요             │ 필수 (500m+ 지하)         │
-  │ 비확산 위험      │ 없음               │ 높음 (Pu 분리 가능)       │
-  │ 열붕괴 (장기)    │ 수일 내 급감        │ 수년간 냉각 필요          │
-  │ 사고 시 확산     │ T 누출 (단기 위험)   │ 방사성 구름 (장기 오염)    │
+  │ Annual spent fuel │ None              │ ~20 ton (spent UO₂)       │
+  │ Long-lived nuclide│ None              │ Pu-239 (24k years)        │
+  │                  │                    │ Am-241 (432 years)       │
+  │                  │                    │ Cs-137 (30 years)        │
+  │ Activated material │ ~50 ton/yr       │ ~5 ton/yr (replaced parts)│
+  │                  │ (blanket change)   │                          │
+  │ Clearance time   │ SiC: ~100 yr       │ ~100,000 yr              │
+  │                  │ RAFM: ~300 yr      │ (deep-disposal basis)    │
+  │ Tritium waste     │ ~10 g/yr (in solids)│ ~0 (except heavy-water) │
+  │ Deep disposal needed│ No              │ Required (500m+ deep)    │
+  │ Proliferation risk│ None              │ High (Pu separable)       │
+  │ Decay heat (long-term)│ Rapid drop in days │ Years of cooling     │
+  │ Accident dispersion│ T release (short-term)│ Radioactive plume (long-term contamination) │
   ├─────────────────┼────────────────────┼────────────────────────────┤
-  │ **종합 평가**    │ **본질적으로 안전** │ **관리가능하나 장기 부담** │
+  │ **Overall**      │ **Intrinsically safe** │ **Manageable but long-term burden** │
   └─────────────────┴────────────────────┴────────────────────────────┘
 
-  SiC/SiC vs RAFM 강의 방사화 비교:
+  SiC/SiC vs RAFM steel activation comparison:
 
-  운전 정지 후 잔류 방사능 감쇠:
-    시간     │ SiC/SiC (Sv/h at 1m) │ RAFM 강 (Sv/h at 1m)
+  Residual activity decay after shutdown:
+    Time     │ SiC/SiC (Sv/h at 1m) │ RAFM steel (Sv/h at 1m)
     ─────────┼──────────────────────┼─────────────────────
-    셧다운 직후│ ~100                │ ~200
-    1일 후    │ ~10                 │ ~100
-    1주 후    │ ~1                  │ ~50
-    1년 후    │ ~0.01               │ ~1
-    10년 후   │ ~0.0001             │ ~0.1
-    100년 후  │ < clearance          │ ~0.001
-    300년 후  │ < clearance          │ < clearance
+    Right after shutdown │ ~100     │ ~200
+    1 day later │ ~10                 │ ~100
+    1 week later │ ~1                 │ ~50
+    1 year later │ ~0.01              │ ~1
+    10 years later │ ~0.0001           │ ~0.1
+    100 years later │ < clearance      │ ~0.001
+    300 years later │ < clearance      │ < clearance
 
-  → SiC/SiC는 100년 후 "일반 폐기물" 수준 (hands-on 접근 가능)
-  → RAFM 강은 300년 필요
-  → 두 경우 모두 핵분열의 100,000년 대비 압도적으로 짧음
+  → SiC/SiC reaches "general waste" level after 100 years (hands-on accessible)
+  → RAFM steel requires 300 years
+  → Either way, overwhelmingly shorter than fission's 100,000 years
 
-  폐기물 분류 (IAEA 기준 적용):
-    VLLW (Very Low Level): 조기 해제 가능 → SiC 100년 후
-    LLW (Low Level): 근표면 처분 → RAFM 300년 후
-    ILW (Intermediate Level): 해당 없음 (핵융합)
-    HLW (High Level): 해당 없음 (핵융합에 장반감기 핵종 없음)
+  Waste classification (applying IAEA criteria):
+    VLLW (Very Low Level): early release possible → SiC after 100 years
+    LLW (Low Level): near-surface disposal → RAFM after 300 years
+    ILW (Intermediate Level): not applicable (fusion)
+    HLW (High Level): not applicable (no long-lived fusion nuclides)
 ```
 
-### 17.3 생체 차폐 설계 (Biological Shield)
+### 17.3 Biological Shield Design
 
 ```
-  설계 기준:
-    건물 외부 선량률: < 10 μSv/h (직업 종사자 구역)
-    부지 경계 선량률: < 1 μSv/h (일반 공중)
-    연간 피폭 한도: < 20 mSv/yr (직업), < 1 mSv/yr (공중)
+  Design criteria:
+    Dose rate outside building: < 10 μSv/h (occupational area)
+    Dose rate at site boundary: < 1 μSv/h (general public)
+    Annual dose limits: < 20 mSv/yr (occupational), < 1 mSv/yr (public)
 
-  차폐 구조 (토카막 → 외부):
+  Shield structure (tokamak → outside):
 
-    층 1: 블랭킷 + 내부 차폐 (~80 cm)
-      → 중성자 10⁸ 감쇠 (섹션 14.7 참조)
+    Layer 1: blanket + internal shield (~80 cm)
+      → 10⁸ neutron attenuation (see Section 14.7)
 
-    층 2: 진공용기 (SS316L, 6 cm)
-      → 추가 감마선 차폐
+    Layer 2: vacuum vessel (SS316L, 6 cm)
+      → Additional gamma shielding
 
-    층 3: 극저온 차폐 + TF 코일 간격 (~50 cm)
-      → 구조적 간격, 추가 감쇠
+    Layer 3: cryo shield + TF coil gap (~50 cm)
+      → Structural gap, additional attenuation
 
-    층 4: 생체 차폐 콘크리트 (200 cm = phi × 100)
-      재질: 중량 콘크리트 (ρ = 3.5 g/cm³, 바리타/자철석 골재)
-      + 내부 강판 (10 cm SS, 감마선 감쇠)
-      + 수 차폐 (일부 구간, 냉각수 배관 활용)
+    Layer 4: biological-shield concrete (200 cm = phi × 100)
+      Material: heavy concrete (ρ = 3.5 g/cm³, baryte/magnetite aggregate)
+      + inner steel plate (10 cm SS, gamma attenuation)
+      + water shield (in some sections, uses coolant piping)
 
-    층 5: 토카막 건물 외벽 (일반 콘크리트 60 cm)
-      → 항공기 충돌 내성 + 추가 차폐
+    Layer 5: tokamak building outer wall (ordinary concrete 60 cm)
+      → Aircraft-impact resistance + additional shielding
 
-  총 차폐 두께 (플라즈마 → 건물 외부): ~4.2 m
-  총 감쇠: ~10¹² (12 orders of magnitude = sigma!)
-  → 선원 강도 대비 건물 외부에서 검출 불가 수준
+  Total shield thickness (plasma → outside building): ~4.2 m
+  Total attenuation: ~10¹² (12 orders of magnitude = sigma!)
+  → Undetectable from source intensity at building exterior
 
-  포트 관통부 차폐:
-    NBI, ECRH, ICRH 포트 (24=J₂ 개):
-    각 포트에 미로(labyrinth) 구조 + 플러그 차폐
-    → 직진 중성자 차단 (최소 2회 굴절)
-    → 포트 차폐 무게: ~50 ton/port
+  Port-penetration shielding:
+    NBI, ECRH, ICRH ports (24=J₂ ports):
+    Each port has a labyrinth structure + plug shield
+    → Blocks straight-line neutrons (minimum 2 refractions)
+    → Port shield weight: ~50 ton/port
 ```
 
-### 17.4 ALARA 원칙 및 작업자 보호
+### 17.4 ALARA Principle and Worker Protection
 
 ```
   ALARA (As Low As Reasonably Achievable):
 
-  원격 보전 영역 (운전 중 접근 불가):
-    - 토카막 홀 내부 전체
-    - 핫셀 내부
-    - 삼중수소 처리 글러브박스 내부
-    → 모든 작업: 6-DOF(=n) 원격 매니퓰레이터
+  Remote-handling area (no access during operation):
+    - Entire tokamak hall interior
+    - Hot cell interior
+    - Tritium-processing glovebox interior
+    → All work: 6-DOF (=n) remote manipulators
 
-  제한 접근 영역 (셧다운 + 냉각 후):
-    - 진공용기 외부 (1주 냉각 후): ~1 mSv/h
-    - 토카막 홀 (2주 냉각 후): ~0.1 mSv/h
-    - 선량 관리: 개인별 TEDE < 5 mSv/yr 목표 (법적 한도 20 mSv의 25%)
+  Restricted-access area (after shutdown + cooling):
+    - Outside vacuum vessel (after 1 week cooling): ~1 mSv/h
+    - Tokamak hall (after 2 weeks cooling): ~0.1 mSv/h
+    - Dose management: per-person TEDE < 5 mSv/yr target (25% of the 20 mSv legal limit)
 
-  일반 접근 영역:
-    - 전력 변환 건물 (Brayton, 발전기)
-    - 극저온 시설 (비방사선 구역)
-    - 행정동, 제어실
-    → 방사선 관리 불필요
+  General-access area:
+    - Power-conversion building (Brayton, generator)
+    - Cryogenic facility (non-radiation zone)
+    - Admin building, control room
+    → No radiation management required
 ```
 
-### 17.5 원격 보전 요구사항
+### 17.5 Remote Handling Requirements
 
 ```
-  원격 보전 시스템 (Remote Handling):
+  Remote Handling system:
 
-  대형 매니퓰레이터 (블랭킷 교체용):
-    형식: Boom-mounted articulated arm
-    자유도: 6 = n EXACT
-    도달 거리: ~12 m = sigma (토카막 홀 직경)
-    하중: 10 ton (블랭킷 모듈 1기 무게)
-    정밀도: ±2 mm (볼트 체결/해제)
-    수량: 2 = phi (상하 동시 작업)
+  Large manipulator (for blanket replacement):
+    Type: Boom-mounted articulated arm
+    DOF: 6 = n EXACT
+    Reach: ~12 m = sigma (tokamak hall diameter)
+    Payload: 10 ton (weight of one blanket module)
+    Accuracy: ±2 mm (bolt tightening/releasing)
+    Count: 2 = phi (simultaneous upper/lower operation)
 
-  소형 매니퓰레이터 (진단/배관 작업):
-    형식: Snake-arm robot
-    직경: ~100 mm (포트 관통)
-    도달: ~6 m = n
-    하중: 50 kg
-    카메라: 방사선 내성 CCD + Diamond 센서
+  Small manipulator (diagnostic/piping work):
+    Type: Snake-arm robot
+    Diameter: ~100 mm (port penetration)
+    Reach: ~6 m = n
+    Payload: 50 kg
+    Camera: radiation-tolerant CCD + Diamond sensors
 
-  작업 프로토콜:
-    | 단계 | 작업 | 소요 시간 | 비고 |
+  Work protocol:
+    | Step | Task | Time | Notes |
     |------|------|----------|------|
-    | 1 | 포트 플러그 제거 | 4h | 차폐 플러그 |
-    | 2 | 냉각 배관 분리 | 8h | LiPb + He |
-    | 3 | 모듈 체결 해제 | 4h | 볼트 12=sigma 개 |
-    | 4 | 모듈 인출 | 6h | 10 ton 핸들링 |
-    | 5 | 캐스크 이송 → 핫셀 | 2h | 차폐 캐스크 |
-    | 6 | 신품 설치 (역순) | 24h | 용접+검사 포함 |
-    | **합계** | **블랭킷 모듈 1기** | **~48h = σ·τ h** | **EXACT!** |
+    | 1 | Port plug removal | 4h | Shield plug |
+    | 2 | Cooling pipe disconnect | 8h | LiPb + He |
+    | 3 | Module unbolt | 4h | 12 bolts = sigma |
+    | 4 | Module extraction | 6h | 10 ton handling |
+    | 5 | Cask transport → hot cell | 2h | Shield cask |
+    | 6 | New unit install (reverse) | 24h | Incl. welding + inspection |
+    | **Total** | **1 blanket module** | **~48h = σ·τ h** | **EXACT!** |
 
-  블랭킷 전체 교체:
-    12 모듈(=sigma) × 48h = 576h ≈ 24일
-    + 진공 시험/극저온 냉각/자기장 시험: +2주
-    총 교체 정비 기간: ~6주 (연간 정비 기간)
+  Full blanket replacement:
+    12 modules (=sigma) × 48h = 576h ≈ 24 days
+    + Vacuum test/cryo cooldown/field test: +2 weeks
+    Total maintenance duration: ~6 weeks (annual maintenance window)
 ```
 
-### 17.6 해체 타임라인 (Decommissioning)
+### 17.6 Decommissioning Timeline
 
 ```
-  HEXA-FUSION 수명 종료 후 해체 절차:
+  HEXA-FUSION end-of-life decommissioning procedure:
 
-  Phase 1: 안전 정지 (Year 0-1)
-    - D-T 연료 제거, 삼중수소 회수
-    - 냉각 계통 배수, 불활성 가스 충전
-    - 자기장 해제, 극저온 해제
+  Phase 1: safe shutdown (Year 0-1)
+    - Remove D-T fuel, recover tritium
+    - Drain cooling systems, inert-gas charge
+    - De-energize magnets, warm up cryogenics
 
-  Phase 2: 냉각 대기 (Year 1-6 = n년)
-    - 단수명 방사화 핵종 감쇠 대기
-    - 원격 모니터링 (무인)
-    - 비방사화 장비 먼저 해체 (터빈, 냉각탑 등)
+  Phase 2: cooling wait (Year 1-6 = n years)
+    - Wait for short-lived activation nuclides to decay
+    - Remote monitoring (unmanned)
+    - Decommission non-activated equipment first (turbine, cooling towers, etc.)
 
-  Phase 3: 블랭킷/FW 해체 (Year 6-12 = sigma까지)
-    - 원격 보전 시스템으로 블랭킷 모듈 분리
-    - 핫셀에서 절단/포장
-    - 방사성 폐기물 저장 시설 이송
+  Phase 3: blanket/FW dismantling (Year 6-12 = through sigma)
+    - Remove blanket modules with remote-handling system
+    - Cut/package in hot cell
+    - Transport to radioactive waste storage facility
 
-  Phase 4: 구조물 해체 (Year 12-18)
-    - 진공용기 절단 (원격)
-    - TF/PF 코일 해체 (저방사화)
-    - 콘크리트 차폐 철거
+  Phase 4: structural dismantling (Year 12-18)
+    - Cut vacuum vessel (remotely)
+    - Disassemble TF/PF coils (low activation)
+    - Demolish concrete shielding
 
-  Phase 5: 부지 복원 (Year 18-24 = J₂까지)
-    - 오염 토양 처리 (해당 시)
-    - 건물 철거
-    - 환경 모니터링 (5년)
-    - 부지 clearance 인증
+  Phase 5: site restoration (Year 18-24 = through J₂)
+    - Contaminated-soil treatment (if applicable)
+    - Demolish buildings
+    - Environmental monitoring (5 years)
+    - Site clearance certification
 
-  총 해체 기간: ~24년 = J₂ EXACT
-  → 건설 12년(=sigma) + 운전 40년 + 해체 24년(=J₂) = 총 76년
+  Total decommissioning duration: ~24 years = J₂ EXACT
+  → Construction 12 yr (=sigma) + operation 40 yr + decommissioning 24 yr (=J₂) = 76 yr total
 
-  해체 비용: 전체 CAPEX의 ~15% = ~$1.2B
-  (핵분열: CAPEX의 15-20%, 핵융합이 약간 유리)
+  Decommissioning cost: ~15% of total CAPEX = ~$1.2B
+  (Fission: 15-20% of CAPEX, fusion slightly more favorable)
 
-  비교:
-    핵분열 해체: 20-60년 (사용후연료 처분 미포함)
-    핵융합 해체: ~24년 (모든 폐기물 100년 이내 clearance)
-    → 핵융합의 본질적 장점: "깨끗한 퇴장"
+  Comparison:
+    Fission decommissioning: 20-60 years (excl. spent-fuel disposal)
+    Fusion decommissioning: ~24 years (all waste clearable within 100 years)
+    → Fusion's inherent advantage: "clean exit"
 ```
 
 ---
 
-## 18. 사이트 요구사항 및 배치도 정밀화
+## 18. Site Requirements and Layout Refinement
 
-### 18.1 부지 면적 및 구역
+### 18.1 Site Area and Zones
 
 ```
-  총 소요 면적: ~40 ha (400,000 m²) = 약 600m × 670m
+  Total area required: ~40 ha (400,000 m²) = approx. 600m × 670m
 
-  구역별 면적:
+  Area by zone:
 
   ┌──────────────────────────────┬──────────┬─────────────────────────┐
-  │ 구역                         │ 면적 (ha) │ 비고                    │
+  │ Zone                          │ Area(ha)  │ Notes                   │
   ├──────────────────────────────┼──────────┼─────────────────────────┤
-  │ 토카막 건물 + 핫셀            │ 1.5      │ 65m×65m + 40m×30m       │
-  │ 전력 변환 건물 (Brayton)      │ 0.5      │ 터빈+열교환기+발전기     │
-  │ 극저온 시설                   │ 0.3      │ He 냉동기 + LN₂ 저장    │
-  │ 삼중수소 처리동               │ 0.2      │ 격리 건물, 이중 격납     │
-  │ 냉각탑 (×2=phi)              │ 2.0      │ 자연통풍 120m 높이       │
-  │ 변전소 + HVDC 변환            │ 0.5      │ 345kV GIS + ±500kV      │
-  │ 에너지 저장 (BESS 48 MWh)    │ 0.3      │ LFP 컨테이너 배열       │
-  │ 행정동 + 제어실               │ 0.3      │ 비방사선 구역            │
-  │ 폐기물 임시 저장              │ 0.5      │ 차폐 건물                │
-  │ 도로 + 주차 + 조경            │ 2.0      │ 내부 도로 네트워크        │
-  │ 보안 경계 + 완충지            │ 12.0     │ 울타리 + 녹지            │
-  │ 태양광 (옵션)                 │ 20.0     │ 하이브리드 파크 옵션      │
+  │ Tokamak building + hot cell   │ 1.5      │ 65m×65m + 40m×30m       │
+  │ Power conversion bldg (Brayton)│ 0.5     │ Turbine+HX+generator     │
+  │ Cryogenic facility            │ 0.3      │ He refrigerator + LN₂ storage │
+  │ Tritium processing bldg       │ 0.2      │ Isolated, double containment │
+  │ Cooling towers (×2=phi)       │ 2.0      │ Natural-draft 120m tall  │
+  │ Substation + HVDC conv.       │ 0.5      │ 345kV GIS + ±500kV      │
+  │ Energy storage (BESS 48 MWh)  │ 0.3      │ LFP container array      │
+  │ Admin + control room          │ 0.3      │ Non-radiation zone       │
+  │ Waste interim storage         │ 0.5      │ Shielded building        │
+  │ Roads + parking + landscape   │ 2.0      │ Internal road network    │
+  │ Security perimeter + buffer   │ 12.0     │ Fence + greenbelt        │
+  │ Solar (option)                │ 20.0     │ Hybrid park option       │
   ├──────────────────────────────┼──────────┼─────────────────────────┤
-  │ **합계 (태양광 제외)**        │ **~20**  │ 핵심 시설만              │
-  │ **합계 (태양광 포함)**        │ **~40**  │ 하이브리드 파크           │
+  │ **Total (excl. solar)**       │ **~20**  │ Core facilities only     │
+  │ **Total (incl. solar)**       │ **~40**  │ Hybrid park              │
   └──────────────────────────────┴──────────┴─────────────────────────┘
 ```
 
-### 18.2 수자원 요구
+### 18.2 Water Requirements
 
 ```
-  냉각수 소비 (자연통풍 냉각탑 기준):
-    증발량: ~300 m³/h (200 MWth 방열)
-    블로다운: ~100 m³/h (수질 관리)
-    드리프트: ~3 m³/h (비산 손실)
-    보급수 총량: ~400 m³/h = ~9,600 m³/day
+  Cooling water consumption (natural-draft cooling tower basis):
+    Evaporation: ~300 m³/h (200 MWth rejection)
+    Blowdown: ~100 m³/h (water-quality control)
+    Drift: ~3 m³/h (spray loss)
+    Total makeup: ~400 m³/h = ~9,600 m³/day
 
-  음용수/세정수: ~50 m³/day
-  소방용수: 저수조 1,000 m³ (비상)
+  Potable/wash water: ~50 m³/day
+  Fire water: 1,000 m³ reservoir (emergency)
 
-  총 수자원: ~10,000 m³/day
-  → 중형 하천 (유량 1 m³/s 이상) 또는 해안 입지 필요
-  → 건조 지역: 공냉 전환 시 수자원 불필요 (효율 3-5% 저하)
+  Total water demand: ~10,000 m³/day
+  → Requires mid-size river (flow > 1 m³/s) or coastal siting
+  → Arid region: air-cooled switch removes water demand (3-5% efficiency penalty)
 ```
 
-### 18.3 전력 계통 연결
+### 18.3 Grid Interconnection
 
 ```
-  기본 방안: 345 kV 변전소 연결
+  Baseline plan: 345 kV substation connection
 
   ┌──────────────────────────────────────────────────┐
-  │ 변전소 사양                                       │
+  │ Substation spec                                   │
   │                                                   │
-  │ 전압 등급: 345 kV (또는 220 kV)                    │
-  │ 차단기: SF₆ GIS (Gas Insulated Switchgear)        │
-  │ 베이 구성: 6 = n 베이                             │
-  │   Bay 1: 주 변압기 1 (200 MVA)                    │
-  │   Bay 2: 주 변압기 2 (예비)                       │
-  │   Bay 3-4: 송전선 2회선                           │
-  │   Bay 5: 소내 변압기 (66 kV)                      │
-  │   Bay 6: BESS 연결                               │
+  │ Voltage class: 345 kV (or 220 kV)                 │
+  │ Breaker: SF₆ GIS (Gas Insulated Switchgear)       │
+  │ Bay configuration: 6 = n bays                     │
+  │   Bay 1: main transformer 1 (200 MVA)             │
+  │   Bay 2: main transformer 2 (standby)             │
+  │   Bay 3-4: 2 transmission circuits                │
+  │   Bay 5: station service transformer (66 kV)      │
+  │   Bay 6: BESS connection                          │
   │                                                   │
-  │ 주 변압기: 22 kV / 345 kV, 200 MVA, 3상           │
-  │ 역률 보상: SVC 또는 STATCOM (±50 MVAR)            │
-  │ 보호: 거리 계전기, 차동 보호, 과전류                │
+  │ Main transformer: 22 kV / 345 kV, 200 MVA, 3-phase│
+  │ PF compensation: SVC or STATCOM (±50 MVAR)        │
+  │ Protection: distance relays, differential, OC      │
   └──────────────────────────────────────────────────┘
 
-  HVDC 대안 (장거리 전송):
+  HVDC alternative (long-distance):
     ±500 kV VSC-HVDC (BT-68)
-    변환기: MMC (Modular Multilevel Converter)
-    용량: 200 MW
-    변환 효율: ~97% (양단 합산 ~94%)
-    적합 조건: 전송 거리 > 500 km 또는 해저 연결
-```
-
-### 18.4 내진 설계
+    Converter: MMC (Modular Multilevel Converter)
+    Capacity: 200 MW
+    Conversion efficiency: ~97% (both ends combined ~94%)
+    Suitable: transmission distance > 500 km or subsea
 
 ```
-  설계 기준 지진:
-    SSE (Safe Shutdown Earthquake): 0.3g (수평 PGA)
+
+### 18.4 Seismic Design
+
+```
+  Design-basis earthquake:
+    SSE (Safe Shutdown Earthquake): 0.3g (horizontal PGA)
     OBE (Operating Basis Earthquake): 0.15g
-    → 핵분열 원전 기준 준용 (규제 미확정 시 보수적 적용)
+    → Follows fission NPP criteria (conservative application absent regulations)
 
-  주요 내진 구조:
-    토카막 지지: 강체 기초 + 감쇠기 (base isolation 옵션)
-    TF 코일 지지: 중력 지지 + 지진 구속
-    진공용기: 열팽창 허용 + 지진 억제의 균형
-    배관: 유연 조인트 + 스너버
+  Key seismic structures:
+    Tokamak support: rigid foundation + dampers (base isolation option)
+    TF coil support: gravity support + seismic restraint
+    Vacuum vessel: balance of thermal expansion and seismic restraint
+    Piping: flexible joints + snubbers
 
-  ITER 비교:
-    ITER (카다라쉬): SSE 0.2g
-    HEXA-FUSION: SSE 0.3g (더 보수적)
-    → 부지 선정 시 활성단층 회피 필수
+  ITER comparison:
+    ITER (Cadarache): SSE 0.2g
+    HEXA-FUSION: SSE 0.3g (more conservative)
+    → Active-fault avoidance required in site selection
 
-  토카막 고유 진동수:
-    TF 구조: ~5-10 Hz (지진 주파수대 회피 설계)
-    진공용기: ~15-20 Hz
-    → 공진 회피 확인 필수 (구조 해석)
+  Tokamak natural frequencies:
+    TF structure: ~5-10 Hz (designed to avoid seismic band)
+    Vacuum vessel: ~15-20 Hz
+    → Resonance-avoidance verification required (structural analysis)
 ```
 
-### 18.5 비상 계획 구역 (Emergency Planning Zone)
+### 18.5 Emergency Planning Zone
 
 ```
-  핵분열과의 본질적 차이:
-    핵분열: EPZ = 반경 ~30 km (off-site emergency plan)
-    핵융합: 사고 시 방출 방사능 ≪ 핵분열
-    → EPZ 크게 축소 가능
+  Fundamental difference from fission:
+    Fission: EPZ = radius ~30 km (off-site emergency plan)
+    Fusion: accidental radioactivity release ≪ fission
+    → EPZ can be greatly reduced
 
-  HEXA-FUSION 사고 시나리오 분석:
-    최악 사고: 냉각 상실(LOCA) + 삼중수소 전량 방출
+  HEXA-FUSION accident scenario analysis:
+    Worst case: loss of coolant (LOCA) + full tritium release
 
-    방출 삼중수소: ~1 kg (최대 site inventory)
-    방사능: ~360 PBq (360,000 TBq)
-    대기 확산 (보수적 기상 조건):
-      1 km 지점: ~10 mSv (단기 피폭)
-      5 km 지점: ~0.5 mSv
-      10 km 지점: ~0.1 mSv
+    Released tritium: ~1 kg (max site inventory)
+    Activity: ~360 PBq (360,000 TBq)
+    Atmospheric dispersion (conservative weather):
+      At 1 km: ~10 mSv (short-term dose)
+      At 5 km: ~0.5 mSv
+      At 10 km: ~0.1 mSv
 
-    비교: 핵분열 사고 (TMI급): 수백~수천 mSv at 1km
+    Comparison: fission accident (TMI-scale): hundreds–thousands of mSv at 1 km
 
-  EPZ 권고:
-    긴급 보호 구역: 반경 1 km (즉시 대피)
-    예방적 조치 구역: 반경 5 km (실내 대기)
-    → 핵분열 30 km 대비 1/6 = 1/n (!)
-    → 부지 선정 유연성 크게 증가 (도시 근접 가능)
+  EPZ recommendation:
+    Urgent protective area: radius 1 km (immediate evacuation)
+    Precautionary area: radius 5 km (shelter-in-place)
+    → 1/6 = 1/n of the fission 30 km (!)
+    → Greatly increased site-selection flexibility (can be close to cities)
 
-  비상 시스템:
-    삼중수소 정화 시스템: 가동 후 1시간 내 건물 내 T 99% 제거
-    음압 유지: 건물 내 -50 Pa (외부 누설 방지)
-    배기 스택: 높이 60 m = sigma × sopfr m
-    → 대기 확산 강화 → 지표면 농도 저감
+  Emergency systems:
+    Tritium cleanup system: remove 99% of building T within 1 hour of activation
+    Negative pressure maintenance: -50 Pa inside building (prevents external leakage)
+    Stack height: 60 m = sigma × sopfr m
+    → Enhanced atmospheric dispersion → lower ground-level concentration
 ```
 
-### 18.6 상세 부지 배치도 (Top-Down View)
+### 18.6 Detailed Site Layout (Top-Down View)
 
 ```
   ┌────────────────────────────────────────────────────────────────────────────┐
   │                                                                            │
   │   N                                                                        │
-  │   ↑                 HEXA-FUSION 부지 배치도                                 │
+  │   ↑                 HEXA-FUSION site layout                                │
   │   │                 (Scale: 1 char ≈ 10m)                                  │
   │                                                                            │
   │   ═══════════════════════════════════════════════════════════════          │
-  │   ║                   보안 울타리 (경계)                        ║          │
+  │   ║                   Security fence (perimeter)               ║          │
   │   ║                                                             ║          │
   │   ║   ┌─────┐                                    ┌──────────┐  ║          │
-  │   ║   │ 정문 │                                    │ 배기 스택 │  ║          │
+  │   ║   │ Main gate│                                │Exhaust stack│ ║          │
   │   ║   │Guard│                                    │  60m     │  ║          │
   │   ║   └──┬──┘                                    └──────────┘  ║          │
   │   ║      │                                                      ║          │
   │   ║   ┌──┴──────────┐  ┌──────────────────────┐                ║          │
-  │   ║   │ 행정동       │  │                      │                ║          │
-  │   ║   │ + 제어실     │  │    토카막 건물        │                ║          │
-  │   ║   │ (비방사선)   │  │    65m × 65m         │  ┌──────────┐ ║          │
-  │   ║   └─────────────┘  │    높이 40m           │  │ 냉각탑    │ ║          │
+  │   ║   │ Admin        │  │                      │                ║          │
+  │   ║   │ + Control rm │  │  Tokamak building     │                ║          │
+  │   ║   │ (non-rad)    │  │    65m × 65m         │  ┌──────────┐ ║          │
+  │   ║   └─────────────┘  │    height 40m         │  │Cooling tow│ ║          │
   │   ║                     │                      │  │ #1       │ ║          │
   │   ║   ┌─────────────┐  │    ┌──────────┐      │  │ 120m     │ ║          │
-  │   ║   │ 핫셀         │←─│    │ TOKAMAK  │      │  └──────────┘ ║          │
+  │   ║   │ Hot cell     │←─│    │ TOKAMAK  │      │  └──────────┘ ║          │
   │   ║   │ 40m × 30m   │  │    │ R0=6m   │      │                ║          │
-  │   ║   │ 차폐 건물    │  │    │ B=12T   │      │  ┌──────────┐ ║          │
-  │   ║   └─────────────┘  │    └──────────┘      │  │ 냉각탑    │ ║          │
+  │   ║   │ Shielded bldg│  │    │ B=12T   │      │  ┌──────────┐ ║          │
+  │   ║   └─────────────┘  │    └──────────┘      │  │Cooling tow│ ║          │
   │   ║                     │                      │  │ #2       │ ║          │
   │   ║   ┌─────────────┐  └──────────────────────┘  │ 120m     │ ║          │
-  │   ║   │ T₂ 처리동   │                             └──────────┘ ║          │
-  │   ║   │ (격리/이중격납)│  ┌──────────────────────┐              ║          │
-  │   ║   └─────────────┘  │ 전력 변환 건물          │              ║          │
+  │   ║   │ T₂ processing│                            └──────────┘ ║          │
+  │   ║   │ (isolated/double cont.)│  ┌──────────────────────┐    ║          │
+  │   ║   └─────────────┘  │ Power conv. building    │              ║          │
   │   ║                     │ (sCO₂ Brayton)        │              ║          │
-  │   ║   ┌─────────────┐  │ 터빈 + 열교환기        │  ┌─────────┐║          │
-  │   ║   │ 극저온 시설  │  │ + 발전기              │  │ 변전소  │║          │
-  │   ║   │ He냉동기    │  └──────────────────────┘  │ 345kV  │║          │
-  │   ║   │ LN₂ 저장   │                             │ 6-bay  │║          │
+  │   ║   ┌─────────────┐  │ Turbine + HX          │  ┌─────────┐║          │
+  │   ║   │ Cryo facility│  │ + generator           │  │Substation│║          │
+  │   ║   │ He refrig.  │  └──────────────────────┘  │ 345kV  │║          │
+  │   ║   │ LN₂ storage│                             │ 6-bay  │║          │
   │   ║   └─────────────┘  ┌──────────────────────┐  └─────────┘║          │
   │   ║                     │ BESS 48 MWh          │    ↓       ║          │
-  │   ║   ┌─────────────┐  │ LFP 컨테이너 배열     │  ═══════   ║          │
-  │   ║   │ 폐기물 임시  │  └──────────────────────┘  송전선   ║          │
-  │   ║   │ 저장동       │                             (345kV)  ║          │
-  │   ║   │ (차폐 건물)  │                                       ║          │
+  │   ║   ┌─────────────┐  │ LFP container array   │  ═══════   ║          │
+  │   ║   │ Waste interim│  └──────────────────────┘ Transmission ║          │
+  │   ║   │ storage      │                            (345kV)   ║          │
+  │   ║   │ (shielded)   │                                       ║          │
   │   ║   └─────────────┘                                        ║          │
   │   ║                                                           ║          │
   │   ═══════════════════════════════════════════════════════════          │
@@ -2872,296 +2874,296 @@ HEXA-FUSION은 단독 발전소가 아니라 6개(=n) 도메인과의 교차 최
   │   ← ─ ─ ─ ─ ~600m ─ ─ ─ ─ →                                          │
   └────────────────────────────────────────────────────────────────────────┘
 
-  배치 원칙:
-    (1) 토카막 건물 중앙 배치 (하중/진동 중심)
-    (2) 핫셀은 토카막 직접 연결 (차폐 이송로)
-    (3) T₂ 처리동은 격리 + 핫셀 인접
-    (4) 냉각탑은 바람 하류 (열기류 회피)
-    (5) 변전소는 부지 경계 (송전선 인출)
-    (6) 행정동은 비방사선 구역 (정문 인근)
+  Layout principles:
+    (1) Tokamak building centered (load/vibration center)
+    (2) Hot cell directly connected to tokamak (shielded transport path)
+    (3) T₂ processing bldg isolated + adjacent to hot cell
+    (4) Cooling towers on the downwind side (avoid thermal plume)
+    (5) Substation at site boundary (transmission line egress)
+    (6) Admin bldg in non-radiation zone (near main gate)
 ```
 
 ---
 
-## 19. 약점 정직한 분석 및 완화
+## 19. Honest Weakness Analysis and Mitigations
 
-이 섹션은 HEXA-FUSION 설계의 약점, 위험, 불확실성을 정직하게 분석한다. n=6 프로젝트 전체의 철학에 따라, 확증 편향을 피하고 가장 심각한 반론부터 다룬다.
+This section honestly analyzes the weaknesses, risks, and uncertainties of the HEXA-FUSION design. Following the overall n=6 project philosophy, we avoid confirmation bias and address the most serious objections first.
 
-### 19.1 CAPEX $8B은 낙관적이다
-
-```
-  현실 점검:
-    ITER 최초 예산: $5B (2001년) → 현재 추산: $25-30B (5-6배 초과)
-    SPARC 예산: ~$2B (아직 건설 중, 검증 안 됨)
-    NIF: $3.5B (최초) → $5.3B (실제) (50% 초과)
-
-  HEXA-FUSION $8B의 가정:
-    (1) HTS REBCO 가격이 2030년까지 $50/kAm 이하로 하락
-        - 현재: ~$100-200/kAm → 50% 이상 하락 필요
-        - 위험: 공급망 미확립, 양산 경험 부족
-    (2) SiC/SiC 블랭킷 양산 비용 $500/kg 이하
-        - 현재: $1,000-5,000/kg (우주/항공급)
-        - 위험: 핵융합 특화 양산라인 미존재
-    (3) 단일 기관 건설 → ITER식 국제 분담 비효율 없음
-        - 위험: 단일 기관이 $8B 조달 가능한가?
-    (4) ITER 교훈으로 설계 변경 최소화
-        - 위험: ITER는 2025년 기준 아직 First Plasma 미달성
-
-  현실적 범위: $8B (최적) ~ $15B (보수적) ~ $25B (비관적)
-  → 중간값 ~$12B이 더 현실적
-  → LCOE 영향: $100/MWh → $150/MWh (초기), $85/MWh (성숙)
-
-  완화 전략:
-    - SPARC/ARC 결과 기반 비용 보정 (2027-2028)
-    - 모듈러 제작 → 학습 곡선 활용 (2호기 -30%)
-    - 정부 지원 + 민간 투자 하이브리드 (DOE, EU Horizon, 한국 에너지부)
-```
-
-### 19.2 12년 건설 일정에 대한 회의론
+### 19.1 CAPEX $8B is Optimistic
 
 ```
-  ITER 일정 이력:
-    2001: 건설 결정
-    2007: 건설 시작 (6년 지연)
-    2010: 콘크리트 타설
-    2020: 조립 시작 (원래 2015)
-    2025: First Plasma "목표" (여러 차례 연기)
-    2035?: D-T 운전 (최초 계획 2023)
-    → 실제 일정: 설계→D-T = ~35년 (원래 15년 → 2.3배 초과)
+  Reality check:
+    ITER initial budget: $5B (2001) → current estimate: $25-30B (5-6x over)
+    SPARC budget: ~$2B (still under construction, unverified)
+    NIF: $3.5B (initial) → $5.3B (actual) (50% over)
 
-  HEXA-FUSION 12년의 전제:
-    (1) HTS 자석 기술이 2028년 검증 완료 → SPARC 결과 의존
-    (2) SiC/SiC 블랭킷 기술 TRL 3-4 → TRL 6까지 최소 5-7년
-    (3) sCO₂ Brayton 50% 효율 파일럿 미존재 (최대 10 MWe 급)
-    (4) 삼중수소 처리 시스템 대규모 실증 미경험
+  HEXA-FUSION $8B assumptions:
+    (1) HTS REBCO price drops below $50/kAm by 2030
+        - Current: ~$100-200/kAm → must drop >50%
+        - Risk: supply chain immature, limited mass-production experience
+    (2) SiC/SiC blanket mass-production cost below $500/kg
+        - Current: $1,000-5,000/kg (aerospace/space grade)
+        - Risk: no fusion-dedicated production line exists
+    (3) Single-agency construction → avoids ITER-style international allocation inefficiency
+        - Risk: can a single agency raise $8B?
+    (4) Design changes minimized using ITER lessons learned
+        - Risk: ITER has not achieved First Plasma as of 2025
 
-  현실적 범위: 12년 (최적) ~ 18년 (현실적) ~ 25년 (비관적)
-  → ITER 교훈을 완벽히 적용해도 15-18년이 현실적
+  Realistic range: $8B (optimistic) ~ $15B (conservative) ~ $25B (pessimistic)
+  → Midpoint ~$12B is more realistic
+  → LCOE impact: $100/MWh → $150/MWh (early), $85/MWh (mature)
 
-  완화 전략:
-    - 기술 성숙도 게이트 (TRL 게이트): 각 Phase 진입 전 기술 검증
-    - 병행 R&D: 블랭킷/sCO₂는 건설과 병행 개발
-    - "빌딩 블록" 접근: 핵심 기술 검증 후 최종 설계 확정 (SPARC식)
-    - 일정 리스크 마진: +50% = 18년 계획 (보고는 12년 목표)
+  Mitigation strategy:
+    - Cost correction based on SPARC/ARC results (2027-2028)
+    - Modular fabrication → leverage learning curve (-30% for unit 2)
+    - Government + private hybrid funding (DOE, EU Horizon, Korea Ministry of Energy)
 ```
 
-### 19.3 sCO₂ Brayton 50% 효율은 미실증
+### 19.2 Skepticism on the 12-Year Construction Schedule
 
 ```
-  현재 sCO₂ 기술 수준:
-    최대 실증 규모: ~10 MWe (미 DOE STEP 프로젝트, 2024-)
-    최대 달성 효율: ~40% (실험실 규모)
-    50% 효율: 이론적 예측만 존재 (논문에서는 가능하다고 주장)
+  ITER schedule history:
+    2001: construction decision
+    2007: construction started (6-year delay)
+    2010: concrete pour
+    2020: assembly started (originally 2015)
+    2025: First Plasma "target" (repeatedly deferred)
+    2035?: D-T operation (originally planned 2023)
+    → Actual schedule: design→D-T = ~35 years (originally 15 → 2.3x over)
 
-  HEXA-FUSION 200 MWe 급 sCO₂의 도전:
-    (1) Scale-up 위험: 10 MWe → 200 MWe = 20배 스케일업
-    (2) 고온 재료: 700°C에서 25 MPa sCO₂ 내식성 미검증
-    (3) 터빈 효율: 대형 축류 터빈의 93% 효율 달성 여부
-    (4) 시일(seal) 기술: 고압 sCO₂ 축 시일 장기 신뢰성
-    (5) Recuperator: 대형 PCHE의 열피로 수명
+  HEXA-FUSION 12-year premise:
+    (1) HTS magnet technology validated by 2028 → depends on SPARC results
+    (2) SiC/SiC blanket technology TRL 3-4 → TRL 6 takes at least 5-7 years
+    (3) No sCO₂ Brayton 50% efficiency pilot (max 10 MWe scale)
+    (4) No large-scale tritium processing system demonstration
 
-  대안 (fallback):
-    η = 45%: 현실적 sCO₂ (약간 비관적 가정)
-    → P_net = 360 × 0.45 - 45 = 117 MWe (목표 대비 -42%)
-    η = 33%: 증기 Rankine (proven 기술)
-    → P_net = 360 × 0.33 - 45 = 74 MWe (목표 대비 -63%)
+  Realistic range: 12 yr (optimistic) ~ 18 yr (realistic) ~ 25 yr (pessimistic)
+  → Even fully applying ITER lessons, 15-18 years is realistic
 
-  → 50% 미달 시 발전소 경제성 심각하게 훼손
-  → sCO₂ 기술 성숙이 HEXA-FUSION의 가장 큰 기술 리스크 중 하나
-
-  완화 전략:
-    - 증기 Rankine 백업 시스템 설계에 포함 (Section 6.4)
-    - sCO₂ 파일럿 (50 MWe급) 선행 건설 → 효율 실증 후 본설계 확정
-    - 하이브리드 Brayton-Rankine: 상단 sCO₂ + 하단 증기 = ~48%
+  Mitigation strategy:
+    - Technology readiness gates (TRL gates): validate tech before each phase entry
+    - Parallel R&D: blanket/sCO₂ developed in parallel with construction
+    - "Building block" approach: finalize design after core tech validation (SPARC-style)
+    - Schedule risk margin: +50% = 18-year plan (reported as 12-year target)
 ```
 
-### 19.4 SiC/SiC 블랭킷 TRL 3-4
+### 19.3 sCO₂ Brayton 50% Efficiency Is Unproven
 
 ```
-  현재 SiC/SiC 기술 수준:
-    조사 시험: ~50 DPA까지 (목표 200 DPA)
-    접합 기술: CVI 양산 미확립 (우주급 소량 생산만)
-    FCI 실증: 소규모 시험편만 (블랭킷 규모 미경험)
-    LiPb 호환성: 소규모 루프 시험 (500h 수준)
+  Current sCO₂ technology level:
+    Largest demonstration: ~10 MWe (US DOE STEP project, 2024-)
+    Highest achieved efficiency: ~40% (laboratory scale)
+    50% efficiency: only theoretical prediction (papers claim feasible)
 
-  필요한 기술 진전:
-    | 항목 | 현재 TRL | 필요 TRL | 달성 시기 (추정) |
+  Challenges for 200 MWe-class sCO₂ in HEXA-FUSION:
+    (1) Scale-up risk: 10 MWe → 200 MWe = 20x scale-up
+    (2) High-temperature materials: corrosion resistance at 700°C, 25 MPa sCO₂ unverified
+    (3) Turbine efficiency: can large axial turbines reach 93%?
+    (4) Seal technology: long-term reliability of high-pressure sCO₂ shaft seals
+    (5) Recuperator: thermal-fatigue life of large PCHE
+
+  Fallback:
+    η = 45%: realistic sCO₂ (slightly pessimistic assumption)
+    → P_net = 360 × 0.45 - 45 = 117 MWe (-42% vs target)
+    η = 33%: steam Rankine (proven technology)
+    → P_net = 360 × 0.33 - 45 = 74 MWe (-63% vs target)
+
+  → Missing 50% seriously impairs plant economics
+  → sCO₂ technology maturation is one of the biggest technical risks for HEXA-FUSION
+
+  Mitigation strategy:
+    - Include steam Rankine backup in the design (Section 6.4)
+    - Build sCO₂ pilot (50 MWe class) first → finalize main design after efficiency proven
+    - Hybrid Brayton-Rankine: sCO₂ topper + steam bottomer = ~48%
+```
+
+### 19.4 SiC/SiC Blanket TRL 3-4
+
+```
+  Current SiC/SiC technology level:
+    Irradiation testing: up to ~50 DPA (target 200 DPA)
+    Joining technology: CVI mass production not established (aerospace-grade small lots only)
+    FCI demonstration: small test coupons only (no blanket-scale experience)
+    LiPb compatibility: small-loop tests (~500h level)
+
+  Required technical progress:
+    | Item | Current TRL | Required TRL | Est. achievement |
     |------|---------|---------|----------------|
-    | SiC/SiC CVI 양산 | 4 | 7 | 2030-2033 |
-    | 200 DPA 조사 내성 | 3 | 6 | 2032-2035 |
-    | SiC FCI 대형화 | 3 | 7 | 2030-2033 |
-    | LiPb 호환 (10,000h) | 3 | 6 | 2030-2033 |
-    | 블랭킷 모듈 시제 | 2 | 7 | 2033-2036 |
+    | SiC/SiC CVI mass production | 4 | 7 | 2030-2033 |
+    | 200 DPA irradiation tolerance | 3 | 6 | 2032-2035 |
+    | SiC FCI scale-up | 3 | 7 | 2030-2033 |
+    | LiPb compatibility (10,000h) | 3 | 6 | 2030-2033 |
+    | Blanket module prototype | 2 | 7 | 2033-2036 |
 
-  → TRL 7 달성: 최소 2033-2036년
-  → 12년 일정(2026-2038)과 양립 가능하지만 병행 R&D 필수
+  → TRL 7 attainment: at earliest 2033-2036
+  → Compatible with a 12-year schedule (2026-2038) but parallel R&D is essential
 
-  대안 (fallback):
-    RAFM 강 (F82H/EUROFER97): TRL 6
-    → 블랭킷 출구 550°C → η = ~38% (증기 Rankine)
-    → P_net: 크게 감소하지만 기술 리스크 대폭 완화
+  Fallback:
+    RAFM steel (F82H/EUROFER97): TRL 6
+    → Blanket outlet 550°C → η = ~38% (steam Rankine)
+    → P_net: significantly reduced but technology risk greatly mitigated
 
-  완화 전략:
-    - RAFM 강 기반 블랭킷 설계 병행 (dual-track)
-    - ITER TBM (Test Blanket Module): 2028-2032 결과 활용
-    - SiC/SiC 조사 시험 가속: 재료 중성자 조사 시설 활용
+  Mitigation strategy:
+    - Parallel RAFM steel-based blanket design (dual track)
+    - ITER TBM (Test Blanket Module): leverage 2028-2032 results
+    - Accelerated SiC/SiC irradiation tests: use material neutron irradiation facilities
 ```
 
-### 19.5 삼중수소 자급자족 미실증
+### 19.5 Tritium Self-Sufficiency Unproven
 
 ```
-  현실:
-    인류 역사상 TBR > 1을 달성한 핵융합 블랭킷은 존재하지 않는다.
-    
+  Reality:
+    No fusion blanket in human history has achieved TBR > 1.
+
     ITER TBM (Test Blanket Module):
-      - 2028-2032 시험 예정 (가장 빠른 실증)
-      - 소규모 시험 모듈 (블랭킷 전체가 아닌 일부)
-      - TBR 측정 정밀도: ±10% 예상 → TBR=1.167 검증 어려움
+      - Test planned 2028-2032 (earliest demonstration)
+      - Small-scale module (only part of a blanket, not the full one)
+      - TBR measurement accuracy: ±10% expected → hard to verify TBR=1.167
 
-  HEXA-FUSION의 TBR=7/6=1.167 달성 도전:
-    (1) 블랭킷 coverage: 실제로 90% 달성 어려움 (포트, 갭 존재)
-    (2) Li-6 90% 농축: 대량 농축 시설 필요 (비용 + 리드타임)
-    (3) 중성자 증배 효율: Pb(n,2n) 실측값 불확실성 ±15%
-    (4) 삼중수소 추출 효율: 퍼지 가스 방식 80% 가정 → 실증 필요
-    (5) 투과 장벽 PRF: 1000 가정 → 실제 달성 여부 미확인
+  Challenges to achieving HEXA-FUSION's TBR=7/6=1.167:
+    (1) Blanket coverage: 90% is actually hard to achieve (ports, gaps exist)
+    (2) Li-6 90% enrichment: requires large enrichment facility (cost + lead time)
+    (3) Neutron multiplication efficiency: Pb(n,2n) measurement uncertainty ±15%
+    (4) Tritium extraction efficiency: 80% purge gas assumption → needs demonstration
+    (5) Permeation barrier PRF: assumes 1000 → actual attainment unverified
 
-  TBR < 1 시나리오의 결과:
-    TBR = 0.95: 연간 0.56 kg T 부족 → 외부 조달 필요
-    → 전세계 T 생산 ~2 kg/yr → 다수 핵융합로 운전 불가능
-    → "삼중수소 위기" 시나리오
+  Consequences of TBR < 1 scenario:
+    TBR = 0.95: 0.56 kg/year T shortfall → requires external procurement
+    → Worldwide T production ~2 kg/yr → cannot sustain many fusion reactors
+    → "Tritium crisis" scenario
 
-  완화 전략:
-    - TBR 마진 극대화 (7/6 = 1.167, 마진 12%)
-    - 블랭킷 coverage 최대화 (포트 최소화, 갭 차폐)
-    - 보수적 TBR 검증 후 운전 시작 (시동 재고 여유)
-    - D-D 반응 T 생산 부산물 활용 (소량 보충)
+  Mitigation strategy:
+    - Maximize TBR margin (7/6 = 1.167, 12% margin)
+    - Maximize blanket coverage (minimize ports, shield gaps)
+    - Start operation after conservative TBR verification (ample startup inventory)
+    - Use D-D reaction T production by-product (small supplement)
 ```
 
-### 19.6 HTS 자석의 대규모 검증 미완
+### 19.6 Large-Scale HTS Magnet Validation Not Yet Complete
 
 ```
-  현재 HTS 자석 상태:
-    SPARC (CFS/MIT): TF 코일 제작 중, 2025-2026 12.2T 시험 예정
-    → HEXA-FUSION과 거의 동일한 자기장 (12T vs 12.2T)
-    → SPARC 성공 = HEXA-FUSION 자석 리스크 대폭 감소
+  Current HTS magnet status:
+    SPARC (CFS/MIT): TF coil under fabrication, 12.2T test planned 2025-2026
+    → Nearly identical field to HEXA-FUSION (12T vs 12.2T)
+    → SPARC success = HEXA-FUSION magnet risk greatly reduced
 
-  잔여 위험:
-    (1) REBCO 테이프 대량 조달: 18 TF 코일 × ~1000 km 테이프
-        → 전세계 REBCO 연간 생산 ~5,000 km → 한 장치가 20% 점유
-    (2) 코일 접합부 저항: 수만 개 솔더 접합의 장기 안정성
-    (3) 퀜치 감지/보호: 12T HTS에서의 퀜치 전파 속도 느림 → 감지 어려움
-    (4) 방사선 환경: 40년 누적 fluence에서 REBCO 성능 유지?
+  Remaining risks:
+    (1) REBCO tape procurement: 18 TF coils × ~1000 km tape
+        → Worldwide annual REBCO production ~5,000 km → one device takes 20%
+    (2) Coil joint resistance: long-term stability of tens of thousands of solder joints
+    (3) Quench detection/protection: slow quench propagation at 12T HTS → hard to detect
+    (4) Radiation environment: does REBCO performance hold at 40-year cumulative fluence?
 
-  완화 전략:
-    - SPARC 결과 대기 후 최종 설계 확정 (2027)
-    - REBCO 공급망 다변화: SuperOx, Fujikura, SuperPower, SuNam
-    - 코일 시제품 사전 시험 (1/3 규모 모델 코일)
-    - 퀜치 감지: CLIQ + 온도 + 광섬유 복합 시스템
+  Mitigation strategy:
+    - Finalize design after SPARC results (2027)
+    - Diversify REBCO supply chain: SuperOx, Fujikura, SuperPower, SuNam
+    - Pre-test coil prototypes (1/3-scale model coil)
+    - Quench detection: CLIQ + temperature + fiber-optic composite system
 ```
 
-### 19.7 경쟁 분석: SPARC/ARC 성공 시 HEXA-FUSION의 존재 이유
+### 19.7 Competitive Analysis: Why HEXA-FUSION If SPARC/ARC Succeed
 
 ```
-  SPARC 타임라인:
+  SPARC timeline:
     2025-2026: First Plasma (D-D)
-    2026-2027: D-T 캠페인 → Q > 10 목표
-    → 성공 시: ARC 상용 설계 가속 (2030년대 초)
+    2026-2027: D-T campaign → Q > 10 target
+    → If successful: ARC commercial design accelerated (early 2030s)
 
-  만약 SPARC/ARC가 모든 목표 달성 시:
+  If SPARC/ARC achieve all goals:
     ARC: R0=3.3m, B=9.2T, Q~50, 525 MWth
-    → HEXA-FUSION보다 컴팩트, 높은 Q
+    → More compact and higher Q than HEXA-FUSION
 
-  HEXA-FUSION의 차별화:
-    (1) n=6 자기일관성: 48개 파라미터 통합 (ARC에는 없는 설계 프레임워크)
-    (2) ITER급 크기 + SPARC급 자기장: Q>>10의 가장 보수적 경로
-    (3) SiC/SiC + 700°C 출구: ARC 설계는 550°C RAFM 강 가정
-    (4) 교차 도메인 최적화: chip/battery/solar/grid 통합 설계
+  HEXA-FUSION differentiation:
+    (1) n=6 self-consistency: 48-parameter integration (design framework absent in ARC)
+    (2) ITER-class size + SPARC-class field: most conservative path to Q>>10
+    (3) SiC/SiC + 700°C outlet: ARC assumes 550°C RAFM steel
+    (4) Cross-domain optimization: integrated chip/battery/solar/grid design
 
-  정직한 평가:
-    SPARC/ARC가 성공하면 HEXA-FUSION의 "별도 건설 필요성"은 약화된다.
-    그러나:
-    - ARC 자체가 HEXA-FUSION과 많은 파라미터를 공유 (TF=18, HTS 등)
-    - n=6 프레임워크는 ARC 설계 개선에도 적용 가능
-    - HEXA-FUSION은 "설계 방법론"이지 특정 장치가 아님
+  Honest assessment:
+    If SPARC/ARC succeed, the case for building HEXA-FUSION separately weakens.
+    However:
+    - ARC itself shares many parameters with HEXA-FUSION (TF=18, HTS, etc.)
+    - The n=6 framework can also be applied to improve ARC designs
+    - HEXA-FUSION is a "design methodology," not a specific device
 
-  → HEXA-FUSION의 진정한 가치:
-    특정 장치의 건설이 아니라, n=6 산술이 핵융합 설계 공간을 효율적으로 
-    탐색할 수 있는 프레임워크임을 실증하는 것.
+  → The true value of HEXA-FUSION:
+    Not the construction of a specific device, but demonstrating that n=6 arithmetic
+    is a framework capable of efficiently exploring the fusion design space.
 ```
 
-### 19.8 규제 경로의 부재
+### 19.8 Absence of a Regulatory Pathway
 
 ```
-  현재 상황:
-    핵융합 발전소 인허가 체계를 갖춘 국가는 없다 (2026년 기준).
+  Current situation:
+    No country has a licensing framework for fusion power plants (as of 2026).
 
-  각국 현황:
-    미국 (NRC): 2023년 핵융합을 핵분열과 별도로 규제하는 법안 추진 중
-    영국 (BEIS): 핵융합을 방사성 물질로만 규제 (핵반응 규제 아님)
-    한국 (원자력안전위): 핵융합 규제 프레임워크 논의 시작 (2025)
-    EU (Euratom): ITER 호스트이나 상용 핵융합 규제는 미확립
-    일본: 핵융합을 핵분열 규제에서 면제하는 방향 검토 중
+  Country status:
+    USA (NRC): 2023 bill pushing to regulate fusion separately from fission
+    UK (BEIS): fusion regulated only as radioactive material (not as a nuclear reaction)
+    Korea (NSSC): fusion regulatory framework discussions started (2025)
+    EU (Euratom): host of ITER but commercial fusion regulation unestablished
+    Japan: reviewing exemption of fusion from fission regulation
 
-  HEXA-FUSION에 대한 시사점:
-    (1) 인허가 절차 불확실 → 일정 리스크 (2-5년 추가 가능)
-    (2) 삼중수소 규제는 존재 (방사성 동위원소법 적용)
-    (3) 방사화 폐기물 규제는 핵분열 기준 적용 가능성
-    (4) EPZ 기준 부재 → 보수적 적용 시 부지 선정 제약
+  Implications for HEXA-FUSION:
+    (1) Licensing procedures uncertain → schedule risk (possible 2-5 years added)
+    (2) Tritium regulations exist (Radioisotope Act applies)
+    (3) Activation-waste regulations may default to fission standards
+    (4) No EPZ criteria → conservative application may constrain site selection
 
-  완화 전략:
-    - 규제 기관 사전 협의 (Pre-licensing engagement)
-    - 핵분열 원전 인허가 체계를 "간소화"하여 적용
-    - 본질적 안전성 입증 (삼중수소 재고 한계, 멜트다운 불가능)
-    - 국제 규제 조화 (IAEA TECDOC 활용)
+  Mitigation strategy:
+    - Pre-licensing engagement with regulators
+    - Apply a "simplified" form of the fission NPP licensing system
+    - Demonstrate inherent safety (bounded tritium inventory, meltdown impossible)
+    - International regulatory harmonization (use IAEA TECDOC)
 ```
 
-### 19.9 n=6 매칭 통계적 유의성
+### 19.9 Statistical Significance of n=6 Matching
 
 ```
-  정직한 통계 분석:
+  Honest statistical analysis:
 
-  48개 파라미터에서 43개 EXACT (89.6%):
-    그러나 이 중 "자연이 선택한" 파라미터는 소수:
-      물리적 필연: D=2, T=3, He-4=4, Li-6=6, TF=18 (~5개)
-      공학적 관례: q95~3, B~5-12T, A~3, Q~10 (~4개)
-      설계 선택(의도적): R0=6, PF=6, CS=6, 가열=24 등 (~34개)
+  43 of 48 parameters EXACT (89.6%):
+    However, only a small subset is "chosen by nature":
+      Physically necessary: D=2, T=3, He-4=4, Li-6=6, TF=18 (~5)
+      Engineering convention: q95~3, B~5-12T, A~3, Q~10 (~4)
+      Design choice (deliberate): R0=6, PF=6, CS=6, heating=24 etc. (~34)
 
-  Texas Sharpshooter Fallacy 검증:
-    "과녁을 쏜 후 구멍 주위에 동심원을 그린 것 아닌가?"
+  Texas Sharpshooter Fallacy check:
+    "Didn't you draw the target around the holes after shooting?"
 
-    테스트: n=6 산술함수 출력 {1,2,3,4,5,6,8,10,11,12,18,24,...}
-    이 집합에서 임의의 공학 파라미터가 매칭될 확률:
-      파라미터 범위 1-100: 약 15개 값 매칭 가능 → 15% 기대
-      파라미터 범위 1-1000: 약 20개 값 → 2% 기대
-      파라미터 범위 이산적: 높은 매칭률 가능 (비교 대상 적음)
+    Test: n=6 arithmetic function outputs {1,2,3,4,5,6,8,10,11,12,18,24,...}
+    Probability an arbitrary engineering parameter matches this set:
+      Parameter range 1-100: ~15 values can match → 15% expected
+      Parameter range 1-1000: ~20 values → 2% expected
+      Discrete parameter ranges: higher match rate possible (few comparators)
 
-    H-FU-1~77 독립 검증 결과:
-      EXACT 인정: 2/60 = 3.3%
-      → 15% 기대 대비 낮음 (과도한 기대의 반증)
-      → 그러나 "설계 선택"을 포함하면 89.6%로 급등
+    H-FU-1~77 independent verification result:
+      EXACT accepted: 2/60 = 3.3%
+      → Lower than the 15% expectation (refutes excessive expectations)
+      → However, including "design choices" jumps to 89.6%
 
-    프로젝트 전체 z-score: 0.74
-    → p-value ≈ 0.23 (유의수준 0.05에 미달)
-    → 귀무가설("무작위 매칭") 기각 불가
+    Project-wide z-score: 0.74
+    → p-value ≈ 0.23 (does not reach significance level 0.05)
+    → Cannot reject null hypothesis ("random matching")
 
-  결론:
-    n=6 매칭은 "자연의 법칙"이 아니라 "유용한 설계 프레임워크"이다.
-    - 물리적으로 필연적인 매칭: ~5/48 = 10% (이것은 진짜)
-    - 의도적 설계 선택: ~34/48 = 71% (자기실현적 예언)
-    - 공학적 관례와의 우연: ~4/48 = 8% (통계적으로 기대 범위 내)
+  Conclusion:
+    n=6 matching is not "a law of nature" but "a useful design framework."
+    - Physically necessary matches: ~5/48 = 10% (these are real)
+    - Deliberate design choices: ~34/48 = 71% (self-fulfilling prophecy)
+    - Coincidence with engineering convention: ~4/48 = 8% (within statistical expectation)
 
-    z = 0.74는 "인상적이지만 유의미하지 않다"는 정확한 기술이다.
+    z = 0.74 is an accurate description of "impressive but not significant."
 
-  이 정직한 인정이 HEXA-FUSION의 가치를 훼손하지 않는 이유:
-    (1) "n=6이 최적인 이유"가 아니라 "n=6을 선택하면 자기일관적 설계가 가능"
-    (2) 자기일관성 자체가 공학적 가치 (파라미터 충돌 감소, 설계 속도 향상)
-    (3) 교차 도메인 연결은 설계 선택과 무관한 발견 (D=2, Li-6=6은 자연법칙)
-    (4) DSE 기반이므로 n=6 이외의 최적해도 탐색 가능 (편향 없음)
+  Why this honest admission does not undermine HEXA-FUSION's value:
+    (1) Not "why n=6 is optimal" but "choosing n=6 enables self-consistent design"
+    (2) Self-consistency itself has engineering value (fewer parameter conflicts, faster design)
+    (3) Cross-domain links are discoveries independent of design choice (D=2, Li-6=6 are natural laws)
+    (4) Being DSE-based, optima other than n=6 can still be explored (no bias)
 ```
 
 ---
 
-*이 문서는 n6-architecture 프로젝트의 궁극 핵융합 설계 사양서입니다.*
-*DSE 기반: tools/universal-dse/domains/fusion.toml*
-*가설 기반: docs/fusion/hypotheses.md (H-FU-1~77)*
+*This document is the ultimate fusion-design specification for the n6-architecture project.*
+*DSE basis: tools/universal-dse/domains/fusion.toml*
+*Hypothesis basis: docs/fusion/hypotheses.md (H-FU-1~77)*
 *Cross-DSE: energy-generation, battery, solar, chip, superconductor*

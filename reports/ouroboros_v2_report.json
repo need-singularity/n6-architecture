@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-04-15T17:44:48Z",
+  "timestamp": "2026-04-26T08:05:38Z",
   "version": "v2_namespace_aware",
-  "atlas_path": "/Users/ghost/Dev/nexus/shared/n6/atlas.n6",
-  "n_entries": 3772,
+  "atlas_path": "/Users/ghost/core/n6-architecture/n6shared/atlas.n6",
+  "n_entries": 5132,
   "total_cycles": 20,
   "total_self_loops": 0,
   "severity_distribution": {
@@ -23,18 +23,18 @@
     {
       "size": 19,
       "nodes": [
-        "L8-mw-solar-velocity-kms",
-        "L8-mw-gc-distance-kly",
-        "L8-laniakea-diameter-mly",
-        "L8-mw-bulge-mass-Msun",
-        "L8-mw-disk-mass-Msun"
+        "L8-virgo-cluster-mass-Msun",
+        "L8-virgo-infall-velocity-kms",
+        "L8-cmb-dipole-velocity-kms",
+        "L8-great-attractor-distance-mly",
+        "L8-shapley-supercluster-distance-mly"
       ]
     },
     {
       "size": 7,
       "nodes": [
-        "L8-omega-lambda",
         "L8-lambda-cosmological-constant",
+        "L8-omega-lambda",
         "L8-dark-energy-acceleration-z",
         "L8-universe-age-gyr",
         "L8-mw-age-gyr"
@@ -67,11 +67,11 @@
     {
       "size": 10,
       "nodes": [
+        "L8-m87-jet-length-kly",
         "L8-type-Sc-example",
         "L8-type-Sb-example",
         "L8-type-Sa-example",
-        "L8-type-S0-example",
-        "L8-type-E7-example"
+        "L8-type-S0-example"
       ]
     },
     {
