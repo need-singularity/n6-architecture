@@ -8,8 +8,9 @@ ref 1 live "hive canonical (n6-architecture)"
   source github.com/need-singularity/hive
   branch main
   path .raw
-  pinned-hash 555fab7b00a9423317c5f7c963cbf59308f63d75
-  checked-at 2026-04-26T15:18:00Z
+  pinned-hash 9208e691f11b735b227f78ae664a2c84d33685baa45213335d7dea3c14e79a75
+  checked-at 2026-04-26T15:45:00Z
+  hive-commit-ref 555fab7b00a9423317c5f7c963cbf59308f63d75
   prev-source github.com/need-singularity/hexa-lang
   prev-pinned-hash TO_BE_FILLED_ON_FIRST_SYNC
   prev-checked-at 2026-04-21T18:48:41Z
