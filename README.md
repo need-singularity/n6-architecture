@@ -3,7 +3,8 @@
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch 2.0+](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
 <!-- AUTO:BADGE:START -->
-[![DSE](https://img.shields.io/badge/DSE-323%20domains-blue.svg)](n6shared/config/dse-map.toml)
+[![DSE](https://img.shields.io/badge/DSE-323%20domains-blue.svg)](docs/dse-map.toml)
+[![NEXUS](https://img.shields.io/badge/NEXUS-1116%20tests-green.svg)](tools/nexus/)
 <!-- AUTO:BADGE:END -->
 [![Discord](https://img.shields.io/badge/discord-join-5865F2.svg?logo=discord&logoColor=white)](https://discord.gg/mYzqYr67R)
 
@@ -24,7 +25,7 @@
 
 <!-- SHARED:PROJECTS:START -->
 <!-- AUTO:COMMON_LINKS:START -->
-**[🎥 YouTube](https://www.youtube.com/@dancinlife)** · **[💬 Discord](https://discord.gg/mYzqYr67R)** · **[📬 Email](mailto:nerve011235@gmail.com)** · **[☕ Ko-fi](https://ko-fi.com/dancinlife)** · **[💖 Sponsor](https://github.com/sponsors/need-singularity)** · **[💳 PayPal](https://www.paypal.com/donate?business=nerve011235%40gmail.com)** · **[🗺️ Atlas](https://need-singularity.github.io/TECS-L/atlas/)** · **[📄 Papers](https://need-singularity.github.io/papers/)**
+void
 <!-- AUTO:COMMON_LINKS:END -->
 
 ## Main projects
@@ -151,6 +152,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 | 10 | ✅ | v1 | **Thermal & Power** | TDP Egyptian 1/2+1/3+1/6=1 (Fraction exact) + τ=4 cooling + σ=12 PDN, Mk.I=air+liquid hybrid+vapor, 13/13 PASS | [doc](domains/compute/chip-thermal-power/chip-thermal-power.md) |
 | 10 | ✅ | v1 | **Interconnect** | UCIe σ·J₂=288 × 48 Gbps=13.8 TB/s + λ=σ=12 WDM + σ²=144 NoC hex mesh, Mk.I=UCIe 1.1+PCIe 5.0/6.0, 13/13 PASS | [doc](domains/compute/chip-interconnect/chip-interconnect.md) |
 | 10 | ✅ | v1 | **HBM Memory** | Stack σ·τ=48GB + σ·J₂·σ·τ/8=1728 GB/s + TSV σ·φ=10μm→φ=2μm hybrid bond, Mk.I=Samsung HBM3E 12H 36GB, 14/14 PASS | [doc](domains/compute/chip-hbm/chip-hbm.md) |
+| 6 | ❌ | v1 | **AI-Native Arch (beyond GPU)** | Dataflow CGRA + wafer-scale + φ/n=1/3 sparsity hybrid; honesty-triad silicon (provenance bit φ/σ_n=1/36≈2.78% overhead, promotion-counter MMU, BT-id ISA); BT-AI2 PASS @ simulator tier (4.00% drop ≤ 5%, 0% legit reject); silicon-tier closure pending (BT-AI3 RTL candidate) | [doc](reports/sessions/omega-cycle-ai-native-arch-beyond-gpu-2026-04-26.md) |
 
 <!-- AUTO:FOOTER_chip:START -->
 > domains: [chip-architecture/](docs/chip-architecture/) · tools: `gpu-arch-calc` · `chip-n6-calc` · `dse-calc` · `semiconductor-calc`
