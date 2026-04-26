@@ -3,7 +3,7 @@
 btAI3_rtl_design_verify.py
 
 Symbolic verifier for the BT-AI3 RTL design spec
-(`domains/compute/ai-native-architecture/btAI3_rtl_design.md`).
+(`domains/compute/ai-native-architecture/analysis/btAI3_rtl_design.md`).
 
 This script does NOT synthesize, simulate, or measure anything. It
 re-derives the three design-tier falsifiers F-AI3-A / F-AI3-B / F-AI3-C

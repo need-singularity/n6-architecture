@@ -1172,7 +1172,17 @@
       "has_hexa": false,
       "has_verify": false,
       "status": "basic"
+    },
+    {
+      "slug": "ai-native-architecture",
+      "files": 6,
+      "has_claude_md": false,
+      "has_domain_md": true,
+      "has_hexa": true,
+      "has_verify": true,
+      "status": "live",
+      "note": "registered 2026-04-26 (own#16 sync) — silicon primitives: provenance-bit / promotion-counter-mmu / bt-id-isa; alien=6, target Mk.0 -> Mk_inf"
     }
   ],
-  "_note": "compute 축 전체 멤버 목록은 ../_index.json compute 키 SSOT 를 따른다 (중복 등록 금지)."
+  "_note": "compute axis full member list follows ../_index.json compute key SSOT (no duplicate registration)."
 }

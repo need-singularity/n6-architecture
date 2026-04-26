@@ -478,7 +478,7 @@ if __name__ == "__main__":
 btAI3_rtl_design_verify.py
 
 Symbolic verifier for the BT-AI3 RTL design spec
-(`domains/compute/ai-native-architecture/btAI3_rtl_design.md`).
+(`domains/compute/ai-native-architecture/analysis/btAI3_rtl_design.md`).
 
 This script does NOT synthesize, simulate, or measure anything. It
 re-derives the three design-tier falsifiers F-AI3-A / F-AI3-B / F-AI3-C
@@ -1341,3 +1341,77 @@ def main() -> int:
 if __name__ == "__main__":
     sys.exit(main())
 ```
+
+## §8 IDEAS
+
+- F-AI4 family extension: per-tile rollback amortisation analysis under
+  bursty workloads; n=6 cache-tier resonance check at L2/L3 granularity.
+- Provenance-bit hardware-assisted GC: leverage the OR-propagation
+  semantics for zero-cost generational sweep at BT-id boundaries.
+- bt-id-isa opcode-space expansion: reserve sigma=12 BT-id rows for
+  cross-domain accelerator extensions (vision / audio / sparse-tensor).
+
+## §9 METRICS
+
+- Provenance-bit overhead: `phi / sigma_n = 1/36` (1 bit per 36 payload bits).
+- N6 native tiles: `sigma / phi = 6` per array.
+- Pipeline stages: `tau = 4`.
+- Peak MACs / tile / cycle: `sigma * phi = 24`.
+- Peak MACs / array / cycle: `sigma^2 * phi = 288`.
+- F-AI2c-A acceptance: max-perf-drop-under-rollback <= 5% (H1 PASS).
+- 6-vendor gap: 0/18 commercial accelerators close the honesty-triad gap
+  (analysis/six_vendor_gap_analysis_2026-04-26.md, F-DESIGN-A PASS).
+
+## §10 RISKS
+
+- **R1 ISA fragmentation**: bt-id-isa adoption requires compiler / runtime
+  cooperation; without atlas-bound ledger sync, BT-id semantics drift.
+- **R2 Process-node lock-in**: provenance-bit MMU register width is
+  currently sized for 64-bit tensor descriptors; scaling to 128-bit
+  payloads needs MMU re-spin.
+- **R3 Falsifier opacity**: F-AI3 silicon-tier falsifiers are *design-only*
+  (no synthesis, no tape-out); promotion to F-AI4/AI5 requires PDK access.
+
+## §11 DEPENDENCIES
+
+- atlas constants (sigma=12, phi=2, n=6, tau=4, sigma_n=72, J2=24, sopfr_n=5).
+- BT-AI1 / BT-AI2 / BT-AI2c sweep harness (`reports/anomaly/`).
+- domains/compute/chip-design (silicon process anchor).
+- bridge constants (cross-engine dimension-perception F5 fix, raw#11).
+
+## §12 TIMELINE
+
+- 2026-04-26: domain registered (Mk.0); 21/21 EXACT verify; 6-vendor
+  gap analysis 0/18; analysis/btAI3_rtl_design.md drafted (design-only).
+- Mk.I (planned): RTL prototype on SKY130 open PDK with provenance-bit
+  cell library; F-AI4-A power-overhead falsifier.
+- Mk.II (planned): TSMC N5 placeholder synthesis; promotion-counter-mmu
+  cycle-accurate simulator; F-AI4-B latency falsifier.
+- Mk_inf (target): cross-vendor honesty-triad accelerator standard with
+  bt-id-isa opcode reservation accepted upstream.
+
+## §13 TOOLS
+
+- `verify_ai-native-architecture.hexa` — primary verify, 21/21 EXACT.
+- `verify_ai-native-architecture.py` — legacy Python verifier (mirror).
+- `verify_ai-native-architecture_extended.py` — extended falsifier coverage.
+- `btAI3_rtl_design_verify.py` — symbolic verifier for the RTL design spec.
+- `analysis/btAI3_rtl_design.md` — silicon-tier design spec (design-only).
+- `analysis/six_vendor_gap_analysis_2026-04-26.md` — F-DESIGN-A 6-vendor commercial gap analysis.
+
+## §14 TEAM
+
+- Domain owner: n6-architecture maintainer cohort (single-owner repo).
+- Cross-repo: nexus (atlas absorption read-only); hive (cross-host orchestration).
+- External collaboration: none currently; design is open under repo licence.
+
+## §15 REFERENCES
+
+See §5 above for the canonical reference set:
+- Atlas: `n6shared/atlas.n6` (anchor constants).
+- Knowledge graph nodes: BT-AI1 / BT-AI2 / BT-AI2c.
+- Simulators: `reports/anomaly/btAI*` harness output.
+- Reports: parent session `reports/sessions/omega-cycle-ai-native-arch-beyond-gpu-2026-04-26.md`; F-AI2c-A H1 summary `reports/anomaly/btAI2c_h1_summary.md`.
+- Verify scripts: §13 above.
+- Cross-domain: chip-design / chip-process / chip-isa-n6.
+
