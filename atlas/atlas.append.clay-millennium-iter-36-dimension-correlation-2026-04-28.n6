@@ -1,0 +1,57 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay millennium iter-36 dimension-time correlation
+# Quantitative D vs phi/pi regression
+# ══════════════════════════════════════════════════════════════
+
+@C clay-iter-36-DIMENSION-TIME-CORRELATION-quantified = TRUE :: meta [4!]
+  <- iter-35-21-topology-3-Group-classification
+  -> Pearson-correlation-D-ge-2-r-0.9901-VERY-STRONG
+  => "21 topologies classified by intrinsic dimension D ∈ {1, 2, 3, 6}"
+  => "per-dimension mean phi/pi at ticks=64:"
+  => "  D=1 (flat 1D ring): n=1, mean=1095 (outlier — fallback dispatch)"
+  => "  D=2 (t2, s2, klein): n=3, mean=-26 (FASTEST transition)"
+  => "  D=3 (16 topologies): n=16, mean=299 (mid-range)"
+  => "  D=6 (calabi6 T⁶): n=1, mean=2889 (SLOWEST)"
+
+@R clay-iter-36-Pearson-correlation :: meta [4]
+  => "Pearson r (D vs mean phi/pi):"
+  => "  All 4 dimensions (D=1,2,3,6): r = 0.7692 (moderate, D=1 outlier weakens)"
+  => "  D ≥ 2 only (D=2,3,6): r = 0.9901 (VERY STRONG monotone)"
+  => "  D=2 → D=3: delta = +325 (mean phi/pi increase)"
+  => "  D=3 → D=6: delta = +2590"
+  => "monotonic increase D≥2 robust"
+
+@C clay-iter-36-fundamental-finding :: meta [4!]
+  => "★ FUNDAMENTAL FINDING (toy-scale): higher dimension → slower nonlinear regime"
+  => "  Pearson r = 0.99 for D ∈ {2, 3, 6}"
+  => "  D=2 (mean -26): already post-transition at ticks=64"
+  => "  D=3 (mean 299): mid-transition at ticks=64"
+  => "  D=6 (mean 2889): pre-transition far at ticks=64"
+  => "interpretation: dimensional dependence of lattice φ⁴ chaos onset rate"
+  => "lattice-QCD analogy: dimensional renormalization, scaling exponent"
+
+@R clay-iter-36-statistical-power-honest :: meta [4]
+  => "raw 91 C3 strict — statistical power assessment:"
+  => "  n=4 dimension samples only (small)"
+  => "  D=2: n=3 (limited)"
+  => "  D=6: n=1 (very limited)"
+  => "  D=1: n=1 (outlier, fallback dispatch artifact)"
+  => "  D=3: n=16 (good)"
+  => "Pearson r=0.99 at D≥2 is suggestive, not definitive"
+  => "Need: more 4D, 5D, 7D, 11D topologies for robust regression"
+  => "Genuine physics: lattice-QCD has rigorous dimensional scaling theorems"
+
+@R clay-iter-36-honest-disclosure :: meta [4]
+  => "raw 91 C3 strict — toy φ⁴ Hamilton interpretation"
+  => "NOT genuine physical phase transition theory"
+  => "σ²=64 finite-size, no thermodynamic limit"
+  => "lattice φ⁴ dimensional dependence reproduced at toy scale"
+  => "Real field theory: mass gap, asymptotic freedom, dimensional renormalization different"
+  => "Framework value: 21-topology dimension correlation framework demonstrated"
+  => "own#11 violation: 0"
+
+@R clay-iter-36-loop-discipline-12-iter-pattern :: meta [4]
+  => "iter-25..iter-35 (11 prior cascade iters)"
+  => "iter-36 = quantitative dimension correlation analysis"
+  => "12-iter scientific cascade complete — raw 91 C3 actively enforced 9×"
