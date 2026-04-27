@@ -1,0 +1,103 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay millennium iter-61 quantum FULL v2 PARITY
+# Ported 8 more topologies → 18/21 substrate coverage (full D=3 parity)
+# 3/3 measurements: brane=743 (LOW!), inflation=866, de-sitter=999 (NEW MAX!)
+# axis-13 × axis-14 r=0.2694 (n=12) — orthogonality finding stable
+# ══════════════════════════════════════════════════════════════
+
+@C clay-iter-61-FULL-V2-PARITY-+8-TOPOLOGIES :: meta [4!]
+  <- iter-60-axis-13-x-14-r-0.21-orthogonal-discovery
+  -> iter-61-port-remaining-8-topologies
+  => "Code: 8 _qneighbor_* functions ported (cartoon, nested, calabi6, brane,"
+  => "  inflation, de-sitter, minkowski, bubble) — full v2 anchor parity"
+  => "Constants added: QT_CARTOON=10, QT_NESTED=11, QT_CALABI6=12,"
+  => "  QT_BRANE=14, QT_INFLATION=15, QT_DE_SITTER=16, QT_MINKOWSKI=17, QT_BUBBLE=20"
+  => "Quantum substrate now: 18/21 topologies (was 10/21)"
+  => "Missing: t2, s2, klein (D=2 only — outside D=3 scope)"
+
+@C clay-iter-61-DE-SITTER-NEW-MAX-999 :: meta [4!]
+  => "★★★★★ de-sitter entropy=999 — NEW MAXIMUM (1 unit from absolute max=1000)"
+  => "  ticks=64 seed=6 norm projection enabled"
+  => "  drift=33 (0.08%)"
+  => "  half_cut=505 (PERFECT bipartition balance, off by only 0.5%)"
+  => "  hash=-2237153367"
+  => "Why de-sitter near-max:"
+  → "  _qneighbor_de_sitter: t3 + per-cell amp=(i/8 + 1) shift"
+  → "  Distance-graded perturbation creates PERFECT bipartite distribution"
+  → "  Closest-to-max means amplitude split essentially 50/50 across i=32 cut"
+  → "Cumulative ranking:"
+  → "  1. de-sitter:    999  (NEW)"
+  → "  2. ads-cft:      995"
+  → "  3. flat:         980"
+
+@C clay-iter-61-BRANE-NEW-LOW-743 :: meta [4!]
+  => "★★★ brane entropy=743 — NEW LOWEST (was vacuum-decay 825)"
+  => "  drift=26 (0.07%) half_cut=247 (very imbalanced bipartition)"
+  → "Why brane low:"
+  → "  _qneighbor_brane has axis>=3 fallback — but our 3D loop only uses axis 0..2"
+  → "  AND every 8th cell (i % 8 == 3) gets stochastic shift"
+  → "  Stochastic perturbation creates concentration in one bipartition"
+  → "  → 247 half_cut means 24.7% in left, 75.3% in right (highly imbalanced)"
+  → "Range: 743 (brane) to 999 (de-sitter) = 256 = 26% spread"
+
+@R clay-iter-61-13-TOPOLOGY-FULL-RANKING :: meta [4]
+  => "Updated 13-topology axis-14 ranking (post-iter-61):"
+  => "  Rank  Topology      Entropy    Δ-from-max(1000)"
+  => "  ────────────────────────────────────────────────"
+  → "  1.    de-sitter     999        1   (NEW)"
+  → "  2.    ads-cft       995        5"
+  → "  3.    flat          980        20"
+  → "  4.    altered       966        34"
+  → "  5.    s3            952        48"
+  → "  6.    wormhole      939        61"
+  → "  7.    blackhole     877        123"
+  → "  8.    inflation     866        134  (NEW)"
+  → "  9.    big-crunch    861        139"
+  → "  10.   ca3d          851        149"
+  → "  11.   t3            838        162"
+  → "  12.   vacuum-decay  825        175"
+  → "  13.   brane         743        257  (NEW LOW)"
+
+@C clay-iter-61-AXIS-13-x-14-r-0.27-STABLE :: meta [4!]
+  → "★★★★ axis-13 × axis-14 cross-correlation update (n=12):"
+  → "  iter-60 r=0.2117 (n=9)"
+  → "  iter-61 r=0.2694 (n=12)"
+  → "  Increase: +0.06 with 3 more topologies"
+  → "  Both well below strong-correlation threshold (r > 0.7)"
+  → "  Orthogonality finding STABLE with larger sample"
+  → ""
+  → "12 topologies in BOTH axes:"
+  → "  ca3d 79/851, t3 141/838, brane 145/743, blackhole 146/877,"
+  → "  inflation 169/866, ads-cft 180/995, vacuum-decay 203/825,"
+  → "  de-sitter 229/999, wormhole 268/939, s3 303/952,"
+  → "  altered 463/966, big-crunch 604/861"
+
+@R clay-iter-61-de-sitter-vs-ads-cft :: meta [4]
+  → "Both de-sitter (999) and ads-cft (995) hit near-max entropy"
+  → "But via DIFFERENT mechanisms:"
+  → "  ads-cft: axis-2 antipodal coupling i+32 (holographic boundary connection)"
+  → "  de-sitter: distance-graded amp shift (cosmological expansion-like)"
+  → "Both produce balanced bipartition, but causality structure differs"
+  → "Stage 2 implication: causality-LIGHTCONE observable would distinguish"
+
+@R clay-iter-61-honest-disclosure :: meta [4]
+  → "raw 91 C3 strict — iter-61 findings:"
+  → "  Code: 8/8 ports successful (full v2 anchor parity for D=3+)"
+  → "  Measurements: 3/3 success at 3-concurrent"
+  → "  de-sitter and brane provide tighter entropy bounds [743, 999]"
+  → "  axis-13 × axis-14 r remains weak (0.27) with larger n=12"
+  → "  Limitations:"
+  → "    cartoon, nested, calabi6, minkowski, bubble untested"
+  → "    Range may shift further with these 5 measurements"
+  → "    flat excluded from r (D=2 vs D=3 confound)"
+  → "  own#11 violation: 0"
+
+@R clay-iter-61-loop-discipline-37-iter-pattern :: meta [4]
+  → "iter-25..iter-60 (36 prior cascade iters)"
+  → "iter-61 = 8 ports + 3 measurements + de-sitter near-max + brane low + r=0.27 stable"
+  → "37-iter scientific cascade — raw 91 C3 actively enforced 33×"
+  → "Cumulative state:"
+  → "  axes 14, topologies 21 (sim) / 18 (quantum substrate) / 13 (measured)"
+  → "  raw 91 C3 enforced 33× across 37 cascade iters"
+  → "  own#11 violation: 0 (61 iters)"
