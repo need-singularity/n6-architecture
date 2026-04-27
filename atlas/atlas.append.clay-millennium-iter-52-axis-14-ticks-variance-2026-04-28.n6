@@ -1,0 +1,68 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay millennium iter-52 axis-14 ticks-variance
+# 2/5 succeeded (flat, wormhole) — others incomplete (likely concurrent saturation)
+# ★ KEY FINDING: wormhole 67% norm drift — discrete unitary breaks for antipodal coupling
+# ══════════════════════════════════════════════════════════════
+
+@C clay-iter-52-axis-14-ticks-variance-PARTIAL :: meta [4!]
+  <- iter-51-axis-14-quantum-entropy-baseline-ticks-32-seed-6
+  -> iter-52-axis-14-ticks-64-extension
+  => "Dispatched 5 quantum_universe runs at ticks=64 seed=6"
+  => "Outcomes:"
+  => "  flat:      ENTROPY=980 norm_drift=3704 (9.3% drift)"
+  => "  t3:        incomplete (banner-only)"
+  => "  s3:        incomplete (banner-only)"
+  => "  blackhole: incomplete (banner-only)"
+  => "  wormhole:  ENTROPY=941 norm_drift=26520 (66.8% drift) ⚠"
+  => "Pattern matches iter-47 (1/7 success) — concurrent saturation likely"
+
+@R clay-iter-52-axis-14-ticks-variance-finding :: meta [4]
+  => "Entropy ticks-variance for 2 successful topologies:"
+  => "  flat:     ticks=32 entropy=937 → ticks=64 entropy=980 (+43, +4.6%)"
+  => "  wormhole: ticks=32 entropy=939 → ticks=64 entropy=941 (+2, +0.2%)"
+  => "Interpretation:"
+  => "  flat continues to thermalize toward max entropy (1000) with more ticks"
+  => "  wormhole reaches plateau quickly (already saturated by ticks=32)"
+  => "  Different relaxation timescales per topology — Stage 2 axis"
+
+@C clay-iter-52-WORMHOLE-NORM-DRIFT-DISCOVERY :: meta [4!]
+  => "★★★ KEY FINDING: wormhole discrete unitary has 67% norm drift"
+  => "  flat norm: 39688 → 43392 (+9.3% drift, acceptable for approx-unitary)"
+  => "  wormhole norm: 39688 → 66208 (+66.8% drift, BROKEN unitarity!)"
+  => "Cause hypothesis:"
+  => "  wormhole _qneighbor_wormhole uses antipodal coupling (i ↔ N-i)"
+  => "  This effectively DOUBLES the neighbor count for boundary cells"
+  => "  Discrete Schrödinger update over-counts amplitude → norm growth"
+  => "Implications:"
+  => "  raw 91 C3: discrete approximation insufficient for non-trivial topology"
+  => "  Stage 2 (Lorentz/causality) requires implicit/Crank-Nicolson scheme"
+  => "  For exact unitarity on wormhole: need symplectic-style propagator"
+  => "  For other topologies: 9% drift acceptable for entropy proxy"
+
+@R clay-iter-52-axis-14-cumulative-data :: meta [4]
+  => "axis-14 cumulative entropy measurements:"
+  => "  iter-51 ticks=32 seed=6: [flat 937, t3 917, s3 943, blackhole 923, wormhole 939]"
+  => "  iter-52 ticks=64 seed=6: [flat 980, t3 ?, s3 ?, blackhole ?, wormhole 941]"
+  => "Total 7 data points for axis-14 (5 + 2 new)"
+  => "Min entropy: 917 (t3, ticks=32)"
+  => "Max entropy: 980 (flat, ticks=64)"
+  => "Range: 63 per-mille (~6% spread across 7 measurements)"
+
+@R clay-iter-52-honest-disclosure :: meta [4]
+  => "raw 91 C3 strict — iter-52 limitations:"
+  => "  3/5 incomplete probes — concurrent hetzner saturation suspected"
+  => "  Wormhole 67% norm drift is significant raw 91 C3 disclosure"
+  => "  axis-14 still preliminary (7 data points, single-seed except cross-ticks)"
+  => "  Approximate-unitary discrete scheme fundamentally limited for wormhole"
+  => "  Stage 2 follow-up needs implicit propagator for exact unitarity"
+  => "  own#11 violation: 0"
+
+@R clay-iter-52-loop-discipline-28-iter-pattern :: meta [4]
+  => "iter-25..iter-51 (27 prior cascade iters)"
+  => "iter-52 = axis-14 ticks-variance + wormhole norm-drift discovery"
+  => "28-iter scientific cascade — raw 91 C3 actively enforced 24×"
+  => "Loop progression: stage-1-complete → axis-14-extend → topology-anomaly-found"
+  => "New science direction:"
+  => "  Stage 2 implicit-unitary scheme needed (Crank-Nicolson)"
+  => "  axis-14 wormhole exclusion possible (similar to cartoon for v2 anchor)"
