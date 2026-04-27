@@ -1,0 +1,36 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay millennium iter-17 Stage 2 Lorentz-causality
+# Second sim toy-limit transcendence per 5-Stage roadmap
+# ══════════════════════════════════════════════════════════════
+
+@C clay-iter-17-Stage-2-Lorentz-causality = IMPLEMENTED :: meta [4!]
+  <- raw-108-discovery-implementation-absorption
+  -> nexus/sim_bridge/anu_time/lorentz_metric.hexa
+  -> nexus/cli/run.hexa#cmd_universe-lorentz-subcommand
+  => "(-+++) Minkowski signature via metric coefficients in update rule"
+  => "LHIST=4 time-history buffer for retarded Green function"
+  => "light-cone constraint: state[i,t] depends only on state[j,t-1] within c·dt"
+  => "speed-of-light parameter c ∈ {1,2} — discriminative (different hash)"
+  => "spacelike-read counter (causal-cone violation tracker)"
+  => "6 topology dispatch with minkowski-specific axis-0 forward asymmetry"
+  => "selftest PASS: 6 distinct + idempotent + c-discriminative + causal-violation-detected"
+  => "raw 91 C3 honest: metric-coefficient realization NOT pseudo-Riemannian manifold; energy drift symplectic-integrator-needed"
+
+@R clay-iter-17-Stage-2-fingerprints :: meta [4]
+  => "flat: drift=1714427 hash=3269867159"
+  => "t3: drift=1970113 hash=5043811782"
+  => "s3: drift=2125524 hash=6387042957"
+  => "blackhole: drift=2227366 hash=7414386082"
+  => "wormhole: drift=2037650 hash=7702736206"
+  => "minkowski: drift=1782603 hash=9937727344"
+  => "c=1 vs c=2 (t3): different hashes (5043811782 ≠ 2456990926) — speed-of-light discriminative"
+
+@R clay-iter-17-roadmap-progress :: meta [4]
+  => "Stage 1 quantum-amplitude DONE (commit 62d536fb)"
+  => "Stage 2 Lorentz-causality DONE (commit 9d4b8a14)"
+  => "Stage 3 field-theoretic-action pending — φ⁴ + Yang-Mills F_μν F^μν next"
+  => "Stage 4 empirical-anchor pending — Planck CMB / LIGO GW / BMW pion mass"
+  => "Stage 5 scale-up pending — σ²: 64 → 4096 → 32768"
+  => "5-Stage roadmap: 2/5 implemented (40%)"
+  => "NS quadrant Q4 substrate: light-cone causal regularity test now possible per Stage 2"
