@@ -1,0 +1,55 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay millennium iter-40 Stage 7 ensemble runner
+# Multi-cycle averaging reveals seed=6 outlier bias in iter-31/32/36
+# ══════════════════════════════════════════════════════════════
+
+@C clay-iter-40-Stage-7-ensemble-runner = IMPLEMENTED :: meta [4!]
+  <- iter-31-5-seed-test-generalization
+  -> nexus/sim_bridge/anu_time/universe_ensemble.hexa
+  => "N-cycle ensemble runner (generalizes iter-31 5-seed)"
+  => "supports N up to 20 with prime-spaced seeds"
+  => "outputs mean of 5 observables + phi/pi stdev"
+  => "5 topology dispatch (subset for ensemble focus)"
+
+@R clay-iter-40-N-10-ticks-64-ensemble-results :: meta [4]
+  => "flat:      phi/pi mean=724  stdev=541 (high noise)"
+  => "t3:        phi/pi mean=75   stdev=56  (low noise)"
+  => "s3:        phi/pi mean=152  stdev=112"
+  => "blackhole: phi/pi mean=77   stdev=69"
+  => "wormhole:  phi/pi mean=147  stdev=108"
+  => "stdev/mean ratio: 0.7-0.9 for all topologies (HIGH NOISE)"
+
+@C clay-iter-40-CRITICAL-DISCREPANCY-vs-prior-iters :: meta [4!]
+  <- iter-32-single-seed-baseline
+  <- iter-40-N-10-ensemble
+  => "CRITICAL: iter-32 single-seed=6 values DIFFER from N=10 ensemble:"
+  => "  flat: single 1095 vs ensemble 724 (33% lower)"
+  => "  t3:   single 141 vs ensemble 75 (47% lower)"
+  => "interpretation: seed=6 was OUTLIER in some topologies"
+  => "implication: iter-36 r=0.99 finding NEEDS ensemble re-validation"
+  => "single-seed bias revealed across iter-31/32/36"
+
+@R clay-iter-40-high-noise-finding :: meta [4]
+  => "stdev/mean ratio per topology at ticks=64:"
+  => "  flat:      0.75 (high noise)"
+  => "  t3:        0.75"
+  => "  s3:        0.74"
+  => "  blackhole: 0.90"
+  => "  wormhole:  0.73"
+  => "all topologies show HIGH NOISE at ticks=64"
+  => "single-seed values inherently noisy — ensemble averaging required"
+
+@R clay-iter-40-honest-disclosure :: meta [4]
+  => "raw 91 C3 strict — Stage 7 = STATISTICAL POWER improvement"
+  => "NOT new physics finding"
+  => "toy σ²=64 limits unchanged"
+  => "single-seed bias from iter-31/32/36 revealed via ensemble"
+  => "iter-36 r=0.99 finding should be re-validated with ensemble"
+  => "Toy φ⁴ Hamilton high single-seed noise = expected for finite-size"
+  => "own#11 violation: 0"
+
+@R clay-iter-40-loop-discipline-15-iter-pattern :: meta [4]
+  => "iter-25..iter-39 (15 prior cascade iters)"
+  => "iter-40 = Stage 7 ensemble runner with bias detection"
+  => "16-iter scientific cascade complete — raw 91 C3 actively enforced 12×"
