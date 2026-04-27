@@ -1,0 +1,69 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay millennium iter-45 CLI ARG-SHIFT FIX
+# v2 anchor parser patched to scan for topology name (position-independent)
+# Unblocks ticks-CLI on hetzner remote run discovered in iter-44
+# ══════════════════════════════════════════════════════════════
+
+@C clay-iter-45-CLI-PARSER-PATCHED-position-independent :: meta [4!]
+  <- iter-44-discovery-hetzner-arg-index-shift-pushes-script-path-to-args-2
+  -> iter-45-position-independent-arg-scan-by-topology-name
+  => "Patch: empirical_anchor_v2.hexa main parser (line 485-525)"
+  => "Algorithm:"
+  => "  1. Scan _e2args for first arg whose _e2topo_id() returns ≥ 0"
+  => "  2. That is the topology arg at idx i"
+  => "  3. Read ticks from args[i-1] (with int parse fallback)"
+  => "  4. Read seed from args[i+1] (with int parse fallback)"
+  => "  5. Fallback to legacy hardcoded args[2/3/4] if no topology found"
+  => "Effect: CLI grammar 'hexa run ...hexa <ticks> <topology> <seed>' now works"
+  => "        on BOTH local hexa --selftest AND hetzner remote run"
+
+@R clay-iter-45-verification-probe :: meta [4]
+  => "Verification probe (post-patch):"
+  => "  cmd: hexa run empirical_anchor_v2.hexa 64 vacuum-decay 13"
+  => "  output: 'start ticks=64 topology=vacuum-decay seed=13'"
+  => "  raw correlation: 47"
+  => "  raw T/V ratio:   15125"
+  => "  raw pair-amp:    41"
+  => "  raw phi/pi:      209"
+  => "  raw max/avg:     3337"
+  => "All 3 user args (ticks=64, topology=vacuum-decay, seed=13) reached script ✓"
+
+@R clay-iter-45-vacuum-decay-cross-seed-comparison :: meta [4]
+  => "vacuum-decay seed variance (2 data points so far):"
+  => "  iter-44 (ticks=50, seed=64):  phi/pi=374, correl=31, T/V=15130"
+  => "  iter-45 (ticks=64, seed=13):  phi/pi=209, correl=47, T/V=15125"
+  => "Observations:"
+  => "  T/V ratio stable across seeds (~15125-15130, tight band)"
+  => "  correlation differs by 16 (31 vs 47, 50% spread)"
+  => "  phi/pi differs by 165 (374 vs 209, 2× spread - high seed variance)"
+  => "Implication: vacuum-decay shows higher seed-variance than D=3 baseline"
+  => "             → 8-seed ensemble required for stable mean"
+
+@C clay-iter-45-unblocked-full-ensemble-now-feasible :: meta [4!]
+  => "iter-43/44 blocker: CLI on hetzner couldn't pass user-specified ticks"
+  => "iter-45: blocker RESOLVED via position-independent name-scan parser"
+  => "Now possible:"
+  => "  Full 16-topo D=3 ensemble (16 × 8 seeds × ticks=64 = 128 invocations)"
+  => "  Per-call ~60s × 128 = 7680s (128min) — still > 5min loop budget"
+  => "  But NOW each iter-46+ can advance batch by ~5 invocations"
+  => "  Estimated 26-iter chain to complete full 16-topo D=3 ensemble"
+  => "Alternative: raw 79 DAG-scheduler parallel batch (16 hetzner workers)"
+
+@R clay-iter-45-honest-disclosure-cumulative :: meta [4]
+  => "raw 91 C3 strict — iter-45 findings:"
+  => "  CLI patch verified working (1 probe success)"
+  => "  vacuum-decay 2-seed comparison shows high phi/pi variance (374 vs 209)"
+  => "  Full 16-topo D=3 ensemble UNBLOCKED but requires 26-iter batch chain"
+  => "  Single-probe verification — broader cross-topology validation pending"
+  => "  Patch backwards-compatible: legacy [2/3/4] positional fallback retained"
+  => "  own#11 violation: 0"
+
+@R clay-iter-45-loop-discipline-21-iter-pattern :: meta [4]
+  => "iter-25..iter-44 (20 prior cascade iters)"
+  => "iter-45 = CLI parser hetzner arg-shift fix + verification probe"
+  => "21-iter scientific cascade — raw 91 C3 actively enforced 17×"
+  => "Loop self-unblocking demonstrated:"
+  => "  iter-43: claimed 16-topo blocker (FALSE)"
+  => "  iter-44: retracted blocker, discovered real arg-shift bug"
+  => "  iter-45: fixed real bug + verified, unblocked full ensemble path"

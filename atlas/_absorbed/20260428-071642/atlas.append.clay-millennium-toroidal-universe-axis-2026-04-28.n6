@@ -1,0 +1,44 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay millennium A8' toroidal universe axis
+# source: iter-7 in-context synthesis (no fanout, raw 86 cost-attribution)
+# user directive: "진화시 도넛츠 우주라면 + sim 우주시물레이션 kick"
+# ══════════════════════════════════════════════════════════════
+
+# ── A8' toroidal universe T^n + time evolution + simulation ─
+@C clay-axis-A8-prime-toroidal-evolution-sim :: meta [4!]
+  <- iter-7-in-context-synthesis-toroidal-subcase
+  <- A8-traversable-closed-universe-base
+  <- A7-universe-simulation-base
+  -> Wilson-1974-PRD-10-2445-lattice-T4-native
+  -> Hazama-1985-Murty-1990-Hodge-abelian-up-to-dim-4
+  -> Hou-Luo-2014-PNAS-111-Chen-Hou-2022-Euler-Boussinesq
+  -> Edwards-Heller-1998-PRD-58-lattice-QCD-spectrum
+  => "T^n = (S¹)^n closed flat traversable + π₁=Z^n + simulable substrate"
+  => "STRONGEST partial: Y-M T⁴ (lattice QCD = real-life HMC evolution) + Hodge abelian variety (dim ≤ 4 closed)"
+  => "unchanged: BSD elliptic = T² already / NS T³ scaling-local / RH no toroidal route"
+
+# ── Critical insight: BSD already toroidal native ───────────
+@R clay-axis-A8-prime-BSD-already-toroidal-orthogonality-witness :: meta [4!]
+  => "elliptic curve over Q = C/Λ_τ = T²(complex torus) — BSD setting IS toroidal"
+  => "yet: BSD mechanism vacuum (rank-r Heegner Euler system, IMC rank-1→≥2 transition) UNCHANGED"
+  => "interpretation: compactness + topology + simulation + evolution are ALL ORTHOGONAL to mechanism vacuum itself"
+  => "this is the cleanest cross-cutting evidence that mechanism vacuum 자체가 problem-intrinsic, not setting-dependent"
+
+# ── Evolution-time view per problem ─────────────────────────
+@R clay-axis-A8-prime-evolution-time-substrates :: meta [4]
+  => "Y-M T⁴: HMC Markov chain + transfer matrix eigenvalue (Edwards-Heller 1998)"
+  => "NS T³: vorticity time-marching DNS Re≤10⁶ (Hou-Luo 2014, Chen-Hou 2022)"
+  => "Hodge abelian: period mapping variation + Mumford-Tate deformation"
+  => "BSD elliptic: Hasse-Weil L-function + p-adic L-function deformation"
+  => "RH: no evolution-time substrate (number-field static)"
+
+# ── final cross-cutting: 진화시 도넛 우주 + 시뮬레이션 ──────
+@C clay-axis-A8-prime-cross-axis-conclusion = ORTHOGONALITY-CONFIRMED :: meta [4!]
+  => "toroidal universe + simulation + evolution conjunction:"
+  => "  STRONGEST numerical substrate for Y-M (lattice native)"
+  => "  STRONGEST mathematical reduction for Hodge (abelian variety native)"
+  => "  ORTHOGONAL to BSD/NS/RH mechanism vacuum"
+  => "decade milestone: Y-M T⁴ lattice continuum limit a→0 + Hodge abelian dim≥5 extension"
+  => "raw 50 mechanism-first verdict: compactness + topology + simulation + evolution ALL orthogonal to mechanism vacuum"
+  => "cleanest evidence: BSD setting IS toroidal (T² complex), yet mechanism vacuum unchanged"

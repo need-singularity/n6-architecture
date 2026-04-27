@@ -1,0 +1,49 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay millennium iter-26 circular evidence falsification
+# 5-observable ticks-sweep reveals analyzer-design bias
+# raw 91 C3 honest enforcement — second falsification iter
+# ══════════════════════════════════════════════════════════════
+
+@C clay-iter-26-circular-evidence-discovered = TRUE :: meta [4!]
+  <- iter-25-cross-feed-falsification
+  <- iter-26-5-observable-ticks-sweep
+  => "iter-25 found cross-feed χ²=1 was ticks-12 cherry-pick"
+  => "iter-26 finds even STANDALONE anchor close-matches are circular evidence"
+  => "n_s/alpha/mp_me close to ref because analyzer FUNCTION DEFINITION bakes in ref range"
+  => "  n_s_proxy = 9500 + (clamped * 400) / 1000 = hardcoded [9500, 9900] around Planck 9649"
+  => "  alpha_inv_proxy = 1370000 + offset = hardcoded near CODATA 1370360"
+  => "  mp_me_proxy = 18000000 + (ratio - 1000)*100 = hardcoded near PDG 18361500"
+  => "close match = DESIGN ARTIFACT, not physical prediction"
+
+@R clay-iter-26-5-observable-matrix :: meta [4]
+  => "ticks 8/16/32/64 × 5 topologies × 5 observables = 100 measurements"
+  => "n_s: ref 9649, sim 9508-9566, ±0.9-1.5% (toy mapped to Planck)"
+  => "pion: ref 1350000, sim 13200-219700, OFF by 6-100×"
+  => "chirp: ref 304000, sim 9-153, OFF by 2000-30000×"
+  => "alpha: ref 1370360, sim 1354628-1385444, ±1.2% (toy mapped to CODATA)"
+  => "mp_me: ref 18361500, sim 18210800-18847700, ±2.6% (toy mapped to PDG)"
+  => "interpretation: 3 of 5 observables (n_s, alpha, mp_me) FUNCTIONALLY DESIGNED close-to-ref"
+  => "interpretation: 2 of 5 observables (pion, chirp) outside design range — naturally far"
+
+@R clay-iter-26-already-known-bug-confirmed :: meta [4]
+  => "standalone anchor: t3 = s3 = blackhole = wormhole (IDENTICAL output)"
+  => "root cause: empirical_anchor uses t3-neighbor fallback for all non-flat topology"
+  => "flat 1D ring is the ONLY topology distinction that propagates to anchor observables"
+  => "Stage 5 follow-up: topology-specific anchor analyzers"
+
+@C clay-iter-26-second-loop-self-falsification :: meta [4!]
+  => "iter-25 falsified iter-24 cross-feed χ²=1 claim"
+  => "iter-26 falsified standalone anchor close-match claim"
+  => "TWO iters demonstrate raw 91 C3 honest disclosure is ACTIVELY ENFORCED"
+  => "scientific process: hypothesis (iter-24) → falsification (iter-25) → deeper falsification (iter-26)"
+  => "loop self-correcting capability ESTABLISHED across multiple parameter sweeps"
+
+@R clay-iter-26-cumulative-status :: meta [4]
+  => "iters 1-26 / sub-agents 39 / cross-cutting axes 13 / topology modes 21"
+  => "sim stages 5/5 + Stage 6 candidate + 2 falsification iters (25, 26)"
+  => "8 sim modules / ~3100 LoC / nexus CLI 10 universe subcommands"
+  => "raw 91 C3 actively enforced 2× via parameter sweeps"
+  => "raw 100 fallback empirically validated 39/39"
+  => "own#11 violation: 0 throughout"
+  => "loop self-falsification: STRONGEST evidence framework over numerical claims"

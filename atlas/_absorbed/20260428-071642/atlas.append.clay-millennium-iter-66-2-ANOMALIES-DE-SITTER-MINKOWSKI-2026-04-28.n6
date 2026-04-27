@@ -1,0 +1,87 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay millennium iter-66 ★ 2 ANOMALIES IDENTIFIED
+# axis-15 sample n=5 → n=8: r weakened from -0.40 to -0.27
+# Minkowski JOINS de-sitter as anomaly (high E + high D)
+# Both anomalies are "spacetime-physics" topologies — pattern emerging
+# ══════════════════════════════════════════════════════════════
+
+@C clay-iter-66-3-OF-3-EXPANSION-SUCCESS :: meta [4!]
+  <- iter-65-axis-14-x-15-r-minus-0.40-n-5
+  -> iter-66-add-3-already-ported-topologies
+  → "Measured 3 already-ported topologies at ticks=100 c=1:"
+  → "  vacuum-decay: drift=2049823 (axis-14 entropy 825 — LOW E)"
+  → "  minkowski:    drift=2165663 (axis-14 entropy 972 — HIGH E)"
+  → "  t3:           drift=1928254 (axis-14 entropy 838 — LOW E)"
+  → "All causal_viol=0"
+
+@C clay-iter-66-MINKOWSKI-2nd-ANOMALY :: meta [4!]
+  → "★★★★ Minkowski is 2nd anomaly (high entropy + high drift):"
+  → "  de-sitter (iter-64): 999 / 2021183 — first anomaly"
+  → "  minkowski (iter-66): 972 / 2165663 — SECOND anomaly"
+  → "  Both have HIGH entanglement entropy AND HIGH energy drift"
+  → ""
+  → "Physical pattern emerging:"
+  → "  de-sitter = cosmological expansion (positive vacuum energy)"
+  → "  minkowski = canonical flat Lorentz spacetime"
+  → "  → BOTH are 'classical-spacetime-like' topologies"
+  → "  → Discrete-modification topologies follow 'efficient mixing'"
+  → "  → Spacetime-like topologies break the rule (intrinsic energy)"
+
+@C clay-iter-66-r-WEAKENED-WITH-LARGER-SAMPLE :: meta [4!]
+  → "★★★ axis-14 × axis-15 correlation evolution (n=5 → n=8):"
+  → "  iter-65 n=5: Pearson r = -0.4027"
+  → "  iter-66 n=8: Pearson r = -0.2676 (weakened)"
+  → "  iter-66 n=8: Spearman ρ = 0.0000 (NO rank-order correlation)"
+  → ""
+  → "Interpretation:"
+  → "  Pearson still moderate negative (n=8) — driven by clear anti-correlated 6-topology subgroup"
+  → "  Spearman ρ=0 — adding minkowski (high-rank E, high-rank D) cancels rank ordering"
+  → "  Two-population structure: 6 'efficient' + 2 'spacetime' anomalies"
+
+@R clay-iter-66-FULL-AXIS-15-RANKING :: meta [4]
+  → "axis-15 ranking by drift (8 topologies, ticks=100 c=1):"
+  → "  1.  ads-cft        1488520  (low — efficient)"
+  → "  2.  altered        1712829  (low — efficient)"
+  → "  3.  t3             1928254"
+  → "  4.  brane          1907852"
+  → "  5.  big-crunch     2000227"
+  → "  6.  de-sitter      2021183  (anomaly: high E)"
+  → "  7.  vacuum-decay   2049823"
+  → "  8.  minkowski      2165663  (anomaly: high E)"
+  → "  Range: 1488520 (ads-cft) to 2165663 (minkowski) = 31% spread"
+
+@R clay-iter-66-3-AXIS-correlation-MATRIX-UPDATE :: meta [4]
+  → "Updated 3-axis correlation matrix:"
+  → "  axis-13 × axis-14: r = +0.39 (n=16) — moderate positive (STABLE)"
+  → "  axis-13 × axis-15: r = ? (n=8 update needed)"
+  → "  axis-14 × axis-15: r = -0.27 (n=8) — weakened from -0.40"
+  → "  axis-14 × axis-15: ρ = 0.00 (n=8) — rank ordering canceled"
+  → ""
+  → "Conclusion: axes are MORE WEAKLY structured than n=5 suggested"
+  → "  6/8 'efficient mixing' subgroup: high E ↔ low D anti-correlated"
+  → "  2/8 'spacetime' anomalies: high E ↔ high D"
+  → "  Bimodal — needs subgroup analysis"
+
+@R clay-iter-66-honest-disclosure :: meta [4]
+  → "raw 91 C3 strict — iter-66 findings:"
+  → "  3/3 success at 3-concurrent"
+  → "  axis-14 × axis-15 correlation WEAKENED with larger sample"
+  → "  iter-65 n=5 finding partially RETRACTED (r=-0.40 was overestimate)"
+  → "  TRUE pattern: 6 'efficient' subgroup + 2 'spacetime' anomalies (bimodal)"
+  → "  Need n>10 to characterize subgroups statistically"
+  → "  Minkowski anomaly = NEW iter-66 discovery"
+  → "  own#11 violation: 0"
+
+@R clay-iter-66-loop-discipline-42-iter-pattern :: meta [4]
+  → "iter-25..iter-65 (41 prior cascade iters)"
+  → "iter-66 = axis-15 sample expansion + 2nd anomaly (minkowski) discovery"
+  → "42-iter scientific cascade — raw 91 C3 actively enforced 38×"
+  → "Loop progression:"
+  → "  iter-65 found r=-0.40 with n=5"
+  → "  iter-66 RETRACTS partially — n=8 gives r=-0.27, ρ=0"
+  → "  Pattern is bimodal (efficient + spacetime anomalies)"
+  → "Cumulative state:"
+  → "  axes 15, topologies 21 (sim) / 18 (quantum) / 12 (Lorentz measured 8)"
+  → "  raw 91 C3 enforced 38× across 42 cascade iters"
+  → "  own#11 violation: 0 (66 iters)"

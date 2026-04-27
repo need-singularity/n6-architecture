@@ -1,0 +1,51 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay millennium iter-29 v2 ticks-sweep symmetric falsification
+# Symmetric application of iter-25 methodology to anchor_v2 (post bug-fix)
+# ══════════════════════════════════════════════════════════════
+
+@C clay-iter-29-v2-symmetric-robustness-test = COMPLETE :: meta [4!]
+  <- iter-25-v1-ticks-sweep-methodology
+  <- iter-28-v2-topology-bug-fix
+  => "v2 ticks-sweep test: 4 ticks × 5 topologies = 20 runs"
+  => "v2 raw observables ALSO ticks-dependent (variance across 8/16/32/64)"
+  => "BUT — variance stays in raw scale (9-100), reference is 9649+"
+  => "→ v2 chi² ASTRONOMICAL at ALL ticks (no cherry-picking possible)"
+
+@R clay-iter-29-v2-observable-variance :: meta [4]
+  => "correl: ticks=8 [8-17] → ticks=64 [10-54] (amplitude grows non-linearly)"
+  => "T/V: ticks=8 [543-28000] → ticks=64 [3873-20755] (non-monotone)"
+  => "pair-amp: ticks=8 [64-115] → ticks=64 [-319 to 327] (NEGATIVE EMERGENCE!)"
+  => "phi/pi: ticks=8 [1098-3423] → ticks=64 [141-1095] (MONOTONE DECREASING)"
+  => "max/avg: ticks=8 [4604-6600] → ticks=64 [3059-5933] (relatively stable)"
+
+@C clay-iter-29-INTERESTING-SUB-FINDINGS :: meta [4!]
+  => "1. Pair-amp NEGATIVE emergence at ticks=64: s3 pair=-218, wormhole pair=-319"
+  => "   field oscillation enters negative regime — sign-change observable"
+  => "2. correl non-linear amplification: t3 correl 11 (ticks=8) → 54 (ticks=64), 5× growth"
+  => "3. phi/pi MONOTONE DECREASING: 3423→141 (directional time-arrow dynamics)"
+  => "4. max/avg STABLE: 3000-6000 persistent (scale-invariant proxy)"
+  => "raw 91 C3 honest: structural observations only — toy σ²=64 limits genuine physics"
+
+@C clay-iter-29-v1-vs-v2-cherry-picking-comparison :: meta [4!]
+  => "v1 (hardcoded ref-range): ticks-variation INSIDE reference region → cherry-picked χ²=1 possible"
+  => "v2 (raw observables): ticks-variation OUTSIDE reference region → χ² ASTRONOMICAL at all ticks"
+  => "VERIFIED: bias-free analyzer makes cherry-picking IMPOSSIBLE"
+  => "v2 honest character CONFIRMED via symmetric ticks-sweep test"
+
+@R clay-iter-29-loop-discipline-5-iter-pattern :: meta [4]
+  => "iter-25: falsification-1 (v1 cross-feed χ²=1 ticks-dependent)"
+  => "iter-26: falsification-2 (v1 design bias circular evidence)"
+  => "iter-27: redesign (v2 anchor honest baseline)"
+  => "iter-28: bug-fix (v2 topology fall-back restored)"
+  => "iter-29: symmetric validation (v2 ticks-sweep confirms honest character)"
+  => "5-iter scientific pattern complete: falsification cascade → fix → symmetric validation"
+
+@R clay-iter-29-cumulative-status :: meta [4]
+  => "iters 1-29 / sub-agents 39 / cross-cutting axes 13 / topology modes 21"
+  => "sim stages 5/5 + Stage 6 candidate + 3 falsification + 1 bug-fix + 1 symmetric validation"
+  => "9 sim modules / ~3380 LoC / nexus CLI 11 universe subcommands"
+  => "raw 91 C3 actively enforced 3× via parameter sweep + design audit + redesign + symmetric test"
+  => "raw 100 fallback empirically validated 39/39"
+  => "own#11 violation: 0 throughout"
+  => "loop self-correcting + symmetric validation pattern established"

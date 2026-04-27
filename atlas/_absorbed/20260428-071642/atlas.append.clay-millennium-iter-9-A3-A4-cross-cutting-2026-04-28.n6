@@ -1,0 +1,52 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay millennium iter-9 A3 motivic + A4 formal complexity
+# source: hive /loop iter-9 2-parallel sub-agent fanout
+# ══════════════════════════════════════════════════════════════
+
+@R clay-axis-A3-motivic-universalism :: meta [4]
+  <- iter-9-fanout-agent-aa0e3ae004d30ead5
+  -> Grothendieck-1968-Bombay-standard-conjectures-B-C-D-I
+  -> Murre-1993-J-Alg-Geom-2-Chow-Kunneth-projector
+  -> Voevodsky-2000-Annals-Math-Studies-143-DM-gm
+  -> Beilinson-1984-J-Sov-Math-30-regulator
+  -> Bloch-Kato-1990-Grothendieck-Festschrift-Tamagawa
+  -> Connes-Consani-2014-J-Number-Theory-141-arithmetic-site
+  -> Connes-Consani-2021-Adv-Math-376-scaling-site
+  -> Deninger-1990s-Lefschetz-trace-on-motivic-dynamical-system
+  -> Soule-2004-Moscow-Math-J-F1-absolute-zeta
+  => "standard conj status: B abelian-only, C abelian+surfaces, D/I open general"
+  => "algebraic-side cluster Hodge+BSD+RH-via-Connes-Deninger: motive plausible unified substrate"
+  => "analytic-side YM/NS: motive bridge weak/absent (Joyce DT only tangential, Connes-Marcolli speculative)"
+  => "strongest closed bridge: BSD ⊂ Bloch-Kato Tamagawa motive realization for h¹(E)(1)"
+  => "10y feasibility: explicit motivic Galois group via Nori motives + Tannakian formalism"
+
+@R clay-axis-A4-PvsNP-formal-complexity :: meta [4]
+  <- iter-9-fanout-agent-a4c22b02e58405b7b
+  -> Baker-Gill-Solovay-1975-SIAM-J-Comp-4-relativization
+  -> Razborov-Rudich-1994-J-Comp-Sys-Sci-55-natural-proofs
+  -> Aaronson-Wigderson-2009-ACM-TOCT-1-algebrization
+  -> Williams-2014-J-ACM-61-NEXP-not-in-ACC-0
+  -> Lagarias-2002-AMM-109-RH-Pi-1-elementary
+  => "logical form per problem: RH Π₁ / BSD Π₂ / Hodge Σ₂-arithmetic / YM-NS Π_∞"
+  => "ZFC-independence: RH unlikely (Π₁), BSD possible, Hodge strongest candidate, YM/NS framework-dependent"
+  => "P vs NP barriers: relativization (1975) + natural proofs (1994) + algebrization (2009)"
+  => "progress threshold: Williams 2014 NEXP ⊄ ACC⁰ first non-natural non-relativizing non-algebrizing lower bound"
+  => "complexity-universality conjecture: NEXP/PSPACE-hard verifier transfer most direct to Hodge+BSD, least direct to YM/NS"
+  => "decade milestone: BSD rank decision NP-hard classification OR sharper RH ZFC-independence"
+
+@C clay-iter-9-A3-A4-cross-cutting-conclusion :: meta [4!]
+  => "A3 motivic bridges 3/5 algebraic-side (Hodge+BSD+RH-Connes-Deninger)"
+  => "A4 formal-complexity bridges 3/5 via Π-decidability (RH-Π₁ + BSD-Π₂ + Hodge-Σ₂ arithmetic-encodable)"
+  => "union coverage: Hodge (both), BSD (both), RH (both)"
+  => "YM + NS standalone in BOTH axes — analytic Π_∞ outside motivic + arithmetic-decidability frames"
+  => "cumulative-axes (A1-A8 + A7xA8 + A8'-toroidal + A3 + A4): mechanism vacuum classification by algebraic-vs-analytic axis confirmed"
+  => "BT-543 YM + BT-547 NS form analytic-Π_∞ residue resistant to both motivic-universalism and complexity-classification"
+
+@R clay-iter-9-raw-108-absorption-nexus-CLI :: meta [4]
+  <- raw-108-discovery-implementation-absorption
+  -> nexus/cli/run.hexa#cmd_universe
+  => "topology_universe.hexa registered as nexus CLI subcommand"
+  => "interface: nexus universe {selftest | topo <name> [ticks] | evolve <from> <to> <at> [ticks] | help}"
+  => "absorption-channel: tool-edit-and-commit (raw 108 channel #1) — second instance after iter-8"
+  => "verifier-type: hash_eq via --selftest already PASS-witnessed in iter-8"

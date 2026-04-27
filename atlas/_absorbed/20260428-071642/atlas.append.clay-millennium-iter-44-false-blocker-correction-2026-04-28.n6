@@ -1,0 +1,73 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay millennium iter-44 FALSE-BLOCKER CORRECTION
+# iter-43 misread: v2 anchor actually dispatches 21/21 topologies
+# CLI arg-order subtlety on hetzner remote run discovered
+# raw 91 C3 strict — iter-43 conclusion partially RETRACTED
+# ══════════════════════════════════════════════════════════════
+
+@C clay-iter-44-iter-43-FALSE-BLOCKER-RETRACTED :: meta [4!]
+  <- iter-43-scope-limit-disclosure-claiming-5-of-16-coverage
+  -> iter-44-direct-source-audit-empirical_anchor_v2.hexa-lines-46-68-+-255-278
+  => "iter-43 conclusion 'v2 dispatch supports only 5/16 D=3 topologies' is FALSE"
+  => "Direct source audit:"
+  => "  E2T_* constants line 25-45: 21 topology IDs declared"
+  => "  _e2topo_id() line 48-69: 21 string-to-id mappings (hyphenated names)"
+  => "  _e2neighbor_*() line 72-251: 21 neighbor functions implemented"
+  => "  dispatch line 255-278: 21 topology branches"
+  => "iter-43 misread of error message 'valid: flat | t3 | s3 | blackhole | wormhole'"
+  => "  → that string is hardcoded help text, not actual dispatch list"
+
+@R clay-iter-44-CLI-arg-order-discovery :: meta [4]
+  => "iter-43 probe 'hexa run empirical_anchor_v2.hexa 64 vacuum_decay 6' FAILED:"
+  => "  args[2] used as topology → 'unknown topology=64'"
+  => "  TWO bugs simultaneously: (1) underscore vs hyphen, (2) arg index shift"
+  => "iter-44 corrected probe 'hexa run empirical_anchor_v2.hexa vacuum-decay 64 6':"
+  => "  args[2] = (script path, non-int) → ticks defaults to 50"
+  => "  args[3] = 'vacuum-decay' → topology ✓"
+  => "  args[4] = '64' → seed=64 (NOT ticks!)"
+  => "  args[5] = '6' → IGNORED"
+  => "Effective hetzner CLI grammar: <topology> <seed> (ticks always 50)"
+
+@R clay-iter-44-corrected-probe-vacuum-decay :: meta [4]
+  => "Single working probe (vacuum-decay, ticks=50, seed=64):"
+  => "  raw correlation: 31"
+  => "  raw T/V ratio:   15130"
+  => "  raw pair-amp:    1"
+  => "  raw phi/pi:      374"
+  => "  raw max/avg:     2600"
+  => "Topology dispatch CONFIRMED working for vacuum-decay"
+  => "Single-point — no ensemble or comparison yet"
+
+@C clay-iter-44-arg-shift-root-cause :: meta [4!]
+  => "Why hetzner run shifts args differently than local hexa --selftest:"
+  => "  hexa-resolver routes to hetzner via ssh"
+  => "  remote shell adds wrapper args before user args"
+  => "  args[0..1] = wrapper, args[2] = script path, args[3..] = user args"
+  => "  empirical_anchor_v2 hardcodes args[2]=ticks, args[3]=topo, args[4]=seed"
+  => "  → on hetzner: args[2]=script-path (non-int → ticks default 50)"
+  => "  → topology shifts to args[3], seed shifts to args[4]"
+  => "  → tied user args = 2 instead of 3"
+
+@R clay-iter-44-honest-disclosure-cumulative :: meta [4]
+  => "raw 91 C3 strict — iter-43 partial retraction:"
+  => "  iter-43 'topology coverage 5/16' = FALSE (actual 21/21)"
+  => "  iter-43 'CLI grammar <ticks> <topology> <seed>' = HALF-TRUE"
+  => "  iter-43 'runtime budget 60s/invocation' = TRUE (still applies)"
+  => "  iter-43 'multi-iter chain required' = TRUE (still applies, ticks=50 fixed)"
+  => "iter-44 corrections:"
+  => "  v2 anchor dispatches all 21 topologies (5/16 → 21/21)"
+  => "  CLI on hetzner: <topology> <seed>, ticks fixed at 50"
+  => "  Vacuum-decay probe single-point verified (correl=31, T/V=15130)"
+  => "Limitations:"
+  => "  ticks-CLI does not flow through to hetzner (default 50)"
+  => "  iter-42 D=6 ticks=64 measurement may have used different invocation path"
+  => "  Full 16-topo ensemble still requires multi-iter batch (per-call ~60s)"
+  => "  own#11 violation: 0"
+
+@R clay-iter-44-loop-discipline-20-iter-pattern :: meta [4]
+  => "iter-25..iter-43 (19 prior cascade iters)"
+  => "iter-44 = false-blocker retraction + arg-order discovery"
+  => "20-iter scientific cascade — raw 91 C3 actively enforced 16×"
+  => "Loop self-correcting demonstrated again: false claim → direct audit → correction"
+  => "Next iter: extend script to take args via env or stdin to bypass arg shift"

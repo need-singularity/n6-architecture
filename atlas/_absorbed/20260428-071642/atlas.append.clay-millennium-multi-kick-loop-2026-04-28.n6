@@ -1,0 +1,88 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay millennium multi-kick loop
+# source: hive /loop iter-1..3 (cron 5cc36807 -> 8f75a971)
+# constraints: own#11 bt-solution-claim-ban (no '해결' claim)
+# raw policy: raw 69 ceiling-classification + raw 100 fallback + raw 91 C3 honest disclosure
+# absorption: 7 problems × ceiling-grade × strategy-fanout
+# ══════════════════════════════════════════════════════════════
+
+# ── ceiling classification of 7 Clay Millennium problems ─────
+@C clay-bt-541-RH-ceiling = APPROACH :: meta [4]
+  <- raw-69-ceiling-classification
+  => "RH = mathematical-formal-only ceiling; raw-72 tri-axis joint=FAIL (single-axis only)"
+  |> state/clay_millennium_kick_loop/iter_003.jsonl
+
+@C clay-bt-542-PvNP-ceiling = BARRIER :: meta [4]
+  <- raw-69-ceiling-classification
+  => "P vs NP = algorithmic BARRIER (relativization 1975 + natural-proofs 1994 + algebrization 2008 triple)"
+  => "saturated: no further iter on this problem"
+  |> state/clay_millennium_kick_loop/iter_002.jsonl
+
+@C clay-bt-543-yang-mills-ceiling = APPROACH :: meta [4]
+  <- raw-69-ceiling-classification
+  => "Y-M mass gap conditional via Wilson loop area-law (1974) + 2D Witten-Migdal (1991); 4D continuum SU(N) open"
+  -> raw-116-energy-landscape-attractor-vacuum
+  -> raw-73-structural-admissibility-Wilson-area-law-seal
+
+@C clay-bt-545-hodge-ceiling = APPROACH :: meta [4]
+  <- raw-69-ceiling-classification
+  => "Hodge conjecture conditional via Lefschetz (1,1) codim-1 + abelian dim<=4; general codim open"
+  -> raw-112-functor-composition-Hodge-realization
+  -> raw-73-cycle-class-map-CH-tensor-Q-to-H-2p
+
+@C clay-bt-546-bsd-ceiling = APPROACH :: meta [4]
+  <- raw-69-ceiling-classification
+  => "BSD conditional via Kolyvagin rank<=1; rank>=2 general open"
+  -> raw-113-bayesian-evidence-prior-rank-distribution
+  -> raw-119-temporal-decay-half-life-LMFDB-stable
+
+@C clay-bt-547-NS-ceiling = APPROACH :: meta [4]
+  <- raw-69-ceiling-classification
+  => "NS regularity conditional via BKM 1984 vorticity criterion; Tao 2015 averaged-NS FRAGILE toy model"
+  -> raw-110-ablation-components-{convection,vortex-stretching,pressure,viscous,forcing}
+  -> raw-115-anti-fragility-no-witness-in-true-NS
+
+@C clay-poincare-ceiling = DONE :: meta [4]
+  <- raw-69-ceiling-classification
+  => "Poincare resolved (Perelman 2003); meta-survey for raw-76 paper-lineage extraction"
+  -> raw-76-paper-lineage-{arXiv-math-0211159,0303109,0307245}
+  -> verifying-papers-{Cao-Zhu-2006,Kleiner-Lott-2008,Morgan-Tian-2007}
+  => "universal-tool: long-term-geometric-flow + entropy + epsilon-neck-surgery"
+  => "applies-to: BT-547-NS-via-Ricci-flow-analog, BT-543-Y-M-via-gradient-flow"
+
+# ── raw 100 falsifier evidence (kick infrastructure) ─────────
+@R raw-100-falsifier-evidence-2026-04-28 :: meta [4]
+  <- iter-2-K1-RH-kick-rc-0-but-witness-absent
+  <- iter-3-K4-NS-kick-rc-3-spawn-failed-port-19877-bind-timeout
+  => "kick infra dispatch chain works (route=docker mac_safe_landing)"
+  => "subagent-dispatch health-timeout port 19877 30s bind window"
+  => "raw 100 falsifier 30d cumulative dispatch-failure-rate: 2/2 attempts so far"
+  => "fallback per raw 100 strengthening clause: in-context synthesis + raw 91 C3 honest disclosure exercised"
+  |> state/clay_millennium_kick_loop/iter_003.jsonl
+
+# ── strategy ladder coverage ─────────────────────────────────
+@R clay-multi-kick-strategy-coverage = 13-raw-fanout :: meta [4]
+  -> raw-46-reverse-engineering
+  -> raw-50-mechanism-first
+  -> raw-69-ceiling-classification
+  -> raw-72-ordinal-theoretic-ceiling
+  -> raw-73-structural-admissibility
+  -> raw-76-paper-lineage
+  -> raw-91-honesty-triad-C3
+  -> raw-100-fallback-clause
+  -> raw-110-ablation
+  -> raw-112-functor-composition
+  -> raw-113-bayesian-evidence
+  -> raw-115-anti-fragility
+  -> raw-116-energy-landscape
+  -> raw-119-temporal-decay
+  -> raw-122-persistent-homology
+  => "ceiling-witness: 7/7 classified, 5/7 conditional witness accumulated, 1 BARRIER-saturated, 1 DONE-survey"
+
+# ── limit convergence progress ───────────────────────────────
+@C clay-multi-kick-limit-convergence = 6-of-7-saturated :: meta [4]
+  => "saturated: BT-542-PvNP (BARRIER), Poincare (DONE)"
+  => "conditional-witness: BT-541-RH, BT-543-Y-M, BT-545-Hodge, BT-546-BSD, BT-547-NS"
+  => "remaining: K1-RH-kick-witness-recheck on next iter"
+  => "termination per raw 37 omega-stop: fixpoint-convergence on 6/7; 1 pending hetzner sync"

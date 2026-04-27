@@ -1,0 +1,78 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay millennium iter-56 raw 91 C3 RETRACTION
+# iter-55 'seed-variance' finding RETRACTED — qs_init seed CLI was NOT wired
+# All iter-55 'seed=13' probes were ACTUALLY running with hardcoded seed=6
+# True seed-variance = 0.6% (not 9%); iter-55 finding was ticks-variance
+# ══════════════════════════════════════════════════════════════
+
+@C clay-iter-56-RETRACTION-seed-CLI-NOT-wired :: meta [4!]
+  <- iter-55-claimed-9-percent-t3-seed-variance
+  -> iter-56-direct-source-audit
+  => "iter-55 'seed-variance discovery' RETRACTED — major raw 91 C3 finding"
+  => "Root cause:"
+  => "  qs_init(6) was HARDCODED in main mode (line 438 pre-fix)"
+  => "  CLI parser at iter-54 read seed value but never passed to qs_init"
+  => "  All iter-55 'seed=13' probes ACTUALLY ran with seed=6"
+  => "Evidence:"
+  => "  iter-55 wormhole 'seed=13' hash=-7143937677 (IDENTICAL to seed=6 -7143937677)"
+  => "  iter-55 results were actually TICKS-variance (32 vs 64 ticks)"
+
+@C clay-iter-56-FIX-applied :: meta [4!]
+  => "Patch: quantum_universe.hexa main parser + qs_init call"
+  => "  Added: let mut q_seed: i64 = 6 (default)"
+  => "  Added: read seed from args[topo_idx + 1] (post-CLI-parse)"
+  => "  Changed: qs_init(6) → qs_init(q_seed)"
+  => "  Output line: now includes 'seed=N' label"
+
+@R clay-iter-56-TRUE-t3-seed-variance-MEASURED :: meta [4]
+  => "Verification probe (TRUE seed=13 wiring active):"
+  => "  cmd: hexa run quantum_universe.hexa 64 t3 13"
+  => "  output: 'start ticks=64 topology=t3 seed=13 mode=standard-Schrodinger'"
+  => "  hash=7477705932 (DIFFERENT from prior seed=6 hash, confirms seed flow)"
+  => "  norm²_initial=39304 (vs seed=6 initial=39688, difference confirms perturbation)"
+  => "  norm_drift=41 (0.10%)"
+  => "  entropy=833 (TRUE seed=13 measurement)"
+
+@R clay-iter-56-CORRECTED-axis-14-interpretation :: meta [4]
+  => "★ CORRECTED axis-14 interpretation:"
+  => "  TRUE seed-variance (seed=6 vs seed=13 at ticks=64):"
+  => "    t3:  prior-seed=6 838 → true-seed=13 833 = -5 (0.6%) STABLE"
+  => "    other topologies: pending re-measurement"
+  => ""
+  => "  TICKS-variance (ticks=32 vs ticks=64 at seed=6):"
+  => "    flat:      937 → 980 = +43 (+4.6%)"
+  => "    t3:        917 → 838 = -79 (-8.6%) ← what iter-55 mislabeled as seed"
+  => "    blackhole: 923 → 877 = -46 (-5.0%) ← what iter-55 mislabeled as seed"
+  => "    wormhole:  939 → 939 = 0 (saturated)"
+
+@R clay-iter-56-NEW-finding-relaxation-dynamics :: meta [4]
+  => "★ NEW correctly-attributed finding: TICKS-relaxation dynamics"
+  => "  flat: amplitude continues thermalizing (937 → 980 with more time)"
+  => "  t3:   amplitude DECOHERES with time (917 → 838) — toroidal phase scattering"
+  => "  blackhole: gradual amplitude redistribution (923 → 877)"
+  => "  wormhole: saturated quickly (939 → 939) — antipodal coupling fast-mixing"
+  => "Different topology relaxation timescales — Stage 2 axis"
+  => "This is the corrected version of iter-55's mislabeled finding"
+
+@R clay-iter-56-honest-disclosure :: meta [4]
+  => "raw 91 C3 strict — iter-56 retraction findings:"
+  => "  iter-55 seed-variance ranking RETRACTED (was actually ticks-variance)"
+  => "  qs_init seed CLI bug existed for 5 iters (iter-51 to iter-55)"
+  => "  iter-56 fix: q_seed CLI now properly piped to qs_init"
+  => "  TRUE t3 seed-variance MEASURED: 0.6% (very stable, not 9%)"
+  => "  axis-14 interpretation corrected: relaxation dynamics, not seed-variance"
+  => "  s3 docker-killed (mac OOM at 4g cap) — re-measurement pending"
+  => "  own#11 violation: 0"
+
+@R clay-iter-56-loop-discipline-32-iter-pattern :: meta [4]
+  => "iter-25..iter-55 (31 prior cascade iters)"
+  => "iter-56 = MAJOR RETRACTION — qs_init seed not wired, iter-55 mislabeled"
+  => "32-iter scientific cascade — raw 91 C3 actively enforced 28× (28th = retraction)"
+  => "Loop self-correcting demonstrated AGAIN:"
+  => "  iter-43: false-blocker → iter-44 retract → iter-45 fix"
+  => "  iter-55: false-attribution → iter-56 retract + fix in one iter"
+  => "Cumulative state:"
+  => "  axes 14, topologies 21, sim modules 10, stages 5/5+6+7"
+  => "  raw 91 C3 enforced 28× across 32 cascade iters"
+  => "  own#11 violation: 0 (56 iters)"

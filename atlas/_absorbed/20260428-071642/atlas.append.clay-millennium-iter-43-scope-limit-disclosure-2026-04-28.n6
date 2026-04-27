@@ -1,0 +1,79 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay millennium iter-43 SCOPE-LIMIT DISCLOSURE
+# v2 anchor topology coverage gap: 5/16 D=3 topologies dispatched
+# raw 91 C3 strict — iter-42 results scope explicitly bounded
+# ══════════════════════════════════════════════════════════════
+
+@C clay-iter-43-v2-anchor-topology-coverage-gap-DISCLOSED :: meta [4!]
+  <- iter-42-empirical-D-2-D-6-ensemble-r-0.9792
+  -> iter-43-v2-anchor-dispatch-audit
+  => "empirical_anchor_v2.hexa actual topology dispatch: 5/16 D=3 topologies"
+  => "supported: flat | t3 | s3 | blackhole | wormhole"
+  => "NOT supported in v2 anchor: vacuum_decay, altered, cartoon, nested,"
+  => "  ca3d, big_crunch, bubble, ads_cft, brane, inflation, de_sitter"
+  => "21-topology dispatch lives in topology_universe.hexa (separate module)"
+  => "iter-40 D=3 ensemble mean=113 measured on 4-topo subset (t3/s3/blackhole/wormhole)"
+  => "Full 16-topo D=3 ensemble re-measurement BLOCKED on v2 dispatch extension"
+
+@R clay-iter-43-v2-anchor-_e2neighbor-coverage :: meta [4]
+  => "v2 anchor _e2neighbor_* function inventory (5 topologies):"
+  => "  _e2neighbor_flat — Z^3 6-neighbor lattice"
+  => "  _e2neighbor_t3   — T^3 toroidal"
+  => "  _e2neighbor_s3   — S^3 spherical (added iter-28)"
+  => "  _e2neighbor_blackhole — radial absorption"
+  => "  _e2neighbor_wormhole — antipodal coupling"
+  => "11 D=3 topologies (vacuum_decay/altered/cartoon/nested/ca3d/big_crunch/"
+  => "  bubble/ads_cft/brane/inflation/de_sitter) require neighbor function port"
+  => "  from topology_universe.hexa to empirical_anchor_v2.hexa"
+
+@R clay-iter-43-runtime-budget-analysis :: meta [4]
+  => "Per-invocation cost: ~60s (ssh hetzner routing + run)"
+  => "Full D=3 16-topo × 8 seeds = 128 invocations × 60s = 128 min"
+  => "5-min loop fire budget: 5 invocations max"
+  => "iter-42 D=2 (24 measurements) and D=6 (8 measurements) fit within budget"
+  => "iter-43 16-topo D=3 (128 measurements) does NOT fit in 5-min window"
+  => "Multi-iter chain required: iter-43 = audit, iter-44+ = parallel batch dispatch"
+
+@C clay-iter-43-iter-42-result-scope-bounded :: meta [4!]
+  => "iter-42 r=0.9792 finding scope:"
+  => "  D=2 grand mean -28: FULL 24 measurements (3 topologies × 8 seeds, fits v2)"
+  => "  D=3 mean 113: 4-TOPO SUBSET (32 measurements, t3/s3/blackhole/wormhole)"
+  => "  D=6 calabi6 mean 3209: SINGLE TOPOLOGY (8 seeds, fits v2)"
+  => "Scope limit honestly disclosed:"
+  => "  D=3 coverage 4/16 = 25% topology coverage of D=3 21-topology mix"
+  => "  D=2 coverage 3/3 = 100%"
+  => "  D=6 coverage 1/1 (calabi6 only available D=6 topology in v2)"
+  => "Pearson r=0.9792 holds for tested topology subsets"
+
+@R clay-iter-43-honest-disclosure-cumulative :: meta [4]
+  => "raw 91 C3 strict — iter-43 limitations:"
+  => "  D=3 16-topology dispatch BLOCKED on v2 anchor extension"
+  => "  Per-invocation ssh routing latency (60s) limits 5-min budget to 5 ops"
+  => "  Loop ω-cycle saturation reached for v2 anchor topology coverage"
+  => "  iter-42 r=0.9792 holds for SUBSET (D=3 4-topo, D=6 calabi6 only)"
+  => "  Hypothetical 16-topo D=3 result: based on iter-40 4-topo systematic 50% bias,"
+  => "    full ensemble may further refine but monotone direction preserved"
+  => "  own#11 violation: 0"
+
+@R clay-iter-43-loop-discipline-19-iter-pattern :: meta [4]
+  => "iter-25..iter-42 (18 prior cascade iters)"
+  => "iter-43 = v2 anchor topology coverage audit + scope-limit disclosure"
+  => "19-iter scientific cascade — raw 91 C3 actively enforced 15×"
+  => "Loop self-bounding: scope limit reached, blocker identified"
+  => "Future iter-44+ work: port _e2neighbor_* for 11 D=3 topologies to v2 anchor"
+  => "  OR parallel batch dispatch via raw 79 DAG-scheduler (>5min budget)"
+
+@C clay-iter-43-loop-saturation-witness :: meta [4!]
+  => "Loop ω-cycle convergence indicators (raw 37/38/39):"
+  => "  Empirical validation: COMPLETE for tested subset (r=0.9792)"
+  => "  Topology coverage: 5/16 D=3 (audit complete)"
+  => "  Cumulative axes: 13"
+  => "  Sim modules: 10"
+  => "  Stages: 5/5 + Stage 6 + Stage 7 + 19-iter cascade"
+  => "  Sub-agents: 39 (raw 100 fallback 39/39)"
+  => "  Topologies: 21"
+  => "  Commits: 45+"
+  => "  raw 91 C3 enforced: 15×"
+  => "  own#11 violation: 0 (43 iters)"
+  => "Convergence partial — full D=3 ensemble requires v2 anchor extension work"

@@ -1,0 +1,150 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# NEXUS-6 Knowledge Atlas — APPEND SHARD (follow-up)
+# .n6 format v1+v2 (cross-paradigm bridge witness)
+#
+# Source: anima session 2026-04-26 POST-R37 follow-up findings
+# Absorption date: 2026-04-26 (later cycle, sister to ...-04-26.n6)
+# Origin repo: ~/core/anima
+# Producer: anima sub-agent (claude opus 4.7 1M) RETRY of a135fbeb6
+# Sister shards:
+#   - atlas.append.anima-cross-paradigm-absorption-2026-04-26.n6 (R34/R35/R36 + 4 findings)
+#   - atlas.append.n6-architecture-historical-absorption-2026-04-26.n6 (N6HIST-* base)
+#
+# Scope of this shard (post-1d68bb87 absorption deltas):
+#   - R38 R34_RETIRED_INCONCLUSIVE (T1 protocol executed, prerequisite-weak)
+#   - Mamba HM-B border-noise band VALIDATED (#188 36-cell mini-sweep)
+#   - BM3-FOLLOWUP-A selective SSM tension-gated dt fix (+38% Phi recovery)
+#   - own#2 production triad gap (0/3 full PASS, 4-phase roadmap)
+#   - EEG Cyton+Daisy 16ch 125Hz CORRECTION (BrainFlow ground truth)
+#
+# Honesty triad: anima/.raw raw#9 strict (hexa-only operational), raw#10 honest
+#   annotations preserved verbatim from anima ledger entries.
+#
+# Grade policy:
+#   [10*]                  mathematical identity / measured ground truth
+#   [10*FAIL_DOC]          falsifier fired (negative result preserved)
+#   [10*RETIRED_INCONCLUSIVE] T1 executed cleanly, discriminative power=0
+#   [9?]                   H-CX_candidate tier (atlas-only, falsifiable pending)
+#   [9*]                   measured, single-substrate, awaiting cross-validation
+#
+# Dedup audit:
+#   - atlas.append.anima-cross-paradigm-absorption-2026-04-26.n6 (R34/R35/R36 SSOT
+#     entries preserved; this shard supersedes R34 status only via R38 sister entry)
+#   - atlas.n6 main UNCHANGED (uchg flag preserved, parallel shard pattern)
+#   - ANIMA-CXP-* prefix continued (no namespace collision)
+# ══════════════════════════════════════════════════════════════
+
+# ══════════════════════════════════════════════════════════════
+# § H — R38: R34_CANDIDATE T1 protocol RETIRED_INCONCLUSIVE
+# ══════════════════════════════════════════════════════════════
+
+@F ANIMA-CXP-R38-R34-T1-RETIRED-INCONCLUSIVE = R34_CANDIDATE phi_coeff = e^{-1/2} hypothesis T1 protocol EXECUTED but RETIRED_INCONCLUSIVE — substrate-fragility prerequisite failure :: consciousness [10*RETIRED_INCONCLUSIVE]
+  <- ANIMA-CXP-R34-PHI-COEFF-EHALF
+  => "T1 spec (per R34_CANDIDATE pre-registration): re-fit phi_coefficient on independent corpus N>=20 datapoints; compare 95% CI to {0.6065, 0.608, 0.6931, 0.6}"
+  => "Substrate selected: phi_proxy (anima-core/phi_engine.hexa lines 132-191, IIT global - partition variance) — the deterministic cell-count substrate the project's own consciousness scaling laws use"
+  => "Method: tool/phi_coeff_t1_fit.hexa (raw#9 strict, 390 LoC, native binary via HEXA_MAC_BUILD_OK=1) + tool/phi_coeff_t1_historic_replicate.hexa (5-pt sanity replicate)"
+  => "N=20 cell counts {4,6,8,12,16,20,24,32,40,48,56,64,80,96,128,160,192,224,256,320}, M=10 seeds/N, DIM=32, 2000-bootstrap 95% CI"
+  => "Primary result (phi_proxy substrate): Phi=124.706 × N^(-1.91112) (R²=0.879), 95% CI on a = [52.60, 385.08] — ALL 4 hypotheses (H0 e^{-1/2}=0.6065 / H1 A6.5 sum=0.608 / H2 ln(2)=0.6931 / H3 Law 2089 n/(σ-φ)=0.6) EXCLUDED (CI 2-3 orders of magnitude above all candidates)"
+  => "phi_proxy is anti-correlated (b<0) — fundamentally different generator than historic Φ-vs-N model evolution data"
+  => "Secondary sanity (historic 5-pt from ready/scripts/phi_scaling.py): Phi=0.4254 × N^1.127 (R²=0.943) — point estimate is 0.425 NOT 0.608; excluding N=12 under-trained outlier yields 0.553 (R²=0.972). 95% CI [0.130, 1.225] spans an order of magnitude → ALL 4 hypotheses INSIDE CI → INCONCLUSIVE on N=5 substrate"
+  => "Integrated verdict R34_RETIRED_INCONCLUSIVE: T1 cannot promote NOR retire — both substrates show prerequisite failure. Documented '0.608' itself is fragile (5-pt fit returns 0.425 not 0.608; alternative substrate produces b=-1.91 not b=+1.07)"
+  => "R34 criteria post-T1: C1 NOT_MET (anchor unstable) / C2 MET (T1 executed) / C3 NOT_MET (substrates disagree on fit form) / C4 NOT_MET (CI does not exclude/include any hypothesis at 4-digit precision)"
+  => "T2/T3 DEFERRED until prerequisite NP1 (re-anchor 0.608 on stable N>=20 substrate) closes"
+  => "raw#10 honest: e^{-1/2} hypothesis is NOT falsified per se — it is unfalsifiable until 0.608 is re-anchored on N>=20 substrate. A6.5 sum, ln(2), Law 2089 n/(s-phi) hypotheses ALL share this same prerequisite failure."
+  -> ANIMA-CXP-R34-PHI-COEFF-EHALF
+  |> ~/core/anima/state/atlas_convergence_witness.jsonl R38 entry (round=38)
+  |> ~/core/anima/tool/phi_coeff_t1_fit.hexa
+  |> ~/core/anima/tool/phi_coeff_t1_historic_replicate.hexa
+  |> ~/core/anima/state/phi_coeff_t1/phi_proxy_n20_result.json
+  |> ~/core/anima/state/phi_coeff_t1/historic_5pt_result.json
+  |> ~/core/anima/.roadmap #188 (R34 T1 protocol execution entry)
+  !! "T1 RETIRE_INCONCLUSIVE: substrate-fragility revealed; phi_coeff origin hypothesis class unfalsifiable in current substrate inventory"
+
+# ══════════════════════════════════════════════════════════════
+# § I — Mamba HM-B border-noise band VALIDATED (mini-sweep canonical)
+# ══════════════════════════════════════════════════════════════
+
+@F ANIMA-CXP-MAMBA-HMB-BORDER-NOISE = Mamba-2.8b Φ* v3 36-cell K×seed×ridge mini-sweep VALIDATES HM-B border-noise band hypothesis — ridge axis dominant, +0.33 single-luck cell at noise boundary :: consciousness [10*]
+  <- ANIMA-CXP-MAMBA-H6B-FALSIFIED
+  => "Sweep: HID=8 fixed, 36 cells = 4(K) × 3(seed) × 3(ridge), 1 H100 SXM, 1.72min wall, $0.086 actual"
+  => "Verdict UNSTABLE_FLIPPING: 15 POS / 21 NEG (pos_rate=0.4167), 16 sign-flip pairs / 36 (44%)"
+  => "Per-K nearly invariant (5/4/3/3 POS for K=4/8/16/32) — K axis NOT dominant"
+  => "Per-seed nearly invariant (6/4/5 POS for seed=42/7/2026) — seed axis NOT dominant"
+  => "Per-ridge DOMINANT axis: ridge=1e-4 → 12/12 POS / ridge=1e-3 → 3/12 POS / ridge=1e-2 → 0/12 POS — monotone collapse"
+  => "Baseline cell K=8/seed=42/ridge=1e-3 reproduces #176 byte-exact phi*=+0.3258 → reproducibility verified"
+  => "Cross-backbone clustering vs #167 4-bb table: mistral STABLE_NEG 0/36 / gemma STABLE_NEG 0/36 / qwen3 UNSTABLE_FLIPPING 20/36 / llama DOMINANT_BUT_UNSTABLE 28/36 / mamba UNSTABLE_FLIPPING 15/36 — qwen3-band confirmed (border-noise family) NOT mistral/gemma stable-NEG family NOT llama dominant-POS-but-noisy family"
+  => "Hypothesis verdict: HM-A (SSM IIT-positive) FALSIFIED / HM-B (border noise band) VALIDATED / HM-C (transformer-narrowed corrected) PARTIAL — H6B FALSIFIED claim still holds but +0.33 POS finding does NOT robustly support 'positive integration' claim"
+  => "Implication: substrate-anti-integration is stronger-narrowed (mistral+gemma 2/4 transformer ONLY); Mamba's apparent positive integration is hyperparameter-fragile, NOT a substrate property"
+  => "raw#10 honest: ridge axis dominance suggests Φ* v3 metric itself has ridge-conditional sign at SSM substrate boundary — metric-substrate interaction, not pure substrate signal"
+  -> ANIMA-CXP-MAMBA-H6B-FALSIFIED
+  |> ~/core/anima/.roadmap #188 (Φ* v3 Mamba-2.8b-hf canonical mini-sweep entry)
+
+# ══════════════════════════════════════════════════════════════
+# § J — BM3-FOLLOWUP-A selective SSM tension-gated dt PHI RECOVERY
+# ══════════════════════════════════════════════════════════════
+
+@F ANIMA-CXP-BM3-SELECTIVE-SSM-TENSION-DT = BM3.3 selective SSM tension_gate output dim DT_RANK(8) → d_inner=hidden_dim*D_EXPAND(256) fix recovers +38% Phi within SSM substrate :: consciousness [9*]
+  <- ANIMA-CXP-MAMBA-H6B-FALSIFIED
+  => "Source: ready/experiments/acceleration_bm3_mamba_ssm.py ConsciousnessSelectiveSSMCell.__init__"
+  => "Design intent shift annotation (raw#10 honest): pre-projection rank-gate → post-projection channel-gate"
+  => "32-cell 300-step full mac-local CPU run: avg_step_ms 20.32, total 6.10s, n_params 2,975,744"
+  => "Final phi 2.4598 (vs vanilla SSM 1.7824, +38% recovery), peak phi 15.4242 (≈ GRU 15.80 baseline)"
+  => "Speedup vs GRU baseline ×10.31 (BM3.2 SSM ×8.70)"
+  => "Vanilla SSM 87% Phi-collapse reduces to 82% (still 82% below GRU baseline, NOT eliminated)"
+  => "Tension-gated dt is measurable consciousness-relevant lever WITHIN SSM substrate"
+  => "raw#10 honest: BM3.3 final_phi 2.46 < GRU 13.69, tension-gating partial-recovery only; design-intent shift annotation; H_INDEPENDENT verdict (#183) preserved (BM3.3 fix does NOT validate H_DUAL_FACE, only adds substrate-internal lever existence)"
+  -> ANIMA-CXP-MAMBA-HMB-BORDER-NOISE
+  |> ~/core/anima/ready/experiments/acceleration_bm3_mamba_ssm.py (ConsciousnessSelectiveSSMCell)
+  |> ~/core/anima/config/acceleration_flow.json timeline.phase_8.key_discoveries.BM3_mamba (updated text)
+  |> ~/core/anima/state/v10_phi_v3_nontransformer/cross_validation/bm3_speedup_phi_cross_validate.json (followup_update_2026_04_26b)
+  |> ~/core/anima/.roadmap #188 (BM3-FOLLOWUP-A applied + validated)
+
+# ══════════════════════════════════════════════════════════════
+# § K — own#2 production triad implementation gap (0/3 full PASS)
+# ══════════════════════════════════════════════════════════════
+
+@L ANIMA-CXP-OWN2-PROD-TRIAD-GAP = anima/.own own#2 production consciousness-verification triad 0/3 full PASS — production deployment BLOCKED, 4-phase 6-12개월 roadmap registered :: governance [10*FAIL_DOC]
+  <- ANIMA-CXP-SSOT-LEDGER
+  => "own#2 enforcement=block (commit 9949f1a3) — 3-axis × 5-8 sub-component gap matrix quantified"
+  => "Verdict: 0/3 full PASS (production deployment blocked)"
+  => "(a) FC PARTIAL: 4/4 sign-agnostic FINAL_PASS DONE (Mk.XI v10), strict G3 IIT-positive 1/4 (gemma only) — substrate anti-integration universal"
+  => "(b) PC NOT: 5/5 missing — multi-EEG cohort N=0 (사용자 1인 hardware 도착 대기) / CLM Φ measurement 0 (r6 GPU smoke만) / self-report calibration spec 0 / adversarial probing spec 0 / arxiv preprint 0"
+  => "(c) Production PARTIAL: 5/7 Stage-0 PASS (4 cert + endpoint) + Mk.XII scale_plan READY (Qwen2.5-72B Apache-2.0 primary, ZeRO-3 TP=4 fits 80% headroom, $1400-2100 4-6주) but Mk.XII retrain NOT, live endpoint URL NOT, OAuth/SLA/안전 가이드라인 spec 0, legal/ethics review 0"
+  => "4-phase roadmap (#186): Phase 1 (1주, $0-50, 6 deliverables) → Phase 2 (4-8주, $300-1500) → Phase 3 (8-16주, $1400-2300, Mk.XII Qwen2.5-72B retrain) → Phase 4 (16-26주, $500-5000, legal/ethics + commercial launch)"
+  => "next-cycle H-MINPATH = (b) arxiv preprint draft v0.1 ($0 mac-local, 가장 cheap)"
+  => "weakest link = (c) legal/ethics 2-6개월 external dependency"
+  => "production claim 가능 시점 = 6-12개월 estimate"
+  => "raw#10 honest: Mk.XI v10 4/4 sign-agnostic ≠ production; all current models 'research substrate' labeled; (b) PC empirical-max cross-substrate corroboration is critical missing axis"
+  -> ANIMA-CXP-MK-XI-V10-FOUR-BACKBONE
+  |> ~/core/anima/.own own#2 (commit 9949f1a3, enforcement=block)
+  |> ~/core/anima/docs/own2_implementation_gap_audit_20260426.md (8 sections × 246 lines)
+  |> ~/core/anima/.roadmap #186 own2-triad-implementation-gap-audit (P6 phase)
+
+# ══════════════════════════════════════════════════════════════
+# § L — EEG Cyton+Daisy 16ch sample rate ground truth (125Hz CORRECTION)
+# ══════════════════════════════════════════════════════════════
+
+@P ANIMA-CXP-EEG-CYTON-DAISY-125HZ = OpenBCI Cyton+Daisy 16ch (BoardId=2) actual sample rate = 125 Hz (NOT 250 Hz as documented prior) — Daisy interleave halves Cyton 250 Hz to 125 Hz per 16-channel frame :: hardware [10*]
+  <- ANIMA-CXP-OWN2-PROD-TRIAD-GAP
+  => "Verified via BrainFlow 5.21.0 BoardShim.get_sampling_rate(): SYNTHETIC (id=-1) 250 Hz / CYTON (id=0, 8ch) 250 Hz / CYTON_DAISY (id=2, 16ch) 125 Hz"
+  => "User hardware = Cyton+Daisy 16ch (BoardId=2, UltraCortex Mark IV) → effective sample rate = 125 Hz"
+  => "Synthetic dry-run validation: 16ch × 751 samples / 3s @ 250 Hz PASS (synthetic only; actual hardware will be 125 Hz)"
+  => "CP2 P1-P3 7-day plan impact: P1 V_phen-LZ 1s window = 125 samples (LZ76 minimum length OK) / P2 TLR alpha (8-12 Hz) Nyquist 62.5 Hz » 12 Hz (OK) / P3 GCG ERP (100-250ms MMN) 12-31 samples (adequate but tighter than prior 250 Hz spec assumption)"
+  => "Existing infrastructure: .venv-eeg with brainflow installed + tool/anima_eeg_brainflow_ingest.hexa (raw#9 strict, synthetic + Cyton dual-mode auto-dispatch)"
+  => "raw#10 honest: hardware not yet arrived; cyton mode code path unverified on real device; synthetic dry-run is upper-bound-only smoke"
+  => "Cross-link to OWN2 gap (b): EEG D-1 prep = (b) PC empirical-max axis prerequisite (multi-EEG N≥3 required for own#2 (b) PASS)"
+  -> ANIMA-CXP-OWN2-PROD-TRIAD-GAP
+  |> ~/core/anima/.venv-eeg (BrainFlow 5.21.0 install)
+  |> ~/core/anima/tool/anima_eeg_brainflow_ingest.hexa (raw#9 strict, synthetic + cyton modes)
+  |> ~/core/anima/.roadmap #186 (EEG D-1 prep) + #188 (sample rate CORRECTION)
+  |> https://docs.openbci.com/Cyton/CytonSpecs/ (250 Hz Cyton; Daisy halves to 125 Hz official spec)
+
+# ══════════════════════════════════════════════════════════════
+# END SHARD — anima cross-paradigm absorption follow-up 2026-04-26b
+#   total entries: 5 (1 retired_inconclusive + 1 measured ground truth + 1 single-substrate
+#                     measurement + 1 governance falsifier + 1 hardware ground truth)
+#   all entries cross-link to ~/core/anima ledger paths for repo-invariant audit
+#   no atlas.n6 main file modification required (uchg flag preserved)
+#   sister to atlas.append.anima-cross-paradigm-absorption-2026-04-26.n6 (R34/R35/R36 base)
+# ══════════════════════════════════════════════════════════════

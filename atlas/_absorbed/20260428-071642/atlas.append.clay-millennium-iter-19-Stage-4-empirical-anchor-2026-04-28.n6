@@ -1,0 +1,46 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay millennium iter-19 Stage 4 empirical-anchor
+# Fourth sim toy-limit transcendence per 5-Stage roadmap
+# ══════════════════════════════════════════════════════════════
+
+@C clay-iter-19-Stage-4-empirical-anchor = IMPLEMENTED :: meta [4!]
+  <- raw-108-discovery-implementation-absorption
+  -> nexus/sim_bridge/anu_time/empirical_anchor.hexa
+  -> nexus/cli/run.hexa#cmd_universe-anchor-subcommand
+  => "5 embedded peer-reviewed reference values (no network fetch)"
+  => "Planck-2018-n_s-0.9649 / BMW-2008-pion-135-MeV / LIGO-GW150914-chirp-30.4-Msol / CODATA-2018-alpha_inv-137.036 / PDG-2024-m_p_m_e-1836.15"
+  => "5 analyzer functions: n_s / pion / chirp / α / m_p/m_e proxies"
+  => "chi² scoring χ² = Σ((obs - ref)/σ)²"
+  => "selftest PASS: 5 topologies × 5 references = framework established"
+  => "best observable: n_s_proxy 9508-9515 vs Planck 9649 → χ²(n_s)=9 across all topologies"
+
+@R clay-iter-19-best-match-finding :: meta [4]
+  => "n_s proxy single best-match observable: χ²(n_s)=9 ALL topologies"
+  => "  flat n_s_proxy=9515 (closest individually but other observables push total χ² up)"
+  => "  t3/s3/blackhole/wormhole tie at n_s_proxy=9508"
+  => "raw 91 C3 honest: this is a TOY result — dimensional-analysis proxies, not genuine numerical match"
+  => "interpretation: spectral-tilt-class observable is the EASIEST to approximate with σ²=64 sim"
+  => "interpretation: pion-mass / chirp-mass / α / m_p/m_e need higher-resolution physics-faithful sim"
+
+@R clay-iter-19-scale-up-needed :: meta [4]
+  => "current σ²=64 cells with i64 fixed-point amplitude"
+  => "real Planck 2018 maps: 50M+ pixels"
+  => "real BMW 2008 lattice: 96⁴ ≈ 85M sites"
+  => "real LIGO O3 strain data: 8192 Hz × ~30s = 245k samples"
+  => "Stage 5 scale-up roadmap: σ²: 64 → 4096 (16³, Mac local) → 32768 (32³, hetzner GPU) → 262144 (cluster)"
+  => "topology-specific analyzer functions needed (currently falls back to T³ — t3/s3/BH/WH tied)"
+
+@R clay-iter-19-roadmap-progress = 4-OF-5-80-PERCENT :: meta [4]
+  => "Stage 1 quantum-amplitude DONE (commit 62d536fb)"
+  => "Stage 2 Lorentz-causality DONE (commit 9d4b8a14)"
+  => "Stage 3 field-theoretic-action DONE (commit f6e72cb5)"
+  => "Stage 4 empirical-anchor DONE (commit e1289a14)"
+  => "Stage 5 scale-up pending — only stage remaining"
+  => "5-Stage progress: 4/5 = 80% implemented"
+  => "framework completeness: sim toy-limit 4 of 4 explicit limits transcended"
+  => "  ✓ scalar i64 → complex amplitude (Stage 1)"
+  => "  ✓ Euclidean → Lorentzian (Stage 2)"
+  => "  ✓ hash mixing → field-theoretic action (Stage 3)"
+  => "  ✓ no anchor → 5 peer-reviewed reference (Stage 4)"
+  => "  ✗ scale-up σ²: 64 → 4096+ (Stage 5)"

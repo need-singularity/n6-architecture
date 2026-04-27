@@ -1,0 +1,40 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay millennium iter-28 anchor_v2 topology bug fix
+# Bug-fix iter following iter-25/26/27 falsification cascade
+# ══════════════════════════════════════════════════════════════
+
+@C clay-iter-28-anchor-v2-topology-fix = COMPLETE :: meta [4!]
+  <- iter-26-known-bug-discovery
+  -> nexus/sim_bridge/anu_time/empirical_anchor_v2.hexa
+  => "iter-26 발견: t3 = s3 = blackhole = wormhole (IDENTICAL output) — t3 fallback bug"
+  => "iter-28 fix: 4 distinct neighbor functions added"
+  => "  _e2neighbor_s3 (antipodal identification 4³)"
+  => "  _e2neighbor_blackhole (horizon i_BH=21 inflow)"
+  => "  _e2neighbor_wormhole (bridge axis 3)"
+  => "5 topologies now genuinely distinct in raw observables"
+
+@R clay-iter-28-distinct-fingerprints :: meta [4]
+  => "16-tick selftest after fix:"
+  => "  flat:      (1D ring, distinct from start)"
+  => "  t3:        correlation=9  T/V=32250  pair=125  phi/pi=1086  max/avg=2811"
+  => "  s3:        correlation=5  T/V=56100  pair=203  phi/pi=819   max/avg=3082"
+  => "  blackhole: correlation=8  T/V=38769  pair=125  phi/pi=1089  max/avg=2764"
+  => "  wormhole:  correlation=9  T/V=31600  pair=104  phi/pi=1126  max/avg=2887"
+  => "topology effects measurable: s3 correl=5 (lowest), wormhole pair=104 (lowest), s3 max/avg=3082 (highest)"
+
+@R clay-iter-28-honest-disclosure :: meta [4]
+  => "raw 91 C3 strict — bug fix recovers topology distinguishability ONLY"
+  => "chi² values still ASTRONOMICAL: alpha 1.87×10¹² mp_me 3.37×10¹⁰"
+  => "sim toy σ²=64 still GENUINELY FAR from physical references — unchanged"
+  => "this fix is FRAMEWORK CORRECTNESS, not new physics finding"
+  => "iter-28 is BUG-FIX iter following iter-25/26/27 falsification cascade"
+
+@R clay-iter-28-loop-discipline-pattern :: meta [4]
+  => "iter-25: falsification-1 (cross-feed χ²=1 ticks-dependent)"
+  => "iter-26: falsification-2 (circular evidence design)"
+  => "iter-27: redesign (anchor_v2 bias-free honest baseline)"
+  => "iter-28: bug-fix (topology fall-back restored)"
+  => "loop discipline pattern: falsification cascade → bug-fix iter — natural scientific flow"
+  => "raw 91 C3 honest disclosure: ACTIVELY ENFORCED 3× via parameter sweep + design audit + redesign"
+  => "own#11 violation: 0 throughout 28 iter"

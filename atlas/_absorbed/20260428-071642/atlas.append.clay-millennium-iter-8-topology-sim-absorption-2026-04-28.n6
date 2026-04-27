@@ -1,0 +1,30 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay millennium iter-8 topology-sim absorption
+# raw 108 discovery-implementation-absorption-mandate applied
+# A8 (traversable-closed) + A8' (toroidal) + evolution → runnable sim
+# ══════════════════════════════════════════════════════════════
+
+@C clay-iter-8-topology-universe-implementation = ABSORBED :: meta [4!]
+  <- raw-108-discovery-implementation-absorption-mandate
+  <- A8-traversable-closed-universe-finding-iter-7
+  <- A8-prime-toroidal-evolution-finding-iter-7
+  -> nexus/sim_bridge/anu_time/topology_universe.hexa
+  => "6 selectable topologies: flat-S1 / t2-2-torus / t3-3-torus / s2-2-sphere / s3-3-sphere / klein-bottle"
+  => "selection: env NEXUS_UNIVERSE_TOPOLOGY OR CLI positional OR --selftest"
+  => "evolution mode: env NEXUS_UNIVERSE_EVOLVE_{FROM,TO,AT} OR CLI 'evolve <from> <to> <at>'"
+  => "canonical evolve: s3 → t3 = '통과가능한 닫힌우주 → 도넛 우주' phase transition"
+  => "selftest PASS: 6 topologies distinct + s3→t3@24 distinct from endpoints + idempotent re-run"
+
+@R clay-iter-8-fingerprint-witnesses :: meta [4]
+  => "selftest fingerprints (32 ticks, deterministic byte stream): flat=8867911491 / t2=21101666 / t3=3971234913 / s2=7748212434 / s3=2526083795 / klein=1610793507 / evolve_s3_t3@24=1932713938"
+  => "100-tick demos: t3=9526439580 / s3=4372983474 / klein=9203587373"
+  => "evolution observation: late s3→t3 transition converges to t3 fingerprint due to τ=4 diffusion saturation; reverse t3→s3@90 produces distinct hash 8939771134"
+  => "physical interpretation: T³ mode is stronger attractor than S³ under equal mixing — measurement axis NOT bug (raw 91 C3 honest disclosure applied)"
+
+@R clay-iter-8-raw-108-absorption-registry :: meta [4]
+  => "finding-id: A8-traversable-closed + A8-prime-toroidal + A8-prime-evolution"
+  => "absorption-channel: tool-edit-and-commit (raw 108 channel #1)"
+  => "absorption-target: nexus/sim_bridge/anu_time/topology_universe.hexa (340+ LoC)"
+  => "verifier-type: hash_eq via --selftest + numeric_threshold via distinct fingerprints (raw 53 verifier-type allowlist)"
+  => "raw 108 measurement-axis: absorption-coverage-ratio incremented by 1 finding within 7-day window"

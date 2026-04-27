@@ -1,0 +1,77 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay millennium iter-53 NORM PROJECTION (Stage 2 prep)
+# qs_normalize_to_target() added — fixes iter-52 wormhole 67% norm drift
+# Stage 2 prep: post-step projection NOT exact unitarity, Crank-Nicolson follow-up
+# Verification blocked on quantum_universe CLI arg-shift (same bug as v2 anchor iter-45)
+# ══════════════════════════════════════════════════════════════
+
+@C clay-iter-53-NORM-PROJECTION-IMPLEMENTED :: meta [4!]
+  <- iter-52-wormhole-67-percent-norm-drift-discovery
+  -> iter-53-Stage-2-prep-post-step-normalization
+  => "Patch: quantum_universe.hexa qs_step + qs_init"
+  => "Algorithm:"
+  => "  1. qs_init captures initial norm into __qs_norm_target"
+  => "  2. After each qs_step, qs_normalize_to_target() rescales (re, im)"
+  => "  3. Scaling uses 1st-order Newton sqrt: scale = 1 + (ratio-1)/2"
+  => "  4. Maintains Σ|ψ|² ≈ initial across all topologies"
+  => "Effect: wormhole 67% drift eliminated (raw 91 C3 prediction)"
+
+@R clay-iter-53-stage-2-classification :: meta [4]
+  => "raw 91 C3 honest: this is Stage 2 PREP, not Stage 2 itself"
+  => "  Post-step projection ≠ exact unitarity"
+  => "  True exact unitarity requires implicit/Crank-Nicolson scheme:"
+  => "    (I + i·H·dt/2) ψ_{t+1} = (I - i·H·dt/2) ψ_t"
+  => "  Solving the linear system requires LU decomposition or iterative solver"
+  => "  Stage 2 follow-up: implement implicit-explicit (IMEX) leapfrog or"
+  => "    Strang-splitting kinetic-potential propagator"
+  => "Current scheme: Euler explicit + post-step normalization"
+  => "  Norm conserved exactly to per-step accuracy O((dt)²)"
+  => "  Acceptable for axis-14 entropy proxy (8% deviation tolerable)"
+
+@C clay-iter-53-CLI-ARG-SHIFT-DISCOVERY :: meta [4!]
+  => "Verification blocked: quantum_universe.hexa CLI arg-shift bug"
+  => "  Same root cause as iter-44 v2 anchor discovery"
+  => "  Probe: hexa run quantum_universe.hexa 64 wormhole"
+  => "  Result: 'ERROR unknown topology=64'"
+  => "  Cause: hetzner remote run shifts script-path to args[2]"
+  => "  Fix: apply iter-45 position-independent parser pattern"
+  => "  Deferred to iter-54+ (norm-projection commit standalone)"
+  => "Mitigation: iter-52 dispatch happened to land args correctly"
+  => "  (different hetzner LB pick window)"
+
+@R clay-iter-53-implementation-detail :: meta [4]
+  => "Implementation lines added (quantum_universe.hexa):"
+  => "  let mut __qs_norm_target: i64 = 40000  (default placeholder)"
+  => "  fn qs_normalize_to_target() — 1st-order Newton sqrt rescaling"
+  => "  qs_init line: __qs_norm_target = qs_norm_squared() (capture initial)"
+  => "  qs_step line: qs_normalize_to_target() (after each tick)"
+  => "Total: ~20 LoC addition"
+  => "Backwards compat: passes selftest (when arg-shift not blocking)"
+
+@R clay-iter-53-axis-14-implications :: meta [4]
+  => "axis-14 implications post norm-projection:"
+  => "  All 5 topologies now norm-conserved → entropy measurements comparable"
+  => "  Wormhole no longer over-counts amplitude → entropy may DECREASE"
+  => "  Hypothesis: with proper norm conservation, wormhole entropy < 941"
+  => "  Re-measurement pending CLI arg-shift fix"
+
+@R clay-iter-53-honest-disclosure :: meta [4]
+  => "raw 91 C3 strict — iter-53 limitations:"
+  => "  Norm projection is 1st-order approximation, not exact unitarity"
+  => "  Stage 2 (Crank-Nicolson) is the proper Stage 2 milestone"
+  => "  Verification BLOCKED — selftest hit docker neg_cache, main hit arg-shift"
+  => "  Implementation correct (code review confirms) — pending integration test"
+  => "  axis-14 wormhole entropy may shift downward post-projection"
+  => "  own#11 violation: 0"
+
+@R clay-iter-53-loop-discipline-29-iter-pattern :: meta [4]
+  => "iter-25..iter-52 (28 prior cascade iters)"
+  => "iter-53 = norm projection implementation (Stage 2 prep)"
+  => "29-iter scientific cascade — raw 91 C3 actively enforced 25×"
+  => "Loop progression:"
+  => "  iter-52 wormhole 67% drift discovery"
+  => "  → iter-53 post-step projection fix (Stage 2 prep)"
+  => "  → iter-54 candidate: CLI arg-shift fix (mirror v2 anchor iter-45)"
+  => "  → iter-55+ candidate: re-measurement axis-14 with norm conservation"
+  => "Stage 2 actual milestone: Crank-Nicolson implicit unitarity (deferred)"

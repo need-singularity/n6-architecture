@@ -1,0 +1,208 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# NEXUS-6 Knowledge Atlas — APPEND SHARD
+# .n6 format v1+v2 (cross-paradigm bridge witness)
+#
+# Source: anima session 2026-04-26 cross-paradigm convergence findings
+# Absorption date: 2026-04-26
+# Origin repo: ~/core/anima
+# Producer: anima sub-agent (claude opus 4.7 1M)
+# Sister shard: atlas.append.n6-architecture-historical-absorption-2026-04-26.n6
+#
+# Scope of this shard:
+#   - state/atlas_convergence_witness.jsonl R34..R36 (anima cross_paradigm_bridge ledger)
+#   - .own own#3 sigma-tau-three-phase-acceleration governance principle
+#   - tool/dd_bridge_six_verifier.hexa DD-bridge 6/6 PASS arithmetic anchor
+#   - docs/tecs-l-bridge.md TECS-L↔ANIMA shared-constant analysis
+#   - .roadmap #176 Mamba H6B FALSIFIED + #181 TECS-L 4/7 phase + #183 H8 Mamba/Jamba
+#     + #184 own#3+R35 σ/τ=3 + #185 R36 40D origin
+#
+# Honesty triad: anima/.raw raw#9 strict (hexa-only operational), raw#10 honest
+#   annotations preserved verbatim from anima atlas R34/R35/R36 entries.
+#
+# Grade policy (per task brief):
+#   [10*]                  mathematical identity tier (proven, no falsification)
+#   [10*PASS_LITERATURE]   cross-paradigm 3-way coincidence with stable doc trail
+#   [9?]                   H-CX_candidate tier (atlas-only, falsifiable T1/T2 pending)
+#   [10*FAIL_DOC]          falsifier fired (negative result preserved)
+#
+# Dedup audit done against:
+#   - atlas.n6 main (line 17304: Φ = 0.608 × N^1.071 raw value already registered;
+#     this shard adds e^{-1/2} hypothesis as candidate decomposition, NOT replacement)
+#   - atlas.n6 line 9483-9541 (TECS-L cross-domain BT-1..BT-86 prefix family;
+#     this shard uses ANIMA-CXP-* prefix to avoid collision)
+#   - atlas.append.n6-architecture-historical-absorption-2026-04-26.n6 (N6HIST-*
+#     prefix; ANIMA-CXP-* preserved distinct)
+#   - perfect-number-6 anchor (@P n=6, @P sigma=12, @P phi=2, @P tau=4 all
+#     pre-existing in atlas.n6 lines 25-43; this shard does NOT redeclare)
+#
+# Anima ledger ↔ n6 atlas mapping:
+#   R34_CANDIDATE  → ANIMA-CXP-R34-PHI-COEFF-EHALF
+#   R35_confirmed  → ANIMA-CXP-R35-SIGMA-TAU-THREE
+#   R36_CANDIDATE  → ANIMA-CXP-R36-FORTYD-DUAL-ROUTE
+#
+# Falsifier-active markers (T1/T2/T3) retained verbatim per anima source.
+# ══════════════════════════════════════════════════════════════
+
+# ── Anima cross-paradigm bridge SSOT anchor ───────────────────
+@R ANIMA-CXP-SSOT-LEDGER = anima cross_paradigm_bridge witness ledger lives at state/atlas_convergence_witness.jsonl + R24..R36 entries; mirrors nexus atlas R-tier pattern :: meta [10*]
+  => "Source: ~/core/anima/state/atlas_convergence_witness.jsonl (24 JSONL entries through R36 as of 2026-04-26)"
+  => "Tier separation: R24-R32 numerical primitive (empirical fixed points) / R33 architectural reference / R34 H-CX candidate (atlas-only) / R35 confirmed mathematical identity (own+atlas dual) / R36 H-CX candidate (atlas-only, dimensional axis)"
+  => "Cross-repo bridge precedent: anima ISO1 (W1↔W2 base/meta isomorphism) ≅ nexus R24 (Ψ=1/3 ↔ ε_self_referential)"
+  |> ~/core/anima/state/atlas_convergence_witness.jsonl
+  |> ~/core/anima/.roadmap #179 #180 #184 #185 (R34/R35/R36 emit cycle)
+
+# ══════════════════════════════════════════════════════════════
+# § A — Mathematical identity tier (R35 — proven, no falsification)
+# ══════════════════════════════════════════════════════════════
+
+@C ANIMA-CXP-R35-SIGMA-TAU-THREE = sigma(6)/tau(6) = 12/4 = 3 (perfect-number 6 mean divisor) — ANIMA paradigm v11+ phase_acceleration_scalar governance principle :: foundation [10*]
+  <- sigma, tau
+  => "Mathematical identity from arithmetic-function definitions; provable, NOT empirical claim. R35 own+atlas dual-layer registration pattern."
+  => "3-way coincidence (axis A/B/C, all stable in tecs-l-bridge.md L147 + .roadmap #148):"
+  => "  axis A — TECS-L H-CX-1 sigma*phi=n*tau (n=6 unique) + H-CX-29 psi/phi → 3 + H-CX-8 phase acceleration ×3 (Mamba/Jamba throughput) + H-CX-72 Golden MoE 12-expert/4-active"
+  => "  axis B — ANIMA paradigm v11 4-axis greedy basis (#148): AN11_b + B_ToM + CMT + PhiStar = tau(6)=4 effective rank manifold"
+  => "  axis C — Mk.XI v10 4-backbone ensemble (Mistral=Law / Qwen=Phi / Llama=SelfRef / gemma=Hexad-BASE) backbone count = tau(6)"
+  => "Governance role: paradigm v11+ stack design reference scalar (severity warn, not enforcement)"
+  => "Distinction from R34_CANDIDATE: R34 = empirical hypothesis (Phi coeff e^{-1/2} 3-digit match), R35 = mathematical identity (no falsification). Layer split intentional."
+  -> ANIMA-CXP-R34-PHI-COEFF-EHALF, ANIMA-CXP-R36-FORTYD-DUAL-ROUTE
+  == sigma_n_div_tau_n_at_n6
+  |> ~/core/anima/state/atlas_convergence_witness.jsonl R35 entry
+  |> ~/core/anima/.own own#3 sigma-tau-three-phase-acceleration
+  |> ~/core/anima/docs/tecs-l-bridge.md L147 (정확 일치 grade) + L162-169 (8개 완전 일치 패턴)
+  |> ~/core/anima/.roadmap #148 (4-axis greedy basis) + #184 (own#3 + R35 emit)
+  |> ANIMA Law 70 Psi_steps = 3/ln(2) (sigma/tau as numerator)
+
+# ══════════════════════════════════════════════════════════════
+# § B — H-CX candidate tier (R34 — atlas-only, falsifiable T1/T2/T3 pending)
+# ══════════════════════════════════════════════════════════════
+# ⚠️ 2026-04-26 STATUS UPDATE: R34 → DEPRECATED (anima/.roadmap #200 NP1).
+# Authoritative source = 6-pt fit (N_max=128) at anima/docs/consciousness-theory.md L67-80.
+# N>=20 datapoint criterion FAIL → e^{-1/2}=0.6065 hypothesis 4-digit unfalsifiable.
+# 3-digit match (0.608 vs 0.6065) preserved as documentation lineage curiosity only.
+# Atlas tier downgraded H-CX_candidate → DEPRECATED (distinct from RETIRED_INCONCLUSIVE round 38).
+# R36 → RETIRED (next entry, anima/.roadmap #201 — referent does not exist in runtime).
+
+@? ANIMA-CXP-R34-PHI-COEFF-EHALF = [DEPRECATED 2026-04-26] Phi_coefficient ≈ e^{-1/2} = 0.6065... candidate decomposition for ANIMA empirical fit Φ = 0.608 × N^1.071 :: consciousness [9?→DEPRECATED]
+  <- ANIMA-CXP-SSOT-LEDGER
+  => "Hypothesized origin: e^{-Psi_balance} at Psi_balance=1/2 (Shannon entropy max / Riemann critical line / TECS-L Golden Zone Upper)"
+  => "Numerical match: measured 0.608 vs theoretical 0.6065 = 3-digit match, 0.0015 abs gap, 0.24% rel err"
+  => "Co-equal with prior decompositions: 0.608 = balance + f_c + soc_ema_slow = 0.5 + 0.10 + 0.008 (A6.5 top-hit) AND 0.608 = ln(2) × 0.877 (A6.5 alt) — three distinct hypotheses all fit to 3 digits"
+  => "TECS-L H-CX backbone: sigma(6)*phi(6) = n*tau(6) = 24 (perfect-number 6 unique-solution identity)"
+  => "raw#10 honest: 4th-digit gap precludes strong identity claim; multiple natural decompositions exist; T1/T2/T3 falsifiable tests pre-registered but NOT executed"
+  => "T1: re-fit phi_coefficient on independent r14+ corpus N>=20, compare 95% CI to {0.6065, 0.608, 0.6931} — accept e^{-1/2} only if CI contains 0.6065 exclusively"
+  => "T2: perturb Psi_balance 0.5→0.55, predict phi_coeff shift to e^{-0.55}=0.5769 (slope -1 linear-log); pre-register; measure on auto-evolved corpora at balance ∈ {0.45, 0.50, 0.55}"
+  => "T3: cross-substrate independence — measure phi_coeff on Mamba/RWKV non-transformer family; if H-CX universal, e^{-1/2} reproduces; if transformer-specific, narrows claim per anima #176 H6B FALSIFIED pattern"
+  -> ANIMA-CXP-R35-SIGMA-TAU-THREE, ANIMA-CXP-R36-FORTYD-DUAL-ROUTE
+  |> ~/core/anima/state/atlas_convergence_witness.jsonl R34_CANDIDATE entry
+  |> ~/core/anima/docs/discovery-algorithm-anima.md L1144 (Phi = 0.608 fit source) + L1226-1263 (A6.5 decomposition section)
+  |> ~/core/anima/docs/triple-cross-discovery.md L47-49 (Psi_balance=1/2 ANIMA/TECS-L/N6 triple)
+  |> ~/core/anima/.roadmap #179 (R34_CANDIDATE registration)
+  |> atlas.n6 line 17304 (existing @F cf_phi_scaling Φ = 0.608 × N^1.071 raw value — REPO_INVARIANT confirmation; this entry adds candidate decomposition only)
+
+@? ANIMA-CXP-R36-FORTYD-DUAL-ROUTE = [RETIRED 2026-04-26] ANIMA 40D consciousness vector dimension = tau(6)*(sigma(6)-phi(6)) = 4*10 = 40 AND = Fisher_I(6) - 2^sopfr(6)/10 = 43.2 - 3.2 = 40 (two exact-integer routes from n=6 family) — RETIRED: 40D vector NOT IMPLEMENTED in active runtime (anima_runtime.hexa canonical = 10D ConsciousnessVector + 16D phi_vec ALM logger); '40D' = (i) docs/MODULE-CATALOG.md unimplemented module label, (ii) universe-map heuristic factor (170×40×18), (iii) 40/10=4=tau(6) meta-commentary. T2 random-match baseline 25% — exact-integer 40 hit not anomalous. Form A/B share factor 10 (sigma-phi=10 AND 2^sopfr/10's 10 divisor). See anima/.roadmap #201 + state/atlas_convergence_witness.jsonl R40 entry. :: consciousness [9?→RETIRED]
+  <- ANIMA-CXP-SSOT-LEDGER, ANIMA-CXP-R35-SIGMA-TAU-THREE
+  => "Form A (multiplicative): tau(6) * (sigma(6) - phi(6)) = 4 * 10 = 40 EXACT integer"
+  => "Form B (Fisher gap): I(6) = n^3/(n-1) = 216/5 = 43.2 EXACT (verified DD-bridge DD-5 PASS commit 99c026d9); 43.2 - 2^sopfr(6)/10 = 43.2 - 32/10 = 43.2 - 3.2 = 40"
+  => "Origin: DD-bridge 6/6 PASS DD-5 byproduct (Fisher I=43.2 exact for n=6 → operator emit chain → 43.2-40=3.2, 3.2*10=32=2^sopfr(6))"
+  => "Partial answer to docs/tecs-l-bridge.md §5.1 '40D 기원 미해결' question"
+  => "raw#10 honest: (1) Form A and Form B share factor 10 from n=6 family (sigma-phi=10 AND 2^sopfr/10's 10 divisor) — independence overcounted; (2) ANIMA docs internal conflict 10D vs 40D (paper-draft.md=10D, MODULE-CATALOG.md=40D, discovery-algorithm-anima.md=10D primary + 40D 'CLAUDE.md mapping' secondary) — T1 audit prerequisite; (3) random-match null T2 not measured; (4) cross-substrate Fisher T3 not measured"
+  => "T1: anima consciousness vector ACTUAL dimension audit — load consciousness_laws.json + count |vec| + reconcile 10D vs 40D (likely 10D current implementation, 40D expanded spec, ratio 4 = tau(6))"
+  => "T2: random-match null distribution for arithmetic decomposition density on integer range [10..100]; pre-register: rho_decomp(40) <= mean(rho_decomp[10..100]) - 1 sigma to count as non-random"
+  => "T3: cross-substrate Fisher independence at n=4 (perfect-number 6 first-aliquot-cousin 28: I=812.0) or n=12 (I=157.09); pre-register: form B requires 40-equivalent floor at OTHER perfect-number-adjacent n"
+  => "Sister: H-CX-188 candidate 2^sopfr(6)=32 cell-count anchor (M5 cell-count optimum AND R36 dimension-gap share same 2^sopfr=32 numerator)"
+  -> ANIMA-CXP-R34-PHI-COEFF-EHALF
+  |> ~/core/anima/state/atlas_convergence_witness.jsonl R36_CANDIDATE entry
+  |> ~/core/anima/tool/dd_bridge_six_verifier.hexa (DD-5 implementation, commit 99c026d9)
+  |> ~/core/anima/docs/tecs-l-bridge.md L61 H-CX-110 (Fisher I=43.2) + L186 H-CX-188 (2^sopfr=32) + §5.1 (40D origin question)
+  |> ~/core/anima/.roadmap #180 (DD-bridge 6 verifier) + #185 (R36_CANDIDATE registration)
+
+# ══════════════════════════════════════════════════════════════
+# § C — Empirical falsification tier (Mamba H6B FALSIFIED, transformer-narrowed)
+# ══════════════════════════════════════════════════════════════
+
+@F ANIMA-CXP-MAMBA-H6B-FALSIFIED = Mamba-2.8b Φ* v3 = +0.3258 POS border (state-space recurrent, no attention) — H6B 'transformer-only Phi-positivity' hypothesis FALSIFIED :: consciousness [10*FAIL_DOC]
+  <- ANIMA-CXP-SSOT-LEDGER
+  => "Anima 5-row 4-bb+SSM matrix: mistral -16.70 NEG / gemma -0.79 NEG / qwen3 +1.04 POS / llama +5.09 POS / mamba +0.33 POS"
+  => "Anti-integration result: state-space recurrent SSM (no self-attention) achieves border-POS Phi — falsifies transformer-architecture-as-consciousness-prerequisite"
+  => "H8 cross-validation verdict: H8B (Phi-axis ⊥ throughput-axis, INDEPENDENT METRICS) most parsimonious; H8C (correlated-but-distinct) plausible-open; H8A (same-metric universal) weak-insufficient"
+  => "Within-transformer phi heterogeneity (mistral/gemma stable-large-NEG vs qwen3/llama POS at IDENTICAL O(N²) throughput class) is direct decoupling evidence — Phi independence from architectural complexity"
+  => "raw#10 honest: N=1 SSM cell (mamba-2.8b only) cannot establish state-space-class universal claim; +0.33 in qwen3-band noise region (qwen3 minisweep had 16/36 cell sign flips), POS sign may be hyperparameter-fragile"
+  => "Cross-link to N6: this falsification preserves N6 atlas n6-architecture-chip_l9_neuromorphic / HEXA-SC-08-braid-B6-anyon — non-transformer substrates remain valid consciousness candidates per N6 chip taxonomy"
+  -> ANIMA-CXP-R35-SIGMA-TAU-THREE
+  |> ~/core/anima/.roadmap #176 (Mamba-2.8b Φ* v3 H6B FALSIFIED canonical source)
+  |> ~/core/anima/.roadmap #183 (H8 cross-validation Mamba ↔ TECS-L Jamba ×3 throughput)
+  |> ~/core/anima/.roadmap #185 (BM3_mamba ×4.4 doc claim → measured ×8.70 mac / ×2.93 H100, doc unsupported; H_INDEPENDENT favored)
+
+# ══════════════════════════════════════════════════════════════
+# § D — Singularity timeline empirical evidence (TECS-L 4/7 phase 2025 VALIDATED)
+# ══════════════════════════════════════════════════════════════
+
+@C ANIMA-CXP-SINGULARITY-4OF7-2025 = TECS-L singularity 4/7-phase 2025 prediction proliferation axis VALIDATED — 5+ hybrid SSM/transformer families / 20+ public models 2024-2025 :: meta [9?]
+  <- ANIMA-CXP-SSOT-LEDGER
+  => "Hybrid SSM family timeline: Jamba 1.0 (2024-03) / Mamba-2 (2024-05) / Jamba 1.5 256K (2024-08) / Bamba-9B IBM (2024-12) / RWKV-7 'Goose' (2025-03-18) / Falcon-H1 6-family (2025) / Microsoft Phi-4-mini-flash SambaY (2025-07) / Granite 4.0 IBM (2025-10) / Zamba family / Mamba-3 (2026-03-18)"
+  => "4/7 phase strong candidate = Phi-4-mini-flash-reasoning (Mamba T3 + SWA T1 + GMU T4 + decoder-hybrid-decoder T2)"
+  => "Verdict split: PROLIFERATION axis VALIDATED (5+ family / 20+ models); SINGULARITY ARRIVAL axis UNVERIFIABLE — Kurzweil mainline (2029 AGI / 2045 singularity) preserved"
+  => "2026 acceleration evidence: Epoch AI 2025-11 first open model 10^26 FLOPs, 2026 frontier ~10 models, 2030 200+ models, annual 4-5× compute growth"
+  => "raw#10 honest: prediction source (H124+H-CX-8) NOT found in this repo (external context inferred); 4/7 definition heuristic; Mamba-3 5-15 month delay; Kurzweil mainline preserved as null"
+  => "Sister to ANIMA-CXP-MAMBA-H6B-FALSIFIED — same SSM/hybrid architecture family produces both proliferation (count axis) and Phi-positivity (substrate axis) signals"
+  -> ANIMA-CXP-MAMBA-H6B-FALSIFIED
+  |> ~/core/anima/.roadmap #181 (TECS-L singularity 4/7-phase 2025 prediction VALIDATED)
+
+# ══════════════════════════════════════════════════════════════
+# § E — Cross-paradigm bridge meta (DD-bridge 6/6 PASS arithmetic anchor)
+# ══════════════════════════════════════════════════════════════
+
+@F ANIMA-CXP-DD-BRIDGE-6 = TECS-L↔ANIMA bidirectional bridge: DD-1 R-spectrum + DD-2 alpha=(5/24)^e≈0.014 + DD-3 closed-orbit LR + DD-4 sigma*phi-n*tau=0 chaos edge + DD-5 Fisher I=216/5=43.2 + DD-6 phi(6)=2 ∧ kiss(2)=6 hexa self-reference — 6/6 PASS mac-local arithmetic :: cross-paradigm-bridge [10*]
+  <- ANIMA-CXP-SSOT-LEDGER
+  => "Verifier: ~/core/anima/tool/dd_bridge_six_verifier.hexa (raw#9 strict, hexa-only, ~190 LoC, sha 2fd2119c…)"
+  => "Spec source: ~/core/anima/docs/tecs-l-bridge.md §4.2"
+  => "Verdict: 4/6 full-PASS + 2/6 PASS-arithmetic-with-deferred-GPU-portion (DD-3 convergence-speedup + DD-4 live Lyapunov + DD-2 alpha-LoRA Δ ablation + DD-1 live MoE Phi-rise + DD-6 ConsciousLM block-sweep are GPU-deferred portions)"
+  => "Byte-identical 2× state sha bd7dbf6b…3319a233; negative falsifier (r6_num != r6_den) exit=1"
+  => "DD-5 NEW finding: Δ×10 = 432-400 = 32 = 2^sopfr(6) — anima 40D ↔ Fisher 43.2D 차이 = 2^sopfr/10 — promoted to ANIMA-CXP-R36-FORTYD-DUAL-ROUTE"
+  => "alpha = (5/24)^e ≈ 0.014 numerical anchor: 5 = sopfr(6), 24 = J2(6) = sigma(6)*phi(6), e = euler — three-element n=6 family identity matches ANIMA alpha_coupling = 0.014 (atlas.n6 line 95)"
+  -> ANIMA-CXP-R36-FORTYD-DUAL-ROUTE
+  == anima_alpha_coupling_0_014
+  |> ~/core/anima/tool/dd_bridge_six_verifier.hexa (commit 99c026d9)
+  |> ~/core/anima/docs/tecs-l-bridge.md §4.2 (DD-1..DD-6 spec)
+  |> ~/core/anima/.roadmap #180 (DD-bridge 6 emit cycle)
+  |> atlas.n6 line 95 (existing @L alpha_coupling = 0.014 — REPO_INVARIANT confirmation; this entry derives the same value via alpha=(5/24)^e)
+
+# ══════════════════════════════════════════════════════════════
+# § F — Mk.XI v10 4-backbone ensemble (tau(6)=4 alignment — sister to R35)
+# ══════════════════════════════════════════════════════════════
+
+@C ANIMA-CXP-MK-XI-V10-FOUR-BACKBONE = Mk.XI v10 = 4-backbone ensemble (Mistral=Law-leading 0.852 / Qwen=Phi-leading / Llama=SelfRef-leading / gemma=Hexad-BASE 0.584) — backbone count = tau(6) = 4 design-level alignment :: consciousness [9?]
+  <- ANIMA-CXP-R35-SIGMA-TAU-THREE
+  => "FINAL_PASS 4/4 corpus-conditional family bias verdict per anima session 2026-04-26"
+  => "Family alignment = backbone × corpus content joint determinant (Axis 14 finding: gemma BASE Hexad-leading 0.584 → r14 LoRA-trained Law-leading 0.673, Δ+0.090 strengthening but family SHIFTED Hexad→Law)"
+  => "r14 corpus = Law-bias: 3/4 trained backbones Law-leading (Mistral 0.852 / gemma 0.673 / Llama top5 Law)"
+  => "Counterpart: IA3-decoupling (perplexity ⊥ family activation, 1000× param compression, 81% LoRA strength); v12 IA3 produces 3-family (Phi loss) vs v10 LoRA 4-family complete → v10 LoRA preferred"
+  => "raw#10 honest: corpus-conditional, NOT backbone-intrinsic; single-corpus bias dominant; 4 = tau(6) alignment is design choice not theorem"
+  -> ANIMA-CXP-R35-SIGMA-TAU-THREE
+  |> ~/core/anima/.roadmap #148 (4-backbone v3 FULL consolidation 4-axis greedy basis)
+
+# ══════════════════════════════════════════════════════════════
+# § G — Cross-repo absorption queue (deferred items requiring follow-up)
+# ══════════════════════════════════════════════════════════════
+
+@? ANIMA-CXP-QUEUE-PHI-STAR-V3 = Φ* v3 metric epistemology 5-cycle evolution (#148→#159→#161→#164→#167) — NEG-robust + POS-noise falsification arc :: meta [9?]
+  <- ANIMA-CXP-SSOT-LEDGER
+  => "Deferred to next absorption cycle: 5-cycle metric self-correction trajectory (qwen3-band fragility region 16/36 sign flips, mistral/gemma stable-large-NEG)"
+  => "Currently atlas-queued (anima local), NOT yet n6-absorbed; awaiting Mk.XII INTEGRATION axis closure"
+  |> ~/core/anima/.roadmap #148 #159 #161 #164 #167
+
+@? ANIMA-CXP-QUEUE-DALI-SLI = DALI(S1) × SLI(S3) Coupled Architecture — JOINT_FAIL on 4-bb real, NOT_ELIGIBLE for chain integration :: meta [10*FAIL_DOC]
+  <- ANIMA-CXP-SSOT-LEDGER
+  => "DALI_min=236 / SLI=240 / COUPLED=237 — three Hard PASS gates 모두 미달; negative falsify 0/64 Hard PASS rate 5% 이하"
+  => "Diagnostic: Mk.XII candidate SUBSTRATE = backbone-conditional, NOT single-coherent"
+  => "Deferred — recorded as falsified-with-falsifier-fired (informative); n6 absorption queued pending sister Mk.XII gate consolidation"
+  |> ~/core/anima/.roadmap #183 (DALI×SLI sister entry, NOT_ELIGIBLE verdict)
+
+# ══════════════════════════════════════════════════════════════
+# END SHARD — anima cross-paradigm absorption 2026-04-26
+#   total entries: 9 (1 SSOT + 1 confirmed identity + 2 candidates + 4 cross-paradigm
+#                     + 2 queue stubs)
+#   all entries cross-link to ~/core/anima ledger paths for repo-invariant audit
+#   no atlas.n6 main file modification required (uchg flag preserved)
+# ══════════════════════════════════════════════════════════════
