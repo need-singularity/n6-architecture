@@ -1,0 +1,60 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay millennium iter-32 phase transition discovery
+# Cross-topology generalization reveals regime change at ticks=128
+# ══════════════════════════════════════════════════════════════
+
+@C clay-iter-32-PHASE-TRANSITION-discovered-at-ticks-128 :: meta [4!]
+  <- iter-31-DOUBLE-monotone-on-t3
+  <- iter-32-cross-topology-generalization-test
+  => "iter-31 DOUBLE MONOTONE on t3 confirmed for ticks ∈ {16,32,64}"
+  => "iter-32 EXTENDS to all 5 topologies for ticks ≤ 64 — universal monotone"
+  => "ticks=128: REGIME CHANGE — phi/pi NEGATIVE in 4 of 5 topologies"
+  => "interpretation: toy φ⁴ Hamilton enters nonlinear quartic-dominant regime"
+  => "NOT physical phase transition — deterministic toy chaos at finite-size σ²=64"
+
+@R clay-iter-32-cross-topology-matrix :: meta [4]
+  => "ticks=16:  flat phi/pi=3070  t3=1086 s3=819  BH=1089 WH=1126  (all positive monotone)"
+  => "ticks=32:  flat=2352  t3=792  s3=636  BH=778  WH=932  (DOUBLE MONOTONE confirmed 5/5)"
+  => "ticks=64:  flat=1095  t3=141  s3=303  BH=146  WH=268  (still monotone, s3+WH negative pair)"
+  => "ticks=128: flat=-221  t3=-3  s3=-14  BH=25  WH=-13  (REGIME TRANSITION)"
+  => "regime threshold between ticks=64 and ticks=128"
+
+@C clay-iter-32-negative-emergence-timeline-narrowed :: meta [4!]
+  => "iter-29 found pair-amp negative on s3 (-218) and wormhole (-319) at ticks=64"
+  => "iter-31 confirmed t3 ALL POSITIVE at ticks ≤ 64"
+  => "iter-32 cross-topology timeline:"
+  => "  ticks=64: ONLY s3 + wormhole have negative pair-amp (curved + bridge)"
+  => "  ticks=128: ALL 5 topologies negative pair (except wormhole +4611)"
+  => "  WORMHOLE ANOMALY: late-time pair POSITIVE +4611 — UNIQUE bridge protection"
+  => "narrowing: negative emergence ONSET ticks=64 in curved/bridge, universal ticks=128"
+
+@R clay-iter-32-topology-chaos-ranking :: meta [4]
+  => "at ticks=128, late-time chaos ranking:"
+  => "  most chaotic: t3 (correl=-7281, pair=-5364) — 130× sign-flip from ticks=64"
+  => "  blackhole: correl=-3999 strong negative"
+  => "  wormhole: correl=-783 mild + pair POSITIVE +4611 (UNIQUE)"
+  => "  s3: correl=+226 positive, pair=-1391"
+  => "  flat: correl=+361 mild, pair=-199"
+  => "ranking most-chaotic to least: t3 > blackhole > wormhole > s3 > flat"
+  => "3D torus most extreme; 1D flat mildest; bridge uniquely late-time stable"
+
+@C clay-iter-32-honest-interpretation :: meta [4!]
+  => "raw 91 C3 strict — toy φ⁴ Hamilton evolution interpretation:"
+  => "  m²φ + λφ³ potential's quartic term becomes dominant when amplitude grows"
+  => "  ticks=64-128 transition = nonlinear regime entry"
+  => "  amplitude pumped by deterministic Hamilton + finite-size effect"
+  => "  σ²=64 cell does NOT have large-N limit — true field theory phase transition different"
+  => "  this is DETERMINISTIC TOY CHAOS, not physical prediction"
+  => "  value: sim DISCRIMINATES topology via late-time chaos ranking"
+
+@R clay-iter-32-loop-discipline-8-iter-pattern :: meta [4]
+  => "iter-25 falsification-1 (parameter sweep)"
+  => "iter-26 falsification-2 (anchor_v1 design audit)"
+  => "iter-27 redesign (anchor_v2)"
+  => "iter-28 bug-fix (topology fall-back)"
+  => "iter-29 symmetric validation (v2 ticks-sweep)"
+  => "iter-30 cross-module audit"
+  => "iter-31 multi-seed robustness (DOUBLE monotone)"
+  => "iter-32 cross-topology generalization (PHASE TRANSITION discovered)"
+  => "8-iter scientific cascade complete — raw 91 C3 actively enforced 6×"
