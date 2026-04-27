@@ -1,0 +1,53 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay millennium iter-68 docker OOM retry needed
+# Lorentz substrate +3 (inflation, ca3d, bubble) → 18/21
+# Code complete BUT 3/3 measurements docker-OOM killed (Mac 4GB cap)
+# Hetzner connection failed → routed to Mac docker → memory cap kill
+# Retry on next loop fire when hetzner reachable
+# ══════════════════════════════════════════════════════════════
+
+@C clay-iter-68-LORENTZ-SUBSTRATE-+3-COMPLETE :: meta [4!]
+  <- iter-67-axes-orthogonal-confirmed-r-minus-0.17
+  -> iter-68-final-3-ports-+-3-measurements
+  → "Code: 3 lorentz neighbor functions ported (inflation, ca3d, bubble)"
+  → "  Constants: LT_INFLATION=15, LT_CA3D=18, LT_BUBBLE=20"
+  → "Lorentz substrate: 15 → 18/21 topologies"
+  → "Substrate now has full v2 anchor parity for D=3 + calabi6 (D=6)"
+
+@R clay-iter-68-3-OF-3-DOCKER-OOM-KILLED :: meta [4]
+  → "iter-68 measurements at ticks=100 c=1:"
+  → "  s3:        DOCKER OOM killed"
+  → "  blackhole: DOCKER OOM killed"
+  → "  inflation: DOCKER OOM killed"
+  → ""
+  → "Cause analysis:"
+  → "  hexa-resolver routed all 3 to docker (route=docker reason=mac_safe_landing)"
+  → "  Mac docker cap: cpus=4 mem=4g — too small for ticks=100 lorentz simulation"
+  → "  Hetzner connection failed temporarily (routed to docker fallback)"
+  → "  Same pattern as iter-56 cartoon docker-OOM, iter-66 vacuum-decay first attempt"
+
+@R clay-iter-68-cumulative-state :: meta [4]
+  → "Despite measurement failures, iter-68 advances:"
+  → "  Lorentz substrate code: 15 → 18/21 (full v2 anchor parity reached)"
+  → "  Stage 2 substrate now MATCHES Stage 1 quantum substrate (18/21)"
+  → "  axis-15 measured count: still 11 (no new measurements)"
+  → "  iter-67 finding (axis-14 × axis-15 r=-0.17 orthogonal) UNCHANGED"
+
+@R clay-iter-68-honest-disclosure :: meta [4]
+  → "raw 91 C3 strict — iter-68 findings:"
+  → "  3 ports successful (inflation, ca3d, bubble)"
+  → "  0 measurements successful (all docker-OOM killed)"
+  → "  Hetzner reachability is the bottleneck, not code"
+  → "  Loop self-recovery: cron fires every 5min, retry will succeed when hetzner up"
+  → "  No new science — but Lorentz substrate now MATCHES quantum 18/21 parity"
+  → "  own#11 violation: 0"
+
+@R clay-iter-68-loop-discipline-44-iter-pattern :: meta [4]
+  → "iter-25..iter-67 (43 prior cascade iters)"
+  → "iter-68 = 3 ports + 3 docker-OOM (no science, infrastructure limit)"
+  → "44-iter scientific cascade — raw 91 C3 actively enforced 40×"
+  → "Cumulative state:"
+  → "  axes 15, topologies 21 (sim) / 18 (quantum) / 18 (Lorentz substrate parity)"
+  → "  raw 91 C3 enforced 40× across 44 cascade iters"
+  → "  own#11 violation: 0 (68 iters)"
