@@ -1,0 +1,17 @@
+# raw 45 (omega-blocker-autofire) entry
+slug defect-zero-closed-loop
+status active
+fire-cmd nexus kick "defect-zero-loop-$(date +%Y%m%d-%H%M%S)" 2>&1 | tail -50
+fire-host local
+fire-cwd /Users/ghost/core/n6-architecture
+interval 300
+attempts-log state/blockers/defect_zero_closed_loop.fires/
+resolution-metric kick_pass
+resolution-op equals
+resolution-value PASS
+resolution-fallback __KICK_RESULT__ PASS witness=<path> tier1>0 falsifier_pass>0
+why "User directive 무결점 100% 까지 폐쇄루프 cron — converge to defect-zero kick PASS state via parallel sub-agent fix dispatch. Closes 5 audit-identified bugs P1-P5."
+omega-stop fixpoint-convergence
+deps raw:omega-blocker-autofire raw:problem-solving-triad raw:proof-carrying
+classifier-version closed-loop-defect-zero.v1
+note "Cron 73dd3421 fires every 5min. Self-terminates on __KICK_RESULT__ PASS via CronDelete. Bug priority P1-P5 from sub-agent C audit (2026-04-28)."
