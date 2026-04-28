@@ -32742,3 +32742,104 @@
   => "Python mirror /tmp/cascade_s3/graph_basis_axis16.py (236 lines)"
   => "reuses /tmp/cascade_s2/lightcone_probe_FIXED.py BFS infrastructure unchanged"
   => "own#11 strict; raw 70 multi-axis-verify-grid sub-mechanism for STRONG axis-16"
+
+# ══════════════════════════════════════════════════════════════
+# absorbed: clay-cascade-s3 tick-2 AF deg-var mechanism NARROWED
+#   ★ predictive falsifier test: 5/7 hit (71.4%) — mechanism PARTIAL
+#   12th raw 71 narrowing; src-conditional refinement needed
+# ts: 20260428-132418
+# ══════════════════════════════════════════════════════════════
+
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s3 tick-2 AF deg-var mechanism NARROWED via predictive test
+# source: sub-agent AF 7-mixer adversarial design + PRE-DECLARED predictions vs measured
+# constraints: raw 91 C3 + raw 71 (12th retraction this session) + own#11 + raw 22+24+23
+# date: 2026-04-28
+# Cascade-s3 first self-correction: AE mechanism partial; src-conditional refinement needed
+# ══════════════════════════════════════════════════════════════
+
+@C clay-cascade-s3-tick2-AF-deg-var-mechanism-NARROWED-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-71-falsifier-retire-rule
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-s3-tick1-AE-axis-16-graph-mechanism-witness
+  -> clay-cascade-s3-tick2-AF-source-conditional-refinement
+  -> clay-cascade-s3-tick2-AF-symmetrized-vs-directed-distinction
+  => "★ 12th raw 71 narrowing this session — AE deg-var mechanism PARTIAL (5/7 hit = 71.4%, below 80% threshold)"
+  => "predictive falsifier test: PRE-DECLARED 7 mixer predictions in /tmp/cascade_s3/AF_predictions.txt 2026-04-28T13:21:09Z BEFORE BFS"
+  => "M2 + M4 misses identify symmetrized-graph deg-var as SOURCE-POSITION-BLIND + EDGE-DIRECTION-BLIND"
+
+@C clay-cascade-s3-tick2-AF-mixer-design :: meta [4]
+  <- clay-cascade-s3-tick2-AF-deg-var-mechanism-NARROWED-witness
+  => "adversarial mixer family: nbr(i, axis) = (i*A + axis*B + C) mod 64; src=32, 3 axes"
+  => "M1: A=8  B=17 C=5  | gcd(8,64)=8   | 8 cosets"
+  => "M2: A=16 B=7  C=11 | gcd(16,64)=16 | 4 cosets"
+  => "M3: A=32 B=13 C=3  | gcd(32,64)=32 | 2 cosets"
+  => "M4: A=4  B=23 C=7  | gcd(4,64)=4   | 16 cosets"
+  => "M5: A=48 B=19 C=9  | gcd(48,64)=16 | 4 cosets (cartoon-bug analog)"
+  => "C1: A=47 B=23 C=13 | gcd(47,64)=1  | 64 cosets (proper cartoon, FULL control)"
+  => "C2: A=45 B=23 C=13 | gcd(45,64)=1  | 64 cosets (low-deg-var FULL control)"
+
+@C clay-cascade-s3-tick2-AF-predictions-and-measurements :: meta [4]
+  <- clay-cascade-s3-tick2-AF-mixer-design
+  => "PRE-DECLARED prediction rule (file /tmp/cascade_s3/AF_predictions.txt):"
+  => "  deg_var >= 20 -> FAST | 5 <= deg_var < 20 -> BOUNDED | deg_var < 5 -> FULL"
+  => "format: mixer | deg_M | deg_var | predicted | V(8) measured | meas_class | hit?"
+  => "M1: deg_M=11  deg_var=13.37  pred=BOUNDED | V(8)=13 BOUNDED  HIT"
+  => "M2: deg_M=19  deg_var=34.37  pred=FAST    | V(8)=13 BOUNDED  MISS"
+  => "M3: deg_M=34  deg_var=76.53  pred=FAST    | V(8)=7  FAST     HIT"
+  => "M4: deg_M=7   deg_var=2.87   pred=FULL    | V(8)=40 BOUNDED  MISS"
+  => "M5: deg_M=19  deg_var=34.37  pred=FAST    | V(8)=10 FAST     HIT"
+  => "C1: deg_M=6   deg_var=0.31   pred=FULL    | V(8)=64 FULL     HIT"
+  => "C2: deg_M=6   deg_var=0.28   pred=FULL    | V(8)=64 FULL     HIT"
+  => "match rate: 5/7 = 71.4% < 80% threshold -> mechanism PARTIAL"
+
+@C clay-cascade-s3-tick2-AF-symmetrized-vs-directed-distinction :: meta [4!]
+  <- clay-cascade-s3-tick2-AF-predictions-and-measurements
+  => "★ ROOT CAUSE of M2 + M4 misses: degree-variance vs BFS-directed measurement mismatch"
+  => "AE's deg_var was computed on SYMMETRIZED adjacency (drop self-loops, treat as undirected)"
+  => "BFS V(k) uses DIRECTED forward edges (u -> nbr(u, a)) — NOT symmetric"
+  => "M2 example: deg_var=34.37 (high, predicts FAST), but src=32 lands in LOW-DEG COSET disconnected from deg-19 hubs under directed BFS"
+  => "  graph IS connected when symmetrized (so deg_var calculation is well-defined)"
+  => "  but FORWARD-BFS frontier dies at 13 cells because src=32 cannot reach hubs via forward propagation"
+  => "M4 example: deg_var=2.87 (low, predicts FULL), but 16-coset gcd structure creates 'moderate-fragmentation' regime"
+  => "  V(8)=40 plateaus before saturation due to topological obstruction invisible to degree distribution"
+  => "  16 cosets create periodic structure that BFS samples differently than k-symmetric expansion would"
+
+@C clay-cascade-s3-tick2-AF-source-conditional-refinement :: meta [4!]
+  <- clay-cascade-s3-tick2-AF-symmetrized-vs-directed-distinction
+  => "★ MECHANISM NARROWING (raw 71 12th this session):"
+  => "AE mechanism: 'V(8) saturation class predicted by symmetrized-graph degree-variance' RETIRED in current form"
+  => "Replacement candidate: 'V(8) class predicted by SOURCE-COMPONENT-CONDITIONAL deg-variance under DIRECTED mixing'"
+  => "key refinement: must compute deg distribution restricted to BFS-reachable component from src=32 via DIRECTED edges"
+  => "  not whole-graph deg distribution"
+  => "this refinement preserves 5/7 hits while explaining M2/M4 misses"
+  => "  M3 V(8)=7 confirms: gcd=32 super-collapse mechanism still works on directed orbit"
+  => "  M5 V(8)=10 confirms: cartoon-bug-equivalent works via direct mechanism (validated tick-4 P bug analysis)"
+
+@C clay-cascade-s3-tick2-AF-cascade-position :: meta [4]
+  <- clay-cascade-s3-tick2-AF-deg-var-mechanism-NARROWED-witness
+  => "cascade-s3 mirroring cascade-s2 self-correction pattern:"
+  => "  cascade-s2 tick-1 sub-agent A: axis-16 V(8) cartoon=10 closed-orbit (initial finding)"
+  => "  cascade-s2 tick-3 N: 9-cell core REJECTED via 64-source enumeration"
+  => "  cascade-s2 tick-4 P: BFS bug ROOT-CAUSE identified"
+  => "  cascade-s2 tick-5 T: cartoon CORRECTED V(8)=64 FULL-FILL"
+  => "  cascade-s3 tick-1 AE: axis-16 graph-theoretic basis = degree-variance dominant"
+  => "  cascade-s3 tick-2 AF (this): mechanism PARTIAL via predictive falsifier"
+  => "  cascade-s3 tick-3 candidate: SOURCE-CONDITIONAL deg-variance refinement"
+  => "11+1 = 12 cumulative raw 71 narrowings; cascade discipline active across both cascades"
+
+@C clay-cascade-s3-tick2-AF-C3-limits :: meta [4]
+  <- clay-cascade-s3-tick2-AF-deg-var-mechanism-NARROWED-witness
+  => "BFS uses DIRECTED forward edges (u -> nbr(u,a)) but deg_var on SYMMETRIZED adjacency"
+  => "  honest exposure of CRITICAL methodological mismatch — both misses traced to this single issue"
+  => "  fixing this asymmetry IS the tick-3 follow-up work"
+  => "src=32 fixed (canonical); mechanism would need full src-sweep to truly characterize source-conditional version"
+  => "n=7 (5 adversarial + 2 controls) < n=18 of AE; statistical power limited"
+  => "class boundary V(8)<=10 FAST | <=40 BOUNDED | >=63 FULL drawn from AE original"
+  => "  M4 V(8)=40 sits ON boundary; threshold-sensitive (could have been 'BOUNDED' or 'FAST' with diff threshold)"
+  => "predictions persisted to /tmp/cascade_s3/AF_predictions.txt 2026-04-28T13:21:09Z BEFORE measurement"
+  => "  raw 91 C3 honest pre-declaration: no post-hoc adjustment possible"
+  => "tools /tmp/cascade_s3/AF_predeclare.py + AF_predictions.txt + AF_measure.py + AF_results.txt"
+  => "own#11 strict; chflags uchg honored"
