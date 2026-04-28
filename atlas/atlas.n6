@@ -34381,3 +34381,92 @@
     }
   }
 }
+@shard cascade_s12_tick1_global_indeg_freelunch_REJECTED {
+  origin: "cascade-s12 AS sub-agent (unconditional global in-deg variance free-lunch verification)"
+  date: 2026-04-28
+  agent_id: aa31b5494fd644e2e
+  cwd: /Users/ghost/core/n6-architecture
+  raw_91_C3_disclosure: "Python mirror /tmp/cascade_s12/global_indeg_freelunch.py. Single seed=6, no bootstrap CI for D=3/D=4 affine cohorts (would strengthen rejection but unlikely to reverse multi-gate fail). D=3 affine cohort rebuilt locally (cascade-s2 originals not located) using gcd-class spread parity with cascade-s9 D=4 cohort — combinatorial parity, not Hamming-embedded original."
+
+  finding cascade-s12-AS-1 {
+    claim: "global in-deg variance discrim across 3 cohorts: D=3=1.747, D=4=1.450, non-affine=2.101 — all above 0.6 threshold superficially"
+    evidence: {
+      d3_affine: { mu: 1.6042, sd: 1.1035, discrim_baseline: 0.6879, mu_glob: 27.4444, sd_glob: 47.9470, discrim_global: 1.7471 }
+      d4_affine: { mu: 4.5017, sd: 2.2086, discrim_baseline: 0.4906, mu_glob: 46.2222, sd_glob: 67.0187, discrim_global: 1.4499 }
+      nonaffine: { mu: 1.0875, sd: 1.1726, discrim_baseline: 1.0782, mu_glob: 0.8056, sd_glob: 1.6926, discrim_global: 2.1012 }
+      mean_artifact_concern: "non-affine mu_glob=0.81 < 1.0 floor — discrim numerator inflation"
+    }
+    verdict: SUPERFICIAL PASS (discrim ≥ 0.6 all cohorts) BUT artifact-flagged
+    limit: "discrim metric std/|mean| amplifies on near-zero means; non-affine cohort triggers this artifact"
+  }
+
+  finding cascade-s12-AS-2 {
+    claim: "Pearson(base, global) within-cohort: D=3=0.71, D=4=0.37, non-affine=0.81 — 0.7 same-axis threshold MISSED on D=4"
+    evidence: {
+      pearson_d3: 0.7091
+      pearson_d4: 0.3734  ; "ambiguous band 0.3-0.7"
+      pearson_nonaffine: 0.8145
+      spearman_d3: 0.8555
+      spearman_d4: 0.6347
+      spearman_nonaffine: 0.4035
+      cross_cohort_d3_d4: 0.9849
+      cross_cohort_d3_nonaffine: -0.1536
+      cross_cohort_d4_nonaffine: -0.1441
+    }
+    verdict: PARTIAL FAIL (D=4 cohort fails 0.7 same-axis gate)
+    limit: "cross-cohort Pearson on ordinal index alignment is weak proxy when cohort layouts differ; Spearman more meaningful but still ambiguous"
+  }
+
+  finding cascade-s12-AS-3 {
+    claim: "global formulation BREAKS K=2 independence with axis-13 in 2 of 3 cohorts"
+    evidence: {
+      pearson_a13_baseline_d3: -0.1847  ; "PASS independence"
+      pearson_a13_global_d3: -0.4130    ; "FAIL — |r|>0.3"
+      pearson_a13_baseline_d4: 0.2234   ; "PASS"
+      pearson_a13_global_d4: -0.1086    ; "PASS"
+      pearson_a13_baseline_nonaffine: 0.2873  ; "PASS"
+      pearson_a13_global_nonaffine: 0.3508    ; "FAIL — |r|>0.3"
+      independence_break_count: 2  ; "of 3 cohorts"
+    }
+    verdict: FAIL (cannot drop in as axis-16 replacement — pollutes K=2 partition in 2/3 cohorts)
+    limit: "D=4 affine alone has independent global formulation — cohort-conditional K=3 D=4 candidate flagged but deferred"
+  }
+
+  retraction_NO_TRIGGER cascade_s12_AS_freelunch_rejected {
+    proposed_retraction: "14th retraction (simplification): axis-16 canonical form drops to global in-deg variance (+141% discrim)"
+    rejection_basis: [
+      "raw 91 C3 mean-denominator artifact confirmed (non-affine mu_glob=0.81)",
+      "Pearson(base, global) D=4 = 0.37 fails 0.7 same-axis threshold",
+      "K=2 independence with axis-13 broken in 2/3 cohorts (|r|=0.41 D=3, |r|=0.35 non-affine)"
+    ]
+    raw_71_invocation: TRUE  ; "looks-good-but-isn't pattern — global formulation retired from candidate pool"
+    axis_16_canonical_unchanged: "variance(src-conditional directed in-deg, BFS k=4, src=center) — cascade-s11 AR-4 simplified form maintained"
+  }
+
+  partial_finding cascade-s12-AS-4 {
+    claim: "D=4 affine cohort alone: global formulation IS independent of axis-13 (|r|=0.11) AND moderately different from baseline (Pearson 0.37) — could be D=4-conditional K=3 candidate"
+    evidence: {
+      d4_only_pearson_a13_global: -0.1086  ; "independent"
+      d4_only_pearson_base_global: 0.3734  ; "different-ish, ambiguous band"
+      cohort_conditional: TRUE
+    }
+    verdict: COHORT-CONDITIONAL CANDIDATE (8th K=3 candidate, D=4-affine-only — defer to D=4 specific cascade)
+    limit: "single cohort signal; cross-cohort failure means this is NOT a portable K=3 axis"
+  }
+
+  closure cascade_s12 {
+    status: SINGLE-TICK CLOSURE (rejection)
+    K1_anchor_unchanged: "axis-16 = variance(src-conditional directed in-deg, BFS k=4, src=center)"
+    free_lunch_retired: "global in-deg variance — raw 71 retire"
+    cohort_conditional_candidate_8: "D=4-affine-only global formulation as K=3 candidate (deferred)"
+    cascade_s13_pivot_recommendation: "pivot away from axis-16 sharpening — axis-16 work saturating. Next cascade should probe: (a) K=2 phi-pi/lightcone product structure, (b) axis-13 sign-stabilized rescue, (c) framework application to actual physics substrate beyond synthetic mixers, (d) larger N stress test"
+    framework_state: {
+      axis_16: "K=1 ANCHOR (AR-4 simplified, unchanged)"
+      axis_13: "baseline FORMULATION-CONDITIONAL on non-affine"
+      independence: "Pearson<0.3 ports across substrate × dimension"
+      K_3: "7 portable candidates rejected + 1 D=4-affine-only candidate flagged"
+      retraction_count: 13  ; "no 14th — free lunch correctly rejected"
+      cascade_discipline_proof: "cascade rejected attractive +141% discrim because it broke K=2 independence — looks-good-but-isn't pattern caught"
+    }
+  }
+}
