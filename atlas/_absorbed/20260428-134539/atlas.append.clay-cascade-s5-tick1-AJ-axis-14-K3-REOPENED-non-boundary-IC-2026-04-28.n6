@@ -1,0 +1,109 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s5 tick-1 AJ axis-14 K=3 REOPENED via non-boundary IC
+# source: sub-agent AJ 3 IC × 10 topology × 2 estimator (Shannon + Renyi-2) sweep
+# constraints: raw 91 C3 + raw 70 + raw 71 (14th finding) + own#11 + raw 22+24+23
+# date: 2026-04-28
+# AC tick-11 untested caveat closed: non-boundary IC restores discrimination ~10x
+# ══════════════════════════════════════════════════════════════
+
+@C clay-cascade-s5-tick1-AJ-axis-14-K3-REOPENED-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-70-multi-axis-verify-grid
+  <- raw-71-falsifier-retire-rule
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-s2-tick11-AC-pure-k0-IC-3D-CONFIRMED-witness
+  <- clay-cascade-s2-tick4-axis-14-renyi2-K3-DENIED-witness
+  -> clay-cascade-s5-AJ-IC-cut-alignment-saturation
+  -> clay-cascade-s5-AJ-K3-denial-conditional-NOT-robust
+  => "★ cascade-s2 AC tick-11 untested caveat CONFIRMED — non-boundary IC restores axis-14 discrimination ~10x"
+  => "Shannon disc i=32 0.080 -> i=16 0.786 / i=48 0.766; Renyi-2 i=32 0.106 -> i=16 0.837 / i=48 0.803"
+  => "axis-14 K=3 denial (cascade-s2 R) REVERSIBLE — conditional on boundary IC, NOT topology-intrinsic"
+
+@C clay-cascade-s5-AJ-3-IC-sweep-table :: meta [4]
+  <- clay-cascade-s5-tick1-AJ-axis-14-K3-REOPENED-witness
+  => "format: topology | i=16 (p/Sh/R2) | i=32 (p/Sh/R2 control) | i=48 (p/Sh/R2)"
+  => "flat:       0.9999/4/0.0002    | 0.4317/981/0.675   | 0.0003/0/0.0006"
+  => "t3:         0.7955/652/0.394   | 0.3026/843/0.548   | 0.2046/650/0.394"
+  => "s3:         0.5679/982/0.675   | 0.3926/953/0.648   | 0.2066/654/0.397"
+  => "blackhole:  0.8050/628/0.377   | 0.3286/882/0.582   | 0.1677/556/0.327"
+  => "wormhole:   0.9999/4/0.0002    | 0.3796/941/0.637   | 0.0000/0/0.0000"
+  => "ads-cft:    0.6489/912/0.608   | 0.4670/996/0.689   | 0.3541/915/0.611"
+  => "calabi6:    0.9998/4/0.0004    | 0.3780/940/0.635   | 0.0003/0/0.0006"
+  => "cartoon:    0.8581/487/0.279   | 0.3944/955/0.650   | 0.1119/395/0.222"
+  => "brane:      0.7839/680/0.414   | 0.2511/752/0.472   | 0.2158/675/0.413"
+  => "de-sitter:  0.9476/201/0.105   | 0.5024/1000/0.693  | 0.0710/264/0.141"
+
+@C clay-cascade-s5-AJ-discrimination-restored :: meta [4!]
+  <- clay-cascade-s5-AJ-3-IC-sweep-table
+  => "★ DISCRIMINATION (stddev/mean) per IC center:"
+  => "  i=16 non-boundary: p disc=0.171, Shannon disc=0.786, Renyi-2 disc=0.837"
+  => "  i=32 boundary control: p disc=0.186, Shannon disc=0.080, Renyi-2 disc=0.106"
+  => "  i=48 non-boundary: p disc=0.838, Shannon disc=0.766, Renyi-2 disc=0.803"
+  => "Shannon range: i=32 [752, 1000] (saturated near 1000); i=16 [4, 982]; i=48 [0, 915]"
+  => "saturation-band [0.40, 0.60] count: i=32 3/10; i=16 1/10; i=48 0/10"
+  => "non-boundary IC mass shifts AWAY from p=0.5: mean i=16 0.841 / i=48 0.133 vs i=32 0.383"
+
+@C clay-cascade-s5-AJ-IC-cut-alignment-saturation :: meta [4!]
+  <- clay-cascade-s5-AJ-discrimination-restored
+  => "★ MECHANISM IDENTIFIED: IC-cut alignment saturation"
+  => "wavepacket center coincident with bipartite cut location (i=32 = cut location)"
+  => "  Gaussian symmetry forces p->0.5 regardless of topology"
+  => "  neighbor-graph dynamics cannot break IC-imposed symmetry within 64 ticks"
+  => "moving center OFF the cut (i=16 -> mass left of cut -> p->1; i=48 -> mass right -> p->0)"
+  => "  creates asymmetric initial bipartite weight"
+  => "  topology-dependent transport rates across the cut become observable in late-time p"
+  => "  discrimination ∝ |center - cut| heuristic"
+  => "prediction: any cut location ≠ wavepacket center recovers discrimination"
+
+@C clay-cascade-s5-AJ-K3-denial-conditional-NOT-robust :: meta [4!]
+  <- clay-cascade-s5-AJ-IC-cut-alignment-saturation
+  => "★ raw 71 14th finding: cascade-s2 R axis-14 K=3 denial NOT robust to IC variation"
+  => "cascade-s2 R denied K=3 promotion based on:"
+  => "  Shannon disc=0.080 (noise-floor) on i=32 boundary IC"
+  => "  Renyi-2 disc=0.106 marginal on i=32 boundary IC"
+  => "  Structural coupling a14×a13 Spearman 0.519 + a14×a16 Pearson -0.370"
+  => "AJ this shard reveals: discrimination claim was IC-conditional"
+  => "  Shannon disc 10x restored on non-boundary IC — escapes saturation"
+  => "  Renyi-2 disc 8x restored on non-boundary IC"
+  => "axis-14 K=3 promotion REOPENED (NOT yet promoted)"
+  => "  reopening requires structural coupling retest under non-boundary IC"
+  => "  if a14×a13 + a14×a16 ALSO change under non-boundary IC, K=3 promotion possible"
+
+@C clay-cascade-s5-AJ-cascade-s5-position :: meta [4]
+  <- clay-cascade-s5-tick1-AJ-axis-14-K3-REOPENED-witness
+  => "cascade-s5 OPENING — axis-14 honest re-resolution"
+  => "cascade map this session:"
+  => "  s2 axis-13 universality (24 sub-agents, continuum 1D+3D+phi^4)"
+  => "  s3 axis-16 mechanism (4 sub-agents, src-cond directed in-deg confirmed)"
+  => "  s4 joint signature (1 sub-agent, NEGATIVE non-synergistic)"
+  => "  s5 axis-14 IC-conditional denial (this AJ tick-1, K=3 reopened)"
+  => "next cascade-s5 candidate (tick-2): structural coupling retest under non-boundary IC"
+  => "  if a14 decouples from a13/a16 under non-boundary IC -> axis-14 K=3 promotion confirmed"
+  => "  if structural coupling persists -> K=3 denial robust at deeper level"
+
+@C clay-cascade-s5-AJ-trapped-wavepackets :: meta [4]
+  <- clay-cascade-s5-AJ-3-IC-sweep-table
+  => "★ honest C3: 4/10 topologies hit p extrema {0, 1} at non-boundary IC:"
+  => "  flat / wormhole / calabi6 at i=16 (p=0.9999/0.9999/0.9998) and i=48 (p=0.0003/0.0000/0.0003)"
+  => "  these are IC-trapped wavepackets that don't propagate across cut"
+  => "  Shannon=0 / Renyi-2≈0 represents NO information transport, NOT discrimination signal proper"
+  => "  excluding trapped: i=16 disc drops to ~0.4-0.5 (still well above 0.10 threshold)"
+  => "  this is HONEST refinement: discrimination is partly real signal, partly trapped-mass artifact"
+  => "for proper K=3 promotion: need topologies that DO transport at non-boundary IC AND show structural decoupling"
+
+@C clay-cascade-s5-AJ-C3-limits :: meta [4]
+  <- clay-cascade-s5-tick1-AJ-axis-14-K3-REOPENED-witness
+  => "Python mirror only /tmp/cascade_s5/axis14_ic_sweep.py — not authoritative hexa run"
+  => "  re-uses cascade-s2 axis14_alt.py NEIGHBOR_FNS, qs_step, qs_half_cut_weight verbatim"
+  => "  only IC center is parametric — float arithmetic in H_renyi2 differs from per-mille fixed-point"
+  => "seed=6 single seed; per-seed variance untested at non-boundary IC"
+  => "ticks=64 fixed; longer evolution may re-symmetrize p toward 0.5 even from offset IC"
+  => "  equilibration timescale untested — discrimination might decay to cascade-s2 levels at T>>64"
+  => "center=16, 48 only; intermediate centers (8, 24, 40, 56) not swept"
+  => "  discrimination(center) curve unknown"
+  => "half-cut at i=32 fixed — alternative cut locations (i=16, i=48) not tested"
+  => "  would symmetrize the IC=32 case (rendering it the analog of current i=16/48 saturation)"
+  => "raw 71 14th: REOPENS axis-14 K=3 candidacy; does NOT promote it"
+  => "  promotion requires structural coupling retest under non-boundary IC (cascade-s5 tick-2 candidate)"
+  => "own#11 strict; chflags uchg honored"
