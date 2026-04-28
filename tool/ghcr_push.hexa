@@ -1,0 +1,195 @@
+#!/usr/bin/env bash
+# tool/ghcr_push.hexa — F-DOCKER-REGISTRY-PUSH B.3 ghcr.io 자동화 보조
+#
+# 목적: cycle 14 prep — hexa-runner Mac 로컬 image 를 ghcr.io 로 push 후
+#       ubu1 / ubu2 / hetzner 원격 host 3대에 propagate. 사용자 PAT 보유
+#       시점에서 즉시 실행 가능.
+#
+# 적용 raw 원리:
+#   raw 9   hexa-only data path
+#   raw 13  no external comms (stdout/stderr only)
+#   raw 51  4-gate kick infra audit closure (gate c-remote)
+#   raw 65  minimal-blast-radius (PAT 노출 차단)
+#   raw 71  falsifier preregistration (F-B3-GHCR-1..5)
+#   raw 77  omega-cycle witness append
+#   raw 91  C3 honest disposition (사용자 TTY 의존 차단점 명시)
+#   raw 100 institutionalized-fallback ceiling guard
+#   raw 138 audit ledger jsonl append
+#
+# 사용법:
+#   1. PAT 발급 후 (GHCR_TOKEN 파일 mode 0600 보관)
+#   2. export GHCR_USER=<github-username>
+#   3. export GHCR_TOKEN_FILE=~/.config/hexa/ghcr.token
+#   4. bash tool/ghcr_push.hexa --plan       # dry-run
+#      bash tool/ghcr_push.hexa --execute    # actual push (사용자 명시 OK 후)
+#
+# WARNING: --execute 는 사용자 직접 입력 시에만. agent 에이전트가 자동
+# 실행하지 않는다 (raw 91 C3 — TTY-bound credential entry).
+
+set -uo pipefail
+
+LEDGER="${LEDGER:-state/audit/docker_registry_push_events.jsonl}"
+IMAGE_LOCAL="${IMAGE_LOCAL:-hexa-runner:latest}"
+GHCR_NAMESPACE="${GHCR_NAMESPACE:-ghcr.io/need-singularity/hexa-runner}"
+CYCLE_TAG="${CYCLE_TAG:-cycle-14}"
+DATE_TAG="${DATE_TAG:-2026-04-28}"
+HOSTS=("${HOSTS:-ubu1 ubu2 hetzner}")
+MODE="${1:---plan}"
+
+ts() { date -u '+%Y-%m-%dT%H:%M:%SZ'; }
+
+ledger_append() {
+    # $1 = event_type, $2 = host, $3 = exit_code, $4 = note
+    local ev="$1" host="$2" code="$3" note="$4"
+    local row
+    row=$(printf '{"schema":"raw_138_docker_registry_push_v1","ts":"%s","event":"%s","host":"%s","image_local":"%s","ghcr_namespace":"%s","cycle_tag":"%s","exit_code":%s,"note":"%s","cycle":"cycle-14/F-DOCKER-REGISTRY-PUSH"}\n' \
+        "$(ts)" "$ev" "$host" "$IMAGE_LOCAL" "$GHCR_NAMESPACE" "$CYCLE_TAG" "$code" "$note")
+    mkdir -p "$(dirname "$LEDGER")"
+    printf '%s' "$row" >> "$LEDGER"
+    printf '%s' "$row"
+}
+
+preflight() {
+    echo "=== preflight (read-only) ==="
+    if ! command -v docker >/dev/null 2>&1; then
+        echo "FAIL: docker CLI 없음"; ledger_append "preflight" "mac" 2 "docker CLI missing"
+        return 2
+    fi
+    if ! docker image inspect "$IMAGE_LOCAL" >/dev/null 2>&1; then
+        echo "FAIL: 로컬 image $IMAGE_LOCAL 없음 — cycle 2 B.3 build 재수행 필요"
+        ledger_append "preflight" "mac" 2 "local image missing"
+        return 2
+    fi
+    local digest size
+    digest=$(docker image inspect "$IMAGE_LOCAL" --format '{{.Id}}')
+    size=$(docker image inspect "$IMAGE_LOCAL" --format '{{.Size}}')
+    echo "OK: $IMAGE_LOCAL → $digest ($size bytes)"
+    ledger_append "preflight" "mac" 0 "digest=$digest size=$size"
+
+    if [ "$MODE" = "--execute" ]; then
+        if [ -z "${GHCR_USER:-}" ]; then
+            echo "FAIL: GHCR_USER 환경변수 없음"; ledger_append "preflight" "mac" 2 "GHCR_USER unset"
+            return 2
+        fi
+        if [ -z "${GHCR_TOKEN_FILE:-}" ] || [ ! -r "${GHCR_TOKEN_FILE}" ]; then
+            echo "FAIL: GHCR_TOKEN_FILE 누락 또는 읽기 불가 (mode 0600 권장)"
+            ledger_append "preflight" "mac" 2 "GHCR_TOKEN_FILE unreadable"
+            return 2
+        fi
+        local mode
+        mode=$(stat -f '%Lp' "$GHCR_TOKEN_FILE" 2>/dev/null || stat -c '%a' "$GHCR_TOKEN_FILE")
+        if [ "$mode" != "600" ]; then
+            echo "WARN: $GHCR_TOKEN_FILE permission=$mode (raw 65 권장: 600)"
+            ledger_append "preflight" "mac" 0 "token_file_mode=$mode (warn)"
+        fi
+    fi
+    return 0
+}
+
+step1_login_local() {
+    echo "=== Step 1 — local docker login ghcr.io ==="
+    if [ "$MODE" != "--execute" ]; then
+        echo "[plan] cat \"\$GHCR_TOKEN_FILE\" | docker login ghcr.io -u \"\$GHCR_USER\" --password-stdin"
+        ledger_append "login_local_plan" "mac" 0 "plan-only"
+        return 0
+    fi
+    if cat "$GHCR_TOKEN_FILE" | docker login ghcr.io -u "$GHCR_USER" --password-stdin; then
+        ledger_append "login_local" "mac" 0 "Login Succeeded"
+        return 0
+    else
+        ledger_append "login_local" "mac" 1 "docker login failed"
+        return 1
+    fi
+}
+
+step2_tag() {
+    echo "=== Step 2 — tag local image for ghcr.io ==="
+    local tags=( "$CYCLE_TAG" "$DATE_TAG" "latest" )
+    for t in "${tags[@]}"; do
+        local target="$GHCR_NAMESPACE:$t"
+        if [ "$MODE" != "--execute" ]; then
+            echo "[plan] docker tag $IMAGE_LOCAL $target"
+            ledger_append "tag_plan" "mac" 0 "$target"
+        else
+            if docker tag "$IMAGE_LOCAL" "$target"; then
+                ledger_append "tag" "mac" 0 "$target"
+            else
+                ledger_append "tag" "mac" 1 "$target failed"; return 1
+            fi
+        fi
+    done
+}
+
+step3_push() {
+    echo "=== Step 3 — push to ghcr.io ==="
+    local tags=( "$CYCLE_TAG" "$DATE_TAG" "latest" )
+    for t in "${tags[@]}"; do
+        local target="$GHCR_NAMESPACE:$t"
+        if [ "$MODE" != "--execute" ]; then
+            echo "[plan] docker push $target"
+            ledger_append "push_plan" "mac" 0 "$target"
+        else
+            if docker push "$target"; then
+                ledger_append "push" "mac" 0 "$target"
+            else
+                ledger_append "push" "mac" 1 "$target failed"; return 1
+            fi
+        fi
+    done
+}
+
+step4_remote_pull() {
+    echo "=== Step 4 — remote host pull (ubu1/ubu2/hetzner) ==="
+    # shellcheck disable=SC2206
+    local hosts_arr=( ${HOSTS[@]} )
+    for h in "${hosts_arr[@]}"; do
+        local target="$GHCR_NAMESPACE:$CYCLE_TAG"
+        if [ "$MODE" != "--execute" ]; then
+            echo "[plan] ssh $h 'docker login ghcr.io ...; docker pull $target; docker tag $target $IMAGE_LOCAL'"
+            ledger_append "remote_pull_plan" "$h" 0 "plan-only"
+            continue
+        fi
+        # 5a login
+        if ! cat "$GHCR_TOKEN_FILE" | ssh -o ConnectTimeout=10 "$h" "docker login ghcr.io -u $GHCR_USER --password-stdin" >/dev/null; then
+            ledger_append "remote_login" "$h" 1 "ssh docker login failed"; continue
+        fi
+        ledger_append "remote_login" "$h" 0 "ok"
+        # 5b pull
+        if ! ssh "$h" "docker pull $target"; then
+            ledger_append "remote_pull" "$h" 1 "pull failed"; continue
+        fi
+        ledger_append "remote_pull" "$h" 0 "ok"
+        # 5c retag
+        if ! ssh "$h" "docker tag $target $IMAGE_LOCAL"; then
+            ledger_append "remote_retag" "$h" 1 "retag failed"; continue
+        fi
+        ledger_append "remote_retag" "$h" 0 "ok"
+        # 5d verify (node 20 + npm 10 sanity)
+        local v
+        v=$(ssh "$h" "docker run --rm $IMAGE_LOCAL sh -c 'node --version 2>/dev/null && npm --version 2>/dev/null' || echo NOT-FOUND")
+        if echo "$v" | grep -q "v20\." ; then
+            ledger_append "remote_verify" "$h" 0 "node20+npm10 ok"
+        else
+            ledger_append "remote_verify" "$h" 1 "node binary missing or wrong: $v"
+        fi
+    done
+}
+
+main() {
+    case "$MODE" in
+        --plan|--execute) ;;
+        *) echo "Usage: $0 [--plan|--execute]"; exit 64 ;;
+    esac
+    echo "ghcr_push.hexa — mode=$MODE  ledger=$LEDGER"
+    preflight || exit $?
+    step1_login_local || exit $?
+    step2_tag || exit $?
+    step3_push || exit $?
+    step4_remote_pull || exit $?
+    echo "=== done (mode=$MODE) ==="
+    if [ "$MODE" = "--plan" ]; then
+        echo "raw 91 C3: actual push 미실행. PAT 발급 + GHCR_USER + GHCR_TOKEN_FILE 후 --execute 호출."
+    fi
+}
+
+main "$@"

@@ -1,0 +1,305 @@
+#!/usr/bin/env hexa
+# hexa_weave_w5_setup.hexa — HEXA-WEAVE MVP W5 sandbox 1-command runbook
+# Cycle 14 / 2026-04-28
+# raw 9 hexa-only: shell ops wrapped via "hexa run" envelope
+# raw 65 idempotent: every step probes existence + skips if PASS
+# raw 142 D2 rollback: --rollback reverses steps 8 -> 1
+# raw 66 ai-native: failure trailer YAML to stdout
+
+name: hexa_weave_w5_setup
+version: 1.0.0
+schema: hexa/runbook/v1
+parent_proposal: proposals/hexa_weave_mvp_w5_sandbox_cycle14_prep_2026_04_28.md
+description: |
+  HEXA-WEAVE MVP W5 sandbox: 8-step setup on user-approved hosts (Mac for steps
+  1-2; ubu1 for steps 3-8). Single command dispatches all 8; idempotent +
+  rollback-able + machine-parseable failure trailer per spec §3.
+
+flags:
+  - {name: "--skip", arg: "<csv>", help: "skip listed step numbers (e.g. --skip 6,7)"}
+  - {name: "--only", arg: "<csv>", help: "run only listed step numbers"}
+  - {name: "--rollback", help: "reverse all completed steps; prompts confirm per step"}
+  - {name: "--force-rollback", help: "non-interactive rollback; logs to ~/core/hexa-weave/logs/rollback_<ts>.log"}
+  - {name: "--from", arg: "<step>", help: "resume from step number"}
+  - {name: "--dry-run", help: "print commands without executing"}
+  - {name: "--host", arg: "<mac|ubu1>", help: "host context (default: auto-detect)"}
+
+# === Step definitions ===
+steps:
+
+  - id: 1
+    label: "디렉토리 생성"
+    label_en: "directory tree creation"
+    host: ["mac", "ubu1"]
+    probe: "test -d ~/core/hexa-weave/openfold || test -d ~/core/hexa-weave/venv"
+    skip_if_probe_passes: true
+    cmd: |
+      mkdir -p ~/core/hexa-weave/{openfold,weights,test_inputs,outputs,scratch,venv,case_studies/W4_smoke,data,logs,checkpoints,configs,scripts,tests,docs}
+      ls -la ~/core/hexa-weave/
+    rollback: "rm -rf ~/core/hexa-weave/"
+    estimated_seconds: 1
+    estimated_disk_mb: 0
+    estimated_network_mb: 0
+
+  - id: 2
+    label: "python3.10 venv"
+    label_en: "python 3.10 virtual env"
+    host: ["mac", "ubu1"]
+    probe: |
+      test -x ~/core/hexa-weave/venv/bin/python && \
+      ~/core/hexa-weave/venv/bin/python --version 2>&1 | grep -q "Python 3.10"
+    skip_if_probe_passes: true
+    cmd: |
+      python3.10 -m venv ~/core/hexa-weave/venv
+      source ~/core/hexa-weave/venv/bin/activate
+      pip install --upgrade pip setuptools wheel
+    rollback: "rm -rf ~/core/hexa-weave/venv"
+    estimated_seconds: 300
+    estimated_disk_mb: 80
+    estimated_network_mb: 5
+
+  - id: 3
+    label: "PyTorch 2.5.1+cu124 + 11-pkg install"
+    label_en: "torch + numpy<2 + biopython + biotite + rdkit + pydantic + einops + ml_collections + dm-tree"
+    host: ["ubu1"]
+    probe: |
+      ~/core/hexa-weave/venv/bin/python -c "import torch; assert torch.__version__.startswith('2.5.1+cu124'), torch.__version__"
+    skip_if_probe_passes: true
+    cmd: |
+      source ~/core/hexa-weave/venv/bin/activate
+      pip install 'numpy<2.0'  # hard pin BEFORE torch
+      pip install torch==2.5.1+cu124 torchvision==0.20.1+cu124 \
+        --extra-index-url https://download.pytorch.org/whl/cu124
+      pip install biopython==1.84 biotite==1.0.1 rdkit-pypi==2024.3.5 \
+        pydantic==2.7.4 einops==0.7.0 ml_collections==0.1.1 dm-tree==0.1.8
+      python -c "import torch; print(f'torch={torch.__version__} cuda={torch.version.cuda} avail={torch.cuda.is_available()}')"
+      pip freeze > ~/core/hexa-weave/requirements.lock.actual
+    rollback: |
+      pip uninstall -y torch torchvision biopython biotite rdkit-pypi \
+        pydantic einops ml_collections dm-tree numpy
+    estimated_seconds: 600
+    estimated_disk_mb: 5000
+    estimated_network_mb: 5000
+
+  - id: 4
+    label: "OpenFold v2.2.0 shallow clone"
+    label_en: "openfold v2.2.0 shallow clone (e938c184 pin)"
+    host: ["ubu1"]
+    probe: |
+      test -d ~/core/hexa-weave/openfold/.git && \
+      cd ~/core/hexa-weave/openfold && \
+      git rev-parse HEAD | grep -q "^e938c184"
+    skip_if_probe_passes: true
+    cmd: |
+      git clone --depth 1 --branch v2.2.0 \
+        https://github.com/aqlaboratory/openfold.git \
+        ~/core/hexa-weave/openfold
+      cd ~/core/hexa-weave/openfold
+      git rev-parse HEAD                       # expect: e938c184a291bf053af3b14c1e3e8bb29aee57e2
+      git describe --tags                      # expect: v2.2.0
+      test -f openfold/model/model.py
+      test -f run_pretrained_openfold.py
+      test -f requirements.txt
+      pip install -r requirements.txt          # post-clone deps (re-resolves with numpy<2 + torch 2.5)
+    rollback: "rm -rf ~/core/hexa-weave/openfold"
+    estimated_seconds: 120
+    estimated_disk_mb: 120
+    estimated_network_mb: 120
+
+  - id: 5
+    label: "AlphaFold weights download (~3 GB)"
+    label_en: "params_model_{1..5}.pkl + ptm variants"
+    host: ["ubu1"]
+    probe: |
+      test -f ~/core/hexa-weave/weights/params/params_model_1.pkl && \
+      du -sh ~/core/hexa-weave/weights/ | awk '$1+0 >= 2.8 {exit 0} {exit 1}'
+    skip_if_probe_passes: true
+    cmd: |
+      bash ~/core/hexa-weave/openfold/scripts/download_alphafold_params.sh \
+        ~/core/hexa-weave/weights/
+      du -sh ~/core/hexa-weave/weights/        # expect: ~3.0 GB
+      ls ~/core/hexa-weave/weights/params/     # expect: params_model_1.pkl..params_model_5.pkl + ptm variants
+    rollback: "rm -rf ~/core/hexa-weave/weights/"
+    estimated_seconds: 600
+    estimated_disk_mb: 3000
+    estimated_network_mb: 3000
+
+  - id: 6
+    label: "RCSB cluster-split download (78/13/9)"
+    label_en: "Query B cluster-aware 80/10/10 split (78 train + 13 val + 9 test)"
+    host: ["ubu1", "mac"]
+    probe: |
+      test -f ~/core/hexa-weave/data/manifest.json && \
+      jq -e '.train_count + .val_count + .test_count == 100' ~/core/hexa-weave/data/manifest.json
+    skip_if_probe_passes: true
+    cmd: |
+      # Generates manifest.json + downloads 78+13+9 = 100 PDB FASTAs per cycle 10 alt2 cdhit clustering.
+      # Implementation lives in ~/core/hexa-weave/scripts/rcsb_cluster_split_fetch.py (created by Step 1).
+      # If script is absent (Step 1 only mkdir, not file write), fetch the cycle-10 sample list directly:
+      python ~/core/hexa-weave/scripts/rcsb_cluster_split_fetch.py \
+        --train 78 --val 13 --test 9 --seed 0xf927314f \
+        --out ~/core/hexa-weave/data/ \
+        2>&1 | tee ~/core/hexa-weave/logs/rcsb_split_$(date +%s).log
+    rollback: "rm -rf ~/core/hexa-weave/data/"
+    estimated_seconds: 300
+    estimated_disk_mb: 51
+    estimated_network_mb: 51
+
+  - id: 7
+    label: "sm_120 deepspeed source compile (~10 min)"
+    label_en: "deepspeed 0.15.4 source build CUDA_ARCH_LIST=8.6;9.0;12.0"
+    host: ["ubu1"]
+    probe: |
+      ~/core/hexa-weave/venv/bin/python -c "from deepspeed.ops.op_builder import EvoformerAttnBuilder; assert EvoformerAttnBuilder().is_compatible()"
+    skip_if_probe_passes: true
+    cmd: |
+      source ~/core/hexa-weave/venv/bin/activate
+      pip uninstall -y deepspeed
+      CUDA_ARCH_LIST="8.6;9.0;12.0" \
+      DS_BUILD_OPS=1 \
+      DS_BUILD_EVOFORMER_ATTN=1 \
+        pip install --no-binary deepspeed deepspeed==0.15.4
+      python -c "
+      import torch, deepspeed
+      print(f'torch.cuda.get_device_capability={torch.cuda.get_device_capability(0)}')
+      from deepspeed.ops.op_builder import EvoformerAttnBuilder
+      builder = EvoformerAttnBuilder()
+      print(f'evoformer_attn loaded={builder.is_compatible()}')
+      "
+    rollback: |
+      pip uninstall -y deepspeed
+      pip install deepspeed==0.15.4   # prebuilt sm_90 fallback
+    estimated_seconds: 600
+    estimated_disk_mb: 500
+    estimated_network_mb: 100
+    fallbacks:
+      - "PTX JIT runtime (set TORCH_USE_CUDA_DSA=1)"
+      - "prebuilt sm_90 fallback (pip install deepspeed==0.15.4)"
+
+  - id: 8
+    label: "6L1U FASTA dry-run inference"
+    label_en: "OpenFold single-seq inference on 6L1U with --bf16 + RMSD/TM/VRAM measurement"
+    host: ["ubu1"]
+    probe: "test -f ~/core/hexa-weave/outputs/predictions/6L1U_unrelaxed_model_1.pdb"
+    skip_if_probe_passes: true
+    cmd: |
+      source ~/core/hexa-weave/venv/bin/activate
+      # Stage FASTA + ref PDB
+      curl -sSL "https://www.rcsb.org/fasta/entry/6L1U" \
+        -o ~/core/hexa-weave/test_inputs/6L1U.fasta
+      curl -sSL "https://files.rcsb.org/download/6L1U.pdb" \
+        -o ~/core/hexa-weave/test_inputs/6L1U_ref.pdb
+      test -s ~/core/hexa-weave/test_inputs/6L1U.fasta
+      test -s ~/core/hexa-weave/test_inputs/6L1U_ref.pdb
+      # Background VRAM poller
+      nvidia-smi --query-gpu=memory.used,memory.free,utilization.gpu \
+        --format=csv,noheader,nounits -lms 500 \
+        > ~/core/hexa-weave/logs/vram_poller_$(date +%s).csv 2>&1 &
+      POLLER_PID=$!
+      # Inference
+      cd ~/core/hexa-weave/openfold
+      time PYTHONHASHSEED=42 python run_pretrained_openfold.py \
+        --fasta_paths ~/core/hexa-weave/test_inputs/6L1U.fasta \
+        --use_single_seq_inference \
+        --jax_param_path ~/core/hexa-weave/weights/params/params_model_1.pkl \
+        --model_device cuda:0 \
+        --bf16 \
+        --output_dir ~/core/hexa-weave/outputs/ \
+        2>&1 | tee ~/core/hexa-weave/outputs/dryrun.log
+      kill $POLLER_PID 2>/dev/null || true
+      # Measurements (RMSD + TM + peak VRAM)
+      python -c "
+      from Bio.PDB import PDBParser, Superimposer
+      parser = PDBParser(QUIET=True)
+      ref = parser.get_structure('ref', '$HOME/core/hexa-weave/test_inputs/6L1U_ref.pdb')
+      pred = parser.get_structure('pred', '$HOME/core/hexa-weave/outputs/predictions/6L1U_unrelaxed_model_1.pdb')
+      ref_atoms = [a for a in ref[0]['A'] if a.id == 'CA']
+      pred_atoms = [a for a in pred[0]['A'] if a.id == 'CA']
+      n = min(len(ref_atoms), len(pred_atoms))
+      sup = Superimposer()
+      sup.set_atoms(ref_atoms[:n], pred_atoms[:n])
+      print(f'rmsd_angstrom={sup.rms:.3f}')
+      "
+      awk -F',' 'NR>0 {if ($1+0 > max) max=$1+0} END {print \"vram_peak_mb=\"max}' \
+        ~/core/hexa-weave/logs/vram_poller_*.csv | tail -1
+      # Verifier verdict
+      python ~/core/hexa-weave/scripts/w5_verdict.py \
+        --pred ~/core/hexa-weave/outputs/predictions/6L1U_unrelaxed_model_1.pdb \
+        --ref ~/core/hexa-weave/test_inputs/6L1U_ref.pdb \
+        --vram-csv ~/core/hexa-weave/logs/vram_poller_*.csv \
+        --rmsd-max 5.0 --tm-min 0.4 --vram-max-mb 11000 \
+        --out ~/core/hexa-weave/outputs/verdict.json
+    rollback: "rm -rf ~/core/hexa-weave/outputs/"
+    estimated_seconds: 1800
+    estimated_disk_mb: 50
+    estimated_network_mb: 0
+    pass_criteria:
+      - {metric: rmsd_angstrom, threshold: "< 5.0"}
+      - {metric: tm_score, threshold: "> 0.4"}
+      - {metric: vram_peak_mb, threshold: "< 11000"}
+      - {metric: inference_rc, threshold: "== 0"}
+      - {metric: wall_seconds, threshold: "< 1800"}
+
+# === Aggregate cost ===
+aggregate:
+  total_steps: 8
+  total_disk_mb: 8821         # ~8.6 GB
+  total_network_mb: 8276      # ~8.0 GB one-shot
+  total_wall_seconds: 4421    # ~74 min sequential
+  gpu_week_burn: 0.001        # one ~30 min inference
+  reversible: true            # all 8 steps individually reversible
+
+# === Failure trailer template (raw 66 ai-native) ===
+failure_trailer_template: |
+  # === HEXA-WEAVE W5 SETUP FAILURE TRAILER ===
+  schema: hexa-weave/w5-setup-failure/v1
+  ts: ${ISO8601}
+  step_failed: ${STEP_ID}
+  step_label: "${STEP_LABEL}"
+  step_label_en: "${STEP_LABEL_EN}"
+  exit_code: ${RC}
+  stderr_tail: |
+  ${STDERR_TAIL_20}
+  host: ${HOSTNAME}
+  gpu_present: ${GPU_PRESENT}
+  disk_remaining_gb: ${DISK_REMAINING_GB}
+  suggested_fallback:
+  ${FALLBACK_LIST}
+  rollback_hint: "hexa run tool/hexa_weave_w5_setup.hexa --rollback --from ${STEP_ID}"
+  contact: multi404error@proton.me
+  parent_proposal: proposals/hexa_weave_mvp_w5_sandbox_cycle14_prep_2026_04_28.md
+  # === END TRAILER ===
+
+# === Main dispatcher (pseudocode) ===
+main: |
+  parse_flags()
+  if --rollback or --force-rollback:
+    for step in reversed(steps):
+      if probe_passes(step):
+        if --force-rollback or confirm("rollback step {step.id} {step.label}?"):
+          run(step.rollback)
+          log("rollback step {step.id} OK")
+    exit(0)
+  selected = filter_steps(--skip, --only, --from)
+  for step in selected:
+    if probe_passes(step):
+      log("step {step.id} {step.label} SKIP (probe PASS)")
+      continue
+    if --dry-run:
+      print(step.cmd)
+      continue
+    rc = run(step.cmd)
+    if rc != 0:
+      emit_failure_trailer(step, rc)
+      exit(rc)
+    log("step {step.id} {step.label} OK")
+  log("all selected steps OK")
+  exit(0)
+
+# === raw 91 C3 honest ===
+caveats:
+  - "This .hexa file is the spec; the actual hexa runner must implement step dispatch + probe + rollback + failure trailer per main pseudocode."
+  - "scripts/rcsb_cluster_split_fetch.py and scripts/w5_verdict.py are referenced but NOT YET created (W5 cycle 14 prep is forward-spec only)."
+  - "Step 7 sm_120 source compile is bleeding-edge; failure forces fallbacks (PTX JIT or prebuilt sm_90)."
+  - "Step 8 inference verdict pass criteria are deterministic (Bio.PDB.Superimposer + nvidia-smi awk) — no LLM judge."
+  - "User must dispatch on ubu1 with appropriate sudo for python3.10 install if not present (Step 2 prerequisite)."

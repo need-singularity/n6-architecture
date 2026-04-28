@@ -1,0 +1,85 @@
+{
+  "_schema_note": "Zenodo deposition metadata v1 (https://developers.zenodo.org/#representation). Generated 2026-04-28 by cycle-14 deposit-prep auto-prep. PENDING fields require user input per proposals/hexa_weave_zenodo_auto_prep_2026_04_28.md §4.",
+  "_status": "AUTO-PREP only. NOT submitted to Zenodo. NO DOI minted. NO ORCID linked. NO API call performed. PENDING fields must be resolved by user before any upload.",
+  "_cycle": 14,
+  "_predecessor_proposal": "proposals/hexa_weave_zenodo_auto_prep_2026_04_28.md",
+  "_predecessor_witness": "design/kick/2026-04-28_zenodo-auto-prep_omega_cycle.json",
+  "metadata": {
+    "upload_type": "publication",
+    "publication_type": "preprint",
+    "title": "HEXA-WEAVE Formal-Mechanical Verification: Sorry-Free Lean 4 Closure of AX-1 (n=6 Master Identity) and AX-2 (MK-Bridge) under 19 Named Axioms",
+    "_alternative_title_pending_user_choice": "HEXA-WEAVE: Multi-Strand Protein Weaving with n=6 Master Identity Trace and Lean 4 Mechanical Verification",
+    "creators": [
+      {
+        "name": "Park, M.",
+        "affiliation": "n6-architecture private research framework",
+        "orcid": "PENDING_USER_INPUT"
+      }
+    ],
+    "description": "We report a Lean 4 sorry-free mechanical verification of two HEXA-WEAVE keystones inside the n6-architecture private framework: (i) the n=6 master uniqueness identity AX-1, sigma(n)*phi(n) = n*tau(n) iff n = 6; and (ii) the AX-2 MK-bridge / strand-class closure invariants. The reverse direction and the bounded forward direction n in [2, 50] are proved unconditionally via decide / interval_cases. The unbounded tail is closed by a named axiom citing Robin 1984 + Hardy-Wright Thm 322/328 + Wigert 1907. Six MK-bridge / HEXA-COMP / Strand-encoding axioms are cited from Felgner 1971 + the n6-architecture private SSOT. Cycle-12 has 19 atomic named axioms (post-decomposition) with 3 mechanical derived theorems (step1.b / step2.b / step2.d) reducing them via mathlib4 ZFSet / Cardinal infrastructure. Zero sorry tokens in proof terms; all named axioms surfaced via #print axioms. NO Riemann Hypothesis claim, NO Clay Millennium claim, ZERO empirical claims.",
+    "keywords": [
+      "n6-architecture",
+      "formal-verification",
+      "Lean4",
+      "Mathlib4",
+      "mechanical-theorem-proving",
+      "Felgner-conservativity",
+      "Morse-Kelley-class-theory",
+      "multiplicative-number-theory"
+    ],
+    "_alternative_keywords_protein_pivot_pending_user_choice": [
+      "protein-folding",
+      "multi-strand",
+      "AlphaFold-alternative",
+      "HEXA-WEAVE",
+      "DNA-RNA-amino-composition"
+    ],
+    "license": "Apache-2.0",
+    "_alternative_license_pending_user_choice": "cc-by-4.0",
+    "notes": "Companion Lean 4 source: lean4-n6/N6/MechVerif/{AX1,AX2,MKBridge}.lean + lean4-n6/N6/MechVerif/Foundation/{Strand,Axioms}.lean. Mathlib 4 pin: rev 19c497800a418208f973be74c9f5c5901aac2f54. Lean 4 toolchain: leanprover/lean4:v4.30.0-rc1. Reproducibility: clone repo at the recorded SHA, run `lake exe cache get` (8275 oleans), run `lake build N6.MechVerif.AX1 N6.MechVerif.AX2 N6.MechVerif.MKBridge`. Expected: zero sorrys in proof terms; 19 named axioms surfaced via `#print axioms` (excluding Lean kernel propext / Classical.choice / Quot.sound). Honesty disclosure (raw 91 C3): all 19 axioms are NAMED (not silent sorry); 3 derived mechanical theorems (step1.b / step2.b / step2.d) show that the named-axiom layer is shrinking via mathlib4 ZFSet / Cardinal mechanisation; zero empirical claims; Robin 1984 cited only for unconditional sigma asymptotic, NOT for RH-equivalent sharp bound.",
+    "related_identifiers": [
+      {
+        "relation": "isSupplementTo",
+        "identifier": "PENDING_USER_INPUT_GITHUB_URL_OR_TARBALL_PATH",
+        "resource_type": "software",
+        "_options": [
+          "(a) https://github.com/<USER-ORG>/n6-architecture (public-github URL; requires repo public push, separate gate)",
+          "(b) tarball-supplementary upload of lean4-n6-mechverif-cycle12.tar.gz alongside the PDF (no public github push required)"
+        ]
+      }
+    ],
+    "contributors": [
+      {
+        "name": "Anthropic Claude (AI assistant)",
+        "type": "Other",
+        "_optional": "user may omit; byline-of-record is the human author M. Park"
+      }
+    ],
+    "references": [
+      "Felgner, U. (1971). Comparison of the axioms of local and universal choice. Studia Logica 28, 25-37. DOI: 10.1007/BF02113288.",
+      "Robin, G. (1984). Grandes valeurs de la fonction somme des diviseurs et hypothese de Riemann. J. Math. Pures Appl. 63, 187-213.",
+      "Hardy, G. H. & Wright, E. M. (1979, 5th ed.). An Introduction to the Theory of Numbers. Oxford University Press. Theorems 322 and 328.",
+      "Wigert, S. (1907). Sur l'ordre de grandeur du nombre des diviseurs d'un entier. Arkiv for Matematik, Astronomi och Fysik 3(18), 1-9.",
+      "Drake, F. R. (1974). Set Theory: An Introduction to Large Cardinals. North-Holland, Studies in Logic vol. 76.",
+      "Jech, T. (2003). Set Theory: The Third Millennium Edition. Springer Monographs in Mathematics.",
+      "Williams, S. (1976). On the Conservativeness of Morse-Kelley over Zermelo-Fraenkel. Annals of Pure and Applied Logic.",
+      "Tarski, A. (1949). On inaccessible cardinals (corroborating reference for Cardinal.IsInaccessible).",
+      "Mathlib 4 (open). Pinned at rev 19c497800a418208f973be74c9f5c5901aac2f54.",
+      "Lean 4 toolchain (leanprover/lean4:v4.30.0-rc1)."
+    ],
+    "language": "eng",
+    "access_right": "open",
+    "communities": [],
+    "version": "1.0.0-cycle12-w8++",
+    "publication_date": "2026-04-28"
+  },
+  "_pending_user_input": [
+    "creators[0].orcid (item 1 in proposal §4)",
+    "creators[0].name email reconciliation (item 2)",
+    "metadata.title vs alternative protein-folding title (item 3)",
+    "metadata.keywords vs alternative protein pivot keywords (item 4)",
+    "metadata.license Apache-2.0 vs cc-by-4.0 (item 5)",
+    "metadata.related_identifiers[0].identifier (option a public github vs option b tarball)",
+    "Zenodo API token (env var ZENODO_TOKEN) -- NEVER store in metadata.json"
+  ]
+}

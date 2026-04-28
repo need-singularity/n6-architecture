@@ -1,0 +1,42 @@
+# HEXA-WEAVE Zenodo deposit reproducibility requirements
+# Generated: 2026-04-28 (cycle 14 deposit-prep auto-prep)
+# Companion: tool/zenodo/metadata.json + papers/hexa-weave-formal-mechanical-w2-2026-04-28.md
+#
+# Purpose: pin the Python toolchain that re-executes the embedded
+# verify block (papers/hexa-weave-formal-mechanical-w2-2026-04-28.md
+# §7.1 (a)) so a Zenodo reviewer can reproduce the [2, 1000] sweep
+# yielding {6}. Also pins jq + curl version notes for the deposit
+# script.
+#
+# Lean 4 toolchain is pinned in lean4-n6/lean-toolchain (v4.30.0-rc1)
+# and Mathlib 4 rev 19c497800a418208f973be74c9f5c5901aac2f54 in
+# lean4-n6/lake-manifest.json -- those are NOT in this requirements.txt
+# (they live on the Lean side, not the Python side).
+#
+# Reproducer:
+#   python3 -m venv .zenodo-venv
+#   source .zenodo-venv/bin/activate
+#   pip install -r tool/zenodo/requirements.txt
+#   python3 tool/zenodo/verify_paper_block.py
+#   # Expected output:
+#   #   AX-1 verify-embedded PASS:
+#   #     sigma(6)=12, phi(6)=2, tau(6)=4
+#   #     bounded [2,50]    solutions: [6]
+#   #     extended [2,1000] solutions: [6]
+#   #     spec corrigendum: ax1_eq(1) = True; n=1 forces n >= 2 quantifier amend
+
+sympy>=1.12
+# sympy 1.14.0 is the version recorded on the cycle-14 build host.
+# sympy 1.12 is the minimum that exposes divisor_sigma / totient /
+# divisor_count under the names used in §7.1 (a).
+
+# requests is OPTIONAL (only used if the user opts to wrap the deposit
+# script in Python instead of bash + curl). The bash + curl path in
+# tool/zenodo/deposit.sh has zero Python dependency at deposit time.
+requests>=2.31  ; python_version >= "3.10"
+
+# OPTIONAL: PyYAML for users who want to convert the metadata.yaml
+# block in proposals/hexa_weave_zenodo_auto_prep_2026_04_28.md §2 to
+# the metadata.json shipped here. Not load-bearing for the deposit
+# itself.
+PyYAML>=6.0  ; python_version >= "3.10"

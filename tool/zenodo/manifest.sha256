@@ -1,0 +1,29 @@
+# HEXA-WEAVE Zenodo deposit SHA-256 manifest
+# Generated: 2026-04-28T09:52:07Z
+# Tool: tool/zenodo/gen_manifest.sh
+#
+# Format: <sha256>  <relative-path>
+# Compatible with: sha256sum -c  /  shasum -a 256 -c
+#
+76307c120064f436a5e5cd73b21b6f25a4325e4031c9d15e5c6a1f2b37132632  papers/hexa-weave-formal-mechanical-w2-2026-04-28.md
+15fc6ff454375885648dcf906cf488ce28e4c612c2ddf2037f51cba7934c2a89  lean4-n6/N6/MechVerif/AX1.lean
+4018d5b40c99c454bb05c822905abd997ab7c8814f759c0851e68cc40b9e2324  lean4-n6/N6/MechVerif/AX2.lean
+f86ca2af48708c215c8e85721cfde922c3bbf9d0ee4512cebe57101ded827378  lean4-n6/N6/MechVerif/MKBridge.lean
+5ff76f0e9a9af206c88dd0d34ebf8b69f963531df4dfd397b0f05c710374d147  lean4-n6/N6/MechVerif/Foundation/Strand.lean
+47452566e037dd2b7a852d80603ed540e90f370774377f439a96929c27973d0b  lean4-n6/N6/MechVerif/Foundation/Axioms.lean
+139988460d342a8941f9c9f2dbfe34b9a178ef3916e5df559e8b6a526ec89a08  lean4-n6/lean-toolchain
+397a00910ffd29477ad67b1c1966f48060803f3226ad26b855927261722120b6  lean4-n6/lakefile.lean
+16b117ace86ec8cf3d0314780e423b2582226c18824615de891713e7836a39f6  lean4-n6/lake-manifest.json
+69cd76d781f37d58aeb4f67c9653f4e1d7ee920d1413c49126d3bb016ba89709  tool/zenodo/metadata.json
+99b1950cb8d69242a637af7b82e1a93ac51d20d6850880e3a928f42276a2be1d  tool/zenodo/README_zenodo.md
+d6ae41e33b7e363bf090fb94d9c473c0e1b8ddf6c087b81a10c194806d0785c2  tool/zenodo/requirements.txt
+f0c10e43d74f596bab3390093a481cf39f0ce4b61891709ad2f8fde646289ae5  tool/zenodo/verify_paper_block.py
+abb2f99d32e9b2060b642ce84be44846744014f6b76d89564fea9179db750406  tool/zenodo/deposit.sh
+5a12cfa08d2239c2f0d87f4a3c438ce0355bf9c5091a38cff372fe9419bf347a  tool/zenodo/gen_manifest.sh
+a5c35422d75e0f059b70d9a096ca7209bd86d9ea35d7c89e75c248fbd5975820  tool/zenodo/gen_tarball.sh
+a499cbe2487d87b420f7b7ecbe4f46b460e6ba5a1cdd73f2b34919e15e7538ae  tool/zenodo/USER_INPUT_CHECKLIST.md
+1b4d0d395875d5329d164bd9f365c2434683a1a30c092f347fbb3cf0b6445c01  proposals/hexa_weave_zenodo_auto_prep_2026_04_28.md
+369518f856ac4848d266e4588544ed9f322b58984c45500243d19d209eaea703  design/kick/2026-04-28_zenodo-auto-prep_omega_cycle.json
+52aec1d4b1028e6b1e0656da2ff6e7e8678e2afd22bd6452a2b0f7457b0c05d2  design/kick/2026-04-28_zenodo-deposit-prep-cycle14_omega_cycle.json
+# OPTIONAL_NOT_PRESENT: papers/hexa-weave-formal-mechanical-w2-2026-04-28.pdf
+43546867c180dff01b129736ca5177507771ba6f83006d18c377ae1aa34bbfad  tool/zenodo/lean4-n6-mechverif-cycle12.tar.gz

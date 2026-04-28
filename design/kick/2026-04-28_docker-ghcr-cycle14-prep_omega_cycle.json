@@ -1,0 +1,140 @@
+{
+  "schema": "raw_77_omega_cycle_v1",
+  "ts": "2026-04-28T18:45:00Z",
+  "cycle": "cycle-14/F-DOCKER-REGISTRY-PUSH-prep",
+  "mission": "F-DOCKER-REGISTRY-PUSH (B.3 ghcr.io) — 사용자 4항목 OK 중 3번 — automation prep + 한국어 사용자 PAT 가이드 + 14d deadline 추적",
+  "status": "PREP-COMPLETE-AWAITING-USER-PAT",
+  "raw_principles_invoked": [
+    {"raw": 9, "name": "hexa-only data path"},
+    {"raw": 13, "name": "no external comms"},
+    {"raw": 47, "name": "cross-repo coherence (hexa-lang stdlib)"},
+    {"raw": 51, "name": "kick-infra fallback smell"},
+    {"raw": 65, "name": "minimal-blast-radius (PAT 노출 차단)"},
+    {"raw": 71, "name": "falsifier preregistration"},
+    {"raw": 77, "name": "omega-cycle witness"},
+    {"raw": 86, "name": "transport cost disclosure"},
+    {"raw": 91, "name": "C3 honest disposition"},
+    {"raw": 100, "name": "institutionalized fallback ceiling"},
+    {"raw": 108, "name": "absorption registry"},
+    {"raw": 138, "name": "audit ledger append"},
+    {"raw": 142, "name": "internal review"}
+  ],
+  "user_explicit_ok_4_items": {
+    "item_1": "hexa-nanobot domain registration",
+    "item_2": "lean4-w8plus-step2ac-mechanical",
+    "item_3_THIS_CYCLE": "F-DOCKER-REGISTRY-PUSH (B.3 ghcr.io)",
+    "item_4": "zenodo-auto-prep"
+  },
+  "f_docker_registry_push": {
+    "id": "F-DOCKER-REGISTRY-PUSH",
+    "deadline": "2026-05-12T00:00:00Z",
+    "deadline_t_minus_days": 14,
+    "deadline_t_minus_hours": 333.25,
+    "registered_cycle": "cycle-13/fan-out-5-of-5",
+    "registered_witness": "design/kick/2026-04-28_kick-infra-5-of-5-closure_omega_cycle.json",
+    "user_action_required": "GitHub Settings → Developer settings → Tokens (classic) → write:packages PAT 발급; export GHCR_USER + GHCR_TOKEN_FILE; bash tool/ghcr_push.hexa --execute",
+    "successor_ladder": ["F-DOCKER-REGISTRY-PUSH-OVERDUE-1D", "F-DOCKER-REGISTRY-PUSH-OVERDUE-7D", "F-DOCKER-REGISTRY-PUSH-OVERDUE-30D"]
+  },
+  "automation_prep_artifacts": {
+    "shell_script": "tool/ghcr_push.hexa",
+    "shell_script_modes": ["--plan (dry-run)", "--execute (사용자 PAT 후)"],
+    "audit_ledger": "state/audit/docker_registry_push_events.jsonl",
+    "audit_ledger_init_row": 1,
+    "integrated_spec_proposal": "proposals/hexa_weave_b3_ghcr_user_guide_2026_04_28.md",
+    "predecessor_proposals_combined": [
+      "proposals/hexa_weave_kick_infra_b3_registry_2026_04_28.md (cycle 7 — Option 4 + Option 3 plan)",
+      "proposals/hexa_weave_kick_infra_b3_ghcr_2026_04_28.md (cycle 10 — Option 3 detail)"
+    ]
+  },
+  "user_pat_guide_korean": {
+    "step_1_pat_issuance": {
+      "url": "https://github.com/settings/tokens (classic 권장)",
+      "scopes": ["write:packages", "read:packages"],
+      "scope_optional": ["delete:packages (cycle 16+ image GC 시)"],
+      "expiration": "90d (raw 65 minimal-blast-radius)",
+      "org_access": "need-singularity (옵션) — user namespace fallback 가능"
+    },
+    "step_2_pat_storage": {
+      "primary": "1Password / pass / age 암호화 vault",
+      "secondary": "~/.config/hexa/ghcr.token mode 0600",
+      "forbidden": ["chat 붙여넣기", "git commit", "환경변수 평문 export 후 history 잔존"]
+    },
+    "step_3_env_export": {
+      "GHCR_USER": "GitHub username",
+      "GHCR_TOKEN_FILE": "~/.config/hexa/ghcr.token (절대경로)"
+    },
+    "step_4_execute": "bash tool/ghcr_push.hexa --plan  # dry-run 검토; bash tool/ghcr_push.hexa --execute  # 실 push"
+  },
+  "private_vs_public_decision": {
+    "default": "private",
+    "rationale": "raw 65 minimal-blast-radius; image 내부 proprietary 사항 부재 확인했으나 image-baked credentials/secrets 잔존 위험 → private 유지가 안전",
+    "downgrade_path": "추후 image scan PASS + 사용자 명시 OK 후 ghcr.io UI 에서 public 전환 가능"
+  },
+  "remote_propagation": {
+    "hosts": ["ubu1", "ubu2", "hetzner"],
+    "image_size_mb": 234,
+    "raw_86_transport_cost": "234MB × 3 hosts ≈ 702MB 네트워크 (push: Mac→ghcr.io 234MB; pull: ghcr.io→host 3대 = 234MB×3)",
+    "raw_86_correction": "사용자 raw 86 견적 50MB×3=150MB 는 압축 가정; 실측 docker save 234MB 기준 push+pull 합 ~936MB (Mac arm64 layered)",
+    "smart_pull_optimization": "raw 47 cross-repo: hexa-lang stdlib hxc_a*.hexa 가 hexa-runner image 사용 — 동일 image 재사용으로 추가 transport 0"
+  },
+  "fallback_F_DOCKER_REGISTRY_PUSH_FALLBACK": {
+    "mechanism": "docker save → rsync → docker load (cycle 7 Option 4)",
+    "predecessor_witness": "proposals/hexa_weave_kick_infra_b3_registry_2026_04_28.md §2",
+    "trigger_condition": "ghcr.io PAT 거부 OR 14d deadline 초과 OR org access 부재",
+    "raw_100_classification": "이번 cycle 도 raw 100 fallback cumulative 8 cycle (option-A user-side handoff 모드 cycle 1; cycle 13 부터 counter 13)",
+    "user_pat_unblocks": "raw 51 5/5 closure 완전화 — gate (c-remote) CLOSED-USER-SIDE → CLOSED-FIXED-REMOTE 로 승격 가능"
+  },
+  "cross_repo_raw_47": {
+    "hexa_lang_stdlib_impact": "hxc_a*.hexa script 들이 hexa-runner image 동일 사용 — image 갱신 시 자동 반영",
+    "nexus_resolver_fallback_chain": "scripts/bin/hexa_remote + ~/core/hive/tool/subagent_dispatch.hexa 가 ghcr.io 미스 시 local hexa-runner:latest fallback (이미 cycle 10 plan §3 spec)"
+  },
+  "raw_71_falsifiers_registered": [
+    {
+      "id": "F-B3-GHCR-PREP-1",
+      "predicate": "tool/ghcr_push.hexa --execute 가 PAT 검증 단계 없이 실행되어 빈/잘못된 token 으로 docker login 시도",
+      "auto_check": "preflight() GHCR_TOKEN_FILE 존재+읽기 검증 + mode 0600 warn",
+      "deadline": "open"
+    },
+    {
+      "id": "F-B3-GHCR-PREP-2",
+      "predicate": "PAT 가 git commit / state/markers 마커 / audit ledger row note 필드에 평문 노출",
+      "auto_check": "pre-commit hook ghp_*/gho_* pattern deny (별도 cycle 14 hook 추가 권장)",
+      "deadline": "open"
+    },
+    {
+      "id": "F-B3-GHCR-PREP-3",
+      "predicate": "14d deadline (2026-05-12T00:00Z) 초과까지 PAT 미발급 → F-DOCKER-REGISTRY-PUSH-OVERDUE-1D 자동 fire",
+      "auto_check": "falsifier_monitor.hexa cycle 14+ 감시",
+      "deadline": "2026-05-12T00:00:00Z"
+    },
+    {
+      "id": "F-B3-GHCR-PREP-4",
+      "predicate": "step4_remote_pull 이 ssh 인증 단계 실패에도 unhandled exit 없이 전 host 진행 — 1 host fail 이 다른 host 의 push 결과를 silent overwrite",
+      "auto_check": "ledger_append 의 host-specific exit_code per row + final post-step verify",
+      "deadline": "open"
+    },
+    {
+      "id": "F-B3-GHCR-PREP-5",
+      "predicate": "Mac arm64 image 가 amd64 ubu/hetzner 에 그대로 push/pull 되어 platform mismatch 로 컨테이너 실행 실패 (F-B3-REG-1 재발)",
+      "auto_check": "docker buildx 멀티-arch 빌드 권장 — cycle 10 plan §1 step 4 참조",
+      "deadline": "2026-05-12T00:00:00Z"
+    }
+  ],
+  "raw_91_c3_honest": "PAT 미발급 시 actual push 불가 (raw 91 C3 — TTY-bound credential entry agent 차단). cycle 14 prep 은 automation skeleton + 사용자 가이드 + audit ledger init + falsifier 5종 등록까지 가능; 실 push 는 사용자 명시 입력 후에만.",
+  "raw_100_fallback_cumulative": {
+    "cycles_with_fallback": 8,
+    "cycles_with_option_a_handoff": 1,
+    "this_cycle_resolution_mode": "option-A user-side handoff 보강 (PAT-after-issuance automation skeleton 준비)",
+    "exit_path_to_full_closure": "사용자 PAT 발급 + ghcr_push.hexa --execute 성공 → gate (c-remote) CLOSED-FIXED-REMOTE 승격 + raw 51 4-gate 5/5 → 6/6 architectural-FIX"
+  },
+  "audit_rows_appended_this_cycle": 6,
+  "registry_row_appended": 1,
+  "parent_witness": "design/kick/2026-04-28_kick-infra-5-of-5-closure_omega_cycle.json",
+  "predecessor_witnesses": [
+    "design/kick/2026-04-28_b3-docker-hexa-runner-rebuild_omega_cycle.json",
+    "design/kick/2026-04-28_kick-infra-metric-cycle10_omega_cycle.json",
+    "design/kick/2026-04-28_kick-infra-cycle12-countdown_omega_cycle.json",
+    "design/kick/2026-04-28_kick-infra-5-of-5-closure_omega_cycle.json"
+  ],
+  "user_explicit_ok": "사용자 4항목 OK 중 3번 — F-DOCKER-REGISTRY-PUSH B.3 ghcr.io prep"
+}

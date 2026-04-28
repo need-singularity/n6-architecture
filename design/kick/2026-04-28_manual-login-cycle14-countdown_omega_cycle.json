@@ -1,0 +1,146 @@
+{
+  "schema": "raw_77_omega_cycle_v1",
+  "ts": "2026-04-28T09:46:11Z",
+  "cycle": "cycle-14/manual-login-countdown",
+  "mission": "F-MANUAL-LOGIN cycle 14 measurement + Korean user-action guide (option 2 of 4 chosen by user)",
+  "status": "ADVISORY",
+  "raw_principles_invoked": [
+    {"raw": 9, "name": "hexa-only data path"},
+    {"raw": 13, "name": "no external comms — stdout/stderr only"},
+    {"raw": 51, "name": "kick-infra 4-gate audit (DEEP BREACH cycle 12 acknowledged)"},
+    {"raw": 71, "name": "falsifier guard"},
+    {"raw": 77, "name": "omega-cycle witness"},
+    {"raw": 91, "name": "C3 honest — measurement only; no manual /login executed"},
+    {"raw": 100, "name": "institutionalized fallback ceiling — explicit non-applicability noted"},
+    {"raw": 108, "name": "discovery absorption registry append"},
+    {"raw": 135, "name": "cycle witness JSON ledger"}
+  ],
+  "countdown": {
+    "now_utc": "2026-04-28T09:46:11Z",
+    "deadline_utc": "2026-04-29T23:59:59Z",
+    "t_minus_hours": 38.23,
+    "t_minus_estimate_user_brief": "T-38h",
+    "delta_vs_cycle13_hours": -0.20
+  },
+  "twelve_profile_state": {
+    "measurement_method": "direct os.stat + json.load on $HOME/.claude-claudeN/.credentials.json (raw 91 C3 — Mac side only; hetzner not probed in this cycle)",
+    "present_count": 5,
+    "absent_count": 7,
+    "present_profiles": [
+      {"id": "claude2",  "expiresAt": "2026-04-21T00:49Z", "expired_hours": 177, "mtime": "2026-04-20T20:11:11Z", "size": 472, "scopes": ["user:file_upload", "user:inference", "user:mcp_servers", "user:profile", "user:sessions:claude_code"], "accessToken_len": 108, "refreshToken_len": 108},
+      {"id": "claude8",  "expiresAt": "2026-04-21T00:50Z", "expired_hours": 177, "mtime": "2026-04-20T16:51:00Z", "size": 471, "scopes": ["user:file_upload", "user:inference", "user:mcp_servers", "user:profile", "user:sessions:claude_code"], "accessToken_len": 108, "refreshToken_len": 108},
+      {"id": "claude9",  "expiresAt": "2026-04-21T00:50Z", "expired_hours": 177, "mtime": "2026-04-20T20:11:12Z", "size": 472, "scopes": ["user:file_upload", "user:inference", "user:mcp_servers", "user:profile", "user:sessions:claude_code"], "accessToken_len": 108, "refreshToken_len": 108},
+      {"id": "claude11", "expiresAt": "2026-04-21T00:51Z", "expired_hours": 177, "mtime": "2026-04-20T20:11:11Z", "size": 472, "scopes": ["user:file_upload", "user:inference", "user:mcp_servers", "user:profile", "user:sessions:claude_code"], "accessToken_len": 108, "refreshToken_len": 108},
+      {"id": "claude12", "expiresAt": "2026-04-21T00:51Z", "expired_hours": 177, "mtime": "2026-04-20T20:11:11Z", "size": 472, "scopes": ["user:file_upload", "user:inference", "user:mcp_servers", "user:profile", "user:sessions:claude_code"], "accessToken_len": 108, "refreshToken_len": 108}
+    ],
+    "absent_profiles": ["claude1", "claude3", "claude4", "claude5", "claude6", "claude7", "claude10"],
+    "delta_vs_cycle13": "no change (5 PRESENT, 7 ABSENT, all PRESENT credentials still expired since 2026-04-21)",
+    "min_expired_hours": 177,
+    "raw_91_c3_brief_discrepancy": "user brief said '6 PRESENT (claude2/8/9/10/11/12) / 6 ABSENT (claude1/3/4/5/6/7)' but actual stat shows claude10 is ABSENT (only ~/.claude-claude10/ dir exists without .credentials.json); brief had claude3 listed as healthy via OAuth refresh on hetzner side, but Mac side has NO claude3 credentials.json file — Mac vs hetzner asymmetry confirmed"
+  },
+  "macos_keychain_inspection": {
+    "raw_91_c3_constraint": "metadata only — secret value NOT read",
+    "service": "Claude Code-credentials",
+    "account_found": "ghost",
+    "users_probed_not_found": ["multi404error", "mk55992"],
+    "cdat": "2026-04-26T17:02:44Z",
+    "mdat": "2026-04-27T02:45:39Z",
+    "interpretation": "Mac CLI (`claude /login`) writes to login.keychain-db with svce='Claude Code-credentials' acct='ghost' (single entry; per-profile separation NOT in keychain — CLAUDE_CONFIG_DIR-scoped sessions read keychain only when no .credentials.json present); 11 profile manual /login may all overwrite the SAME keychain row unless CLAUDE_CONFIG_DIR per-profile path is honored by CLI for credential storage (open question — needs empirical verification cycle 15)",
+    "open_question_F-KEYCHAIN-PER-PROFILE": "does `CLAUDE_CONFIG_DIR=~/.claude-claudeN claude /login` write to keychain row scoped by N, or to the single ghost@Claude-Code-credentials row? Empirical test deferred to user post-login."
+  },
+  "f_oauth_detector_mac_path_link": {
+    "predecessor_finding": "F-OAUTH-DETECTOR-MAC-PATH (registry.jsonl row 15, b1-hetzner-oauth-refresh outstanding_followups[2])",
+    "claim": "oauth_refresh_detector.body watches ~/.claude-claude9/.credentials.json on Mac but Mac CLI uses Keychain — detector cannot fire REFRESH_HEALTHY for Mac side",
+    "cycle14_status": "UNRESOLVED — detector's mtime watch on claude9 file confirms file last touched 2026-04-20T20:11:12Z (>7 days ago, no refresh activity); after manual /login, file may NOT update if CLI prefers keychain write path; recommend cycle 15 fix: extend detector to also watch keychain mdat via `security find-generic-password -s 'Claude Code-credentials' | grep mdat`",
+    "fix_proposal_F-DETECTOR-FIX-2": "tool/oauth_refresh_detector.body — add second watch source: macOS keychain mdat polling (read-only metadata, raw 91 C3 compliant)"
+  },
+  "raw_51_4_gate_audit": {
+    "cycle_count": 14,
+    "max_threshold": 10,
+    "breach_depth": "DEEP (+4)",
+    "breach_acknowledged": true,
+    "gates_revisited": {
+      "a_oauth_refresh": "CLOSED-USER-SIDE (F-MANUAL-LOGIN, cycle 13 closure declaration) — STILL pending user TTY action",
+      "b_slot_saturation": "CLOSED-FIXED (cycle 2)",
+      "c_mac_docker_rebuild": "CLOSED-FIXED-MAC (cycle 2)",
+      "c_remote_registry_push": "CLOSED-USER-SIDE (F-DOCKER-REGISTRY-PUSH)",
+      "d_silent_timeout": "CLOSED-FIXED (cycle 2)",
+      "e_cascade_prevention": "CLOSED-FIXED (cycle 7)"
+    },
+    "raw_51_re_audit_note": "cycle 13 declared 5/5 closure under option-A user-side handoff; cycle 14 is countdown-tracking (NOT a re-opening of closure decision); breach_depth grows monotonically while user manual /login pending; institutionalization is INTENTIONAL (handoff was ratified)"
+  },
+  "raw_100_fallback_applicability": {
+    "applicable": false,
+    "reason": "raw 100 fallback handles agent-side missing tool / capability shortfall — but F-MANUAL-LOGIN is USER-SIDE TTY action (browser OAuth flow); agent has no fallback path; sandboxed environment cannot drive interactive browser login on user's behalf without violating raw 13 (no external comms beyond stdout) AND raw 91 C3 honest accountability (silently performing user's auth would be impersonation)",
+    "raw_91_c3_note": "explicit non-applicability disclosure required — user must perform; reminder/measurement is the ONLY valid agent action"
+  },
+  "fired_audit_ledger_spec_on_deadline_pass": {
+    "trigger_utc": "2026-04-29T23:59:59Z",
+    "automatic_actions_specified": [
+      {"action": "append F-MANUAL-LOGIN status=fired row to state/falsifier_monitor/audit.jsonl with measured profile_present count at fire time"},
+      {"action": "register successor falsifier F-MANUAL-LOGIN-OVERDUE-1D (deadline 2026-04-30T23:59:59Z, alert_level=alarm)"},
+      {"action": "register successor F-MANUAL-LOGIN-OVERDUE-7D (deadline 2026-05-06T23:59:59Z)"},
+      {"action": "register successor F-MANUAL-LOGIN-OVERDUE-30D (deadline 2026-05-29T23:59:59Z)"},
+      {"action": "raw 51 4-gate audit: gate (a) re-classified from CLOSED-USER-SIDE → BREACHED-USER-SIDE-OVERDUE (no longer counts as closure)"},
+      {"action": "kick infra slot picker stays pinned to claude3 (only healthy hetzner profile per cycle 2 OAuth fix)"}
+    ],
+    "raw_91_c3_safeguard": "fire condition is TIME-based, not behavior-based; if user completes manual /login after T-0 the auto-fired row remains in audit (immutable ledger) and a separate post-fire-recovery row records remediation"
+  },
+  "user_options_recap": {
+    "options_offered": [
+      "1. cycle 14 countdown advisory + Korean guide (re-issue)",
+      "2. measurement + Korean guide + cycle witness + audit-fire spec (CHOSEN BY USER)",
+      "3. attempt automated /login (REJECTED — violates raw 91 C3)",
+      "4. defer and proceed to next non-blocking cycle work"
+    ],
+    "user_choice": "option 2",
+    "user_email_context": "multi404error@proton.me (from system context) — this is the OAuth account email; manual /login browser flow targets this account"
+  },
+  "deliverables": {
+    "1_kick_witness_json": "design/kick/2026-04-28_manual-login-cycle14-countdown_omega_cycle.json (this file)",
+    "2_korean_guide": "INLINE in agent stdout — see korean_guide_block below",
+    "3_registry_jsonl_row": "state/discovery_absorption/registry.jsonl (appended)",
+    "4_audit_jsonl_row": "state/falsifier_monitor/audit.jsonl (appended cycle-14 countdown row)",
+    "5_audit_fire_spec": "fired_audit_ledger_spec_on_deadline_pass field above"
+  },
+  "korean_guide_block": {
+    "priority_order_with_rationale": [
+      {"order": 1, "profile": "claude3", "rationale": "현재 hetzner 측에서 유일하게 healthy (cycle 2 OAuth refresh 1/12 성공). Mac 측 .credentials.json 부재 — manual /login 으로 동기화 필요. 가장 먼저 처리하면 kick infra slot picker 가 추가 backup 확보."},
+      {"order": 2, "profile": "claude2", "rationale": "PRESENT but expired 177h — refresh chain 끊김. 중요 daily-driver."},
+      {"order": 3, "profile": "claude8", "rationale": "PRESENT but expired 177h."},
+      {"order": 4, "profile": "claude9", "rationale": "PRESENT but expired 177h. F-OAUTH-DETECTOR-MAC-PATH 가 watch 하는 profile — 이 파일 mtime 갱신되면 detector 가 활성화 (단 keychain 경로 우선시 위험)."},
+      {"order": 5, "profile": "claude11", "rationale": "PRESENT but expired 177h."},
+      {"order": 6, "profile": "claude12", "rationale": "PRESENT but expired 177h."},
+      {"order": 7, "profile": "claude1", "rationale": "ABSENT — full new login 필요. dir 존재."},
+      {"order": 8, "profile": "claude4", "rationale": "ABSENT — full new login 필요."},
+      {"order": 9, "profile": "claude5", "rationale": "ABSENT — full new login 필요."},
+      {"order": 10, "profile": "claude6", "rationale": "ABSENT — full new login 필요."},
+      {"order": 11, "profile": "claude7", "rationale": "ABSENT — full new login 필요."},
+      {"order": 12, "profile": "claude10", "rationale": "ABSENT (사용자 brief 와 다름 — 실측 결과 absent). dir 존재."}
+    ],
+    "command_template_per_profile": "CLAUDE_CONFIG_DIR=~/.claude-claudeN claude /login   # N=1..12 순서대로",
+    "estimated_total_time": "11 profile × 약 30-60초 = 5-11분 (browser OAuth tab 자동 열림 → email 인증 → CLI 자동 callback)",
+    "browser_oauth_flow_steps_korean": [
+      "1) 위 명령 실행 시 CLI 가 localhost callback URL 띄우고 default browser 자동 열림",
+      "2) browser 에서 Anthropic OAuth 페이지 → multi404error@proton.me 로그인 (이미 세션 있으면 continue 클릭)",
+      "3) 'Allow Claude Code' 권한 동의 클릭",
+      "4) browser 가 localhost:port 로 redirect → CLI 가 token 캡처 후 .credentials.json 또는 keychain 에 저장",
+      "5) CLI 가 'Login successful' 출력 후 종료",
+      "6) 다음 profile 로 이동 (CLAUDE_CONFIG_DIR 만 바꿔서 동일 명령 반복)"
+    ],
+    "verification_command": "for n in 1 2 3 4 5 6 7 8 9 10 11 12; do CLAUDE_CONFIG_DIR=~/.claude-claude$n claude -p ok 2>&1 | head -1; done   # 모두 KICK_OK or 정상 응답이면 12/12 회복",
+    "post_login_followup": "manual /login 완료 후 hetzner 동기화 필요 시: scp ~/.claude-claudeN/.credentials.json hetzner:/root/.claude-claudeN/.credentials.json (raw 91 C3: 수동 동의 필요)"
+  },
+  "concerns_korean": [
+    "C1: macOS Keychain 단일 row (acct=ghost) 가 12 profile 전부 공유할 위험 — CLAUDE_CONFIG_DIR 별 keychain scoping 미확인. 만약 공유면 마지막 /login 만 살아남고 나머지 11 overwrite 됨. → cycle 15 empirical test 필요 (F-KEYCHAIN-PER-PROFILE).",
+    "C2: F-OAUTH-DETECTOR-MAC-PATH 미해결 — detector 가 .credentials.json 만 watch 하므로 keychain-only 저장 시 REFRESH_HEALTHY 영원히 안 발화. → tool/oauth_refresh_detector.body 에 keychain mdat polling 추가 (F-DETECTOR-FIX-2).",
+    "C3: refresh chain 자체가 7일 전에 깨졌으므로 단순 keychain 갱신만으론 자동 refresh 복구 보장 안 됨 — manual /login 후 24h 내 second refresh attempt 까지 봐야 F-B1-1 (24h re-401) 검증 가능.",
+    "C4: deadline T-38h — 사용자 11 login × 약 1분 = 11분 작업이지만 browser OAuth flow 가 한 번이라도 timeout 되면 retry 필요. 안전마진 권장: T-24h (즉 4/29 00:00 UTC) 이전 완료 목표.",
+    "C5: cycle 14 임에도 raw 51 institutionalized fallback DEEP BREACH (+4) 누적 — option A user-side handoff 가 ratified 되었으므로 architectural 측에서 추가 fix 불가; 사용자 액션 외 escape route 없음."
+  ],
+  "raw_71_falsifiers_preregistered": [
+    {"id": "F-MANUAL-LOGIN-CYCLE14-MEASURE-DRIFT", "claim": "between cycle 14 (this) and cycle 15, profile_present count changes without user reporting manual /login activity", "auto_check": true, "deadline": "2026-04-29T00:00:00Z"},
+    {"id": "F-KEYCHAIN-PER-PROFILE", "claim": "CLAUDE_CONFIG_DIR=~/.claude-claudeN does NOT scope keychain entries — last /login overwrites earlier", "auto_check": false, "deadline": "2026-05-05T00:00:00Z", "evidence_required": "post-login `security find-generic-password -s 'Claude Code-credentials' -a ghost` shows multiple acct keys OR a single shared row"},
+    {"id": "F-DETECTOR-FIX-2", "claim": "oauth_refresh_detector.body NOT extended to watch keychain mdat by 2026-05-05", "auto_check": true, "deadline": "2026-05-05T00:00:00Z"}
+  ]
+}

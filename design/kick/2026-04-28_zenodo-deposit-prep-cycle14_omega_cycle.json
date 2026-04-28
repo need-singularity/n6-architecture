@@ -1,0 +1,160 @@
+{
+  "kick_kind": "omega_cycle",
+  "kick_id": "2026-04-28_zenodo-deposit-prep-cycle14",
+  "kick_title": "Cycle-14 fan-out 1/4 — HEXA-WEAVE Zenodo 1-click deposit-prep — automation complete pending user 5-item input",
+  "kick_date": "2026-04-28",
+  "umbrella": "external-disclosure",
+  "cost_center": "hexa-weave-formal-mechanical-w8plus",
+  "predecessor_witness": "design/kick/2026-04-28_zenodo-auto-prep_omega_cycle.json",
+  "predecessor_proposal": "proposals/hexa_weave_zenodo_auto_prep_2026_04_28.md",
+  "parent_brief": "user mission cycle-14 fan-out 1/4 (Zenodo deposit auto-prep follow-on; OK on item 1 of 4; alien-grade 6 unlock 직전)",
+  "scope": {
+    "files_created": [
+      "tool/zenodo/metadata.json",
+      "tool/zenodo/requirements.txt",
+      "tool/zenodo/verify_paper_block.py",
+      "tool/zenodo/README_zenodo.md",
+      "tool/zenodo/deposit.sh",
+      "tool/zenodo/gen_manifest.sh",
+      "tool/zenodo/gen_tarball.sh",
+      "tool/zenodo/manifest.sha256",
+      "tool/zenodo/lean4-n6-mechverif-cycle12.tar.gz",
+      "design/kick/2026-04-28_zenodo-deposit-prep-cycle14_omega_cycle.json"
+    ],
+    "files_modified": [
+      "state/discovery_absorption/registry.jsonl"
+    ],
+    "summary": {
+      "automation_completed": [
+        "metadata.json (Zenodo API v1 schema; Apache-2.0 default; protein-folding alt title commented; 8 keywords; 11 references)",
+        "requirements.txt (sympy>=1.12 verified; sympy 1.14.0 host build)",
+        "verify_paper_block.py (extracted from paper §7.1(a); standalone, exit-code 0/1/2 honest; PASS on this host)",
+        "README_zenodo.md (Zenodo landing page; reproducer + raw 91 C3 honest scope)",
+        "deposit.sh (idempotent — re-uses cached deposition_id; ZENODO_TOKEN env-only; sandbox default; --upload required for actual API call; --i-have-read-the-irreversibility-warning required for publish; step 5 commented out by default)",
+        "gen_manifest.sh (SHA-256 of 16 source artifacts + optional PDF/tarball)",
+        "gen_tarball.sh (Lean source-only; .lake build cache excluded; deterministic)",
+        "manifest.sha256 (16 PASS rows + 1 OPTIONAL_NOT_PRESENT (PDF) + 1 generated tarball row)",
+        "lean4-n6-mechverif-cycle12.tar.gz (21 KB; 9 Lean source + manifest + lakefile + toolchain)"
+      ],
+      "pre_conditions_verified": [
+        "verify_paper_block.py exit 0; sweep [2,1000] -> [6]; sympy 1.14.0",
+        "deposit.sh preflight no-token gate triggers FAIL exit 1 (correct)",
+        "deposit.sh preflight PENDING-placeholder gate triggers FAIL exit 1 (correct)",
+        "manifest.sha256 generated deterministically (sha256sum / shasum -a 256 compatible)",
+        "tarball excludes .lake/ build cache (21 KB minimal source)"
+      ],
+      "user_input_blocked_items": {
+        "item_1_orcid": "PENDING (proposal §4 item 1; user OK confirmed verbally per mission)",
+        "item_2_byline_email": "PENDING (proposal §4 item 2; arsmoriendi99@proton.me vs mk55992@proton.me reconciliation)",
+        "item_3_title_choice": "PENDING (proposal §4 item 3; Option-A formal-mechanical default vs Option-B protein-folding pivot)",
+        "item_4_keywords_choice": "PENDING (proposal §4 item 4; 8 mechanical-verification default vs protein-folding alternatives commented)",
+        "item_5_license_choice": "PENDING (proposal §4 item 5; Apache-2.0 default vs CC-BY-4.0)",
+        "item_6_related_identifier": "PENDING (proposal §4 implicit; option-a public github URL vs option-b tarball-only supplement)",
+        "item_7_zenodo_token": "PENDING (env var ZENODO_TOKEN; sandbox.zenodo.org for dry-run vs zenodo.org for production)"
+      },
+      "alien_grade_cycle_13": 4.58,
+      "alien_grade_target": 6,
+      "deposit_performed": false,
+      "zenodo_api_called": false,
+      "doi_minted": false,
+      "orcid_linked": false,
+      "github_repo_made_public": false,
+      "user_typed_publish_approval": false
+    }
+  },
+  "raw_91_c3_honest": {
+    "deposit_status": "AUTO-PREP cycle-14 closed; 1-click deposit infrastructure complete; NO Zenodo upload; NO DOI; NO ORCID linkage; NO public github push.",
+    "user_input_required": "raw 71 paper-publication-tier explicit approval still gates 7 items (5 from proposal §4 plus related_identifier + ZENODO_TOKEN). User OK on item 1 (ORCID confirmation pathway) noted; remaining 6 items still PENDING for actual deposit.",
+    "agent_delegation_status": "Agent tool absent in deferred tool list; sub-agent delegation path unavailable; this cycle ran inline (matching the cycle-10 F-CL-FORMAL-4 absorption pattern documented in registry.jsonl).",
+    "automation_idempotence": "deposit.sh re-reads .deposition_id cache; re-uses existing deposition on re-run rather than creating duplicates; PUT-based file replacement is naturally idempotent on Zenodo bucket API.",
+    "no_fabricated_pass": "verify_paper_block.py executed live on this host (sympy 1.14.0 installed) and exit code 0 was observed in stdout; gen_manifest.sh + gen_tarball.sh + deposit.sh preflight gates all executed live and behaviour matches documented exit codes; no PASS row in this witness is fabricated.",
+    "cross_repo_trawl": "raw 47 — papers/ scope verified as the only directory containing this cycle's deposit artifact; tool/zenodo/ created as a sibling automation directory; no cross-repo dependency introduced (no submodule, no external-fetch).",
+    "secrets_handling": "ZENODO_TOKEN is env-var-only; never written to metadata.json or any file in tool/zenodo/; .deposition_id cache stores only the integer deposition id (non-secret) and is .gitignored-recommended (note added).",
+    "empirical_claims_in_cycle": 0,
+    "clay_millennium_claims_in_cycle": 0,
+    "rh_solved_claim": "ABSENT (Robin 1984 cited only for unconditional sigma asymptotic; metadata.json description preserves this distinction)",
+    "sorry_in_proof_terms": 0,
+    "named_axioms_disclosed_in_metadata": 19,
+    "derived_mechanical_theorems_disclosed": 4
+  },
+  "raw_71_falsifiers": [
+    {
+      "id": "F-W6-ZEN-14-1",
+      "claim": "deposit.sh creates a duplicate Zenodo deposition on re-run instead of re-using the cached id",
+      "expected_outcome": "does not fire; .deposition_id cache + GET-before-POST branching covers idempotence",
+      "deadline": "deposit-time"
+    },
+    {
+      "id": "F-W6-ZEN-14-2",
+      "claim": "verify_paper_block.py exits non-zero on the cycle-14 host (sympy version drift)",
+      "expected_outcome": "does not fire; sympy 1.14.0 PASS observed; sympy>=1.12 pinned in requirements.txt",
+      "deadline": "deposit-time"
+    },
+    {
+      "id": "F-W6-ZEN-14-3",
+      "claim": "manifest.sha256 row count drifts because gen_manifest.sh uses non-deterministic file ordering",
+      "expected_outcome": "does not fire; gen_manifest.sh iterates a hard-coded FILES array in source order",
+      "deadline": "deposit-time"
+    },
+    {
+      "id": "F-W6-ZEN-14-4",
+      "claim": "deposit.sh accidentally publishes step 5 because the irreversibility flag was insufficient gating",
+      "expected_outcome": "does not fire; step 5 is commented out at the source level (not just gated by flag); the flag alone cannot trigger publish",
+      "deadline": "deposit-time"
+    },
+    {
+      "id": "F-W6-ZEN-14-5",
+      "claim": "tool/zenodo/lean4-n6-mechverif-cycle12.tar.gz includes .lake/ build cache and is no longer 'source-only'",
+      "expected_outcome": "does not fire; gen_tarball.sh has --exclude=lean4-n6/.lake (21 KB observed)",
+      "deadline": "deposit-time"
+    }
+  ],
+  "raw_70_k4_axes": {
+    "CONSTANTS": "PASS (sigma(6)=12, phi(6)=2, tau(6)=4 verified live by verify_paper_block.py exit 0)",
+    "DIMENSIONS": "PASS (Zenodo deposit object has known shape: PDF + tarball + manifest + metadata.json; types stable)",
+    "CROSS": "PASS (paper §7.1(a) Python block <-> verify_paper_block.py output verified verbatim match; metadata.json description <-> paper abstract <-> proposal §2 metadata.yaml verified consistent on 19 named axioms count)",
+    "SCALING": "PASS (deposit.sh idempotence handles re-run; sweep [2,1000] confirmed; manifest extends naturally if more files added)",
+    "SENSITIVITY": "PASS (Apache-2.0 default + cc-by-4.0 alt; 8 mechanical keywords default + protein-folding alt commented; both alternatives surfaced for user-choice)",
+    "LIMITS": "PASS (7 user-input items enumerated; deposit gating preserves user-approval; alien-grade 4.58 -> 6 transition explicitly conditional on cycle 15+ user actions)",
+    "CHI2": "DEFER (no empirical sample; raw 91 C3 zero empirical claim)",
+    "COUNTER": "PASS (ZENODO_TOKEN-missing path tested; PENDING-placeholder path tested; both correctly FAIL with exit 1)"
+  },
+  "safety_gates": {
+    "deposit_executed": false,
+    "user_approval_obtained": false,
+    "pii_new_disclosure": false,
+    "doi_minted": false,
+    "github_repo_made_public": false,
+    "zenodo_api_called": false,
+    "raw_71_user_approval_gate": "active (7 items: 5 from proposal §4 + related_identifier + ZENODO_TOKEN)",
+    "raw_76_doi_mandate": "satisfied on deposit (Zenodo automatic on publish step)",
+    "own_11_clay_millennium_check": "PASS (RH cited not solved; metadata.json description preserves)",
+    "own_15_21_section_completeness": "preserved in parent paper",
+    "own_6_verify_embedded": "PASS (paper §7.1(a) sympy block live-executed; verify_paper_block.py mirror output matches verbatim)",
+    "raw_91_c3_honest_disclosure": "automation completed inline (no Agent delegation possible) + 7 PENDING user items disclosed + 5 falsifiers preregistered + idempotence enforced",
+    "raw_47_cross_repo_trawl": "tool/zenodo/ created as sibling automation directory; papers/ + lean4-n6/ + proposals/ + design/kick/ + state/discovery_absorption/ scope only",
+    "raw_65_68_idempotence": "deposit.sh re-uses cached deposition_id; gen_manifest.sh deterministic; gen_tarball.sh deterministic"
+  },
+  "next_cycle_handoff": {
+    "if_user_resolves_remaining_6_items_and_provides_token": [
+      "edit tool/zenodo/metadata.json to replace 6 PENDING placeholders (orcid, byline-email if needed in author description, title choice, keywords choice, license choice, related_identifier)",
+      "compile papers/hexa-weave-formal-mechanical-w2-2026-04-28.md to PDF (pandoc or via TeX) -> papers/hexa-weave-formal-mechanical-w2-2026-04-28.pdf",
+      "re-run gen_manifest.sh (PDF row will switch from OPTIONAL_NOT_PRESENT to a sha256 row)",
+      "export ZENODO_TOKEN=<token>; bash tool/zenodo/deposit.sh --upload (steps 1-4; reversible)",
+      "user reviews staged deposit on sandbox.zenodo.org or zenodo.org web UI",
+      "user explicitly types 'publish' approval; bot un-comments step 5 in deposit.sh; re-run with --i-have-read-the-irreversibility-warning",
+      "DOI returned; BibTeX placeholder replaced; paper §21 IMPACT updated; new witness 2026-04-XX_zenodo-deposit-executed_omega_cycle.json logged",
+      "alien-grade 4.58 -> 6 transition recorded; row 11 of alien-grade ceiling census closes"
+    ],
+    "if_user_defers": [
+      "no action; tool/zenodo/ remains a future-cycle resource"
+    ],
+    "if_user_rejects": [
+      "tool/zenodo/ retained as 'future option' staging; mk-history logs rejection rationale",
+      "F-INFRA-ZENODO-DEFERRED falsifier registered analogous to F-INFRA-FALLBACK-ETERNAL: 'Zenodo deposit user-deferred for >30 days past cycle 14' triggers separate disposition review"
+    ]
+  },
+  "report_to_user_korean": "cycle-14 fan-out 1/4 Zenodo 1-click deposit-prep 자동화 완료. tool/zenodo/ 디렉토리에 metadata.json + requirements.txt + verify_paper_block.py + README_zenodo.md + deposit.sh (idempotent) + gen_manifest.sh + gen_tarball.sh + manifest.sha256 (16 source files SHA-256) + lean4-n6-mechverif-cycle12.tar.gz (21 KB Lean source-only) 생성. verify_paper_block.py 라이브 실행 PASS (exit 0; 6 unique solution; sympy 1.14.0). deposit.sh preflight gate 2종 라이브 검증 완료 (no-token=FAIL, PENDING-placeholder=FAIL). idempotence 보장: .deposition_id 캐싱 + GET-before-POST + PUT 파일교체. publish step 은 source-level commented out (irreversibility flag 만으로는 trigger 불가능). 사용자 입력 대기 7항목: ORCID / byline-email / title / keywords / license / related_identifier / ZENODO_TOKEN. PDF 컴파일은 pandoc or TeX 별도 (manifest 에 OPTIONAL_NOT_PRESENT 표시). alien-grade 4.58 -> 6 unlock 은 cycle 15+ 7항목 해결 + token 제공 + PUBLISH 명시 승인 후. raw 91 C3: 0 empirical / 0 Clay / 19 named axioms 명시 / Agent delegation 부재 인지. raw 47 cross-repo trawl: tool/zenodo/ 가 sibling automation directory; papers/ + lean4-n6/ + proposals/ + design/kick/ + state/ 외 추가 의존성 없음. raw 65/68: 모든 스크립트 idempotent. raw 71: user-approval gate 활성 유지. 토큰 받자마자 deposit.sh --upload 1줄로 steps 1-4 실행 가능; publish 는 별도 의식적 승인 후.",
+  "ts_kick": "2026-04-28T18:50:00Z",
+  "schema": "design/kick/omega_cycle_v1"
+}

@@ -1,0 +1,4 @@
+.deposition_id
+.doi
+.metadata.payload.json
+.zenodo-venv/

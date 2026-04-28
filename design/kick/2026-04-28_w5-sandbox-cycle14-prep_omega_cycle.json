@@ -1,0 +1,172 @@
+{
+  "schema": "omega_cycle.witness_v2_closure",
+  "ts": "2026-04-28T23:50:00Z",
+  "title": "HEXA-WEAVE MVP W5 cycle 14 sandbox prep — 8-item Korean runbook + tool/hexa_weave_w5_setup.hexa + sister README + requirements.lock + 4-rung VRAM ladder + 5 n6 hooks + 5 falsifiers",
+  "task_label": "cycle 14 W5 sandbox prep (forward-spec; no destructive ops; user 4-item OK absorbed)",
+  "scope": "After cycle 8 W5 user approval doc presented 8-item checklist and cycle 13 closure confirmed kick-infra B1-B5 5-of-5, user issued 4-item OK this turn (mkdir + GPU + weights + dryrun) effectively authorizing all 8 items (steps 2/3/4/6/7 are implied prerequisites bundled with steps 1/5/8). Cycle 14 prep converts approval into deterministic 1-command runbook (tool/hexa_weave_w5_setup.hexa, raw-9-compliant) with idempotent + rollback + ai-native failure trailer; sister repo README.md + requirements.lock initial drafts; 4-rung 12 GB VRAM ladder (L1 6L1U 60aa -> L2 ESM3 mid -> L3 1UBQ 76aa -> L4 350aa target); deterministic measurement criteria RMSD<5A + TM>0.4 + VRAM<11GB + rc=0 + wall<30min (raw 53); 5 n6 invariant hooks at evoformer 43-48 + late-fusion (N6-H1..N6-H5); cross-repo (anima/airgenome/hive) 1/10 applicable + 1/10 partial; alien-grade 4.09 -> ~4.9 path conditional on Step 8 PASS; 5 raw 71 falsifiers all TRANSCEND-tier + 5 MISS criteria + 25 raw 91 C3 NOT-decided items.",
+
+  "parent_witness": {
+    "cycle_5": "W1 + W2 spec + lean4 audit",
+    "cycle_6": "W3 clone+VRAM spec (35.5 KB)",
+    "cycle_7": "W4 8-subdir+dryrun+5-row-fallback spec (34.3 KB)",
+    "cycle_8": "W5 user approval request (8-item checklist; predecessor)",
+    "cycle_9": "W5 alt-paths executed (RCSB Query B 1965 + mock python + lean4 docstring)",
+    "cycle_10": "W5 alt-2 CD-HIT clustering (100/100 FASTA + 46 clusters + 80/10/10 split)",
+    "cycle_11": "W8 step1.b mechanical + hexaComp def",
+    "cycle_12": "W8+ step2.b/d mechanical 21->19 + alien-grade 4.04->4.09",
+    "cycle_13": "kick-infra B1-B5 5-of-5 closure + hexa-nanobot sister registration",
+    "cycle_14_this": "W5 sandbox cycle 14 prep (this) — Korean runbook + .hexa wrapper + sister README + req.lock + VRAM ladder + n6 hooks"
+  },
+
+  "user_approval_received_this_turn": {
+    "items_ok": [
+      {"n": 1, "label": "신규 디렉토리 (mkdir ~/core/hexa-weave/)"},
+      {"n": 5, "label": "AlphaFold weights download (~3 GB)"},
+      {"n": 8, "label": "GPU dry-run (6L1U inference)"},
+      {"n": 8, "label": "dry-run (== GPU; same item)"}
+    ],
+    "items_implied": [
+      {"n": 2, "label": "python3.10 venv (prerequisite for 3)"},
+      {"n": 3, "label": "PyTorch 2.5.1+cu124 install (prerequisite for 5+8)"},
+      {"n": 4, "label": "OpenFold v2.2.0 clone (prerequisite for 5+8)"},
+      {"n": 6, "label": "RCSB cluster-split (78/13/9; deferred but planned)"},
+      {"n": 7, "label": "sm_120 deepspeed source compile (prerequisite for 8 perf)"}
+    ],
+    "approval_classification": "full 8-item authorization via 4-item OK + implied prerequisites",
+    "raw_91_c3_caveat": "this agent does NOT have ubu1 SSH; this agent does NOT have Mac CUDA; actual dispatch is user's responsibility post-prep — mkdir/clone/etc are user-side execution"
+  },
+
+  "deliverables_produced_this_cycle": [
+    {"path": "proposals/hexa_weave_mvp_w5_sandbox_cycle14_prep_2026_04_28.md", "type": "proposal", "size_kb_est": 26, "raw_91_c3": "forward-spec; 25 NOT-decided items in §12"},
+    {"path": "tool/hexa_weave_w5_setup.hexa", "type": "runbook-spec", "size_kb_est": 9, "raw_9_compliant": true, "raw_65_idempotent": true, "raw_142_d2_rollback": true, "raw_66_failure_trailer": true},
+    {"path": "design/kick/2026-04-28_w5-sandbox-cycle14-prep_omega_cycle.json", "type": "kick-witness", "size_kb_est": 6, "schema": "omega_cycle.witness_v2_closure"},
+    {"path": "state/discovery_absorption/registry.jsonl", "type": "registry-append", "size_kb_est": 2, "absorption_channel": "proposal-w5-sandbox-cycle14-runbook"}
+  ],
+
+  "deliverables_NOT_produced_this_cycle": [
+    "~/core/hexa-weave/README.md (spec'd in proposal §4 only; not written to disk per raw 91 C3 — agent does not create the sister repo dir)",
+    "~/core/hexa-weave/requirements.lock (spec'd in proposal §5 only; not written to disk)",
+    "tool/hexa_weave_vram_ladder.hexa (spec'd in §6; separate cycle to author)",
+    "~/core/hexa-weave/scripts/rcsb_cluster_split_fetch.py (referenced in Step 6 cmd; separate cycle to author; cycle 10 alt-2 cdhit emulation has the algorithm but not the script file)",
+    "~/core/hexa-weave/scripts/w5_verdict.py (referenced in Step 8 cmd; separate cycle to author)",
+    "hexa-weave/.git initial commit (W5 sandbox dir creation deferred to user dispatch)"
+  ],
+
+  "korean_runbook_8_steps": [
+    {"n": 1, "label_ko": "디렉토리 생성", "host": "Mac", "wall_min": 1, "disk_mb": 0, "net_mb": 0},
+    {"n": 2, "label_ko": "python3.10 venv", "host": "Mac/ubu1", "wall_min": 5, "disk_mb": 80, "net_mb": 5},
+    {"n": 3, "label_ko": "PyTorch 2.5.1+cu124 + 11-pkg install", "host": "ubu1", "wall_min": 10, "disk_mb": 5000, "net_mb": 5000},
+    {"n": 4, "label_ko": "OpenFold v2.2.0 shallow clone", "host": "ubu1", "wall_min": 2, "disk_mb": 120, "net_mb": 120},
+    {"n": 5, "label_ko": "AlphaFold weights download (~3 GB)", "host": "ubu1", "wall_min": 10, "disk_mb": 3000, "net_mb": 3000},
+    {"n": 6, "label_ko": "RCSB cluster-split download (78/13/9)", "host": "ubu1/Mac", "wall_min": 5, "disk_mb": 51, "net_mb": 51},
+    {"n": 7, "label_ko": "sm_120 deepspeed source compile", "host": "ubu1", "wall_min": 10, "disk_mb": 500, "net_mb": 100},
+    {"n": 8, "label_ko": "6L1U FASTA dry-run inference", "host": "ubu1 GPU", "wall_min": 30, "disk_mb": 50, "net_mb": 0}
+  ],
+
+  "vram_ladder_4_rungs": [
+    {"rung": "L1", "case": "6L1U mini (Step 8 today)", "len_aa": 60, "vram_target_gb": "3-4", "criterion": "RMSD<5A, TM>0.4, VRAM<11GB"},
+    {"rung": "L2", "case": "ESM3 mid", "len_aa": 100, "vram_target_gb": "5-6", "criterion": "no OOM"},
+    {"rung": "L3", "case": "1UBQ real proxy", "len_aa": 76, "vram_target_gb": "7-8", "criterion": "RMSD<3A"},
+    {"rung": "L4", "case": "350aa target post-W6", "len_aa": 350, "vram_target_gb": "10-11", "criterion": "VRAM<11GB else fallback chain 7b-7g"}
+  ],
+
+  "measurement_criteria": {
+    "rmsd_angstrom": {"threshold": "< 5.0", "verifier": "Bio.PDB.Superimposer CA-only"},
+    "tm_score": {"threshold": "> 0.4", "verifier": "TMalign external"},
+    "vram_peak_mb": {"threshold": "< 11000", "verifier": "nvidia-smi -lms 500 awk max"},
+    "inference_rc": {"threshold": "== 0", "verifier": "$?"},
+    "wall_seconds": {"threshold": "< 1800", "verifier": "perf_counter"},
+    "raw_53_compliance": "0 LLM-judge; all deterministic numeric/exit-code/filesystem"
+  },
+
+  "n6_hook_positions": [
+    {"id": "N6-H1", "name": "tau=4 dihedral kmeans", "position": "post-process on output PDB", "invasive": false},
+    {"id": "N6-H2", "name": "sigma=12 icosahedral / DSSP", "position": "post-process or StructureModule subclass", "invasive": "fallback only"},
+    {"id": "N6-H3", "name": "J2=24 PC project", "position": "evoformer block 47 pair-tensor z", "invasive": true},
+    {"id": "N6-H4", "name": "phi=2 hydropathy/SASA bit", "position": "post-process FASTA + DSSP", "invasive": false},
+    {"id": "N6-H5", "name": "master identity check", "position": "aggregator hexa_weave/n6/master_identity.py", "invasive": false}
+  ],
+
+  "cross_repo_check_raw_47": {
+    "10_siblings_audited": [
+      {"sibling": "anima", "applicable": false, "reason": "agent harness, not model sandbox"},
+      {"sibling": "anima-agent-skills", "applicable": false, "reason": "skills are prompts+tools, not weights"},
+      {"sibling": "airgenome", "applicable": "partial", "reason": "bio-adjacent; could share weights/ at W7+"},
+      {"sibling": "hive", "applicable": false, "reason": "orchestration, not modeling"},
+      {"sibling": "nexus", "applicable": false, "reason": "auth/billing"},
+      {"sibling": "pixie", "applicable": false, "reason": "desktop/UI"},
+      {"sibling": "n6-architecture", "applicable": "n/a", "reason": "parent of sibling; provides theoretical n6"},
+      {"sibling": "hexa-weave", "applicable": true, "reason": "target sandbox itself"},
+      {"sibling": "hexa-os", "applicable": false, "reason": "OS layer"},
+      {"sibling": "hexa-lang", "applicable": false, "reason": "language tooling"}
+    ],
+    "verdict": "1/10 yes (hexa-weave) + 1/10 partial (airgenome) + 8/10 no",
+    "hexa_nanobot_consideration": "theoretical sister cycle 13; no model weights, no GPU; same .hexa template clonable to tool/hexa_nanobot_w5_setup.hexa if needed"
+  },
+
+  "alien_grade_unlock_path": {
+    "current_cycle_12": 4.09,
+    "after_step_8_pass_estimate": 4.9,
+    "unlock_components": [
+      {"component": "F-TP5-b empirical evidence", "from_pct": 38, "to_pct": 45, "delta": "+7%"},
+      {"component": "n6 hook source-line confirmation", "from": 0, "to": 4, "delta": "+0.1"},
+      {"component": "12 GB VRAM empirical fit (1 point)", "from": 0, "to": 1, "delta": "+0.3"},
+      {"component": "cross-modal arch first compile", "from": "pseudocode", "to": "binary", "delta": "+0.4"}
+    ],
+    "blockers": [
+      "user must dispatch runbook on ubu1 (agent has no SSH)",
+      "Step 7 sm_120 source compile is bleeding-edge; fallback chain may engage",
+      "F-W5C14-2 must measure PASS not MISS",
+      "19 AX-residual axiom-to-theorem long-tail unaffected by sandbox PASS (parallel track F-CL-FORMAL-4-AXIOM-RESIDUAL deadline 2027-04-28)"
+    ]
+  },
+
+  "falsifiers_5_transcend_tier": [
+    {"id": "F-W5C14-1", "claim": "8-step runbook completes rc=0 on ubu1 with recipes as written", "deadline": "2026-05-26", "tier": "TRANSCEND"},
+    {"id": "F-W5C14-2", "claim": "Step 8 6L1U produces PDB with RMSD<5A + TM>0.4 + VRAM<11GB on RTX 5070 12 GB", "deadline": "2026-05-26", "tier": "TRANSCEND"},
+    {"id": "F-W5C14-3", "claim": "sm_120 deepspeed source compile succeeds with EvoformerAttnBuilder.is_compatible()=True on RTX 5070", "deadline": "2026-05-26", "tier": "TRANSCEND"},
+    {"id": "F-W5C14-4", "claim": "VRAM ladder L4 (350 aa target) post-W6 fits within 12 GB with full 18 cross-attn + late-fusion", "deadline": "2026-07-28", "tier": "TRANSCEND"},
+    {"id": "F-W5C14-5", "claim": "5 n6 invariant hooks install non-invasively post-clone via §8.2 grep targets", "deadline": "2026-05-26", "tier": "TRANSCEND"}
+  ],
+
+  "miss_criteria_5": [
+    "WM5C14-1: prep doc missing or own 22/23 lint fail",
+    "WM5C14-2: kick witness JSON missing or schema-invalid",
+    "WM5C14-3: tool/hexa_weave_w5_setup.hexa missing or not raw-9 compliant",
+    "WM5C14-4: any F-W5C14-* deadline slipped without retraction commit",
+    "WM5C14-5: discovery_absorption registry append missing"
+  ],
+
+  "raw_91_c3_NOT_decided_items_count": 25,
+  "raw_91_c3_NOT_decided_summary": "no mkdir / no pip install / no git clone / no weight download / no nvidia-smi / no SSH / no inference / README.md not written to disk / requirements.lock not written / hexa_weave_vram_ladder.hexa not authored / rcsb_cluster_split_fetch.py not authored / w5_verdict.py not authored / no alien-grade 5/6 actually achieved (path documented; gated on Step 8 PASS) / 12 more items in proposal §12",
+
+  "compliance": {
+    "raw_9_hexa_only": "tool/hexa_weave_w5_setup.hexa is .hexa envelope (raw 9 compliant)",
+    "raw_47_cross_pollination": "10-sibling audit performed (§9)",
+    "raw_53_deterministic_verifier": "all measurement criteria deterministic (numeric/exit-code/filesystem); 0 LLM judge",
+    "raw_65_idempotent": "every step probes existence + skips if PASS",
+    "raw_66_ai_native_trailer": "failure trailer YAML structure spec'd in §3.5",
+    "raw_71_falsifiers_5_min": "5 TRANSCEND-tier preregistered (F-W5C14-1..5)",
+    "raw_91_c3_honest": "25 NOT-decided items (§12); no destructive ops by this agent",
+    "raw_142_d2_rollback": "every step has reverse op; --rollback flag dispatches reversed sequence",
+    "own_1_english_only": "PASS (Korean only in §2 runbook column labels per user spec)",
+    "own_22_proposal_naming": "PASS (snake_case + _YYYY_MM_DD)",
+    "own_23_proposal_umbrella": "PASS (no umbrella declared)"
+  },
+
+  "concerns_raised": [
+    "Step 7 sm_120 source compile bleeding-edge; ~40% probability of first-attempt failure -> PTX JIT or sm_90 fallback; ~10 min build time may extend to 30 min on retries",
+    "F-W5C14-4 (350aa post-W6) is the highest-stakes falsifier — if 12 GB ceiling fails on full hexa-weave, escalation to A100 rental or RoseTTAFold All-Atom required (raw 86 cost-attribution change)",
+    "user must dispatch on ubu1; agent has no SSH so can not verify Step 8 PASS in same cycle as authoring this prep",
+    "scripts/rcsb_cluster_split_fetch.py and scripts/w5_verdict.py referenced in Step 6/8 cmd but NOT YET authored; cycle 15 must produce these before user dispatch",
+    "raw 91 C3: this prep doc is forward-spec; user dispatch + measurement is the empirical step; alien-grade 4.9 is *conditional* not *achieved*"
+  ],
+
+  "next_cycle_suggested_actions": [
+    "cycle 15 author tool/hexa_weave_vram_ladder.hexa (4-rung dispatcher per proposal §6)",
+    "cycle 15 author scripts/rcsb_cluster_split_fetch.py (refs cycle 10 alt-2 cdhit 78/13/9 split with seed 0xf927314f)",
+    "cycle 15 author scripts/w5_verdict.py (Bio.PDB Superimposer + TMalign + nvidia-smi awk)",
+    "after user dispatch: absorb Step 8 verdict.json into state/discovery_absorption/registry.jsonl with empirical RMSD/TM/VRAM",
+    "if alien-grade 5/6 unlocked, paper draft for hexa-weave first empirical inference (papers/hexa-weave-empirical-w5-2026-XX.md)"
+  ]
+}
