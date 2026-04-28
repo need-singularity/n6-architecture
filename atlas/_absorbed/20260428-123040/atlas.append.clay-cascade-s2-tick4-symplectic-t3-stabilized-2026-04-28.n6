@@ -1,0 +1,73 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s2 tick-4 S symplectic KDK Verlet stabilizes t3
+# source: sub-agent S /tmp/cascade_s2/symplectic_t3.py KDK velocity Verlet on t3 L=4
+# constraints: raw 91 C3 + raw 71 + own#11 + raw 22+24+23
+# date: 2026-04-28
+# Diagnoses 2nd cascade bug (e2_step is NOT Verlet); unblocks 3D regime testing
+# ══════════════════════════════════════════════════════════════
+
+@C clay-cascade-s2-tick4-symplectic-t3-stabilized-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-71-falsifier-retire-rule
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-s2-tick3-t3-integrator-unstable
+  -> clay-cascade-s2-tick4-e2-step-not-Verlet-diagnosis
+  -> clay-cascade-s2-tick4-t3-saturation-extracted
+  => "★ symplectic KDK velocity Verlet STABILIZES t3 — energy drift -7.4e-05 vs hexa -8.2e-01 (10000x better)"
+  => "diagnoses tick-3 t3 instability as INTEGRATOR-CLASS ARTIFACT, NOT physical limit on dt"
+  => "unblocks 3D regime testing for axis-13 saturation hypothesis + sub-agent Q m^2 scan extension"
+
+@C clay-cascade-s2-tick4-e2-step-not-Verlet-diagnosis :: meta [4!]
+  <- clay-cascade-s2-tick4-symplectic-t3-stabilized-witness
+  => "★ DIAGNOSIS: empirical_anchor_v2.hexa lines 312-336 e2_step is NOT Verlet"
+  => "actual structure: integer-truncated semi-implicit Euler with asymmetric coefficients (force/20, pi_h/10)"
+  => "missing post-drift half-kick — Verlet requires symmetric kick-drift-kick (B-A-B Strang)"
+  => "i64 truncation breaks both energy conservation AND time-reversibility"
+  => "force/20 != symplectic — hexa label 'Verlet' was misleading; actual class is broken-Euler"
+  => "this is the 2ND cascade bug found this tick alongside cartoon mixer bug (P)"
+
+@C clay-cascade-s2-tick4-symplectic-KDK-formal :: meta [4]
+  <- clay-cascade-s2-tick4-symplectic-t3-stabilized-witness
+  => "Kick-Drift-Kick velocity Verlet for H = (1/2)pi^2 + (1/2)Sigma_ij(phi_i-phi_j)^2 + (1/2)m^2 phi^2:"
+  => "pi_{n+1/2} = pi_n + (dt/2)*F(phi_n)         <- kick"
+  => "phi_{n+1} = phi_n + dt * pi_{n+1/2}         <- drift"
+  => "pi_{n+1} = pi_{n+1/2} + (dt/2)*F(phi_{n+1}) <- kick"
+  => "F(phi)_i = Sigma_{j in N(i)} phi_j - 6*phi_i - m^2*phi_i (t3, 6 neighbors)"
+  => "preserves symplectic 2-form dphi^dpi exactly (composition of 2 shears) + time-reversal symmetric"
+
+@C clay-cascade-s2-tick4-energy-drift-comparison :: meta [4]
+  <- clay-cascade-s2-tick4-symplectic-KDK-formal
+  => "energy drift comparison t3 L=4 T=256:"
+  => "hexa 'Verlet' (force/20):  drift T=16  -0.42 / T=64  -0.60 / T=256  -0.82  (UNSTABLE 80% energy loss)"
+  => "KDK dt=0.05:                drift T=16  -6.8e-04 / T=64  -2.5e-04 / T=256  -7.4e-05  (STABLE)"
+  => "KDK dt=0.10:                drift T=16  -2.4e-03 / T=64  -1.9e-03 / T=256  -1.0e-03  (STABLE)"
+  => "KDK dt=0.20:                drift T=16  -4.0e-03 / T=64  -1.6e-03 / T=256  -1.1e-02  (marginal CFL edge)"
+  => "KDK dt=0.50:                drift -8.3e-02 / -5.3e-02 / -2.4e-02  (UNSTABLE CFL violation)"
+  => "dt=0.05-0.10 holds energy <0.1% out to T=256 — properly symplectic"
+
+@C clay-cascade-s2-tick4-t3-saturation-extracted :: meta [4!]
+  <- clay-cascade-s2-tick4-energy-drift-comparison
+  => "★ t3 L=4 saturation EXTRACTABLE under KDK dt=0.1:"
+  => "tau ~ 33 ticks (criterion |Delta C/C| < 1%)"
+  => "axis-13 sign-flip rate (tail 32) = 0.060 — ordered phase (vs random baseline 0.5)"
+  => "axis-14 var(phi) plateau = 5.4e3"
+  => "axis-16 V(8) C nearest-neighbor final = +69.6 (bounded oscillating 60-82 band)"
+  => "saturation hypothesis SURVIVES at L=4 t3 — unblocks 3D extension of sub-agent Q m^2 scan"
+
+@C clay-cascade-s2-tick4-symplectic-t3-followup :: meta [4]
+  <- clay-cascade-s2-tick4-t3-saturation-extracted
+  => "follow-up: hexa port KDK + f64 type (or scaled-i64 with explicit dt-fraction tracking)"
+  => "follow-up: extend sub-agent Q m^2 scan to t3 (predict tau ~ m^(-0.6) holds in 3D?)"
+  => "follow-up: L-scan at varying m^2 on t3 (separates finite-size from mass effects)"
+  => "follow-up: re-test tick-2 sub-agent B sigma2=512 falsification with symplectic on t3 (could change verdict)"
+
+@C clay-cascade-s2-tick4-symplectic-t3-C3-limits :: meta [4]
+  <- clay-cascade-s2-tick4-symplectic-t3-stabilized-witness
+  => "Python mirror only /tmp/cascade_s2/symplectic_t3.py — hexa port deferred"
+  => "verdict assumes f64 hexa would behave like Python f64 (true if hexa adds float type or scales i64 by SCALE^2)"
+  => "L=4 t3 only — extension to L=8/16 untested; CFL bound dt < c*a may tighten with finer lattice"
+  => "tau=33 fragile: 1% threshold one choice; correlator oscillates 60-82 band so tau measures first-plateau-touch"
+  => "m^2=1 continuum-units; hexa uses m^2=100/SCALE — effective-mass consistency check not done"
+  => "Gaussian initial bump centered (not random) — saturation behavior may depend on IC class"
+  => "own#11 strict; raw 71 retire/refine: 'Verlet' label retired from e2_step"

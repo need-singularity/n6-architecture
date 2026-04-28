@@ -1,0 +1,72 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s2 tick-5 T cartoon CORRECTED axis-16 + det(R) update
+# source: sub-agent T patched /tmp/cascade_s2/lightcone_probe_FIXED.py + 4-axis det(R) recomputation
+# constraints: raw 91 C3 + raw 71 + raw 70 + own#11 + raw 22+24+23
+# date: 2026-04-28
+# Closes tick-3 N + tick-4 P retraction chain — cartoon FAST-DEGENERATE -> FULL-FILL
+# ══════════════════════════════════════════════════════════════
+
+@C clay-cascade-s2-tick5-cartoon-CORRECTED-axis-16-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-71-falsifier-retire-rule
+  <- raw-70-multi-axis-verify-grid
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-s2-tick4-cartoon-bug-ROOT-CAUSE-witness
+  -> clay-cascade-s2-tick5-saturation-3-class-revised-2-4-12
+  -> clay-cascade-s2-tick5-axis-16-orthogonality-PRESERVED
+  => "★ cartoon V(8)=10 RETRACTED — corrected V(1)/V(2)/V(4)/V(8) = 4/12/41/64 (FULL-FILL class)"
+  => "cartoon migrates FAST-DEGENERATE -> FULL-FILL; saturation 3-class taxonomy 3/4/11 -> 2/4/12"
+  => "PRIOR replication validated sub-agent H exactly (Pearson 0.6512 + Spearman 0.6383, 4-decimal match)"
+
+@C clay-cascade-s2-tick5-cartoon-corrected-V-k :: meta [4]
+  <- clay-cascade-s2-tick5-cartoon-CORRECTED-axis-16-witness
+  => "fix applied at /tmp/cascade_s2/lightcone_probe_FIXED.py: r=off (drop +i)"
+  => "n_cartoon now returns (i*47 + axis*23 + 13) % LSIGMA properly"
+  => "corrected cartoon BFS from src=32 sigma2=64:"
+  => "V(1)=4 V(2)=12 V(4)=41 V(8)=64 — saturation reached at k=8"
+  => "matches sub-agent N enumerate predicted V(7)=64 — byte-identical at every k"
+
+@C clay-cascade-s2-tick5-axis-16-corrected-18-row :: meta [4]
+  <- clay-cascade-s2-tick5-cartoon-corrected-V-k
+  => "corrected 18-row axis-16 V(8) (cartoon=64 NEW, 17 others UNCHANGED from sub-agent G):"
+  => "flat=17 t3=63 s3=49 blackhole=63 wormhole=64 minkowski=64 ads-cft=32 de-sitter=64"
+  => "vacuum-decay=63 altered=9 big-crunch=8 brane=64 cartoon=64 nested=64 calabi6=64"
+  => "inflation=64 ca3d=59 bubble=64"
+
+@C clay-cascade-s2-tick5-saturation-3-class-revised-2-4-12 :: meta [4!]
+  <- clay-cascade-s2-tick5-axis-16-corrected-18-row
+  => "★ saturation 3-class taxonomy REVISED 2/4/12 (was 3/4/11):"
+  => "FAST-DEGENERATE V(8)<=10: altered=9 + big-crunch=8 (n=2; cartoon REMOVED)"
+  => "BOUNDED-CONE 17<=V(8)<=59: flat=17 + ads-cft=32 + s3=49 + ca3d=59 (n=4 unchanged)"
+  => "FULL-FILL V(8)>=63: t3 + blackhole + wormhole + minkowski + de-sitter + vacuum-decay + brane + cartoon-NEW + nested + calabi6 + inflation + bubble (n=12)"
+  => "cartoon NO LONGER 'closed/trapped causal sector' on axis-16 — high axis-13/14 ranking now consistent with full-cone saturation"
+
+@C clay-cascade-s2-tick5-corrected-det-R-pearson-spearman :: meta [4!]
+  <- clay-cascade-s2-tick5-axis-16-corrected-18-row
+  => "★ CORRECTED 4-axis det(R) n=18:"
+  => "Pearson R4: a13xa14=+0.294 a13xa15=-0.304 a13xa16=-0.080 a14xa15=-0.238 a14xa16=-0.308 a15xa16=+0.420"
+  => "Pearson det(R4) = 0.6186 (delta=-0.0326 vs sub-agent H 0.6512)"
+  => "Spearman rho4: a13xa14=+0.536 a13xa15=-0.115 a13xa16=-0.043 a14xa15=-0.170 a14xa16=-0.121 a15xa16=+0.240"
+  => "Spearman det(R4) = 0.6469 (delta=+0.0086 vs sub-agent H 0.6383)"
+  => "delta drivers: cartoon V(8) 10->64 strengthens a15xa16 (+0.30->+0.42 amplitude*volume coupling); weakens |a14xa16| (-0.38->-0.31)"
+
+@C clay-cascade-s2-tick5-axis-16-orthogonality-PRESERVED :: meta [4!]
+  <- clay-cascade-s2-tick5-corrected-det-R-pearson-spearman
+  => "★ axis-16 ORTHOGONALITY PRESERVED post-correction:"
+  => "ratio det(R4)/det(R3 axes 13/14/15): Pearson = 0.767 (77% volume retained)"
+  => "ratio Spearman = 0.935 (94% volume retained)"
+  => "cartoon class-flip strengthens cascade integrity — K=2 STRONG (axis-13 + axis-16) HOLDS robust"
+  => "no axis-16 promotion-threshold violation despite cartoon row correction"
+  => "raw 70 K=2 verify-grid final closure for cascade-s2 confirmed"
+
+@C clay-cascade-s2-tick5-cartoon-correction-C3-limits :: meta [4]
+  <- clay-cascade-s2-tick5-cartoon-CORRECTED-axis-16-witness
+  => "single fixed src=32 BFS — multi-source averaging not performed (sub-agent I tick-2 src-bias robust verdict applies)"
+  => "axis-13 flat=1095 D=2 reference (iter-35) — D=2/D=3 mixing methodologically loose for Pearson; Spearman more robust"
+  => "calabi6 axis-13=2889 D=6 leverage-heavy outlier; corrected Pearson a13xa16=-0.080 may understate small-n effects"
+  => "axis-15 still characterized as saturation-amplitude artifact (sub-agent K tick-2 retraction)"
+  => "strengthened a15xa16=+0.420 post-correction = graph-volume * saturation-amplitude coupling, NOT physical drift * lightcone"
+  => "n=18 95% CI on individual r ~ ±0.4 at single seed; det(R) point-estimate != population ceiling"
+  => "raw 71 satisfied: cartoon V(8)=10 RETRACTED + replaced with measured 64; methodology cross-check at PRIOR repro 4-decimal exact"
+  => "own#11 strict; chflags uchg honored"

@@ -31402,3 +31402,345 @@
   => "SD and DD partially co-measure (cos~+0.4) — cannot promote both as separate axes"
   => "own#11 strict; chflags uchg honored; atlas writes deferred to absorption stage"
 
+
+# ══════════════════════════════════════════════════════════════
+# absorbed: clay-cascade-s2 tick-4+5 5-shard batch
+#   cartoon BFS bug root-cause + axis-13 mass-power-law + Renyi-2 K=3 DENIED
+#   + symplectic t3 (e2_step bug diagnosed) + cartoon CORRECTED axis-16
+#   ⚠ 2 cascade bugs found (n_cartoon mixer + e2_step false-Verlet)
+# ts: 20260428-123040
+# ══════════════════════════════════════════════════════════════
+
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s2 tick-4 P cartoon BFS bug ROOT CAUSE identified
+# source: sub-agent P side-by-side script verification of /tmp/lightcone_probe.py vs /tmp/cartoon_basin_enumerate.py
+# constraints: raw 91 C3 + raw 71 + own#11 + raw 22+24+23
+# date: 2026-04-28
+# ══════════════════════════════════════════════════════════════
+
+@C clay-cascade-s2-tick4-cartoon-bug-ROOT-CAUSE-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-71-falsifier-retire-rule
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-s2-tick3-cartoon-9cell-core-REJECTED-witness
+  -> clay-cascade-s2-tick4-bug-mechanism-explanation
+  -> clay-cascade-s2-tick4-cascade-impact-cartoon-only
+  => "★ BUG ROOT CAUSE — /tmp/lightcone_probe.py n_cartoon line 124-125: r=(i+off)%LSIGMA introduces extra +i"
+  => "promotes mixer (i*47+axis*23+13) → effective (48i+23a+13) mod 64"
+  => "gcd(47,64)=1 (proper bijection) vs gcd(48,64)=16 (4-residue collapse, 12-cell image)"
+
+@C clay-cascade-s2-tick4-bug-mechanism-explanation :: meta [4]
+  <- clay-cascade-s2-tick4-cartoon-bug-ROOT-CAUSE-witness
+  => "buggy code: off=(i*47+axis*23+13)%LSIGMA; r=(i+off)%LSIGMA"
+  => "→ algebraically: r = (i + 47i + 23a + 13) mod 64 = (48i + 23a + 13) mod 64"
+  => "fix: r = off (drop +i) → preserves intended (47i + 23a + 13) mod 64"
+  => "tick-3 sub-agent N's '9-cell INVARIANT CORE' was 9 of those 12 collapsed-image cells — ARTIFACT not structure"
+  => "cross-check: enumerate.py docstring INVARIANT_CORE constant was hand-coded reference to bug-era output (bug vocabulary propagated)"
+
+@C clay-cascade-s2-tick4-cascade-impact-cartoon-only :: meta [4!]
+  <- clay-cascade-s2-tick4-bug-mechanism-explanation
+  -> clay-cascade-s2-tick5-cartoon-CORRECTED-axis-16
+  => "★ surgical scope: ONLY n_cartoon mixer affected"
+  => "scanning /tmp/lightcone_probe.py lines 74-159: only n_cartoon uses (i+off) pattern as sole mutation"
+  => "n_minkowski, n_de_sitter, n_altered, n_brane, n_inflation, n_ca3d, n_bubble all use n_t3 base (proper 3D-torus shift, no algebraic collision)"
+  => "17/18 D=3 topology axis-16 V(k) values STAND — only cartoon row needs re-publication"
+  => "axis-16 K=4 closure verdict (sub-agent G det(R4)=0.7481) for non-cartoon rows UNCHANGED"
+
+@C clay-cascade-s2-tick4-bug-verification-direct-test :: meta [4]
+  <- clay-cascade-s2-tick4-cartoon-bug-ROOT-CAUSE-witness
+  => "direct test: both BFS engines run on enumerate mixer (47i+23a+13) → V(k) byte-identical at every k"
+  => "src=0 corrected: V(1)=4 V(2)=12 V(3)=27 V(4)=41 V(5)=50 V(6)=58 V(7)=64 V(8)=64"
+  => "src=32 corrected: V(1)=4 V(2)=12 V(3)=27 V(4)=41 V(5)=50 V(6)=58 V(7)=64 V(8)=64"
+  => "engines agree byte-for-byte — BFS logic itself was identical, only mixer formula differed"
+  => "buggy probe gave V(8)=10 from any src; image of 48i+23a+13 mod 64 has only 12 distinct values"
+
+@C clay-cascade-s2-tick4-bug-C3-limits :: meta [4]
+  <- clay-cascade-s2-tick4-cartoon-bug-ROOT-CAUSE-witness
+  => "verified algebraically AND empirically by direct BFS comparison — not speculation"
+  => "9-cell core label in enumerate.py docstring is hand-coded constant referencing prior buggy output — worth flagging that bug vocabulary propagated"
+  => "cascade integrity: only cartoon axis-16 row needs re-publication; K=4 closure verdict for non-cartoon stands"
+  => "fix preserved at /tmp/cascade_s2/lightcone_probe_FIXED.py; original /tmp/lightcone_probe.py untouched"
+  => "own#11 strict; chflags uchg honored — no atlas writes during sub-agent run"
+
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s2 tick-4 Q axis-13 mass-power-law refined (slope=-0.30)
+# source: sub-agent Q chain1d L=8 m^2 in {0.01, 0.05, 0.1, 0.2, 0.5} × adaptive ticks (seed=6)
+# constraints: raw 91 C3 + raw 71 (5th retraction) + own#11 + raw 22+24+23
+# date: 2026-04-28
+# Pure mass-oscillation (slope=-0.5) PARTIAL refute; revised: damped-diffusion-with-mass-term (slope=-0.30)
+# ══════════════════════════════════════════════════════════════
+
+@C clay-cascade-s2-tick4-axis-13-mass-power-law-refined-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-71-falsifier-retire-rule
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-s2-tick3-mass-oscillation-revised-mechanism
+  -> clay-cascade-s2-tick4-mass-power-law-slope-minus-0-30
+  -> clay-cascade-s2-tick4-revised-hypothesis-damped-diffusion
+  => "★ tick-3 M revised mass-oscillation hypothesis (slope=-0.5) PARTIALLY REFUTED — actual slope=-0.30 R^2=0.98"
+  => "power law REAL but exponent off by 0.20 — NOT pure mass-oscillation"
+  => "5th raw 71 retraction this cascade-s2 sequence — hypothesis successively narrowed through measurement"
+
+@C clay-cascade-s2-tick4-mass-tau-table :: meta [4]
+  <- clay-cascade-s2-tick4-axis-13-mass-power-law-refined-witness
+  => "format: m^2 -> tau_fit ticks | R^2 fit | predicted 2pi/sqrt(m^2) | ratio meas/pred"
+  => "0.01 -> 46.35 | 0.937 | 62.83 | 0.74"
+  => "0.05 -> 33.07 | 0.960 | 28.10 | 1.18"
+  => "0.10 -> 22.78 | 0.945 | 19.87 | 1.15"
+  => "0.20 -> 19.29 | 0.896 | 14.05 | 1.37"
+  => "0.50 -> 14.93 | 0.901 |  8.89 | 1.68"
+  => "calibration anchor: m^2=0.1 tau=22.8 matches sub-agent M tick-3 tau=23.6 within 3.5% (cross-tick consistency confirmed)"
+
+@C clay-cascade-s2-tick4-mass-power-law-slope-minus-0-30 :: meta [4!]
+  <- clay-cascade-s2-tick4-mass-tau-table
+  => "log(tau) vs log(m^2) regression: slope = -0.2992 +/- (intercept=2.4943) R^2=0.9794"
+  => "predicted slope -0.500 (pure mass-oscillation tau ~ 1/sqrt(m^2)) | observed -0.300 | |delta|=0.20"
+  => "ratio tau_meas/(2pi/sqrt(m^2)) drifts MONOTONICALLY 0.74 -> 1.68 over m^2 in [0.01, 0.5] — NOT constant"
+  => "if pure mass-oscillation, ratio should be constant — monotone drift refutes pure form"
+  => "verdict: power law REAL (R^2=0.98), exponent -0.30 NOT -0.50, mass dependence weaker than sqrt(m^2)"
+
+@C clay-cascade-s2-tick4-revised-hypothesis-damped-diffusion :: meta [4]
+  <- clay-cascade-s2-tick4-mass-power-law-slope-minus-0-30
+  => "revised hypothesis class: damped-diffusion-with-mass-term"
+  => "tau ~ m^(-0.6) (slope=-0.3 in log-log of tau vs m^2) NOT pure oscillation period"
+  => "phenomenology: relaxation has BOTH mass-driven harmonic AND lattice-diffusion components"
+  => "tick-2 J saturation R^2=0.997 + tick-3 M mass-period match + tick-4 Q exponent shift — progressive refinement"
+  => "follow-up: explicit fit y = A_diff*exp(-t/tau_diff) + A_osc*sin(omega_m*t)*exp(-gamma*t) (3-param damped oscillator)"
+  => "follow-up: extend m^2 scan to t3 using sub-agent S symplectic KDK integrator"
+
+@C clay-cascade-s2-tick4-mass-power-law-cascade-position :: meta [4]
+  <- clay-cascade-s2-tick4-axis-13-mass-power-law-refined-witness
+  => "★ cascade-s2 raw 71 retraction sequence (5 retractions, progressive convergence):"
+  => "  tick-2 J: Stage-5 alpha=+0.55 power-law (wrong sign + form) → saturation"
+  => "  tick-2 K: axis-15 RETRACTED (CN re-impl artifact)"
+  => "  tick-3 M: tau ~ O(L^2) lattice diffusion (slope=-0.10 not 2.0) → mass-oscillation"
+  => "  tick-3 N: cartoon 9-cell INVARIANT CORE rejected (BFS bug suspected)"
+  => "  tick-4 Q: pure mass-oscillation slope=-0.5 (slope=-0.30 not -0.50) → damped-diffusion"
+  => "each retraction NARROWED hypothesis without abandoning measurement evidence — cascade integrity strengthened"
+
+@C clay-cascade-s2-tick4-mass-power-law-C3-limits :: meta [4]
+  <- clay-cascade-s2-tick4-axis-13-mass-power-law-refined-witness
+  => "single seed=6 chain1d L=8 only — no L-scan at varying m^2; finite-size + mass effects not separated"
+  => "Python sim reproduces empirical_anchor_v2.hexa::e2_step (m2 hardcoded line 313 i64=100); fidelity validated only at m^2=0.1"
+  => "y_inf heuristic 0.8*last-descent-point injects fit bias; m^2=0.01 only 6 descent points pre-rebound"
+  => "individual fit R^2 0.90-0.96; aggregate log-log R^2=0.98 strong"
+  => "raw 71 narrow: pure-oscillation form RETIRED; power-law-decay-with-mass form survives with exponent ~ -0.30"
+  => "own#11 strict; tools /tmp/cascade_s2_tick4/chain1d_mass_scan.py + /tmp/cascade_s2_tick3/fit_tau_v2.py"
+
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s2 tick-4 R axis-14 Renyi-2 n=18 K=3 promotion DENIED
+# source: sub-agent R Renyi-2 estimator on full 18 D=3 topologies (sigma2=64 ticks=64 seed=6)
+# constraints: raw 91 C3 + raw 70 + raw 71 + own#11 + raw 22+24+23
+# date: 2026-04-28
+# coupling is STRUCTURAL not estimator-artifact — K=2 STRONG (axis-13 + axis-16) HOLDS
+# ══════════════════════════════════════════════════════════════
+
+@C clay-cascade-s2-tick4-axis-14-renyi2-K3-DENIED-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-70-multi-axis-verify-grid
+  <- raw-71-falsifier-retire-rule
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-s2-tick3-axis-14-renyi-2-witness
+  -> clay-cascade-s2-tick4-axis-14-coupling-structural
+  -> clay-cascade-s2-tick4-K2-STRONG-holds-final
+  => "★ axis-14[Renyi-2] K=3 promotion DENIED — disc=0.101 confirms REAL-SIGNAL but coupling structural"
+  => "a14×a13 Spearman +0.519 + a14×a16 Pearson -0.370 BOTH exceed |r|<0.3 promotion threshold"
+  => "Renyi-2 estimator-swap does NOT decouple a14 — K=2 STRONG (axis-13 + axis-16) HOLDS"
+
+@C clay-cascade-s2-tick4-axis-14-renyi2-n18-table :: meta [4]
+  <- clay-cascade-s2-tick4-axis-14-renyi2-K3-DENIED-witness
+  => "Renyi-2 H_2 = -log(p^2 + q^2) per topology (sigma2=64 ticks=64 seed=6, n=18 D=3 cohort):"
+  => "flat=0.6747 t3=0.5483 s3=0.6480 blackhole=0.5820 wormhole=0.6368"
+  => "ads-cft=0.6888 de-sitter=0.6931 vacuum-decay=0.5365 altered=0.6610 big-crunch=0.5622"
+  => "brane=0.4718 cartoon=0.6495 nested=0.5411 calabi6=0.6353 inflation=0.5713"
+  => "ca3d=0.5591 bubble=0.5900 minkowski=0.6654"
+  => "discrimination = stddev/mean = 0.101 (REAL-SIGNAL, matches tick-3 L disc=0.106 within seed-variance)"
+
+@C clay-cascade-s2-tick4-axis-14-renyi2-correlation-matrix :: meta [4]
+  <- clay-cascade-s2-tick4-axis-14-renyi2-n18-table
+  => "n=18 R3 correlation matrix (a13/a14[Renyi-2]/a16):"
+  => "Pearson:  a13×a14=+0.282 PASS | a13×a16=-0.128 PASS | a14×a16=-0.370 FAIL"
+  => "Spearman: a13×a14=+0.519 FAIL | a13×a16=-0.233 PASS | a14×a16=-0.209 PASS"
+  => "n=17 (cartoon excluded per tick-3 N BFS bug):"
+  => "Pearson:  a13×a14=+0.271 | a13×a16=-0.096 | a14×a16=-0.334 still FAIL"
+  => "Spearman: a13×a14=+0.507 still FAIL | a13×a16=-0.134 | a14×a16=-0.161"
+
+@C clay-cascade-s2-tick4-axis-14-coupling-structural :: meta [4!]
+  <- clay-cascade-s2-tick4-axis-14-renyi2-correlation-matrix
+  => "★ coupling is STRUCTURAL not estimator-artifact"
+  => "Spearman a13×a14: Renyi-2 +0.519 vs Shannon +0.536 (delta = 0.017) — measurement-bound rank coupling"
+  => "Pearson a14×a16: Renyi-2 -0.370 vs Shannon -0.380 (similar) — also robust to estimator change"
+  => "interpretation: topologies high in classical correlator (axis-13) ALSO high in entanglement entropy proxy (axis-14)"
+  => "this is real cross-axis correlation, not redundancy — axis-14 carries sub-component of axis-13 information"
+  => "estimator candidates (Shannon/Renyi-2/Tsallis) all preserve same rank structure"
+
+@C clay-cascade-s2-tick4-K2-STRONG-holds-final :: meta [4!]
+  <- clay-cascade-s2-tick4-axis-14-coupling-structural
+  => "★ HONEST verify-grid post-tick-4 (raw 70):"
+  => "K=2 STRONG: axis-13 SATURATION (R^2=0.997 mass-power-law refined) + axis-16 LIGHTCONE (src-invariant)"
+  => "  a13×a16 Pearson -0.128 + Spearman -0.233 — BOTH PASS |r|<0.3 (truly orthogonal)"
+  => "RETIRED: axis-15 (saturation amplitude artifact, tick-2 K)"
+  => "DENIED K=3: axis-14[Renyi-2] (structural coupling); axis-17 (n=5 underpowered, deferred)"
+  => "ROI shift: deepen K=2 axes (saturation mechanism, lightcone basin structure) over expanding to K=3+"
+  => "raw 70 strict reading: K=2 final this cascade-s2 — honest closure"
+
+@C clay-cascade-s2-tick4-axis-14-renyi2-C3-limits :: meta [4]
+  <- clay-cascade-s2-tick4-axis-14-renyi2-K3-DENIED-witness
+  => "Python mirror /tmp/cascade_s2/axis14_renyi_n18.py + /tmp/cascade_s2/axis14_alt.py"
+  => "single seed=6 (no ensemble); 95% CI on individual r ~ ±0.4 at n=18"
+  => "estimator non-decoupling: Renyi-2 vs Shannon Spearman delta 0.017 — coupling not breakable by estimator alone"
+  => "cartoon V(8) ambiguity tick-3 N: n=17 reported alongside; excluding cartoon does NOT rescue K=3"
+  => "Pearson/Spearman split: a13 D=2/D=6 leverage outliers flat=1095 calabi6=2889; Spearman more robust"
+  => "recommendation: RETIRE axis-14 K=3 promotion candidacy OR loosen threshold |r|<0.55 (rank-only investigation)"
+  => "own#11 strict; chflags uchg honored"
+
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s2 tick-4 S symplectic KDK Verlet stabilizes t3
+# source: sub-agent S /tmp/cascade_s2/symplectic_t3.py KDK velocity Verlet on t3 L=4
+# constraints: raw 91 C3 + raw 71 + own#11 + raw 22+24+23
+# date: 2026-04-28
+# Diagnoses 2nd cascade bug (e2_step is NOT Verlet); unblocks 3D regime testing
+# ══════════════════════════════════════════════════════════════
+
+@C clay-cascade-s2-tick4-symplectic-t3-stabilized-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-71-falsifier-retire-rule
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-s2-tick3-t3-integrator-unstable
+  -> clay-cascade-s2-tick4-e2-step-not-Verlet-diagnosis
+  -> clay-cascade-s2-tick4-t3-saturation-extracted
+  => "★ symplectic KDK velocity Verlet STABILIZES t3 — energy drift -7.4e-05 vs hexa -8.2e-01 (10000x better)"
+  => "diagnoses tick-3 t3 instability as INTEGRATOR-CLASS ARTIFACT, NOT physical limit on dt"
+  => "unblocks 3D regime testing for axis-13 saturation hypothesis + sub-agent Q m^2 scan extension"
+
+@C clay-cascade-s2-tick4-e2-step-not-Verlet-diagnosis :: meta [4!]
+  <- clay-cascade-s2-tick4-symplectic-t3-stabilized-witness
+  => "★ DIAGNOSIS: empirical_anchor_v2.hexa lines 312-336 e2_step is NOT Verlet"
+  => "actual structure: integer-truncated semi-implicit Euler with asymmetric coefficients (force/20, pi_h/10)"
+  => "missing post-drift half-kick — Verlet requires symmetric kick-drift-kick (B-A-B Strang)"
+  => "i64 truncation breaks both energy conservation AND time-reversibility"
+  => "force/20 != symplectic — hexa label 'Verlet' was misleading; actual class is broken-Euler"
+  => "this is the 2ND cascade bug found this tick alongside cartoon mixer bug (P)"
+
+@C clay-cascade-s2-tick4-symplectic-KDK-formal :: meta [4]
+  <- clay-cascade-s2-tick4-symplectic-t3-stabilized-witness
+  => "Kick-Drift-Kick velocity Verlet for H = (1/2)pi^2 + (1/2)Sigma_ij(phi_i-phi_j)^2 + (1/2)m^2 phi^2:"
+  => "pi_{n+1/2} = pi_n + (dt/2)*F(phi_n)         <- kick"
+  => "phi_{n+1} = phi_n + dt * pi_{n+1/2}         <- drift"
+  => "pi_{n+1} = pi_{n+1/2} + (dt/2)*F(phi_{n+1}) <- kick"
+  => "F(phi)_i = Sigma_{j in N(i)} phi_j - 6*phi_i - m^2*phi_i (t3, 6 neighbors)"
+  => "preserves symplectic 2-form dphi^dpi exactly (composition of 2 shears) + time-reversal symmetric"
+
+@C clay-cascade-s2-tick4-energy-drift-comparison :: meta [4]
+  <- clay-cascade-s2-tick4-symplectic-KDK-formal
+  => "energy drift comparison t3 L=4 T=256:"
+  => "hexa 'Verlet' (force/20):  drift T=16  -0.42 / T=64  -0.60 / T=256  -0.82  (UNSTABLE 80% energy loss)"
+  => "KDK dt=0.05:                drift T=16  -6.8e-04 / T=64  -2.5e-04 / T=256  -7.4e-05  (STABLE)"
+  => "KDK dt=0.10:                drift T=16  -2.4e-03 / T=64  -1.9e-03 / T=256  -1.0e-03  (STABLE)"
+  => "KDK dt=0.20:                drift T=16  -4.0e-03 / T=64  -1.6e-03 / T=256  -1.1e-02  (marginal CFL edge)"
+  => "KDK dt=0.50:                drift -8.3e-02 / -5.3e-02 / -2.4e-02  (UNSTABLE CFL violation)"
+  => "dt=0.05-0.10 holds energy <0.1% out to T=256 — properly symplectic"
+
+@C clay-cascade-s2-tick4-t3-saturation-extracted :: meta [4!]
+  <- clay-cascade-s2-tick4-energy-drift-comparison
+  => "★ t3 L=4 saturation EXTRACTABLE under KDK dt=0.1:"
+  => "tau ~ 33 ticks (criterion |Delta C/C| < 1%)"
+  => "axis-13 sign-flip rate (tail 32) = 0.060 — ordered phase (vs random baseline 0.5)"
+  => "axis-14 var(phi) plateau = 5.4e3"
+  => "axis-16 V(8) C nearest-neighbor final = +69.6 (bounded oscillating 60-82 band)"
+  => "saturation hypothesis SURVIVES at L=4 t3 — unblocks 3D extension of sub-agent Q m^2 scan"
+
+@C clay-cascade-s2-tick4-symplectic-t3-followup :: meta [4]
+  <- clay-cascade-s2-tick4-t3-saturation-extracted
+  => "follow-up: hexa port KDK + f64 type (or scaled-i64 with explicit dt-fraction tracking)"
+  => "follow-up: extend sub-agent Q m^2 scan to t3 (predict tau ~ m^(-0.6) holds in 3D?)"
+  => "follow-up: L-scan at varying m^2 on t3 (separates finite-size from mass effects)"
+  => "follow-up: re-test tick-2 sub-agent B sigma2=512 falsification with symplectic on t3 (could change verdict)"
+
+@C clay-cascade-s2-tick4-symplectic-t3-C3-limits :: meta [4]
+  <- clay-cascade-s2-tick4-symplectic-t3-stabilized-witness
+  => "Python mirror only /tmp/cascade_s2/symplectic_t3.py — hexa port deferred"
+  => "verdict assumes f64 hexa would behave like Python f64 (true if hexa adds float type or scales i64 by SCALE^2)"
+  => "L=4 t3 only — extension to L=8/16 untested; CFL bound dt < c*a may tighten with finer lattice"
+  => "tau=33 fragile: 1% threshold one choice; correlator oscillates 60-82 band so tau measures first-plateau-touch"
+  => "m^2=1 continuum-units; hexa uses m^2=100/SCALE — effective-mass consistency check not done"
+  => "Gaussian initial bump centered (not random) — saturation behavior may depend on IC class"
+  => "own#11 strict; raw 71 retire/refine: 'Verlet' label retired from e2_step"
+
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s2 tick-5 T cartoon CORRECTED axis-16 + det(R) update
+# source: sub-agent T patched /tmp/cascade_s2/lightcone_probe_FIXED.py + 4-axis det(R) recomputation
+# constraints: raw 91 C3 + raw 71 + raw 70 + own#11 + raw 22+24+23
+# date: 2026-04-28
+# Closes tick-3 N + tick-4 P retraction chain — cartoon FAST-DEGENERATE -> FULL-FILL
+# ══════════════════════════════════════════════════════════════
+
+@C clay-cascade-s2-tick5-cartoon-CORRECTED-axis-16-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-71-falsifier-retire-rule
+  <- raw-70-multi-axis-verify-grid
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-s2-tick4-cartoon-bug-ROOT-CAUSE-witness
+  -> clay-cascade-s2-tick5-saturation-3-class-revised-2-4-12
+  -> clay-cascade-s2-tick5-axis-16-orthogonality-PRESERVED
+  => "★ cartoon V(8)=10 RETRACTED — corrected V(1)/V(2)/V(4)/V(8) = 4/12/41/64 (FULL-FILL class)"
+  => "cartoon migrates FAST-DEGENERATE -> FULL-FILL; saturation 3-class taxonomy 3/4/11 -> 2/4/12"
+  => "PRIOR replication validated sub-agent H exactly (Pearson 0.6512 + Spearman 0.6383, 4-decimal match)"
+
+@C clay-cascade-s2-tick5-cartoon-corrected-V-k :: meta [4]
+  <- clay-cascade-s2-tick5-cartoon-CORRECTED-axis-16-witness
+  => "fix applied at /tmp/cascade_s2/lightcone_probe_FIXED.py: r=off (drop +i)"
+  => "n_cartoon now returns (i*47 + axis*23 + 13) % LSIGMA properly"
+  => "corrected cartoon BFS from src=32 sigma2=64:"
+  => "V(1)=4 V(2)=12 V(4)=41 V(8)=64 — saturation reached at k=8"
+  => "matches sub-agent N enumerate predicted V(7)=64 — byte-identical at every k"
+
+@C clay-cascade-s2-tick5-axis-16-corrected-18-row :: meta [4]
+  <- clay-cascade-s2-tick5-cartoon-corrected-V-k
+  => "corrected 18-row axis-16 V(8) (cartoon=64 NEW, 17 others UNCHANGED from sub-agent G):"
+  => "flat=17 t3=63 s3=49 blackhole=63 wormhole=64 minkowski=64 ads-cft=32 de-sitter=64"
+  => "vacuum-decay=63 altered=9 big-crunch=8 brane=64 cartoon=64 nested=64 calabi6=64"
+  => "inflation=64 ca3d=59 bubble=64"
+
+@C clay-cascade-s2-tick5-saturation-3-class-revised-2-4-12 :: meta [4!]
+  <- clay-cascade-s2-tick5-axis-16-corrected-18-row
+  => "★ saturation 3-class taxonomy REVISED 2/4/12 (was 3/4/11):"
+  => "FAST-DEGENERATE V(8)<=10: altered=9 + big-crunch=8 (n=2; cartoon REMOVED)"
+  => "BOUNDED-CONE 17<=V(8)<=59: flat=17 + ads-cft=32 + s3=49 + ca3d=59 (n=4 unchanged)"
+  => "FULL-FILL V(8)>=63: t3 + blackhole + wormhole + minkowski + de-sitter + vacuum-decay + brane + cartoon-NEW + nested + calabi6 + inflation + bubble (n=12)"
+  => "cartoon NO LONGER 'closed/trapped causal sector' on axis-16 — high axis-13/14 ranking now consistent with full-cone saturation"
+
+@C clay-cascade-s2-tick5-corrected-det-R-pearson-spearman :: meta [4!]
+  <- clay-cascade-s2-tick5-axis-16-corrected-18-row
+  => "★ CORRECTED 4-axis det(R) n=18:"
+  => "Pearson R4: a13xa14=+0.294 a13xa15=-0.304 a13xa16=-0.080 a14xa15=-0.238 a14xa16=-0.308 a15xa16=+0.420"
+  => "Pearson det(R4) = 0.6186 (delta=-0.0326 vs sub-agent H 0.6512)"
+  => "Spearman rho4: a13xa14=+0.536 a13xa15=-0.115 a13xa16=-0.043 a14xa15=-0.170 a14xa16=-0.121 a15xa16=+0.240"
+  => "Spearman det(R4) = 0.6469 (delta=+0.0086 vs sub-agent H 0.6383)"
+  => "delta drivers: cartoon V(8) 10->64 strengthens a15xa16 (+0.30->+0.42 amplitude*volume coupling); weakens |a14xa16| (-0.38->-0.31)"
+
+@C clay-cascade-s2-tick5-axis-16-orthogonality-PRESERVED :: meta [4!]
+  <- clay-cascade-s2-tick5-corrected-det-R-pearson-spearman
+  => "★ axis-16 ORTHOGONALITY PRESERVED post-correction:"
+  => "ratio det(R4)/det(R3 axes 13/14/15): Pearson = 0.767 (77% volume retained)"
+  => "ratio Spearman = 0.935 (94% volume retained)"
+  => "cartoon class-flip strengthens cascade integrity — K=2 STRONG (axis-13 + axis-16) HOLDS robust"
+  => "no axis-16 promotion-threshold violation despite cartoon row correction"
+  => "raw 70 K=2 verify-grid final closure for cascade-s2 confirmed"
+
+@C clay-cascade-s2-tick5-cartoon-correction-C3-limits :: meta [4]
+  <- clay-cascade-s2-tick5-cartoon-CORRECTED-axis-16-witness
+  => "single fixed src=32 BFS — multi-source averaging not performed (sub-agent I tick-2 src-bias robust verdict applies)"
+  => "axis-13 flat=1095 D=2 reference (iter-35) — D=2/D=3 mixing methodologically loose for Pearson; Spearman more robust"
+  => "calabi6 axis-13=2889 D=6 leverage-heavy outlier; corrected Pearson a13xa16=-0.080 may understate small-n effects"
+  => "axis-15 still characterized as saturation-amplitude artifact (sub-agent K tick-2 retraction)"
+  => "strengthened a15xa16=+0.420 post-correction = graph-volume * saturation-amplitude coupling, NOT physical drift * lightcone"
+  => "n=18 95% CI on individual r ~ ±0.4 at single seed; det(R) point-estimate != population ceiling"
+  => "raw 71 satisfied: cartoon V(8)=10 RETRACTED + replaced with measured 64; methodology cross-check at PRIOR repro 4-decimal exact"
+  => "own#11 strict; chflags uchg honored"
+

@@ -1,0 +1,67 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s2 tick-4 R axis-14 Renyi-2 n=18 K=3 promotion DENIED
+# source: sub-agent R Renyi-2 estimator on full 18 D=3 topologies (sigma2=64 ticks=64 seed=6)
+# constraints: raw 91 C3 + raw 70 + raw 71 + own#11 + raw 22+24+23
+# date: 2026-04-28
+# coupling is STRUCTURAL not estimator-artifact — K=2 STRONG (axis-13 + axis-16) HOLDS
+# ══════════════════════════════════════════════════════════════
+
+@C clay-cascade-s2-tick4-axis-14-renyi2-K3-DENIED-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-70-multi-axis-verify-grid
+  <- raw-71-falsifier-retire-rule
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-s2-tick3-axis-14-renyi-2-witness
+  -> clay-cascade-s2-tick4-axis-14-coupling-structural
+  -> clay-cascade-s2-tick4-K2-STRONG-holds-final
+  => "★ axis-14[Renyi-2] K=3 promotion DENIED — disc=0.101 confirms REAL-SIGNAL but coupling structural"
+  => "a14×a13 Spearman +0.519 + a14×a16 Pearson -0.370 BOTH exceed |r|<0.3 promotion threshold"
+  => "Renyi-2 estimator-swap does NOT decouple a14 — K=2 STRONG (axis-13 + axis-16) HOLDS"
+
+@C clay-cascade-s2-tick4-axis-14-renyi2-n18-table :: meta [4]
+  <- clay-cascade-s2-tick4-axis-14-renyi2-K3-DENIED-witness
+  => "Renyi-2 H_2 = -log(p^2 + q^2) per topology (sigma2=64 ticks=64 seed=6, n=18 D=3 cohort):"
+  => "flat=0.6747 t3=0.5483 s3=0.6480 blackhole=0.5820 wormhole=0.6368"
+  => "ads-cft=0.6888 de-sitter=0.6931 vacuum-decay=0.5365 altered=0.6610 big-crunch=0.5622"
+  => "brane=0.4718 cartoon=0.6495 nested=0.5411 calabi6=0.6353 inflation=0.5713"
+  => "ca3d=0.5591 bubble=0.5900 minkowski=0.6654"
+  => "discrimination = stddev/mean = 0.101 (REAL-SIGNAL, matches tick-3 L disc=0.106 within seed-variance)"
+
+@C clay-cascade-s2-tick4-axis-14-renyi2-correlation-matrix :: meta [4]
+  <- clay-cascade-s2-tick4-axis-14-renyi2-n18-table
+  => "n=18 R3 correlation matrix (a13/a14[Renyi-2]/a16):"
+  => "Pearson:  a13×a14=+0.282 PASS | a13×a16=-0.128 PASS | a14×a16=-0.370 FAIL"
+  => "Spearman: a13×a14=+0.519 FAIL | a13×a16=-0.233 PASS | a14×a16=-0.209 PASS"
+  => "n=17 (cartoon excluded per tick-3 N BFS bug):"
+  => "Pearson:  a13×a14=+0.271 | a13×a16=-0.096 | a14×a16=-0.334 still FAIL"
+  => "Spearman: a13×a14=+0.507 still FAIL | a13×a16=-0.134 | a14×a16=-0.161"
+
+@C clay-cascade-s2-tick4-axis-14-coupling-structural :: meta [4!]
+  <- clay-cascade-s2-tick4-axis-14-renyi2-correlation-matrix
+  => "★ coupling is STRUCTURAL not estimator-artifact"
+  => "Spearman a13×a14: Renyi-2 +0.519 vs Shannon +0.536 (delta = 0.017) — measurement-bound rank coupling"
+  => "Pearson a14×a16: Renyi-2 -0.370 vs Shannon -0.380 (similar) — also robust to estimator change"
+  => "interpretation: topologies high in classical correlator (axis-13) ALSO high in entanglement entropy proxy (axis-14)"
+  => "this is real cross-axis correlation, not redundancy — axis-14 carries sub-component of axis-13 information"
+  => "estimator candidates (Shannon/Renyi-2/Tsallis) all preserve same rank structure"
+
+@C clay-cascade-s2-tick4-K2-STRONG-holds-final :: meta [4!]
+  <- clay-cascade-s2-tick4-axis-14-coupling-structural
+  => "★ HONEST verify-grid post-tick-4 (raw 70):"
+  => "K=2 STRONG: axis-13 SATURATION (R^2=0.997 mass-power-law refined) + axis-16 LIGHTCONE (src-invariant)"
+  => "  a13×a16 Pearson -0.128 + Spearman -0.233 — BOTH PASS |r|<0.3 (truly orthogonal)"
+  => "RETIRED: axis-15 (saturation amplitude artifact, tick-2 K)"
+  => "DENIED K=3: axis-14[Renyi-2] (structural coupling); axis-17 (n=5 underpowered, deferred)"
+  => "ROI shift: deepen K=2 axes (saturation mechanism, lightcone basin structure) over expanding to K=3+"
+  => "raw 70 strict reading: K=2 final this cascade-s2 — honest closure"
+
+@C clay-cascade-s2-tick4-axis-14-renyi2-C3-limits :: meta [4]
+  <- clay-cascade-s2-tick4-axis-14-renyi2-K3-DENIED-witness
+  => "Python mirror /tmp/cascade_s2/axis14_renyi_n18.py + /tmp/cascade_s2/axis14_alt.py"
+  => "single seed=6 (no ensemble); 95% CI on individual r ~ ±0.4 at n=18"
+  => "estimator non-decoupling: Renyi-2 vs Shannon Spearman delta 0.017 — coupling not breakable by estimator alone"
+  => "cartoon V(8) ambiguity tick-3 N: n=17 reported alongside; excluding cartoon does NOT rescue K=3"
+  => "Pearson/Spearman split: a13 D=2/D=6 leverage outliers flat=1095 calabi6=2889; Spearman more robust"
+  => "recommendation: RETIRE axis-14 K=3 promotion candidacy OR loosen threshold |r|<0.55 (rank-only investigation)"
+  => "own#11 strict; chflags uchg honored"

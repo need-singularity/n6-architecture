@@ -1,0 +1,51 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s2 tick-4 P cartoon BFS bug ROOT CAUSE identified
+# source: sub-agent P side-by-side script verification of /tmp/lightcone_probe.py vs /tmp/cartoon_basin_enumerate.py
+# constraints: raw 91 C3 + raw 71 + own#11 + raw 22+24+23
+# date: 2026-04-28
+# ══════════════════════════════════════════════════════════════
+
+@C clay-cascade-s2-tick4-cartoon-bug-ROOT-CAUSE-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-71-falsifier-retire-rule
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-s2-tick3-cartoon-9cell-core-REJECTED-witness
+  -> clay-cascade-s2-tick4-bug-mechanism-explanation
+  -> clay-cascade-s2-tick4-cascade-impact-cartoon-only
+  => "★ BUG ROOT CAUSE — /tmp/lightcone_probe.py n_cartoon line 124-125: r=(i+off)%LSIGMA introduces extra +i"
+  => "promotes mixer (i*47+axis*23+13) → effective (48i+23a+13) mod 64"
+  => "gcd(47,64)=1 (proper bijection) vs gcd(48,64)=16 (4-residue collapse, 12-cell image)"
+
+@C clay-cascade-s2-tick4-bug-mechanism-explanation :: meta [4]
+  <- clay-cascade-s2-tick4-cartoon-bug-ROOT-CAUSE-witness
+  => "buggy code: off=(i*47+axis*23+13)%LSIGMA; r=(i+off)%LSIGMA"
+  => "→ algebraically: r = (i + 47i + 23a + 13) mod 64 = (48i + 23a + 13) mod 64"
+  => "fix: r = off (drop +i) → preserves intended (47i + 23a + 13) mod 64"
+  => "tick-3 sub-agent N's '9-cell INVARIANT CORE' was 9 of those 12 collapsed-image cells — ARTIFACT not structure"
+  => "cross-check: enumerate.py docstring INVARIANT_CORE constant was hand-coded reference to bug-era output (bug vocabulary propagated)"
+
+@C clay-cascade-s2-tick4-cascade-impact-cartoon-only :: meta [4!]
+  <- clay-cascade-s2-tick4-bug-mechanism-explanation
+  -> clay-cascade-s2-tick5-cartoon-CORRECTED-axis-16
+  => "★ surgical scope: ONLY n_cartoon mixer affected"
+  => "scanning /tmp/lightcone_probe.py lines 74-159: only n_cartoon uses (i+off) pattern as sole mutation"
+  => "n_minkowski, n_de_sitter, n_altered, n_brane, n_inflation, n_ca3d, n_bubble all use n_t3 base (proper 3D-torus shift, no algebraic collision)"
+  => "17/18 D=3 topology axis-16 V(k) values STAND — only cartoon row needs re-publication"
+  => "axis-16 K=4 closure verdict (sub-agent G det(R4)=0.7481) for non-cartoon rows UNCHANGED"
+
+@C clay-cascade-s2-tick4-bug-verification-direct-test :: meta [4]
+  <- clay-cascade-s2-tick4-cartoon-bug-ROOT-CAUSE-witness
+  => "direct test: both BFS engines run on enumerate mixer (47i+23a+13) → V(k) byte-identical at every k"
+  => "src=0 corrected: V(1)=4 V(2)=12 V(3)=27 V(4)=41 V(5)=50 V(6)=58 V(7)=64 V(8)=64"
+  => "src=32 corrected: V(1)=4 V(2)=12 V(3)=27 V(4)=41 V(5)=50 V(6)=58 V(7)=64 V(8)=64"
+  => "engines agree byte-for-byte — BFS logic itself was identical, only mixer formula differed"
+  => "buggy probe gave V(8)=10 from any src; image of 48i+23a+13 mod 64 has only 12 distinct values"
+
+@C clay-cascade-s2-tick4-bug-C3-limits :: meta [4]
+  <- clay-cascade-s2-tick4-cartoon-bug-ROOT-CAUSE-witness
+  => "verified algebraically AND empirically by direct BFS comparison — not speculation"
+  => "9-cell core label in enumerate.py docstring is hand-coded constant referencing prior buggy output — worth flagging that bug vocabulary propagated"
+  => "cascade integrity: only cartoon axis-16 row needs re-publication; K=4 closure verdict for non-cartoon stands"
+  => "fix preserved at /tmp/cascade_s2/lightcone_probe_FIXED.py; original /tmp/lightcone_probe.py untouched"
+  => "own#11 strict; chflags uchg honored — no atlas writes during sub-agent run"

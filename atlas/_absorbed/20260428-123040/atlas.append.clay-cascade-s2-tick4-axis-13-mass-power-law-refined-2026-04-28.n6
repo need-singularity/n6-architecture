@@ -1,0 +1,65 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s2 tick-4 Q axis-13 mass-power-law refined (slope=-0.30)
+# source: sub-agent Q chain1d L=8 m^2 in {0.01, 0.05, 0.1, 0.2, 0.5} × adaptive ticks (seed=6)
+# constraints: raw 91 C3 + raw 71 (5th retraction) + own#11 + raw 22+24+23
+# date: 2026-04-28
+# Pure mass-oscillation (slope=-0.5) PARTIAL refute; revised: damped-diffusion-with-mass-term (slope=-0.30)
+# ══════════════════════════════════════════════════════════════
+
+@C clay-cascade-s2-tick4-axis-13-mass-power-law-refined-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-71-falsifier-retire-rule
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-s2-tick3-mass-oscillation-revised-mechanism
+  -> clay-cascade-s2-tick4-mass-power-law-slope-minus-0-30
+  -> clay-cascade-s2-tick4-revised-hypothesis-damped-diffusion
+  => "★ tick-3 M revised mass-oscillation hypothesis (slope=-0.5) PARTIALLY REFUTED — actual slope=-0.30 R^2=0.98"
+  => "power law REAL but exponent off by 0.20 — NOT pure mass-oscillation"
+  => "5th raw 71 retraction this cascade-s2 sequence — hypothesis successively narrowed through measurement"
+
+@C clay-cascade-s2-tick4-mass-tau-table :: meta [4]
+  <- clay-cascade-s2-tick4-axis-13-mass-power-law-refined-witness
+  => "format: m^2 -> tau_fit ticks | R^2 fit | predicted 2pi/sqrt(m^2) | ratio meas/pred"
+  => "0.01 -> 46.35 | 0.937 | 62.83 | 0.74"
+  => "0.05 -> 33.07 | 0.960 | 28.10 | 1.18"
+  => "0.10 -> 22.78 | 0.945 | 19.87 | 1.15"
+  => "0.20 -> 19.29 | 0.896 | 14.05 | 1.37"
+  => "0.50 -> 14.93 | 0.901 |  8.89 | 1.68"
+  => "calibration anchor: m^2=0.1 tau=22.8 matches sub-agent M tick-3 tau=23.6 within 3.5% (cross-tick consistency confirmed)"
+
+@C clay-cascade-s2-tick4-mass-power-law-slope-minus-0-30 :: meta [4!]
+  <- clay-cascade-s2-tick4-mass-tau-table
+  => "log(tau) vs log(m^2) regression: slope = -0.2992 +/- (intercept=2.4943) R^2=0.9794"
+  => "predicted slope -0.500 (pure mass-oscillation tau ~ 1/sqrt(m^2)) | observed -0.300 | |delta|=0.20"
+  => "ratio tau_meas/(2pi/sqrt(m^2)) drifts MONOTONICALLY 0.74 -> 1.68 over m^2 in [0.01, 0.5] — NOT constant"
+  => "if pure mass-oscillation, ratio should be constant — monotone drift refutes pure form"
+  => "verdict: power law REAL (R^2=0.98), exponent -0.30 NOT -0.50, mass dependence weaker than sqrt(m^2)"
+
+@C clay-cascade-s2-tick4-revised-hypothesis-damped-diffusion :: meta [4]
+  <- clay-cascade-s2-tick4-mass-power-law-slope-minus-0-30
+  => "revised hypothesis class: damped-diffusion-with-mass-term"
+  => "tau ~ m^(-0.6) (slope=-0.3 in log-log of tau vs m^2) NOT pure oscillation period"
+  => "phenomenology: relaxation has BOTH mass-driven harmonic AND lattice-diffusion components"
+  => "tick-2 J saturation R^2=0.997 + tick-3 M mass-period match + tick-4 Q exponent shift — progressive refinement"
+  => "follow-up: explicit fit y = A_diff*exp(-t/tau_diff) + A_osc*sin(omega_m*t)*exp(-gamma*t) (3-param damped oscillator)"
+  => "follow-up: extend m^2 scan to t3 using sub-agent S symplectic KDK integrator"
+
+@C clay-cascade-s2-tick4-mass-power-law-cascade-position :: meta [4]
+  <- clay-cascade-s2-tick4-axis-13-mass-power-law-refined-witness
+  => "★ cascade-s2 raw 71 retraction sequence (5 retractions, progressive convergence):"
+  => "  tick-2 J: Stage-5 alpha=+0.55 power-law (wrong sign + form) → saturation"
+  => "  tick-2 K: axis-15 RETRACTED (CN re-impl artifact)"
+  => "  tick-3 M: tau ~ O(L^2) lattice diffusion (slope=-0.10 not 2.0) → mass-oscillation"
+  => "  tick-3 N: cartoon 9-cell INVARIANT CORE rejected (BFS bug suspected)"
+  => "  tick-4 Q: pure mass-oscillation slope=-0.5 (slope=-0.30 not -0.50) → damped-diffusion"
+  => "each retraction NARROWED hypothesis without abandoning measurement evidence — cascade integrity strengthened"
+
+@C clay-cascade-s2-tick4-mass-power-law-C3-limits :: meta [4]
+  <- clay-cascade-s2-tick4-axis-13-mass-power-law-refined-witness
+  => "single seed=6 chain1d L=8 only — no L-scan at varying m^2; finite-size + mass effects not separated"
+  => "Python sim reproduces empirical_anchor_v2.hexa::e2_step (m2 hardcoded line 313 i64=100); fidelity validated only at m^2=0.1"
+  => "y_inf heuristic 0.8*last-descent-point injects fit bias; m^2=0.01 only 6 descent points pre-rebound"
+  => "individual fit R^2 0.90-0.96; aggregate log-log R^2=0.98 strong"
+  => "raw 71 narrow: pure-oscillation form RETIRED; power-law-decay-with-mass form survives with exponent ~ -0.30"
+  => "own#11 strict; tools /tmp/cascade_s2_tick4/chain1d_mass_scan.py + /tmp/cascade_s2_tick3/fit_tau_v2.py"
