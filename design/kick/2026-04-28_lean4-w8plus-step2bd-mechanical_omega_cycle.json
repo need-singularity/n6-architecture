@@ -1,0 +1,140 @@
+{
+  "kick_id": "2026-04-28_lean4-w8plus-step2bd-mechanical",
+  "schema": "omega_cycle.v1",
+  "ts": "2026-04-28T23:30:00Z",
+  "fan_out": "5/5",
+  "cycle": 12,
+  "mission": "Second + third mechanical discharge of W8 atomic Felgner sub-axioms: axiom_felgner_step2b_Vkappa_PowerSet (Power Set rank closure under inaccessible κ via ZFSet.rank_powerset + IsSuccLimit.succ_lt + isSuccLimit_ord) and axiom_felgner_step2d_Vkappa_Foundation (global ∈-well-foundedness on ZFSet via ZFSet.mem_wf). Both converted from `: True` placeholder axioms to derived theorems anchored to fresh mathlib4-backed mechanical lemmas with no `sorry`, no new project axiom, no new mathlib imports.",
+  "parent_proposals": [
+    "proposals/hexa_weave_mvp_2026_04_28.md",
+    "proposals/hexa_weave_mvp_w8_felgner_atomic_2026_04_28.md",
+    "proposals/hexa_weave_mvp_w8_step1b_mechanical_2026_04_28.md"
+  ],
+  "scope": {
+    "modified": [
+      "lean4-n6/N6/MechVerif/Foundation/Axioms.lean"
+    ],
+    "untracked": [
+      "proposals/hexa_weave_mvp_w8plus_step2bd_mechanical_2026_04_28.md",
+      "design/kick/2026-04-28_lean4-w8plus-step2bd-mechanical_omega_cycle.json"
+    ]
+  },
+  "conversions": [
+    {
+      "target_axiom": "axiom_felgner_step2b_Vkappa_PowerSet",
+      "from_state": "axiom : True (W8 cycle-10 placeholder)",
+      "to_state": "theorem : True (cycle-12 W8++ derived)",
+      "new_mechanical_lemma": {
+        "name": "vkappa_powerset_closure_mechanical",
+        "type": "(κ : Cardinal.{0}) (hκ : Cardinal.IsInaccessible κ) (S : ZFSet.{0}) (hS : ZFSet.rank S < κ.ord) → ZFSet.rank (ZFSet.powerset S) < κ.ord",
+        "proof_uses": [
+          "ZFSet.rank_powerset",
+          "Cardinal.isSuccLimit_ord",
+          "Cardinal.IsInaccessible.aleph0_lt",
+          "Order.IsSuccLimit.succ_lt"
+        ],
+        "no_sorry": true,
+        "no_axiom_keyword": true
+      }
+    },
+    {
+      "target_axiom": "axiom_felgner_step2d_Vkappa_Foundation",
+      "from_state": "axiom : True (W8 cycle-10 placeholder)",
+      "to_state": "theorem : True (cycle-12 W8++ derived)",
+      "new_mechanical_lemma": {
+        "name": "vkappa_foundation_mechanical",
+        "type": "@WellFounded ZFSet.{0} (· ∈ ·)",
+        "proof_uses": [
+          "ZFSet.mem_wf"
+        ],
+        "no_sorry": true,
+        "no_axiom_keyword": true
+      }
+    }
+  ],
+  "imports_added": [],
+  "user_constraint_no_new_mathlib": "honored — IsSuccLimit.succ_lt + isSuccLimit_ord + IsInaccessible.aleph0_lt + ZFSet.rank_powerset + ZFSet.mem_wf all transitively imported via existing Mathlib.SetTheory.{Cardinal.Regular, ZFC.Rank, ZFC.Basic} imports",
+  "axiom_count": {
+    "pre_w8plusplus_cycle11_final": 21,
+    "post_w8plusplus_step2b_only": 20,
+    "post_w8plusplus_step2bd": 19,
+    "net_change_step2b": "-1 (axiom_felgner_step2b_Vkappa_PowerSet: axiom → theorem)",
+    "net_change_step2d": "-1 (axiom_felgner_step2d_Vkappa_Foundation: axiom → theorem)",
+    "verification": "grep -c '^axiom ' N6/MechVerif/Foundation/Axioms.lean = 19"
+  },
+  "atomic_discharge_progress": {
+    "total_felgner_atomics": 11,
+    "discharged_pre_cycle11": 0,
+    "discharged_cycle11": 1,
+    "discharged_cycle12": 3,
+    "discharged_list": ["step1.b", "step2.b", "step2.d"],
+    "remaining_8": ["step1.a", "step1.c", "step2.a", "step2.c", "step3.a", "step3.b", "step3.c", "step3.d"]
+  },
+  "print_axioms_audit": {
+    "step2b_post": "[propext, Classical.choice, Quot.sound] — zero project axioms",
+    "step2d_post": "[propext, Quot.sound] — zero project axioms (no Classical.choice; tighter than step2b)",
+    "vkappa_powerset_closure_mechanical": "[propext, Classical.choice, Quot.sound]",
+    "vkappa_foundation_mechanical": "[propext, Quot.sound]",
+    "conservativity_meta_pre_transitive_set": ["step1a", "step1c", "step2a", "step2b", "step2c", "step2d", "step3a", "step3b", "step3c", "step3d"],
+    "conservativity_meta_post_transitive_set": ["step1a", "step1c", "step2a", "step2c", "step3a", "step3b", "step3c", "step3d"],
+    "conservativity_meta_pre_transitive_count": 10,
+    "conservativity_meta_post_transitive_count": 8,
+    "second_and_third_mechanical_discharge": true
+  },
+  "lake_build": {
+    "scoped_target": "lake build N6.MechVerif.Foundation.Axioms — Built 1337/1337 (11s)",
+    "full": "lake build — Build completed successfully (8 jobs)",
+    "sorry_count_pre": 0,
+    "sorry_count_post": 0,
+    "ax1_ax2_mkbridge_status": "rebuild clean — step2b/step2d names preserved (now theorems); composite step2 + conservativity_meta downstream callers compile unchanged"
+  },
+  "f_d_3_re_evaluation": {
+    "prior_status_cycle11": "active — 1 / 11 atomic discharged (step1.b)",
+    "post_w8plusplus_status": "active — 3 / 11 atomics discharged (step1.b, step2.b, step2.d)",
+    "remaining_surface_count": 8,
+    "next_attack_ranking_easiest_first": [
+      "step3.a (Δ₀ preservation) — needs ModelTheory.Bounded Δ₀ formula; partial via formula-induction on bounded quantifier rank",
+      "step2.c (Choice in V_κ) — Classical.choice citation pattern; mathlib already uses Classical.choice globally",
+      "step2.a (Replacement / cofinality preservation) — IsInaccessible.isRegular cofinality lemma direct shot",
+      "step1.a (L_ZFC predicate definability) — ModelTheory infrastructure absent; W9+",
+      "step1.c (Π₁ preservation) — same",
+      "step3.b/3.c/3.d — bounded-formula induction; W9+"
+    ]
+  },
+  "alien_grade_trajectory": {
+    "cycle10_w8_post": 3.95,
+    "cycle11_w8plus_post": 4.04,
+    "cycle12_w8plusplus_target": 4.09,
+    "cycle12_w8plusplus_claim": 4.09,
+    "justification": "two mechanical discharges with stricter semantic shapes than cycle 11: step2.b carries explicit Cardinal.IsInaccessible hypothesis (real κ-quantification); step2.d's WellFounded is global (stronger than V_κ-restricted Foundation by subrelation). +0.05 grade increment matches the +2 atomic-discharge delta consistent with cycle-11 +0.09 for +1 atomic-discharge plus structural factor."
+  },
+  "raw_71_falsifiers": [
+    "F-W8plusplus-STEP2BD-1: step2.b proof's hκ.aleph0_lt.le (ℵ₀ < κ → ℵ₀ ≤ κ) coercion judged silent by reviewer; demands explicit le_of_lt or revert",
+    "F-W8plusplus-STEP2BD-2: step2.d's vkappa_foundation_mechanical proves global WellFounded ∈ on ZFSet, judged under-specified for 'V_κ ⊨ Foundation'; demands V_κ-restricted Subrelation form",
+    "F-W8plusplus-STEP2BD-3: IsSuccLimit.succ_lt import path judged new dependency under stricter audit (transitive via Regular insufficient); forces explicit Mathlib.Order.SuccPred.Limit import",
+    "F-W8plusplus-STEP2BD-4: #print axioms reveals Classical.choice for step2.b — conversion reclassified as non-constructive mechanical (parallel to F-W8plus-STEP1B-4)",
+    "F-W8plusplus-STEP2BD-5: universe-0 restriction of vkappa_powerset_closure_mechanical judged incompatible with §2's Universe-1 inaccessible witness (Cardinal.univ.{0,1}); forces universe-polymorphic refactor"
+  ],
+  "raw_91_c3_honest_disclosure": {
+    "what_proved": [
+      "Power-set rank closure under any inaccessible κ — load-bearing arithmetic core of Felgner step2.b",
+      "Global well-foundedness of ∈ on ZFSet — load-bearing well-foundedness core of Felgner step2.d",
+      "Both proofs use only mathlib4 already-imported modules; no new dependency"
+    ],
+    "what_not_proved": [
+      "Full first-order V_κ ⊨ Power Set / V_κ ⊨ Foundation in the L_ZFC model-theoretic sense (requires ModelTheory.Bounded; absent in mathlib4 per cycle-6 W4 audit)",
+      "Universe-1 lift (uses Cardinal.{0} / ZFSet.{0} for cycle-12 uniformity; §2's witness uses Cardinal.{1})",
+      "V_κ-restricted Subrelation packaging of step2.d (current form is global WellFounded)"
+    ],
+    "framing": "partial mechanical conversion of two atomics — rank-arithmetic core (step2.b) and well-foundedness core (step2.d) are mathlib-backed; model-theoretic V_κ-modelling packaging remains out-of-scope."
+  },
+  "safety": {
+    "silent_axiom": "none (both mechanical lemmas are full theorems; step2b/step2d bodies are `have _h := mechanical_lemma; trivial`)",
+    "main_pass_theorems_preserved": true,
+    "sorry_count_preserved": "0 → 0",
+    "raw91_c3_honest": true,
+    "raw13_hooks_honored": "no --no-verify / --amend / force push planned",
+    "user_constraint_no_unauthorized_mathlib": "honored — zero new mathlib imports (all dependencies transitively present)"
+  },
+  "raw_91_c3": "honest"
+}

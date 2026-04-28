@@ -1,0 +1,186 @@
+{
+  "schema": "omega_cycle.witness_v2_closure",
+  "ts": "2026-04-28T20:00:00Z",
+  "title": "HEXA-WEAVE prerequisite-domain census + per-domain omega-cycle kick disposition",
+  "task_label": "cycle 12 / fan-out 1/5 prerequisite-domain census (paper artefact; zero destructive ops)",
+  "scope": "Per user directive 2026-04-28 'prerequisite domains 있을시 prerequisite domains 도 모두 kick': enumerate every prerequisite (theoretical, empirical, infrastructural) HEXA-WEAVE depends on, partition into Tier 1/2/3, recommend kick disposition per item (KICK_NOW / HOLD / AWAIT_APPROVAL / NO_KICK), and queue cycle 12+ priorities.",
+
+  "parent_witness": {
+    "cycle_1": "hexa-weave registered in domains/biology/_index.json",
+    "cycle_5_to_8": "MVP W1..W5 spec chain (architecture, base model, clone+VRAM, 8-subdir+dryrun, sandbox plan)",
+    "cycle_9_to_11": "kick infra hardening + cascade-s2 + axis-J (deprecation DSL)",
+    "cycle_12_this": "prerequisite-domain census (this fan-out 1/5)",
+    "fan_out_siblings_cycle_12": ["1/5 (this)", "2/5", "3/5", "4/5", "5/5"]
+  },
+
+  "prerequisites": {
+    "tier_1_direct_dependency": [
+      {"n": 1, "name": "n6 master identity (sigma_phi = n_tau = J2 = 24)", "location": "theory/proofs/theorem-r1-uniqueness.md (own 2)", "disposition": "NO_KICK", "reason": "already PASS in proofs ledger; foundational invariant"},
+      {"n": 2, "name": "biology axis sub-SSOT", "location": "domains/biology/_index.json", "disposition": "KICK_NOW", "reason": "sister-domain expansion (HEXA-NANOBOT / HEXA-SYNBIO / HEXA-RNA-WEAVE) candidates"},
+      {"n": 3, "name": "Foundation/Strand inductive type", "location": "lean4-n6/N6/MechVerif/Foundation/Strand.lean", "disposition": "HOLD", "reason": "cycle 8 refactor PASS sorry=0; W7 ax2/mkbridge will re-touch"},
+      {"n": 4, "name": "Felgner 1971 conservativity", "location": "paper citation", "disposition": "HOLD", "reason": "mathlib mechanical port in flight cycle 11 step 1.b"},
+      {"n": 5, "name": "Robin 1984 + Hardy-Wright", "location": "paper citation", "disposition": "NO_KICK", "reason": "axiomatic; used by W3 ax1"},
+      {"n": 6, "name": "OpenFold v2.2.0 ESM3 base model", "location": "external (aqlaboratory/openfold @ e938c184)", "disposition": "AWAIT_APPROVAL", "reason": "W5 8-item checklist gates items 4-6 on user mode selection"},
+      {"n": 7, "name": "PDB-multimer dataset (RCSB Query B 1965 entries)", "location": "external RCSB", "disposition": "HOLD", "reason": "cycle 11 cached; F-W5-3 monitors endpoint drift"}
+    ],
+    "tier_2_meta_governance": [
+      {"n": 8, "name": "n6-architecture domain framework", "location": "own/ (1-23) + raw/ (1-100+)", "disposition": "KICK_NOW", "reason": "own 1 doc-english + raw 33 cross-axis NL-policy benefit from PR-time enforcement hook"},
+      {"n": 9, "name": "kick infra (nexus/hexa-lang/hive, F-MX-3-c 5 modes)", "location": "design/kick/ ledger + cycles 1-11", "disposition": "KICK_NOW", "reason": "cycle 12 = this cycle; F-MX-3-c 5/5 closure is the parent goal"},
+      {"n": 10, "name": "mathlib4 v4.30.0-rc2", "location": "lean4-n6/lakefile.lean", "disposition": "NO_KICK", "reason": "upstream-stable; pin only"}
+    ],
+    "tier_3_theoretical_axiomatic": [
+      {"n": 11, "name": "Tarski 1936 undefinability", "axis": "FORMAL", "disposition": "NO_KICK", "reason": "axiomatic; cited in mk-x-formal-closure"},
+      {"n": 12, "name": "Bekenstein 1981 holographic bound", "axis": "PHYSICAL", "disposition": "NO_KICK", "reason": "axiomatic; cited in mk-x-physical-closure"},
+      {"n": 13, "name": "Solomonoff 1964 incomputability", "axis": "COMPUTATIONAL", "disposition": "NO_KICK", "reason": "axiomatic"},
+      {"n": 14, "name": "AdS/CFT Maldacena 1997", "axis": "PHYSICAL (Combined Path iv)", "disposition": "NO_KICK", "reason": "axiomatic"},
+      {"n": 15, "name": "Bousso 1999 covariant entropy bound", "axis": "PHYSICAL (dS lift)", "disposition": "NO_KICK", "reason": "axiomatic"}
+    ]
+  },
+
+  "tally": {
+    "total_prerequisites": 15,
+    "tier_1_count": 7,
+    "tier_2_count": 3,
+    "tier_3_count": 5,
+    "disposition_breakdown": {
+      "KICK_NOW": 3,
+      "HOLD": 3,
+      "AWAIT_APPROVAL": 1,
+      "NO_KICK": 8
+    }
+  },
+
+  "kick_now_actions": [
+    {
+      "ref": "#2 biology axis sister-domain expansion",
+      "predecessor_witness": "design/kick/2026-04-28_hexa-weave-abstraction-to-limits_omega_cycle.json",
+      "candidates": ["HEXA-NANOBOT", "HEXA-SYNBIO", "HEXA-RNA-WEAVE"],
+      "closure_target": "domains/biology/_index.json _count >= 2 with at least one tri-axis closure witness",
+      "cost_hr": 0.5,
+      "blocker": "none — internal registration only"
+    },
+    {
+      "ref": "#8 n6-architecture framework cross-axis NL-policy hook",
+      "scope": "own 1 doc-english + raw 33 cross-axis NL-policy",
+      "closure_target": "PR-time lint pass on all domains/*/hexa-weave/ markdown",
+      "cost_hr": 1,
+      "blocker": "none — hook draft + dry-run only"
+    },
+    {
+      "ref": "#9 F-MX-3-c cycle 12 5/5 closure",
+      "scope": "this cycle's fan-out 1/5..5/5",
+      "closure_target": "5 witness JSONs + closure verdict",
+      "cost_hr": 2,
+      "blocker": "none — already in flight"
+    }
+  ],
+
+  "await_approval_items": [
+    {
+      "ref": "#6 OpenFold v2.2.0",
+      "approval_doc": "proposals/hexa_weave_mvp_w5_user_approval_request_2026_04_28.md",
+      "modes": ["A_full", "B1_gpu_free", "B2_install_only", "B3_weights_deferred", "C_full_defer", "D_alternate"],
+      "checklist_items": 8
+    }
+  ],
+
+  "cycle_12_plus_priority_queue": [
+    {"slot": 1, "cycle": 12, "task": "complete fan-outs 2/5..5/5; close F-MX-3-c 5/5"},
+    {"slot": 2, "cycle": 13, "task": "register first sister biology-axis domain candidate (predecessor witness only)"},
+    {"slot": 3, "cycle": 14, "task": "omega-cycle for own 1 + raw 33 NL-policy enforcement hook"},
+    {"slot": 4, "cycle": "15+", "task": "post-user-approval execute W5 items per selected mode"},
+    {"slot": 5, "cycle": "parallel", "task": "Felgner mechanical port — independent of GPU track"}
+  ],
+
+  "deliverables": {
+    "files_created": [
+      "/Users/ghost/core/n6-architecture/proposals/hexa_weave_prerequisite_domains_census_2026_04_28.md",
+      "/Users/ghost/core/n6-architecture/design/kick/2026-04-28_prerequisite-domains-census_omega_cycle.json"
+    ],
+    "files_modified": [],
+    "destructive_ops_executed": 0,
+    "read_only_commands_executed": 5,
+    "prerequisites_enumerated": 15,
+    "tier_partition_buckets": 3,
+    "disposition_buckets": 4,
+    "raw_71_falsifiers": 5
+  },
+
+  "honest_disclosure_raw_91_C3": {
+    "implementation_started": false,
+    "code_run": false,
+    "domains_registered": 0,
+    "claim": "This cycle produced 1 markdown document + 1 witness JSON. No new domains registered, no kick witnesses for any of the 15 prerequisites created beyond this census itself.",
+    "caveats": [
+      "5 of 15 prerequisites are external-stable papers/datasets — HEXA-WEAVE cannot kick them; only cite, monitor, and design fall-backs",
+      "Tier 3 items are axiomatic; NO_KICK is the correct disposition, not avoidance",
+      "Coverage gap: census enumerates direct prerequisites only; transitive closures (Tarski → Goedel → PA) not enumerated; depth-2 census requires explicit follow-up cycle",
+      "raw 86 cost-attribution is light: doc-hours only, no compute/storage/bandwidth (zero this cycle), no opportunity cost vs other 90d-gate work"
+    ]
+  },
+
+  "raw_86_cost_attribution_summary": {
+    "compute": {"gpu_week_planned": 0, "gpu_week_actual": 0},
+    "storage": {"local_mac_kb": 25, "remote_gb": 0},
+    "bandwidth_gb_one_shot": 0,
+    "wall_min_sequential": 8,
+    "dollar_cost_marginal": "$0",
+    "human_hours_this_cycle": 0.3,
+    "human_hours_per_kick_now_followup_estimated": "0.5..2 per item"
+  },
+
+  "falsifiers_raw_71": [
+    {
+      "id": "F-CENSUS-1",
+      "tier": "TRANSCEND",
+      "predicate": "Within 14 days, an additional Tier 1 prerequisite is discovered that this census missed",
+      "detection": "user feedback OR new HEXA-WEAVE artefact references a domain not in the 15-item list",
+      "trip_action": "Re-issue census v2; update biology axis _index.json with new dependency edge",
+      "deadline": "T+14d"
+    },
+    {
+      "id": "F-CENSUS-2",
+      "tier": "TRANSCEND",
+      "predicate": "Within 30 days, >=2 of the 8 NO_KICK items become unstable (paper retraction, mathlib4 v5 breaking change, RCSB endpoint deprecation)",
+      "detection": "external monitoring; W5 dry-run re-execution shows endpoint drift; mathlib4 release notes",
+      "trip_action": "Re-tier unstable items to HOLD; draft fallback citations / pins",
+      "deadline": "T+30d"
+    },
+    {
+      "id": "F-CENSUS-3",
+      "tier": "TRANSCEND",
+      "predicate": "Within 7 days, F-MX-3-c cycle-12 5/5 closure attempt yields fewer than 5 fan-out witnesses",
+      "detection": "ls design/kick/2026-04-28_*cycle12* | wc -l < 5 at EOD 2026-04-28",
+      "trip_action": "Halt cycle 12; root-cause fan-out failure; draft cycle-13 retry",
+      "deadline": "T+7d"
+    },
+    {
+      "id": "F-CENSUS-4",
+      "tier": "TRANSCEND",
+      "predicate": "Within 30 days, biology axis sister-domain expansion (#2) yields zero candidate registrations",
+      "detection": "domains/biology/_index.json _count still = 1 at T+30d",
+      "trip_action": "Demote #2 to HOLD; revisit biology-axis category vs single-reservation question",
+      "deadline": "T+30d"
+    },
+    {
+      "id": "F-CENSUS-5",
+      "tier": "TRANSCEND",
+      "predicate": "Within 14 days, user reports tier partition is wrong (e.g., wants Tier 3 papers reclassified as KICK because of mechanical-port plan)",
+      "detection": "user explicit feedback; PR comment",
+      "trip_action": "Re-issue census with revised tier definition; update kick recommendations accordingly",
+      "deadline": "T+14d"
+    }
+  ],
+
+  "verification": {
+    "destructive_ops_count": 0,
+    "read_only_commands_count": 5,
+    "files_created_count": 2,
+    "prerequisites_enumerated_count": 15,
+    "kick_now_actions_drafted_count": 3,
+    "await_approval_items_count": 1,
+    "no_kick_items_count": 8,
+    "hold_items_count": 3,
+    "spec_chain_intact": "cycle-1 hexa-weave registration -> cycle-5..8 W1..W5 spec -> cycle 9..11 hardening -> cycle 12 prerequisite census (this)"
+  }
+}

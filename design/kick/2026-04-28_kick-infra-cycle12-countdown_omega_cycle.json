@@ -1,0 +1,130 @@
+{
+  "schema": "raw_77_omega_cycle_v1",
+  "ts": "2026-04-28T09:24:51Z",
+  "cycle": "kick-infra cycle 12 / fan-out 4-of-5",
+  "mission": "F-MX-3-c kick infra — F-MANUAL-LOGIN T-X countdown + auto-fire simulation + raw 51 4-gate progress + raw 100 fallback institutionalized 12-cycle DEEP breach",
+  "parent_witness": "design/kick/2026-04-28_kick-infra-cycle11-countdown_omega_cycle.json",
+  "parent_proposal": "proposals/hexa_weave_kick_infra_cycle11_countdown_2026_04_28.md",
+  "report_proposal": "proposals/hexa_weave_kick_infra_cycle12_countdown_2026_04_28.md",
+  "status": "ADVISORY (read-only audit; no infra mutation; user manual /login NOT automated; auto-fire simulated only)",
+  "raw_invariants_honored": ["raw_9_hexa_only", "raw_13_no_external_comms", "raw_71_falsifier_first", "raw_91_c3_honest", "raw_100_institutionalized_fallback_smell"],
+
+  "deadline_countdown": {
+    "now_utc": "2026-04-28T09:24:51Z",
+    "deadline_utc": "2026-04-30T00:00:00Z",
+    "t_minus_hours": 38.59,
+    "drift_vs_cycle11_hours": -0.25,
+    "drift_vs_cycle11_minutes_elapsed": 15
+  },
+
+  "twelve_profile_state": {
+    "present": ["claude2", "claude8", "claude9", "claude11", "claude12"],
+    "absent": ["claude1", "claude3", "claude4", "claude5", "claude6", "claude7", "claude10"],
+    "present_count": 5,
+    "absent_count": 7,
+    "delta_vs_cycle11": {
+      "claude10": "PRESENT (cycle 11) → ABSENT (cycle 12) — .credentials.json deleted without audit attestation",
+      "others": "unchanged (mtime + expiresAt identical)"
+    },
+    "expired_hours_min": 176.55,
+    "expired_hours_max": 176.58,
+    "all_expired": true,
+    "credentials": [
+      {"profile": "claude2",  "mtime_utc": "2026-04-20T20:11:11Z", "expires_at_utc": "2026-04-21T00:49:47Z"},
+      {"profile": "claude8",  "mtime_utc": "2026-04-20T16:51:00Z", "expires_at_utc": "2026-04-21T00:50:26Z"},
+      {"profile": "claude9",  "mtime_utc": "2026-04-20T20:11:12Z", "expires_at_utc": "2026-04-21T00:50:43Z"},
+      {"profile": "claude11", "mtime_utc": "2026-04-20T20:11:11Z", "expires_at_utc": "2026-04-21T00:51:16Z"},
+      {"profile": "claude12", "mtime_utc": "2026-04-20T20:11:11Z", "expires_at_utc": "2026-04-21T00:51:34Z"}
+    ]
+  },
+
+  "auto_fire_simulation": {
+    "executed": false,
+    "simulation_only": true,
+    "trigger_condition": "now >= 2026-04-30T00:00:00Z",
+    "would_emit": {
+      "ts": "2026-04-30T00:00:00Z",
+      "falsifier_id": "F-MANUAL-LOGIN",
+      "status": "fired",
+      "fire_reason": "deadline_exceeded",
+      "successor": "F-MANUAL-LOGIN-OVERDUE-1D"
+    },
+    "successor_ladder": [
+      {"id": "F-MANUAL-LOGIN-OVERDUE-1D",  "deadline_utc": "2026-05-01T00:00:00Z", "alert_level": "alarm"},
+      {"id": "F-MANUAL-LOGIN-OVERDUE-7D",  "deadline_utc": "2026-05-07T00:00:00Z", "alert_level": "alarm"},
+      {"id": "F-MANUAL-LOGIN-OVERDUE-30D", "deadline_utc": "2026-05-30T00:00:00Z", "alert_level": "error"}
+    ],
+    "alternative_disposition_options": {
+      "A_user_side_handoff_retire": "F-MANUAL-LOGIN active → retired; no successor; gate (a) labelled permanent user responsibility; raw 51 closes 5/5 on architectural axis. RECOMMENDED.",
+      "B_overdue_ladder": "F-MANUAL-LOGIN active → fired; ladder F-OVERDUE-1D → 7D → 30D escalates; gate (a) remains PARTIAL but breach is documented live.",
+      "C_retired_no_successor_raw71_review": "manual review path; raw 71 acknowledges permanent open."
+    }
+  },
+
+  "raw_51_4_gate_audit": {
+    "gate_a_oauth_refresh":      {"status": "PARTIAL", "delta_vs_cycle11": "claude10 cred removed", "closure_path": "user manual /login OR option-A retire"},
+    "gate_b_slot_saturation":    {"status": "FIXED+LIVE", "delta_vs_cycle11": "no new anomalies"},
+    "gate_c_docker_rebuild":     {"status": "FIXED-MAC, ghcr.io plan ready", "delta_vs_cycle11": "no PAT yet"},
+    "gate_d_silent_timeout":     {"status": "FIXED+LIVE", "delta_vs_cycle11": "no new silent-timeout rows"},
+    "gate_e_cascade_prevention": {"status": "FIXED+LIVE", "delta_vs_cycle11": "+6 rows (39 → 45 in ~15 min)"},
+    "closure_summary": "4/5 fixed; gate (a) still PARTIAL pending user action OR explicit retire",
+    "five_of_five_closure_feasibility_cycle13_plus": "only via option A (retire user-side) or live user manual /login"
+  },
+
+  "raw_100_institutionalized_fallback": {
+    "max_threshold_cycles": 10,
+    "current_cycle_count": 12,
+    "breach_state": "DEEP_BREACH (+2 over max)",
+    "f_infra_fallback_eternal_v1_registered_cycle": 11,
+    "f_infra_fallback_eternal_v1_status": "stale (raw_100_cycle_count was 11)",
+    "f_infra_fallback_eternal_v2_required": true,
+    "v2_hard_deadline_utc": "2026-04-29T00:00:00Z",
+    "v2_purpose": "force explicit option-A vs option-B disposition before F-MANUAL-LOGIN T=0"
+  },
+
+  "falsifiers_registered_cycle12": [
+    {
+      "id": "F-COUNTDOWN-CYCLE12-1",
+      "predicate": "A .credentials.json among the cycle-11 PRESENT set is deleted without a corresponding audit row attesting user action.",
+      "evidence_cycle12": "claude10/.credentials.json removed between 09:09:19Z (cycle 11) and 09:24:51Z (cycle 12)",
+      "alert_level": "warn",
+      "deadline_utc": "open",
+      "predecessor": "F-MAC-CRED-DRIFT-1"
+    },
+    {
+      "id": "F-COUNTDOWN-CYCLE12-2",
+      "predicate": "At T=0 (2026-04-30T00:00Z), state/falsifier_monitor/audit.jsonl has no row with falsifier_id=F-MANUAL-LOGIN and status in {fired, retired}.",
+      "alert_level": "warn",
+      "deadline_utc": "2026-04-30T00:05:00Z",
+      "predecessor": "F-COUNTDOWN-CYCLE11-1"
+    },
+    {
+      "id": "F-INFRA-FALLBACK-ETERNAL-V2",
+      "predicate": "kick-infra audit reaches cycle 13+ with gate (a) still PARTIAL and F-MANUAL-LOGIN still active (neither fired nor retired).",
+      "raw_100_cycle_count": 12,
+      "raw_100_max_threshold": 10,
+      "breach": true,
+      "alert_level": "alarm",
+      "deadline_utc": "2026-04-29T00:00:00Z",
+      "predecessor": "F-INFRA-FALLBACK-ETERNAL"
+    }
+  ],
+
+  "evidence": {
+    "credential_enumeration_command": "for d in /Users/ghost/.claude-claude{1..12}; do [ -f \"$d/.credentials.json\" ] && TZ=UTC stat -f \"%N %Sm\" -t \"%Y-%m-%dT%H:%M:%SZ\" \"$d/.credentials.json\"; done",
+    "credential_present_count_cycle12": 5,
+    "credential_present_count_cycle11": 6,
+    "cascade_blocked_events_path": "/Users/ghost/core/nexus/state/audit/cascade_blocked_events.jsonl",
+    "cascade_blocked_events_cycle11": 39,
+    "cascade_blocked_events_cycle12": 45
+  },
+
+  "safety_gates": {
+    "read_only_audit": true,
+    "no_infra_mutation": true,
+    "user_manual_login_NOT_automated": true,
+    "raw_91_c3_honest": true,
+    "auto_fire_executed": false,
+    "auto_fire_simulated_only": true
+  }
+}
