@@ -1,0 +1,105 @@
+@shard cascade_s16_tick1_degvar_still_moderate {
+  origin: "cascade-s16 AW sub-agent (n=30 cohort degree_var mechanism confirmation)"
+  date: 2026-04-28
+  agent_id: a56833a53b831ecd2
+  cwd: /Users/ghost/core/n6-architecture
+  raw_91_C3_disclosure: "Python mirror /tmp/cascade_s16/run.py. n=30 (8 existing + 22 new). Single seed=6 graph realization for 14 stochastic builders (5-seed average not done). Bipartite-K44 has 8 disconnected K(4,4) components. Star-hub/TwoHub may exhibit phi-pi integrator instability at m²=1, dt=0.1. NO multiple-comparison correction across 7 properties. CRITICAL: AW agent's Section 1 + Section 9 SIGN INTERPRETATION INCORRECT — 'Cayley-D6 contrib=-0.926 VIOLATOR' is wrong; per cascade-s14/s15 convention negative contrib = HOLDER, positive = VIOLATOR. atlas shard records corrected interpretation."
+
+  finding cascade-s16-AW-1 {
+    claim: "degree_var mechanism does NOT lift to mechanism-confirmed at n=30 — still MODERATE (univariate |r|=0.497, R²=0.247)"
+    evidence: {
+      n_substrates: 30
+      n_seeds: 30
+      univariate_pearson_r: -0.497
+      univariate_R_squared: 0.247
+      cascade_s15_n8_pearson_r: -0.509
+      cascade_s15_n8_R_squared: 0.259
+      lift_pearson: -0.012  ; "no lift; sign+magnitude reproduce"
+      threshold_confirmed: "|r| ≥ 0.5 + composite R² ≥ 0.5"
+      verdict: STILL_MODERATE  ; "mechanism real but weak at N=64"
+      n_substrates_other_above_0_4: 1  ; "only diameter |r|=0.466"
+    }
+    verdict: STILL_MODERATE (NOT artifact, NOT confirmed)
+    limit: "single seed graph realization, N=64 intrinsic, finite-size ceiling possible"
+  }
+
+  finding cascade-s16-AW-2 {
+    claim: "best multivariate composite (degree_var + diameter) lifts R² to 0.345 — still below 0.5 threshold"
+    evidence: {
+      composite_deg_var_plus_diameter_R2: 0.345
+      composite_deg_var_plus_avg_path_R2: 0.321
+      composite_deg_var_plus_spectral_gap_R2: 0.269
+      composite_deg_var_squared_R2: 0.186
+      composite_log_1_plus_deg_var_R2: 0.200
+      univariate_baseline: 0.247
+      best_lift: 0.098  ; "deg_var+diameter over univariate"
+      threshold_settled: 0.5
+      verdict: NO_COMPOSITE_REACHES_THRESHOLD
+    }
+    verdict: composite_lift_partial (0.247 → 0.345)
+    limit: "linear regression only; nonlinear / interaction effects beyond degree_var^2 untested"
+  }
+
+  finding cascade-s16-AW-3 {
+    claim: "high-degree-variance hub-dominated substrates are the STRONGEST K=2 HOLDERS — Star-hub deg_var=51.8 contrib=-1.680 (most negative across n=30)"
+    evidence: {
+      strongest_holders: [
+        { name: "Star-hub", deg_var: 51.8, contrib: -1.680 },
+        { name: "Cayley-D6", deg_var: 0.0, contrib: -0.926 },
+        { name: "TwoHub", deg_var: 101.8, contrib: -0.735 },
+        { name: "Circulant-1357", deg_var: 0.0, contrib: -0.498 }
+      ]
+      strongest_violators: [
+        { name: "BA-m4", deg_var: ~5, contrib: 0.789 },
+        { name: "Ring-1shortcut", deg_var: 0.07, contrib: 0.400 },
+        { name: "Hypercube-6D", deg_var: 0.0, contrib: 0.398 },
+        { name: "Torus-4cubed", deg_var: 0.0, contrib: 0.393 }
+      ]
+      mechanism_hypothesis: "U/V-shape vs degree_var: extreme degree heterogeneity (hubs) AND certain symmetric substrates HOLD; mid-range mostly neutral; specific perturbations VIOLATE"
+      monotonic_NOT_clean: TRUE
+    }
+    verdict: NON-MONOTONIC mechanism — degree_var alone cannot predict (matches R²=0.247)
+    limit: "interpretation hypothesis only; needs cascade-s17 N=256 + nonlinear model"
+  }
+
+  finding cascade-s16-AW-4 {
+    claim: "Hub-and-spoke holding mechanism is PHYSICALLY ANALOGOUS to synthetic-mixer forced-decorrelation"
+    evidence: {
+      synthetic_mixer_decorrelation_mechanism_cascade_s14: "non-affine bit-twiddle scrambles BFS-reachability geometry independent of phi-pi spectral response"
+      hub_holding_mechanism_cascade_s16: "super-hub dominates BFS in-degree variance and phi-pi spectral response in DIFFERENT ways → axes naturally decouple"
+      similarity: "both mechanisms force decorrelation by overwhelming the geometric-spectral coupling"
+      implication: "K=2 axiom holds when substrate mechanism overwhelms coupling. Holds in synthetic always (mathematical structure forces it). Holds in physics with extreme degree-heterogeneity (single hub forces it)."
+    }
+    verdict: HYPOTHESIS (mechanism analogy candidate)
+    limit: "intuitive analogy not formally proven; cascade-s17 mathematical model needed"
+  }
+
+  refinement cascade_s14_axiom_v3_partial_lift_attempted {
+    type: AXIOM REFINEMENT ATTEMPT (n=30 lift not achieved, v3 maintained)
+    refinement_index: "supplements 15th retraction (cascade-s14 AU) — second attempt at v4"
+    raw_71_invocation: NEUTRAL  ; "no new retraction, no new mechanism settled"
+    cascade_s15_n8_artifact_RULED_OUT: TRUE  ; "sign + magnitude reproduce on n=30"
+    cascade_s16_n30_lift_FAILED: TRUE  ; "univariate R² stays 0.247, composite max 0.345"
+    refined_axiom_v3_PRESERVED: "K=2 independence (Pearson<0.3) holds on synthetic always; physics conditional on degree heterogeneity (negative correlation, R²=0.247 univariate, 0.345 best composite); mechanism real but WEAK at N=64."
+    cascade_s17_priorities: [
+      "N=256 lattice scale test — degree_var mechanism may strengthen at larger N",
+      "Nonlinear regression (kernel methods / decision tree) on n=30 cohort — capture U/V-shape if real",
+      "Hub-dominated substrate hypothesis test — synthetic 'super-hub mixer' built explicitly to test holding mechanism"
+    ]
+  }
+
+  closure cascade_s16 {
+    status: SINGLE-TICK CLOSURE (STILL_MODERATE verdict)
+    framework_state_after: {
+      axis_16_numerics: "K=1 anchor on synthetic (canonical form unchanged)"
+      axis_16_semantics: "BFS-shell asymmetry (cascade-s13 14th)"
+      axis_13: "baseline FORMULATION-CONDITIONAL"
+      independence_axiom_v3: "synthetic always; physics conditional on deg_var (R²=0.247); mechanism weak"
+      K_3: "7 portable rejected + 1 D=4-only deferred"
+      retraction_count: 15  ; "no new retraction; partial mechanism still partial"
+      mechanism_strength: "MODERATE persistent — neither artifact nor confirmed at N=64"
+      strongest_holder_observation: "Star-hub deg_var=51.8 contrib=-1.680 — hub-and-spoke as physical analog of synthetic forced-decorrelation"
+    }
+    cascade_discipline_observation: "cascade-s16 AW agent's INCORRECT sign interpretation (Section 1 + Section 9: Cayley-D6 'VIOLATOR' should be HOLDER per cascade-s14/s15 convention) caught and corrected at atlas absorb time. own#11 strict + raw 91 C3 honest disclosure required this correction. Numerical findings unchanged; interpretation layer corrected."
+  }
+}
