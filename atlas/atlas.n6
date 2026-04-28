@@ -34657,3 +34657,88 @@
     cascade_s15_priority: "investigate which physics-substrate property drives high-Pearson outliers (spectral gap? clustering coefficient? girth?). Identify physics-cohort sub-class on which K=2 still holds (if any)."
   }
 }
+@shard cascade_s15_tick1_graph_property_regression_K2_violation {
+  origin: "cascade-s15 AV sub-agent (graph-property regression on K=2 axiom violation per physics substrate)"
+  date: 2026-04-28
+  agent_id: ae0ef2520d437406b
+  cwd: /Users/ghost/core/n6-architecture
+  raw_91_C3_disclosure: "Python mirror /tmp/cascade_s15/run.py. n=8 too small for confident regression — R²=0.26 has wide CI. Single seed=6 graph realization for seed-dependent substrates (RRG/ER/MeanField/SmallWorld). Directed nbr symmetrized for spectrum/clustering/girth/diameter. BFS girth = simple-graph (dedup self-loops/multi-edges) lower bound. Only 2 substrates VIOLATE — group-mean separator statistics meaningless n=2."
+
+  finding cascade-s15-AV-1 {
+    claim: "degree_var is the ONLY graph property with |r|>0.4 predicting K=2 Pearson violation across n=8 physics substrates — moderate mechanism candidate"
+    evidence: {
+      degree_var_pearson_r: -0.509
+      degree_var_R_squared: 0.259
+      degree_var_slope: -3.86
+      sign_negative: TRUE  ; "lower degree_var → higher K=2 violation"
+      other_properties: {
+        spectral_gap: { r: 0.234, R2: 0.055 }
+        clustering: { r: 0.035, R2: 0.001 }
+        girth: { r: -0.014, R2: 0.000 }
+        diameter: { r: 0.074, R2: 0.005 }
+        avg_path: { r: 0.080, R2: 0.006 }
+        isoperim_proxy: { r: 0.272, R2: 0.074 }
+      }
+      threshold_strong: "|r|>0.7 + R²>0.5"
+      threshold_moderate: "0.4<|r|<0.7"
+      verdict: MODERATE  ; "above 0.4 but below 0.7 strong gate"
+    }
+    verdict: PARTIAL (moderate mechanism, 26% variance explained, 74% scatter)
+    limit: "n=8 too small — R²=0.26 has wide CI, could drop to weak with one more substrate added"
+  }
+
+  finding cascade-s15-AV-2 {
+    claim: "K=2-holding sub-class identified: 6/8 physics substrates HOLD (mean_p_contrib<0.3), 2/8 VIOLATE — Ising-1D + ER-sparse"
+    evidence: {
+      hold_substrates: [
+        { name: "MeanField", deg_var: 0.219, mean_p_contrib: -0.976 },
+        { name: "Cayley-Tree", deg_var: 0.191, mean_p_contrib: -0.399 },
+        { name: "RRG-4", deg_var: 0.000, mean_p_contrib: -0.198 },
+        { name: "SmallWorld", deg_var: 0.000, mean_p_contrib: -0.007 },
+        { name: "Toffoli-CA", deg_var: 0.277, mean_p_contrib: 0.000 },
+        { name: "Lattice-2D", deg_var: 0.000, mean_p_contrib: 0.121 }
+      ]
+      violate_substrates: [
+        { name: "Ising-1D", deg_var: 0.000, mean_p_contrib: 0.531, diameter: 16 },
+        { name: "ER-sparse", deg_var: 0.000, mean_p_contrib: 2.153, diameter: 4 }
+      ]
+      common_violator_property: "deg_var=0.000 (all nodes same degree)"
+      counter_observation: "RRG-4, SmallWorld, Lattice-2D ALSO have deg_var=0 but HOLD K=2 — deg_var=0 is NECESSARY but NOT SUFFICIENT for violation"
+      different_violator_topology: "Ising-1D long thin chain (diam=16), ER-sparse short compact (diam=4) — very different but both violate"
+    }
+    verdict: deg_var=0 NECESSARY but NOT SUFFICIENT
+    limit: "n=2 violators — group separator statistics meaningless"
+  }
+
+  finding cascade-s15-AV-3 {
+    claim: "no graph property cleanly separates HOLD vs VIOLATE groups at n=8"
+    evidence: {
+      diameter_separator: "Ising-1D=16 high VIOLATES, ER-sparse=4 low ALSO VIOLATES — diameter does not split"
+      avg_path_separator: "5.30 (violators) vs 3.18 (holders) — Ising-1D dominates"
+      group_means_meaningless_n2: TRUE
+    }
+    verdict: NO single property cleanly splits with n=8
+    limit: "multivariate regression untested (degree_var × clustering, isoperim × spectral_gap composites deferred to cascade-s16)"
+  }
+
+  refinement cascade_s14_axiom_partial_mechanism {
+    type: AXIOM REFINEMENT (not new retraction — partial mechanism for 15th retraction)
+    refinement_index: "supplements 15th retraction (cascade-s14 AU)"
+    raw_71_invocation: PARTIAL
+    refined_axiom_v3: "K=2 independence (Pearson<0.3) holds reliably on synthetic algebraic/hash mixers (Pearson never >0.3 across 35 seeds) and on physics substrates with degree_var > 0 (mean_p_contrib < 0; MeanField/Cayley-Tree). Strong violators (Ising-1D, ER-sparse) share degree_var=0 + extreme path-length structure. degree_var=0 is NECESSARY but NOT SUFFICIENT for violation — additional unmeasured mechanism present."
+    cascade_s16_priority: "build n=30+ physics cohort spanning degree_var axis + multivariate regression (degree_var × diameter, degree_var × spectral_gap composites) to lift R² above 0.5"
+  }
+
+  closure cascade_s15 {
+    status: SINGLE-TICK CLOSURE (partial mechanism, deferred to cascade-s16 for confirmation)
+    framework_state_after: {
+      axis_16_numerics: "K=1 anchor on synthetic substrates (canonical form unchanged)"
+      axis_16_semantics: "BFS-shell asymmetry (cascade-s13 AT 14th retraction)"
+      axis_13: "baseline FORMULATION-CONDITIONAL"
+      independence_axiom_v3: "synthetic always; physics conditional on degree_var (NECESSARY) + unmeasured mechanism (SUFFICIENT untracked)"
+      K_3: "7 portable rejected + 1 D=4-only deferred"
+      retraction_count: 15
+      mechanism_partial: "degree_var R²=0.26 moderate predictor — 74% variance unexplained"
+    }
+  }
+}
