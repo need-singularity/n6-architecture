@@ -81,6 +81,29 @@
 //
 // own#11 strict: NO Clay BT 'resolution' claims — this tool exits with
 // exit code 0/1/2 per @exit_codes; no consensus or resolution semantics.
+//
+// ─── v2 (2026-04-28) — raw 91 C3 follow-up disclosures closer ─────────
+//   v1 → v2 bumps three known-honest gaps surfaced by raw 91 C3:
+//     (a) escape-aware quote handling: prior _is_inside_quoted_prose used
+//         line.index_of("\"") which counted ESCAPED quotes (\\" / \\') as
+//         genuine quote-state transitions. v2 walks `before` left→right,
+//         skipping any quote that follows a backslash (so `\\"->* ..."` no
+//         longer false-positives as inside-prose; arrow forms inside
+//         genuine quoted prose still skip cleanly).
+//     (b) heredoc-aware header detection: atlas.n6 line 34960+ uses the
+//         convention `<key> = """ ... <multi-line body with literal @-rows> ... """`
+//         (and ``\`\`\``-fenced equivalents). v1's _parse_header recognised
+//         every line starting `@<kind> ` as a header — including lines
+//         INSIDE a heredoc, which polluted the slug-existence side-table
+//         and could mis-attribute supersession edges. v2 threads a
+//         heredoc-state flag through the corpus walk: when the in_heredoc
+//         flag is true, neither _parse_header nor _parse_body_field fires.
+//     (c) cycle full-path report: v1 reported only the closing edge
+//         (`from → to kind=...`), useful as a FAIL trigger but lossy when
+//         a cycle traverses 4+ slugs. v2 emits the full path
+//         (`A → B → C → A`) by snapshotting the gray-path nodes at
+//         back-edge detection, with the closing edge appended.
+//   classifier_version bumped: atlas_self_arch_axis_lint.v1.0 → v2.0.
 
 use "self/stdlib/argv_skip"
 
@@ -164,6 +187,88 @@ fn _indent_width(line: string) -> int {
     return i
 }
 
+// ─── heredoc state tracker (v2, raw 91 C3 (b)) ────────────────────────
+//
+// atlas.n6 multi-line block convention (axis-K shard, line 34960+):
+//
+//   <indent>key = """
+//   @? Slug-In-Body = [DEPRECATED YYYY-MM-DD] inline-string
+//     superseded_by = some-target
+//   """
+//
+// Inside a heredoc block, lines beginning with `@<kind>` are PROSE EXAMPLES
+// quoted by reference — they are NOT entry headers in the SSOT graph and
+// MUST NOT be parsed by _parse_header / _parse_body_field. Otherwise the
+// slug-existence side-table inflates with phantom slugs and supersession
+// edges get mis-attributed.
+//
+// Triple-quote families recognised: `"""` and ``\`\`\``. Either fence opens
+// the block; the SAME fence closes it (mismatched fences nest correctly).
+// A line containing the fence both opens and closes (e.g. `x = """abc"""`)
+// is NOT treated as a heredoc — both fences cancel within the line.
+//
+// State: caller carries [in_heredoc: bool, fence: string]. Initial state:
+// [false, ""]. Each line, call _heredoc_step(line, in_heredoc, fence) →
+// returns [new_in_heredoc, new_fence, was_inside_or_boundary] where the
+// third element is TRUE if the WHOLE line should be ignored by the lint
+// (boundary-open lines are not ignored — they may carry a real header
+// before the fence — but body and boundary-close lines are).
+fn _count_substr(s: string, sub: string) -> int {
+    if len(sub) == 0 { return 0 }
+    let mut n = 0
+    let mut i = 0
+    while i + len(sub) <= len(s) {
+        if s.substring(i, i + len(sub)) == sub {
+            n = n + 1
+            i = i + len(sub)
+        } else {
+            i = i + 1
+        }
+    }
+    return n
+}
+
+// Update heredoc state for one line. Returns [in_heredoc_after, fence_after, ignore_line]
+// where ignore_line == true if the line is fully INSIDE the heredoc body
+// (lint should not parse headers/body-fields/arrow forms from it).
+//
+// Transition table (fence f ∈ {`"""`, ` ``` `}):
+//   in=false, line has `f` opening (odd count) → in=true, fence=f, ignore=false
+//   in=false, line has `f` even count (open+close inline) → in=false, ignore=false
+//   in=true,  line has fence-match closing → in=false, ignore=true (close-line is opaque)
+//   in=true,  line has neither fence → ignore=true
+//   in=true,  line has DIFFERENT fence → ignore=true (still inside outer fence)
+fn _heredoc_step(line: string, in_heredoc: bool, fence: string) -> array {
+    let dq = _count_substr(line, "\"\"\"")
+    let bt = _count_substr(line, "```")
+    if in_heredoc {
+        // closing match
+        if fence == "\"\"\"" && dq > 0 {
+            // odd dq → closes; even dq → still open (rare; a literal `"""` inside)
+            if dq % 2 == 1 {
+                return [false, "", true]
+            }
+            return [true, fence, true]
+        }
+        if fence == "```" && bt > 0 {
+            if bt % 2 == 1 {
+                return [false, "", true]
+            }
+            return [true, fence, true]
+        }
+        return [true, fence, true]
+    }
+    // not in heredoc
+    if dq > 0 && dq % 2 == 1 {
+        // opens with """ ; line itself NOT ignored (it may carry a header)
+        return [true, "\"\"\"", false]
+    }
+    if bt > 0 && bt % 2 == 1 {
+        return [true, "```", false]
+    }
+    return [false, "", false]
+}
+
 // ─── ID / header parser ───────────────────────────────────────────────
 
 // Recognize an entry header line: `@<kind> <slug...>` where <kind> is one of
@@ -199,13 +304,35 @@ fn _parse_header(line: string) -> array {
 //   - `=> "->* {N @ [grade]} reads ..."`            (quoted commentary)
 //   - `@D foo = 4 :: empirical [10]   # [DEPRECATED YYYY-MM-DD] template`
 //                                                   (mid-line `#` comment)
+//
+// v2 (2026-04-28) raw 91 C3 (a) — escape-aware walk: a backslash-escaped
+// quote (`\\"` / `\\'`) is NOT a state-transition. Walk `before` left→right
+// tracking quote-state, ignoring any quote whose immediately-prior char is
+// `\\`. A `#` outside an open quote-state still triggers (mid-line comment).
+// Inside an OPEN quote, a `#` is part of the prose and does not flip state.
 fn _is_inside_quoted_prose(line: string, pos: int) -> bool {
     if pos <= 0 { return false }
     let before = line.substring(0, pos)
-    let dq = before.index_of("\"")
-    let sq = before.index_of("'")
-    let hash = before.index_of("#")
-    if dq >= 0 || sq >= 0 || hash >= 0 { return true }
+    let mut i = 0
+    let mut in_dq = false
+    let mut in_sq = false
+    while i < len(before) {
+        let c = before.substring(i, i + 1)
+        // backslash-escape: skip the escaped char unconditionally
+        if c == "\\" && i + 1 < len(before) {
+            i = i + 2
+            continue
+        }
+        if c == "\"" && !in_sq {
+            in_dq = !in_dq
+        } else if c == "'" && !in_dq {
+            in_sq = !in_sq
+        } else if c == "#" && !in_dq && !in_sq {
+            return true
+        }
+        i = i + 1
+    }
+    if in_dq || in_sq { return true }
     return false
 }
 
@@ -416,11 +543,23 @@ fn _read_lines(path: string) -> array {
 
 // Build the set of known slugs across the corpus (any line that parses as a
 // header `@<kind> <slug>`). Returns array of [kind, slug] pairs.
+//
+// v2 (2026-04-28) raw 91 C3 (b): heredoc-aware — lines whose state-after
+// _heredoc_step.ignore_line == true are skipped (heredoc body / close).
+// Boundary-open lines (where `key = """` appears mid-line) are NOT ignored
+// because no real header can share a line with a fence-open in the n6 DSL.
 fn _collect_headers(paths: array) -> array {
     let mut headers = []
     for p in paths {
         let lines = _read_lines(p)
+        let mut in_heredoc = false
+        let mut fence = ""
         for line in lines {
+            let st = _heredoc_step(line, in_heredoc, fence)
+            in_heredoc = st[0]
+            fence = st[1]
+            let ignore = st[2]
+            if ignore { continue }
             let h = _parse_header(line)
             if len(h) == 2 {
                 headers.push(h)
@@ -452,9 +591,22 @@ fn _extract_supersession_edges(paths: array) -> array {
         let mut pending_to = ""
         let mut pending_kind = ""
         let mut pending_from = ""
+        // v2 (2026-04-28) raw 91 C3 (b): heredoc-aware — body-fields and
+        // headers inside a `"""..."""` (or ``\`\`\`...``\`\`\``) block are
+        // PROSE EXAMPLES, not real edges.
+        let mut in_heredoc = false
+        let mut fence = ""
         for raw in lines {
             let line = _rstrip(raw)
-            if len(line) == 0 { continue }
+            if len(line) == 0 {
+                // empty lines inside heredoc don't break heredoc state
+                continue
+            }
+            let st = _heredoc_step(raw, in_heredoc, fence)
+            in_heredoc = st[0]
+            fence = st[1]
+            let ignore = st[2]
+            if ignore { continue }
             // header line resets current_slug (and emits any pending edge)
             if line.substring(0, 1) == "@" {
                 if len(pending_to) > 0 && len(pending_from) > 0 {
@@ -587,15 +739,24 @@ fn _detect_cycles(edges: array) -> array {
                 // The cycle closes via edge (node → nbr_idx) of kind nbr_kind,
                 // and includes the kinds along path_kinds from nbr_idx → node.
                 let mut cycle_kinds = [nbr_kind]
+                // v2 (2026-04-28) raw 91 C3 (c): build the FULL cycle node
+                // chain (slugs) for the violation message — `A → B → C → A`
+                // — by capturing path_nodes from the back-edge target onward.
+                let mut cycle_node_chain = []
                 let mut started = false
                 let mut t = 0
                 while t < len(path_nodes) {
                     if path_nodes[t] == nbr_idx { started = true }
-                    if started && t < len(path_kinds) {
-                        cycle_kinds.push(path_kinds[t])
+                    if started {
+                        cycle_node_chain.push(path_nodes[t])
+                        if t < len(path_kinds) {
+                            cycle_kinds.push(path_kinds[t])
+                        }
                     }
                     t = t + 1
                 }
+                // close the chain back to the back-edge target (forming `A → ... → A`)
+                cycle_node_chain.push(nbr_idx)
                 // whitelist: every edge in cycle is "verdict-on"
                 let mut all_verdict = true
                 for kd in cycle_kinds {
@@ -604,9 +765,17 @@ fn _detect_cycles(edges: array) -> array {
                     }
                 }
                 if !all_verdict {
+                    // build `slug-A → slug-B → ... → slug-A` rendering
+                    let mut path_str = ""
+                    let mut pi = 0
+                    while pi < len(cycle_node_chain) {
+                        if pi > 0 { path_str = path_str + " → " }
+                        path_str = path_str + nodes[cycle_node_chain[pi]]
+                        pi = pi + 1
+                    }
                     let from_slug = nodes[node]
                     let to_slug = nodes[nbr_idx]
-                    violations.push("axis-J supersession_kind cycle (non-whitelisted): " + from_slug + " → " + to_slug + " kind=\"" + nbr_kind + "\"")
+                    violations.push("axis-J supersession_kind cycle (non-whitelisted): " + from_slug + " → " + to_slug + " kind=\"" + nbr_kind + "\" path=" + path_str)
                 }
             } else if color[nbr_idx] == 0 {
                 stack.push([nbr_idx, 0, nbr_kind])
@@ -660,11 +829,21 @@ fn _lint_corpus(paths: array) -> array {
     let headers = _collect_headers(paths)
     let edges = _extract_supersession_edges(paths)
     // pass 1 + 3: line-local form
+    // v2 (2026-04-28) raw 91 C3 (b): heredoc-aware — arrow-form / meta-tag
+    // lints inside a `"""..."""` block are PROSE EXAMPLES (e.g. axis-K
+    // shard quoting `[DEPRECATED 2026-04-26]` for illustration). Skip them.
     for p in paths {
         let lines = _read_lines(p)
         let mut lineno = 0
+        let mut in_heredoc = false
+        let mut fence = ""
         for line in lines {
             lineno = lineno + 1
+            let st = _heredoc_step(line, in_heredoc, fence)
+            in_heredoc = st[0]
+            fence = st[1]
+            let ignore = st[2]
+            if ignore { continue }
             let lv = _lint_line(line)
             for v in lv {
                 violations.push(p + ":" + to_string(lineno) + ": " + v)
@@ -732,7 +911,7 @@ fn _build_audit_row(atlas_path: string, verdict: string, violations: array) -> s
         row = row + "\"" + _esc_json(violations[i]) + "\""
         i = i + 1
     }
-    row = row + "],\"classifier_version\":\"atlas_self_arch_axis_lint.v1.0\"}"
+    row = row + "],\"classifier_version\":\"atlas_self_arch_axis_lint.v2.0\"}"
     return row
 }
 
@@ -982,6 +1161,132 @@ fn _selftest() -> void {
     }
     println("  fixture-7 FAIL (meta-tag form violations correctly flagged)")
 
+    // ─── FIXTURE 9 — v2 (a) escape-aware quote handling ───────────────
+    // A line like `key = "value with literal \\"->* {3 @ [10*]}\\" inside"`
+    // is genuinely-quoted prose: the inner ->* must be skipped despite the
+    // escaped \\" sequences appearing first. Pre-v2 _is_inside_quoted_prose
+    // returned true (correct) only because the OPENING quote came first;
+    // a sneakier line where ->* appears after a closed-and-escaped quote
+    // pair (`prose "OK \\"X\\"" ->* malformed` w/ no body) would have been
+    // mis-classified. v2's escape-aware walker tracks state precisely.
+    let f9 = dir + "/fixture9_escape_aware.n6"
+    let body9 = ""
+              + "@C escape_a = legit :: arch [10*]\n"
+              + "  inline_quote_with_escaped_arrow = \"prose ->* {N @ [grade]} stays inside quotes\"\n"
+              + "  ->* {3 @ [10*]}\n"
+    _write_fixture(f9, body9)
+    let r9 = _lint_corpus([f9])
+    if r9[0] != "PASS" {
+        eprintln("FIXTURE 9 (v2 escape-aware) expected PASS, got " + r9[0])
+        for v in r9[1] { eprintln("  - " + v) }
+        exit(1)
+    }
+    // unit assertion: walking through escape sequences does not flip state
+    if _is_inside_quoted_prose("a \\\" b ->*", 9) != false {
+        // before-pos= `a \" b ` — escaped DQ, still outside quotes; ->* should
+        // NOT be reported as inside-prose (this is the pre-v2 bug-line).
+        // Note: in source, \\\" represents a literal \" pair followed by space.
+        eprintln("FIXTURE 9 escape-walker: escaped \\\" should not flip quote-state")
+        exit(1)
+    }
+    if _is_inside_quoted_prose("\"prose ->*", 8) != true {
+        eprintln("FIXTURE 9 escape-walker: open quote should still register as inside-prose")
+        exit(1)
+    }
+    println("  fixture-9 PASS  (v2 (a) escape-aware quote walk)")
+
+    // ─── FIXTURE 10 — v2 (b) heredoc multi-line block ─────────────────
+    // axis-K shard convention (atlas.n6 line 34960+):
+    //   key = """
+    //   @? phantom-slug = ...        ← INSIDE heredoc, must NOT be a header
+    //     superseded_by = nowhere    ← INSIDE heredoc, must NOT extract edge
+    //   """
+    // v1 would have collected `phantom-slug` as a real header and the
+    // body-field as a real edge. v2 ignores the entire heredoc body.
+    let f10 = dir + "/fixture10_heredoc.n6"
+    let body10 = ""
+              + "@C heredoc_host :: meta [4]\n"
+              + "  proposal_form = \"\"\"\n"
+              + "@? phantom-slug = [DEPRECATED 2099-13-40] would-violate-meta-tag :: meta [9?]\n"
+              + "  superseded_by = nonexistent-target\n"
+              + "  supersession_kind = \"made-up-kind-would-fail-vocab\"\n"
+              + "  ->* malformed-arrow-no-body\n"
+              + "\"\"\"\n"
+              + "  real_field = ok\n"
+    _write_fixture(f10, body10)
+    let r10 = _lint_corpus([f10])
+    if r10[0] != "PASS" {
+        eprintln("FIXTURE 10 (v2 heredoc) expected PASS, got " + r10[0])
+        for v in r10[1] { eprintln("  - " + v) }
+        exit(1)
+    }
+    // also confirm phantom-slug is NOT in collected headers (negative check)
+    let hdrs = _collect_headers([f10])
+    let mut found_phantom = false
+    for h in hdrs {
+        if h[1] == "phantom-slug" { found_phantom = true }
+    }
+    if found_phantom { eprintln("FIXTURE 10 heredoc: phantom-slug leaked into header table"); exit(1) }
+    // also confirm 0 edges extracted (the inside-heredoc superseded_by)
+    let edges10 = _extract_supersession_edges([f10])
+    if len(edges10) != 0 {
+        eprintln("FIXTURE 10 heredoc: phantom edge extracted (count=" + to_string(len(edges10)) + ")")
+        exit(1)
+    }
+    // sanity: same body WITHOUT heredoc fences DOES violate (regression-proof)
+    let f10b = dir + "/fixture10b_heredoc_negative_control.n6"
+    let body10b = ""
+              + "@? phantom-slug = [DEPRECATED 2099-13-40] would-violate :: meta [9?]\n"
+              + "  superseded_by = nonexistent-target\n"
+              + "  supersession_kind = \"made-up-kind\"\n"
+    _write_fixture(f10b, body10b)
+    let r10b = _lint_corpus([f10b])
+    if r10b[0] != "FAIL" {
+        eprintln("FIXTURE 10b negative-control: same content WITHOUT heredoc must FAIL, got " + r10b[0])
+        exit(1)
+    }
+    println("  fixture-10 PASS  (v2 (b) heredoc multi-line block ignored)")
+
+    // ─── FIXTURE 11 — v2 (c) cycle full-path report ───────────────────
+    // 4-slug replacement cycle A → B → C → D → A. The violation message
+    // must include `path=A → B → C → D → A` (full chain) so the operator
+    // knows which intermediate edge to break, not just the closing edge.
+    let f11 = dir + "/fixture11_cycle_path.n6"
+    let body11 = ""
+              + "@? cyc-A = [DEPRECATED 2026-04-26] a :: meta [9?]\n"
+              + "  superseded_by = cyc-B\n"
+              + "  supersession_kind = \"replacement\"\n"
+              + "@? cyc-B = [DEPRECATED 2026-04-26] b :: meta [9?]\n"
+              + "  superseded_by = cyc-C\n"
+              + "  supersession_kind = \"replacement\"\n"
+              + "@? cyc-C = [DEPRECATED 2026-04-26] c :: meta [9?]\n"
+              + "  superseded_by = cyc-D\n"
+              + "  supersession_kind = \"replacement\"\n"
+              + "@? cyc-D = [DEPRECATED 2026-04-26] d :: meta [9?]\n"
+              + "  superseded_by = cyc-A\n"
+              + "  supersession_kind = \"replacement\"\n"
+    _write_fixture(f11, body11)
+    let r11 = _lint_corpus([f11])
+    if r11[0] != "FAIL" {
+        eprintln("FIXTURE 11 (v2 cycle path) expected FAIL, got " + r11[0])
+        exit(1)
+    }
+    let mut saw_full_path = false
+    for v in r11[1] {
+        if v.index_of("path=") < 0 { continue }
+        // the chain must contain ALL four slugs to count as a full path report
+        if v.index_of("cyc-A") >= 0 && v.index_of("cyc-B") >= 0
+           && v.index_of("cyc-C") >= 0 && v.index_of("cyc-D") >= 0 {
+            saw_full_path = true
+        }
+    }
+    if !saw_full_path {
+        eprintln("FIXTURE 11 (v2 cycle path) full-path missing in violations:")
+        for v in r11[1] { eprintln("  - " + v) }
+        exit(1)
+    }
+    println("  fixture-11 FAIL (v2 (c) cycle full-path A→B→C→D→A reported)")
+
     // ─── FIXTURE 8 — PASS: real-world atlas snippet (R34/R36/R38 + clay) ─
     // Mirrors the actuation shard's installed rows: R34 ↔ R38 verdict-cycle
     // (whitelisted), R36 → R34 referent-nonexistent (skipped), clay-iter-55
@@ -1011,7 +1316,7 @@ fn _selftest() -> void {
     println("  fixture-8 PASS  (real-world R34/R36/R38 + clay-iter pattern validates clean)")
 
     exec("rm -rf '" + dir + "'")
-    println("[atlas_self_arch_axis_lint selftest] OK (8 fixtures)")
+    println("[atlas_self_arch_axis_lint selftest] OK (11 fixtures — v2 escape/heredoc/cycle-path)")
     exit(0)
 }
 

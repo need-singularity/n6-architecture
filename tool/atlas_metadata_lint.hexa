@@ -22,7 +22,7 @@
 //     foundation row → WARN (axis-K § B1: optional on legacy, required on
 //     new rows added after 2026-04-28 cutover; lint is the enforcement).
 //
-// @tool(slug="atlas_metadata_lint", desc="lint atlas.n6 + atlas.append.* shards for raw 91 C3 metadata invariants — meta-closure ENUMERATION GAP audit (declared-vs-enumerated count vs ellipsis) + axis-K introduced_at sentinel/ISO validation (pre-axis-K | YYYY-MM-DD | YYYY-MM-DDTHH:MM:SSZ)")
+// @tool(slug="atlas_metadata_lint", desc="lint atlas.n6 + atlas.append.* shards for raw 91 C3 metadata invariants — meta-closure ENUMERATION GAP audit (declared-vs-enumerated count vs ellipsis) + axis-K introduced_at sentinel/ISO validation (pre-axis-K | YYYY-MM-DD | YYYY-MM-DDTHH:MM:SS{Z|±HH:MM}) + leap-day calendar check + meta-closure quote-variant tolerance (B3/B4/B5 closed in v2)")
 // @usage(hexa /Users/ghost/core/n6-architecture/tool/atlas_metadata_lint.hexa [<file-or-dir>] [--all] [--severity warn|block] [--selftest])
 // @omega-saturation-exempt("structural lint over a finite SSOT set; converges in O(N) per push; complementary to atlas_self_arch_axis_lint axis-I/J syntax lint — this tool covers content semantics")
 // @exit_codes(0=PASS or warn-only, 1=usage/io error, 2=block mode with violations or any FAIL fixture)
@@ -73,11 +73,12 @@
 //   Accepted <value> shapes:
 //     - sentinel `pre-axis-K`  (legacy grandfather, ~96% of rows)
 //     - sentinel `foundation`  (raw 24 immutable axiom rows; per axis-K B1)
-//     - ISO 8601 date `YYYY-MM-DD`
-//     - RFC 3339  `YYYY-MM-DDTHH:MM:SSZ` (UTC `Z` only; offsets normalised
-//                                        elsewhere — this lint accepts only
-//                                        the canonical Z-suffix form per
-//                                        axis-K § B5)
+//     - ISO 8601 date `YYYY-MM-DD`  (calendar-validated incl. leap-year for 02-29; v2 B4)
+//     - RFC 3339  `YYYY-MM-DDTHH:MM:SSZ`         (UTC `Z`)
+//     - RFC 3339  `YYYY-MM-DDTHH:MM:SS+HH:MM`    (positive offset, +00:00..+14:00; v2 B3)
+//     - RFC 3339  `YYYY-MM-DDTHH:MM:SS-HH:MM`    (negative offset, -12:00..-00:00; v2 B3)
+//   v2 (2026-04-28) closes raw 91 C3 disclosures B3 (offset acceptance) +
+//   B4 (leap-day calendar) + B5 (meta-closure quote-variant tolerance).
 //   Quoting: bare or single/double-quoted are both accepted (axis-K § §1
 //   `introduced_at = YYYY-MM-DD` shows bare form; sentinels appear quoted
 //   in axis-K § B1 examples).
@@ -114,7 +115,7 @@
 //       {"ts":"<ISO-8601>","agent_id":"atlas_metadata_lint",
 //        "atlas_path":"<path>","verdict":"PASS|WARN|FAIL",
 //        "violations":[...],"info":[...],
-//        "classifier_version":"atlas_metadata_lint.v1.0"}
+//        "classifier_version":"atlas_metadata_lint.v2.0"}
 //   - last stdout line (raw 80 sentinel):
 //       __ATLAS_METADATA_LINT_RESULT__ PASS|WARN|FAIL
 //
@@ -244,6 +245,73 @@ fn _header_kind(line: string) -> string {
 
 // ─── introduced_at value validator ────────────────────────────────────
 
+// Calendar-aware date check. Returns true iff (yyyy, mm, dd) is a real
+// date, including the leap-year rule on 02-29 (v2 B4 closure).
+//   leap-year ≡ (year % 4 == 0) AND (year % 100 != 0 OR year % 400 == 0)
+fn _is_leap_year(yyyy: int) -> bool {
+    if yyyy % 400 == 0 { return true }
+    if yyyy % 100 == 0 { return false }
+    if yyyy % 4 == 0 { return true }
+    return false
+}
+
+fn _is_calendar_valid(yyyy: int, mm: int, dd: int) -> bool {
+    if mm < 1 || mm > 12 { return false }
+    if dd < 1 { return false }
+    if mm == 1 || mm == 3 || mm == 5 || mm == 7
+       || mm == 8 || mm == 10 || mm == 12 {
+        if dd > 31 { return false }
+        return true
+    }
+    if mm == 4 || mm == 6 || mm == 9 || mm == 11 {
+        if dd > 30 { return false }
+        return true
+    }
+    // mm == 2
+    let max_day = if _is_leap_year(yyyy) { 29 } else { 28 }
+    if dd > max_day { return false }
+    return true
+}
+
+// Validate the `±HH:MM` tail of an RFC 3339 timestamp. v2 B3.
+//   accepted positive: +00:00 .. +14:00  (max real-world offset is +14:00)
+//   accepted negative: -12:00 .. -00:00  (-00:00 RFC-permitted)
+//   inner minutes must be 00..59 (the lint does not require 15-min
+//   alignment; some real zones e.g. +05:45 use other values)
+// Returns "" on PASS, error string on FAIL.
+fn _validate_rfc3339_offset(off: string) -> string {
+    if len(off) != 6 { return "offset wrong length (want ±HH:MM, got \"" + off + "\")" }
+    let sign = off.substring(0, 1)
+    if sign != "+" && sign != "-" {
+        return "offset missing sign (want ±HH:MM, got \"" + off + "\")"
+    }
+    if off.substring(3, 4) != ":" {
+        return "offset missing colon (want ±HH:MM, got \"" + off + "\")"
+    }
+    let hh = parse_int(off.substring(1, 3))
+    let mm = parse_int(off.substring(4, 6))
+    if mm < 0 || mm > 59 {
+        return "offset minutes out of range (got \"" + off + "\")"
+    }
+    if sign == "+" {
+        if hh < 0 || hh > 14 {
+            return "offset hours out of range +00..+14 (got \"" + off + "\")"
+        }
+        if hh == 14 && mm > 0 {
+            return "offset exceeds maximum +14:00 (got \"" + off + "\")"
+        }
+        return ""
+    }
+    // sign == "-"
+    if hh < 0 || hh > 12 {
+        return "offset hours out of range -00..-12 (got \"" + off + "\")"
+    }
+    if hh == 12 && mm > 0 {
+        return "offset exceeds maximum -12:00 (got \"" + off + "\")"
+    }
+    return ""
+}
+
 // Validate `introduced_at` value. Returns "" on PASS, error string on FAIL.
 fn _validate_introduced_at_value(v: string) -> string {
     if v == "pre-axis-K" { return "" }
@@ -254,38 +322,49 @@ fn _validate_introduced_at_value(v: string) -> string {
             let yyyy = parse_int(v.substring(0, 4))
             let mm = parse_int(v.substring(5, 7))
             let dd = parse_int(v.substring(8, 10))
-            if yyyy >= 2024 && yyyy <= 2099
-               && mm >= 1 && mm <= 12
-               && dd >= 1 && dd <= 31 {
-                return ""
+            if yyyy < 2024 || yyyy > 2099 {
+                return "axis-K introduced_at date out of range (got: \"" + v + "\")"
             }
-            return "axis-K introduced_at date out of range (got: \"" + v + "\")"
+            if !_is_calendar_valid(yyyy, mm, dd) {
+                return "axis-K introduced_at date out of range (got: \"" + v + "\")"
+            }
+            return ""
         }
     }
-    // YYYY-MM-DDTHH:MM:SSZ (20 chars, dashes/T/colons/Z fixed positions)
-    if len(v) == 20 {
+    // RFC 3339 with Z suffix (20 chars) OR ±HH:MM offset (25 chars). v2 B3.
+    let n = len(v)
+    if n == 20 || n == 25 {
         if v.substring(4, 5) == "-" && v.substring(7, 8) == "-"
            && v.substring(10, 11) == "T"
-           && v.substring(13, 14) == ":" && v.substring(16, 17) == ":"
-           && v.substring(19, 20) == "Z" {
+           && v.substring(13, 14) == ":" && v.substring(16, 17) == ":" {
             let yyyy = parse_int(v.substring(0, 4))
             let mm = parse_int(v.substring(5, 7))
             let dd = parse_int(v.substring(8, 10))
             let hh = parse_int(v.substring(11, 13))
             let mi = parse_int(v.substring(14, 16))
             let ss = parse_int(v.substring(17, 19))
-            if yyyy >= 2024 && yyyy <= 2099
-               && mm >= 1 && mm <= 12
-               && dd >= 1 && dd <= 31
-               && hh >= 0 && hh <= 23
-               && mi >= 0 && mi <= 59
-               && ss >= 0 && ss <= 60 {
-                return ""
+            if yyyy < 2024 || yyyy > 2099 {
+                return "axis-K introduced_at timestamp out of range (got: \"" + v + "\")"
             }
-            return "axis-K introduced_at timestamp out of range (got: \"" + v + "\")"
+            if !_is_calendar_valid(yyyy, mm, dd) {
+                return "axis-K introduced_at timestamp out of range (got: \"" + v + "\")"
+            }
+            if hh < 0 || hh > 23 || mi < 0 || mi > 59 || ss < 0 || ss > 60 {
+                return "axis-K introduced_at timestamp out of range (got: \"" + v + "\")"
+            }
+            if n == 20 {
+                if v.substring(19, 20) == "Z" { return "" }
+                return "axis-K introduced_at timestamp out of range (got: \"" + v + "\")"
+            }
+            // n == 25 → expect ±HH:MM at v[19..25]
+            let off_err = _validate_rfc3339_offset(v.substring(19, 25))
+            if len(off_err) > 0 {
+                return "axis-K introduced_at timestamp out of range (got: \"" + v + "\"; " + off_err + ")"
+            }
+            return ""
         }
     }
-    return "axis-K introduced_at value not in {pre-axis-K, foundation, YYYY-MM-DD, YYYY-MM-DDTHH:MM:SSZ} (got: \"" + v + "\")"
+    return "axis-K introduced_at value not in {pre-axis-K, foundation, YYYY-MM-DD, YYYY-MM-DDTHH:MM:SS{Z|±HH:MM}} (got: \"" + v + "\")"
 }
 
 // ─── meta-closure ENUMERATION GAP validator ──────────────────────────
@@ -307,6 +386,10 @@ fn _validate_introduced_at_value(v: string) -> string {
 // rows — those are the actuation shard's calibration rows that already
 // recorded the gap as `closure_gap = N` body-field; double-flagging would
 // be noise.
+// v2 B5: meta-closure regex accepts double-quote, single-quote, OR no-quote
+//   `=> "meta-closure:..."`   (canonical, atlas.n6 lines 28/34/43)
+//   `=> 'meta-closure:...'`   (single-quote variant, accepted as v2 of B5)
+//   `=> meta-closure:...`     (no-quote variant, accepted as v2 of B5)
 fn _is_canonical_meta_closure_line(line: string) -> bool {
     let trimmed_left = _lstrip(line)
     if len(trimmed_left) == 0 { return false }
@@ -314,12 +397,16 @@ fn _is_canonical_meta_closure_line(line: string) -> bool {
     if _starts_with(trimmed_left, "source_prose ") { return false }
     if _starts_with(trimmed_left, "source_prose=") { return false }
     if !_starts_with(trimmed_left, "=>") { return false }
-    // After `=>`, expect optional whitespace then `"meta-closure:`
+    // After `=>`, expect optional whitespace then optional quote then `meta-closure:`
     let after_arrow = _lstrip(trimmed_left.substring(2, len(trimmed_left)))
     if len(after_arrow) == 0 { return false }
-    if after_arrow.substring(0, 1) != "\"" { return false }
-    let after_q = after_arrow.substring(1, len(after_arrow))
-    if !_starts_with(after_q, "meta-closure:") { return false }
+    let lead = after_arrow.substring(0, 1)
+    let body = if lead == "\"" || lead == "'" {
+        after_arrow.substring(1, len(after_arrow))
+    } else {
+        after_arrow
+    }
+    if !_starts_with(body, "meta-closure:") { return false }
     return true
 }
 
@@ -601,7 +688,7 @@ fn _build_audit_row(atlas_path: string, verdict: string, violations: array, info
         row = row + "\"" + _esc_json(infos[j]) + "\""
         j = j + 1
     }
-    row = row + "],\"classifier_version\":\"atlas_metadata_lint.v1.0\"}"
+    row = row + "],\"classifier_version\":\"atlas_metadata_lint.v2.0\"}"
     return row
 }
 
@@ -633,7 +720,7 @@ fn _emit_trailer(verdict: string, atlas_path: string, violations: array, infos: 
         eprintln("  info (non-fatal):")
         for s in infos { eprintln("    " + s) }
     }
-    eprintln("  fix: 1) meta-closure WARN: reconcile declared count with enumerated names (line-local edit OR migrate prose to axis-I `->* {N @ [grade]}`)  2) introduced_at WARN: add `  introduced_at = pre-axis-K` (legacy) or `  introduced_at = YYYY-MM-DD` (post-cutover row)  3) introduced_at FAIL (malformed value): replace with one of {pre-axis-K, foundation, YYYY-MM-DD, YYYY-MM-DDTHH:MM:SSZ} per axis-K § B5  4) ref atlas.append.atlas-metadata-policy-2026-04-28.n6 for the formal sentinel + ENUMERATION GAP audit policy")
+    eprintln("  fix: 1) meta-closure WARN: reconcile declared count with enumerated names (line-local edit OR migrate prose to axis-I `->* {N @ [grade]}`)  2) introduced_at WARN: add `  introduced_at = pre-axis-K` (legacy) or `  introduced_at = YYYY-MM-DD` (post-cutover row)  3) introduced_at FAIL (malformed value): replace with one of {pre-axis-K, foundation, YYYY-MM-DD, YYYY-MM-DDTHH:MM:SS{Z|±HH:MM}} per axis-K § B5 (v2: ±HH:MM offset + leap-day calendar enforced)  4) ref atlas.append.atlas-metadata-policy-2026-04-28.n6 for the formal sentinel + ENUMERATION GAP audit policy")
 }
 
 // ─── target resolution ────────────────────────────────────────────────
@@ -679,6 +766,18 @@ fn _write_fixture(path: string, body: string) -> void {
         exec("mkdir -p '" + parent + "'")
     }
     write_file(path, body)
+}
+
+// Shell-side fast padder: prepend N pad-comment lines to an existing fixture.
+// Avoids the O(N²) `padded = padded + "..."` accumulation in hexa runtime.
+fn _prepend_padding(path: string, pad_lines: int) -> void {
+    let n = to_string(pad_lines)
+    let cmd = "PAD=$(yes '# pad' 2>/dev/null | head -n " + n + ")"
+            + " && printf '%s\\n' \"$PAD\" > '" + path + ".pad'"
+            + " && cat '" + path + ".pad' '" + path + "' > '" + path + ".tmp'"
+            + " && mv '" + path + ".tmp' '" + path + "'"
+            + " && rm -f '" + path + ".pad'"
+    exec(cmd)
 }
 
 fn _selftest() -> void {
@@ -734,14 +833,7 @@ fn _selftest() -> void {
 
     // ─── FIXTURE 3 — FAIL: introduced_at malformed values ────────────────
     let f3 = dir + "/fixture3_introduced_at_malformed.n6"
-    let header = "# pad to push past AXIS_K_CUTOFF_LINE\n"
-    let mut padded = header
-    let mut i = 0
-    while i < 35200 {
-        padded = padded + "# pad\n"
-        i = i + 1
-    }
-    let body3 = padded
+    let body3 = ""
               + "@C bad_partial = x :: arch [10*]\n"
               + "  introduced_at = 2026-04\n"
               + "@C bad_prose = y :: arch [10*]\n"
@@ -749,6 +841,7 @@ fn _selftest() -> void {
               + "@C bad_outofrange = z :: arch [10*]\n"
               + "  introduced_at = 2099-13-40\n"
     _write_fixture(f3, body3)
+    _prepend_padding(f3, 35200)
     let r3 = _lint_file(f3)
     if r3[0] != "FAIL" {
         eprintln("FIXTURE 3 expected FAIL, got " + r3[0])
@@ -790,16 +883,11 @@ fn _selftest() -> void {
 
     // ─── FIXTURE 5 — WARN: introduced_at MISSING on post-cutover row ────
     let f5 = dir + "/fixture5_introduced_at_missing.n6"
-    let mut padded5 = ""
-    let mut k = 0
-    while k < 35200 {
-        padded5 = padded5 + "# pad\n"
-        k = k + 1
-    }
-    let body5 = padded5
+    let body5 = ""
               + "@C row_no_introduced_at :: arch [10*]\n"
               + "  some_other_field = value\n"
     _write_fixture(f5, body5)
+    _prepend_padding(f5, 35200)
     let r5 = _lint_file(f5)
     if r5[0] != "WARN" {
         eprintln("FIXTURE 5 expected WARN (missing introduced_at), got " + r5[0])
@@ -860,16 +948,11 @@ fn _selftest() -> void {
 
     // ─── FIXTURE 8 — FAIL: introduced_at with empty RHS ──────────────────
     let f8 = dir + "/fixture8_introduced_at_empty.n6"
-    let mut padded8 = ""
-    let mut m = 0
-    while m < 35200 {
-        padded8 = padded8 + "# pad\n"
-        m = m + 1
-    }
-    let body8 = padded8
+    let body8 = ""
               + "@C empty_value :: arch [10*]\n"
               + "  introduced_at = \n"
     _write_fixture(f8, body8)
+    _prepend_padding(f8, 35200)
     let r8 = _lint_file(f8)
     if r8[0] != "FAIL" {
         eprintln("FIXTURE 8 expected FAIL (empty value), got " + r8[0])
@@ -878,8 +961,158 @@ fn _selftest() -> void {
     }
     println("  fixture-8 FAIL  (introduced_at with empty RHS detected)")
 
+    // ─── FIXTURE 9 — PASS: RFC 3339 with positive offset (v2 B3) ────────
+    let f9 = dir + "/fixture9_rfc3339_positive_offset.n6"
+    let body9 = ""
+              + "@P n = 6 :: foundation [11*]\n"
+              + "  introduced_at = 2026-04-28T15:30:00+09:00\n"
+              + "@C utc_baseline :: arch [10*]\n"
+              + "  introduced_at = 2026-04-28T00:00:00Z\n"
+              + "@C neg_offset :: arch [10*]\n"
+              + "  introduced_at = 2026-04-28T08:00:00-08:00\n"
+    _write_fixture(f9, body9)
+    let r9 = _lint_file(f9)
+    if r9[0] != "PASS" {
+        eprintln("FIXTURE 9 expected PASS (RFC 3339 ±HH:MM offsets), got " + r9[0])
+        for v in r9[1] { eprintln("  - " + v) }
+        exit(1)
+    }
+    println("  fixture-9 PASS  (RFC 3339 +09:00 + Z + -08:00 offsets all accepted)")
+
+    // ─── FIXTURE 10 — FAIL: invalid offset values (v2 B3) ───────────────
+    let f10 = dir + "/fixture10_rfc3339_bad_offset.n6"
+    let body10 = ""
+               + "@C bad_offset_25 :: arch [10*]\n"
+               + "  introduced_at = 2026-04-28T15:30:00+25:00\n"
+               + "@C bad_offset_99 :: arch [10*]\n"
+               + "  introduced_at = 2026-04-28T15:30:00+09:99\n"
+               + "@C bad_offset_15 :: arch [10*]\n"
+               + "  introduced_at = 2026-04-28T15:30:00+15:00\n"
+    _write_fixture(f10, body10)
+    _prepend_padding(f10, 35200)
+    let r10 = _lint_file(f10)
+    if r10[0] != "FAIL" {
+        eprintln("FIXTURE 10 expected FAIL (invalid offsets), got " + r10[0])
+        for v in r10[1] { eprintln("  - " + v) }
+        exit(1)
+    }
+    let mut saw_25 = false
+    let mut saw_99 = false
+    let mut saw_15 = false
+    for v in r10[1] {
+        if v.index_of("+25:00") >= 0 { saw_25 = true }
+        if v.index_of("+09:99") >= 0 { saw_99 = true }
+        if v.index_of("+15:00") >= 0 { saw_15 = true }
+    }
+    if !saw_25 { eprintln("FIXTURE 10 missing +25:00 violation"); exit(1) }
+    if !saw_99 { eprintln("FIXTURE 10 missing +09:99 violation"); exit(1) }
+    if !saw_15 { eprintln("FIXTURE 10 missing +15:00 (above +14:00 max) violation"); exit(1) }
+    println("  fixture-10 FAIL (invalid offsets +25:00, +09:99, +15:00 all rejected)")
+
+    // ─── FIXTURE 11 — FAIL: leap-day on non-leap year (v2 B4) ───────────
+    let f11 = dir + "/fixture11_leap_day_nonleap.n6"
+    let body11 = ""
+               + "@C feb29_2026 :: arch [10*]\n"
+               + "  introduced_at = 2026-02-29\n"
+               + "@C apr31 :: arch [10*]\n"
+               + "  introduced_at = 2026-04-31\n"
+               + "@C feb30 :: arch [10*]\n"
+               + "  introduced_at = 2024-02-30\n"
+    _write_fixture(f11, body11)
+    _prepend_padding(f11, 35200)
+    let r11 = _lint_file(f11)
+    if r11[0] != "FAIL" {
+        eprintln("FIXTURE 11 expected FAIL (calendar-invalid dates), got " + r11[0])
+        for v in r11[1] { eprintln("  - " + v) }
+        exit(1)
+    }
+    let mut saw_feb29 = false
+    let mut saw_apr31 = false
+    let mut saw_feb30 = false
+    for v in r11[1] {
+        if v.index_of("2026-02-29") >= 0 { saw_feb29 = true }
+        if v.index_of("2026-04-31") >= 0 { saw_apr31 = true }
+        if v.index_of("2024-02-30") >= 0 { saw_feb30 = true }
+    }
+    if !saw_feb29 { eprintln("FIXTURE 11 missing 2026-02-29 violation (non-leap year)"); exit(1) }
+    if !saw_apr31 { eprintln("FIXTURE 11 missing 2026-04-31 violation (April has 30 days)"); exit(1) }
+    if !saw_feb30 { eprintln("FIXTURE 11 missing 2024-02-30 violation (Feb max 29 even in leap year)"); exit(1) }
+    println("  fixture-11 FAIL (calendar-invalid: 2026-02-29 non-leap + 2026-04-31 + 2024-02-30)")
+
+    // ─── FIXTURE 12 — PASS: leap-day on leap year (v2 B4) ───────────────
+    let f12 = dir + "/fixture12_leap_day_valid.n6"
+    let body12 = ""
+               + "@P n = 6 :: foundation [11*]\n"
+               + "  introduced_at = 2024-02-29\n"
+               + "@C leap_2000 :: arch [10*]\n"
+               + "  introduced_at = 2096-02-29\n"
+               + "@C end_of_april :: arch [10*]\n"
+               + "  introduced_at = 2026-04-30\n"
+    _write_fixture(f12, body12)
+    let r12 = _lint_file(f12)
+    if r12[0] != "PASS" {
+        eprintln("FIXTURE 12 expected PASS (real leap days + valid 04-30), got " + r12[0])
+        for v in r12[1] { eprintln("  - " + v) }
+        exit(1)
+    }
+    println("  fixture-12 PASS (2024-02-29 + 2096-02-29 leap-year + 2026-04-30 boundary)")
+
+    // ─── FIXTURE 13 — PASS: meta-closure single-quote variant (v2 B5) ──
+    let f13 = dir + "/fixture13_meta_closure_singlequote.n6"
+    let body13 = ""
+               + "@P n = 6 :: foundation [11*]\n"
+               + "  => 'meta-closure: 5 grade-10 derivations (a, b, c, d, e)'\n"
+               + "@P sigma = 12 :: foundation [11*]\n"
+               + "  => 'meta-closure: 7 grade-10 derivations (a,b,c,d,e,...)'\n"
+    _write_fixture(f13, body13)
+    let r13 = _lint_file(f13)
+    if r13[0] != "WARN" {
+        eprintln("FIXTURE 13 expected WARN (single-quote variant: gap=2 detected), got " + r13[0])
+        for v in r13[1] { eprintln("  - " + v) }
+        for v in r13[2] { eprintln("  i " + v) }
+        exit(1)
+    }
+    let mut saw_sq_calibration_silent = true
+    let mut saw_sq_gap = false
+    for v in r13[1] {
+        if v.index_of("declared 5") >= 0 && v.index_of("only 5") >= 0 {
+            saw_sq_calibration_silent = false
+        }
+        if v.index_of("declared 7") >= 0 && v.index_of("only 5") >= 0 { saw_sq_gap = true }
+    }
+    if !saw_sq_calibration_silent { eprintln("FIXTURE 13 spuriously flagged single-quote gap=0 row"); exit(1) }
+    if !saw_sq_gap { eprintln("FIXTURE 13 missing single-quote gap=2 violation (declared 7, only 5)"); exit(1) }
+    println("  fixture-13 PASS (single-quote `=> 'meta-closure:...'` matched: gap=0 silent + gap=2 WARN)")
+
+    // ─── FIXTURE 14 — PASS: meta-closure no-quote variant (v2 B5) ──────
+    let f14 = dir + "/fixture14_meta_closure_noquote.n6"
+    let body14 = ""
+               + "@P n = 6 :: foundation [11*]\n"
+               + "  => meta-closure: 3 grade-10 derivations (x, y, z)\n"
+               + "@P sigma = 12 :: foundation [11*]\n"
+               + "  => meta-closure: 6 grade-10 derivations (x,y,z,...)\n"
+    _write_fixture(f14, body14)
+    let r14 = _lint_file(f14)
+    if r14[0] != "WARN" {
+        eprintln("FIXTURE 14 expected WARN (no-quote variant: gap=3 detected), got " + r14[0])
+        for v in r14[1] { eprintln("  - " + v) }
+        for v in r14[2] { eprintln("  i " + v) }
+        exit(1)
+    }
+    let mut saw_nq_gap = false
+    let mut saw_nq_calibration_silent = true
+    for v in r14[1] {
+        if v.index_of("declared 3") >= 0 && v.index_of("only 3") >= 0 {
+            saw_nq_calibration_silent = false
+        }
+        if v.index_of("declared 6") >= 0 && v.index_of("only 3") >= 0 { saw_nq_gap = true }
+    }
+    if !saw_nq_calibration_silent { eprintln("FIXTURE 14 spuriously flagged no-quote gap=0 row"); exit(1) }
+    if !saw_nq_gap { eprintln("FIXTURE 14 missing no-quote gap=3 violation (declared 6, only 3)"); exit(1) }
+    println("  fixture-14 PASS (no-quote `=> meta-closure:...` matched: gap=0 silent + gap=3 WARN)")
+
     exec("rm -rf '" + dir + "'")
-    println("[atlas_metadata_lint selftest] OK (8 fixtures)")
+    println("[atlas_metadata_lint selftest] OK (14 fixtures)")
     exit(0)
 }
 
