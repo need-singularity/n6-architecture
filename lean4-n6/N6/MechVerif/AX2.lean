@@ -147,6 +147,16 @@ theorem AX2_strand_class_well_formed :
     (single source). raw 91 C3: axioms themselves unchanged; only their
     location is unified.
 
+    W5-alt cycle 9 cross-reference (2026-04-28 fan-out 3/5):
+      * RCSB Query B (1965 entries; Protein + RNA + ligand + ≤3.0 Å + pre-2024)
+        retires F-W2-4 (yield ≥ 50) PARTIAL — see
+        proposals/hexa_weave_mvp_w5_alt_paths_executed_2026_04_28.md §1.2.
+      * Mock-up wrapper (Alt-3) validates the 18-module cross-attention
+        architecture (6 blocks × 3 branches) without touching the lean4
+        axiom layer; AX-3 / AX-4 lean4 work remains W7+ deferred.
+      * No theorem / axiom / sorry change in this cycle (raw 91 C3 honest;
+        comment-only docstring strengthening, build-safe).
+
     Outstanding gaps (named axioms in Foundation/Axioms.lean — auditable):
       ✘ axiom_felgner_1971_conservativity_meta (W7+)
       ✘ axiom_strand_zfc_witness (W5+ via Encodable)

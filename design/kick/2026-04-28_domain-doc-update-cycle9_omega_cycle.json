@@ -1,0 +1,111 @@
+{
+  "kick_kind": "omega_cycle",
+  "kick_id": "2026-04-28_domain-doc-update-cycle9",
+  "kick_title": "HEXA-WEAVE domain-doc sync (cycle 9 / fan-out 5/5) — §6/§7/§9/§10/§11/§12/§15 refresh",
+  "kick_date": "2026-04-28",
+  "umbrella": "domain-governance",
+  "cost_center": "n6-architecture-domain-governance",
+  "parent_witness": "design/kick/2026-04-28_hexa-weave-closure_omega_cycle.json",
+  "predecessor_witness": "design/kick/2026-04-28_lean4-w6-axioms-refactor_omega_cycle.json",
+  "parent_spec": "domains/biology/hexa-weave/hexa-weave.md",
+  "cycle9_report_doc": "domains/biology/hexa-weave/hexa-weave.md (this body, post-edit)",
+  "mission": {
+    "intent": "Refresh hexa-weave domain doc body to reflect cycle 7-8 milestones: lean4 sorry-free, 7 named axioms (Felgner decomposed), Foundation/{Strand,Axioms}.lean shared refactor, F-D-3 deadline-miss probability burndown 60-75% -> 50-58%, F-CL-JOINT-9 SCOPE-NARROW + F-MANUAL-LOGIN, papers/hexa-weave-formal-mechanical-w2 Option-E first paper, MVP W3+W4 spec progress (35%).",
+    "scope_in": ["§6 EVOLVE", "§7 VERIFY", "§9 METRICS", "§10 RISKS", "§11 DEPENDENCIES", "§12 TIMELINE", "§15 REFERENCES"],
+    "scope_out": ["§1 WHY", "§2 COMPARE", "§3 REQUIRES", "§4 STRUCT", "§5 FLOW", "§8 IDEAS", "§13 TOOLS", "§14 TEAM"],
+    "scope_out_rationale": "scope-out sections are stable across cycles 1-8; no claim or invariant changed. Editing them would inflate the diff without increasing fidelity."
+  },
+  "deliverables": {
+    "modified_files": [
+      {
+        "path": "domains/biology/hexa-weave/hexa-weave.md",
+        "loc_before": 256,
+        "loc_after": 313,
+        "delta": "+57 lines",
+        "change": "§6 cycle 1-8 milestone trace table prepended; §7 added MECHANICAL + LINT axes (8 of 9 PASS, CHI2 DEFER); §9 metrics refreshed with cycle 8 actuals (sorry=0, 7 axioms, F-D-3 50-58%, +201 LoC Foundation/Axioms); §10 added measurable claims 4 (3 falsifiers F-CL-FORMAL-4 a/b/c) + 5 (3 falsifiers F-MANUAL-LOGIN, F-USER-GATE-W5, F-USER-GATE-ZENODO); §11 added Lean toolchain, mathlib pin, Felgner/Hardy-Wright/Robin/Wigert citation rows, lean4-n6 sister directory, OpenFold v2.2.0; §12 expanded into cycle 1-9 actual + cycle 9+ planned table including Mk.X TRANSCEND chain, F-MANUAL-LOGIN deadline 2026-04-29 24:00 UTC, F-TP5-b 90-day MVP gate 2026-07-28; §15 added 6 new reference rows (cosmological L4-L7 chain, W1-W6 proposals, papers/, lean4-n6 mechanical body)."
+      }
+    ],
+    "section_count_before": 15,
+    "section_count_after": 15,
+    "own_4_15_section_template_preserved": true,
+    "auto_marker_preserved": true,
+    "english_only_raw_33_preserved": true,
+    "cjk_chars_in_modified_doc": 0
+  },
+  "verification": {
+    "own_doc_lint_status": "PASS for hexa-weave.md (0 violations attributable to this edit)",
+    "own_doc_lint_rule_results": {
+      "own#1": "OK on hexa-weave.md (CJK chars = 0); 3 pre-existing violations remain on unrelated cycle 7-8 W2/W3/W4 lean4 proposals (NOT introduced by this edit)",
+      "own#2": "OK",
+      "own#3": "OK",
+      "own#4": "OK (15 sections preserved in declared order)",
+      "own#5": "OK",
+      "own#6": "OK",
+      "own#7": "OK",
+      "own#8": "OK",
+      "own#9": "OK",
+      "own#10": "OK",
+      "own#11": "OK (no Millennium Problem solved-claim; Robin's criterion cited as named axiom only)",
+      "own#12": "OK (MISS criteria in §10 declared upfront)",
+      "own#16": "OK"
+    },
+    "own_doc_lint_target_count": 13,
+    "own_doc_lint_pass_count": 13,
+    "own_14_sealed_status": "OUT-OF-SCOPE — only README.md is sealed; domain bodies are not sealed (per cycle 8 sealed_check.py scope)",
+    "raw_91_c3_disclosure_level": "HIGH-but-MITIGATED",
+    "raw_91_c3_split": {
+      "mechanical_layer": "lean4 sorry-free with 7 NAMED axioms (auditable via #print axioms); citations to Felgner 1971 / Robin 1984 / Hardy-Wright / Wigert 1907",
+      "empirical_layer": "still NOT opened; CHI2 DEFER n=1; F-TP5-b 90-day MVP gate 2026-07-28 still open",
+      "user_approval_gates": "5+ items explicitly listed in §12 (W5 sandbox, Zenodo, docker registry, manual /login, external preprint)"
+    }
+  },
+  "raw_71_falsifiers": [
+    {
+      "id": "F-DOC-CYCLE9-1",
+      "claim": "§6 milestone trace table accurately mirrors witness chain cycle 1 -> cycle 8",
+      "falsifier": "any reviewer can find a cycle 1-8 witness JSON in design/kick/ with a hexa-weave-mvp prefix that contradicts the cycle/phase/deliverable/witness mapping in the §6 table",
+      "auto_check": "no (manual reviewer)",
+      "alert_level": "warn"
+    },
+    {
+      "id": "F-DOC-CYCLE9-2",
+      "claim": "§7 MECHANICAL axis PASS — lean4 project-wide lake build PASS, sorry count 0, 7 named axioms",
+      "falsifier": "lake build of N6.MechVerif on cycle 8 HEAD with mathlib4 rev 19c4978 returns non-zero exit OR `grep -r '\\bsorry\\b' lean4-n6/N6/MechVerif/*.lean` finds an active sorry inside a theorem body OR `#print axioms` of any AX-1/AX-2 theorem reveals an axiom outside the declared 7-set",
+      "auto_check": "yes (CI / manual lake build)",
+      "alert_level": "block"
+    },
+    {
+      "id": "F-DOC-CYCLE9-3",
+      "claim": "F-D-3 deadline-miss probability 50-58% post-W6 (cumulative -15-17pp from W3 baseline ~65-75%)",
+      "falsifier": "the lean4-w*-omega_cycle.json witness chain f_d_3_*assessment fields contradict the trajectory 65-75% -> 58-66% (W4) -> 52-60% (W5) -> 50-58% (W6) reported in §9",
+      "auto_check": "yes (jq on witness JSON chain)",
+      "alert_level": "warn"
+    }
+  ],
+  "miss_criteria_per_own_12": [
+    "domain doc body fails own_doc_lint with violations attributable to this edit -> revert",
+    "any §6/§7/§9/§10/§11/§12/§15 claim cannot be backed by an existing witness or proposal artefact -> retract claim",
+    "the @own header section list deviates from the 15-section template -> revert",
+    "any CJK character is added to the domain body -> revert (raw 33 English-only)"
+  ],
+  "readme_consistency": {
+    "readme_biology_section_lines": "L367-380 (HEXA-WEAVE row + AUTO:SUMMARY/FOOTER blocks)",
+    "consistency_check": "PASS — README closure='APPROACH' matches §1 limit clause + §9 closure-verdict tier 'APPROACH'; tri-axis Ω-saturation framing matches §7; F-TP5-b 90-day MVP gate 2026-07-28 matches §12; Mk.X TRANSCEND PASS-WITH-C3-CAVEATS matches §6 cosmological-extension addendum",
+    "readme_unchanged_by_this_edit": true,
+    "readme_sealed_check_unaffected": true
+  },
+  "verdict": "PASS",
+  "verdict_rationale": "Domain doc cycle 7-8 milestone refresh complete; 15-section template preserved; English-only maintained; @own header preserved; raw 91 C3 honest split (mechanical layer named-axiom-disclosed / empirical layer still open / user-approval gates listed); 3 raw 71 falsifiers across 3 measurable claims; own_doc_lint pre-existing violations on unrelated proposals are NOT attributable to this edit.",
+  "tags": [
+    "domain-governance",
+    "hexa-weave",
+    "cycle9",
+    "fan-out-5-of-5",
+    "doc-refresh",
+    "cycle7-cycle8-milestone-mirror",
+    "lean4-sorry-free-disclosure",
+    "f-d-3-burndown",
+    "f-cl-formal-4-partial-resolved",
+    "raw-91-c3-honest"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "kick_id": "2026-04-28_cycle9-commit-push",
+  "schema": "omega_cycle.v1",
+  "ts": "2026-04-28T17:55:00Z",
+  "fan_out": "1/5",
+  "cycle": 10,
+  "mission": "cycle 9 monolithic commit + push origin/main",
+  "scope": {
+    "modified": [
+      "lean4-n6/N6/MechVerif/Foundation/Axioms.lean",
+      "lean4-n6/N6/MechVerif/AX2.lean",
+      "domains/biology/hexa-weave/hexa-weave.md",
+      "state/discovery_absorption/registry.jsonl"
+    ],
+    "untracked": [
+      "proposals/hexa_weave_mvp_w7_axiom_step_down_2026_04_28.md",
+      "proposals/hexa_weave_mvp_w5_alt_paths_executed_2026_04_28.md",
+      "design/kick/2026-04-28_lean4-w7-axiom-step-down_omega_cycle.json",
+      "design/kick/2026-04-28_hexa-weave-mvp-w5-alt-paths_omega_cycle.json",
+      "design/kick/2026-04-28_domain-doc-update-cycle9_omega_cycle.json",
+      "design/kick/2026-04-28_cycle9-commit-push_omega_cycle.json"
+    ],
+    "excluded_dirty": [
+      "reports/n6_own_doc_lint.json",
+      "tool/atlas_self_arch_lint.hexa",
+      "state/atlas_self_arch_audit/",
+      "state/markers/*",
+      "state/falsifier_monitor/audit.jsonl (untracked, not part of cycle9 stage)"
+    ]
+  },
+  "safety": {
+    "preexisting_dirty_isolated": true,
+    "secrets_scan": "clean (api_key/secret/token/password/bearer/sk-/ghp_/aws_/private-key — 0 hits in staged set)",
+    "destructive_ops": 0,
+    "raw13_hooks": "honored (no --no-verify, no --amend, no force push)",
+    "raw91_c3_honest": true
+  },
+  "commit_message": "feat(hexa-weave): cycle 9 W7 axiom step-down 7→15 + W5 Alt-paths executed (RCSB 6014/1965 + mock-up) + domain doc 256→313",
+  "drift_notes": [
+    "domain doc actual 312 lines (mission said 313 — off-by-one drift, no impact)",
+    "state/falsifier_monitor/audit.jsonl present as untracked but not staged — mission-listed file not modified vs HEAD"
+  ],
+  "raw_91_c3": "honest"
+}

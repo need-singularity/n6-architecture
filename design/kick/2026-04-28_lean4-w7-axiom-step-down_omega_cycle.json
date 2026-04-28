@@ -1,0 +1,195 @@
+{
+  "schema": "omega_cycle.witness_v2_closure",
+  "ts": "2026-04-28T20:30:00Z",
+  "title": "HEXA-WEAVE MVP W7 — lean4 axiom step-down decomposition (Foundation/Axioms.lean)",
+  "task_label": "cycle 9 / fan-out 2/5 W7 lean4 axiom step-down (orthogonal to rejected cycle 8 fan-out 2/5 Felgner full proof)",
+  "scope": "Decompose two largest monolithic axioms in N6/MechVerif/Foundation/Axioms.lean (axiom_strand_zfc_witness, axiom_hexa_comp_closure_via_ZFC) into 5+4 named sub-axioms following the Felgner step1/2/3 pattern from cycle 8. Felgner-related axioms intentionally untouched to avoid proximity to the rejected cycle 8 fan-out 2/5 full-proof track. Sorry count preserved at 0; main PASS theorems preserved unchanged.",
+
+  "parent_witness": {
+    "cycle_5": "W1 + W2 spec + lean4 audit",
+    "cycle_6": "W3 clone+VRAM spec + W4 MKBridge.lean (4-axiom monolithic)",
+    "cycle_7": "W5 sandbox plan + AX2.lean 2-mirror duplication (F-W5-AX2-1)",
+    "cycle_8_w6_3of5": "Foundation/Axioms.lean shared-file refactor (7 axioms, F-W5-AX2-1 RESOLVED)",
+    "cycle_8_w6_2of5": "Felgner full proof attempt — REJECTED",
+    "cycle_9_this_2of5": "W7 axiom step-down decomposition (orthogonal track)"
+  },
+
+  "deliverables": {
+    "files_created": [
+      "/Users/ghost/core/n6-architecture/proposals/hexa_weave_mvp_w7_axiom_step_down_2026_04_28.md",
+      "/Users/ghost/core/n6-architecture/design/kick/2026-04-28_lean4-w7-axiom-step-down_omega_cycle.json"
+    ],
+    "files_modified": [
+      "/Users/ghost/core/n6-architecture/lean4-n6/N6/MechVerif/Foundation/Axioms.lean"
+    ],
+    "files_unchanged_verified": [
+      "/Users/ghost/core/n6-architecture/lean4-n6/N6/MechVerif/Foundation/Strand.lean",
+      "/Users/ghost/core/n6-architecture/lean4-n6/N6/MechVerif/AX1.lean",
+      "/Users/ghost/core/n6-architecture/lean4-n6/N6/MechVerif/AX2.lean",
+      "/Users/ghost/core/n6-architecture/lean4-n6/N6/MechVerif/MKBridge.lean"
+    ],
+    "destructive_ops_executed": 0,
+    "sorry_count_pre": 0,
+    "sorry_count_post": 0,
+    "raw_71_falsifiers": 5
+  },
+
+  "decompositions": {
+    "A_strand_zfc_witness": {
+      "monolithic_pre": "axiom axiom_strand_zfc_witness : Strand → ZFSet.{0}",
+      "subaxioms_post": [
+        {"id": "A.1", "name": "axiom_strand_zfc_witness_amino", "type": "List AminoAcid → ZFSet.{0}", "constructor": ".aminoAcid", "alphabet": "22-letter (20 standard + sec + pyl)"},
+        {"id": "A.2", "name": "axiom_strand_zfc_witness_rna", "type": "List RNANucleotide → ZFSet.{0}", "constructor": ".rna", "alphabet": "{A, U, G, C}"},
+        {"id": "A.3", "name": "axiom_strand_zfc_witness_dna", "type": "List DNANucleotide → ZFSet.{0}", "constructor": ".dna", "alphabet": "{A, T, G, C}"},
+        {"id": "A.4", "name": "axiom_strand_zfc_witness_small_ligand", "type": "String → ZFSet.{0}", "constructor": ".smallLigand", "alphabet": "SMILES string"},
+        {"id": "A.5", "name": "axiom_strand_zfc_witness_antibody", "type": "List AminoAcid → List AminoAcid → ZFSet.{0}", "constructor": ".antibody", "alphabet": "heavy + light chain pair"}
+      ],
+      "derived_theorem": "noncomputable def axiom_strand_zfc_witness : Strand → ZFSet.{0} (pattern-match dispatch)",
+      "delta_axioms": "+4 (−1 monolithic + 5 sub-axioms)",
+      "downstream_callers_unchanged": ["StrandClass_ZFC", "MKBridge.StrandClass_ZFC.nonempty", "MKBridge.StrandClass_ZFC.exhibits_each", "felgner_bridge_to_MK_strand"]
+    },
+    "C_hexa_comp_closure_via_ZFC": {
+      "monolithic_pre": "axiom axiom_hexa_comp_closure_via_ZFC : ClosedUnderHEXAComp Strand",
+      "subaxioms_post": [
+        {"id": "C.1", "name": "axiom_hexa_comp_strand_op_well_defined", "type": "True", "subproperty": "binary op is total on Strand carrier"},
+        {"id": "C.2", "name": "axiom_hexa_comp_associativity", "type": "True", "subproperty": "(a*Hb)*Hc = a*H(b*Hc) or explicit non-associative declaration"},
+        {"id": "C.3", "name": "axiom_hexa_comp_identity", "type": "True", "subproperty": "identity element exists in Strand"},
+        {"id": "C.4", "name": "axiom_hexa_comp_zfc_class_closure", "type": "True", "subproperty": "image stays inside StrandClass_ZFC"},
+        {"id": "C.atom", "name": "axiom_hexa_comp_closure_atom", "type": "ClosedUnderHEXAComp Strand", "subproperty": "atomic-inhabitation retention (cannot be eliminated until ClosedUnderHEXAComp gets a non-opaque definition; W6+ AX-3/AX-4)"}
+      ],
+      "derived_theorem": "theorem axiom_hexa_comp_closure_via_ZFC : ClosedUnderHEXAComp Strand (combines C.1-C.4 True placeholders + C.atom)",
+      "delta_axioms": "+4 (−1 monolithic + 4 sub-property + 1 atom retention)",
+      "honest_caveat": "Opaque ClosedUnderHEXAComp prevents full derivation from True placeholders alone. C.atom retains the irreducible inhabitation content. C.1-C.4 are documentation surrogates contributing zero proof-theoretic strength.",
+      "downstream_callers_unchanged": ["hexa_comp_closure_strand", "MKBridge.AX2_strand_closed_under_HEXAComp_via_ZFC", "AX2_strand_closed_under_HEXAComp"]
+    }
+  },
+
+  "axiom_keyword_count": {
+    "pre_cycle_9": {
+      "total": 7,
+      "list": [
+        "axiom_felgner_step1_class_quantifier_to_Vkappa_bounded",
+        "axiom_felgner_step2_proper_class_in_Vkappa",
+        "axiom_felgner_step3_LZFC_relativization",
+        "axiom_strand_zfc_witness",
+        "axiom_felgner_bridge_to_MK",
+        "axiom_hexa_comp_closure_via_ZFC",
+        "axiom_robin_hardy_wright_ax1_tail"
+      ]
+    },
+    "post_cycle_9": {
+      "total": 15,
+      "delta": "+8",
+      "list": [
+        "axiom_felgner_step1_class_quantifier_to_Vkappa_bounded",
+        "axiom_felgner_step2_proper_class_in_Vkappa",
+        "axiom_felgner_step3_LZFC_relativization",
+        "axiom_strand_zfc_witness_amino",
+        "axiom_strand_zfc_witness_rna",
+        "axiom_strand_zfc_witness_dna",
+        "axiom_strand_zfc_witness_small_ligand",
+        "axiom_strand_zfc_witness_antibody",
+        "axiom_felgner_bridge_to_MK",
+        "axiom_hexa_comp_strand_op_well_defined",
+        "axiom_hexa_comp_associativity",
+        "axiom_hexa_comp_identity",
+        "axiom_hexa_comp_zfc_class_closure",
+        "axiom_hexa_comp_closure_atom",
+        "axiom_robin_hardy_wright_ax1_tail"
+      ],
+      "newly_derived_theorems": [
+        "axiom_felgner_1971_conservativity_meta (was already a derived theorem in cycle 8)",
+        "axiom_strand_zfc_witness (cycle 9: was monolithic axiom; now noncomputable def dispatching to A.1-A.5)",
+        "axiom_hexa_comp_closure_via_ZFC (cycle 9: was monolithic axiom; now theorem combining C.1-C.4 + C.atom)"
+      ]
+    }
+  },
+
+  "build_verification": {
+    "lake_version": "5.0.0-src+714601b (Lean 4.30.0-rc1)",
+    "build_target_foundation_axioms": "PASS (1336/1336 jobs, 11s)",
+    "build_target_dependents": "PASS (AX1 5.3s, AX2 4.0s, MKBridge 4.1s)",
+    "build_full_n6": "PASS (8 jobs)",
+    "sorry_count_post": 0,
+    "rfl_proofs_preserved_via_definitional_unfolding": [
+      "felgner_bridge_to_MK_strand (uses ⟨Strand.witnessAminoAcid, rfl⟩)",
+      "MKBridge.StrandClass_ZFC.nonempty (rfl on aminoAcid witness)",
+      "MKBridge.StrandClass_ZFC.exhibits_each (5 rfl proofs, one per constructor)"
+    ]
+  },
+
+  "raw_71_falsifiers": [
+    {
+      "id": "F-W7-AX-1",
+      "title": "axiom_strand_zfc_witness is now noncomputable def, not axiom",
+      "severity": "low",
+      "impact": "Tooling that introspects ConstantInfo.axiom would see it as def",
+      "mitigation": "No such tooling currently in repo; flagged for future cycles introducing axiom-graph extraction"
+    },
+    {
+      "id": "F-W7-AX-2",
+      "title": "axiom_hexa_comp_closure_atom is renamed retention of prior monolithic axiom",
+      "severity": "low",
+      "impact": "Greps for axiom_hexa_comp_closure_via_ZFC as literal axiom now find theorem instead",
+      "mitigation": "Identifier preserved; behavior unchanged for inhabitation purposes"
+    },
+    {
+      "id": "F-W7-AX-3",
+      "title": "C.1-C.4 sub-axioms are : True placeholders with content in docstrings only",
+      "severity": "medium",
+      "impact": "Sub-axioms contribute zero proof-theoretic strength; step-down is a PATTERN not a PROOF",
+      "mitigation": "raw 91 C3 honest disclosure in proposal §4 and §8; future cycles must replace : True with meaningful propositions once HEXA-COMP is defined"
+    },
+    {
+      "id": "F-W7-AX-4",
+      "title": "5 strand_zfc_witness sub-axioms have no consistency relation among them",
+      "severity": "low",
+      "impact": "Two distinct constructors encoding the same intuitive object yield different ZFSets (preserved from pre-cycle-9, but more visible)",
+      "mitigation": "Same property as monolithic axiom; flagged for W7+ extensionality work"
+    },
+    {
+      "id": "F-W7-AX-5",
+      "title": "Audit pipelines counting #axioms as quality metric will see jump 7 → 15",
+      "severity": "low",
+      "impact": "Misinterpretation if #axioms is taken as quality signal without axiom-size weighting",
+      "mitigation": "Intended interpretation: smaller surface area per axiom, not fewer axioms; documented in proposal §3 and §8"
+    }
+  ],
+
+  "honest_disclosure_raw_91_C3": {
+    "decomposition_is_structural_only": true,
+    "felgner_full_proof_attempted": false,
+    "hexa_comp_defined": false,
+    "strand_zfc_encoding_constructed": false,
+    "sorry_count_remained": 0,
+    "claim": "This cycle is a step-down PATTERN applied to two monolithic axioms. No new theorems are proved; no axiomatic content is reduced. The 5+4+1 sub-axioms are smaller surface area each, but together carry the same total content as the prior 1+1 monolithic axioms, plus 4 True placeholder sub-axioms documenting structural sub-properties.",
+    "explicit_non_attempts": [
+      "did NOT attempt Felgner Hauptsatz internal proof",
+      "did NOT touch the axiom_felgner_bridge_to_MK signature",
+      "did NOT define HEXA-COMP",
+      "did NOT introduce Encodable Strand instance",
+      "did NOT modify AX1.lean / AX2.lean / MKBridge.lean / Foundation/Strand.lean",
+      "did NOT attempt to derive ClosedUnderHEXAComp Strand from True placeholders alone (impossible due to opaque type)"
+    ]
+  },
+
+  "f_d_3_reassessment": {
+    "pre_w6": "HIGH 63-72%",
+    "post_w6_cycle_8": "HIGH 58-66%",
+    "post_w7_cycle_9_this": "HIGH 58-66%",
+    "rationale": "Decomposition is structural; no semantic change to F-D-3 evaluation."
+  },
+
+  "main_pass_theorems_preserved": [
+    "AX1_n6_uniqueness",
+    "AX2_strand_class_well_formed",
+    "AX2_strand_is_MK_class",
+    "AX2_strand_closed_under_HEXAComp",
+    "AX2_strand_is_MK_class_via_ZFC",
+    "AX2_strand_closed_under_HEXAComp_via_ZFC",
+    "StrandClass_ZFC.nonempty",
+    "StrandClass_ZFC.exhibits_each",
+    "felgner_bridge_to_MK_strand",
+    "hexa_comp_closure_strand"
+  ]
+}
