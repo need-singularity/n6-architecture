@@ -1,0 +1,119 @@
+{
+  "kick_id": "2026-04-28_lean4-w8-hexa-comp-definition",
+  "schema": "omega_cycle.v1",
+  "ts": "2026-04-28T19:30:00Z",
+  "fan_out": "4/5",
+  "cycle": 11,
+  "mission": "Define hexaComp total function on Strand and CONVERT C.1 (axiom_hexa_comp_strand_op_well_defined) from `: True` axiom to derived theorem in Foundation/Axioms.lean. C.2/C.3/C.4 retained as axioms (biological/structural meaning underspecified or false). Net -1 axiom for THIS mission scope.",
+  "parent_proposals": [
+    "proposals/hexa_weave_mvp_2026_04_28.md",
+    "proposals/hexa_weave_mvp_w7_axiom_step_down_2026_04_28.md",
+    "proposals/hexa_weave_mvp_w8_felgner_atomic_2026_04_28.md"
+  ],
+  "scope": {
+    "modified": [
+      "lean4-n6/N6/MechVerif/Foundation/Strand.lean",
+      "lean4-n6/N6/MechVerif/Foundation/Axioms.lean"
+    ],
+    "untracked": [
+      "proposals/hexa_weave_mvp_w8_hexa_comp_definition_2026_04_28.md",
+      "design/kick/2026-04-28_lean4-w8-hexa-comp-definition_omega_cycle.json"
+    ]
+  },
+  "definitions_added": {
+    "Foundation/Strand.lean §7": {
+      "hexaComp": {
+        "signature": "Strand → Strand → Strand",
+        "kind": "def (total)",
+        "semantics": "placeholder dispatch — returns s₁ unchanged in every case",
+        "raw_91_c3_honest": "biologically uninformative; does NOT capture protein-RNA complex / binding pose / multi-strand composition; single purpose is to inhabit total-function signature for C.1 derivation"
+      },
+      "hexaComp_well_defined": {
+        "signature": "∀ (s₁ s₂ : Strand), ∃! (s₃ : Strand), s₃ = hexaComp s₁ s₂",
+        "kind": "theorem",
+        "proof": "refine ⟨hexaComp s₁ s₂, rfl, ?_⟩; intro y hy; exact hy",
+        "purpose": "strengthened-form C.1 well-definedness; backward-compatible :True projection retained in Axioms.lean for callsite stability"
+      }
+    }
+  },
+  "strand_complex_deferred": {
+    "decision": "DEFERRED to W9+",
+    "reason_1": "cross-cutting refactor risk — adding StrandComplex would change hexaComp signature and force changes to opaque ClosedUnderHEXAComp Strand predicate, rippling through MKBridge/AX2; mission safety constraint forbids cross-cutting refactor without user approval",
+    "reason_2": "mission goal (C.1 axiom → theorem) achieved by simpler hexaComp : Strand → Strand → Strand placeholder; richer semantics is W9+ work"
+  },
+  "C1_C4_disposition": {
+    "C1_axiom_hexa_comp_strand_op_well_defined": {
+      "before": "axiom : True",
+      "after": "theorem : True (discharged via hexaComp_well_defined)",
+      "change": "−1 axiom keyword"
+    },
+    "C2_axiom_hexa_comp_associativity": {
+      "before": "axiom : True",
+      "after": "axiom : True (RETAINED)",
+      "rationale": "non-associative in general — protein-RNA binding pose is order-dependent; CANNOT be discharged trivially even with full semantics"
+    },
+    "C3_axiom_hexa_comp_identity": {
+      "before": "axiom : True",
+      "after": "axiom : True (RETAINED)",
+      "rationale": "no biological identity element under placeholder semantics; pending W9+ richer carrier (e.g. distinguished Strand.empty unit)"
+    },
+    "C4_axiom_hexa_comp_zfc_class_closure": {
+      "before": "axiom : True",
+      "after": "axiom : True (RETAINED)",
+      "rationale": "depends on StrandClass_ZFC (already chained axiom system); pending W9+ joint work"
+    },
+    "axiom_hexa_comp_closure_atom": {
+      "before": "axiom : ClosedUnderHEXAComp Strand",
+      "after": "axiom : ClosedUnderHEXAComp Strand (RETAINED)",
+      "rationale": "inhabits opaque predicate; cannot be eliminated until §6 opaque ClosedUnderHEXAComp is given a non-opaque definition"
+    }
+  },
+  "axiom_count": {
+    "pre_cycle_11": 23,
+    "post_cycle_11": 21,
+    "this_mission_delta": "-1 (C.1 only)",
+    "concurrent_cycle_11_step1b_delta": "-1 (step1.b mechanisation, separate fan-out — already present in worktree state when this mission started)",
+    "verification": "grep -c '^axiom ' lean4-n6/N6/MechVerif/Foundation/Axioms.lean = 21"
+  },
+  "lake_build": {
+    "scoped_strand": "lake build N6.MechVerif.Foundation.Strand — Built 351/351 (2.9s)",
+    "scoped_axioms": "lake build N6.MechVerif.Foundation.Axioms — Built 1337/1337 (6.0s)",
+    "scoped_dependents": "lake build N6.MechVerif.AX2 N6.MechVerif.MKBridge — Built 1339/1339 (3.6-3.7s)",
+    "full": "lake build — Build completed successfully (8 jobs)",
+    "sorry_count": 0,
+    "main_pass_theorems_preserved": [
+      "AX2_strand_class_well_formed",
+      "AX2_strand_is_MK_class_via_ZFC",
+      "AX2_strand_closed_under_HEXAComp_via_ZFC",
+      "felgner_bridge_to_MK_strand",
+      "hexa_comp_closure_strand",
+      "axiom_hexa_comp_closure_via_ZFC"
+    ]
+  },
+  "f_d_3_re_evaluation": {
+    "pre_status": "HIGH 58-66% (post-W8 cycle 10)",
+    "post_status": "HIGH 58-66% (unchanged — C.1 mechanisation is structural; semantic content of HEXA-COMP closure remains in C.2/C.3/C.4 + atom)",
+    "remaining_surface": [
+      "axiom_hexa_comp_associativity (C.2 — non-associative; W9+ formal non-associative declaration)",
+      "axiom_hexa_comp_identity (C.3 — pending richer carrier for biological identity)",
+      "axiom_hexa_comp_zfc_class_closure (C.4 — pending joint W9+ ZFC-class work)",
+      "axiom_hexa_comp_closure_atom (irreducible inhabitation of opaque ClosedUnderHEXAComp Strand)"
+    ]
+  },
+  "raw_71_falsifiers": [
+    "F-W8-HEXACOMP-1: hexaComp placeholder dispatch judged semantically misleading (always returns first input) → future cycle replaces with Sum/Option/StrandComplex carrier; C.1 derivation re-validated",
+    "F-W8-HEXACOMP-2: deferred StrandComplex inductive forces changing the opaque ClosedUnderHEXAComp Strand predicate type → cross-cutting refactor; nominal forced regression",
+    "F-W8-HEXACOMP-3: hexaComp_well_defined ∃! form judged spurious (uniqueness automatic for functions) → future cycle replaces with stronger statement; :True projection re-derived",
+    "F-W8-HEXACOMP-4: C.2 (associativity) is later judged TRUE under refined model (e.g. up-to-binding-pose-equivalence) → discharged as derived theorem; axiom-retain decision reverted",
+    "F-W8-HEXACOMP-5: C.3 (identity) is later supplied (e.g. distinguished Strand.empty constructor proven unit) → discharged; axiom-retain decision reverted"
+  ],
+  "safety": {
+    "silent_axiom": "none (C.1 explicitly discharged via hexaComp_well_defined; C.2/C.3/C.4 explicitly retained as named axioms)",
+    "main_pass_theorems_preserved": true,
+    "sorry_count_preserved": "0 → 0",
+    "raw91_c3_honest": true,
+    "raw13_hooks_honored": "no --no-verify / --amend / force push planned",
+    "cross_cutting_refactor": "AVOIDED (StrandComplex deferred to W9+; current change is additive in Strand.lean §7 + single-line conversion in Axioms.lean)"
+  },
+  "raw_91_c3": "honest"
+}

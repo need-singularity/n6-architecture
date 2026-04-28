@@ -173,4 +173,62 @@ opaque IsMKProperClass (α : Type) : Prop
 /-- Opaque axiom-shaped predicate: "the class is closed under HEXA-COMP". -/
 opaque ClosedUnderHEXAComp (α : Type) : Prop
 
+/-! ## §7 HEXA-COMP binary operation — cycle 11 W8+ definition surface
+
+    Cycle 11 W8+ (this commit): introduces a placeholder `hexaComp` total
+    function on `Strand` so that the C.1 well-definedness sub-axiom
+    (`axiom_hexa_comp_strand_op_well_defined : True` in Foundation/Axioms.lean)
+    can be CONVERTED to a derived `theorem` (no longer a `: True` axiom).
+
+    raw 91 C3 honest disclosure:
+      • The dispatch below is **placeholder semantics** — every case returns
+        the first input strand unchanged. Real biological / structural
+        meanings (protein–RNA complex, antigen–antibody binding pose,
+        enzyme–substrate composite, etc.) are NOT captured. A faithful
+        encoding requires a richer carrier (a `StrandComplex` inductive
+        with binding-pose payload, planned for W9+).
+      • What IS captured here, and ONLY here: that the operation has a
+        total function signature `Strand → Strand → Strand`. C.1
+        well-definedness reduces to that signature being inhabited as a
+        Lean term — which it now is, hence C.1 becomes derivable.
+      • Associativity (C.2), identity (C.3), and ZFC-class closure (C.4)
+        are NOT discharged by this placeholder dispatch:
+          – C.2 is biologically false in general (binding pose depends on
+            ordering of association events), so it remains an axiom and is
+            EXPECTED to remain a non-trivially-stated axiom even after
+            W9+ enrichment.
+          – C.3 has no obvious biological identity element (the empty
+            peptide is not a unit for protein–RNA association, etc.), so
+            it remains an axiom pending a richer model.
+          – C.4 depends on the ZFC encoding (`StrandClass_ZFC`), which is
+            already a chained axiom system; it remains an axiom pending
+            joint W9+ work.
+      • The placeholder dispatch is total but biologically uninformative.
+        It MUST NOT be used as a load-bearing semantic primitive in
+        downstream theorems. -/
+
+/-- HEXA-COMP binary operation on `Strand` (cycle 11 W8+ placeholder).
+    Total function — every input pair maps to a `Strand` output. The
+    semantic content is a placeholder dispatch (returns the first input
+    strand unchanged in every case); see §7 docstring for the raw 91 C3
+    honest disclosure of what this does and does NOT capture. The single
+    purpose of this definition is to make C.1 (well-definedness, i.e.
+    inhabitation of the total-function signature `Strand → Strand → Strand`)
+    derivable as a `theorem` rather than postulated as an axiom. -/
+def hexaComp : Strand → Strand → Strand
+  | s₁, _ => s₁
+
+/-- HEXA-COMP well-definedness, derived from the existence of the
+    `hexaComp` term above. The unique-existence statement is the standard
+    formal expression of "the binary operation is well-defined as a
+    total function": for every input pair `(s₁, s₂)`, there exists a
+    unique `s₃ : Strand` equal to `hexaComp s₁ s₂` (uniqueness here is
+    trivial because `hexaComp` is a function, not a relation). -/
+theorem hexaComp_well_defined :
+    ∀ (s₁ s₂ : Strand), ∃! (s₃ : Strand), s₃ = hexaComp s₁ s₂ := by
+  intro s₁ s₂
+  refine ⟨hexaComp s₁ s₂, rfl, ?_⟩
+  intro y hy
+  exact hy
+
 end N6Mathlib.MechVerif

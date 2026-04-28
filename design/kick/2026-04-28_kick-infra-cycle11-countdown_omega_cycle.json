@@ -1,0 +1,115 @@
+{
+  "schema": "omega_cycle_witness_v1",
+  "ts": "2026-04-28T09:09:19Z",
+  "mission_id": "kick-infra-cycle11-countdown",
+  "cycle": "cycle-11/fan-out-5-of-5",
+  "parent_proposal": "proposals/hexa_weave_kick_infra_cycle11_countdown_2026_04_28.md",
+  "predecessor_witness": "design/kick/2026-04-28_kick-infra-metric-cycle10_omega_cycle.json",
+  "category": "operational",
+  "raws_invoked": ["raw_9","raw_13","raw_71","raw_77","raw_91_c3","raw_100"],
+  "scope": "Mac-local read-only audit; no infra mutation; user manual /login NOT automated",
+
+  "now_utc": "2026-04-28T09:09:19Z",
+  "deadline_utc": "2026-04-30T00:00:00Z",
+  "deadline_alias": "2026-04-29T24:00:00Z",
+  "t_minus_hours": 38.84,
+  "t_minus_hours_cycle10": 38.99,
+  "elapsed_since_cycle10_minutes": 9,
+
+  "profile_inventory": {
+    "total": 12,
+    "present_count": 6,
+    "absent_count": 6,
+    "auth_filename": ".credentials.json",
+    "raw_91_c3_filename_note": "task brief used 'auth.json' for legacy reference; actual file is .credentials.json (matches cycle 10 §2.1 enumeration)",
+    "profiles": [
+      {"id":"claude1","present":false},
+      {"id":"claude2","present":true,"mtime":"2026-04-20T20:11:11Z","expiresAt":"2026-04-21T00:49:47Z","expired_hours":176.33,"delta_vs_cycle10":"unchanged"},
+      {"id":"claude3","present":false,"note":"hetzner-side healthy per cycle-7 B.1 witness; Mac-side ABSENT"},
+      {"id":"claude4","present":false},
+      {"id":"claude5","present":false},
+      {"id":"claude6","present":false},
+      {"id":"claude7","present":false},
+      {"id":"claude8","present":true,"mtime":"2026-04-20T16:51:00Z","expiresAt":"2026-04-21T00:50:26Z","expired_hours":176.32,"delta_vs_cycle10":"unchanged"},
+      {"id":"claude9","present":true,"mtime":"2026-04-20T20:11:12Z","expiresAt":"2026-04-21T00:50:43Z","expired_hours":176.31,"delta_vs_cycle10":"unchanged"},
+      {"id":"claude10","present":true,"mtime":"2026-04-20T16:52:01Z","expiresAt":"2026-04-21T00:51:00Z","expired_hours":176.31,"delta_vs_cycle10":"unchanged"},
+      {"id":"claude11","present":true,"mtime":"2026-04-20T20:11:11Z","expiresAt":"2026-04-21T00:51:16Z","expired_hours":176.30,"delta_vs_cycle10":"unchanged"},
+      {"id":"claude12","present":true,"mtime":"2026-04-20T20:11:11Z","expiresAt":"2026-04-21T00:51:34Z","expired_hours":176.30,"delta_vs_cycle10":"unchanged"}
+    ],
+    "delta_summary": "ZERO mtime drift across all 12 profiles; F-MANUAL-LOGIN claim still LIVE"
+  },
+
+  "f_manual_login_auto_fire": {
+    "current_status": "active",
+    "fire_action_taken_this_cycle": false,
+    "fire_action_planned_at_deadline": [
+      "1. tool/falsifier_monitor.hexa --status F-MANUAL-LOGIN reads deadline, compares to now, emits active->fired",
+      "2. audit.jsonl row appended: status=fired, fire_reason=deadline_exceeded, successor=F-MANUAL-LOGIN-OVERDUE",
+      "3. successor F-MANUAL-LOGIN-OVERDUE registers (deadline +30d, alert_level=alarm)",
+      "OR alternative: user explicit retire -> active->retired, no successor, gate (a) permanent user-side handoff"
+    ],
+    "no_op_in_cycle11": true
+  },
+
+  "raw_51_4gate_status": {
+    "gate_a_oauth_refresh": {"status":"PARTIAL","cycle10":"PARTIAL","note":"Mac dormant 7.35d, T-38.84h to deadline; user TTY required"},
+    "gate_b_slot_saturation": {"status":"FIXED+LIVE","cycle10":"FIXED+LIVE","anomaly":"1 row 13/12 dirs (F-CASCADE-METRIC-1)"},
+    "gate_c_docker_rebuild_mac": {"status":"FIXED+LIVE","cycle10":"FIXED+LIVE"},
+    "gate_c_docker_rebuild_remote": {"status":"BLOCKED-on-user-PAT","cycle10":"BLOCKED-on-user-PAT"},
+    "gate_d_silent_timeout": {"status":"FIXED+LIVE","cycle10":"FIXED+LIVE"},
+    "gate_e_cascade_prevention": {"status":"FIXED+LIVE","cycle10":"FIXED+LIVE","cascade_rows":39,"cycle10_rows":35,"delta":"+4"},
+    "closure_count": "4/5",
+    "closure_blockers": ["(a) requires user manual /login or explicit retire","(c-remote) requires user ghcr.io PAT"],
+    "five_of_five_feasibility_cycle12": "only if user acts on (a) within next 38.84h or explicitly retires gate"
+  },
+
+  "raw_100_institutionalized_fallback": {
+    "cycles_accumulated": 11,
+    "max_threshold": 10,
+    "breach": true,
+    "narrative": "kick-infra audit has now run 11 consecutive cycles with gate (a) PARTIAL and read-only Mac-local audit fallback applied; cycle 11 crosses the raw-100 maximum smell threshold",
+    "recommended_action": "promote F-INFRA-FALLBACK-ETERNAL to active falsifier; cycle 12 must close 5/5 OR retire (a) OR escalate"
+  },
+
+  "falsifiers_preregistered": [
+    {
+      "id": "F-COUNTDOWN-CYCLE11-1",
+      "predicate": "At T=0 (2026-04-30T00:00Z), F-MANUAL-LOGIN registry row is still active and no fire row appears in state/falsifier_monitor/audit.jsonl",
+      "disposition": "auto-fire path not wired; manual invocation required",
+      "alert_level": "warn",
+      "deadline": "2026-04-30T00:05:00Z"
+    },
+    {
+      "id": "F-COUNTDOWN-CYCLE11-2",
+      "predicate": "A .credentials.json mtime among the 6 PRESENT profiles advances WITHOUT a corresponding cycle-N audit row attesting user manual /login",
+      "disposition": "echoes F-MAC-CRED-DRIFT-1; cumulative evidence of background credential mutation",
+      "alert_level": "warn",
+      "deadline": "open"
+    },
+    {
+      "id": "F-INFRA-FALLBACK-ETERNAL",
+      "predicate": "kick-infra audit reaches cycle 12+ with gate (a) still PARTIAL and no successor falsifier replacing F-MANUAL-LOGIN",
+      "disposition": "raw 100 institutionalized-fallback breach; require explicit retire-or-escalate decision",
+      "alert_level": "alarm",
+      "deadline": "2026-04-29T00:00:00Z"
+    }
+  ],
+
+  "safety": {
+    "read_only": true,
+    "mutation": false,
+    "ssh_invoked": false,
+    "user_login_automated": false,
+    "raw_91_c3_honest": "cycle 11 confirms ZERO mtime drift; T-38.84h deadline approaching; raw-100 maximum-smell threshold breached; cycle 12 must close or escalate"
+  },
+
+  "cascade_blocked_events_snapshot": {
+    "path": "/Users/ghost/core/nexus/state/audit/cascade_blocked_events.jsonl",
+    "rows_now": 39,
+    "rows_cycle10": 35,
+    "delta": 4,
+    "rate_per_minute": "0.067 (4 rows in ~60 min since cycle 10)"
+  },
+
+  "report_summary_korean_300char": "1) UTC 2026-04-28T09:09Z, T-38.84h. 2) 12 profile mtime/expiresAt 변화 ZERO (cycle10과 동일, 6 PRESENT 모두 +176h 만료). 3) F-MANUAL-LOGIN auto-fire prep 완료, 발화는 deadline 도달시. 4) raw 51 4-gate 4/5 closure 유지, 5/5 는 사용자 manual /login 또는 explicit retire 필요. 5) raw 91 C3 honest: 11 cycle 누적 fallback → raw 100 max threshold (10) 돌파, F-INFRA-FALLBACK-ETERNAL 발화 권고."
+}

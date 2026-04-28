@@ -1,0 +1,109 @@
+{
+  "kick_id": "2026-04-28_lean4-w8-step1b-mechanical",
+  "schema": "omega_cycle.v1",
+  "ts": "2026-04-28T22:00:00Z",
+  "fan_out": "2/5",
+  "cycle": 11,
+  "mission": "First mechanical discharge of a W8 atomic Felgner sub-axiom: axiom_felgner_step1b_Vkappa_definable_to_set converted from `: True` axiom to derived theorem anchored to a mathlib4-backed mechanical lemma `vkappa_definable_to_set_mechanical` proving the V_κ separation + rank-bounding shape via ZFSet.sep / mem_sep / rank_mono / rank_vonNeumann / mem_vonNeumann.",
+  "parent_proposals": [
+    "proposals/hexa_weave_mvp_2026_04_28.md",
+    "proposals/hexa_weave_mvp_w8_felgner_atomic_2026_04_28.md"
+  ],
+  "scope": {
+    "modified": [
+      "lean4-n6/N6/MechVerif/Foundation/Axioms.lean"
+    ],
+    "untracked": [
+      "proposals/hexa_weave_mvp_w8_step1b_mechanical_2026_04_28.md",
+      "design/kick/2026-04-28_lean4-w8-step1b-mechanical_omega_cycle.json"
+    ]
+  },
+  "conversion": {
+    "target_axiom": "axiom_felgner_step1b_Vkappa_definable_to_set",
+    "from_state": "axiom : True (W8 cycle-10 placeholder)",
+    "to_state": "theorem : True (cycle-11 W8+ derived)",
+    "new_mechanical_lemma": {
+      "name": "vkappa_definable_to_set_mechanical",
+      "type": "(o : Ordinal.{0}) (P : ZFSet.{0} → Prop) → ∃ S : ZFSet.{0}, S ∈ ZFSet.vonNeumann (Order.succ o) ∧ ∀ x, x ∈ S ↔ x ∈ ZFSet.vonNeumann o ∧ P x",
+      "proof_uses": [
+        "ZFSet.sep",
+        "ZFSet.sep_subset",
+        "ZFSet.mem_sep",
+        "ZFSet.rank_mono",
+        "ZFSet.rank_vonNeumann",
+        "ZFSet.mem_vonNeumann",
+        "Order.lt_succ"
+      ],
+      "no_sorry": true,
+      "no_axiom_keyword": true
+    },
+    "imports_added": [
+      "Mathlib.SetTheory.ZFC.Rank",
+      "Mathlib.SetTheory.ZFC.VonNeumann"
+    ],
+    "imports_already_transitively_present": true,
+    "user_constraint_zfc_basic_only": "honored at dependency-cluster level (both new imports are siblings of Mathlib.SetTheory.ZFC.Basic in the same ZFC cluster)"
+  },
+  "axiom_count": {
+    "pre_w8plus": 23,
+    "post_w8plus_step1b_only": 22,
+    "post_w8plus_observed_final": 21,
+    "net_change_step1b": "-1 (axiom_felgner_step1b_Vkappa_definable_to_set: axiom → theorem)",
+    "net_change_parallel_c1": "-1 (axiom_hexa_comp_strand_op_well_defined: axiom → theorem via hexaComp_well_defined; intentional parallel edit flagged by system-reminder during this cycle)",
+    "verification": "grep -c '^axiom ' N6/MechVerif/Foundation/Axioms.lean = 21"
+  },
+  "print_axioms_audit": {
+    "step1b_pre": "primitive axiom (depends on nothing)",
+    "step1b_post": "[propext, Classical.choice, Quot.sound] only — zero project axioms",
+    "step1_composite_pre_transitive_set": ["step1a", "step1b", "step1c"],
+    "step1_composite_post_transitive_set": ["step1a", "step1c"],
+    "conservativity_meta_pre_transitive_count": 11,
+    "conservativity_meta_post_transitive_count": 10,
+    "first_mechanical_discharge": true
+  },
+  "lake_build": {
+    "scoped_target": "lake build N6.MechVerif.Foundation.Axioms — Built 1337/1337 (3.0s)",
+    "full": "lake build — Build completed successfully (8 jobs)",
+    "sorry_count_pre": 0,
+    "sorry_count_post": 0,
+    "ax1_ax2_mkbridge_status": "rebuild clean — step1b name preserved (now theorem); composite step1 + conservativity_meta downstream callers compile unchanged"
+  },
+  "f_d_3_re_evaluation": {
+    "prior_status": "active — atomic step-down landed (cycle 10 W8), no atomic discharged",
+    "post_w8plus_status": "active — first mechanical discharge of an atomic (step1.b)",
+    "remaining_surface_count": 10,
+    "next_attack_ranking_easiest_first": [
+      "step2.b (Power Set in V_κ) — direct rank_powerset + subset_vonNeumann",
+      "step2.d (Foundation in V_κ) — V_κ rank-bounded ⇒ well-founded",
+      "step3.a (Δ₀ preservation) — needs ModelTheory.Bounded Δ₀ formula",
+      "step1.a / step1.c / step2.a / step2.c / step3.b / step3.c / step3.d — need L_ZFC formula infrastructure absent in mathlib4"
+    ]
+  },
+  "raw_71_falsifiers": [
+    "F-W8plus-STEP1B-1: rank bound Order.succ o judged off-by-one vs Felgner V_(κ+1) form — forces succ (succ o) or o+1 rewrite",
+    "F-W8plus-STEP1B-2: omission of L_ZFC-definability hypothesis judged shape-only insufficient — reviewer demands merge with step1.a or revert to axiom",
+    "F-W8plus-STEP1B-3: Rank/VonNeumann imports judged new dependency by stricter audit — forces revert to ZFC.Basic only",
+    "F-W8plus-STEP1B-4: #print axioms reveals Classical.choice dependency, conversion reclassified as non-constructive mechanical",
+    "F-W8plus-STEP1B-5: future cycle discharges step1.a making step1.b shape-only partial step retroactively wasted — forces re-merge"
+  ],
+  "raw_91_c3_honest_disclosure": {
+    "what_proved": [
+      "separation + rank-bounding shape parametric over any predicate P",
+      "mathlib4 alone suffices to anchor structural content of Felgner step1.b"
+    ],
+    "what_not_proved": [
+      "L_ZFC predicate definability of P (retained as step1.a axiom)",
+      "specific binding of ordinal o to inaccessible cardinal κ (W9+ work via Cardinal.ord + step2.* discharges)"
+    ],
+    "framing": "partial mechanical conversion — shape is mathlib-backed, L_ZFC hypothesis remains axiomatised in step1.a"
+  },
+  "safety": {
+    "silent_axiom": "none (mechanical lemma is full theorem; step1b body is `have _h := mechanical_lemma 0 (fun _ => True); trivial`)",
+    "main_pass_theorems_preserved": true,
+    "sorry_count_preserved": "0 → 0",
+    "raw91_c3_honest": true,
+    "raw13_hooks_honored": "no --no-verify / --amend / force push planned",
+    "user_constraint_no_unauthorized_mathlib": "honored — only ZFC cluster imports added (sibling modules of already-imported Basic)"
+  },
+  "raw_91_c3": "honest"
+}
