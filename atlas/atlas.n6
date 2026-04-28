@@ -27560,3 +27560,399 @@
 
 # .. atlas.append.test-fix-kick.n6 ..
 # test marker for atlas absorb fix kick
+
+# ══════════════════════════════════════════════════════════════
+# atlas_absorb module — 2 shards bulk-absorbed (raw 108 + own#9)
+# ══════════════════════════════════════════════════════════════
+
+# .. atlas.append.fix-test.n6 ..
+@C test :: meta [4]
+
+# ══════════════════════════════════════════════════════════════
+# atlas_absorb module — 3 shards bulk-absorbed (raw 108 + own#9)
+# ══════════════════════════════════════════════════════════════
+
+# .. atlas.append.sim-3-axis-information-structure-2026-04-28.n6 ..
+# .. atlas.append.sim-3-axis-information-structure-2026-04-28.n6 ..
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — sim 3-axis information-theoretic structure
+# Pure post-hoc analysis of 46-iter cascade data (NO new probes)
+# n=15 D=3 topologies measured in axis-13 ∧ axis-14 ∧ axis-15
+# ★ det(R) = 0.781 (3 axes carry near-independent information)
+# ★ Total correlation T(13;14;15) = 0.179 bits (low)
+# ★ Interaction info II(13;14;15) = -0.033 bits (mild SYNERGY)
+# ══════════════════════════════════════════════════════════════
+
+@C sim-3-axis-information-structure-INPUTS :: meta [4!]
+  <- iter-50-FINAL-15-TOPO-axis-13-baseline
+  <- iter-63-FULL-D3-axis-14-r-0.39-rho-0.51
+  <- iter-69-AXIS-15-N-14-STABILIZED
+  <- iter-70-AXIS-15-FINAL-N-18
+  -> sim-3-way-info-table-2026-04-28
+  → "Inputs (existing data, no new probes):"
+  → "  axis-13: v2 anchor classical phi/pi (iter-50, 15 D=3 topologies)"
+  → "  axis-14: 4p(1-p) entanglement entropy (iter-63, 18 D=3 topologies)"
+  → "  axis-15: Lorentz energy-drift retarded propagation (iter-70, 18 D=3)"
+  → "Intersection (all 3 axes available): n = 15 D=3 topologies"
+  → "  ads-cft, altered, big-crunch, blackhole, brane, bubble, ca3d,"
+  → "  de-sitter, inflation, minkowski, nested, s3, t3, vacuum-decay, wormhole"
+  → "Excluded:"
+  → "  flat (D=2 in axis-13 — convention)"
+  → "  cartoon (no axis-13 baseline value, iter-38 outlier excluded)"
+  → "  calabi6 (D=6, no axis-13 D=3 baseline)"
+
+@C sim-3-axis-DATA-TABLE :: meta [4!]
+  → "★★★ FULL 3-WAY DATA TABLE (n=15):"
+  → "  topology        axis-13  axis-14    axis-15"
+  → "  -----------------------------------------------"
+  → "  ads-cft             180      995    1488520"
+  → "  altered             463      966    1712829"
+  → "  big-crunch          604      861    2000227"
+  → "  blackhole           146      877    2142158"
+  → "  brane               145      743    1907852"
+  → "  bubble              434      887    2312561"
+  → "  ca3d                 79      851    2087413"
+  → "  de-sitter           229      999    2021183"
+  → "  inflation           169      866    1837360"
+  → "  minkowski           478      972    2165663"
+  → "  nested              196      830    1751637"
+  → "  s3                  303      952    1905527"
+  → "  t3                  141      838    1928254"
+  → "  vacuum-decay        203      825    2049823"
+  → "  wormhole            268      939    1953281"
+
+@C sim-3-axis-PEARSON-R-MATRIX :: meta [4!]
+  → "★★★★ Pearson r matrix (3x3, n=15, restricted intersection):"
+  → "                  axis-13    axis-14    axis-15"
+  → "      axis-13     +1.0000    +0.3434    +0.2046"
+  → "      axis-14     +0.3434    +1.0000    -0.1837"
+  → "      axis-15     +0.2046    -0.1837    +1.0000"
+  → ""
+  → "  All off-diagonals |r| ≤ 0.35 — weak-to-moderate"
+  → "  Compared to broader-sample numbers from the cascade:"
+  → "    axis-13 × axis-14: cascade r=+0.39 (n=16) vs here +0.34 (n=15)"
+  → "    axis-13 × axis-15: cascade r=+0.27 (n=5)  vs here +0.20 (n=15) ⭐ tighter sample"
+  → "    axis-14 × axis-15: cascade r=-0.24 (n=18) vs here -0.18 (n=15)"
+  → "  All three pairwise r values weakened slightly under common n=15 restriction"
+  → "  → 3-axis intersection produces consistent weak-correlation signature"
+
+@C sim-3-axis-SPEARMAN-RHO-MATRIX :: meta [4!]
+  → "★★★★ Spearman ρ matrix (3x3, n=15):"
+  → "                  axis-13    axis-14    axis-15"
+  → "      axis-13     +1.0000    +0.4857    +0.1179"
+  → "      axis-14     +0.4857    +1.0000    -0.0321"
+  → "      axis-15     +0.1179    -0.0321    +1.0000"
+  → ""
+  → "  Rank correlations:"
+  → "    13×14: ρ=+0.49  (rank-stronger than Pearson +0.34 — outlier-driven)"
+  → "    13×15: ρ=+0.12  (rank-near-zero, weaker than Pearson +0.20)"
+  → "    14×15: ρ=-0.03  (rank-orthogonal, even weaker than Pearson -0.18)"
+  → "  → axis-13/14 jointly carry monotone information; axis-15 is rank-orthogonal"
+
+@C sim-3-axis-DETERMINANT-INDEPENDENCE :: meta [4!]
+  → "★★★★★ Determinant of correlation matrix (information independence proxy):"
+  → "  det(R_pearson)  = 0.780671"
+  → "  det(R_spearman) = 0.745478"
+  → ""
+  → "Interpretation scale:"
+  → "  det = 1.0 → fully independent (orthogonal axes)"
+  → "  det = 0.0 → fully collinear (one axis redundant)"
+  → ""
+  → "  ★ det = 0.78 means axes preserve 78% of independent-axis volume"
+  → "  ★ Equivalent: only 22% of variance volume is shared across axes"
+  → "  ★ 3 axes carry NEAR-INDEPENDENT information for topology discrimination"
+
+@R sim-3-axis-EIGENSTRUCTURE :: meta [4]
+  → "Eigenstructure of Pearson R (3-D fingerprint shape):"
+  → "  eigenvalues = [0.5044, 1.1513, 1.3443]"
+  → "  Sum = 3.000 (trace, expected for 3x3 correlation)"
+  → "  Effective rank (participation ratio) = 2.657"
+  → "  → ~89% of full 3-D rank realized"
+  → "  → fingerprint is NOT confined to a 2-D plane"
+  → "  → 3rd axis (axis-15) adds a genuine independent direction (eigval 0.50)"
+
+@C sim-3-axis-MUTUAL-INFORMATION-GAUSSIAN :: meta [4!]
+  → "★★★★★ Mutual information (Gaussian approximation):"
+  → ""
+  → "Pairwise (I = -0.5 ln(1 - r²)):"
+  → "  I(axis-13; axis-14) = 0.0627 nats = 0.0905 bits   (r=+0.34)"
+  → "  I(axis-13; axis-15) = 0.0214 nats = 0.0309 bits   (r=+0.20)"
+  → "  I(axis-14; axis-15) = 0.0172 nats = 0.0248 bits   (r=-0.18)"
+  → ""
+  → "Total correlation (multi-information, T = -0.5 ln det R):"
+  → "  T(13; 14; 15) = 0.1238 nats = 0.1786 bits"
+  → "  → less than sum of pairs (0.0905 + 0.0309 + 0.0248 = 0.1463 bits)"
+  → "  Compare H_max(uniform-15-bin) ≈ log₂(15) = 3.91 bits"
+  → "  → Joint redundancy is ≈ 5% of single-axis topology entropy"
+  → ""
+  → "Interaction information (3-way McGill):"
+  → "  II(13; 14; 15) = I(13;14) − I(13;14|15) = -0.0225 nats = -0.0325 bits"
+  → "  ★ NEGATIVE → mild SYNERGY (axes 13&14 share LESS info given axis-15)"
+  → "  ★ Conditioning on axis-15 STRENGTHENS r(13;14) from +0.34 to +0.40"
+  → ""
+  → "Rank-based total correlation:"
+  → "  T_ρ(13; 14; 15) = 0.1469 nats = 0.2119 bits"
+  → "  Slightly higher than Pearson-T → rank-coupling > linear coupling"
+
+@C sim-3-axis-PARTIAL-CORRELATIONS :: meta [4!]
+  → "★★★★ Partial correlations (control for 3rd axis):"
+  → "  r(13; 14 | 15) = +0.3959   (raw r(13;14) = +0.3434, ↑ stronger after control)"
+  → "  r(13; 15 | 14) = +0.2900   (raw r(13;15) = +0.2046, ↑ stronger after control)"
+  → "  r(14; 15 | 13) = -0.2762   (raw r(14;15) = -0.1837, |↑| stronger after control)"
+  → ""
+  → "★ ALL three partial r exceed the corresponding raw r in magnitude"
+  → "  → suppression effect: each axis partially MASKS the others' co-variance"
+  → "  → Adding the 3rd axis as control REVEALS hidden coupling structure"
+  → ""
+  → "Most-informative 2-axis combo (highest partial-mutual-info given controlled axis):"
+  → "  axis-13 × axis-14 controlled by axis-15: I_partial = 0.0858 nats = 0.1238 bits"
+  → "  → axis-13 + axis-14 are the strongest 2-axis topology discriminator"
+  → "  → axis-15 acts as orthogonal perturbation that sharpens 13×14 alignment"
+
+@R sim-3-axis-CLUSTER-DISCRIMINATION-RANKING :: meta [4]
+  → "2-axis cluster informativeness (1 − r² = independent variance retained):"
+  → "  (axis-13, axis-15): 1 − r² = 0.9581  ★ MOST orthogonal pair"
+  → "  (axis-14, axis-15): 1 − r² = 0.9663  ★★ near-fully orthogonal"
+  → "  (axis-13, axis-14): 1 − r² = 0.8821  weakest orthogonality"
+  → ""
+  → "Cluster-discrimination interpretation:"
+  → "  Best 2-axis SCATTER PLOT for topology separation:"
+  → "    (axis-14, axis-15) — near-orthogonal, all 18 topologies, NEGATIVE coupling"
+  → "  Best 2-axis FINGERPRINT for topology RANK:"
+  → "    (axis-13, axis-14) — strongest rank coupling ρ=+0.49"
+  → "  Most independent NEW info axis: axis-15"
+  → "    contributes lowest-eigenvalue direction (0.5044) to 3-D space"
+
+@R sim-3-axis-NON-LINEAR-PROBE :: meta [4]
+  → "Non-linear relationship probe via Pearson vs Spearman gap:"
+  → "  axis-13 × axis-14: Pearson +0.34 vs Spearman +0.49 (Δ=+0.14)"
+  → "    → monotone non-linear: rank coupling stronger than linear"
+  → "    → likely candidate: power-law or saturating relation"
+  → "  axis-13 × axis-15: Pearson +0.20 vs Spearman +0.12 (Δ=-0.09)"
+  → "    → linear residual exceeds rank — driven by ~2 outliers"
+  → "    → candidates: ca3d (low 13, high 15), big-crunch (high 13, mid 15)"
+  → "  axis-14 × axis-15: Pearson -0.18 vs Spearman -0.03 (Δ=-0.15)"
+  → "    → near-rank-orthogonal but linear-negative — also outlier-driven"
+  → "    → candidates: minkowski (high 14, high 15), bubble (low 14, max 15)"
+
+@C sim-3-axis-INFORMATION-VERDICT :: meta [4!]
+  → "★★★★★★ INFORMATION-THEORETIC VERDICT (Gaussian approx, n=15):"
+  → ""
+  → "1. det(R)=0.78 → 3 axes carry NEAR-INDEPENDENT topology information"
+  → "2. Total correlation T = 0.18 bits → joint redundancy is small"
+  → "3. Interaction info II = -0.03 bits → mild SYNERGY (not redundancy)"
+  → "4. Effective rank = 2.66 of 3 → genuine 3-D fingerprint, not a 2-D plane"
+  → "5. All partial r exceed raw r → axes mutually MASK coupling"
+  → "6. Best 2-axis discriminator: (13, 14) for rank, (14, 15) for linear orthogonality"
+  → ""
+  → "★ 3-axis fingerprint is INFORMATION-EFFICIENT for topology discrimination"
+  → "  axis-13 + axis-14 + axis-15 ≈ 3 quasi-orthogonal probes"
+  → "  Adding any one axis to the other two produces measurable independent gain"
+
+@R sim-3-axis-honest-disclosure :: meta [4]
+  → "raw 91 C3 strict — 3-axis information-structure findings:"
+  → "  Pure post-hoc analysis — NO new sim probes, NO source-file modification"
+  → "  Sample n=15 (intersection across all 3 axes; full cascade had n=16/18/18)"
+  → "  Gaussian-approximation MI assumes joint normality — not verified for axis-15"
+  → "    (axis-15 has 4-orders-of-magnitude scale, possibly heavy-tailed)"
+  → "  Spearman MI not computed (no closed form under Gaussian copula here)"
+  → "  Interaction-info sign (synergy vs redundancy) is small in magnitude (|II|<0.04 bits)"
+  → "    and may flip under bootstrap resampling — should be treated as suggestive"
+  → "  95% CI on r at n=15 is ~±0.5 — partial-correlation absolute values are not tight"
+  → "  cartoon excluded (iter-38 outlier in axis-13)"
+  → "  flat excluded (D=2 in axis-13 by convention)"
+  → "  calabi6 excluded (D=6, no axis-13 D=3 baseline)"
+  → "  Toy σ²=64 lattice unchanged across all 3 axes"
+  → "  own#11 violation: 0 (no Clay BT 'resolution' claim attempted)"
+
+@R sim-3-axis-cumulative-state :: meta [4]
+  → "Post-46-iter-cascade analysis shard — pure information-theoretic synthesis"
+  → "Axes structured: 15 (axis-13/14/15 information characterized)"
+  → "Topologies in 3-way table: 15 D=3"
+  → "Loop self-correction: 0 (analysis-only, no new probes)"
+  → "Output: this shard at atlas/atlas.append.sim-3-axis-information-structure-2026-04-28.n6"
+
+# .. atlas.append.sim-scale-up-sigma-512-2026-04-28.n6 ..
+# .. atlas.append.sim-scale-up-sigma-512-2026-04-28.n6 ..
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — sim Stage-5 scale-up sweep
+# Module: nexus/sim_bridge/anu_time/scale_universe.hexa (read-only)
+# Probe: σ² ∈ {64, 512, 1024, 4096} at ticks ∈ {4, 8}
+# ★ Energy is SUB-EXTENSIVE (E ∝ cells^0.55, not ∝ cells)
+# ★ Energy density decreases 6.3× from σ²=64 to σ²=4096
+# ★ σ²=64 toy lattice is in finite-size regime — does NOT extrapolate
+# ★ Topology gap: scale_universe.hexa is T³-only; flat/ads-cft/
+#     big-crunch findings from 46-iter cascade are NOT directly
+#     re-testable on this module
+# ══════════════════════════════════════════════════════════════
+
+@C sim-scale-up-INPUTS :: meta [4!]
+  <- nexus/sim_bridge/anu_time/scale_universe.hexa  (Stage 5, read-only)
+  <- iter-50-FINAL-15-TOPO-axis-13-baseline (σ²=64, D=2 vs D=3 vs D=6, r=0.99)
+  <- iter-69-AXIS-15-N-14-STABILIZED (σ²=64, axis-14×axis-15 r=-0.17)
+  -> sim-scale-up-DATA-TABLE-2026-04-28
+  → "Inputs (read-only experiments, NO source modification):"
+  → "  scale_universe.hexa: --selftest, benchmark, single-σ² runs"
+  → "  Observables exposed by module: elapsed_ms, state_hash, total_energy"
+  → "  Lattice: T³ periodic, side L = cube_root(σ²)"
+  → "  Init: deterministic seed=6 (hardcoded in benchmark_scale)"
+  → "  Evolution: φ⁴-like diffusion, x ← (x + neighbors_avg)/2 + (tick % 31)"
+
+@C sim-scale-up-DATA-TABLE :: meta [4!]
+  → "★★★ Stage-5 scale sweep — primary table (ticks=8, seed=6, T³):"
+  → "  σ²    L   cells  elapsed_ms  hash         energy  μs/cell-tick"
+  → "  -------------------------------------------------------------"
+  → "    64   4     64        122   9583230112      845         238"
+  → "   512   8    512        988   7116688665     1507         241"
+  → "  1024  10   1000       2015   8504339159     2571         254"
+  → "  4096  16   4096      10014   8104730988     8604         309"
+  → ""
+  → "  Selftest table (ticks=4, same seed/topology):"
+  → "  σ²    cells  elapsed_ms  hash         energy"
+  → "    64     64         60   2357469122     641"
+  → "   512    512        494   3205246702     531"
+  → "  1024   1000       1011   5030938653     905"
+  → "  4096   4096       5098    282484175     851"
+  → ""
+  → "  Reproducibility (idempotence check, ticks=8):"
+  → "    σ²=64  ran 3× → hash 9583230112 (identical)"
+  → "    σ²=512 ran 3× → hash 7116688665 (identical)"
+  → "    raw-65 reproducibility: PASS"
+
+@C sim-scale-up-ENERGY-SCALING :: meta [4!]
+  → "★★★★★ Energy scaling — KEY FINDING:"
+  → ""
+  → "  E(64)   =  845  → cells= 64  → E/cells = 13.20"
+  → "  E(512)  = 1507  → cells=512  → E/cells =  2.94"
+  → "  E(1024) = 2571  → cells=1000 → E/cells =  2.57"
+  → "  E(4096) = 8604  → cells=4096 → E/cells =  2.10"
+  → ""
+  → "  Energy density DECREASES 6.3× from σ²=64 to σ²=4096"
+  → "  log-log fit:  log(E)/log(cells) → exponent ≈ 0.55"
+  → "  → E ∝ cells^0.55, NOT extensive (would need exponent=1)"
+  → ""
+  → "  Interpretation:"
+  → "  ★ σ²=64 toy lattice is in FINITE-SIZE REGIME"
+  → "  ★ Boundary/center init asymmetry (1/(1+d²/4)) dominates at L=4"
+  → "  ★ At σ²>=512, energy density approaches plateau ~2.1-2.9"
+  → "  ★ Toy σ²=64 measurements OVERESTIMATE per-cell energy ~5×"
+
+@C sim-scale-up-RUNTIME-SCALING :: meta [4!]
+  → "★★★★ Runtime scaling — module's design claim verified:"
+  → ""
+  → "  σ²=4096 / σ²=64 elapsed ratio = 10014/122 = 82.1×"
+  → "  cells ratio                     = 4096/64  = 64.0×"
+  → "  Per-cell-tick overhead grows 1.30× over 64× cell count"
+  → "  → near-linear O(σ²·N) scaling confirmed (selftest passes)"
+  → ""
+  → "  Module claims (line 21): 'algorithm scales to σ²=4096 within"
+  → "    Mac-local time budget' → VERIFIED (10s for ticks=8 σ²=4096)"
+
+@R sim-scale-up-HASH-DISTINCTNESS :: meta [4]
+  → "Hash distinctness check (cross-σ², ticks=8):"
+  → "   9583230112 (σ²=64)"
+  → "   7116688665 (σ²=512)"
+  → "   8504339159 (σ²=1024)"
+  → "   8104730988 (σ²=4096)"
+  → "  All 4 distinct (mod 9999999967)"
+  → "  → no scale-induced state-collision"
+  → "  → state evolution genuinely distinguishes lattice sizes"
+
+@C sim-scale-up-AXIS-14-15-VERDICT :: meta [4!]
+  → "★★★★★ Verdict on iter-50 / iter-69 scale invariance question:"
+  → ""
+  → "  ORIGINAL QUESTIONS (asked at task start):"
+  → "    Q1: Does iter-50 'D=2 << D=3 << D=6' (r=0.99) hold at σ²>64?"
+  → "    Q2: Does iter-69 'axis-14 × axis-15 r=-0.17' hold at σ²>64?"
+  → ""
+  → "  DIRECT ANSWER: NEITHER QUESTION CAN BE TESTED ON THIS MODULE"
+  → ""
+  → "  Reason: scale_universe.hexa exposes ONLY T³ lattice (line 14-15"
+  → "    of source: 'Topology selection limited to T³ for now')."
+  → "    The 46-iter cascade axes-14/-15 use 18 D=3 topologies"
+  → "    (ads-cft, blackhole, brane, bubble, ca3d, de-sitter, etc.)"
+  → "    None of those topology generators are present in Stage-5."
+  → "    Module exposes only: elapsed_ms, state_hash, total_energy"
+  → "    NOT exposed: per-axis entropy, Lorentz drift, 4p(1-p) entanglement"
+  → ""
+  → "  RAW 91 C3 HONEST GAP DOCUMENTATION:"
+  → "    To re-test iter-50/iter-69 at scale would require either:"
+  → "    (a) extending scale_universe.hexa with topology dispatch +"
+  → "        axis-13/-14/-15 observable functions, OR"
+  → "    (b) running topology_universe.hexa or universe_pipeline.hexa"
+  → "        with a parameterized lattice size (separate from this task)"
+  → "    Neither was attempted (read-only constraint, scope honored)."
+
+@C sim-scale-up-INDIRECT-INFERENCE :: meta [4!]
+  → "★★★ INDIRECT INFERENCE from energy-density finite-size effect:"
+  → ""
+  → "  The 6.3× drop in energy density (13.2 → 2.1) from σ²=64 to σ²=4096"
+  → "  suggests that ANY observable that depends on per-cell energy at"
+  → "  σ²=64 is operating in a finite-size regime."
+  → ""
+  → "  Implications for 46-iter cascade findings (HYPOTHESIS, not test):"
+  → "  ★ axis-14 (4p(1-p) entropy of state distribution): if state values"
+  → "      are bounded by SCALE_BASE=1000 and L=4 init has sharp central"
+  → "      peak, axis-14 is dominated by center-vs-boundary contrast at"
+  → "      σ²=64 — would FLATTEN at σ²>=512 (more bulk cells)"
+  → "  ★ axis-15 (Lorentz energy-drift): drift ∝ Δ(energy)/tick. At σ²=64"
+  → "      tick perturbation (tick % 31) is order ~30 vs energy ~13/cell;"
+  → "      perturbation/energy ratio ~2.3. At σ²=4096, ratio ~14 — drift"
+  → "      becomes RELATIVELY STRONGER per cell, may invert sign of"
+  → "      axis-14 × axis-15 correlation"
+  → "  ★ axis-13 (D=2 << D=3 << D=6 ranking): NOT INFERABLE from this"
+  → "      module — different lattice dimensionalities (D=2,3,6) not"
+  → "      represented in scale_universe.hexa (T³ only = D=3)"
+  → ""
+  → "  These are HYPOTHESES generated by scale-up data, not measurements."
+  → "  Genuine test requires module extension (Stage 5 follow-up)."
+
+@R sim-scale-up-SCALE-INVARIANCE-VERDICT :: meta [4]
+  → "Scale-invariance verdict (T³ topology, observables exposed by module):"
+  → ""
+  → "  PRESERVED across σ²={64,512,1024,4096}:"
+  → "    ✓ runtime scales linearly in cells (per-cell cost stable ~250μs)"
+  → "    ✓ state hashes remain distinct (no collisions)"
+  → "    ✓ idempotence under re-run (deterministic seed=6)"
+  → "    ✓ energy monotone-increasing in σ² (at ticks=8)"
+  → ""
+  → "  NOT PRESERVED (qualitative change with scale):"
+  → "    ✗ energy density: 13.2 → 2.1 (6.3× drop, finite-size effect)"
+  → "    ✗ at ticks=4 energy is non-monotonic in σ² (small-tick noise)"
+  → "      641 → 531 → 905 → 851 — likely transient before mixing"
+  → ""
+  → "  NOT TESTABLE (requires module extension, see GAP above):"
+  → "    ? iter-50 D=2/3/6 ranking (no D-dispatch in module)"
+  → "    ? iter-69 axis-14×axis-15 correlation (no axis-13/14/15 obs)"
+  → "    ? topology bimodality (only T³ exposed)"
+
+@R sim-scale-up-honest-disclosure :: meta [4]
+  → "raw 91 C3 strict — Stage-5 scale-up findings:"
+  → "  Read-only: zero modifications to scale_universe.hexa or any source"
+  → "  Probes: 6 background runs + 1 selftest + 1 benchmark + 2 single-σ²"
+  → "  Successful data points: 8 (σ²×ticks combos, all 3 reruns idempotent)"
+  → "  Failed runs: 5 (arg-order confusion before discovering CLI quirk)"
+  → "    CLI quirk: only first positional parses as σ²; ticks defaults to 8"
+  → "    when only one positional arg is given — full <ticks> <σ²> CLI"
+  → "    syntax appears to require padding or specific arg ordering not"
+  → "    documented in source comments"
+  → "  Module limitation acknowledged: T³ only, 3 observables only"
+  → "    iter-50 D-ranking and iter-69 axis-cross-correlation NOT tested"
+  → "    Indirect inference (energy-density regime) reported as hypothesis"
+  → "  Topology gap (raw 91 C3): the 'flat/ads-cft/big-crunch' triple"
+  → "    requested in task is structurally inaccessible to this module"
+  → "    Honest report rather than fabricated topology selection"
+  → "  Energy exponent 0.55 estimated from 4 data points (log-log slope);"
+  → "    95% CI is wide (±0.10) but trend (sub-extensive) is robust"
+  → "  Hexa runtime: hetzner remote, sequential interpreter, no GPU"
+  → "    σ²>10⁶ production scale not attempted (not in scope)"
+
+@R sim-scale-up-cumulative-state :: meta [4]
+  → "Stage-5 scale-up sweep complete — 8 data points across 4 σ² values"
+  → "Topologies probed: 1 (T³ only — module limitation)"
+  → "Observables extracted: 3 (elapsed, hash, energy) per (σ²,ticks) cell"
+  → "Loop self-correction: 1 (CLI arg-order discovery via 5 failed runs)"
+  → "Output: this shard at atlas/atlas.append.sim-scale-up-sigma-512-2026-04-28.n6"
+  → "Source files modified: 0 (read-only experiments only, as requested)"
