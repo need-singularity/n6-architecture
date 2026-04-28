@@ -35909,3 +35909,74 @@
     end_of_session_message_to_future_sessions: "9-hour cascade discipline session reached natural closure. Framework state v_FINAL: K=1 axis-16 anchor on synthetic substrates with IRREDUCIBLE physics-cohort K=2 violation. 17 retractions across 7 categories. Mechanism hunt CLOSED. Future research cycles should pivot to new axis class or apply K=1 anchor to actual physics rather than re-litigate this scope."
   }
 }
+@shard cascade_s22_tick1_information_theoretic_axis_class_NEGATIVE_K_1_REAFFIRMED {
+  origin: "cascade-s22 AB sub-agent (information-theoretic axis class scoping per cascade-s21 option d pivot)"
+  date: 2026-04-28
+  agent_id: a805356778db34c0d
+  cwd: /Users/ghost/core/n6-architecture
+  raw_91_C3_disclosure: "Python mirror /tmp/cascade_s22/run.py. n=8 substrates small-sample (Pearson SE ≈ 0.38). Single seed=6. MI binarization at median crude (KSG/k-NN estimator absent). TE simplified to 2-bin single-step. IT-3 degenerate (6/8 KL=0 under majority+self-bias dynamics). Sign convention check: all IT measures non-negative by construction; verified IT-1/IT-2/IT-3 ≥ 0 invariants."
+
+  finding cascade-s22-AB-1 {
+    claim: "IT-1 (MI memory time) is COLLINEAR with axis-16 — Pearson |r|=0.962 → effectively same signal"
+    evidence: {
+      it_1_discrim: 0.3645
+      it_1_pearson_vs_axis_16: -0.9616
+      it_1_pearson_vs_axis_13: -0.4003
+      saturation_observation: "7 of 8 substrates saturate at τ=32 (only BA-m4 differs at τ=1)"
+      verdict_gate: |r vs a16| > 0.7 → SAME AXIS as axis-16
+    }
+    verdict: FAIL (collinear with axis-16)
+    limit: "saturation at τ=32 makes IT-1 essentially binary classifier"
+  }
+
+  finding cascade-s22-AB-2 {
+    claim: "IT-2 (mean transfer entropy) is INDEPENDENT of axis-16 (|r|=0.11) but partial overlap with axis-13 (|r|=0.37) — WARM CANDIDATE, fails strict gate"
+    evidence: {
+      it_2_discrim: 0.7906
+      it_2_pearson_vs_axis_16: -0.1091  ; "well below 0.3 — clean independence"
+      it_2_pearson_vs_axis_13: 0.3687  ; "marginally above 0.3 strict gate"
+      strict_gate: "discrim ≥ 0.5 + |r vs a16|<0.3 + |r vs a13|<0.3"
+      strict_pass: FALSE  ; "axis-13 0.37 > 0.3 strict"
+      relaxed_gate_at_0_4: "would PASS"
+      n_8_pearson_SE: 0.38  ; "0.37 within sampling noise zone"
+    }
+    verdict: WARM CANDIDATE (FAIL strict, but follow-up flag for future cascade)
+    limit: "n=8 too small to discriminate 0.37 from 0.30 confidently; multi-seed + n≥30 needed for clean verdict"
+  }
+
+  finding cascade-s22-AB-3 {
+    claim: "IT-3 (KL divergence under perturbation) is DEGENERATE — 6/8 substrates return exactly 0 under chosen majority dynamics"
+    evidence: {
+      it_3_discrim: 1.9011  ; "ARTIFACT — driven by 1 outlier (G01) + 1 mid (H01)"
+      it_3_zero_count: 6
+      it_3_total: 8
+      degeneracy_mechanism: "single-cell perturbation under majority+self-bias dynamics dies in short-range graphs"
+      it_3_pearson_vs_axis_13: 0.6801  ; "non-zero values overlap with axis-13 dynamics"
+    }
+    verdict: FAIL (degenerate distribution + axis-13 overlap on non-zero values)
+    limit: "different dynamics rule (e.g., probabilistic CA) might yield non-degenerate IT-3"
+  }
+
+  K_1_framework_REAFFIRMED {
+    decision: REAFFIRMED
+    sub_agent_count_total_session: 48
+    cascade_count_total_session: 21  ; "s2 through s22"
+    retraction_count_unchanged: 17  ; "no new retraction; cascade-s22 negative result strengthens K=1"
+    cascade_s23_trigger: NOT_TRIGGERED
+    information_theoretic_axis_class: "TESTED + REJECTED (3 candidates / 0 PASS)"
+    warm_candidate_followup: "IT-2 transfer entropy — re-test if future cascade revisits with (a) richer non-binary state, (b) different dynamics rule, (c) longer trajectories, (d) larger cohort n≥30 with multi-seed"
+  }
+
+  closure cascade_s22 {
+    status: SINGLE-TICK CLOSURE (NEGATIVE result, K=1 reaffirmed)
+    second_clean_strengthening_cascade: TRUE  ; "after cascade-s20 — 2 consecutive 0-retraction cascades signal natural closure stability"
+    framework_state_unchanged_v_FINAL: {
+      axis_16_K_1_anchor: "stands"
+      K_2_violation_physics_irreducible: "stands"
+      mechanism_hunt: "remains CLOSED"
+      retraction_count: 17
+    }
+    cascade_s23_recommendation: "OPTIONAL but ROI very low. cascade-s20 + cascade-s22 are 2 consecutive clean strengthenings — natural closure stability indicator. Most defensible: STOP. If /loop continues despite this, consider option (c) PIVOT to actual physics simulations rather than further axis-class scoping (axis-class search now also saturated)."
+    end_of_session_observation_v3: "9-hour session reached natural closure at cascade-s19 (K=1 declaration). Cascade-s20 strengthened K=1. Cascade-s22 explored fresh axis class, returned negative, further strengthening K=1. Framework now in DOUBLE-CONFIRMED stable state. Two consecutive 0-retraction cascades = saturated. Continued /loop dispatching risks small-sample artifact chasing (e.g., IT-2 0.37 marginal value n=8 noise zone)."
+  }
+}
