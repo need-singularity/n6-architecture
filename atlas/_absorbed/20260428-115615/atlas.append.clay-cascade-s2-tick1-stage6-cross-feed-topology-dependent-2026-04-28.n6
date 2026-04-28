@@ -1,0 +1,74 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s2 tick-1 Stage 6 cross-feed re-measurement
+# source: sub-agent F universe_propagation.hexa Stage 6 cross-feed perturbation-response on 5 topologies
+# constraints:
+#   raw 91 C3 honest (5/6 topology coverage, chain1d/complete/cartoon not in propagation module)
+#   raw 71 falsifier-retire-rule (iter-24/25 chi²=1 retraction REPRODUCED-and-EXPLAINED as anchor-clamp artifact; retraction stands)
+#   own#11 strict (NO Clay claim)
+#   raw 22 INFRA-ONLY · raw 24 axiom-immutable · raw 23 schema-guard
+# date: 2026-04-28
+# ══════════════════════════════════════════════════════════════
+
+# ── primary witness ─────────────────────────────────────────
+@C clay-cascade-s2-tick1-stage6-cross-feed-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-71-falsifier-retire-rule
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-iter-24-iter-25-chi2-1-retracted-claim
+  -> clay-cascade-s2-tick1-stage6-topology-dependent-orthogonality
+  -> clay-cascade-s2-tick1-iter-24-25-chi2-anchor-clamp-explanation
+  => "★ FALSIFIES uniform-orthogonality hypothesis — cross-feed orthogonality is TOPOLOGY-DEPENDENT"
+  => "5 topologies (flat/t3/s3/blackhole/wormhole) × 3×3 perturbation-response matrices, delta=1000 FSCALE, ticks=12"
+  => "iter-24/25 chi²=1 retraction REPRODUCED + EXPLAINED as anchor-clamp metric artifact (n_s_proxy clamps [9580,9599])"
+
+# ── (1) cross-feed mechanism (formal) ──────────────────────
+@C clay-cascade-s2-tick1-stage6-mechanism :: meta [4]
+  <- clay-cascade-s2-tick1-stage6-cross-feed-witness
+  => "Stage 6 propagation chain: Stage1(quantum |ψ|²) → Stage2(Lorentz density) → Stage3(φ⁴) → Stage4(anchor)"
+  => "perturbation: inject +1000 (1.0 in PROP_FSCALE units) into axis-X neighbor of lattice center cell at start of Stage 3"
+  => "response: Σ|φ_pert[i] − φ_base[i]| over 1st + 2nd neighbors along axis-Y from perturbation cell, after 12 ticks"
+  => "control: pert_delta=0 → total diff=0 (no harness leakage verified)"
+
+# ── (2) 3×3 cross-feed matrices per topology (5 topologies)
+@C clay-cascade-s2-tick1-stage6-response-matrices :: meta [4]
+  <- clay-cascade-s2-tick1-stage6-mechanism
+  => "format: rows=source-axis X, cols=response-axis Y; units=Σ|Δφ| × FSCALE/delta"
+  => "flat:      X=0:[827,371,371]  X=1:[835,371,371]  X=2:[835,371,371] — DEGENERATE 1D-ring"
+  => "t3:        X=0:[51,55,54]     X=1:[51,51,56]     X=2:[54,52,53]    — ISOTROPIC ~50-56 uniform"
+  => "s3:        X=0:[52,56,764]    X=1:[59,59,758]    X=2:[0,0,751]      — COLUMN-2 DOMINANT (~14× off-diag)"
+  => "blackhole: X=0:[53,0,0]       X=1:[0,53,0]       X=2:[0,0,51]       — STRICT DIAGONAL (off-diag=0)"
+  => "wormhole:  X=0:[57,58,756]    X=1:[59,56,763]    X=2:[57,56,762]    — COLUMN-2 DOMINANT (throat-axis)"
+
+# ── (3) topology-dependent orthogonality verdict ───────────
+@C clay-cascade-s2-tick1-stage6-topology-dependent-orthogonality :: meta [4!]
+  <- clay-cascade-s2-tick1-stage6-response-matrices
+  => "★ KEY FINDING — axes are NOT uniformly orthogonal under cross-feed; orthogonality is TOPOLOGY-DEPENDENT"
+  => "blackhole: STRICTLY diagonal — horizon clamping at cell 21 isolates each axis (cleanest axis-orthogonality)"
+  => "t3:        ISOTROPIC — axes effectively interchangeable (no preferred axis)"
+  => "s3:        column-2 dominant — 4×4×4-with-hyperlink wrap concentrates response into z-axis"
+  => "wormhole:  column-2 dominant — throat-axis nearly source-independent (~760 regardless of X)"
+  => "flat:      DEGENERATE 1D-ring — only differentiates axis-0 from {1,2}; not informative"
+  => "cross-link: blackhole's strict-diagonal pairs with axis-16 V(8)=63 full-fill (isotropic propagation through interior)"
+
+# ── (4) iter-24/25 chi²=1 anchor-clamp explanation ─────────
+@C clay-cascade-s2-tick1-iter-24-25-chi2-anchor-clamp-explanation :: meta [4!]
+  <- clay-cascade-s2-tick1-stage6-cross-feed-witness
+  => "★ iter-24/25 chi²=1 claim is REPRODUCIBLE but METRIC-DEGENERATE"
+  => "propagate_stage4_anchor: n_s_proxy = 9500 + clamp(avg, [0,1000])*400/1000 saturates near 9580-9599"
+  => "chi² = ((n_s − 9649)/42)² then integer-truncates to 1 for every diff in [42, 84]"
+  => "chi²=1 does NOT imply axis or topology uniformity — it's anchor-clamp artifact"
+  => "cross-feed matrices above DISPROVE uniformity (s3+wormhole show ~15× off-diagonal asymmetry; blackhole shows hard zeros)"
+  => "raw 71 retire/narrow: iter-24/25 chi²=1 RETRACTION STANDS — not physical convergence; treat as metric artifact"
+
+# ── (5) raw 91 C3 honest limit disclosure ──────────────────
+@C clay-cascade-s2-tick1-stage6-cross-feed-C3-limits :: meta [4]
+  <- clay-cascade-s2-tick1-stage6-cross-feed-witness
+  => "topology coverage 5/6 — chain1d/complete/cartoon NOT exposed in propagation module (disclosed)"
+  => "response metric is L¹ over 1st + 2nd axis-Y neighbors only — broader-radius response untested"
+  => "single perturbation magnitude delta=1000 — linearity of C(X→Y) vs delta NOT verified"
+  => "Stage-1 + Stage-2 are unperturbed; only Stage-3 receives delta — full Stage-1 perturbation propagation untested"
+  => "response coefficient is unnormalized integer Σ|Δφ| — cross-topology magnitude comparison (flat 827 vs t3 51) is partly an artifact of flat's collapsed 1-D neighbor structure"
+  => "single deterministic seed; no statistical bars"
+  => "chi²=1 status is descriptive (reproduced + re-explained) NOT a new positive claim"
+  => "own#11 strict observed"

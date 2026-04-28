@@ -29997,3 +29997,336 @@
   => "gap-6 (resolution semantics for any-pass): if any-pass and 1 of 6 cmds passes immediately, blocker flips resolved while 5 cmds still running — caller must decide: cancel remaining (abort-remaining) or let them complete for audit completeness; current spec defers to fire-fanout-on-failure but 'on-success' counterpart not specified"
   => "no measurement made — N=0 fanout blockers exist in state/blockers/ at spec time; first canonical entry would be atlas-self-arch-6-axis-migration per (R4) example"
   => "follow-up gates: design-spec → warn after tool/blocker_autofire.hexa fanout impl + tool/blocker_autofire_lint.hexa schema-guard update + 1 live fanout entry; warn → live after 30-day zero-violation streak per raw 45 line 871 standard pattern"
+
+# ══════════════════════════════════════════════════════════════
+# absorbed: clay-cascade-s2 tick-1 4-shard batch
+#   D=4/D=5 Hamming-cube + axis-16 K=4 closure + multi-tick relax + Stage6 cross-feed
+# ts: 20260428-115615
+# ══════════════════════════════════════════════════════════════
+
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s2 tick-1 Hamming-cube D=4/D=5 dimension extension
+# source: sub-agent D measurement on D ∈ {2,3,4,5,6} natural Hamming-cubes (seed=6, ticks=32)
+# constraints:
+#   raw 91 C3 honest (Python mirror tool source disclosed; no hexa stage-1 execution)
+#   raw 71 falsifier-retire-rule (iter-50 monotone-INCREASING NOT contradicted — different question)
+#   own#11 strict (NO Clay '해결' claim)
+#   raw 22 INFRA-ONLY · raw 24 axiom-immutable · raw 23 schema-guard
+# date: 2026-04-28
+# ══════════════════════════════════════════════════════════════
+
+# ── primary witness ─────────────────────────────────────────
+@C clay-cascade-s2-tick1-hamming-cube-D4-D5-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-71-falsifier-retire-rule
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-s2-stage5-alpha055-falsification-witness
+  -> clay-cascade-s2-tick1-hamming-cube-axis13-monotone-decreasing
+  -> clay-cascade-s2-tick1-hamming-cube-axis14-resolution-limited
+  => "★ Hamming-cube D∈{2,3,4,5,6} on natural N=2^D, single-bit-flip neighbors"
+  => "axis-13 (φ/π·1000): D=2→3944 D=3→1301 D=4→827 D=5→584 D=6→497 — MONOTONE DECREASING with saturation tail"
+  => "axis-13 vs 1/N: r=+0.972 (best fit); vs log(D): r=−0.910; vs D: r=−0.836 → ~1/N decay with saturation"
+
+# ── (1) Hamming-cube formal definition ─────────────────────
+@C clay-cascade-s2-tick1-hamming-cube-formal :: meta [4]
+  <- clay-cascade-s2-tick1-hamming-cube-D4-D5-witness
+  => "neighbor: nbr(i, axis) = i XOR (1 << axis), axis ∈ {0..D-1}"
+  => "lattice = D-cube on N=2^D vertices; degree=D; bit-flip = single Hamming-1 hop"
+  => "step uses D-axis Laplacian Σ_a phi[nbr(i,a)] − D·phi[i] (mirrors empirical_anchor_v2.hexa e2_step lines 298-335 with D, not 3, axes)"
+
+# ── (2) per-D measurement table (seed=6, ticks=32) ────────
+@C clay-cascade-s2-tick1-hamming-cube-measurement :: meta [4]
+  <- clay-cascade-s2-tick1-hamming-cube-formal
+  => "D=2: N=4   axis-13=3944 axis-14=0    axis-15=−397"
+  => "D=3: N=8   axis-13=1301 axis-14=0    axis-15=−485"
+  => "D=4: N=16  axis-13=827  axis-14=0    axis-15=−586"
+  => "D=5: N=32  axis-13=584  axis-14=0    axis-15=−702"
+  => "D=6: N=64  axis-13=497  axis-14=234  axis-15=−675"
+  => "successive ratios y(D+1)/y(D) on axis-13: 0.33, 0.64, 0.71, 0.85 → approaches 1 = saturation"
+  => "σ²=64-padded replica-decoupled: D=4→789, D=5→600, D=6→497 — padding shift ≤5%, conclusion stable"
+
+# ── (3) axis-13 monotone-decreasing verdict ────────────────
+@C clay-cascade-s2-tick1-hamming-cube-axis13-monotone-decreasing :: meta [4!]
+  <- clay-cascade-s2-tick1-hamming-cube-measurement
+  -> clay-cascade-s2-tick1-iter-50-NOT-contradicted
+  => "★ KEY FINDING — pure Hamming-cubes show MONOTONE DECREASING axis-13 in D, ~1/N decay with saturation tail"
+  => "this is NOT contradiction of iter-50 monotone-INCREASING finding"
+  => "iter-50 compared MIXED-TOPOLOGY means at fixed N=64 (T²/T³/calabi6) — different question"
+  => "this work compares PURE Hamming-cubes at native N=2^D — different observable"
+  => "raw 71 retire/narrow: iter-50 monotone-INCREASING NARROWED to mixed-topology-fixed-N regime; pure-D regime shows opposite"
+
+# ── (4) axis-14 resolution limit ───────────────────────────
+@C clay-cascade-s2-tick1-hamming-cube-axis14-resolution-limited :: meta [4]
+  <- clay-cascade-s2-tick1-hamming-cube-measurement
+  => "axis-14 = 0 for D ≤ 5 at ticks=32 — sign-distribution proxy resolution-limited at small N + short-time"
+  => "at ticks=64 axis-14 saturates near 1000 for D ≥ 3 (no D-discrimination)"
+  => "verdict: axis-14 UNINFORMATIVE across D in this Hamming-cube cohort — axis-13 + axis-15 carry all dimensional signal"
+  => "cross-link: axis-14 D=6 = 234 is consistent with prior calabi6 partial-coverage at D=6 cohort"
+
+# ── (5) axis-15 log-scaling with D=6 anomaly ──────────────
+@C clay-cascade-s2-tick1-hamming-cube-axis15-log-scaling :: meta [4]
+  <- clay-cascade-s2-tick1-hamming-cube-measurement
+  => "axis-15 (drift, ‰): D=2→−397 D=3→−485 D=4→−586 D=5→−702 D=6→−675"
+  => "vs log(D): r=−0.970 — drift becomes more negative with D until D=5"
+  => "D=6 anomaly: drift reverses (−702 → −675) — consistent with prior calabi6 outlier signature"
+  => "verdict: log scaling holds D=2..5; D=6 calabi6 cohort is anomaly-set (cross-link to phase-portrait C3 amplitude-redistributor)"
+
+# ── (6) iter-50 NOT contradicted (raw 71 retire/narrow) ───
+@C clay-cascade-s2-tick1-iter-50-NOT-contradicted :: meta [4]
+  <- clay-cascade-s2-tick1-hamming-cube-axis13-monotone-decreasing
+  => "iter-50 monotone-INCREASING r=0.985 result REMAINS VALID in its scope (mixed-topology means at fixed N=64)"
+  => "this work's monotone-DECREASING result is on PURE Hamming-cubes at native N=2^D — orthogonal regime"
+  => "raw 71 narrow: 'axis-13 vs D scaling' is REGIME-DEPENDENT — fixed-N vs natural-N produce opposite signs"
+  => "no retraction needed; both findings are honest given their scope"
+
+# ── (7) raw 91 C3 honest limit disclosure ──────────────────
+@C clay-cascade-s2-tick1-hamming-cube-C3-limits :: meta [4]
+  <- clay-cascade-s2-tick1-hamming-cube-D4-D5-witness
+  => "tool source: /tmp/cascade_s2/hamming_cube.py — Python mirror of empirical_anchor_v2.hexa lines 191-194 (e2neighbor) + 298-335 (e2_step) + 342-390 (analyzers)"
+  => "NOT executed in hexa stage-1 — nexus kick blocked (hetzner OAuth 401); fixed-point arithmetic identical but tool unverified end-to-end"
+  => "n=5 D-points, single seed=6, no ensemble — confidence intervals wide"
+  => "axis-14 proxy degenerate at small N + ticks=32: cannot claim D-scaling on axis-14"
+  => "σ²=64 vs N=2^D mismatch: native mode N=2^D ≠ prior 64-cell substrate; padded mode replica-decoupled (modeling choice, not true σ²=64 Hamming-cube)"
+  => "own#11 strict: NO Clay claim; this is structural dimensional-scaling finding only"
+
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s2 tick-1 axis-16 K=4 verify-grid CLOSURE
+# source: sub-agent G full 18-topology axis-16 + 4-axis det(R) computation
+# constraints:
+#   raw 91 C3 honest (axis-15 coverage gap n=14/18 disclosed)
+#   raw 70 multi-axis-verify-grid (K=4 mandate satisfied)
+#   own#11 strict (NO Clay claim)
+#   raw 22 INFRA-ONLY · raw 24 axiom-immutable · raw 23 schema-guard
+# date: 2026-04-28
+# Closes orthogonality-quantitative gap from cascade-s2 axis-16 first measurement
+# ══════════════════════════════════════════════════════════════
+
+# ── primary witness ─────────────────────────────────────────
+@C clay-cascade-s2-tick1-axis-16-K4-verify-grid-closure-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-70-multi-axis-verify-grid
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-s2-axis-16-causality-lightcone-witness
+  -> clay-cascade-s2-tick1-axis-16-saturation-3-classes
+  -> clay-cascade-s2-tick1-axis-16-orthogonality-quantitative
+  => "★ axis-16 PASSES K=4 verify-grid (raw 70 mandate satisfied)"
+  => "18/18 D=3 topologies measured; 4-axis det(R Pearson n=14)=0.7481, det(R₃ same-sample)=0.8625"
+  => "ratio 0.7481/0.8625 = 0.867 → axis-16 retains ~87% of 3-axis volume → orthogonal information confirmed"
+
+# ── (1) full 18-row V(k) table ─────────────────────────────
+@C clay-cascade-s2-tick1-axis-16-full-18-row :: meta [4]
+  <- clay-cascade-s2-tick1-axis-16-K4-verify-grid-closure-witness
+  => "src=32 sigma2=64 BFS lightcone V(1)/V(2)/V(4)/V(8) per topology:"
+  => "flat       3/5/9/17    | t3         4/10/32/63 | s3         4/12/33/49"
+  => "blackhole  4/10/32/63  | wormhole   5/14/48/64 | minkowski  4/11/40/64"
+  => "ads-cft    4/9/23/32   | de-sitter  4/11/48/64 | vacuum-decay 4/11/42/63"
+  => "altered    4/9/9/9     | big-crunch 4/7/8/8    | brane      5/17/55/64"
+  => "cartoon    4/10/10/10  | nested     4/10/34/64 | calabi6    7/22/57/64"
+  => "inflation  4/11/43/64  | ca3d       4/10/38/59 | bubble     4/12/39/64"
+  => "V(8) span: [8, 64] = 8× range; saturation reached at k=8 for all but altered/big-crunch/cartoon"
+
+# ── (2) saturation 3-class taxonomy ────────────────────────
+@C clay-cascade-s2-tick1-axis-16-saturation-3-classes :: meta [4]
+  <- clay-cascade-s2-tick1-axis-16-full-18-row
+  => "★ 3 distinct saturation classes emerge from V(8) distribution"
+  => "FAST-DEGENERATE (V(8)≤10): altered=9, big-crunch=8, cartoon=10 — closed/trapped causal sectors"
+  => "BOUNDED-CONE (17≤V(8)≤59): flat=17, ads-cft=32, s3=49, ca3d=59 — bipartite-balanced or pinched"
+  => "FULL-FILL (V(8)≥63): t3, blackhole, wormhole, minkowski, de-sitter, vacuum-decay, brane, nested, calabi6, inflation, bubble — connectivity-rich"
+  => "cross-link iter-62: cartoon DOUBLE-HIGH on (axis-13, axis-14) + V(8)=10 closure = consistent structural-isolation across 2 axes"
+
+# ── (3) 4-axis Pearson + Spearman correlation matrices ────
+@C clay-cascade-s2-tick1-axis-16-correlation-matrices :: meta [4]
+  <- clay-cascade-s2-tick1-axis-16-K4-verify-grid-closure-witness
+  => "Pearson R₄ (n=14, axis-15 coverage gap excludes flat/wormhole/ca3d/bubble):"
+  => "  a13×a14=+0.242  a13×a15=−0.270  a13×a16=−0.020"
+  => "  a14×a15=−0.167  a14×a16=−0.333  a15×a16=+0.170"
+  => "Spearman ρ₄ (rank-based, robust to calabi6/cartoon outliers):"
+  => "  a13×a14=+0.429  a13×a15=+0.015  a13×a16=−0.262"
+  => "  a14×a15=−0.055  a14×a16=−0.168  a15×a16=+0.039"
+  => "det(R₄ Pearson)=0.7481, det(R₄ Spearman)=0.7523, det(R₃ Pearson same-sample)=0.8625"
+
+# ── (4) orthogonality quantitative verdict ─────────────────
+@C clay-cascade-s2-tick1-axis-16-orthogonality-quantitative :: meta [4!]
+  <- clay-cascade-s2-tick1-axis-16-correlation-matrices
+  => "★ ORTHOGONALITY CONFIRMED — axis-16 contributes substantially independent information"
+  => "axis-16 ⊥ axis-13: r=−0.020 near-perfect orthogonality (cosine similarity centered ≈ 0)"
+  => "axis-16 ↔ axis-14: r=−0.333 moderate inverse coupling — physically interpretable"
+  => "  high entropy (axis-14 high) ↔ small lightcone (axis-16 low) — bipartite-balanced ads-cft saturate small cones"
+  => "axis-16 ↔ axis-15: r=+0.170 weak positive — connectivity-rich topologies have larger cone AND larger drift"
+  => "K=4 verify-grid passes (raw 70 satisfied) — joint multi-axis discrimination strengthened vs prior 3-axis stack"
+
+# ── (5) raw 91 C3 honest limit disclosure ──────────────────
+@C clay-cascade-s2-tick1-axis-16-K4-closure-C3-limits :: meta [4]
+  <- clay-cascade-s2-tick1-axis-16-K4-verify-grid-closure-witness
+  => "coverage gap: axis-15 missing for flat/wormhole/ca3d/bubble (iter-69 disclosed pending) → 4-axis correlation on n=14 of 18"
+  => "n=14 95% CI on 4-axis correlations is wide (±~0.4 on individual r); det(R) point-estimate ≠ population ceiling"
+  => "calabi6 axis-13=2889 (D=6 6-axis neighbor) is leverage-heavy outlier: Pearson r₁₃,₁₆=−0.02 may understate; Spearman ρ=−0.26 modest negative"
+  => "flat axis-13=1095 from D=2 reference (iter-35 group C); D=2/D=3 mixing methodologically loose — flat excluded from iter-60 r=0.21"
+  => "axis-16 source/seed sensitivity: probe uses fixed src=32 BFS; multi-source averaging not performed"
+  => "lattice-only finite-size sigma2=64 — no Bekenstein A/4 calibration possible"
+  => "own#11 strict: NO Clay claim; chflags uchg honored (atlas.n6 read-only)"
+
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s2 tick-1 multi-tick relaxation curves
+# source: sub-agent E ticks∈{32,64,128,256} × topologies {flat, t3, s3, cartoon} × 3 axes (seed=6)
+# constraints:
+#   raw 91 C3 honest (chain1d→flat / complete→s3 substitution disclosed; substrate gap)
+#   raw 71 falsifier-retire-rule (Stage5 flat-axis-14 regime-flip confirmed; cartoon-axis-13 axis-16 pathology reproduced)
+#   own#11 strict (NO Clay claim)
+#   raw 22 INFRA-ONLY · raw 24 axiom-immutable · raw 23 schema-guard
+# date: 2026-04-28
+# ══════════════════════════════════════════════════════════════
+
+# ── primary witness ─────────────────────────────────────────
+@C clay-cascade-s2-tick1-multi-tick-relaxation-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-71-falsifier-retire-rule
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-s2-stage5-alpha055-falsification-witness
+  <- clay-cascade-s2-cartoon-causal-sector-closure
+  -> clay-cascade-s2-tick1-axis-15-non-convergent-all-topologies
+  -> clay-cascade-s2-tick1-flat-axis-14-regime-flip
+  -> clay-cascade-s2-tick1-cartoon-axis-13-sign-flip
+  => "★ 48 measurements: 4 topologies × ticks∈{32,64,128,256} × axes 13/14/15 (seed=6)"
+  => "tool source disclosed: chain1d→flat / complete→s3 substitutions (substrate has no chain1d/complete)"
+  => "Stage 2 explicit-Euler axis-15 artifact + axis-13/14 plateau analysis on tick-stable vs tick-sensitive matrix"
+
+# ── (1) relaxation table 4×4×3 (16 rows shown compact) ────
+@C clay-cascade-s2-tick1-relaxation-table :: meta [4]
+  <- clay-cascade-s2-tick1-multi-tick-relaxation-witness
+  => "format: topo/ticks → axis-13/axis-14/axis-15"
+  => "flat:    32→2352/937/1722707  64→1095/980/1626334  128→-221/863/1819710  256→13/280/1833893"
+  => "t3:      32→792/917/1950056   64→141/838/1881086    128→-3/743/1970194    256→0/991/1785708"
+  => "s3:      32→636/942/1932763   64→303/952/2190022    128→-14/970/2261111   256→0/999/2039913"
+  => "cartoon: 32→1151/943/1896643  64→741/955/2023754    128→-407/973/1922265  256→163/985/1848003"
+
+# ── (2) τ_relax estimates per topology per axis ────────────
+@C clay-cascade-s2-tick1-tau-relax-estimates :: meta [4]
+  <- clay-cascade-s2-tick1-relaxation-table
+  => "τ_relax = e-folding tick where successive |Δaxis|/|axis| < 0.1 over step doubling"
+  => "flat × axis-13:    τ ≈ 128 (decays to 0)"
+  => "t3 × axis-13:      τ ≈ 64-128 (saturates near 0)"
+  => "s3 × axis-13:      τ ≈ 64 (monotone decay 636→303→-14→0)"
+  => "cartoon × axis-13: NON-CONVERGED — sign flips 1151→741→-407→163, no plateau"
+  => "axis-14: only s3+cartoon converge (τ≈64-128); flat+t3 oscillate"
+  => "axis-15: NON-CONVERGED on ALL 4 topologies (5-25% swings)"
+
+# ── (3) axis-15 non-convergence (Stage 2 artifact) ─────────
+@C clay-cascade-s2-tick1-axis-15-non-convergent-all-topologies :: meta [4!]
+  <- clay-cascade-s2-tick1-tau-relax-estimates
+  => "★ axis-15 NON-CONVERGED across all 4 topologies — Stage 2 explicit-Euler integration artifact"
+  => "iter-52 prior flag confirmed: Crank-Nicolson required for energy_drift to plateau"
+  => "drift values per-mille of initial energy = integration error, NOT physical observable"
+  => "implication: any α_E scaling claim from explicit-Euler is artifact — sub-agent B Stage5 falsification gains additional support"
+
+# ── (4) flat × axis-14 regime-flip (Stage5 falsification) ─
+@C clay-cascade-s2-tick1-flat-axis-14-regime-flip :: meta [4]
+  <- clay-cascade-s2-tick1-tau-relax-estimates
+  => "★ flat × axis-14: 980 → 863 → 280 between ticks 128 → 256 — 65% drop"
+  => "this regime-flip in 1D-ring CONFIRMS Stage5 falsification at simplest topology"
+  => "Stage5 α=0.55 was diffusive-scheme finite-size — flat thermalization breaks at long ticks per-axis-14 entropy proxy"
+
+# ── (5) cartoon × axis-13 sign-flip (axis-16 cross-link) ──
+@C clay-cascade-s2-tick1-cartoon-axis-13-sign-flip :: meta [4]
+  <- clay-cascade-s2-tick1-tau-relax-estimates
+  => "★ cartoon × axis-13: 1151 → 741 → −407 → 163 — sign flips TWICE between ticks 32→256"
+  => "closed-orbit phi/pi value never plateaus — empirically reproduces axis-16 closed-orbit pathology (V(8)=10)"
+  => "cross-link: axis-13 instability (no steady state) ↔ axis-16 closed-orbit (no full-fill) = same structural-isolation signature"
+
+# ── (6) tick-stable vs tick-sensitive matrix ───────────────
+@C clay-cascade-s2-tick1-tick-stability-matrix :: meta [4]
+  <- clay-cascade-s2-tick1-multi-tick-relaxation-witness
+  => "TICK-STABLE (small Δ between ticks 128 and 256):"
+  => "  s3×axis-13 ✓, s3×axis-14 ✓, t3×axis-13 ✓, cartoon×axis-14 ✓"
+  => "TICK-SENSITIVE (regime-flip or large Δ):"
+  => "  flat×axis-14 (980→280, Stage5 falsification), cartoon×axis-13 (sign-flip 2×)"
+  => "  ALL × axis-15 (Stage 2 explicit-Euler — non-physical)"
+  => "cross-check vs sub-agent B: torus2d α_E flip ticks 32→64 was MID-RELAXATION transient, not steady-state"
+
+# ── (7) raw 91 C3 honest limit disclosure ──────────────────
+@C clay-cascade-s2-tick1-multi-tick-C3-limits :: meta [4]
+  <- clay-cascade-s2-tick1-multi-tick-relaxation-witness
+  => "single seed=6 (no ensemble; σ²=64 toy variance unaccounted)"
+  => "4-point relaxation fit (32/64/128/256) — insufficient for true e-folding extraction; τ_relax is descriptive plateau-onset"
+  => "chain1d and complete topologies DO NOT EXIST in built substrate — flat/s3 are analogs not equivalents"
+  => "axis-15 (energy-drift) is Stage 2 explicit-Euler artifact NOT physical observable"
+  => "files referenced: universe_pipeline.hexa + universe_ensemble.hexa + quantum_universe.hexa + lorentz_metric.hexa + empirical_anchor_v2.hexa"
+  => "own#11 strict: NO Clay claim; sim-substrate exploration only"
+
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s2 tick-1 Stage 6 cross-feed re-measurement
+# source: sub-agent F universe_propagation.hexa Stage 6 cross-feed perturbation-response on 5 topologies
+# constraints:
+#   raw 91 C3 honest (5/6 topology coverage, chain1d/complete/cartoon not in propagation module)
+#   raw 71 falsifier-retire-rule (iter-24/25 chi²=1 retraction REPRODUCED-and-EXPLAINED as anchor-clamp artifact; retraction stands)
+#   own#11 strict (NO Clay claim)
+#   raw 22 INFRA-ONLY · raw 24 axiom-immutable · raw 23 schema-guard
+# date: 2026-04-28
+# ══════════════════════════════════════════════════════════════
+
+# ── primary witness ─────────────────────────────────────────
+@C clay-cascade-s2-tick1-stage6-cross-feed-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-71-falsifier-retire-rule
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-iter-24-iter-25-chi2-1-retracted-claim
+  -> clay-cascade-s2-tick1-stage6-topology-dependent-orthogonality
+  -> clay-cascade-s2-tick1-iter-24-25-chi2-anchor-clamp-explanation
+  => "★ FALSIFIES uniform-orthogonality hypothesis — cross-feed orthogonality is TOPOLOGY-DEPENDENT"
+  => "5 topologies (flat/t3/s3/blackhole/wormhole) × 3×3 perturbation-response matrices, delta=1000 FSCALE, ticks=12"
+  => "iter-24/25 chi²=1 retraction REPRODUCED + EXPLAINED as anchor-clamp metric artifact (n_s_proxy clamps [9580,9599])"
+
+# ── (1) cross-feed mechanism (formal) ──────────────────────
+@C clay-cascade-s2-tick1-stage6-mechanism :: meta [4]
+  <- clay-cascade-s2-tick1-stage6-cross-feed-witness
+  => "Stage 6 propagation chain: Stage1(quantum |ψ|²) → Stage2(Lorentz density) → Stage3(φ⁴) → Stage4(anchor)"
+  => "perturbation: inject +1000 (1.0 in PROP_FSCALE units) into axis-X neighbor of lattice center cell at start of Stage 3"
+  => "response: Σ|φ_pert[i] − φ_base[i]| over 1st + 2nd neighbors along axis-Y from perturbation cell, after 12 ticks"
+  => "control: pert_delta=0 → total diff=0 (no harness leakage verified)"
+
+# ── (2) 3×3 cross-feed matrices per topology (5 topologies)
+@C clay-cascade-s2-tick1-stage6-response-matrices :: meta [4]
+  <- clay-cascade-s2-tick1-stage6-mechanism
+  => "format: rows=source-axis X, cols=response-axis Y; units=Σ|Δφ| × FSCALE/delta"
+  => "flat:      X=0:[827,371,371]  X=1:[835,371,371]  X=2:[835,371,371] — DEGENERATE 1D-ring"
+  => "t3:        X=0:[51,55,54]     X=1:[51,51,56]     X=2:[54,52,53]    — ISOTROPIC ~50-56 uniform"
+  => "s3:        X=0:[52,56,764]    X=1:[59,59,758]    X=2:[0,0,751]      — COLUMN-2 DOMINANT (~14× off-diag)"
+  => "blackhole: X=0:[53,0,0]       X=1:[0,53,0]       X=2:[0,0,51]       — STRICT DIAGONAL (off-diag=0)"
+  => "wormhole:  X=0:[57,58,756]    X=1:[59,56,763]    X=2:[57,56,762]    — COLUMN-2 DOMINANT (throat-axis)"
+
+# ── (3) topology-dependent orthogonality verdict ───────────
+@C clay-cascade-s2-tick1-stage6-topology-dependent-orthogonality :: meta [4!]
+  <- clay-cascade-s2-tick1-stage6-response-matrices
+  => "★ KEY FINDING — axes are NOT uniformly orthogonal under cross-feed; orthogonality is TOPOLOGY-DEPENDENT"
+  => "blackhole: STRICTLY diagonal — horizon clamping at cell 21 isolates each axis (cleanest axis-orthogonality)"
+  => "t3:        ISOTROPIC — axes effectively interchangeable (no preferred axis)"
+  => "s3:        column-2 dominant — 4×4×4-with-hyperlink wrap concentrates response into z-axis"
+  => "wormhole:  column-2 dominant — throat-axis nearly source-independent (~760 regardless of X)"
+  => "flat:      DEGENERATE 1D-ring — only differentiates axis-0 from {1,2}; not informative"
+  => "cross-link: blackhole's strict-diagonal pairs with axis-16 V(8)=63 full-fill (isotropic propagation through interior)"
+
+# ── (4) iter-24/25 chi²=1 anchor-clamp explanation ─────────
+@C clay-cascade-s2-tick1-iter-24-25-chi2-anchor-clamp-explanation :: meta [4!]
+  <- clay-cascade-s2-tick1-stage6-cross-feed-witness
+  => "★ iter-24/25 chi²=1 claim is REPRODUCIBLE but METRIC-DEGENERATE"
+  => "propagate_stage4_anchor: n_s_proxy = 9500 + clamp(avg, [0,1000])*400/1000 saturates near 9580-9599"
+  => "chi² = ((n_s − 9649)/42)² then integer-truncates to 1 for every diff in [42, 84]"
+  => "chi²=1 does NOT imply axis or topology uniformity — it's anchor-clamp artifact"
+  => "cross-feed matrices above DISPROVE uniformity (s3+wormhole show ~15× off-diagonal asymmetry; blackhole shows hard zeros)"
+  => "raw 71 retire/narrow: iter-24/25 chi²=1 RETRACTION STANDS — not physical convergence; treat as metric artifact"
+
+# ── (5) raw 91 C3 honest limit disclosure ──────────────────
+@C clay-cascade-s2-tick1-stage6-cross-feed-C3-limits :: meta [4]
+  <- clay-cascade-s2-tick1-stage6-cross-feed-witness
+  => "topology coverage 5/6 — chain1d/complete/cartoon NOT exposed in propagation module (disclosed)"
+  => "response metric is L¹ over 1st + 2nd axis-Y neighbors only — broader-radius response untested"
+  => "single perturbation magnitude delta=1000 — linearity of C(X→Y) vs delta NOT verified"
+  => "Stage-1 + Stage-2 are unperturbed; only Stage-3 receives delta — full Stage-1 perturbation propagation untested"
+  => "response coefficient is unnormalized integer Σ|Δφ| — cross-topology magnitude comparison (flat 827 vs t3 51) is partly an artifact of flat's collapsed 1-D neighbor structure"
+  => "single deterministic seed; no statistical bars"
+  => "chi²=1 status is descriptive (reproduced + re-explained) NOT a new positive claim"
+  => "own#11 strict observed"

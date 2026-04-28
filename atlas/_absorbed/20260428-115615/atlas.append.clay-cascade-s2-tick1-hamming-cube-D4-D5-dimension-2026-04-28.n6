@@ -1,0 +1,85 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s2 tick-1 Hamming-cube D=4/D=5 dimension extension
+# source: sub-agent D measurement on D ∈ {2,3,4,5,6} natural Hamming-cubes (seed=6, ticks=32)
+# constraints:
+#   raw 91 C3 honest (Python mirror tool source disclosed; no hexa stage-1 execution)
+#   raw 71 falsifier-retire-rule (iter-50 monotone-INCREASING NOT contradicted — different question)
+#   own#11 strict (NO Clay '해결' claim)
+#   raw 22 INFRA-ONLY · raw 24 axiom-immutable · raw 23 schema-guard
+# date: 2026-04-28
+# ══════════════════════════════════════════════════════════════
+
+# ── primary witness ─────────────────────────────────────────
+@C clay-cascade-s2-tick1-hamming-cube-D4-D5-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-71-falsifier-retire-rule
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-s2-stage5-alpha055-falsification-witness
+  -> clay-cascade-s2-tick1-hamming-cube-axis13-monotone-decreasing
+  -> clay-cascade-s2-tick1-hamming-cube-axis14-resolution-limited
+  => "★ Hamming-cube D∈{2,3,4,5,6} on natural N=2^D, single-bit-flip neighbors"
+  => "axis-13 (φ/π·1000): D=2→3944 D=3→1301 D=4→827 D=5→584 D=6→497 — MONOTONE DECREASING with saturation tail"
+  => "axis-13 vs 1/N: r=+0.972 (best fit); vs log(D): r=−0.910; vs D: r=−0.836 → ~1/N decay with saturation"
+
+# ── (1) Hamming-cube formal definition ─────────────────────
+@C clay-cascade-s2-tick1-hamming-cube-formal :: meta [4]
+  <- clay-cascade-s2-tick1-hamming-cube-D4-D5-witness
+  => "neighbor: nbr(i, axis) = i XOR (1 << axis), axis ∈ {0..D-1}"
+  => "lattice = D-cube on N=2^D vertices; degree=D; bit-flip = single Hamming-1 hop"
+  => "step uses D-axis Laplacian Σ_a phi[nbr(i,a)] − D·phi[i] (mirrors empirical_anchor_v2.hexa e2_step lines 298-335 with D, not 3, axes)"
+
+# ── (2) per-D measurement table (seed=6, ticks=32) ────────
+@C clay-cascade-s2-tick1-hamming-cube-measurement :: meta [4]
+  <- clay-cascade-s2-tick1-hamming-cube-formal
+  => "D=2: N=4   axis-13=3944 axis-14=0    axis-15=−397"
+  => "D=3: N=8   axis-13=1301 axis-14=0    axis-15=−485"
+  => "D=4: N=16  axis-13=827  axis-14=0    axis-15=−586"
+  => "D=5: N=32  axis-13=584  axis-14=0    axis-15=−702"
+  => "D=6: N=64  axis-13=497  axis-14=234  axis-15=−675"
+  => "successive ratios y(D+1)/y(D) on axis-13: 0.33, 0.64, 0.71, 0.85 → approaches 1 = saturation"
+  => "σ²=64-padded replica-decoupled: D=4→789, D=5→600, D=6→497 — padding shift ≤5%, conclusion stable"
+
+# ── (3) axis-13 monotone-decreasing verdict ────────────────
+@C clay-cascade-s2-tick1-hamming-cube-axis13-monotone-decreasing :: meta [4!]
+  <- clay-cascade-s2-tick1-hamming-cube-measurement
+  -> clay-cascade-s2-tick1-iter-50-NOT-contradicted
+  => "★ KEY FINDING — pure Hamming-cubes show MONOTONE DECREASING axis-13 in D, ~1/N decay with saturation tail"
+  => "this is NOT contradiction of iter-50 monotone-INCREASING finding"
+  => "iter-50 compared MIXED-TOPOLOGY means at fixed N=64 (T²/T³/calabi6) — different question"
+  => "this work compares PURE Hamming-cubes at native N=2^D — different observable"
+  => "raw 71 retire/narrow: iter-50 monotone-INCREASING NARROWED to mixed-topology-fixed-N regime; pure-D regime shows opposite"
+
+# ── (4) axis-14 resolution limit ───────────────────────────
+@C clay-cascade-s2-tick1-hamming-cube-axis14-resolution-limited :: meta [4]
+  <- clay-cascade-s2-tick1-hamming-cube-measurement
+  => "axis-14 = 0 for D ≤ 5 at ticks=32 — sign-distribution proxy resolution-limited at small N + short-time"
+  => "at ticks=64 axis-14 saturates near 1000 for D ≥ 3 (no D-discrimination)"
+  => "verdict: axis-14 UNINFORMATIVE across D in this Hamming-cube cohort — axis-13 + axis-15 carry all dimensional signal"
+  => "cross-link: axis-14 D=6 = 234 is consistent with prior calabi6 partial-coverage at D=6 cohort"
+
+# ── (5) axis-15 log-scaling with D=6 anomaly ──────────────
+@C clay-cascade-s2-tick1-hamming-cube-axis15-log-scaling :: meta [4]
+  <- clay-cascade-s2-tick1-hamming-cube-measurement
+  => "axis-15 (drift, ‰): D=2→−397 D=3→−485 D=4→−586 D=5→−702 D=6→−675"
+  => "vs log(D): r=−0.970 — drift becomes more negative with D until D=5"
+  => "D=6 anomaly: drift reverses (−702 → −675) — consistent with prior calabi6 outlier signature"
+  => "verdict: log scaling holds D=2..5; D=6 calabi6 cohort is anomaly-set (cross-link to phase-portrait C3 amplitude-redistributor)"
+
+# ── (6) iter-50 NOT contradicted (raw 71 retire/narrow) ───
+@C clay-cascade-s2-tick1-iter-50-NOT-contradicted :: meta [4]
+  <- clay-cascade-s2-tick1-hamming-cube-axis13-monotone-decreasing
+  => "iter-50 monotone-INCREASING r=0.985 result REMAINS VALID in its scope (mixed-topology means at fixed N=64)"
+  => "this work's monotone-DECREASING result is on PURE Hamming-cubes at native N=2^D — orthogonal regime"
+  => "raw 71 narrow: 'axis-13 vs D scaling' is REGIME-DEPENDENT — fixed-N vs natural-N produce opposite signs"
+  => "no retraction needed; both findings are honest given their scope"
+
+# ── (7) raw 91 C3 honest limit disclosure ──────────────────
+@C clay-cascade-s2-tick1-hamming-cube-C3-limits :: meta [4]
+  <- clay-cascade-s2-tick1-hamming-cube-D4-D5-witness
+  => "tool source: /tmp/cascade_s2/hamming_cube.py — Python mirror of empirical_anchor_v2.hexa lines 191-194 (e2neighbor) + 298-335 (e2_step) + 342-390 (analyzers)"
+  => "NOT executed in hexa stage-1 — nexus kick blocked (hetzner OAuth 401); fixed-point arithmetic identical but tool unverified end-to-end"
+  => "n=5 D-points, single seed=6, no ensemble — confidence intervals wide"
+  => "axis-14 proxy degenerate at small N + ticks=32: cannot claim D-scaling on axis-14"
+  => "σ²=64 vs N=2^D mismatch: native mode N=2^D ≠ prior 64-cell substrate; padded mode replica-decoupled (modeling choice, not true σ²=64 Hamming-cube)"
+  => "own#11 strict: NO Clay claim; this is structural dimensional-scaling finding only"

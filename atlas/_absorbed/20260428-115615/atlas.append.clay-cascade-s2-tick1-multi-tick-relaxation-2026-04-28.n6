@@ -1,0 +1,87 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s2 tick-1 multi-tick relaxation curves
+# source: sub-agent E ticks∈{32,64,128,256} × topologies {flat, t3, s3, cartoon} × 3 axes (seed=6)
+# constraints:
+#   raw 91 C3 honest (chain1d→flat / complete→s3 substitution disclosed; substrate gap)
+#   raw 71 falsifier-retire-rule (Stage5 flat-axis-14 regime-flip confirmed; cartoon-axis-13 axis-16 pathology reproduced)
+#   own#11 strict (NO Clay claim)
+#   raw 22 INFRA-ONLY · raw 24 axiom-immutable · raw 23 schema-guard
+# date: 2026-04-28
+# ══════════════════════════════════════════════════════════════
+
+# ── primary witness ─────────────────────────────────────────
+@C clay-cascade-s2-tick1-multi-tick-relaxation-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-71-falsifier-retire-rule
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-s2-stage5-alpha055-falsification-witness
+  <- clay-cascade-s2-cartoon-causal-sector-closure
+  -> clay-cascade-s2-tick1-axis-15-non-convergent-all-topologies
+  -> clay-cascade-s2-tick1-flat-axis-14-regime-flip
+  -> clay-cascade-s2-tick1-cartoon-axis-13-sign-flip
+  => "★ 48 measurements: 4 topologies × ticks∈{32,64,128,256} × axes 13/14/15 (seed=6)"
+  => "tool source disclosed: chain1d→flat / complete→s3 substitutions (substrate has no chain1d/complete)"
+  => "Stage 2 explicit-Euler axis-15 artifact + axis-13/14 plateau analysis on tick-stable vs tick-sensitive matrix"
+
+# ── (1) relaxation table 4×4×3 (16 rows shown compact) ────
+@C clay-cascade-s2-tick1-relaxation-table :: meta [4]
+  <- clay-cascade-s2-tick1-multi-tick-relaxation-witness
+  => "format: topo/ticks → axis-13/axis-14/axis-15"
+  => "flat:    32→2352/937/1722707  64→1095/980/1626334  128→-221/863/1819710  256→13/280/1833893"
+  => "t3:      32→792/917/1950056   64→141/838/1881086    128→-3/743/1970194    256→0/991/1785708"
+  => "s3:      32→636/942/1932763   64→303/952/2190022    128→-14/970/2261111   256→0/999/2039913"
+  => "cartoon: 32→1151/943/1896643  64→741/955/2023754    128→-407/973/1922265  256→163/985/1848003"
+
+# ── (2) τ_relax estimates per topology per axis ────────────
+@C clay-cascade-s2-tick1-tau-relax-estimates :: meta [4]
+  <- clay-cascade-s2-tick1-relaxation-table
+  => "τ_relax = e-folding tick where successive |Δaxis|/|axis| < 0.1 over step doubling"
+  => "flat × axis-13:    τ ≈ 128 (decays to 0)"
+  => "t3 × axis-13:      τ ≈ 64-128 (saturates near 0)"
+  => "s3 × axis-13:      τ ≈ 64 (monotone decay 636→303→-14→0)"
+  => "cartoon × axis-13: NON-CONVERGED — sign flips 1151→741→-407→163, no plateau"
+  => "axis-14: only s3+cartoon converge (τ≈64-128); flat+t3 oscillate"
+  => "axis-15: NON-CONVERGED on ALL 4 topologies (5-25% swings)"
+
+# ── (3) axis-15 non-convergence (Stage 2 artifact) ─────────
+@C clay-cascade-s2-tick1-axis-15-non-convergent-all-topologies :: meta [4!]
+  <- clay-cascade-s2-tick1-tau-relax-estimates
+  => "★ axis-15 NON-CONVERGED across all 4 topologies — Stage 2 explicit-Euler integration artifact"
+  => "iter-52 prior flag confirmed: Crank-Nicolson required for energy_drift to plateau"
+  => "drift values per-mille of initial energy = integration error, NOT physical observable"
+  => "implication: any α_E scaling claim from explicit-Euler is artifact — sub-agent B Stage5 falsification gains additional support"
+
+# ── (4) flat × axis-14 regime-flip (Stage5 falsification) ─
+@C clay-cascade-s2-tick1-flat-axis-14-regime-flip :: meta [4]
+  <- clay-cascade-s2-tick1-tau-relax-estimates
+  => "★ flat × axis-14: 980 → 863 → 280 between ticks 128 → 256 — 65% drop"
+  => "this regime-flip in 1D-ring CONFIRMS Stage5 falsification at simplest topology"
+  => "Stage5 α=0.55 was diffusive-scheme finite-size — flat thermalization breaks at long ticks per-axis-14 entropy proxy"
+
+# ── (5) cartoon × axis-13 sign-flip (axis-16 cross-link) ──
+@C clay-cascade-s2-tick1-cartoon-axis-13-sign-flip :: meta [4]
+  <- clay-cascade-s2-tick1-tau-relax-estimates
+  => "★ cartoon × axis-13: 1151 → 741 → −407 → 163 — sign flips TWICE between ticks 32→256"
+  => "closed-orbit phi/pi value never plateaus — empirically reproduces axis-16 closed-orbit pathology (V(8)=10)"
+  => "cross-link: axis-13 instability (no steady state) ↔ axis-16 closed-orbit (no full-fill) = same structural-isolation signature"
+
+# ── (6) tick-stable vs tick-sensitive matrix ───────────────
+@C clay-cascade-s2-tick1-tick-stability-matrix :: meta [4]
+  <- clay-cascade-s2-tick1-multi-tick-relaxation-witness
+  => "TICK-STABLE (small Δ between ticks 128 and 256):"
+  => "  s3×axis-13 ✓, s3×axis-14 ✓, t3×axis-13 ✓, cartoon×axis-14 ✓"
+  => "TICK-SENSITIVE (regime-flip or large Δ):"
+  => "  flat×axis-14 (980→280, Stage5 falsification), cartoon×axis-13 (sign-flip 2×)"
+  => "  ALL × axis-15 (Stage 2 explicit-Euler — non-physical)"
+  => "cross-check vs sub-agent B: torus2d α_E flip ticks 32→64 was MID-RELAXATION transient, not steady-state"
+
+# ── (7) raw 91 C3 honest limit disclosure ──────────────────
+@C clay-cascade-s2-tick1-multi-tick-C3-limits :: meta [4]
+  <- clay-cascade-s2-tick1-multi-tick-relaxation-witness
+  => "single seed=6 (no ensemble; σ²=64 toy variance unaccounted)"
+  => "4-point relaxation fit (32/64/128/256) — insufficient for true e-folding extraction; τ_relax is descriptive plateau-onset"
+  => "chain1d and complete topologies DO NOT EXIST in built substrate — flat/s3 are analogs not equivalents"
+  => "axis-15 (energy-drift) is Stage 2 explicit-Euler artifact NOT physical observable"
+  => "files referenced: universe_pipeline.hexa + universe_ensemble.hexa + quantum_universe.hexa + lorentz_metric.hexa + empirical_anchor_v2.hexa"
+  => "own#11 strict: NO Clay claim; sim-substrate exploration only"

@@ -1,0 +1,77 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s2 tick-1 axis-16 K=4 verify-grid CLOSURE
+# source: sub-agent G full 18-topology axis-16 + 4-axis det(R) computation
+# constraints:
+#   raw 91 C3 honest (axis-15 coverage gap n=14/18 disclosed)
+#   raw 70 multi-axis-verify-grid (K=4 mandate satisfied)
+#   own#11 strict (NO Clay claim)
+#   raw 22 INFRA-ONLY · raw 24 axiom-immutable · raw 23 schema-guard
+# date: 2026-04-28
+# Closes orthogonality-quantitative gap from cascade-s2 axis-16 first measurement
+# ══════════════════════════════════════════════════════════════
+
+# ── primary witness ─────────────────────────────────────────
+@C clay-cascade-s2-tick1-axis-16-K4-verify-grid-closure-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-70-multi-axis-verify-grid
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-s2-axis-16-causality-lightcone-witness
+  -> clay-cascade-s2-tick1-axis-16-saturation-3-classes
+  -> clay-cascade-s2-tick1-axis-16-orthogonality-quantitative
+  => "★ axis-16 PASSES K=4 verify-grid (raw 70 mandate satisfied)"
+  => "18/18 D=3 topologies measured; 4-axis det(R Pearson n=14)=0.7481, det(R₃ same-sample)=0.8625"
+  => "ratio 0.7481/0.8625 = 0.867 → axis-16 retains ~87% of 3-axis volume → orthogonal information confirmed"
+
+# ── (1) full 18-row V(k) table ─────────────────────────────
+@C clay-cascade-s2-tick1-axis-16-full-18-row :: meta [4]
+  <- clay-cascade-s2-tick1-axis-16-K4-verify-grid-closure-witness
+  => "src=32 sigma2=64 BFS lightcone V(1)/V(2)/V(4)/V(8) per topology:"
+  => "flat       3/5/9/17    | t3         4/10/32/63 | s3         4/12/33/49"
+  => "blackhole  4/10/32/63  | wormhole   5/14/48/64 | minkowski  4/11/40/64"
+  => "ads-cft    4/9/23/32   | de-sitter  4/11/48/64 | vacuum-decay 4/11/42/63"
+  => "altered    4/9/9/9     | big-crunch 4/7/8/8    | brane      5/17/55/64"
+  => "cartoon    4/10/10/10  | nested     4/10/34/64 | calabi6    7/22/57/64"
+  => "inflation  4/11/43/64  | ca3d       4/10/38/59 | bubble     4/12/39/64"
+  => "V(8) span: [8, 64] = 8× range; saturation reached at k=8 for all but altered/big-crunch/cartoon"
+
+# ── (2) saturation 3-class taxonomy ────────────────────────
+@C clay-cascade-s2-tick1-axis-16-saturation-3-classes :: meta [4]
+  <- clay-cascade-s2-tick1-axis-16-full-18-row
+  => "★ 3 distinct saturation classes emerge from V(8) distribution"
+  => "FAST-DEGENERATE (V(8)≤10): altered=9, big-crunch=8, cartoon=10 — closed/trapped causal sectors"
+  => "BOUNDED-CONE (17≤V(8)≤59): flat=17, ads-cft=32, s3=49, ca3d=59 — bipartite-balanced or pinched"
+  => "FULL-FILL (V(8)≥63): t3, blackhole, wormhole, minkowski, de-sitter, vacuum-decay, brane, nested, calabi6, inflation, bubble — connectivity-rich"
+  => "cross-link iter-62: cartoon DOUBLE-HIGH on (axis-13, axis-14) + V(8)=10 closure = consistent structural-isolation across 2 axes"
+
+# ── (3) 4-axis Pearson + Spearman correlation matrices ────
+@C clay-cascade-s2-tick1-axis-16-correlation-matrices :: meta [4]
+  <- clay-cascade-s2-tick1-axis-16-K4-verify-grid-closure-witness
+  => "Pearson R₄ (n=14, axis-15 coverage gap excludes flat/wormhole/ca3d/bubble):"
+  => "  a13×a14=+0.242  a13×a15=−0.270  a13×a16=−0.020"
+  => "  a14×a15=−0.167  a14×a16=−0.333  a15×a16=+0.170"
+  => "Spearman ρ₄ (rank-based, robust to calabi6/cartoon outliers):"
+  => "  a13×a14=+0.429  a13×a15=+0.015  a13×a16=−0.262"
+  => "  a14×a15=−0.055  a14×a16=−0.168  a15×a16=+0.039"
+  => "det(R₄ Pearson)=0.7481, det(R₄ Spearman)=0.7523, det(R₃ Pearson same-sample)=0.8625"
+
+# ── (4) orthogonality quantitative verdict ─────────────────
+@C clay-cascade-s2-tick1-axis-16-orthogonality-quantitative :: meta [4!]
+  <- clay-cascade-s2-tick1-axis-16-correlation-matrices
+  => "★ ORTHOGONALITY CONFIRMED — axis-16 contributes substantially independent information"
+  => "axis-16 ⊥ axis-13: r=−0.020 near-perfect orthogonality (cosine similarity centered ≈ 0)"
+  => "axis-16 ↔ axis-14: r=−0.333 moderate inverse coupling — physically interpretable"
+  => "  high entropy (axis-14 high) ↔ small lightcone (axis-16 low) — bipartite-balanced ads-cft saturate small cones"
+  => "axis-16 ↔ axis-15: r=+0.170 weak positive — connectivity-rich topologies have larger cone AND larger drift"
+  => "K=4 verify-grid passes (raw 70 satisfied) — joint multi-axis discrimination strengthened vs prior 3-axis stack"
+
+# ── (5) raw 91 C3 honest limit disclosure ──────────────────
+@C clay-cascade-s2-tick1-axis-16-K4-closure-C3-limits :: meta [4]
+  <- clay-cascade-s2-tick1-axis-16-K4-verify-grid-closure-witness
+  => "coverage gap: axis-15 missing for flat/wormhole/ca3d/bubble (iter-69 disclosed pending) → 4-axis correlation on n=14 of 18"
+  => "n=14 95% CI on 4-axis correlations is wide (±~0.4 on individual r); det(R) point-estimate ≠ population ceiling"
+  => "calabi6 axis-13=2889 (D=6 6-axis neighbor) is leverage-heavy outlier: Pearson r₁₃,₁₆=−0.02 may understate; Spearman ρ=−0.26 modest negative"
+  => "flat axis-13=1095 from D=2 reference (iter-35 group C); D=2/D=3 mixing methodologically loose — flat excluded from iter-60 r=0.21"
+  => "axis-16 source/seed sensitivity: probe uses fixed src=32 BFS; multi-source averaging not performed"
+  => "lattice-only finite-size sigma2=64 — no Bekenstein A/4 calibration possible"
+  => "own#11 strict: NO Clay claim; chflags uchg honored (atlas.n6 read-only)"
