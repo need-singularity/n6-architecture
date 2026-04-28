@@ -1,0 +1,89 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s2 tick-11 AC pure k=0 IC 3D universality CONFIRMED
+# source: sub-agent AC t3 L=8 KDK pure-k=0 IC vs bump-IC comparison
+# constraints: raw 91 C3 + raw 70 + own#11 + raw 22+24+23
+# date: 2026-04-28
+# CASCADE-S2 3D regime CLOSURE: AB diagnosis confirmed, IC was contamination source
+# ══════════════════════════════════════════════════════════════
+
+@C clay-cascade-s2-tick11-AC-pure-k0-IC-3D-CONFIRMED-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-70-multi-axis-verify-grid
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-s2-tick10-AB-k0-estimator-contamination
+  -> clay-cascade-s2-tick11-AC-pure-k0-IC-clean-result
+  -> clay-cascade-s2-tick11-AC-3D-universality-RESTORED
+  => "★ AB tick-10 diagnosis CONFIRMED — 1.27 ratio was IC-sourced k!=0 mode contamination, NOT estimator-bias intrinsic"
+  => "Pure k=0 IC on t3 L=8 KDK: ratio obs/pred = 1.008 (was 1.27 with bump-IC), slope -0.4973 (was -0.59)"
+  => "matches continuum tau ~ m^(-1) within 0.003 — 3D universality CONFIRMED at L=8"
+
+@C clay-cascade-s2-tick11-AC-fourier-interpretation :: meta [4]
+  <- clay-cascade-s2-tick11-AC-pure-k0-IC-3D-CONFIRMED-witness
+  => "Fourier interpretation: spatial mean <phi> = N^-1 * Sigma_x phi(x) = F_phi[0,0,0]/N = exact k=0 mode by construction"
+  => "issue is NOT the observable; issue is the INITIAL CONDITION"
+  => "linear (mass + lattice-Laplacian) Hamiltonian: k-modes decouple with omega(k)^2 = m^2 + 4*Sigma_mu sin^2(k_mu/2)"
+  => "Gaussian bump IC populates ALL k!=0 modes; they oscillate at omega(k) > m"
+  => "even projecting onto k=0 at readout, tau_half estimator picks up beat patterns from full spectrum"
+  => "PURE k=0 IC (phi(x,0)=c0, pi(x,0)=c1, both constant) excites only k=0 mode"
+  => "linearity preserves this -> tau_half on <phi> equals continuum pi/(3m) exactly"
+
+@C clay-cascade-s2-tick11-AC-pure-k0-IC-clean-result :: meta [4]
+  <- clay-cascade-s2-tick11-AC-fourier-interpretation
+  => "format: m^2 | tau_obs | tau_pred=pi/(3*sqrt(m^2)) | obs/pred | E_drift"
+  => "0.05 | 4.70 | 4.68 | 1.0036 | 2.35e-5"
+  => "0.10 | 3.35 | 3.31 | 1.0116 | 4.75e-5"
+  => "0.20 | 2.35 | 2.34 | 1.0036 | 9.42e-5"
+  => "0.50 | 1.50 | 1.48 | 1.0129 | 2.38e-4"
+  => "slope log(tau) vs log(m^2) = -0.4973 (R^2=0.9999); mean ratio = 1.0079"
+  => "energy drift improvement: bump-IC 6e-4 -> pure-k0 IC 2e-5 to 2e-4 (1-2 orders cleaner)"
+
+@C clay-cascade-s2-tick11-AC-IC-comparison :: meta [4]
+  <- clay-cascade-s2-tick11-AC-pure-k0-IC-clean-result
+  => "side-by-side comparison bump-IC (AB tick-10) vs pure-k0-IC (this AC):"
+  => "format: m^2 | r_bump | r_purek0 | delta"
+  => "0.05 | 1.4200 | 1.0036 | -0.4164"
+  => "0.10 | 1.2985 | 1.0116 | -0.2869"
+  => "0.20 | 1.2171 | 1.0036 | -0.2135"
+  => "0.50 | 1.1479 | 1.0129 | -0.1350"
+  => "mean ratio: 1.271 -> 1.008 (delta = -0.26)"
+  => "slope: bump -0.59 -> pure-k0 -0.497 (matches continuum -0.50 within 0.003)"
+  => "BOTH contamination level AND m^2-dependence vanish under pure k=0 IC"
+
+@C clay-cascade-s2-tick11-AC-3D-universality-RESTORED :: meta [4!]
+  <- clay-cascade-s2-tick11-AC-IC-comparison
+  -> clay-cascade-s2-K2-STRONG-final-closure-axis-13-+-axis-16
+  => "★ CASCADE-S2 K=2 STRONG verify-grid axis-13 RESTORED FOR BOTH 1D AND 3D"
+  => "  1D regime (chain1d): AA tick-10 90 runs 3-axis robust"
+  => "  3D regime (t3): AC tick-11 pure k=0 IC ratio 1.008, slope -0.4973 — confirmed within IC + integrator + projection"
+  => "Cascade-s2 final published verify-grid:"
+  => "  axis-13 SATURATION universal across 1D + 3D under symplectic KDK + k=0 mode + pure k=0 IC"
+  => "  axis-16 LIGHTCONE V(8) src-robust (88.9% 18-cohort) cartoon FULL-FILL corrected"
+  => "  a13 x a16 Pearson -0.128 + Spearman -0.233 BOTH PASS |r|<0.3"
+  => "Stage-5 magnitude |alpha|~=0.5 correct from start; only sign+form+IC framing wrong; 11-tick narrowing fully resolved"
+
+@C clay-cascade-s2-tick11-AC-cascade-position :: meta [4]
+  <- clay-cascade-s2-tick11-AC-pure-k0-IC-3D-CONFIRMED-witness
+  => "★ cascade-s2 truly final closure achieved at tick-11 (after 23 sub-agents, 10 retractions/narrowings)"
+  => "K=2 STRONG axis-13 + axis-16 verify-grid PUBLISHED FINAL"
+  => "axis-13 mechanism = continuum mass-oscillation tau = pi/(sqrt(m^2)*dt) on k=0 mode"
+  => "  required ingredients: (a) symplectic KDK Verlet (S diagnosed e2_step false-Verlet)"
+  => "  (b) k=0 mode (spatial mean) — well-defined in linear Hamiltonian"
+  => "  (c) pure k=0 IC — bump-IC populates k!=0 modes, contaminates spatial-mean readout"
+  => "axis-16 mechanism = lightcone volume V(s, k=8) — graph-distance saturation 88.9% src-invariant"
+  => "follow-up if revived: phi^4 nonlinear regime test (mode-coupling would seed k!=0 dynamically), L=16 t3, dt-scaling, ensemble seeds for 3D"
+
+@C clay-cascade-s2-tick11-AC-C3-limits :: meta [4]
+  <- clay-cascade-s2-tick11-AC-pure-k0-IC-3D-CONFIRMED-witness
+  => "N=512 only (single L); cannot rule out residual L-dependence in the 0.8% offset"
+  => "single seed for bump-IC reference (AB used seed=42); ratio Delta-distribution unmeasured"
+  => "pure-k0 ratio shows weak m^2-trend (1.0036->1.0129 monotone); plausibly Verlet O((m*dt)^2) phase error"
+  => "  not separated from any residual mode-coupling — needs dt-scaling test for clean attribution"
+  => "test confirms diagnosis for LINEAR Hamiltonian only"
+  => "  with phi^4 self-interaction (not present here), pure-k0 IC would NOT preserve k=0 dynamically"
+  => "  mode-coupling would seed k!=0 dynamically — full nonlinear case needs separate analysis"
+  => "tau_half resolution = dt = 0.05 -> quantization floor on ratio ~0.011 at m^2=0.50"
+  => "  the 1.0129 datum at the floor (consistent with 1.000 within resolution)"
+  => "E_drift monitor-only (sampled every 50 ticks + at tau_half); not a per-step bound"
+  => "Python mirror only /tmp/cascade_s2/symplectic_t3_L8_purek0.py 167 lines, 0.2s wall"
+  => "own#11 strict; chflags uchg honored"

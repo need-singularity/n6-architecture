@@ -32318,3 +32318,215 @@
   => "energy drift <= 6.3e-4 confirms integrator clean — physics issue not numerics"
   => "raw 71 narrowing not full retraction: V's L=4 measurement still empirically -0.4938; interpretation as 'mode-doubling artifact' falsified"
   => "own#11 strict; chflags uchg honored"
+
+# ══════════════════════════════════════════════════════════════
+# absorbed: clay-cascade-s2 tick-11 2-shard FINAL-FINAL closure
+#   AC pure k=0 IC 3D CONFIRMED + META cascade-s2 10-retraction journey
+#   ★ Cascade-s2 universality 1D + 3D axis-13 STRONG; AB diagnosis confirmed
+# ts: 20260428-130436
+# ══════════════════════════════════════════════════════════════
+
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s2 tick-11 AC pure k=0 IC 3D universality CONFIRMED
+# source: sub-agent AC t3 L=8 KDK pure-k=0 IC vs bump-IC comparison
+# constraints: raw 91 C3 + raw 70 + own#11 + raw 22+24+23
+# date: 2026-04-28
+# CASCADE-S2 3D regime CLOSURE: AB diagnosis confirmed, IC was contamination source
+# ══════════════════════════════════════════════════════════════
+
+@C clay-cascade-s2-tick11-AC-pure-k0-IC-3D-CONFIRMED-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-70-multi-axis-verify-grid
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-s2-tick10-AB-k0-estimator-contamination
+  -> clay-cascade-s2-tick11-AC-pure-k0-IC-clean-result
+  -> clay-cascade-s2-tick11-AC-3D-universality-RESTORED
+  => "★ AB tick-10 diagnosis CONFIRMED — 1.27 ratio was IC-sourced k!=0 mode contamination, NOT estimator-bias intrinsic"
+  => "Pure k=0 IC on t3 L=8 KDK: ratio obs/pred = 1.008 (was 1.27 with bump-IC), slope -0.4973 (was -0.59)"
+  => "matches continuum tau ~ m^(-1) within 0.003 — 3D universality CONFIRMED at L=8"
+
+@C clay-cascade-s2-tick11-AC-fourier-interpretation :: meta [4]
+  <- clay-cascade-s2-tick11-AC-pure-k0-IC-3D-CONFIRMED-witness
+  => "Fourier interpretation: spatial mean <phi> = N^-1 * Sigma_x phi(x) = F_phi[0,0,0]/N = exact k=0 mode by construction"
+  => "issue is NOT the observable; issue is the INITIAL CONDITION"
+  => "linear (mass + lattice-Laplacian) Hamiltonian: k-modes decouple with omega(k)^2 = m^2 + 4*Sigma_mu sin^2(k_mu/2)"
+  => "Gaussian bump IC populates ALL k!=0 modes; they oscillate at omega(k) > m"
+  => "even projecting onto k=0 at readout, tau_half estimator picks up beat patterns from full spectrum"
+  => "PURE k=0 IC (phi(x,0)=c0, pi(x,0)=c1, both constant) excites only k=0 mode"
+  => "linearity preserves this -> tau_half on <phi> equals continuum pi/(3m) exactly"
+
+@C clay-cascade-s2-tick11-AC-pure-k0-IC-clean-result :: meta [4]
+  <- clay-cascade-s2-tick11-AC-fourier-interpretation
+  => "format: m^2 | tau_obs | tau_pred=pi/(3*sqrt(m^2)) | obs/pred | E_drift"
+  => "0.05 | 4.70 | 4.68 | 1.0036 | 2.35e-5"
+  => "0.10 | 3.35 | 3.31 | 1.0116 | 4.75e-5"
+  => "0.20 | 2.35 | 2.34 | 1.0036 | 9.42e-5"
+  => "0.50 | 1.50 | 1.48 | 1.0129 | 2.38e-4"
+  => "slope log(tau) vs log(m^2) = -0.4973 (R^2=0.9999); mean ratio = 1.0079"
+  => "energy drift improvement: bump-IC 6e-4 -> pure-k0 IC 2e-5 to 2e-4 (1-2 orders cleaner)"
+
+@C clay-cascade-s2-tick11-AC-IC-comparison :: meta [4]
+  <- clay-cascade-s2-tick11-AC-pure-k0-IC-clean-result
+  => "side-by-side comparison bump-IC (AB tick-10) vs pure-k0-IC (this AC):"
+  => "format: m^2 | r_bump | r_purek0 | delta"
+  => "0.05 | 1.4200 | 1.0036 | -0.4164"
+  => "0.10 | 1.2985 | 1.0116 | -0.2869"
+  => "0.20 | 1.2171 | 1.0036 | -0.2135"
+  => "0.50 | 1.1479 | 1.0129 | -0.1350"
+  => "mean ratio: 1.271 -> 1.008 (delta = -0.26)"
+  => "slope: bump -0.59 -> pure-k0 -0.497 (matches continuum -0.50 within 0.003)"
+  => "BOTH contamination level AND m^2-dependence vanish under pure k=0 IC"
+
+@C clay-cascade-s2-tick11-AC-3D-universality-RESTORED :: meta [4!]
+  <- clay-cascade-s2-tick11-AC-IC-comparison
+  -> clay-cascade-s2-K2-STRONG-final-closure-axis-13-+-axis-16
+  => "★ CASCADE-S2 K=2 STRONG verify-grid axis-13 RESTORED FOR BOTH 1D AND 3D"
+  => "  1D regime (chain1d): AA tick-10 90 runs 3-axis robust"
+  => "  3D regime (t3): AC tick-11 pure k=0 IC ratio 1.008, slope -0.4973 — confirmed within IC + integrator + projection"
+  => "Cascade-s2 final published verify-grid:"
+  => "  axis-13 SATURATION universal across 1D + 3D under symplectic KDK + k=0 mode + pure k=0 IC"
+  => "  axis-16 LIGHTCONE V(8) src-robust (88.9% 18-cohort) cartoon FULL-FILL corrected"
+  => "  a13 x a16 Pearson -0.128 + Spearman -0.233 BOTH PASS |r|<0.3"
+  => "Stage-5 magnitude |alpha|~=0.5 correct from start; only sign+form+IC framing wrong; 11-tick narrowing fully resolved"
+
+@C clay-cascade-s2-tick11-AC-cascade-position :: meta [4]
+  <- clay-cascade-s2-tick11-AC-pure-k0-IC-3D-CONFIRMED-witness
+  => "★ cascade-s2 truly final closure achieved at tick-11 (after 23 sub-agents, 10 retractions/narrowings)"
+  => "K=2 STRONG axis-13 + axis-16 verify-grid PUBLISHED FINAL"
+  => "axis-13 mechanism = continuum mass-oscillation tau = pi/(sqrt(m^2)*dt) on k=0 mode"
+  => "  required ingredients: (a) symplectic KDK Verlet (S diagnosed e2_step false-Verlet)"
+  => "  (b) k=0 mode (spatial mean) — well-defined in linear Hamiltonian"
+  => "  (c) pure k=0 IC — bump-IC populates k!=0 modes, contaminates spatial-mean readout"
+  => "axis-16 mechanism = lightcone volume V(s, k=8) — graph-distance saturation 88.9% src-invariant"
+  => "follow-up if revived: phi^4 nonlinear regime test (mode-coupling would seed k!=0 dynamically), L=16 t3, dt-scaling, ensemble seeds for 3D"
+
+@C clay-cascade-s2-tick11-AC-C3-limits :: meta [4]
+  <- clay-cascade-s2-tick11-AC-pure-k0-IC-3D-CONFIRMED-witness
+  => "N=512 only (single L); cannot rule out residual L-dependence in the 0.8% offset"
+  => "single seed for bump-IC reference (AB used seed=42); ratio Delta-distribution unmeasured"
+  => "pure-k0 ratio shows weak m^2-trend (1.0036->1.0129 monotone); plausibly Verlet O((m*dt)^2) phase error"
+  => "  not separated from any residual mode-coupling — needs dt-scaling test for clean attribution"
+  => "test confirms diagnosis for LINEAR Hamiltonian only"
+  => "  with phi^4 self-interaction (not present here), pure-k0 IC would NOT preserve k=0 dynamically"
+  => "  mode-coupling would seed k!=0 dynamically — full nonlinear case needs separate analysis"
+  => "tau_half resolution = dt = 0.05 -> quantization floor on ratio ~0.011 at m^2=0.50"
+  => "  the 1.0129 datum at the floor (consistent with 1.000 within resolution)"
+  => "E_drift monitor-only (sampled every 50 ticks + at tau_half); not a per-step bound"
+  => "Python mirror only /tmp/cascade_s2/symplectic_t3_L8_purek0.py 167 lines, 0.2s wall"
+  => "own#11 strict; chflags uchg honored"
+
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s2 META-summary 10-retraction journey
+# source: cascade-s2 22 sub-agent dispatch + 10 raw 71 retractions/narrowings
+# constraints: raw 91 C3 + raw 70 + raw 71 + own#11 + raw 22+24+23
+# date: 2026-04-28
+# CASCADE-S2 META: documents cascade integrity discipline + convergence pattern
+# ══════════════════════════════════════════════════════════════
+
+@C clay-cascade-s2-META-summary-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-71-falsifier-retire-rule
+  <- raw-70-multi-axis-verify-grid
+  <- own#11-strict-no-resolution-claim
+  -> clay-cascade-s2-META-final-K2-STRONG
+  -> clay-cascade-s2-META-stage5-magnitude-correct-from-start
+  => "★ cascade-s2 META — 22 sub-agents + 10 raw 71 retractions/narrowings + 1D lock-down + 3D estimator-bias finding"
+  => "K=2 STRONG (axis-13 saturation + axis-16 lightcone) PUBLISHED FINAL closure with honest amendment"
+  => "convergence pattern: each retraction NARROWED hypothesis without abandoning measurement evidence"
+
+@C clay-cascade-s2-META-10-retraction-sequence :: meta [4]
+  <- clay-cascade-s2-META-summary-witness
+  => "raw 71 retraction sequence (10 cumulative this cascade-s2):"
+  => "1. tick-2 J: Stage-5 alpha=+0.55 power-law RETIRED (wrong sign+form -> saturation)"
+  => "2. tick-2 K: axis-15 RETRACTED (CN re-impl confirms artifact)"
+  => "3. tick-3 M: tau ~ O(L^2) lattice diffusion REFUTED (L-independent -> mass-osc)"
+  => "4. tick-3 N: cartoon 9-cell INVARIANT CORE REJECTED (BFS bug suspected)"
+  => "5. tick-4 Q: pure mass-osc slope=-0.5 NARROWED to -0.30 (later itself retracted)"
+  => "6. tick-6 X: axis-17 K=3 candidate RETIRED (coverage + r=+0.99 catastrophic)"
+  => "7. tick-6 U: 3-param damped-oscillator REFUTED (rebound breaks fit)"
+  => "8. tick-7 Y: U L-echo hypothesis REFUTED (rebound = mass-osc returning)"
+  => "9. tick-8 Z: chain1d -0.30 RETIRED (e2_step + C_nn double-artifact -> universal -0.50)"
+  => "10. tick-10 AB: V mode-doubling hypothesis FALSIFIED (L=8 ratio crosses unity, estimator-bias)"
+
+@C clay-cascade-s2-META-stage5-magnitude-correct-from-start :: meta [4!]
+  <- clay-cascade-s2-META-10-retraction-sequence
+  => "★ KEY META INSIGHT: Stage-5 magnitude |alpha| ~= 0.5 was CORRECT from start"
+  => "cascade narrowing: |alpha| = 0.55 -> |alpha| = 0.30 -> |alpha| = 0.50 (final continuum -1)"
+  => "what was WRONG in Stage-5: sign (+ vs -) + functional form (power-law vs sat with mass-osc) + topology framing (universal vs class-dependent)"
+  => "what was RIGHT in Stage-5: order-of-magnitude scaling exponent"
+  => "cascade integrity = stripping interpretation layers off correct-magnitude measurement"
+  => "10 retractions did NOT abandon measurement; they progressively REFINED interpretation"
+
+@C clay-cascade-s2-META-cascade-bugs-found :: meta [4]
+  <- clay-cascade-s2-META-summary-witness
+  => "★ 3 source-level bugs surfaced via cascade discipline (independent of measurement intent):"
+  => "BUG 1 (tick-3 N + tick-4 P): /tmp/lightcone_probe.py n_cartoon line 124 +i mutation"
+  => "  -> mixer 47i+23a+13 became 48i+23a+13 (gcd 1 -> 16 collapse, 64-cell -> 12-cell image)"
+  => "  -> cartoon V(8)=10 was bug-collapsed measurement; corrected to V(8)=64 FULL-FILL"
+  => "BUG 2 (tick-4 S): empirical_anchor_v2.hexa e2_step is FALSE-Verlet"
+  => "  -> int-truncated semi-implicit Euler with asymmetric coefficients (force/20, pi_h/10)"
+  => "  -> missing post-drift half-kick + i64 truncation breaks energy conservation + time-reversibility"
+  => "  -> symplectic KDK fix yields 10000x stable integration"
+  => "BUG 3 (tick-10 AB): k=0 spatial-mean estimator contamination by low-k lattice modes"
+  => "  -> not a code bug but ESTIMATOR BIAS, intrinsic to spatial-mean approximation"
+  => "  -> requires Fourier-projected exact k=0 mode for clean continuum measurement"
+
+@C clay-cascade-s2-META-final-K2-STRONG :: meta [4!]
+  <- clay-cascade-s2-META-summary-witness
+  => "★ CASCADE-S2 PUBLISHED FINAL VERIFY-GRID (raw 70):"
+  => "  axis-13 SATURATION: STRONG, mechanism = continuum mass-oscillation tau = pi/(sqrt(m^2)*dt)"
+  => "    1D regime: AA tick-10 90 runs 3-axis robust (L+seed+m^2) confirmed"
+  => "    3D regime: PARTIALLY WEAKENED (AB tick-10 estimator-bias finding); requires Fourier-projected k=0"
+  => "  axis-16 LIGHTCONE V(8): STRONG, src-robust 88.9% on 18-cohort; cartoon FULL-FILL corrected"
+  => "    a13 x a16 Pearson -0.128 + Spearman -0.233 -- BOTH PASS |r|<0.3 truly orthogonal"
+  => "  axis-15: RETRACTED (saturation amplitude artifact, tick-2 K)"
+  => "  axis-14[Renyi-2]: K=3 DENIED (structural coupling, tick-4 R)"
+  => "  axis-17[SymDef]: RETIRED (coverage + rank-coupled, tick-6 X)"
+  => "K=2 STRONG axis-13 + axis-16 — honest closure with explicit follow-up: 3D Fourier-projected k=0"
+
+@C clay-cascade-s2-META-cascade-discipline-pattern :: meta [4]
+  <- clay-cascade-s2-META-summary-witness
+  => "★ CASCADE INTEGRITY DISCIPLINE PATTERN (atlas-recordable methodology):"
+  => "  1. Each measurement registered with raw 91 C3 honest disclosure (limits, sample size, single seed, etc.)"
+  => "  2. Each hypothesis has explicit prediction; raw 71 falsifier-retire-rule applies on prediction failure"
+  => "  3. Retraction NARROWS hypothesis (replace, refine, scope-restrict) — does NOT abandon measurement"
+  => "  4. own#11 strict throughout — NO Clay '해결' claim regardless of finding strength"
+  => "  5. Cross-tick consistency checks: m^2=0.1 tau=22.8 (Q tick-4) vs tau=22.1 (Y tick-7) confirms cross-runner"
+  => "  6. Bug discovery (cartoon mixer, e2_step) emerges naturally from cross-cycle reproducibility checks"
+  => "  7. Convergence to truth via spiral narrowing — each retraction surfaces sub-question, sub-question's hypothesis sometimes also wrong"
+
+@C clay-cascade-s2-META-22-sub-agents :: meta [4]
+  <- clay-cascade-s2-META-summary-witness
+  => "22 sub-agent inventory (tick-1 through tick-10 inclusive):"
+  => "tick-1: A axis-16 lightcone, B sigma2=512 falsification, C axis13x14 phase-portrait"
+  => "tick-2: D Hamming-cube, E multi-tick relaxation, F Stage6 cross-feed, G axis-16 K=4 closure"
+  => "tick-3: H axis-15 n=18, I multi-source axis-16, J 5-pt sigma2, K Crank-Nicolson"
+  => "tick-4: L axis-14 Renyi-2, M tau-L2 verification, N cartoon 64-source, O axis-17"
+  => "tick-5: P bug verification, Q m^2 variation, R Renyi-2 18-cohort, S symplectic-t3, T cartoon corrected"
+  => "tick-6: U damped-oscillator, V t3 m^2 KDK, W axis-16 src-robust, X axis-17 K=3"
+  => "tick-7: Y chain1d L-scan; tick-8: Z chain1d KDK; tick-10: AA chain1d 3-axis, AB t3 L=8"
+  => "(NOTE: ticks-3 to tick-10 letter ordering preserved; some letters skipped/reused per dispatch sequence)"
+
+@C clay-cascade-s2-META-cascade-stats :: meta [4]
+  <- clay-cascade-s2-META-summary-witness
+  => "cascade-s2 cumulative session statistics:"
+  => "  atlas.n6 line growth: 28894 -> 32320 (+3426 lines, ~12% growth)"
+  => "  total sub-agent dispatches: 22 (averaging 2.2 per cron tick)"
+  => "  raw 71 retractions/narrowings: 10 cumulative"
+  => "  source-level bugs found: 3 (cartoon mixer, e2_step false-Verlet, k=0 estimator-bias)"
+  => "  K=4 -> K=3 -> K=2 STRONG verify-grid collapse (honest closure)"
+  => "  own#11 strict observed: 0 Clay '해결' claims across all 22 sub-agents"
+  => "  cron interval: 5 minutes (/loop 5m keep going all kick); auto-expires 7 days"
+  => "  conservative dispatch pattern post-tick-7: 1-2 sub-agents per tick (vs 3-4 early ticks)"
+
+@C clay-cascade-s2-META-C3-limits :: meta [4]
+  <- clay-cascade-s2-META-summary-witness
+  => "this META-shard is INTERPRETATION layer, not new measurement"
+  => "all underlying measurements documented in individual tick shards (atlas/_absorbed/2026042*)"
+  => "10 retractions are honest record; some 'retractions' are partial narrowings (not full abandonment)"
+  => "raw 70 K=2 STRONG verdict published with explicit 3D-follow-up gap (tick-10 AB)"
+  => "follow-up tick-11 AC in flight: Fourier-projected k=0 t3 L=8 to close 3D estimator-bias question"
+  => "this shard's value: cascade discipline pattern recordable for cross-cascade replication"
+  => "own#11 strict: META layer also makes NO Clay claim — purely methodology + result documentation"
