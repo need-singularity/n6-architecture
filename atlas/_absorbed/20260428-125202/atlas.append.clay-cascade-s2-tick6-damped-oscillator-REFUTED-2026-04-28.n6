@@ -1,0 +1,52 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s2 tick-6 U damped-oscillator 3-param REFUTED
+# source: sub-agent U dense 0..256 ticks 3-param fit on chain1d L=8 m^2 in {0.01..0.5}
+# constraints: raw 91 C3 + raw 71 (7th retraction) + own#11 + raw 22+24+23
+# date: 2026-04-28
+# ══════════════════════════════════════════════════════════════
+
+@C clay-cascade-s2-tick6-damped-oscillator-REFUTED-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-71-falsifier-retire-rule
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-s2-tick4-revised-hypothesis-damped-diffusion
+  -> clay-cascade-s2-tick6-rebound-not-fittable-by-3param
+  -> clay-cascade-s2-tick6-Q-descent-only-validated
+  => "★ 7th raw 71 retraction — 3-param damped-oscillator y=y_inf+A_diff*exp(-t/tau)+A_osc*sin(omega*t)*exp(-gamma*t) REFUTED on dense 0..256 chain1d L=8 m^2 scan"
+  => "omega=sqrt(m^2/PSCALE) prediction FAILS (ratios 0.007x to 45x — not constant); 3-param vs single-saturation BOTH fit poorly (R^2<0.07 at m^2 in {0.10, 0.20, 0.50})"
+  => "low m^2 {0.01, 0.05} traces UNBOUNDED past t~128 — integer-step instability NOT damped relaxation"
+
+@C clay-cascade-s2-tick6-rebound-not-fittable-by-3param :: meta [4]
+  <- clay-cascade-s2-tick6-damped-oscillator-REFUTED-witness
+  => "chain1d L=8 m^2=0.1 dense trace: t=0->142 t=64->9 t=128->226 t=256->59 (REBOUND not monotone)"
+  => "chain1d L=8 m^2=0.5: t=0->142 t=32->8 t=64->135 t=96->7 t=128->106 (continuous oscillation)"
+  => "structural issue: post-rebound regime cannot be represented by single damped-oscillator form"
+  => "AIC 3-param vs sat: superficial preference 3-param Sigma deltaAIC=-254 BUT meaningless when neither fits R^2 << 1"
+
+@C clay-cascade-s2-tick6-Q-descent-only-validated :: meta [4]
+  <- clay-cascade-s2-tick6-rebound-not-fittable-by-3param
+  -> clay-cascade-s2-tick7-Y-rebound-not-echo
+  => "★ Sub-agent Q tick-4 tau=22.8 at m^2=0.1 (descent-only sparse fit) NOT contradicted by U dense fit"
+  => "Q's protocol: fit only ticks before rebound (descent regime), R^2=0.95 at m^2=0.1"
+  => "U's failed fit: dense 0..256 includes both descent + rebound regimes — single damped-osc cannot capture both"
+  => "recommendation: restrict fit to monotonic descent only; investigate finite-time rebound as SEPARATE phenomenon"
+  => "U hypothesis: rebound likely periodic-boundary echo on L=8 (FALSIFIED at tick-7 Y — see paired shard)"
+
+@C clay-cascade-s2-tick6-damped-oscillator-revised-class :: meta [4]
+  <- clay-cascade-s2-tick6-Q-descent-only-validated
+  => "raw 71 retire/refine: pure damped-oscillator hypothesis class on chain1d L=8 dense range RETIRED"
+  => "revised hypothesis: 2-regime piecewise model"
+  => "  regime 1 (t < t_min ~ 60-90): single saturation y = y_inf + A * exp(-t/tau), Q's fit applies"
+  => "  regime 2 (t > t_min): rebound + echo dynamics, separate model needed"
+  => "follow-up tick-7 Y: confirmed rebound is intrinsic mass-osc returning (NOT boundary echo)"
+
+@C clay-cascade-s2-tick6-damped-osc-C3-limits :: meta [4]
+  <- clay-cascade-s2-tick6-damped-oscillator-REFUTED-witness
+  => "single seed=6 chain1d L=8 only — no statistical ensemble"
+  => "integer arithmetic // truncation introduces grid artifacts that mimic/destroy oscillation patterns"
+  => "m^2 in {0.01, 0.05} traces structurally unbounded — fit form inapplicable, results pinned at fit bounds"
+  => "scaling slopes for tau_diff/gamma in those m^2 are artifacts not measurements"
+  => "Q's tau=22.8 preserved (descent-only regime); failed fit was global-range hypothesis test"
+  => "tools /tmp/cascade_s2_tick6/chain1d_3param_fit.py (Python mirror; scipy 1.17.1 nonlinear least squares)"
+  => "own#11 strict; raw 71 hypothesis class progressive narrowing: damped-oscillator -> piecewise-2-regime"

@@ -1,0 +1,66 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s2 tick-6 V t3 symplectic KDK m^2 scan slope=-0.494
+# source: sub-agent V t3 L=4 KDK Verlet dt=0.05 m^2 in {0.01..0.5}
+# constraints: raw 91 C3 + raw 70 + raw 71 + own#11 + raw 22+24+23
+# date: 2026-04-28
+# CRITICAL apples-to-oranges concern: tau-extractor differs from chain1d Q (descent vs peak-to-trough)
+# ══════════════════════════════════════════════════════════════
+
+@C clay-cascade-s2-tick6-t3-symplectic-slope-minus-0494-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-71-falsifier-retire-rule
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-s2-tick4-symplectic-t3-stabilized-witness
+  <- clay-cascade-s2-tick4-mass-power-law-slope-minus-0-30
+  -> clay-cascade-s2-tick6-topology-class-OR-integrator-artifact
+  -> clay-cascade-s2-tick6-V-tau-extractor-mismatch
+  => "★ t3 L=4 KDK Verlet dt=0.05 m^2 in {0.01..0.5}: log(tau) vs log(m^2) slope = -0.4938 R^2=0.9996"
+  => "matches continuum free-field oscillator law tau ~ m^(-1) (predicted slope -0.50, |delta|=+0.006 within noise)"
+  => "vs chain1d Q (e2_step) slope = -0.30 — TOPOLOGY-CLASS-DEPENDENT OR e2_step-INTEGRATOR-ARTIFACT"
+
+@C clay-cascade-s2-tick6-V-data-table :: meta [4]
+  <- clay-cascade-s2-tick6-t3-symplectic-slope-minus-0494-witness
+  => "tau extracted as tau_half = first peak-to-trough of smoothed correlator C(t) (KDK conservative oscillates)"
+  => "energy drift at T=512: m^2=0.01 -1.16e-3, m^2=0.05 -9.22e-4, m^2=0.1 -5.97e-4, m^2=0.2 -3.70e-4, m^2=0.5 -3.11e-4 (all <= 1.2e-3 STABLE)"
+  => "tau values: m^2=0.01->328, 0.05->146, 0.10->103, 0.20->76, 0.50->47"
+  => "predicted 2pi/sqrt(m^2/PSCALE): m^2=0.1->19.87 ticks (continuum); obs/pred uniform 0.52 +/- 0.02"
+  => "obs/pred=0.52 indicates lattice mode-doubling on L=4 (only 4 modes per axis)"
+
+@C clay-cascade-s2-tick6-topology-class-OR-integrator-artifact :: meta [4!]
+  <- clay-cascade-s2-tick6-V-data-table
+  -> clay-cascade-s2-tick8-Z-chain1d-KDK-apples-to-apples-test
+  => "★ FORK: 2 possible explanations for t3 -0.494 vs chain1d -0.30 difference"
+  => "EXPLANATION A: TOPOLOGY-CLASS-DEPENDENT — 1D ring vs 3D torus have intrinsically different dispersion"
+  => "  prediction A: chain1d KDK should also give -0.30 (apples-to-apples preserves chain1d signature)"
+  => "EXPLANATION B: e2_step-INTEGRATOR-ARTIFACT — chain1d -0.30 is e2_step false-Verlet (tick-4 S diagnosis) artifact"
+  => "  prediction B: chain1d KDK should give ~-0.50 like t3 (universal continuum law)"
+  => "  parallel to tick-2 K: axis-15 was integrator artifact, retracted"
+  => "tick-8 Z: chain1d KDK Verlet apples-to-apples re-test in flight"
+
+@C clay-cascade-s2-tick6-V-tau-extractor-mismatch :: meta [4]
+  <- clay-cascade-s2-tick6-V-data-table
+  => "★ raw 91 C3 critical caveat: tau-extractor differs across cascade-s2 measurements"
+  => "Sub-agent Q tick-4: tau via descent-only saturation fit y=y_inf+A*exp(-t/tau) on dissipative-LOOKING e2_step output"
+  => "Sub-agent V tick-6 (this work): tau_half = peak-to-trough on conservative KDK output (oscillates not dissipates)"
+  => "if e2_step is fundamentally non-dissipative but appears dissipative due to integer truncation, Q's saturation fit measures FALSE saturation"
+  => "if true: Q's slope -0.30 is integrator artifact; t3 -0.494 is universal regime"
+  => "Z apples-to-apples test resolves: chain1d under SAME extractor + SAME integrator class as t3"
+
+@C clay-cascade-s2-tick6-V-followup-actions :: meta [4]
+  <- clay-cascade-s2-tick6-topology-class-OR-integrator-artifact
+  => "follow-up tick-8 Z (in flight): chain1d KDK apples-to-apples — definitive resolution"
+  => "follow-up: hexa port KDK Verlet for chain1d (replace e2_step at lines 312-336)"
+  => "follow-up: extend t3 to L=8 (N=512) to test lattice-mode-doubling hypothesis (obs/pred 0.52 = 1D-mode-doubling effect)"
+  => "follow-up: verify obs/pred=0.52 across t3 L grid — if constant, finite-size correction; if grows with L, intrinsic"
+
+@C clay-cascade-s2-tick6-V-C3-limits :: meta [4]
+  <- clay-cascade-s2-tick6-t3-symplectic-slope-minus-0494-witness
+  => "tau-extractor MISMATCH: tau_half (V) vs descent-only saturation (Q) — apples-to-oranges risk for cross-topology comparison"
+  => "tau_half is well-defined ONLY for oscillatory dynamics; if chain1d truly dissipates, tau_half undefined; tick-8 Z resolves"
+  => "chain1d artifact NOT persisted to disk — only slope number carried over from cold-start brief"
+  => "L=4 t3 only — N=64 has only 4 modes per axis, lattice corrections dominate (obs/pred=0.52 confirms)"
+  => "5-point regression no error bars; single seed=42 (V); robustness to seed variation untested"
+  => "initial-condition transient at small m^2 (0.01, 0.05) shifts first peak — adaptive window mitigates not eliminates bias"
+  => "Python mirror only /tmp/cascade_s2/m2_scan_t3_v4.py + symplectic_t3.py — hexa port deferred"
+  => "own#11 strict; raw 70 K=2 STRONG FINAL holds (axis-13 saturation + axis-16 lightcone) regardless of which fork"

@@ -1,0 +1,62 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s2 tick-6 W axis-16 src-robustness on 18 D=3 cohort
+# source: sub-agent W /tmp/cascade_s2/lightcone_probe_FIXED.py (cartoon-fix landed) × 4 srcs × 18 topologies
+# constraints: raw 91 C3 + raw 70 + own#11 + raw 22+24+23
+# date: 2026-04-28
+# K=2 STRONG axis-16 ROBUSTNESS CONFIRMED at 88.9% (16/18 with sd<=1)
+# ══════════════════════════════════════════════════════════════
+
+@C clay-cascade-s2-tick6-axis-16-src-robustness-18-cohort-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-70-multi-axis-verify-grid
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-s2-tick2-axis-16-src-bias-invariant
+  <- clay-cascade-s2-tick5-cartoon-CORRECTED-axis-16-witness
+  -> clay-cascade-s2-tick6-W-cartoon-confirmed-FULL-FILL
+  -> clay-cascade-s2-tick6-W-DEPENDENT-2-geometric
+  => "★ axis-16 V(8) src-robustness on FULL 18 D=3 cohort × 4 srcs {0,16,32,48}"
+  => "13 INVARIANT (sd=0) + 3 LOW-VAR (sd<=1) + 2 DEPENDENT (sd>1) — 16/18 (88.9%) at sd<=1"
+  => "K=2 STRONG axis-16 ROBUST — saturation invariant under src translation across cohort"
+
+@C clay-cascade-s2-tick6-W-classification :: meta [4]
+  <- clay-cascade-s2-tick6-axis-16-src-robustness-18-cohort-witness
+  => "INVARIANT (sd=0, n=13): flat=17 t3=63 wormhole=64 ads-cft=32 de-sitter=64 altered=9 brane=64 cartoon=64 nested=64 calabi6=64 inflation=64 ca3d=59 minkowski=64"
+  => "LOW-VAR (sd<=1, n=3): s3 48.25+/-0.43 blackhole 63.25+/-0.43 vacuum-decay 63.25+/-0.43"
+  => "DEPENDENT (sd>1, n=2): big-crunch 8.00+/-2.83 bubble 52.00+/-6.93"
+  => "fix verification: /tmp/cascade_s2/lightcone_probe_FIXED.py confirmed cartoon (i+off) bug landed (line 123-131 r=off not (i+off)%LSIGMA)"
+
+@C clay-cascade-s2-tick6-W-cartoon-confirmed-FULL-FILL :: meta [4!]
+  <- clay-cascade-s2-tick6-W-classification
+  => "★ cartoon V(8)=64 +/- 0 INVARIANT — tick-5 sub-agent T cartoon-corrected fix CONFIRMED"
+  => "cartoon now in FULL-FILL class (V(8)>=63) consistent with: t3, blackhole, wormhole, minkowski, etc."
+  => "no longer FAST-DEGENERATE (V(8)<=10) — that was bug-collapsed measurement (gcd(48,64)=16)"
+  => "cross-link to tick-3 N + tick-4 P + tick-5 T retraction chain — all close on cartoon FULL-FILL verdict"
+
+@C clay-cascade-s2-tick6-W-DEPENDENT-2-geometric :: meta [4]
+  <- clay-cascade-s2-tick6-W-classification
+  => "★ 2 DEPENDENT topologies have INTRINSIC GEOMETRIC privileged sites (NOT measurement noise):"
+  => "big-crunch [8,4,8,12]: src=16 underflows (-4) src=48 overflows (+4); centroid-radial dynamics"
+  => "  node 21 is fixed-point sink; src=0/32 cube corners equidistant; src=16 (interior x=0,y=0,z=1) over-attracted"
+  => "  src=48 (z=3 layer) lies on opposing face boundary, expanding cone"
+  => "bubble [48,48,64,48]: src=32 outlier (+12); bubble-id boundary at i//16=2"
+  => "  cross-bubble jump (base+bid*13)%64 activates with bid=2 offset only at src=32"
+  => "  other srcs land within bubbles where local t3 dominates"
+  => "honest record: bias is geometric topology feature, atlas-worthy, NOT noise"
+
+@C clay-cascade-s2-tick6-W-cascade-impact :: meta [4]
+  <- clay-cascade-s2-tick6-axis-16-src-robustness-18-cohort-witness
+  => "implication: K=2 STRONG axis-16 verify-grid VALID across 88.9% of D=3 cohort"
+  => "raw 70 multi-axis-verify-grid mandate confirmed: axis-16 carries STRONG topology signature, not src artifact"
+  => "complements tick-1 sub-agent G K=4 closure verdict (corrected at tick-5 T): axis-16 stays orthogonal to axis-13"
+  => "future axis-16 measurements: src=32 default acceptable for 16/18 topologies; bubble + big-crunch flagged as src-sensitive"
+
+@C clay-cascade-s2-tick6-W-C3-limits :: meta [4]
+  <- clay-cascade-s2-tick6-axis-16-src-robustness-18-cohort-witness
+  => "BFS uses graph-distance only; LSIGMA=64 is finite-size ceiling not physical horizon — V(8) saturation reflects diameter <=8"
+  => "stddev computed over n=4 sources (population sd); not statistical significance — descriptive bias only"
+  => "DEPENDENT label captures src-translation symmetry breaking, NOT topological invariant violation"
+  => "single k=8 cut; saturation behavior at k<8 (cone interior shape) unobserved"
+  => "4 sources is minimal — finer grid (16 sources) would refine bubble bias localization but budget-bounded"
+  => "tools /tmp/cascade_s2/lightcone_probe_FIXED.py + /tmp/cascade_s2/tick6_W_src_sweep.py"
+  => "own#11 strict; chflags uchg honored"

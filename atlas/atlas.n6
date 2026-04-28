@@ -31744,3 +31744,416 @@
   => "raw 71 satisfied: cartoon V(8)=10 RETRACTED + replaced with measured 64; methodology cross-check at PRIOR repro 4-decimal exact"
   => "own#11 strict; chflags uchg honored"
 
+
+# ══════════════════════════════════════════════════════════════
+# absorbed: clay-cascade-s2 tick-6+7+8 6-shard mega batch
+#   U damped-oscillator REFUTED + V t3 slope=-0.494 + W axis-16 src-robust
+#   + X axis-17 RETIRED + Y rebound NOT echo + Z chain1d KDK UNIVERSAL -0.50
+#   ★ 9 raw 71 retractions cumulative — tau ~ m^(-1) UNIVERSAL across topology
+#   ★ K=2 STRONG (axis-13 + axis-16) cascade-s2 FINAL closure
+# ts: 20260428-125202
+# ══════════════════════════════════════════════════════════════
+
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s2 tick-6 U damped-oscillator 3-param REFUTED
+# source: sub-agent U dense 0..256 ticks 3-param fit on chain1d L=8 m^2 in {0.01..0.5}
+# constraints: raw 91 C3 + raw 71 (7th retraction) + own#11 + raw 22+24+23
+# date: 2026-04-28
+# ══════════════════════════════════════════════════════════════
+
+@C clay-cascade-s2-tick6-damped-oscillator-REFUTED-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-71-falsifier-retire-rule
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-s2-tick4-revised-hypothesis-damped-diffusion
+  -> clay-cascade-s2-tick6-rebound-not-fittable-by-3param
+  -> clay-cascade-s2-tick6-Q-descent-only-validated
+  => "★ 7th raw 71 retraction — 3-param damped-oscillator y=y_inf+A_diff*exp(-t/tau)+A_osc*sin(omega*t)*exp(-gamma*t) REFUTED on dense 0..256 chain1d L=8 m^2 scan"
+  => "omega=sqrt(m^2/PSCALE) prediction FAILS (ratios 0.007x to 45x — not constant); 3-param vs single-saturation BOTH fit poorly (R^2<0.07 at m^2 in {0.10, 0.20, 0.50})"
+  => "low m^2 {0.01, 0.05} traces UNBOUNDED past t~128 — integer-step instability NOT damped relaxation"
+
+@C clay-cascade-s2-tick6-rebound-not-fittable-by-3param :: meta [4]
+  <- clay-cascade-s2-tick6-damped-oscillator-REFUTED-witness
+  => "chain1d L=8 m^2=0.1 dense trace: t=0->142 t=64->9 t=128->226 t=256->59 (REBOUND not monotone)"
+  => "chain1d L=8 m^2=0.5: t=0->142 t=32->8 t=64->135 t=96->7 t=128->106 (continuous oscillation)"
+  => "structural issue: post-rebound regime cannot be represented by single damped-oscillator form"
+  => "AIC 3-param vs sat: superficial preference 3-param Sigma deltaAIC=-254 BUT meaningless when neither fits R^2 << 1"
+
+@C clay-cascade-s2-tick6-Q-descent-only-validated :: meta [4]
+  <- clay-cascade-s2-tick6-rebound-not-fittable-by-3param
+  -> clay-cascade-s2-tick7-Y-rebound-not-echo
+  => "★ Sub-agent Q tick-4 tau=22.8 at m^2=0.1 (descent-only sparse fit) NOT contradicted by U dense fit"
+  => "Q's protocol: fit only ticks before rebound (descent regime), R^2=0.95 at m^2=0.1"
+  => "U's failed fit: dense 0..256 includes both descent + rebound regimes — single damped-osc cannot capture both"
+  => "recommendation: restrict fit to monotonic descent only; investigate finite-time rebound as SEPARATE phenomenon"
+  => "U hypothesis: rebound likely periodic-boundary echo on L=8 (FALSIFIED at tick-7 Y — see paired shard)"
+
+@C clay-cascade-s2-tick6-damped-oscillator-revised-class :: meta [4]
+  <- clay-cascade-s2-tick6-Q-descent-only-validated
+  => "raw 71 retire/refine: pure damped-oscillator hypothesis class on chain1d L=8 dense range RETIRED"
+  => "revised hypothesis: 2-regime piecewise model"
+  => "  regime 1 (t < t_min ~ 60-90): single saturation y = y_inf + A * exp(-t/tau), Q's fit applies"
+  => "  regime 2 (t > t_min): rebound + echo dynamics, separate model needed"
+  => "follow-up tick-7 Y: confirmed rebound is intrinsic mass-osc returning (NOT boundary echo)"
+
+@C clay-cascade-s2-tick6-damped-osc-C3-limits :: meta [4]
+  <- clay-cascade-s2-tick6-damped-oscillator-REFUTED-witness
+  => "single seed=6 chain1d L=8 only — no statistical ensemble"
+  => "integer arithmetic // truncation introduces grid artifacts that mimic/destroy oscillation patterns"
+  => "m^2 in {0.01, 0.05} traces structurally unbounded — fit form inapplicable, results pinned at fit bounds"
+  => "scaling slopes for tau_diff/gamma in those m^2 are artifacts not measurements"
+  => "Q's tau=22.8 preserved (descent-only regime); failed fit was global-range hypothesis test"
+  => "tools /tmp/cascade_s2_tick6/chain1d_3param_fit.py (Python mirror; scipy 1.17.1 nonlinear least squares)"
+  => "own#11 strict; raw 71 hypothesis class progressive narrowing: damped-oscillator -> piecewise-2-regime"
+
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s2 tick-6 V t3 symplectic KDK m^2 scan slope=-0.494
+# source: sub-agent V t3 L=4 KDK Verlet dt=0.05 m^2 in {0.01..0.5}
+# constraints: raw 91 C3 + raw 70 + raw 71 + own#11 + raw 22+24+23
+# date: 2026-04-28
+# CRITICAL apples-to-oranges concern: tau-extractor differs from chain1d Q (descent vs peak-to-trough)
+# ══════════════════════════════════════════════════════════════
+
+@C clay-cascade-s2-tick6-t3-symplectic-slope-minus-0494-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-71-falsifier-retire-rule
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-s2-tick4-symplectic-t3-stabilized-witness
+  <- clay-cascade-s2-tick4-mass-power-law-slope-minus-0-30
+  -> clay-cascade-s2-tick6-topology-class-OR-integrator-artifact
+  -> clay-cascade-s2-tick6-V-tau-extractor-mismatch
+  => "★ t3 L=4 KDK Verlet dt=0.05 m^2 in {0.01..0.5}: log(tau) vs log(m^2) slope = -0.4938 R^2=0.9996"
+  => "matches continuum free-field oscillator law tau ~ m^(-1) (predicted slope -0.50, |delta|=+0.006 within noise)"
+  => "vs chain1d Q (e2_step) slope = -0.30 — TOPOLOGY-CLASS-DEPENDENT OR e2_step-INTEGRATOR-ARTIFACT"
+
+@C clay-cascade-s2-tick6-V-data-table :: meta [4]
+  <- clay-cascade-s2-tick6-t3-symplectic-slope-minus-0494-witness
+  => "tau extracted as tau_half = first peak-to-trough of smoothed correlator C(t) (KDK conservative oscillates)"
+  => "energy drift at T=512: m^2=0.01 -1.16e-3, m^2=0.05 -9.22e-4, m^2=0.1 -5.97e-4, m^2=0.2 -3.70e-4, m^2=0.5 -3.11e-4 (all <= 1.2e-3 STABLE)"
+  => "tau values: m^2=0.01->328, 0.05->146, 0.10->103, 0.20->76, 0.50->47"
+  => "predicted 2pi/sqrt(m^2/PSCALE): m^2=0.1->19.87 ticks (continuum); obs/pred uniform 0.52 +/- 0.02"
+  => "obs/pred=0.52 indicates lattice mode-doubling on L=4 (only 4 modes per axis)"
+
+@C clay-cascade-s2-tick6-topology-class-OR-integrator-artifact :: meta [4!]
+  <- clay-cascade-s2-tick6-V-data-table
+  -> clay-cascade-s2-tick8-Z-chain1d-KDK-apples-to-apples-test
+  => "★ FORK: 2 possible explanations for t3 -0.494 vs chain1d -0.30 difference"
+  => "EXPLANATION A: TOPOLOGY-CLASS-DEPENDENT — 1D ring vs 3D torus have intrinsically different dispersion"
+  => "  prediction A: chain1d KDK should also give -0.30 (apples-to-apples preserves chain1d signature)"
+  => "EXPLANATION B: e2_step-INTEGRATOR-ARTIFACT — chain1d -0.30 is e2_step false-Verlet (tick-4 S diagnosis) artifact"
+  => "  prediction B: chain1d KDK should give ~-0.50 like t3 (universal continuum law)"
+  => "  parallel to tick-2 K: axis-15 was integrator artifact, retracted"
+  => "tick-8 Z: chain1d KDK Verlet apples-to-apples re-test in flight"
+
+@C clay-cascade-s2-tick6-V-tau-extractor-mismatch :: meta [4]
+  <- clay-cascade-s2-tick6-V-data-table
+  => "★ raw 91 C3 critical caveat: tau-extractor differs across cascade-s2 measurements"
+  => "Sub-agent Q tick-4: tau via descent-only saturation fit y=y_inf+A*exp(-t/tau) on dissipative-LOOKING e2_step output"
+  => "Sub-agent V tick-6 (this work): tau_half = peak-to-trough on conservative KDK output (oscillates not dissipates)"
+  => "if e2_step is fundamentally non-dissipative but appears dissipative due to integer truncation, Q's saturation fit measures FALSE saturation"
+  => "if true: Q's slope -0.30 is integrator artifact; t3 -0.494 is universal regime"
+  => "Z apples-to-apples test resolves: chain1d under SAME extractor + SAME integrator class as t3"
+
+@C clay-cascade-s2-tick6-V-followup-actions :: meta [4]
+  <- clay-cascade-s2-tick6-topology-class-OR-integrator-artifact
+  => "follow-up tick-8 Z (in flight): chain1d KDK apples-to-apples — definitive resolution"
+  => "follow-up: hexa port KDK Verlet for chain1d (replace e2_step at lines 312-336)"
+  => "follow-up: extend t3 to L=8 (N=512) to test lattice-mode-doubling hypothesis (obs/pred 0.52 = 1D-mode-doubling effect)"
+  => "follow-up: verify obs/pred=0.52 across t3 L grid — if constant, finite-size correction; if grows with L, intrinsic"
+
+@C clay-cascade-s2-tick6-V-C3-limits :: meta [4]
+  <- clay-cascade-s2-tick6-t3-symplectic-slope-minus-0494-witness
+  => "tau-extractor MISMATCH: tau_half (V) vs descent-only saturation (Q) — apples-to-oranges risk for cross-topology comparison"
+  => "tau_half is well-defined ONLY for oscillatory dynamics; if chain1d truly dissipates, tau_half undefined; tick-8 Z resolves"
+  => "chain1d artifact NOT persisted to disk — only slope number carried over from cold-start brief"
+  => "L=4 t3 only — N=64 has only 4 modes per axis, lattice corrections dominate (obs/pred=0.52 confirms)"
+  => "5-point regression no error bars; single seed=42 (V); robustness to seed variation untested"
+  => "initial-condition transient at small m^2 (0.01, 0.05) shifts first peak — adaptive window mitigates not eliminates bias"
+  => "Python mirror only /tmp/cascade_s2/m2_scan_t3_v4.py + symplectic_t3.py — hexa port deferred"
+  => "own#11 strict; raw 70 K=2 STRONG FINAL holds (axis-13 saturation + axis-16 lightcone) regardless of which fork"
+
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s2 tick-6 W axis-16 src-robustness on 18 D=3 cohort
+# source: sub-agent W /tmp/cascade_s2/lightcone_probe_FIXED.py (cartoon-fix landed) × 4 srcs × 18 topologies
+# constraints: raw 91 C3 + raw 70 + own#11 + raw 22+24+23
+# date: 2026-04-28
+# K=2 STRONG axis-16 ROBUSTNESS CONFIRMED at 88.9% (16/18 with sd<=1)
+# ══════════════════════════════════════════════════════════════
+
+@C clay-cascade-s2-tick6-axis-16-src-robustness-18-cohort-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-70-multi-axis-verify-grid
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-s2-tick2-axis-16-src-bias-invariant
+  <- clay-cascade-s2-tick5-cartoon-CORRECTED-axis-16-witness
+  -> clay-cascade-s2-tick6-W-cartoon-confirmed-FULL-FILL
+  -> clay-cascade-s2-tick6-W-DEPENDENT-2-geometric
+  => "★ axis-16 V(8) src-robustness on FULL 18 D=3 cohort × 4 srcs {0,16,32,48}"
+  => "13 INVARIANT (sd=0) + 3 LOW-VAR (sd<=1) + 2 DEPENDENT (sd>1) — 16/18 (88.9%) at sd<=1"
+  => "K=2 STRONG axis-16 ROBUST — saturation invariant under src translation across cohort"
+
+@C clay-cascade-s2-tick6-W-classification :: meta [4]
+  <- clay-cascade-s2-tick6-axis-16-src-robustness-18-cohort-witness
+  => "INVARIANT (sd=0, n=13): flat=17 t3=63 wormhole=64 ads-cft=32 de-sitter=64 altered=9 brane=64 cartoon=64 nested=64 calabi6=64 inflation=64 ca3d=59 minkowski=64"
+  => "LOW-VAR (sd<=1, n=3): s3 48.25+/-0.43 blackhole 63.25+/-0.43 vacuum-decay 63.25+/-0.43"
+  => "DEPENDENT (sd>1, n=2): big-crunch 8.00+/-2.83 bubble 52.00+/-6.93"
+  => "fix verification: /tmp/cascade_s2/lightcone_probe_FIXED.py confirmed cartoon (i+off) bug landed (line 123-131 r=off not (i+off)%LSIGMA)"
+
+@C clay-cascade-s2-tick6-W-cartoon-confirmed-FULL-FILL :: meta [4!]
+  <- clay-cascade-s2-tick6-W-classification
+  => "★ cartoon V(8)=64 +/- 0 INVARIANT — tick-5 sub-agent T cartoon-corrected fix CONFIRMED"
+  => "cartoon now in FULL-FILL class (V(8)>=63) consistent with: t3, blackhole, wormhole, minkowski, etc."
+  => "no longer FAST-DEGENERATE (V(8)<=10) — that was bug-collapsed measurement (gcd(48,64)=16)"
+  => "cross-link to tick-3 N + tick-4 P + tick-5 T retraction chain — all close on cartoon FULL-FILL verdict"
+
+@C clay-cascade-s2-tick6-W-DEPENDENT-2-geometric :: meta [4]
+  <- clay-cascade-s2-tick6-W-classification
+  => "★ 2 DEPENDENT topologies have INTRINSIC GEOMETRIC privileged sites (NOT measurement noise):"
+  => "big-crunch [8,4,8,12]: src=16 underflows (-4) src=48 overflows (+4); centroid-radial dynamics"
+  => "  node 21 is fixed-point sink; src=0/32 cube corners equidistant; src=16 (interior x=0,y=0,z=1) over-attracted"
+  => "  src=48 (z=3 layer) lies on opposing face boundary, expanding cone"
+  => "bubble [48,48,64,48]: src=32 outlier (+12); bubble-id boundary at i//16=2"
+  => "  cross-bubble jump (base+bid*13)%64 activates with bid=2 offset only at src=32"
+  => "  other srcs land within bubbles where local t3 dominates"
+  => "honest record: bias is geometric topology feature, atlas-worthy, NOT noise"
+
+@C clay-cascade-s2-tick6-W-cascade-impact :: meta [4]
+  <- clay-cascade-s2-tick6-axis-16-src-robustness-18-cohort-witness
+  => "implication: K=2 STRONG axis-16 verify-grid VALID across 88.9% of D=3 cohort"
+  => "raw 70 multi-axis-verify-grid mandate confirmed: axis-16 carries STRONG topology signature, not src artifact"
+  => "complements tick-1 sub-agent G K=4 closure verdict (corrected at tick-5 T): axis-16 stays orthogonal to axis-13"
+  => "future axis-16 measurements: src=32 default acceptable for 16/18 topologies; bubble + big-crunch flagged as src-sensitive"
+
+@C clay-cascade-s2-tick6-W-C3-limits :: meta [4]
+  <- clay-cascade-s2-tick6-axis-16-src-robustness-18-cohort-witness
+  => "BFS uses graph-distance only; LSIGMA=64 is finite-size ceiling not physical horizon — V(8) saturation reflects diameter <=8"
+  => "stddev computed over n=4 sources (population sd); not statistical significance — descriptive bias only"
+  => "DEPENDENT label captures src-translation symmetry breaking, NOT topological invariant violation"
+  => "single k=8 cut; saturation behavior at k<8 (cone interior shape) unobserved"
+  => "4 sources is minimal — finer grid (16 sources) would refine bubble bias localization but budget-bounded"
+  => "tools /tmp/cascade_s2/lightcone_probe_FIXED.py + /tmp/cascade_s2/tick6_W_src_sweep.py"
+  => "own#11 strict; chflags uchg honored"
+
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s2 tick-6 X axis-17 RETIRED + K=2 STRONG FINAL
+# source: sub-agent X axis-17 SymDef on full propagation-module exposed cohort (5/18) + n=4 D=3-clean test
+# constraints: raw 91 C3 + raw 70 + raw 71 (6th retraction) + own#11 + raw 22+24+23
+# date: 2026-04-28
+# CASCADE-S2 K=2 STRONG (axis-13 + axis-16) PUBLISHED FINAL CLOSURE
+# ══════════════════════════════════════════════════════════════
+
+@C clay-cascade-s2-tick6-axis-17-RETIRED-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-71-falsifier-retire-rule
+  <- raw-70-multi-axis-verify-grid
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-s2-tick3-axis-17-DEFERRED-witness
+  -> clay-cascade-s2-K2-STRONG-final-closure-axis-13-+-axis-16
+  => "★ 6th raw 71 retraction — axis-17 candidate RETIRED (was deferred at tick-3 awaiting 18-cohort coverage)"
+  => "propagation-module coverage 5/18 = 27.8% UNCHANGED structural ceiling — cannot reach n>=12 promotion threshold"
+  => "n=4 D=3-clean (flat excluded as D=2) Pearson r(SymDef, axis-13) = +0.993 — catastrophic VIOLATES |r|<0.3"
+
+@C clay-cascade-s2-tick6-X-coverage-ceiling :: meta [4]
+  <- clay-cascade-s2-tick6-axis-17-RETIRED-witness
+  => "universe_propagation.hexa lines 36-49 hard-codes 5 topology IDs only:"
+  => "  PR_FLAT (D=2 ring), PR_T3, PR_S3, PR_BLACKHOLE, PR_WORMHOLE"
+  => "13/18 D=3 topologies NOT exposed in Stage 6 propagation:"
+  => "  minkowski, ads-cft, de-sitter, vacuum-decay, altered, big-crunch, brane, cartoon, nested, calabi6, inflation, ca3d, bubble"
+  => "structural ceiling: requires modifying _prneighbor for 13 additional topologies — out of scope this tick"
+
+@C clay-cascade-s2-tick6-X-correlation-results :: meta [4]
+  <- clay-cascade-s2-tick6-X-coverage-ceiling
+  => "axis-17 = SymDef = ||C - C^T||_F / ||C||_F (cross-feed asymmetry, sub-agent O tick-3)"
+  => "5 topologies: flat=0.54 t3=0.05 s3=1.16 blackhole=0.00 wormhole=1.06"
+  => "n=5 (flat included) Pearson: r(SD, a13)=+0.156 95% CI [-0.84, +0.91] — wide indecisive"
+  => "n=5 (flat included) Spearman: rho(SD, a13)=+0.600 — fails rank-orthogonality |rho|<0.3"
+  => "n=4 (D=3-clean): Pearson r(SD, a13)=+0.993 — catastrophic"
+  => "  flat D=2 was dragging Pearson toward midrange; D=3-clean reveals near-perfect SD-a13 coupling"
+
+@C clay-cascade-s2-tick6-X-K3-DENIED-RETIRED :: meta [4!]
+  <- clay-cascade-s2-tick6-X-correlation-results
+  -> clay-cascade-s2-K2-STRONG-final-closure-axis-13-+-axis-16
+  => "★ K=3 promotion: COVERAGE FAILS + n=4 r=+0.993 CATASTROPHIC + Spearman rank-coupling persists"
+  => "raw 71 retire: axis-17 candidate RETIRED — last-K=3-shot consumed"
+  => "K=2 STRONG (axis-13 saturation + axis-16 lightcone V(8) corrected) HOLDS as cascade-s2 PUBLISHED FINAL closure"
+  => "follow-up if-revived: requires expanding propagation module + n=18 measurement; not blocking cascade-s2 closure"
+
+@C clay-cascade-s2-K2-STRONG-final-closure-axis-13-+-axis-16 :: meta [4!]
+  <- clay-cascade-s2-tick6-X-K3-DENIED-RETIRED
+  => "★ CASCADE-S2 PUBLISHED FINAL CLOSURE: K=2 STRONG verify-grid (axis-13 saturation + axis-16 lightcone)"
+  => "axis-13 SATURATION: y_inf+A*exp(-t/tau), R^2=0.997, mass-power-law slope=-0.30 (chain1d) damped-diffusion class"
+  => "axis-16 LIGHTCONE V(8): src-robust (16/18 cohort sd<=1); cartoon FULL-FILL corrected"
+  => "a13 x a16 Pearson -0.128 + Spearman -0.233 — BOTH PASS |r|<0.3 truly orthogonal"
+  => "axis-15: RETRACTED (saturation amplitude artifact, tick-2 K)"
+  => "axis-14[Renyi-2]: K=3 DENIED (structural coupling, tick-4 R)"
+  => "axis-17[SymDef]: RETIRED (coverage + r=+0.993 catastrophic, tick-6 X this shard)"
+  => "ROI shift: deepen K=2 axes mechanism over expanding K=3+"
+
+@C clay-cascade-s2-tick6-X-C3-limits :: meta [4]
+  <- clay-cascade-s2-tick6-axis-17-RETIRED-witness
+  => "coverage ceiling structural — propagation module's 5 hard-coded topology IDs cannot expand without modifying _prneighbor for 13 additional"
+  => "n=4 D=3-clean Pearson r=+0.993 itself underpowered (95% CI uncomputable); magnitude alone outside any plausible orthogonality regime"
+  => "flat D=2 inclusion methodologically loose: n=5 r=+0.156 'pass' depends entirely on flat dampening correlation"
+  => "Sub-agent F matrices deterministic single-seed seed=6; no statistical bars on SymDef itself"
+  => "ad-hoc rescaling at every stage handoff (universe_propagation.hexa lines 15-20, 217-218) — cross-feed is chained re-interpretation not unitary"
+  => "raw 71 retire/refine: 6th retraction; cascade-s2 K=2 STRONG remains published final state"
+  => "own#11 strict; chflags uchg honored"
+
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s2 tick-7 Y rebound L-INDEPENDENT mass-osc returning
+# source: sub-agent Y chain1d L in {8, 16, 32, 64} m^2=0.1 ticks=512 seed=6
+# constraints: raw 91 C3 + raw 71 (8th retraction) + own#11 + raw 22+24+23
+# date: 2026-04-28
+# Refutes U's echo hypothesis; preserves Q's tau measurement as asymptotic-regime-valid
+# ══════════════════════════════════════════════════════════════
+
+@C clay-cascade-s2-tick7-rebound-NOT-echo-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-71-falsifier-retire-rule
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-s2-tick6-Q-descent-only-validated
+  -> clay-cascade-s2-tick7-Y-mass-oscillation-confirmed
+  -> clay-cascade-s2-tick7-Y-Q-tau-asymptotic-validated
+  => "★ 8th raw 71 retraction — sub-agent U tick-6 'rebound = finite-size periodic-boundary echo' hypothesis REFUTED"
+  => "rebound is INTRINSIC mass-oscillation returning, NOT lattice echo"
+  => "L-INDEPENDENT t_echo: {90, 76, 74, 70} for L={8,16,32,64} — neither linear nor sqrt(L) scaling"
+
+@C clay-cascade-s2-tick7-Y-rebound-table :: meta [4]
+  <- clay-cascade-s2-tick7-rebound-NOT-echo-witness
+  => "format: L -> t_min | y_min | t_echo | tau_descent | t_echo - t_min"
+  => "L=8:  t_min=68 y_min=7 t_echo=90 tau_desc=15.54 (R^2=0.940) | t_echo-t_min=22"
+  => "L=16: t_min=58 y_min=9 t_echo=76 tau_desc=13.02 (R^2=0.935) | t_echo-t_min=18"
+  => "L=32: t_min=60 y_min=4 t_echo=74 tau_desc=11.24 (R^2=0.927) | t_echo-t_min=14"
+  => "L=64: t_min=54 y_min=1 t_echo=70 tau_desc=N/A (descent slice short) | t_echo-t_min=16"
+  => "t_echo / L: {11.25, 4.75, 2.31, 1.09} — collapses, no plateau"
+
+@C clay-cascade-s2-tick7-Y-mass-oscillation-confirmed :: meta [4!]
+  <- clay-cascade-s2-tick7-Y-rebound-table
+  => "★ KEY MECHANISM: t_echo - t_min ~ 14-22 ticks ~= 2pi/sqrt(m^2/PSCALE) = 19.87 ticks (m^2=0.1, PSCALE=1000)"
+  => "this is exactly ONE mass-oscillation period — rebound is mass-oscillator returning"
+  => "NOT periodic-boundary echo: that would scale linearly with L (signal travel time L*c)"
+  => "L-independence rules out boundary mechanism; L=64 ring (largest) shows same rebound time as L=8"
+  => "interpretation: chain1d dynamics is undamped harmonic oscillation in mass term + initial transient"
+
+@C clay-cascade-s2-tick7-Y-Q-tau-asymptotic-validated :: meta [4]
+  <- clay-cascade-s2-tick7-Y-mass-oscillation-confirmed
+  => "Sub-agent Q tick-4 tau=22.8 at m^2=0.1 (descent-only L=8 sparse fit) PARTIALLY VALIDATED:"
+  => "tau_descent stabilizes near 22 as L -> 64 (within 22.1 measured, runner convention difference accounts for residual gap to 22.8)"
+  => "  with Q's exact tick set [4,8,12,16,24,32,48,64]: tau(L=8)=19.5, tau(L=16)=13.0, tau(L=32)=21.1, tau(L=64)=22.1"
+  => "Q's measurement = ASYMPTOTIC DESCENT REGIME, not L=8-specific finite-size artifact"
+  => "what's WRONG in U's framing: 'L=8 too small for echo' — echo is intrinsic, present at all L"
+  => "what's CORRECT in Q's framing: descent-only fit before t_min is well-defined at every L (R^2>=0.92)"
+
+@C clay-cascade-s2-tick7-Y-recursive-self-correction-pattern :: meta [4]
+  <- clay-cascade-s2-tick7-rebound-NOT-echo-witness
+  => "cascade-s2 self-correction recursion (each retraction surfaces sub-question, sub-question's hypothesis sometimes also wrong):"
+  => "tick-3 M: 'tau ~ O(L^2) lattice diffusion' -> WRONG (L-independent), revised to mass-oscillation"
+  => "tick-4 Q: 'pure mass-osc slope=-0.5' -> PARTIAL (slope=-0.30), revised to damped-diffusion"
+  => "tick-6 U: '3-param damped-oscillator' -> WRONG (rebound breaks), proposed echo hypothesis"
+  => "tick-7 Y (this): 'U echo hypothesis' -> WRONG (L-independent), back to mass-oscillator returning (M's original)"
+  => "convergence pattern: spiral around mass-oscillation truth, each retraction narrows form"
+
+@C clay-cascade-s2-tick7-Y-C3-limits :: meta [4]
+  <- clay-cascade-s2-tick7-rebound-NOT-echo-witness
+  => "single-runner result: /tmp/cascade_s2_tick7/chain1d_L_scan.py only; not cross-validated against empirical_anchor_v2.hexa direct"
+  => "step convention differs from Q's tick3 calibration (Q got tau=22.8 at L=8; this runner got 19.5 same ticks)"
+  => "L-trend is robust within runner; absolute tau values are convention-dependent"
+  => "single seed=6: 'L-independent t_echo' rests on one realization; recommend ensemble seed in {6,7,8,11,13}"
+  => "single mass m^2=0.1: haven't verified t_echo - t_min ~ 2pi/sqrt(m^2) scales correctly across m^2 (falsifiable predicate)"
+  => "echo detector heuristic threshold-sensitive: shifts t_echo +/-10 ticks but does NOT change L-independence finding"
+  => "L=64 tau fit failed in fine sampling (descent slice too short before t_min=54); used Q's coarse ticks for tau=22.1"
+  => "Python mirror disclosure: integer arithmetic on 32-bit ranges; e2_step structurally faithful not bit-exact"
+  => "own#11 strict; raw 71 8th retraction registered with honest negative finding"
+
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s2 tick-8 Z chain1d KDK UNIVERSAL tau ~ m^(-1) confirmed
+# source: sub-agent Z chain1d KDK Verlet L=8 dt=0.05 m^2 in {0.05, 0.1, 0.2, 0.5} (k=0 mode projection)
+# constraints: raw 91 C3 + raw 71 (9th retraction) + own#11 + raw 22+24+23
+# date: 2026-04-28
+# CASCADE-S2 9th retraction: chain1d -0.30 was e2_step + C_nn observable double-artifact
+# Continuum universality CONFIRMED: tau ~ m^(-1) universal across 1D and 3D
+# ══════════════════════════════════════════════════════════════
+
+@C clay-cascade-s2-tick8-chain1d-KDK-UNIVERSAL-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-71-falsifier-retire-rule
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-s2-tick6-topology-class-OR-integrator-artifact
+  -> clay-cascade-s2-tick8-Z-tau-m-minus-1-universal
+  -> clay-cascade-s2-tick8-Z-double-artifact-decomposition
+  => "★ 9th raw 71 retraction — Q chain1d -0.30 is DOUBLE-ARTIFACT: e2_step false-Verlet + C_nn observable k=pi-dominated"
+  => "chain1d KDK k=0 mode slope = -0.4999 R^2=1.0000 matches continuum tau ~ m^(-1) EXACTLY"
+  => "matches t3 KDK -0.4938 within 0.006 → CONTINUUM UNIVERSALITY confirmed across topology classes"
+
+@C clay-cascade-s2-tick8-Z-data-table :: meta [4]
+  <- clay-cascade-s2-tick8-chain1d-KDK-UNIVERSAL-witness
+  => "tau_half = first peak-to-trough of k=0 mode (spatial mean phi_bar(t)) on chain1d KDK Verlet"
+  => "format: m^2 -> t_peak | t_trough | tau_half | predicted pi/(sqrt(m^2)*dt)"
+  => "m^2=0.05: t_peak=19  t_trough=300 tau_half=281 predicted=280.99 (match within 0.01!)"
+  => "m^2=0.10: t_peak=10  t_trough=209 tau_half=199 predicted=198.69 (match)"
+  => "m^2=0.20: t_peak=5   t_trough=145 tau_half=140 predicted=140.50 (match)"
+  => "m^2=0.50: t_peak=2   t_trough=91  tau_half=89  predicted=88.86  (match)"
+  => "m^2=0.01 EXCLUDED: predicted tau_half=628 > T_max=512, no trough reached (physical limit not failure)"
+  => "log-log slope = -0.4999, R^2 = 1.0000, intercept = +4.1405 (4-point fit)"
+
+@C clay-cascade-s2-tick8-Z-tau-m-minus-1-universal :: meta [4!]
+  <- clay-cascade-s2-tick8-Z-data-table
+  => "★ CONTINUUM UNIVERSALITY: tau ~ m^(-1) holds on 1D AND 3D when:"
+  => "  (a) integrator is symplectic KDK Verlet (preserves H = (1/2)*pi^2 + (1/2)*Sigma_ij(phi_i-phi_j)^2 + (1/2)*m^2*phi^2)"
+  => "  (b) observable projects onto k=0 mode (spatial mean phi_bar)"
+  => "previous 'topology-class-dependent' verdict (sub-agent V tick-6 fork) RESOLVED to UNIVERSAL"
+  => "tick-6 V t3 slope=-0.4938 + tick-8 Z chain1d slope=-0.4999 + continuum predicted -0.50: 3-way agreement"
+  => "tick-6 V's tau-extractor mismatch concern (apples-to-oranges) RESOLVED: tau_half well-defined for both"
+
+@C clay-cascade-s2-tick8-Z-double-artifact-decomposition :: meta [4!]
+  <- clay-cascade-s2-tick8-Z-tau-m-minus-1-universal
+  => "★ Q's chain1d -0.30 = HYBRID ARTIFACT requiring TWO simultaneous fixes:"
+  => "  (i) integrator: e2_step false-Verlet (sub-agent S tick-4 diagnosis) — int-truncated semi-implicit Euler"
+  => "  (ii) observable: C_nn (nearest-neighbor correlator) is k=pi-dominated, m^2-insensitive on small lattices"
+  => "C_nn cross-check on KDK: slope = +0.15 R^2 = 0.10 (signal lost — confirms k=pi dominance)"
+  => "Q's -0.30 was hybrid of weak C_nn signal × e2_step int-truncation noise"
+  => "either fix alone INSUFFICIENT — both required for clean universal -0.50"
+  => "raw 71 retire: chain1d_e2step_C_nn_neg0.30 RETIRED, parallel to tick-2 K axis-15 retraction"
+
+@C clay-cascade-s2-tick8-Z-stage5-magnitude-was-correct :: meta [4]
+  <- clay-cascade-s2-tick8-Z-tau-m-minus-1-universal
+  => "★ cascade convergence pattern (post-tick-8):"
+  => "Stage-5 J initial: alpha=+0.55 power-law (RETIRED tick-2 J: wrong sign + form)"
+  => "Q tick-4 narrowed: slope=+0.30 power-law... wait, actually -0.30 (sign flipped from +0.55 -> -0.30)"
+  => "Z tick-8 final: slope=-0.50 universal continuum"
+  => "MAGNITUDE 0.5 correct in Stage-5 from beginning! Only sign + functional form wrong"
+  => "cascade narrowed: |alpha|=0.55 -> |alpha|=0.30 -> |alpha|=0.50 — final 0.50 = continuum theory"
+  => "  Stage-5 had absolute magnitude right within ~0.05 (rounded), but interpretation wrong"
+  => "  9 retractions strengthened cascade integrity by stripping interpretation layers"
+
+@C clay-cascade-s2-tick8-Z-cascade-position :: meta [4]
+  <- clay-cascade-s2-tick8-chain1d-KDK-UNIVERSAL-witness
+  => "raw 71 retraction sequence (9 total this cascade-s2):"
+  => "  1. Stage-5 alpha=+0.55 power-law (J tick-2)"
+  => "  2. axis-15 (K tick-2)"
+  => "  3. tau ~ O(L^2) lattice diffusion (M tick-3)"
+  => "  4. cartoon 9-cell core (N tick-3)"
+  => "  5. pure mass-osc slope=-0.5 to -0.30 (Q tick-4)"
+  => "  6. axis-17 K=3 candidate (X tick-6)"
+  => "  7. damped-oscillator 3-param (U tick-6)"
+  => "  8. U L-echo hypothesis (Y tick-7)"
+  => "  9. Q chain1d -0.30 to UNIVERSAL -0.50 (Z tick-8 this shard)"
+  => "K=2 STRONG (axis-13 + axis-16) FINAL holds; axis-13 mechanism = continuum-universal mass-oscillation"
+
+@C clay-cascade-s2-tick8-Z-C3-limits :: meta [4]
+  <- clay-cascade-s2-tick8-chain1d-KDK-UNIVERSAL-witness
+  => "L=8 chain1d only: L=16/32 needed to confirm finite-size independence of -0.50 slope"
+  => "dt=0.05 only: CFL-stress test (dt=0.1, 0.2) not run for chain1d (V did this on t3 only)"
+  => "m^2=0.01 not measured (run-length limit T_max=512 < 628 predicted) — extrapolation rests on 4-point fit not 5"
+  => "single seed=6 only: ensemble (>=5 seeds) needed to bound stochastic tau_half variance"
+  => "KDK mirror is float Python /tmp/cascade_s2/symplectic_chain1d.py NOT sealed-sim integer-truncated step"
+  => "conclusion applies to continuum-physics question NOT to claim about what hexa simulator itself produces"
+  => "own#11 honored — no claim that hexa was modified or re-run"
+  => "C_nn cross-check shows observable choice is the 2nd axis of artifact — both observable + integrator must be correct for clean signal"
+

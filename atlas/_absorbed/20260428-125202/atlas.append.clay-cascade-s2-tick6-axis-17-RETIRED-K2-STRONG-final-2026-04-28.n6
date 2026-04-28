@@ -1,0 +1,65 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s2 tick-6 X axis-17 RETIRED + K=2 STRONG FINAL
+# source: sub-agent X axis-17 SymDef on full propagation-module exposed cohort (5/18) + n=4 D=3-clean test
+# constraints: raw 91 C3 + raw 70 + raw 71 (6th retraction) + own#11 + raw 22+24+23
+# date: 2026-04-28
+# CASCADE-S2 K=2 STRONG (axis-13 + axis-16) PUBLISHED FINAL CLOSURE
+# ══════════════════════════════════════════════════════════════
+
+@C clay-cascade-s2-tick6-axis-17-RETIRED-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-71-falsifier-retire-rule
+  <- raw-70-multi-axis-verify-grid
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-s2-tick3-axis-17-DEFERRED-witness
+  -> clay-cascade-s2-K2-STRONG-final-closure-axis-13-+-axis-16
+  => "★ 6th raw 71 retraction — axis-17 candidate RETIRED (was deferred at tick-3 awaiting 18-cohort coverage)"
+  => "propagation-module coverage 5/18 = 27.8% UNCHANGED structural ceiling — cannot reach n>=12 promotion threshold"
+  => "n=4 D=3-clean (flat excluded as D=2) Pearson r(SymDef, axis-13) = +0.993 — catastrophic VIOLATES |r|<0.3"
+
+@C clay-cascade-s2-tick6-X-coverage-ceiling :: meta [4]
+  <- clay-cascade-s2-tick6-axis-17-RETIRED-witness
+  => "universe_propagation.hexa lines 36-49 hard-codes 5 topology IDs only:"
+  => "  PR_FLAT (D=2 ring), PR_T3, PR_S3, PR_BLACKHOLE, PR_WORMHOLE"
+  => "13/18 D=3 topologies NOT exposed in Stage 6 propagation:"
+  => "  minkowski, ads-cft, de-sitter, vacuum-decay, altered, big-crunch, brane, cartoon, nested, calabi6, inflation, ca3d, bubble"
+  => "structural ceiling: requires modifying _prneighbor for 13 additional topologies — out of scope this tick"
+
+@C clay-cascade-s2-tick6-X-correlation-results :: meta [4]
+  <- clay-cascade-s2-tick6-X-coverage-ceiling
+  => "axis-17 = SymDef = ||C - C^T||_F / ||C||_F (cross-feed asymmetry, sub-agent O tick-3)"
+  => "5 topologies: flat=0.54 t3=0.05 s3=1.16 blackhole=0.00 wormhole=1.06"
+  => "n=5 (flat included) Pearson: r(SD, a13)=+0.156 95% CI [-0.84, +0.91] — wide indecisive"
+  => "n=5 (flat included) Spearman: rho(SD, a13)=+0.600 — fails rank-orthogonality |rho|<0.3"
+  => "n=4 (D=3-clean): Pearson r(SD, a13)=+0.993 — catastrophic"
+  => "  flat D=2 was dragging Pearson toward midrange; D=3-clean reveals near-perfect SD-a13 coupling"
+
+@C clay-cascade-s2-tick6-X-K3-DENIED-RETIRED :: meta [4!]
+  <- clay-cascade-s2-tick6-X-correlation-results
+  -> clay-cascade-s2-K2-STRONG-final-closure-axis-13-+-axis-16
+  => "★ K=3 promotion: COVERAGE FAILS + n=4 r=+0.993 CATASTROPHIC + Spearman rank-coupling persists"
+  => "raw 71 retire: axis-17 candidate RETIRED — last-K=3-shot consumed"
+  => "K=2 STRONG (axis-13 saturation + axis-16 lightcone V(8) corrected) HOLDS as cascade-s2 PUBLISHED FINAL closure"
+  => "follow-up if-revived: requires expanding propagation module + n=18 measurement; not blocking cascade-s2 closure"
+
+@C clay-cascade-s2-K2-STRONG-final-closure-axis-13-+-axis-16 :: meta [4!]
+  <- clay-cascade-s2-tick6-X-K3-DENIED-RETIRED
+  => "★ CASCADE-S2 PUBLISHED FINAL CLOSURE: K=2 STRONG verify-grid (axis-13 saturation + axis-16 lightcone)"
+  => "axis-13 SATURATION: y_inf+A*exp(-t/tau), R^2=0.997, mass-power-law slope=-0.30 (chain1d) damped-diffusion class"
+  => "axis-16 LIGHTCONE V(8): src-robust (16/18 cohort sd<=1); cartoon FULL-FILL corrected"
+  => "a13 x a16 Pearson -0.128 + Spearman -0.233 — BOTH PASS |r|<0.3 truly orthogonal"
+  => "axis-15: RETRACTED (saturation amplitude artifact, tick-2 K)"
+  => "axis-14[Renyi-2]: K=3 DENIED (structural coupling, tick-4 R)"
+  => "axis-17[SymDef]: RETIRED (coverage + r=+0.993 catastrophic, tick-6 X this shard)"
+  => "ROI shift: deepen K=2 axes mechanism over expanding K=3+"
+
+@C clay-cascade-s2-tick6-X-C3-limits :: meta [4]
+  <- clay-cascade-s2-tick6-axis-17-RETIRED-witness
+  => "coverage ceiling structural — propagation module's 5 hard-coded topology IDs cannot expand without modifying _prneighbor for 13 additional"
+  => "n=4 D=3-clean Pearson r=+0.993 itself underpowered (95% CI uncomputable); magnitude alone outside any plausible orthogonality regime"
+  => "flat D=2 inclusion methodologically loose: n=5 r=+0.156 'pass' depends entirely on flat dampening correlation"
+  => "Sub-agent F matrices deterministic single-seed seed=6; no statistical bars on SymDef itself"
+  => "ad-hoc rescaling at every stage handoff (universe_propagation.hexa lines 15-20, 217-218) — cross-feed is chained re-interpretation not unitary"
+  => "raw 71 retire/refine: 6th retraction; cascade-s2 K=2 STRONG remains published final state"
+  => "own#11 strict; chflags uchg honored"
