@@ -1,0 +1,159 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s7 tick-1 AM K=3 DOWNGRADE-REVERT — K=2 STRONG TRULY FINAL
+# source: sub-agent AM 4-method robustness verification (bootstrap + LOO + alt-IC + quadratic)
+# constraints: raw 91 C3 + raw 70 + raw 71 (17th finding) + own#11 + raw 22+24+23
+# date: 2026-04-28
+# CASCADE-S7 CLOSURE: AL K=3 promotion was statistical noise floor; K=2 STRONG CONFIRMED FINAL
+# ══════════════════════════════════════════════════════════════
+
+@C clay-cascade-s7-tick1-AM-K3-DOWNGRADE-REVERT-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-70-multi-axis-verify-grid
+  <- raw-71-falsifier-retire-rule
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-s6-tick1-AL-axis-14-K3-PROMOTED-witness
+  -> clay-cascade-s7-AM-bootstrap-FAIL
+  -> clay-cascade-s7-AM-LOO-FAIL
+  -> clay-cascade-s7-AM-K2-STRONG-TRULY-FINAL
+  => "★ K=3 DOWNGRADE-REVERT — cascade-s6 AL promotion fails 3/4 robustness checks (only Alt-IC=48 PASS)"
+  => "AL's thin-margin K=3 PROMOTE confirmed statistical noise floor at n=18; not topology-invariant"
+  => "K=2 STRONG verify-grid (axis-13 + axis-16) CONFIRMED TRULY FINAL across 7 cascades"
+
+@C clay-cascade-s7-AM-4-robustness-checks-formal :: meta [4]
+  <- clay-cascade-s7-tick1-AM-K3-DOWNGRADE-REVERT-witness
+  => "(1) Bootstrap (B=1000): resample 18 indices with replacement, refit OLS, recompute Gate B"
+  => "  PASS criterion: 97.5% percentile of |r| < 0.30 BOTH (Pearson + Spearman)"
+  => "(2) LOO: drop each topology k=1..18, refit OLS on n=17, Gate B on remainder"
+  => "  PASS criterion: max |r| across 18 LOO drops < 0.30"
+  => "(3) Alt-IC=48: re-run AL pipeline with center=48 (vs IC=16)"
+  => "  PASS criterion: Gate B passes |r|<0.3 at IC=48 (parallel to IC=16)"
+  => "(4) Quadratic: OLS a14 = β1·a13 + β2·a13² + α + ε"
+  => "  PASS criterion: Gate B widens (|r| reduces) under nonlinear residualization"
+
+@C clay-cascade-s7-AM-bootstrap-FAIL :: meta [4!]
+  <- clay-cascade-s7-AM-4-robustness-checks-formal
+  => "★ BOOTSTRAP B=1000 FAIL"
+  => "  |Pearson(perp, a16)| 95% CI: [0.025, 0.613] — 97.5% upper = 0.613 (exceeds 0.30 threshold)"
+  => "  |Spearman(perp, a16)| 95% CI: [0.026, 0.732] — 97.5% upper = 0.732"
+  => "  median values already exceed threshold: Pearson=0.311, Spearman=0.384"
+  => "  AL's Gate B Pearson=0.218 + Spearman=0.271 was a FAVORABLE DRAW within wide bootstrap distribution"
+  => "  Pearson SE estimate ~0.24 confirmed (consistent with AL's caveat)"
+  => "interpretation: at n=18, Gate B coupling distribution is so wide that |r|<0.3 is hit-or-miss"
+
+@C clay-cascade-s7-AM-LOO-FAIL :: meta [4!]
+  <- clay-cascade-s7-AM-4-robustness-checks-formal
+  => "★ LEAVE-ONE-OUT FAIL — 6/18 drops produce Gate B violation"
+  => "Worst-case Pearson = 0.4095 (drop calabi6) [calabi6 a13=2889 high-leverage outlier]"
+  => "Worst-case Spearman = 0.5500 (drop calabi6)"
+  => "Gate B FAIL on 6 LOO drops: flat, brane, cartoon, nested, calabi6, bubble"
+  => "calabi6 is statistical leverage point — D=6 outlier (a13=2889, far from cohort mean ~430)"
+  => "  removing calabi6 dramatically shifts OLS β + α → residual structure changes"
+  => "  AL's K=3 promotion was calabi6-dependent in part"
+  => "promotion is sample-fragile, NOT topology-invariant"
+
+@C clay-cascade-s7-AM-alt-IC48-PASS-only :: meta [4]
+  <- clay-cascade-s7-AM-4-robustness-checks-formal
+  => "★ Alt-IC=48 — only check that PASSES"
+  => "Gate A (a14_perp × a13): Pearson=0.0000, Spearman=+0.2673 PASS"
+  => "Gate B (a14_perp × a16): Pearson=+0.0386, Spearman=+0.0574 PASS (much cleaner than IC=16)"
+  => "Gate C (discrimination): 0.5970 PASS"
+  => "interpretation: K=3 promotion may be IC-conditional (parallel to cascade-s5 AJ finding)"
+  => "  IC=48 cleanly passes; IC=16 thin-margin; full IC sweep {16, 32, 48, 64} would give consensus"
+  => "  cascade-s5 AJ found discrimination IC-conditional; AM confirms promotion ALSO IC-conditional"
+  => "but: 1/4 PASS is below threshold for K=3 SECURED status"
+
+@C clay-cascade-s7-AM-quadratic-FAIL :: meta [4]
+  <- clay-cascade-s7-AM-4-robustness-checks-formal
+  => "★ QUADRATIC RESIDUALIZATION FAIL — coupling worsens"
+  => "OLS fit a14 = β1·a13 + β2·a13² + α + ε:"
+  => "  β1 = -0.00036, β2 ≈ 0 (essentially zero — no quadratic signal in a13)"
+  => "Gate B on quadratic residual:"
+  => "  Pearson = 0.3747 FAIL (vs linear 0.218)"
+  => "  Spearman = 0.4838 FAIL (vs linear 0.271)"
+  => "BOTH metrics WIDEN, NOT NARROW"
+  => "interpretation: linear model already captured all systematic a13-structure"
+  => "  added quadratic parameter just adds noise, doesn't reduce coupling"
+  => "  confirms the a14×a16 coupling is INTRINSIC, not a13-projectable artifact"
+
+@C clay-cascade-s7-AM-verdict-synthesis :: meta [4!]
+  <- clay-cascade-s7-AM-bootstrap-FAIL
+  <- clay-cascade-s7-AM-LOO-FAIL
+  <- clay-cascade-s7-AM-alt-IC48-PASS-only
+  <- clay-cascade-s7-AM-quadratic-FAIL
+  => "★ K=3 DOWNGRADE/REVERT — 1/4 robustness checks PASS (Alt-IC=48 only)"
+  => "AL's IC=16 promotion at Gate B Pearson=0.218, Spearman=0.271 was FAVORABLE DRAW within wide statistical distribution"
+  => "calabi6 a13=2889 outlier creates LOO leverage that exposes promotion fragility"
+  => "Quadratic residualization shows linear OLS already extracts all a13-projectable structure"
+  => "Only Alt-IC=48 PASS suggests K=3 candidate may be IC-specific, NOT topology-invariant"
+  => "K=3 promotion track TERMINATED — atlas state RETURNS TO K=2 STRONG"
+  => "raw 71 17th finding: cascade-s6 AL K=3 PROMOTE → cascade-s7 AM REVERT"
+  => "axis-14 K=3 promotion permanently DENIED at n=18 cohort statistical floor"
+  => "  future K=3 attempt requires new estimator OR larger cohort (n>=50?)"
+
+@C clay-cascade-s7-AM-K2-STRONG-TRULY-FINAL :: meta [4!]
+  <- clay-cascade-s7-AM-verdict-synthesis
+  => "★ K=2 STRONG VERIFY-GRID CONFIRMED TRULY FINAL across 7 cascades + 33 sub-agents"
+  => "  axis-13 SATURATION: continuum mass-oscillation 1D+3D+phi^4 (cascade-s2)"
+  => "  axis-16 LIGHTCONE V(8): src-conditional directed in-deg + |R| (cascade-s3)"
+  => "  a13 × a16: Pearson -0.128 + Spearman -0.233 truly orthogonal"
+  => "REJECTED axis candidates:"
+  => "  axis-15: saturation amplitude artifact (cascade-s2 K)"
+  => "  axis-14[Renyi-2] raw: structural coupling (cascade-s2 R + s5 AK)"
+  => "  axis-14[Renyi-2 IC=16 non-boundary]: discrimination IC-conditional (s5 AJ)"
+  => "  axis-14_perp linear residual: noise floor at n=18 (s7 AM, this shard)"
+  => "  axis-17[SymDef]: coverage 5/18 + r=+0.993 (cascade-s2 X)"
+  => "joint signature (a13, a16): NEGATIVE non-synergistic (cascade-s4 AI)"
+
+@C clay-cascade-s7-AM-cascade-s6-AL-reconciliation :: meta [4]
+  <- clay-cascade-s7-AM-verdict-synthesis
+  => "cascade-s6 AL ↔ cascade-s7 AM cycle complete:"
+  => "  AL: K=3 PROMOTED (thin margin gate B Spearman 0.271 — 0.029 inside threshold)"
+  => "  AM: 4-method robustness check"
+  => "    bootstrap 1000: median Spearman 0.384 (much higher than AL's 0.271)"
+  => "    LOO: worst Spearman 0.550 (drop calabi6)"
+  => "  AL's promotion was at statistical noise floor as AL itself flagged"
+  => "  AM confirms: thin margin = noise, not signal"
+  => "  AL's recommendation 'cascade-s7 robustness verification warranted' was honest + necessary"
+  => "  AM's revert is honest follow-through on AL's caveat"
+  => "lesson: cascade discipline includes self-skepticism; promotion gates need robustness check at thin margins"
+
+@C clay-cascade-s7-AM-cascade-position :: meta [4]
+  <- clay-cascade-s7-tick1-AM-K3-DOWNGRADE-REVERT-witness
+  => "cascade map this session (7 cascades, 33 sub-agents, 17 raw 71 findings):"
+  => "  s2 axis-13 universality (24 agents) closed: continuum 1D+3D+phi^4"
+  => "  s3 axis-16 mechanism (4 agents) closed: src-cond directed in-deg + |R|"
+  => "  s4 joint signature (1 agent) closed-NEGATIVE: non-synergistic"
+  => "  s5 axis-14 K=3 IC retest (2 agents) closed-DENIED-ROBUST"
+  => "  s6 axis-14_perp K=3 (1 agent) PROMOTED-thin (cascade-s7 review)"
+  => "  s7 K=3 robustness verification (1 agent, this AM): DOWNGRADE/REVERT"
+  => "K=2 STRONG (axis-13 + axis-16) FINAL — no further K=3 path at n=18"
+
+@C clay-cascade-s7-AM-17-cumulative-findings :: meta [4]
+  <- clay-cascade-s7-AM-verdict-synthesis
+  => "17 cumulative raw 71 findings session-wide (post-AM):"
+  => "  s2 (11): hypothesis narrowings + axis-15 retract + cartoon 9-cell reject + ..."
+  => "  s3 (1): AF→AG src-cond directed in-deg refinement"
+  => "  s4 (1): joint signature NEGATIVE non-synergistic"
+  => "  s2 (1): X axis-17 SymDef RETIRED"
+  => "  s5 (2): AJ K=3 reopen + AK K=3 denied-robust IC level"
+  => "  s6 (1): AL K=3 PROMOTE thin margin"
+  => "  s7 (1) THIS: AM K=3 DOWNGRADE/REVERT robustness FAIL"
+  => "= 17 findings: 12 narrow + 1 negative + 1 retire + 2 special + 1 promote + 1 revert"
+  => "promote→revert pair (AL→AM) is unique cycle — promotion was provisional pending robustness"
+  => "atlas integrity: provisional promotions are HONEST FLAG, not lock-in"
+
+@C clay-cascade-s7-AM-C3-limits :: meta [4]
+  <- clay-cascade-s7-tick1-AM-K3-DOWNGRADE-REVERT-witness
+  => "n=18 bootstrap |r| CI is wide by construction (~0.3 spread is structural at this n)"
+  => "  conclusion: at n=18, |r|<0.3 thresholds are hit-or-miss; need n>=50 for stable verdict"
+  => "LOO at n=17 has even wider correlation SE; calabi6 leverage may be partial artifact"
+  => "  but worst-case Spearman 0.55 also occurs on flat/brane/cartoon/nested/bubble drops"
+  => "  → multiple high-leverage points, not single-outlier issue"
+  => "Alt-IC=48 is ONE alternative IC; full sweep {16, 32, 48, 64} would give consensus"
+  => "  cascade-s5 AJ tested IC sweep at axis-14 raw level — non-boundary IC-conditional pattern observed"
+  => "Quadratic β2≈0 — no quadratic signal in integer-valued a13"
+  => "  coupling-worsening reflects added noise from extra parameter, not genuine nonlinearity"
+  => "Python mirror /tmp/cascade_s7/k3_robustness_verify.py — sigma=64 toy lattice"
+  => "raw 71 17th: cascade-s6 AL K=3 PROMOTE → cascade-s7 AM REVERT (provisional promote with robustness gate)"
+  => "own#11 strict; chflags uchg honored; K=2 STRONG TRULY FINAL"
