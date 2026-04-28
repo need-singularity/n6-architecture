@@ -1,0 +1,49 @@
+@shard cascade_s9_tick1_d4_portability {
+  origin: "cascade-s9 AO sub-agent (D=4 cohort K=2 portability test)"
+  date: 2026-04-28
+  agent_id: a25278444ff52d1c3
+  cwd: /Users/ghost/core/n6-architecture
+  raw_91_C3_disclosure: "Python mirror /tmp/cascade_s9/d4_cohort.py (NOT hexa exec). N=64 fixed (matches D=3 isolation). Single seed=6, ticks=32, k=4 BFS, no error bars. Mixer is affine non-commuting nbr(i,a)=(i*A*(1+a)+a*B+C) mod 64."
+
+  finding cascade-s9-AO-1 {
+    claim: "K=2 STRONG framework (axis-13 saturation + axis-16 lightcone V(8)) portable across dimension D=3 → D=4 on N=64 affine cohort"
+    evidence: {
+      cohort: "18 D=4 mixers, gcd-classes {1:6, 2:3, 4:3, 8:2, 16:2, 32:1, 64:1}"
+      axis-13_D4_range: [85, 1342]
+      axis-16_D4_strata: {coprime_g1: "~52-64", g2: "~52-64", g4: "~32", g8: "~15", g16: "~12", g32: "~7", g64: 5}
+      pearson_a13_a16: -0.1134
+      spearman_a13_a16: -0.0279
+      discrim_a13: 0.556
+      discrim_a16: 0.579
+      orthogonality_threshold: "|r| < 0.3 PASS"
+    }
+    verdict: PASS (K=2 STRONG portable)
+    limit: "affine mod-arithmetic only — true non-commutative D=4 substrate untested; N=64 isolation (D=4·N=256 untested); single seed/tick"
+  }
+
+  finding cascade-s9-AO-2 {
+    claim: "axis-NEW candidate (hyper-tetrahedral 4-cycle count) DEGENERATE on affine D=4 cohort — uniform value=1 across all 18 mixers"
+    evidence: {
+      axis-NEW_value: "1 ∀ mixer ∈ {M01..M18}"
+      discrim: 0.000
+      pearson_with_a16: 0.000
+      spearman_with_a16: -0.9133  ; "rank-correlation artifact of zero variance, not signal"
+    }
+    verdict: raw 71 FAIL — retire candidate
+    limit: "degeneracy is mixer-family-conditional (affine commute under axis cycling); non-affine substrates may resurrect 4-cycle observable"
+  }
+
+  finding cascade-s9-AO-3 {
+    claim: "K=3 emergence from D=4-specific 4-axis observable NOT supported"
+    evidence: "axis-NEW degenerate ⇒ no third orthogonal direction surfaced from 4-axis structure"
+    verdict: K=2 STAYS (matches cascade-s8 final state)
+    limit: "single observable tested (hyper-tetrahedral 4-cycle); other D=4-emergent candidates — 4-axis-asymmetry score, hypercube reflection group invariants, etc. — untested"
+  }
+
+  closure cascade_s9 {
+    status: SINGLE-TICK CLOSURE
+    K2_STRONG: HOLDS (axis-13 + axis-16, cross-dimension portable on N=64 affine cohort)
+    K3_investigation_count: 5+1=6 candidates rejected (cascade-s2 R, cascade-s5 AK, cascade-s6 AL→s7 AM revert, cascade-s8 AN n=40 revert, cascade-s9 AO axis-NEW degenerate)
+    next_cascade_trigger: "cascade-s10 only if raw 70 demands non-affine D=4 OR N=256 D=4 OR k>4 lightcone"
+  }
+}
