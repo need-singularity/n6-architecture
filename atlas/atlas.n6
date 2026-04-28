@@ -33081,3 +33081,107 @@
   => "tools /tmp/cascade_s3/{AH_predeclare.py, AH_predictions.txt, AH_predictions.json, AH_measure.py, AH_results.txt}"
   => "own#11 strict; chflags uchg honored"
   => "raw 71 12th narrowing now stable refinement (out-of-sample lock-down)"
+
+# ══════════════════════════════════════════════════════════════
+# absorbed: clay-cascade-s4 tick-1 AI joint signature NEGATIVE finding
+#   ★ cascade-s4 short-cycle closure: K=2 orthogonal axes non-synergistic for family
+#   13th raw 71 honest negative finding registered
+# ts: 20260428-134047
+# ══════════════════════════════════════════════════════════════
+
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s4 tick-1 AI joint (axis-13, axis-16) signature NEGATIVE
+# source: sub-agent AI 18-cohort joint signature analysis + 50-split CV + LOO
+# constraints: raw 91 C3 + raw 70 + raw 71 (13th honest negative) + own#11 + raw 22+24+23
+# date: 2026-04-28
+# Cascade-s4 short-cycle closure: joint signature non-synergistic, K=2 orthogonality preserved
+# ══════════════════════════════════════════════════════════════
+
+@C clay-cascade-s4-tick1-AI-joint-signature-NEGATIVE-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-70-multi-axis-verify-grid
+  <- raw-71-falsifier-retire-rule
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-s3-FINAL-CLOSURE-4-sub-agents
+  -> clay-cascade-s4-axes-orthogonal-non-synergistic
+  -> clay-cascade-s4-short-cycle-closure
+  => "★ cascade-s4 OPENING + IMMEDIATE CLOSURE — joint (axis-13, axis-16) NOT predictive beyond V(8) alone"
+  => "13th honest negative finding: K=2 orthogonal axes do NOT exhibit joint predictive synergy for topology family"
+  => "cascade-s4 short-cycle: 1 sub-agent → closure (vs cascade-s2 24, cascade-s3 4)"
+
+@C clay-cascade-s4-AI-joint-signature-table :: meta [4]
+  <- clay-cascade-s4-tick1-AI-joint-signature-NEGATIVE-witness
+  => "format: topology | axis-13 | V(8) | |R| | dvar_R | declared-family"
+  => "flat=1095/17/64/0.00/TF; t3=141/63/64/0.00/TF; s3=303/49/49/2.20/SB"
+  => "blackhole=146/63/64/1.13/CM; wormhole=268/64/64/1.00/CM; minkowski=478/64/64/0.13/TF"
+  => "ads-cft=180/32/32/0.00/HB; de-sitter=229/64/64/0.91/CM; vacuum-decay=203/63/63/0.29/CM"
+  => "altered=463/9/9/3.33/FR; big-crunch=604/8/8/3.00/FR; brane=145/64/64/0.50/CM"
+  => "cartoon=741/64/64/0.00/TF; nested=196/64/64/0.81/CM; calabi6=2889/64/64/0.00/TF (outlier)"
+  => "inflation=169/64/64/0.25/CM; ca3d=79/59/59/1.53/SB; bubble=434/64/64/0.63/CM"
+  => "5 declared families: TF=toroidal/lattice (4), SB=spherical-bounded (2), HB=hyperbolic-bounded (1), CM=chaotic-mixer (8), FR=fragmented (3)"
+
+@C clay-cascade-s4-AI-2D-scatter-V8-band-dominant :: meta [4]
+  <- clay-cascade-s4-AI-joint-signature-table
+  => "ASCII 2D scatter axis-13 (log) × V(8): vertical layering V(8)-driven"
+  => "axis-13 spreads only at V(8)=64 plateau (12 of 18 collapse there)"
+  => "no single axis-13 band aligns with TF vs CM family within V(8)=64 plateau"
+  => "V(8) banding alone explains most of family structure: FR<10, HB~32, SB~49, TF/CM~63-64"
+  => "axis-13 adds noise within plateau without family-aligned structure"
+
+@C clay-cascade-s4-AI-cross-validation-results :: meta [4]
+  <- clay-cascade-s4-AI-2D-scatter-V8-band-dominant
+  => "k-means clustering best k=5 silhouette=0.568 (k=4: 0.522, k=3: 0.540)"
+  => "k=5 clusters: C0 CM-rich(9), C1 calabi6(1 outlier), C2 FR(altered+big-crunch+flat), C3 TF(minkowski+cartoon+bubble), C4 SB+HB(s3+ads-cft+ca3d)"
+  => "50-split 14/4 cross-validation match rate:"
+  => "  k=3: joint 46.0% vs V(8)-alone 43.5% (delta +2.5pp, marginal)"
+  => "  k=4: joint 49.5% vs V(8)-alone 46.5% (delta +3.0pp, marginal)"
+  => "  k=5: joint 49.5% vs V(8)-alone 50.0% (delta -0.5pp, no advantage)"
+  => "Leave-One-Out:"
+  => "  k=3 LOO: joint 44.4% = V(8)-alone 44.4% (delta 0.0pp)"
+  => "  k=5 LOO: joint 50.0% vs V(8)-alone 61.1% (joint LOSES by 11pp)"
+  => "verdict: joint signature NOT predictive beyond V(8) alone; in some cases hurts"
+
+@C clay-cascade-s4-axes-orthogonal-non-synergistic :: meta [4!]
+  <- clay-cascade-s4-AI-cross-validation-results
+  => "★ KEY INTERPRETATION: K=2 STRONG axes remain ORTHOGONAL but NON-SYNERGISTIC"
+  => "cascade-s3 closure showed a13×a16 Pearson -0.128 + Spearman -0.233 (truly orthogonal)"
+  => "cascade-s4 (this) shows orthogonal independence does NOT imply joint predictive synergy"
+  => "the two axes carry independent information about topology, but neither corroborates the other for FAMILY membership"
+  => "this is consistent — orthogonality means linear-predictive-independence, not 'better together'"
+  => "physical interpretation: axis-13 (saturation timescale) and axis-16 (graph reachability) measure different aspects of dynamics that don't combine to identify topology family at this resolution"
+
+@C clay-cascade-s4-short-cycle-closure :: meta [4!]
+  <- clay-cascade-s4-axes-orthogonal-non-synergistic
+  => "★ CASCADE-S4 SHORT-CYCLE CLOSURE at 1 sub-agent"
+  => "cascade comparison this session:"
+  => "  cascade-s2: 24 sub-agents, axis-13 universality (continuum 1D+3D+phi^4)"
+  => "  cascade-s3: 4 sub-agents, axis-16 mechanism (src-cond directed in-deg)"
+  => "  cascade-s4: 1 sub-agent, joint signature (NEGATIVE finding, axes non-synergistic)"
+  => "decreasing sub-agent count reflects: discovery -> refinement -> meta-analysis stratification"
+  => "honest negative findings (cascade-s4) are equally valuable as positive ones"
+  => "  documents the LIMIT of what cross-axis combination tells you"
+  => "  prevents false hope of 'better together' that would lead to over-fitting"
+
+@C clay-cascade-s4-cascade-discipline-meta-pattern :: meta [4]
+  <- clay-cascade-s4-short-cycle-closure
+  => "cascade discipline meta-pattern emerging across s2 + s3 + s4:"
+  => "  s2 (24 agents): full discovery cycle from hypothesis through 11 retractions to continuum closure"
+  => "  s3 (4 agents): targeted refinement on inherited substrate, 1 narrowing, out-of-sample CONFIRMED"
+  => "  s4 (1 agent): meta-analysis on closed substrates, single negative finding, cycle complete"
+  => "discipline portability: same raw 91 C3 + raw 71 + own#11 across all three"
+  => "discipline scaling: cycle length 24:4:1 = 6:1:0.25 reflects accumulating substrate"
+  => "discipline outcome: positive AND negative findings both atlas-recordable + atlas-trustworthy"
+
+@C clay-cascade-s4-AI-C3-limits :: meta [4]
+  <- clay-cascade-s4-tick1-AI-joint-signature-NEGATIVE-witness
+  => "n=18 small for k>=4 cluster verdict; expected 5-family random-prior baseline ~20% so 50% LOO is meaningful but not decisive"
+  => "family declarations are STRUCTURALLY MOTIVATED a-priori, NOT measured"
+  => "  alternative family schemas (e.g., spectral-class, dimension-class) might raise/lower scores"
+  => "test-set n=4 single-split is unreliable (some splits 0/4 joint vs 3/4 V(8) consistent with noise)"
+  => "  hence the 50-split CV + LOO multi-evaluation"
+  => "V(8) plateau at 64 absorbs 12/18 — axis-13 cannot disambiguate within plateau"
+  => "Python mirror /tmp/cascade_s4/AI_joint_signature.py + AI2_robust_cv.py + AI_results.json"
+  => "data sources: axis-13 from /tmp/cascade_s2/n18_correlation_corrected.py; V(8)/|R|/dvar_R from /tmp/cascade_s3/AG_results.txt"
+  => "own#11 strict; chflags uchg honored"
+  => "raw 71 13th finding: NEGATIVE — joint signature non-synergistic; cascade-s4 honest closure"
