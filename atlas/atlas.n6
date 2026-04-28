@@ -32157,3 +32157,164 @@
   => "own#11 honored — no claim that hexa was modified or re-run"
   => "C_nn cross-check shows observable choice is the 2nd axis of artifact — both observable + integrator must be correct for clean signal"
 
+
+# ══════════════════════════════════════════════════════════════
+# absorbed: clay-cascade-s2 tick-10 2-shard batch (cascade integrity check)
+#   AA chain1d KDK 3-axis robust + AB t3 L=8 mode-doubling FALSIFIED
+#   ★ 1D universality confirmed; 3D universality partially weakened (estimator-bias)
+# ts: 20260428-125931
+# ══════════════════════════════════════════════════════════════
+
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s2 tick-10 AA chain1d KDK 3-axis robustness CONFIRMED
+# source: sub-agent AA chain1d KDK 90 runs (3 L × 5 seeds × 6 m^2) — closes Z C1+C3+C4
+# constraints: raw 91 C3 + raw 70 + own#11 + raw 22+24+23
+# date: 2026-04-28
+# 1D universality LOCKED DOWN; integrator preserves analytic omega=sqrt(m^2) law
+# ══════════════════════════════════════════════════════════════
+
+@C clay-cascade-s2-tick10-AA-chain1d-KDK-3axis-robust-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-70-multi-axis-verify-grid
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-s2-tick8-chain1d-KDK-UNIVERSAL-witness
+  -> clay-cascade-s2-tick10-AA-90-runs-table
+  -> clay-cascade-s2-tick10-AA-honest-integrator-preservation
+  => "★ chain1d KDK k=0 universality LOCKED DOWN on 3 axes: L+seed+m^2"
+  => "90 runs (3 L × 5 seeds × 6 m^2 + extended): all tau_half within 0.6 ticks of analytic pi/(sqrt(m^2)*dt)"
+  => "max |slope - (-0.50)| = 0.0004 across L in {8,16,32}; closes Z tick-8 C1+C3+C4 limits"
+
+@C clay-cascade-s2-tick10-AA-90-runs-table :: meta [4]
+  <- clay-cascade-s2-tick10-AA-chain1d-KDK-3axis-robust-witness
+  => "<tau_half> +/- sigma across 5 seeds {6,7,11,13,17}, T_max=2048, dt=0.05:"
+  => "format: m^2 | L=8 | L=16 | L=32 | predicted pi/(sqrt(m^2)*dt)"
+  => "0.005 | 888.40+/-0.55 | 888.60+/-0.55 | 888.60+/-0.55 | 888.6"
+  => "0.010 | 628.40+/-0.55 | 628.20+/-0.45 | 628.40+/-0.55 | 628.3"
+  => "0.050 | 281.00+/-0.00 | 281.00+/-0.00 | 281.00+/-0.00 | 281.0"
+  => "0.100 | 198.20+/-0.45 | 198.60+/-0.55 | 198.60+/-0.55 | 198.7"
+  => "0.200 | 140.40+/-0.55 | 140.60+/-0.55 | 140.40+/-0.55 | 140.5"
+  => "0.500 | 88.80+/-0.45  | 88.60+/-0.55  | 89.00+/-0.00  | 88.9"
+  => "every cell within 0.6 ticks of prediction; seed sigma ~0.5 ticks (sub-1% relative)"
+
+@C clay-cascade-s2-tick10-AA-per-L-slopes :: meta [4]
+  <- clay-cascade-s2-tick10-AA-90-runs-table
+  => "per-L log-log fit + 95% CI from seed jackknife:"
+  => "L=8:  slope = -0.5002 +/- 0.0008 (R^2=1.0000), per-seed slopes -0.4999 -0.5001 -0.4996 -0.5018 -0.4998"
+  => "L=16: slope = -0.5004 +/- 0.0010 (R^2=1.0000), per-seed slopes -0.4993 -0.5002 -0.5018 -0.5012 -0.4993"
+  => "L=32: slope = -0.4999 +/- 0.0004 (R^2=1.0000), per-seed slopes -0.5004 -0.5002 -0.4994 -0.4994 -0.4999"
+  => "all 95% CIs bracket -0.50; finite-size drift NOT detectable"
+  => "verdict: chain1d k=0 universality robust across 3 axes"
+
+@C clay-cascade-s2-tick10-AA-honest-integrator-preservation :: meta [4!]
+  <- clay-cascade-s2-tick10-AA-chain1d-KDK-3axis-robust-witness
+  => "★ raw 91 C3 critical caveat: this is INTEGRATOR PRESERVATION test, not independent physics claim"
+  => "k=0 spatial mean is exact free-field oscillator at omega=sqrt(m^2) by construction"
+  => "every lattice site contributes equally to spatial mean → result is INDEPENDENT of L by construction"
+  => "test really validates KDK Verlet preserves analytic omega=sqrt(m^2) law to FP precision"
+  => "k>0 modes (lattice-dispersion sensitive) UNTESTED in this run"
+  => "honest interpretation: 'chain1d KDK preserves omega=sqrt(m^2) on k=0 zero-mode' — strong but bounded claim"
+  => "true lattice physics universality requires k>0 mode test (deferred to follow-up)"
+
+@C clay-cascade-s2-tick10-AA-cascade-position :: meta [4]
+  <- clay-cascade-s2-tick10-AA-chain1d-KDK-3axis-robust-witness
+  => "closure of Z tick-8 honest C3 limits:"
+  => "  C1 (L=8 only) -> CLOSED: L in {8,16,32} all yield -0.50"
+  => "  C4 (seed=6 only) -> CLOSED: 5-seed ensemble sigma <= 0.0012"
+  => "  C3 (m^2=0.01 not measured) -> CLOSED: m^2=0.005 + 0.01 added with T_max=2048"
+  => "compute speed: 90 runs in 2.2s wall-clock — k=0 mode trivially fast even at L=32 + T=2048"
+  => "cascade-s2 universality on chain1d 1D regime: STRONG CONFIRMATION"
+
+@C clay-cascade-s2-tick10-AA-C3-limits :: meta [4]
+  <- clay-cascade-s2-tick10-AA-chain1d-KDK-3axis-robust-witness
+  => "only chain1d topology — torus/complete/3-tetra not in this sweep"
+  => "only k=0 zero-mode by construction; finite-size dispersion in k>0 modes UNTESTED"
+  => "dt=0.05 only; Verlet error O(dt^2); slope might shift at dt -> 0.001 (likely below sigma_seed)"
+  => "float64 only — integer-truncated e2_step path remains separate (Z tick-8 retraction)"
+  => "T_max=2048 sufficient for m^2 >= 0.005; m^2 < 0.001 (predicted tau > 3000) extension untested"
+  => "KDK Verlet only — DKD ordering or higher-order (Forest-Ruth) symplectic at extended m^2 untested"
+  => "cross-check: Z's t3 L=4 -0.4938 paired with AA L>=8 chain1d -0.50 is cross-topology slope evidence; topology question separated to AB tick-10"
+  => "tools /tmp/cascade_s2/symplectic_chain1d_AA.py + AA_output.txt"
+  => "own#11 strict; raw 91 C3 honest"
+
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s2 tick-10 AB t3 KDK L=8 mode-doubling FALSIFIED
+# source: sub-agent AB t3 L=8 (N=512) KDK Verlet dt=0.05 m^2 in {0.05..0.5}
+# constraints: raw 91 C3 + raw 71 (10th narrowing) + own#11 + raw 22+24+23
+# date: 2026-04-28
+# Honest negative finding: V's mode-doubling hypothesis FALSIFIED; t3 universality 3D weakened
+# ══════════════════════════════════════════════════════════════
+
+@C clay-cascade-s2-tick10-AB-t3-L8-mode-doubling-FALSIFIED-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-71-falsifier-retire-rule
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-s2-tick6-V-tau-extractor-mismatch
+  <- clay-cascade-s2-tick6-t3-symplectic-slope-minus-0494-witness
+  -> clay-cascade-s2-tick10-AB-ratio-crosses-unity
+  -> clay-cascade-s2-tick10-AB-k0-estimator-contamination
+  => "★ 10th raw 71 narrowing — sub-agent V tick-6 mode-doubling hypothesis FALSIFIED at L=8"
+  => "L=8 obs/pred ratio = 1.27 (m^2-dependent 1.15-1.42) NOT approaching 1.0 from L=4 0.52"
+  => "ratio CROSSED unity, slope WORSENED -0.4938 -> -0.5915 — t3 3D universality PARTIALLY WEAKENED"
+
+@C clay-cascade-s2-tick10-AB-data-table :: meta [4]
+  <- clay-cascade-s2-tick10-AB-t3-L8-mode-doubling-FALSIFIED-witness
+  => "t3 L=8 (N=512, 8x8x8 cube periodic) KDK Verlet dt=0.05, single seed=42, T_max varies per m^2:"
+  => "format: m^2 | tau_half_obs | tau_half_pred=pi/(3*sqrt(m^2)) | obs/pred | max E-drift"
+  => "0.05 | 6.65 | 4.68 | 1.420 | 6.3e-4"
+  => "0.10 | 4.30 | 3.31 | 1.298 | 5.5e-4"
+  => "0.20 | 2.85 | 2.34 | 1.217 | 4.2e-4"
+  => "0.50 | 1.70 | 1.48 | 1.148 | 6.0e-4"
+  => "energy drift uniform <= 6.3e-4 (better than L=4 budget 1.2e-3) — integrator clean"
+
+@C clay-cascade-s2-tick10-AB-ratio-crosses-unity :: meta [4!]
+  <- clay-cascade-s2-tick10-AB-data-table
+  => "★ KEY FINDING: ratio CROSSED unity from L=4 to L=8, did NOT approach 1.0"
+  => "L=4 (V tick-6): ratio = 0.52 +/- 0.02 (uniform, under-prediction by x0.5)"
+  => "L=8 (this run): ratio = 1.27 (m^2-dependent 1.15-1.42, OVER-prediction)"
+  => "L=4 -> L=8 transition: ratio went 0.52 -> 1.27, NOT 0.52 -> 1.0"
+  => "if V's pure mode-doubling hypothesis correct, L=8 ratio should be ~1.0"
+  => "instead crossed unity AND became m^2-dependent — pure mode-doubling REJECTED as sole explanation"
+  => "slope L=4 -0.4938 -> L=8 -0.5915 (worse than continuum -0.50) confirms non-universal contamination"
+
+@C clay-cascade-s2-tick10-AB-k0-estimator-contamination :: meta [4!]
+  <- clay-cascade-s2-tick10-AB-ratio-crosses-unity
+  => "★ DIAGNOSIS: k=0 spatial-mean estimator <phi> is contaminated by low-k lattice modes"
+  => "L=8 has more low-k modes than L=4 (modes per axis: L=4 has 4, L=8 has 8)"
+  => "small-k lattice modes contribute disproportionately at low m^2 (where mass term is weakest)"
+  => "ratio m^2-dependence (1.42 at m^2=0.05 -> 1.15 at m^2=0.50) confirms low-k contamination"
+  => "discrete-lattice dispersion: omega^2_lat = m^2 + Sum(2-2cos k); at k=0 only m^2 survives"
+  => "BUT spatial-mean estimator mixes neighboring discrete-k modes whose contribution scales as 1/L^3 with mass-dependent prefactor"
+  => "not a finite-size artifact in the simple sense — estimator bias intrinsic to spatial-mean approximation"
+
+@C clay-cascade-s2-tick10-AB-cascade-implication :: meta [4]
+  <- clay-cascade-s2-tick10-AB-k0-estimator-contamination
+  => "implication for cascade-s2 universality claim:"
+  => "  chain1d KDK k=0 universal: STRONG (sub-agent AA 90 runs 3-axis robust, k=0 trivially L-independent in 1D)"
+  => "  t3 KDK k=0 universal: PARTIALLY WEAKENED — L=4 -0.494 may be coincidence; L=8 -0.59 suggests real estimator-bias"
+  => "  cross-topology universality (Z's claim chain1d -0.4999 ≈ t3 -0.4938) → re-evaluate"
+  => "    - Z's chain1d -0.50 stays robust (3-axis confirmed by AA)"
+  => "    - V's t3 -0.494 may have been mass-dependent on L=4 mode counting"
+  => "  cascade-s2 final closure honest amendment: 1D universality CONFIRMED; 3D universality requires deeper test"
+
+@C clay-cascade-s2-tick10-AB-followup-needed :: meta [4]
+  <- clay-cascade-s2-tick10-AB-cascade-implication
+  => "follow-up to confirm 3D continuum universality:"
+  => "  (i) Fourier-projected exact k=0 mode (not spatial-mean approximation) — removes low-k contamination"
+  => "  (ii) L=16 t3 (N=4096) extrapolation — distinguishes 1/L vs 1/L^2 scaling"
+  => "  (iii) L -> infinity scaling check via 4+ L grid (L=4, 6, 8, 10, 12)"
+  => "  (iv) compare integrator: KDK vs higher-order (Forest-Ruth, Yoshida) at L=8"
+  => "until then: t3 -0.59 at L=8 is the empirical truth; -0.50 universality 3D is provisional"
+
+@C clay-cascade-s2-tick10-AB-C3-limits :: meta [4]
+  <- clay-cascade-s2-tick10-AB-t3-L8-mode-doubling-FALSIFIED-witness
+  => "n=2 lattice sizes only (L=4 + L=8) — cannot distinguish 1/L vs 1/L^2 scaling without L=16"
+  => "k=0 mode estimator = spatial mean is exact only at infinite resolution"
+  => "single seed=42, single dt=0.05; no ensemble averaging, no dt extrapolation"
+  => "4 m^2 points -> 2 dof for slope fit; high R^2 not strong evidence given few points"
+  => "continuum prediction tau_half = pi/(3m) assumes pure cosine; lattice introduces beating from small-k modes"
+  => "Hexa port deferred; results are Python-mirror only (/tmp/cascade_s2/symplectic_t3_L8.py)"
+  => "energy drift <= 6.3e-4 confirms integrator clean — physics issue not numerics"
+  => "raw 71 narrowing not full retraction: V's L=4 measurement still empirically -0.4938; interpretation as 'mode-doubling artifact' falsified"
+  => "own#11 strict; chflags uchg honored"
