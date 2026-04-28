@@ -1,0 +1,123 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade-s5 tick-2 AK structural coupling retest CLOSURE
+# source: sub-agent AK 18-cohort axis-14 Renyi-2 at IC=16 + correlation matrix
+# constraints: raw 91 C3 + raw 70 + raw 71 (15th finding) + own#11 + raw 22+24+23
+# date: 2026-04-28
+# CASCADE-S5 CLOSURE: K=3 promotion DENIED-ROBUST — coupling persists across IC, only sign changes
+# ══════════════════════════════════════════════════════════════
+
+@C clay-cascade-s5-tick2-AK-K3-DENIED-ROBUST-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-70-multi-axis-verify-grid
+  <- raw-71-falsifier-retire-rule
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-s5-tick1-AJ-axis-14-K3-REOPENED-witness
+  <- clay-cascade-s2-tick4-axis-14-renyi2-K3-DENIED-witness
+  -> clay-cascade-s5-AK-coupling-sign-flip-IC-conditional
+  -> clay-cascade-s5-AK-K2-STRONG-FINAL-confirmed
+  => "★ axis-14 K=3 PROMOTION DENIED-ROBUST — cascade-s2 R verdict CONFIRMED at deeper IC-conditional level"
+  => "AJ (tick-1) resolved denial (a) discrimination → IC-conditional 10x restored"
+  => "AK (tick-2) confirmed denial (b) structural coupling → PERSISTS, only sign reverses IC-conditionally"
+
+@C clay-cascade-s5-AK-18-cohort-renyi2-i16 :: meta [4]
+  <- clay-cascade-s5-tick2-AK-K3-DENIED-ROBUST-witness
+  => "Renyi-2 H_2 measurement at non-boundary IC center=16, full 18 D=3 cohort:"
+  => "format: topology | p | H_R2 | a13 | a16 | trapped?"
+  => "flat: 0.9999/0.0002/1095/17/T  | t3: 0.7955/0.3936/141/63"
+  => "s3: 0.5679/0.6749/303/49      | blackhole: 0.8050/0.3768/146/63"
+  => "wormhole: 0.9999/0.0002/268/64/T | ads-cft: 0.6489/0.6082/180/32"
+  => "de-sitter: 0.9476/0.1046/229/64 | vacuum-decay: 0.7922/0.3993/203/63"
+  => "altered: 0.7215/0.5140/463/9   | big-crunch: 0.8181/0.3533/604/8"
+  => "brane: 0.7839/0.4137/145/64    | cartoon: 0.8581/0.2791/741/10"
+  => "nested: 0.7758/0.4275/196/64   | calabi6: 0.9998/0.0004/2889/64/T"
+  => "inflation: 0.8106/0.3668/169/64 | ca3d: 0.7948/0.3948/79/59"
+  => "bubble: 0.8005/0.3848/434/64   | minkowski: 0.9086/0.1816/478/64"
+  => "trapped 3/18 (flat, wormhole, calabi6 hit p>=0.9998) — IC-trapped wavepackets"
+  => "Renyi-2 disc = 0.590 (vs i=32: 0.106 — 5.6x restored, AJ confirmed at full cohort)"
+
+@C clay-cascade-s5-AK-correlation-matrix-i16 :: meta [4]
+  <- clay-cascade-s5-AK-18-cohort-renyi2-i16
+  => "3-axis correlation matrix at non-boundary IC=16, full n=18:"
+  => "  a14 x a13: Pearson = -0.536 / Spearman = -0.483"
+  => "  a14 x a16: Pearson = -0.115 / Spearman = -0.239"
+  => "  a13 x a16: Pearson = -0.128 / Spearman = -0.233"
+  => "trapped-excluded n=15 cross-check:"
+  => "  a14 x a13: Pearson = -0.223 / Spearman = -0.307"
+  => "  a14 x a16: Pearson = -0.215 / Spearman = -0.255"
+  => "  a13 x a16: Pearson = -0.713 / Spearman = -0.315"
+
+@C clay-cascade-s5-AK-coupling-sign-flip-IC-conditional :: meta [4!]
+  <- clay-cascade-s5-AK-correlation-matrix-i16
+  => "★ STRIKING FINDING: a14×a13 SIGN FLIP between IC=32 and IC=16"
+  => "format: pair | i=32 P | i=32 S | i=16 P | i=16 S | dP | dS"
+  => "a14 x a13: +0.282 / +0.519 | -0.536 / -0.483 | dP=-0.818, dS=-1.002"
+  => "a14 x a16: -0.370 / -0.209 | -0.115 / -0.239 | dP=+0.255, dS=-0.030"
+  => "a14×a13 magnitude GREW at non-boundary (from 0.282/0.519 to 0.536/0.483)"
+  => "  AND sign reversed (positive → negative correlation)"
+  => "a14×a16 weakened slightly at non-boundary (Pearson FAIL→PASS)"
+  => "interpretation: IC=32 forces p→0.5 saturating BOTH discrimination AND coupling magnitude artifically low"
+  => "  IC=16 reveals true a14↔a13 coupling structure — anti-correlation under non-boundary"
+  => "qualitatively IC-conditional (sign flip!) but quantitatively still |r|>0.3 in BOTH ICs"
+
+@C clay-cascade-s5-AK-K3-DENIED-ROBUST :: meta [4!]
+  <- clay-cascade-s5-AK-coupling-sign-flip-IC-conditional
+  -> clay-cascade-s5-AK-K2-STRONG-FINAL-confirmed
+  => "★ K=3 PROMOTION VERDICT: DENIED-ROBUST"
+  => "  a14×a13: |Pearson|=0.536 FAIL, |Spearman|=0.483 FAIL"
+  => "  a14×a16: |Pearson|=0.115 PASS, |Spearman|=0.239 PASS"
+  => "  trapped-excluded n=15: a14×a13 |Spearman|=0.307 still FAIL; a14×a16 PASS both"
+  => "axis-14 cannot be promoted to K=3 — coupling with axis-13 PERSISTS across IC at deeper level"
+  => "structural mechanism: phi-pi (axis-13) ↔ bipartite-flow (axis-14) SHARE lattice information"
+  => "  same topology property manifests as both phi-pi correlator AND bipartite half-cut weight"
+  => "  IC=32 boundary IC saturates both estimators; IC=16 reveals anti-correlation; magnitude consistent"
+  => "cascade-s2 R denial (b) CONFIRMED ROBUST to IC choice"
+
+@C clay-cascade-s5-AK-cascade-s5-closure :: meta [4!]
+  <- clay-cascade-s5-AK-K3-DENIED-ROBUST
+  => "★ CASCADE-S5 CLOSURE at 2 sub-agents (AJ + AK)"
+  => "cascade-s5 progression:"
+  => "  AJ tick-1: discrimination IC-conditional (resolved denial a)"
+  => "  AK tick-2: structural coupling robust (confirmed denial b at deeper level)"
+  => "promotion blocked by partial IC-dependence:"
+  => "  discrimination (denial a) is IC-fragile — restored 10x at non-boundary"
+  => "  coupling (denial b) is qualitatively IC-conditional (sign flip) but quantitatively still fails"
+  => "no further ticks profitable on axis-14 alone"
+  => "  next would require new DESIGN of estimator that decouples from a13"
+  => "  e.g., bipartite-flow conditioned on axis-13-orthogonal projection"
+
+@C clay-cascade-s5-AK-K2-STRONG-FINAL-confirmed :: meta [4!]
+  <- clay-cascade-s5-AK-cascade-s5-closure
+  => "★ K=2 STRONG VERIFY-GRID FINAL CONFIRMED across 5 cascades:"
+  => "  axis-13 SATURATION (cascade-s2): continuum mass-oscillation 1D+3D+phi^4"
+  => "  axis-16 LIGHTCONE (cascade-s3): src-conditional directed in-deg variance"
+  => "  axis-15: RETRACTED (cascade-s2 K saturation amplitude artifact)"
+  => "  axis-14[Renyi-2]: K=3 DENIED-ROBUST (cascade-s5 AK at IC-conditional level)"
+  => "  axis-17[SymDef]: RETIRED (cascade-s2 X coverage + rank-coupled)"
+  => "  joint signature: NEGATIVE non-synergistic (cascade-s4 AI)"
+  => "K=2 STRONG = (axis-13 + axis-16); orthogonal a13×a16 r=-0.128, ρ=-0.233"
+
+@C clay-cascade-s5-AK-15-raw-71-findings :: meta [4]
+  <- clay-cascade-s5-AK-cascade-s5-closure
+  => "session cumulative raw 71 retractions/narrowings/negatives/reopenings:"
+  => "  s2 (11): Stage-5 alpha=0.55 / axis-15 / tau~L^2 / cartoon 9-cell core / mass-osc-0.5 →"
+  => "         damped-diff -0.30 / U damped-osc / Y echo / Z chain1d-0.30 / V mode-doubling / AC linearity-only"
+  => "  s3 (1): AF deg-var symmetrized → AG src-conditional directed in-deg + |R|"
+  => "  s4 (1): joint signature NEGATIVE non-synergistic"
+  => "  s5 (2): AJ K=3 reopened (denial a IC-conditional) / AK K=3 denied-robust (denial b persistent)"
+  => "= 15 cumulative findings demonstrating cascade discipline self-correction"
+
+@C clay-cascade-s5-AK-C3-limits :: meta [4]
+  <- clay-cascade-s5-tick2-AK-K3-DENIED-ROBUST-witness
+  => "Python mirror /tmp/cascade_s5/axis14_n18_i16.py — not authoritative hexa run"
+  => "  identical NEIGHBOR_FNS, fixed-point qs_step, decimille p resolution; axis-14 H_R2 in float"
+  => "single seed=6 and single tick depth=64; IC sweep limited to 3 centers (16, 32, 48)"
+  => "AXIS_13 anchors from iter-35 phi-pi own-shard provenance; AXIS_16 V(8) from cascade-s3 G corrected BFS at src=32"
+  => "  a13/a16 NOT re-measured here — using cascade-s2/s3 values"
+  => "trapped-wavepacket flagging at p in {<=0.005, >=0.995}; 3 excluded in cross-check"
+  => "  retained in primary correlation per honest-cohort rule"
+  => "sign-flip in a14×a13 (i=32 → i=16) observed but mechanistically unmodeled"
+  => "  possibly Renyi-2 saturating at p=1 trapping high-a13 outliers (calabi6 a13=2889 with H_R2≈0)"
+  => "  trapped-excluded run still shows |Spearman|=0.307 FAIL — verdict robust to artifact"
+  => "tools /tmp/cascade_s5/axis14_n18_i16.py + extended infrastructure"
+  => "own#11 strict; chflags uchg honored; raw 71 15th finding registered"
