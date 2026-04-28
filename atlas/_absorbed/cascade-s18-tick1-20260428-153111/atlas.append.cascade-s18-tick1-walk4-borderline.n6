@@ -1,0 +1,88 @@
+@shard cascade_s18_tick1_walk4_borderline_K1_postponed {
+  origin: "cascade-s18 AY sub-agent (extended graph-property family final mechanism check)"
+  date: 2026-04-28
+  agent_id: a57829e474ab87c8d
+  cwd: /Users/ghost/core/n6-architecture
+  raw_91_C3_disclosure: "Python mirror /tmp/cascade_s18/run.py + /tmp/cascade_s18/robustness.py. n=30 N=64 single seed=6 graph realization. Bipartite-K44 8 disconnected components → algebraic_conn ≈ 0. NO multiple-comparison correction in primary report (Bonferroni added in robustness check). 8 properties have COLLINEARITIES: walk_2_count ≡ 2|E|/N, trace_A_squared = N × walk_2_count (verified r identical), trace_A_cubed = N × walk_3_count (verified r identical) — effective distinct property count = 6. AY agent INCLUDED explicit sign-convention self-check (improvement over cascade-s16 AW agent's confusion)."
+
+  finding cascade-s18-AY-1 {
+    claim: "walk_4_count |r|=0.5093 univariate — borderline crosses 0.5 threshold but FAILS Bonferroni correction (critical |r|=0.526)"
+    evidence: {
+      walk_4_count_pearson_r: -0.5093
+      walk_4_count_spearman: -0.6027
+      walk_4_count_R_squared: 0.259
+      bonferroni_15_test_critical: 0.526
+      bonferroni_pass: FALSE
+      LOO_range: [0.4430, 0.67]  ; "fragile boundary"
+      leave_extreme_out_r: 0.7194  ; "signal NOT outlier-driven"
+      sign_relationship_noise: "BA-m4 (walk_4=304, contrib=+0.79 VIOLATOR) is counter-trend — that's why outlier-removed |r| lifts to 0.72"
+    }
+    verdict: BORDERLINE (univariate threshold pass, multiple-comparison fail)
+    limit: "single seed n=30 cohort, no multi-realization average"
+  }
+
+  finding cascade-s18-AY-2 {
+    claim: "walk_4_count is in degree-related moment family — Spearman with retired degree_var = 0.69"
+    evidence: {
+      walk_4_count_vs_degree_var_spearman: 0.6877
+      degree_var_retired_cascade_s17: TRUE  ; "16th retraction"
+      same_family_pathology_risk: HIGH  ; "walk_4_count likely shares N-dependent pseudo-signal pathology"
+      cascade_s17_N_128_pattern: "degree_var |r| crashed 0.497→0.101 at N=128"
+      walk_4_predicted_outcome: "likely similar crash at N=128/256 if degree_var pattern holds"
+    }
+    verdict: WALK_4_COUNT_LIKELY_INHERITS_DEGREE_VAR_PATHOLOGY (but NOT pre-retired without test)
+    limit: "0.69 Spearman is correlation not equivalence — could behave differently at scale"
+  }
+
+  finding cascade-s18-AY-3 {
+    claim: "Other 7 new properties (walk_2/3, trace_A^2/3, alg_conn, graph_H, vN_H) all univariate |r| < 0.452"
+    evidence: {
+      walk_2_count: { r: -0.3953, R2: 0.156 }
+      walk_3_count: { r: -0.2422, R2: 0.059 }
+      trace_A_squared: { r: -0.3953, R2: 0.156, collinear: walk_2_count }
+      trace_A_cubed: { r: -0.2422, R2: 0.059, collinear: walk_3_count }
+      algebraic_connectivity: { r: -0.3771, R2: 0.142 }
+      graph_entropy: { r: 0.0916, R2: 0.008 }
+      von_neumann_entropy: { r: -0.4513, R2: 0.204 }  ; "second-strongest after walk_4"
+    }
+    verdict: ALL BELOW UNIVARIATE 0.5 THRESHOLD
+    limit: "von_neumann_entropy 0.45 marginal, secondary candidate for cascade-s19 follow-up"
+  }
+
+  finding cascade-s18-AY-4 {
+    claim: "Multivariate composite reaches R²=0.611 on 8-new-only (R²=0.828 with degree_var + diameter, but overfit risk at n=30/p=10)"
+    evidence: {
+      multivariate_8_new_only_R_squared: 0.611
+      multivariate_full_10_feature_R_squared: 0.828
+      multivariate_full_adjusted_R_squared_estimate: 0.74
+      cascade_s15_s16_baseline: 0.345
+      lift_over_cascade_s16: 0.266
+      top_3_betas_full: ["walk_4_count: 0.99", "degree_var: -0.82", "walk_2_count: -0.60"]
+      threshold_confirmed: 0.5
+      overfit_warning: "n=30/p=10 inflates R² substantially"
+    }
+    verdict: PASSES R² > 0.5 (with overfit caveat)
+    limit: "needs independent test set OR n=60+ cohort to confirm not overfit"
+  }
+
+  K_1_declaration_status {
+    decision: POSTPONED_BORDERLINE
+    rationale: "walk_4_count |r|=0.51 nominally passes univariate gate but fails Bonferroni + likely shares degree_var N-dependent pathology. Multivariate R²=0.61 but overfit risk at n=30/p=10. Pure threshold-rule says continue mechanism hunt one more cascade."
+    pre_emptive_retire_avoided: "Without N=128/256 test, walk_4_count cannot be retired by analogy alone (cascade-s17 N-scale crash on degree_var doesn't automatically retire correlated property)."
+    final_gate_for_K_1: "cascade-s19 N=128/256 walk_4_count test"
+  }
+
+  closure cascade_s18 {
+    status: SINGLE-TICK CLOSURE (POSTPONED_BORDERLINE)
+    framework_state_after: {
+      axis_16_numerics: "K=1 anchor on synthetic substrates (canonical form unchanged)"
+      axis_16_semantics: "BFS-shell asymmetry (cascade-s13 14th retraction)"
+      axis_13: "baseline FORMULATION-CONDITIONAL"
+      independence_axiom_v3_PROVISIONAL: "K=2 violation mechanism: walk_4_count BORDERLINE candidate (|r|=0.51 univariate, 0.61 multivariate, fails Bonferroni, likely N-dependent like degree_var)"
+      K_3: "7 portable rejected + 1 D=4-only deferred"
+      retraction_count: 16  ; "no new retraction; new candidate walk_4_count under test"
+    }
+    cascade_s19_priority: "walk_4_count N=128/256 scale gate. If |r|<0.4 at scale → walk_4 RETIRED + K=1 framework UNCONDITIONALLY confirmed. If |r|≥0.5 stable → walk_4 is genuine mechanism, K=2 axiom refines."
+    expected_outcome_per_AY_disclosure: "based on degree_var precedent (Spearman 0.69 with walk_4_count + cascade-s17 N=128 crash), walk_4_count LIKELY retires at scale → K=1 declaration probable but NOT pre-emptive"
+  }
+}
