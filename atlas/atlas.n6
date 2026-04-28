@@ -34565,3 +34565,95 @@
     cascade_s14_priority: "K=2 independence multi-seed confirmation on physics cohort (n≥30, sweep over RNG seed space)"
   }
 }
+@shard cascade_s14_tick1_K2_independence_axiom_substrate_conditional {
+  origin: "cascade-s14 AU sub-agent (35-seed multi-seed K=2 independence verification — 15th retraction confirmation)"
+  date: 2026-04-28
+  agent_id: aa5b75cd25ad68afe
+  cwd: /Users/ghost/core/n6-architecture
+  raw_91_C3_disclosure: "Python mirror /tmp/cascade_s14/run_multiseed.py. Synthetic axis-16 RE-IMPLEMENTED here as variance-of-src-cond-indeg (matching physics protocol) instead of cascade-s10 V(8) reachability count — HARMONISED comparison. Some substrates seed-stable (Ising-1D/Toffoli-CA/Cayley/Lattice/14 algebraic synthetic mixers — IC noise only). Others seed-regenerate graph (MeanField/RRG-4/SmallWorld/ER-sparse/4 FNV hashes). axis-13 IC-only confound: pure IC-only sweep with graph fixed not run — verdict robust because synthetic IC-only also stays below 0.3 across same 35 seeds."
+
+  finding cascade-s14-AU-1 {
+    claim: "physics cohort Pearson(axis-13, axis-16) distribution across 35 seeds: mean +0.153, 34.3% above 0.3 axiom-violation threshold"
+    evidence: {
+      n_seeds: 35
+      n_substrates: 8
+      mean: 0.1532
+      std: 0.3535
+      median: 0.1780
+      pct_5: -0.4413
+      pct_95: 0.6428
+      min: -0.4531
+      max: 0.8641
+      frac_pearson_gt_0_3: 0.3429  ; "12/35 seeds violate K=2 independence axiom"
+      frac_pearson_gt_0_5: 0.1714
+      frac_abs_gt_0_3: 0.4857
+      cascade_s13_seed_6_value: 0.4026  ; "74th percentile of distribution — typical, not anomalous"
+    }
+    verdict: "Physics cohort regularly violates Pearson<0.3 axiom — 34% of seeds"
+    limit: "n=8 cohort Pearson has substantial sampling variance (std 0.35); 35 seeds give CI half-width ~0.13"
+  }
+
+  finding cascade-s14-AU-2 {
+    claim: "synthetic cohort Pearson(axis-13, axis-16) distribution across SAME 35 seeds: mean -0.230, ZERO axiom violations"
+    evidence: {
+      n_seeds: 35
+      n_mixers: 18
+      mean: -0.2302
+      std: 0.1812
+      median: -0.2447
+      pct_5: -0.5650
+      pct_95: 0.0460
+      min: -0.5717
+      max: 0.1094
+      frac_pearson_gt_0_3: 0.0000  ; "0/35 seeds — never violates"
+      frac_pearson_gt_0_5: 0.0000
+      frac_abs_gt_0_3: 0.3143
+    }
+    verdict: "Synthetic cohort robustly preserves Pearson<0.3 axiom across all 35 seeds"
+    limit: "synthetic axis-16 protocol harmonised with physics — slightly different from cascade-s10 V(8) reachability formulation"
+  }
+
+  finding cascade-s14-AU-3 {
+    claim: "Paired delta (physics - synthetic) per seed: mean +0.383, 95% bootstrap CI [+0.250, +0.511], excludes 0"
+    evidence: {
+      paired_delta_mean: 0.3834
+      paired_delta_std: 0.4027
+      paired_t_statistic: 5.633
+      paired_t_df: 34
+      paired_t_p_value: "≈ 2×10⁻⁶ (two-sided)"
+      bootstrap_ci_95_lower: 0.2499
+      bootstrap_ci_95_upper: 0.5109
+      bootstrap_resamples: 10000
+      sign_test_frac_physics_higher: 0.8286  ; "29/35 seeds physics > synthetic"
+      threshold_delta_gate: 0.15
+      verdict_15_retraction: CONFIRMED
+    }
+    verdict: PASS gate (15th retraction CONFIRMED with strong CI separation)
+    limit: "axis-13 IC noise + graph regeneration both contribute to physics distribution variance — not isolated"
+  }
+
+  retraction cascade_s14_AU_K2_axiom_substrate_conditional {
+    type: AXIOMATIC RETRACTION (most consequential category — modifies framework's core axiom)
+    retraction_index: 15
+    raw_71_invocation: TRUE
+    original_axiom: "K=2 independence (Pearson<0.3) ports across substrate × dimension — universal axiom across cascades s2..s12"
+    refined_axiom: "K=2 independence (Pearson<0.3) holds robustly on SYNTHETIC algebraic/hash mixer cohorts. NOT guaranteed on physics-grounded substrates. Substrate-conditional, NOT universal."
+    cascades_affected: "cascade-s2 through s13 (all 12 prior cascades)"
+    statistical_evidence: "n_seeds=35, paired_delta=+0.38, CI [+0.25, +0.51] excludes 0, t=5.6, p≈2e-6, sign-test 83%"
+    mechanism_hypothesis: "synthetic mixers' non-affine bit-twiddle structure scrambles BFS-reachability geometry independent of phi-pi spectral response → forced decorrelation. Physics substrates preserve geometric-spectral coupling naturally."
+  }
+
+  closure cascade_s14 {
+    status: SINGLE-TICK CLOSURE (15th retraction CONFIRMED)
+    framework_state_after: {
+      axis_16_numerics: "K=1 anchor preserved on synthetic substrate cohort (canonical form unchanged)"
+      axis_16_semantics: "BFS-shell in-degree variance (geometric/operational, NOT info-flow heterogeneity) — cascade-s13 14th retraction"
+      axis_13: "baseline FORMULATION-CONDITIONAL on non-affine"
+      independence_axiom: "SUBSTRATE-CONDITIONAL — synthetic mixers only, NOT universal — cascade-s14 15th retraction"
+      K_3: "7 portable rejected + 1 D=4-only deferred"
+      retraction_count: 15  ; "axiom retraction (most consequential category)"
+    }
+    deepest_lesson_v2: "Framework's CENTRAL AXIOM (K=2 independence) was synthetic-mixer-conditional. 12 prior cascades' 'universal portability' was an artifact of testing on a single substrate family. cascade discipline + raw 91 C3 + raw 71 caught this with statistical rigor (n=35 seeds, p~10⁻⁶). The framework's real territory is dramatically narrower than initially claimed: 'axis-16's BFS-ball asymmetry is a K=1 anchor on synthetic algebraic substrates'."
+    cascade_s15_priority: "investigate which physics-substrate property drives high-Pearson outliers (spectral gap? clustering coefficient? girth?). Identify physics-cohort sub-class on which K=2 still holds (if any)."
+  }
+}
