@@ -1,0 +1,39 @@
+# /Users/ghost/core/n6-architecture/.papers-cross-repo-lint-exempt
+#
+# papers/.own own 9 (papers-cross-repo-publish-canonical) grandfather list.
+# 줄당 1 path (relative to this repo root). #-주석 허용. 빈 줄 허용.
+#
+# Format: tool/papers_cross_repo_lint.hexa _load_exempt(repo) reads this file
+#         and SKIPs each path during scan (PASS verdict for those entries).
+#
+# Rationale per category:
+#
+# (1) design/kick/*_zenodo-*_omega_cycle.json — kick witness JSON, audit-only.
+#     own 9 note: "archive/marker migration 완료 후 block 격상" (read-only audit).
+design/kick/2026-04-28_zenodo-auto-prep_omega_cycle.json
+design/kick/2026-04-28_zenodo-deposit-prep_omega_cycle.json
+design/kick/2026-04-28_zenodo-deposit-prep-cycle14_omega_cycle.json
+
+# (2) domains/energy/room-temp-sc/.zenodo.json + osf-metadata.json
+#     paper 자체의 Zenodo/OSF deposit metadata cache (paper-level metadata).
+#     papers manifest.json 의 doi 필드와 중복되지 않는 paper-내부 메타.
+domains/energy/room-temp-sc/.zenodo.json
+domains/energy/room-temp-sc/osf-metadata.json
+
+# (3) proposals/hexa_weave_zenodo_*.md — proposal 문서 (4/28 작성).
+#     hexa-weave w2 paper 발행 prep 협의 문서, archive 부적절.
+#     own 9 grandfather: hexa-weave w2 publish 후 archive 예정.
+proposals/hexa_weave_zenodo_auto_prep_2026_04_28.md
+proposals/hexa_weave_zenodo_deposit_prep_2026_04_28.md
+
+# (4) reports/audits/zenodo-publish-*.md — 2026-04-11 audit 문서.
+#     역사적 기록물, archive 보다는 in-place 보존이 적절 (raw 91 C3 lineage).
+reports/audits/zenodo-publish-3-papers-2026-04-11.md
+reports/audits/zenodo-publish-ready-2026-04-11.md
+
+# (5) tool/zenodo/README_zenodo.md + deposit.sh
+#     hexa-weave w2 paper deposit 도구 — active workflow grandfather.
+#     deposit.sh 는 [DEPRECATED 2026-04-29] marker 적용됨 (auto-detect 가능),
+#     README_zenodo.md 는 명시 exempt.
+tool/zenodo/README_zenodo.md
+# tool/zenodo/deposit.sh — grandfather marker 자동 인식 (exempt 명시 불필요)
