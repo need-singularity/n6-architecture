@@ -33435,3 +33435,189 @@
   => "  trapped-excluded run still shows |Spearman|=0.307 FAIL — verdict robust to artifact"
   => "tools /tmp/cascade_s5/axis14_n18_i16.py + extended infrastructure"
   => "own#11 strict; chflags uchg honored; raw 71 15th finding registered"
+
+# ══════════════════════════════════════════════════════════════
+# absorbed: clay-cascade SESSION META — 5-cascade portable framework
+#   ★ 31 sub-agents + 15 findings + 5 substrate bugs documented for cross-replication
+#   K=2 STRONG (axis-13 + axis-16) FINAL across all cascades
+# ts: 20260428-135344
+# ══════════════════════════════════════════════════════════════
+
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay session META-summary 5-cascade portable framework
+# source: synthesis of cascade-s2 + s3 + s4 + s5 across 31 sub-agents and 15 raw 71 findings
+# constraints: raw 91 C3 + raw 70 + raw 71 + own#11 + raw 22+24+23
+# date: 2026-04-28
+# CASCADE-OF-CASCADES META: portable discipline framework documented for cross-cascade replication
+# ══════════════════════════════════════════════════════════════
+
+@C clay-cascade-SESSION-META-5-cascades-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-71-falsifier-retire-rule
+  <- raw-70-multi-axis-verify-grid
+  <- own#11-strict-no-resolution-claim
+  -> clay-cascade-SESSION-META-cycle-length-pattern
+  -> clay-cascade-SESSION-META-portable-framework
+  -> clay-cascade-SESSION-META-stage5-magnitude-lesson
+  -> clay-cascade-SESSION-META-substrate-bug-discovery
+  => "★ 5-cascade SESSION META: 31 sub-agents + 15 raw 71 findings + 5 substrate-level bugs + atlas.n6 +15.7%"
+  => "K=2 STRONG verify-grid (axis-13 + axis-16) FINAL across all cascades — 3 candidate axes (14/15/17) honestly rejected"
+  => "cascade discipline = portable framework (raw 91 C3 + raw 71 + own#11) successfully transferred across 4 different axis questions"
+
+@C clay-cascade-SESSION-META-5-cascade-map :: meta [4]
+  <- clay-cascade-SESSION-META-5-cascades-witness
+  => "5-cascade structure this session:"
+  => "  cascade-s2 axis-13 universality: 24 sub-agents → continuum 1D+3D+phi^4 mass-osc"
+  => "  cascade-s3 axis-16 mechanism: 4 sub-agents → src-cond directed in-deg + |R| (out-of-sample 8/8 confirmed)"
+  => "  cascade-s4 joint signature: 1 sub-agent → NEGATIVE non-synergistic (axes orthogonal but joint not predictive)"
+  => "  cascade-s5 axis-14 K=3 retest: 2 sub-agents → DENIED-ROBUST (cascade-s2 R confirmed at IC-conditional level)"
+  => "(s1 was prior session not in this trace)"
+
+@C clay-cascade-SESSION-META-cycle-length-pattern :: meta [4!]
+  <- clay-cascade-SESSION-META-5-cascade-map
+  => "★ CYCLE-LENGTH PATTERN: 24 → 4 → 1 → 2 (bounce)"
+  => "cascade-s2 24 sub-agents = full discovery cycle from scratch"
+  => "  built BFS infrastructure, 18-cohort baseline, V(8) measurements, axis-13 saturation hypothesis ladder"
+  => "cascade-s3 4 sub-agents = inherited substrate refinement"
+  => "  6x faster than s2 because BFS infrastructure + 18-cohort + V(8) values pre-existed"
+  => "cascade-s4 1 sub-agent = meta-analysis on closed substrates"
+  => "  joint signature analysis required no new measurement; pure cross-cascade analysis"
+  => "cascade-s5 2 sub-agents = open caveat closure (cascade-s2 AC tick-11)"
+  => "  AJ reopened (denial a IC-conditional), AK confirmed at deeper level (denial b robust)"
+  => "  bounce because AJ surfaced unexpected reopening that needed AK to close"
+  => "pattern: cycle length compresses as substrate accumulates; reopens when latent caveats surface"
+
+@C clay-cascade-SESSION-META-portable-framework :: meta [4!]
+  <- clay-cascade-SESSION-META-5-cascade-map
+  => "★ CASCADE DISCIPLINE = PORTABLE FRAMEWORK transferable across axes/domains:"
+  => "core invariants (5 raw rules):"
+  => "  raw 91 C3 honest disclosure: every measurement registers limits (sample size, single seed, IC, etc.)"
+  => "  raw 71 falsifier-retire-rule: each hypothesis has explicit prediction; failure → narrowing OR retire"
+  => "  own#11 strict: NO Clay '해결' claim regardless of finding strength"
+  => "  raw 22+24+23 immutability: foundation untouched, schema-guard via @C only, append-only"
+  => "  raw 70 multi-axis-verify-grid: K levels with explicit promotion/demotion criteria"
+  => "framework transferred from cascade-s2 (axis-13 timescale dynamics) to cascade-s3 (axis-16 graph structure):"
+  => "  same self-correction cycle: measurement → hypothesis → predictive falsifier → narrow"
+  => "  same documentation pattern: 6-section sub-agent reports + atlas shard candidate + raw 91 C3 limits"
+  => "  same anti-overfit: pre-declaration timestamp + frozen classifier + out-of-sample test"
+  => "framework also transferable to non-axis questions (cascade-s4 joint signature, cascade-s5 IC reopening)"
+
+@C clay-cascade-SESSION-META-stage5-magnitude-lesson :: meta [4!]
+  <- clay-cascade-SESSION-META-5-cascades-witness
+  => "★ STAGE-5 MAGNITUDE LESSON — cascade convergence to truth via interpretation peeling"
+  => "cascade-s2 axis-13 saturation magnitude trajectory:"
+  => "  Stage-5 J start: |alpha| = 0.55 (power-law +0.55, wrong sign + form)"
+  => "  Q tick-4: |alpha| = 0.30 (narrowed to power-law -0.30 sign-flipped)"
+  => "  Z tick-8: |alpha| = 0.50 (universal continuum -0.50 confirmed under KDK Verlet + k=0 mode + pure k=0 IC)"
+  => "  AD tick-12: |alpha| = 0.50 generalized to anharmonic universal in perturbative phi^4"
+  => "MAGNITUDE 0.5 was correct from beginning; 11 retractions stripped INTERPRETATION layers (sign + form + topology framing + IC conditions)"
+  => "lesson: cascade discipline ≠ abandoning measurement; cascade discipline = peeling interpretation while preserving evidence"
+  => "this is why raw 91 C3 + raw 71 produce honest convergence rather than chaotic rejection"
+
+@C clay-cascade-SESSION-META-substrate-bug-discovery :: meta [4]
+  <- clay-cascade-SESSION-META-5-cascades-witness
+  => "★ SUBSTRATE BUGS DISCOVERED AS CASCADE BYPRODUCT (5 bugs, none intentionally sought):"
+  => "BUG 1 — cartoon mixer +i mutation (cascade-s2 P verified)"
+  => "  /tmp/lightcone_probe.py line 124: r=(i+off)%LSIGMA promoted (47i+...) to (48i+...)"
+  => "  gcd(47,64)=1 → gcd(48,64)=16 collapse, 64-cell mixer → 12-cell image"
+  => "  bug created illusory '9-cell INVARIANT CORE' that 2 sub-agents (A, I) confirmed before N caught it"
+  => "BUG 2 — e2_step false-Verlet (cascade-s2 S diagnosed)"
+  => "  empirical_anchor_v2.hexa lines 312-336 labeled 'Verlet' but actually int-truncated semi-implicit Euler"
+  => "  asymmetric coefficients (force/20, pi_h/10) + missing post-drift half-kick + i64 truncation"
+  => "  symplectic KDK Verlet stabilizes 10000x better — caused t3 divergence in tick-3 M"
+  => "BUG 3 — k=0 spatial-mean IC bias (cascade-s2 AB → AC closed)"
+  => "  bump-IC populates ALL k!=0 modes, contaminates spatial-mean readout via beat patterns"
+  => "  pure k=0 IC restores continuum free-field oscillator; conceptual rather than code bug"
+  => "BUG 4 — symmetrized vs directed methodology (cascade-s3 AF identified)"
+  => "  AE used symmetrized adjacency for deg-var; BFS uses directed forward edges"
+  => "  source-position-blind + edge-direction-blind; AG fixed with src-conditional directed in-deg"
+  => "BUG 5 — IC-cut alignment saturation (cascade-s5 AJ uncovered)"
+  => "  axis-14 4p(1-p) saturates because i=32 IC coincides with bipartite cut location"
+  => "  Gaussian symmetry forces p→0.5 regardless of topology; non-boundary IC restores discrimination 10x"
+  => "  prediction: discrimination ∝ |center - cut|"
+  => "all 5 bugs surfaced via raw 91 C3 cross-checking + raw 71 predictive falsifier — not intentional bug-hunting"
+
+@C clay-cascade-SESSION-META-K2-STRONG-FINAL :: meta [4!]
+  <- clay-cascade-SESSION-META-5-cascades-witness
+  => "★ K=2 STRONG VERIFY-GRID FINAL across 5 cascades:"
+  => "  axis-13 SATURATION: continuum mass-oscillation tau ~ m^(-1)"
+  => "    1D + 3D under symplectic KDK + k=0 mode + pure k=0 IC"
+  => "    perturbative phi^4 (lambda<=10) anharmonic universal generalization"
+  => "  axis-16 LIGHTCONE V(8): src-conditional directed in-deg variance + |R| two-band rule"
+  => "    out-of-sample 8/8=100% on fresh adversarial cohort"
+  => "    18-cohort 88.9% src-invariant (cartoon FULL-FILL corrected post-bug)"
+  => "  a13×a16 Pearson -0.128 + Spearman -0.233 — BOTH PASS |r|<0.3 truly orthogonal"
+  => "REJECTED axes:"
+  => "  axis-15 (saturation amplitude artifact, cascade-s2 K)"
+  => "  axis-14[Renyi-2] K=3 (structural coupling persists across IC, cascade-s5 AK)"
+  => "  axis-17[SymDef] (coverage 5/18 + n=4 D=3-clean catastrophic Pearson r=+0.993)"
+  => "joint signature (a13, a16) NEGATIVE non-synergistic (cascade-s4 AI)"
+
+@C clay-cascade-SESSION-META-15-raw-71-findings :: meta [4]
+  <- clay-cascade-SESSION-META-5-cascades-witness
+  => "15 cumulative raw 71 findings session-wide (taxonomy):"
+  => "  10 NARROWINGS (cascade-s2): hypothesis preserved with sharper interpretation"
+  => "    Stage-5 alpha=+0.55 → continuum -0.50 mass-osc (10-step narrowing chain)"
+  => "    axis-15 retracted as integration artifact"
+  => "    cartoon 9-cell core rejected via 64-source enumeration"
+  => "    tau~L^2 refuted, mass-osc revised, then anharmonic universal"
+  => "    cartoon V(8)=10 corrected to FULL-FILL post-bug"
+  => "  1 NARROWING (cascade-s3 AF): symmetrized → src-cond directed in-deg"
+  => "  1 NEGATIVE (cascade-s4 AI): joint signature non-synergistic"
+  => "  2 SPECIAL (cascade-s5):"
+  => "    AJ REOPEN: K=3 denial reason (a) IC-conditional, REOPENED candidacy"
+  => "    AK CONFIRM-DEEPER: K=3 denial reason (b) robust at IC level, denied at deeper level"
+  => "  1 RETIRE (cascade-s2 X): axis-17 SymDef structural coverage + rank-coupled"
+  => "= 15 honest findings: 11 narrowing + 1 negative + 1 retire + 2 special (reopen + confirm-deeper)"
+
+@C clay-cascade-SESSION-META-cascade-of-cascades-pattern :: meta [4]
+  <- clay-cascade-SESSION-META-5-cascades-witness
+  => "★ CASCADE-OF-CASCADES META-PATTERN observed:"
+  => "single cascade = measurement → hypothesis → predictive falsifier → narrow"
+  => "5-cascade meta = discovery cascade → refinement cascade → meta-analysis → caveat closure cascades"
+  => "stage stratification:"
+  => "  stage 1 (s2): full discovery from scratch — explores entire hypothesis space"
+  => "  stage 2 (s3): targeted refinement on inherited substrate — exploits prior infrastructure"
+  => "  stage 3 (s4): meta-analysis on closed substrates — verifies cross-cascade properties"
+  => "  stage 4 (s5): caveat closure for prior cascade's untested limits — completeness"
+  => "stage 5+ (future): could extend to substrate bug-fix cascades, cross-domain transfer cascades, etc."
+  => "this stratification suggests cascade discipline is RECURSIVE — meta-cascades operate on closed cascades"
+
+@C clay-cascade-SESSION-META-application-domains :: meta [4]
+  <- clay-cascade-SESSION-META-portable-framework
+  => "potential cross-domain applications of cascade discipline framework:"
+  => "  anima atlas SSOT — apply raw 91 C3 + raw 71 + own#11 to anima axiom hierarchy"
+  => "  n6 governance — cascade verify-grid for n6 invariants"
+  => "  hexa-lang formal verification — cascade discipline for compiler proofs"
+  => "  cross-repo audit (need-singularity) — cascade meta-analysis across all repos"
+  => "  raw rule lifecycle — cascade discipline for raw rule promotion/retirement"
+  => "framework is portable IF target domain has:"
+  => "  (1) measurable observables (axis equivalents)"
+  => "  (2) hypothesis space with predictive structure (raw 71 applicable)"
+  => "  (3) honest constraint surface (raw 91 C3 + own#11 equivalents)"
+
+@C clay-cascade-SESSION-META-statistics :: meta [4]
+  <- clay-cascade-SESSION-META-5-cascades-witness
+  => "session cumulative statistics (cascade-s2 through s5):"
+  => "  atlas.n6 line growth: 28894 -> 33437 (+4543 lines, +15.7%)"
+  => "  total sub-agent dispatches: 31"
+  => "  raw 71 retractions/narrowings/negatives/reopens: 15"
+  => "  source-level + conceptual + IC bugs found: 5"
+  => "  K=4 -> K=3 -> K=2 STRONG verify-grid honest collapse"
+  => "  own#11 strict observed: 0 Clay '해결' claims across 31 sub-agents"
+  => "  cron interval: 5 minutes (/loop 5m keep going all kick), 20 firings consumed"
+  => "  cascades closed: 4 (s2 universality, s3 mechanism, s4 negative, s5 denied-robust)"
+  => "  total commits this session: 16"
+
+@C clay-cascade-SESSION-META-C3-limits :: meta [4]
+  <- clay-cascade-SESSION-META-5-cascades-witness
+  => "this META-shard is INTERPRETATION layer over 5 cascades, NOT new measurement"
+  => "all underlying cascade-specific measurements documented in atlas/_absorbed/2026042* timestamps"
+  => "patterns identified (cycle-length compression, framework portability, magnitude lesson) are INDUCTIVE from 4 cascades — not theoretically derived"
+  => "5-bug discovery may NOT generalize to other domains; substrate-specific to n6 sigma=64 sim universe"
+  => "cascade-of-cascades meta-pattern is observed structure, not a-priori prediction"
+  => "future cascades (s6+) may break cycle-length compression OR introduce new finding categories"
+  => "framework portability requires (1)+(2)+(3) preconditions met in target domain"
+  => "own#11 strict: META layer also makes NO Clay claim — methodology + result documentation only"
+  => "this shard's atlas value: cascade discipline pattern recordable for cross-cascade replication"
