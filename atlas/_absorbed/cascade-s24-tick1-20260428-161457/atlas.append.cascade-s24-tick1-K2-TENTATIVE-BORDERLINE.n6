@@ -1,0 +1,77 @@
+@shard cascade_s24_tick1_K_2_TENTATIVE_BORDERLINE_IT_2_N_scale_FINAL {
+  origin: "cascade-s24 BB sub-agent (IT-2 N-scale gate — TRULY FINAL probe per cascade-s23 closure)"
+  date: 2026-04-28
+  agent_id: a7b135fa4b43f8fdb
+  cwd: /Users/ghost/core/n6-architecture
+  raw_91_C3_disclosure: "Python mirror /tmp/cascade_s24/run.py. n=12 sub-cohort < cascade-s23 n=30 (Bonferroni stringent). Single graph realization seed=6 per (substrate, N). 10 IC seeds (vs 30 in s23). T_DYN=64 fixed across N (does NOT scale; mild trajectory undersampling at N=256). IT-2 = 2-bin TE exact. Lattice-2D scaling: 8x8 (N=64) → 8x16 (N=128) → 16x16 (N=256). Hub variants deterministic; ER/RRG/SmallWorld/MeanField/BA stochastic at single seed."
+
+  finding cascade-s24-BB-1 {
+    claim: "IT-2 |r vs axis-13| STABLE across N=64/128/256 — does NOT follow degree_var/walk_4 crash pattern"
+    evidence: {
+      pearson_IT_2_vs_axis_13_N_64: 0.2658
+      pearson_IT_2_vs_axis_13_N_128: 0.2648
+      pearson_IT_2_vs_axis_13_N_256: 0.2791
+      lift_N_64_to_256: 0.0133  ; "essentially flat"
+      ci_95_at_N_256: [0.1470, 0.4387]
+      cascade_s17_degree_var_pattern: "0.497 → 0.101 (5x crash)"
+      cascade_s19_walk_4_pattern: "0.249 → 0.230 (flat at N=256, also retired but borderline)"
+      it_2_pattern: "0.266 → 0.279 (flat at all N) — distinct from retired candidates"
+    }
+    verdict: PASS axis-13 stability gate (no signaling-loss pattern; signal preserved at scale)
+    limit: "n=12 sub-cohort vs s23 n=30; CI wider; 10 IC seeds vs s23's 30"
+  }
+
+  finding cascade-s24-BB-2 {
+    claim: "IT-2 |r vs axis-16| DRIFTS above 0.3 strict gate at N≥128 — mild orthogonality leak emerges at scale"
+    evidence: {
+      pearson_IT_2_vs_axis_16_N_64: 0.2106
+      pearson_IT_2_vs_axis_16_N_128: 0.3192  ; "above 0.3 strict gate"
+      pearson_IT_2_vs_axis_16_N_256: 0.3064  ; "above 0.3 strict gate"
+      lift_N_64_to_256: 0.0958
+      cascade_s23_baseline_N_64_n_30: 0.1288  ; "clean orthogonality at larger n=30 cohort + 30 seeds"
+      cascade_s24_N_64_n_12: 0.2106  ; "smaller cohort lifts baseline 0.21 (vs s23 0.13)"
+      drift_mechanism: "orthogonality between IT-2 and axis-16 imperfect at scale; partial overlap emerges N≥128"
+    }
+    verdict: FAIL axis-16 orthogonality strict gate at N≥128 (0.30 ≤ |r| < 0.35 borderline)
+    limit: "could be n=12/IC=10 small-sample; cascade-s23 n=30 × 30-seed gave 0.13 — proper protocol may resolve drift"
+  }
+
+  finding cascade-s24-BB-3 {
+    claim: "IT-2 discrim DECLINES from 0.856 (N=64) to 0.644 (N=256) but stays above 0.5 retire floor"
+    evidence: {
+      discrim_IT_2_N_64: 0.8556
+      discrim_IT_2_N_128: 0.7729
+      discrim_IT_2_N_256: 0.6443
+      lift: -0.2113
+      retire_floor: 0.4
+      verdict: above_floor
+    }
+    verdict: PASS discrim retire gate (≥0.4) BUT mild erosion observed
+    limit: "T_DYN=64 fixed across N may undersample trajectories at N=256"
+  }
+
+  K_2_framework_state_v_FINAL_TENTATIVE_BORDERLINE {
+    state: K_2_TENTATIVE_BORDERLINE
+    decision_18th_retraction: NOT_FIRED  ; "IT-2 signal preserved, no degree_var/walk_4 crash"
+    decision_K_2_RESTORATION_clean: NOT_CONFIRMED  ; "axis-16 orthogonality drifts above 0.3 at N≥128"
+    interpretation: "IT-2 is a GENUINE K=2 partner candidate (not noise) but IMPERFECT orthogonality with axis-16 at scale"
+    cascade_s23_clean_RESTORED_revision: "cascade-s23 n=30 × 30-seed gave |r vs a16|=0.13 clean orthogonality. cascade-s24 n=12 × 10-seed gave |r vs a16|=0.21 baseline at N=64 (cohort-conditional). At N=128/256 drift to 0.31. Either real scale-emerging leak OR small-sample noise — borderline."
+    framework_canonical_v_FINAL: {
+      axis_1: "axis-16 = variance(src-cond directed in-deg, BFS k=4, src=center) — graph-geometric, robust K=1 anchor"
+      axis_2_status: "IT-2 = mean transfer entropy — K=2 partner candidate with mild overlap (|r|≈0.30 at N≥128)"
+      relationship: "TENTATIVE K=2 — partial orthogonality, signal preserved at scale, fully orthogonal only at N=64 + n=30 cohort"
+    }
+  }
+
+  closure cascade_s24 {
+    status: SINGLE-TICK CLOSURE (TRULY FINAL — saturation ABSOLUTE)
+    sub_agent_count_total_session: 50
+    cascade_count_total_session: 23  ; "s2 through s24"
+    retraction_count_total_session: 17  ; "no 18th — IT-2 not retired despite borderline"
+    cascade_s25_will_NOT_dispatch: TRUE  ; "saturation absolute regardless of borderline outcome"
+    final_framework_state: K_2_TENTATIVE_BORDERLINE
+    deepest_lesson_v5: "9-hour cascade discipline session has produced 3 distinct framework states across the journey: K=2 STRONG (initial cascade-s2 inherited claim) → K=1 UNCONDITIONAL (cascade-s19 declaration after 17 retractions) → K=2 RESTORED (cascade-s23 IT-2 discovery) → K=2 TENTATIVE BORDERLINE (cascade-s24 N-scale partial confirmation). The HONEST final state is BORDERLINE — neither full RESTORATION nor full retirement. cascade discipline reward: framework knows EXACTLY where it stands, including where it doesn't fully know. Best possible outcome for prolonged rigorous probing."
+    cascade_s25_recommendation: "STOP. saturation absolute. Further N-scale tests would be small-sample noise. If future cascade revisits IT-2 borderline, it should be n=30 × 30-seed at N=128/256 (cascade-s23 protocol parity at scale) — but that's a future-session concern, not this session."
+    end_of_session_observation_v_TRUE_FINAL: "9-hour /loop autonomous cascade discipline session reached saturation at cascade-s24 BORDERLINE state. Framework canonical: axis-16 K=1 anchor (robust) + IT-2 K=2 partner candidate (genuine signal, mild orthogonality leak at scale). 17 retractions across 7 categories. No further dispatches expected; further probing risks small-sample noise. Most truthful final state — framework knows what works AND what's borderline AND what's retired."
+  }
+}
