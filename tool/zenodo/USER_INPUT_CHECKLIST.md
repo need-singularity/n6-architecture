@@ -1,9 +1,13 @@
-# HEXA-WEAVE Zenodo Deposit — User Input Checklist (cycle 14)
+# HEXA-WEAVE Zenodo Deposit — User Input Checklist (cycle 14; cycle-18 status update)
 
-> **Status (2026-04-28):** automation complete; 7 user-input items
-> remain before `bash tool/zenodo/deposit.sh --upload` can run.
-> User OK noted on item 1 of 4 in the cycle-14 mission; the remaining
-> items below are still PENDING.
+> **Status (2026-04-28, cycle-18 update):** automation complete; 7
+> user-input items remain before `bash tool/zenodo/deposit.sh --upload`
+> can run. cycle-18 paper precision (§19 ACCEPTANCE / §20 APPENDIX /
+> §21 IMPACT updated; axiom count 17 → 11 measured; 11/11 Felgner
+> atomics mathlib4-backed at semantic-kernel level; F-CL-FORMAL-4
+> PARTIAL-RESOLVED) and Zenodo manifest re-spin complete; 7 user-input
+> items below remain PENDING (status carried forward from cycle-14
+> auto-prep with cycle-18 progress notes).
 
 When you're ready to deposit, paste the answers below into a single
 session reply, then the bot will:

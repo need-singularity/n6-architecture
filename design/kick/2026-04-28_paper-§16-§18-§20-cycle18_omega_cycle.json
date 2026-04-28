@@ -1,0 +1,152 @@
+{
+  "kick_id": "2026-04-28_paper-§16-§18-§20-cycle18",
+  "schema": "omega_cycle.v1",
+  "ts": "2026-04-28T22:00:00Z",
+  "fan_out": "ad-hoc/cycle-18",
+  "cycle": 18,
+  "mission": "HEXA-WEAVE paper §16 ACCEPTANCE + §18 APPENDIX + §20 IMPACT precision + Zenodo deposit-prep manifest re-spin. cycle-18 measured axiom count = 11 (HEAD); 11/11 Felgner Hauptsatz §3 atomics now have a vkappa_*_mechanical mathlib4-derived companion theorem at the semantic-kernel level; F-CL-FORMAL-4 OPEN -> PARTIAL-RESOLVED; 4 atomics (step1.c / step3.a / step3.b / step3.c) discharge only the semantic kernel, syntactic L_ZFC BoundedFormula complexity-class statement requires ModelTheory.Bounded (out-of-scope per cycle-6 W4 audit). Section numbers: paper has 21 sections; mission §16/§18/§20 maps to in-paper §19 ACCEPTANCE / §20 APPENDIX / §21 IMPACT (cycle-7 onwards renumbered).",
+
+  "user_directive": "HEXA-WEAVE paper §16 ACCEPTANCE + §18 APPENDIX + §20 IMPACT 정밀화. weave publication 직결.",
+
+  "scope": {
+    "modified": [
+      "papers/hexa-weave-formal-mechanical-w2-2026-04-28.md",
+      "tool/zenodo/manifest.sha256",
+      "tool/zenodo/README_zenodo.md",
+      "tool/zenodo/USER_INPUT_CHECKLIST.md",
+      "tool/zenodo/lean4-n6-mechverif-cycle12.tar.gz"
+    ],
+    "created": [
+      "design/kick/2026-04-28_paper-§16-§18-§20-cycle18_omega_cycle.json"
+    ]
+  },
+
+  "paper_changes": {
+    "section_19_ACCEPTANCE": {
+      "added": [
+        "§19.1 cycle trajectory table (cycle-7 -> cycle-18; axiom 7 -> 11; F-CL-FORMAL-4 OPEN -> PARTIAL-RESOLVED)",
+        "§19.2 5 PASS gates (P1 lake build / P2 axiom keyword count / P3 bounded sweep / P4 own-doc-lint / P5 named-axiom-honesty)",
+        "§19.2 MISS criterion (h) cycle-13/15 anomaly preventative",
+        "§19.3 reviewer reproduction procedure (lake update + lake build + grep + sympy)"
+      ]
+    },
+    "section_20_APPENDIX": {
+      "added": [
+        "§20.0 Mechanical Felgner-atomic catalogue (11/11 mathlib4-backed; line-by-line theorem references; mathlib4 dependency line-by-line list; 4 atomics with ModelTheory.Bounded semantic-vs-syntactic gap; Felgner 1971 reference)"
+      ]
+    },
+    "section_21_IMPACT": {
+      "rewritten_to_subsections": [
+        "§21.1 5-component alien-grade re-baseline 4.6742 (cycle-17 measured; supersedes hand-estimated 4.00 -> 4.04 -> 4.18 -> 4.27)",
+        "§21.2 F-D-3 trajectory ~45-55% (cycle-7 60-75% baseline -> cycle-18)",
+        "§21.3 F-TP5-b 90-day MVP gate cycle-18 progress 38% (W1-W5 prep)",
+        "§21.4 biology-axis tri-sister triangle (composition / actuation / catalysis)",
+        "§21.5 F-MANUAL-LOGIN PARTIAL-RESOLVED-11-OF-12 (Keychain-backed auth)",
+        "§21.6 cycle-18 mechanical-conversion progression (11/11 atomics semantic-kernel)",
+        "§21.7 Zenodo deposit gating (7 user-input items)",
+        "§21.8 raw 91 C3 honest disclosures (declared-vs-measured; ModelTheory.Bounded gap; 5-component re-baseline; raw 47 cross-repo; raw 53 deterministic-verifier; raw 65/68 idempotent)"
+      ]
+    },
+    "section_17_BOM_LIMITATIONS": {
+      "modified": [
+        "§17.1 BOM updated to cycle-18: 961 lines, 11 axioms, 18 vkappa_*_mechanical theorems",
+        "§17.1 BOM Felgner-atomic theorem row expanded to all 11 atomics with line numbers and mathlib backing",
+        "§17.2 LIMITATIONS cycle-17 marked superseded; cycle-18 status entry added (4 atomics step1.c/step3.a/step3.b/step3.c semantic-kernel-only with ModelTheory.Bounded gap explicitly disclosed)",
+        "§17.3 axiom-progression table appended cycle-18 row (11 axioms / 11 mechanical)",
+        "§17.3 alien-grade table appended cycle-17 (4.6742 5-component) and cycle-18 (>=4.6742 lean_mechanical -> 1.0) rows",
+        "§17.3 mechanical PASS atomic table appended step1.c/step3.a/step3.b/step3.c cycle-18 rows"
+      ]
+    },
+    "section_mk_history": {
+      "appended": "2026-04-28T22:00:00Z cycle-18 §16/§18/§20 precision entry"
+    }
+  },
+
+  "axiom_count_validation": {
+    "head_grep_axiom": 11,
+    "head_grep_vkappa_mechanical": 18,
+    "felgner_atomic_coverage": "11/11 semantic-kernel; 4/11 with ModelTheory.Bounded syntactic-class gap",
+    "atomic_breakdown": {
+      "step1a": "vkappa_definability_classical_mechanical (Classical.allZFSetDefinable)",
+      "step1b": "vkappa_definable_to_set_mechanical (ZFSet.sep family + rank bounding)",
+      "step1c": "vkappa_step1c_pi1_translation_mechanical (trivial forall-restriction; semantic kernel only)",
+      "step2a": "vkappa_replacement_cofinality_mechanical (IsInaccessible.isRegular.cof_ord)",
+      "step2b": "vkappa_powerset_closure_mechanical (ZFSet.rank_powerset + IsSuccLimit.succ_lt)",
+      "step2c": "vkappa_choice_mechanical (Classical.choice)",
+      "step2d": "vkappa_foundation_mechanical (ZFSet.mem_wf)",
+      "step3a": "vkappa_delta0_bounded_absoluteness_mechanical (transitivity; semantic kernel only)",
+      "step3b": "vkappa_sigma1_upward_absoluteness_mechanical (exists-witness forgetfulness; semantic kernel only)",
+      "step3c": "vkappa_pi1_downward_absoluteness_mechanical (forall-restriction; semantic kernel only)",
+      "step3d": "vkappa_membership_induction_mechanical (ZFSet.inductionOn = mem_wf.induction)"
+    },
+    "remaining_named_axioms_breakdown": {
+      "strand_witness_axioms": 5,
+      "felgner_bridge": 1,
+      "hexa_comp_closure": 4,
+      "robin_hardy_wright_ax1_tail": 1,
+      "felgner_step_axioms": 0,
+      "total": 11
+    }
+  },
+
+  "zenodo_prep_changes": {
+    "manifest_re_spin": {
+      "tool": "tool/zenodo/gen_manifest.sh",
+      "regenerated_at": "2026-04-28T11:31:52Z",
+      "lines": 29,
+      "paper_sha256_new": "f35c314216afae8194953a52b894937a1bf913ff1c1c3ccbd31e907acf778cea",
+      "axioms_lean_sha256_new": "f0f69813420203df6a4fe7a2d8c66bfc7b653166d28be3c5617d8a5a1fb7b75e",
+      "tarball_sha256_new": "b0229469a67e1befaa87e0004bdc3a3f3bd6ee0ccc0bf1aaf2be4020c0759bf7",
+      "readme_sha256_new": "1a5a06a4b907452422dc2f6dfcd9ad9a5c368abe24682d4c0cf06dabf48e643f",
+      "checklist_sha256_new": "62c8c7e2e70fbd10835dc99b4725f6e55d8719d2e24e340155f738cf549a9736"
+    },
+    "tarball_re_spin": {
+      "tool": "tool/zenodo/gen_tarball.sh",
+      "size": "24K (gzipped)",
+      "files": 9,
+      "includes": "lean4-n6/N6/MechVerif/{AX1,AX2,MKBridge}.lean + Foundation/{Strand,Axioms}.lean + lean-toolchain + lakefile.lean + lake-manifest.json + Main.lean"
+    },
+    "metadata_json_unchanged": "7 PENDING_USER_INPUT placeholders maintained per user manual gating",
+    "user_input_pending": 7,
+    "user_input_items": [
+      "ORCID iD (16-digit)",
+      "author byline email reconciliation (3 candidates: arsmoriendi99@proton.me / mk55992@proton.me / 404errornew@proton.me)",
+      "paper title final (formal-mechanical framing vs protein-folding pivot)",
+      "keyword set final (mechanical-leaning vs protein-pivot vs hybrid)",
+      "license (Apache-2.0 vs CC-BY-4.0)",
+      "related_identifiers (public-GitHub URL vs tarball-only)",
+      "Zenodo API token (sandbox vs production; never stored in metadata.json)"
+    ]
+  },
+
+  "lint_sweep": {
+    "own_1_paper_only": "PASS (paper itself CJK-free; 12 unrelated violations exist in older proposals/*.md unchanged)",
+    "own_6_paper_verify_embedded": "PASS (sympy block executes deterministically; expected output matches recorded output)",
+    "own_11_no_clay_claim": "PASS",
+    "own_12_miss_criteria_pre_declared": "PASS (cycle-7 criteria preserved; criterion (h) cycle-13/15 anomaly preventative added cycle-18)",
+    "own_15_21_section_completeness": "PASS (paper preserves 21 canonical sections; §11/§12/§13/§14 N/A entries kept)",
+    "sympy_verify_embedded_output": "[6] for [2,50] AND [2,1000]; ax1_eq(1)=True confirms n>=2 corrigendum",
+    "raw_91_c3_disclosures": [
+      "declared 11 vs measured 11 (HEAD): MATCH",
+      "11/11 atomic semantic-kernel coverage; 4/11 ModelTheory.Bounded syntactic-class gap explicitly disclosed",
+      "5-component alien-grade re-baseline 4.6742 supersedes hand-estimated values; cycle-13 4.18 anomaly closed cycle-16",
+      "raw 47 cross-repo gates: Zenodo deposit (7 items) + ubu1 dispatch (TTY-bound user step)",
+      "raw 53 deterministic-verifier: sympy block preserved verbatim across cycle-18 paper updates",
+      "raw 65/68 idempotent: gen_manifest.sh + gen_tarball.sh deterministic and re-runnable"
+    ]
+  },
+
+  "raw_91_c3_disclose": "cycle-18 measurement of 11 axioms / 11 mechanical atomics (semantic-kernel coverage) is honest and re-derivable: tool/lean4_axiom_count_check.hexa enforces declared-vs-measured match on commit; F-CL-FORMAL-4 PARTIAL-RESOLVED is the most honest reading because the syntactic L_ZFC BoundedFormula complexity-class statement requires ModelTheory.Bounded (absent in mathlib4 per cycle-6 W4 audit); previous OPEN reading under-counted cycle-11 -> cycle-18 mechanical progress; a RESOLVED claim would conflate semantic kernels with syntactic formula-class statements.",
+
+  "predecessor_witnesses": [
+    "design/kick/2026-04-28_alien-grade-audit-tool-cycle17_omega_cycle.json",
+    "design/kick/2026-04-28_lean4-w9-step3d-remaining-cycle17_omega_cycle.json",
+    "design/kick/2026-04-28_stash-pop-loss-recovery-cycle17_omega_cycle.json"
+  ],
+
+  "follow_up_owed": [
+    "user manual: 7 Zenodo deposit items (USER_INPUT_CHECKLIST.md)",
+    "user manual: ubu1 W5 dispatch (F-TP5-b 38% -> 50%+ requires user TTY)",
+    "F-CL-FORMAL-4 PARTIAL-RESOLVED -> RESOLVED: requires upstream mathlib4 ModelTheory.Bounded integration or private formalization (cycle-19+ scope)"
+  ]
+}

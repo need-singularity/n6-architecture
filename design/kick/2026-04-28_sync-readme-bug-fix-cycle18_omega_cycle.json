@@ -1,0 +1,122 @@
+{
+  "kick_kind": "omega_cycle",
+  "kick_id": "2026-04-28_sync-readme-bug-fix-cycle18",
+  "kick_title": "Cycle 18 — sync-readme.hexa pipeline bug diagnosis + fix (Option A: scan_markers prefix-confusion + void-type guard)",
+  "kick_date": "2026-04-28",
+  "umbrella": "hexa-runtime-pipeline-fix",
+  "cost_center": "n6shared-sync-readme",
+  "predecessor_witness": "design/kick/2026-04-28_readme-curation-cycle16_omega_cycle.json",
+  "parent_brief": "user mission cycle 18 — README sync-readme.hexa pipeline bug 진단 + fix; raw 91 C3 honest, raw 9 hexa-only, raw 142 D2, raw 47 cross-repo",
+  "scope": {
+    "files_created": [
+      "proposals/hexa_weave_sync_readme_bug_fix_2026_04_28.md",
+      "design/kick/2026-04-28_sync-readme-bug-fix-cycle18_omega_cycle.json"
+    ],
+    "files_modified": [
+      "n6shared/sync-readme.hexa"
+    ],
+    "summary": {
+      "diagnosis_correct": true,
+      "cycle_11_hypothesis_was_wrong": true,
+      "actual_bug_kind": "scan_markers prefix-confusion + JSON-null void-type classification",
+      "exec_printenv_HOME_failure": "false (HOME resolves correctly via env_var + echo fallback)",
+      "json_parse_multibyte_paren_failure": "false (36 roadmap entries parse correctly incl. multibyte+paren)",
+      "scan_markers_clean_pre_fix": 2,
+      "scan_markers_clean_post_fix": 64,
+      "marker_changes_dry_run_post_fix": 36,
+      "fix_option_chosen": "A (n6shared/sync-readme.hexa upstream)",
+      "fix_lines_added": 56,
+      "readme_md_modified": false,
+      "readme_sealed_hash_changed": false,
+      "readme_sealed_hash_pre": "sha256:4a22aa270c17846e300a8e4c0d7aeeadb0d7fa5fb73acb31a02828ca26d57ce1",
+      "readme_sealed_hash_post": "sha256:4a22aa270c17846e300a8e4c0d7aeeadb0d7fa5fb73acb31a02828ca26d57ce1",
+      "own_14_status": "PASS preserved",
+      "ssot_enrichment_required_cycle_19": true,
+      "write_mode_safe_now": false,
+      "auto_sync_safe_markers": ["AUTO:BADGE", "AUTO:STATS"],
+      "auto_sync_unsafe_markers": ["AUTO:SUMMARY_<domain>", "AUTO:FOOTER_<domain>"],
+      "auto_sync_unsafe_reason": "JSON SSOT lacks rich content; WRITE would replace hand-curated text with stubs"
+    }
+  },
+  "raw_91_c3_honest": {
+    "fix_status": "PIPELINE FIX ONLY; SSOT NOT YET AUTHORITATIVE",
+    "what_works_post_fix": [
+      "scan_markers correctly extracts 64 marker NAMEs",
+      "resolve_generator dispatch reaches all SUMMARY_* / FOOTER_* entries",
+      "render_summary / render_footer no longer emit literal 'void' for null fields",
+      "dry-run / check / write modes all functional"
+    ],
+    "what_does_not_work_post_fix": [
+      "WRITE mode would destroy ~25KB of hand-curated SUMMARY/FOOTER content for ~30 domains absent from readme-data.json",
+      "JSON SSOT enrichment is cycle 19+ work; not done in cycle 18",
+      "hexa-runtime null/void type classification is patched at .hexa layer only; runtime upstream still non-conformant"
+    ],
+    "cycle_11_hypothesis_was_misdiagnosis": "exec(printenv HOME) and json_parse multibyte+paren are both healthy; bug was elsewhere",
+    "try_and_revert_executed": "yes (raw 142 D2): WRITE applied → 36 markers changed → diff verified → cp restored byte-equal README.md → sealed hash unchanged",
+    "false_pass_emitted_pre_fix": "[OK] README.md is up to date with readme-data.json (64 markers) — false because changed=0 due to skipped markers, not real equality",
+    "scan_markers_pollution_evidence": "out[1] = 'BADGE:END -->\\n[![Discord](https://...\\n...COMMON_LINKS' (length 901 chars) instead of 'STATS' (length 5 chars)",
+    "json_null_void_evidence": "type_of(d['dse_count']) == 'void' (not 'null' or 'nil'); to_string(void) == 'void' literal",
+    "deliverables_modify_readme": false,
+    "deliverables_modify_lean_axioms": false,
+    "deliverables_modify_papers": false,
+    "deliverables_increment_alien_grade": false,
+    "ssot_authority_post_cycle_18": "AUTO:BADGE only (cycle 16 baseline); cycle 19+ enrichment required for SUMMARY/FOOTER"
+  },
+  "raw_71_falsifiers": [
+    {
+      "id": "F-SR-FIX-1",
+      "claim": "cycle-19+ refactor of scan_markers removes is_valid_marker_name without re-introducing prefix-confusion bug",
+      "expected_outcome": "monitored; firing requires removal without test coverage replacement"
+    },
+    {
+      "id": "F-SR-FIX-2",
+      "claim": "hexa-runtime future release re-classifies JSON null as 'null'/'nil', breaking void-only guard",
+      "expected_outcome": "does not fire; triple-guard (null/nil/void) in get_or/has_field"
+    },
+    {
+      "id": "F-SR-FIX-3",
+      "claim": "WRITE mode run before cycle-19 SSOT enrichment destroys hand-curated SUMMARY/FOOTER blocks",
+      "expected_outcome": "monitored; firing requires unsealed README.md commit without prior JSON enrichment proposal"
+    },
+    {
+      "id": "F-SR-FIX-4",
+      "claim": "cross-repo sister (anima/nexus/hexa-lang/papers/hive/void) has identical bug; audit deferred",
+      "expected_outcome": "deferred to cycle 19; firing condition is sister-repo bug discovered without audit task"
+    },
+    {
+      "id": "F-SR-FIX-5",
+      "claim": "future hexa-runtime patch fixes string classification but breaks substring iteration in is_valid_marker_name",
+      "expected_outcome": "monitored; smoke-test 'hexa run sync-readme.hexa --dry-run' must return >=30 changed markers on enriched JSON"
+    }
+  ],
+  "raw_70_k4_axes": {
+    "CONSTANTS": "PASS (n6 quartet unchanged; sigma=12 phi=2 tau=4 J2=24)",
+    "DIMENSIONS": "PASS (sync-readme.hexa 702 → 758 LoC, net +56)",
+    "CROSS": "PASS (cross-checked against scripts/sync-readme.py legacy + cycle-11 /tmp fallback)",
+    "SCALING": "PASS (64 markers scanned; 36 dry-run-changed; 2 vs 64 clean comparable)",
+    "SENSITIVITY": "PASS (Korean-NAME edge case rejected by ASCII-only is_valid_marker_name)",
+    "LIMITS": "PASS (HEAD sealed-hash byte-equal; try-and-revert verified)",
+    "CHI2": "DEFER (raw 91 C3 zero empirical sample; static analysis only)",
+    "COUNTER": "PASS (current README marker names all in [A-Za-z0-9_-])"
+  },
+  "safety_gates": {
+    "readme_md_modified": false,
+    "readme_sealed_hash_unchanged": true,
+    "own_14_pass_preserved": true,
+    "destructive_write_attempted_then_reverted": true,
+    "sister_repo_modifications": 0,
+    "lean_axioms_modified": false,
+    "alien_grade_recomputed": false,
+    "raw_91_c3_honest_disclosure": "fix is pipeline-only; SSOT enrichment cycle 19+; WRITE mode unsafe until enrichment lands"
+  },
+  "next_cycle_handoff": {
+    "cycle_19_priority_1": "JSON SSOT enrichment — replicate ~30 hand-curated SUMMARY/FOOTER blocks into readme-data.json so dry-run reports 0 changed markers (equality test)",
+    "cycle_19_priority_2": "WRITE mode gating — add --allow-overwrite flag + CI safeguard blocking unintended sealed-hash drift",
+    "cycle_19_priority_3": "Cross-repo audit (raw 47) — anima/nexus/hexa-lang/papers/hive/void sister-repo sync template audit for prefix-confusion bug",
+    "cycle_19_priority_4": "hexa-runtime upstream contribution (option C) — fix type_of() classification for JSON null + document substring/index_of multi-byte semantics",
+    "cycle_18_no_op_for_alien_grade": "lean_mechanical / mvp_empirical / paper_published / cross_axis_collision / falsifier_resolution components unchanged; alien-grade pre/post = 4.6742 (cycle 17 baseline)"
+  },
+  "report_to_user_korean": "cycle 18 sync-readme.hexa pipeline bug 진단 완료. cycle 11 가설 (printenv HOME 빈 결과 + json_parse multibyte+괄호 실패)은 모두 misdiagnosis 였음 — HOME 정상 / json_parse 정상 (36 roadmap entries OK). 진짜 원인 1: scan_markers 의 prefix='<!-- AUTO:' 가 START 와 END tag 모두 매치 → 첫 iteration 이후 NAME 이 'BADGE:END -->\\n[![Discord]...COMMON_LINKS' 같은 901-char 잡음 블록으로 오염 → resolve_generator nil → 64 markers 중 2 개만 처리 / 62 skip → '[OK] up to date 64 markers' 거짓 보고. 진짜 원인 2: hexa-runtime 이 JSON null 을 type_of='void' 로 분류 → get_or null/nil 가드 우회 → to_string(void)='void' 가 markdown 에 'DSE void' / '산업void%' / '실험void%' 잡음 주입. fix 옵션 A 채택 (n6shared/sync-readme.hexa 자체 fix +56 LoC): is_valid_marker_name([A-Za-z0-9_-] only, ≤64 char) NAME 검증 추가 + get_or/has_field 에 void 가드 추가. dry-run 결과: pre 0/64 → post 36/64 markers 적용 가능. 단, raw 91 C3 honest: 36 markers 중 ~30 개는 SSOT (readme-data.json) 가 hand-curated README 보다 빈약 (alien=0/tp=0 stub) → WRITE 적용 시 ~25KB 큐레이션 손실 위험. raw 142 D2 try-and-revert 실행: WRITE → diff 검증 → cp restore → byte-equal 복원 → own#14 sealed PASS 유지 (sha256:4a22aa270c17... unchanged). cycle 18 README.md 무수정. cycle 19 priority: (1) JSON SSOT 부유화 (~30 도메인 hand-curated 내용 → readme-data.json), (2) --allow-overwrite gate, (3) raw 47 cross-repo 자매 audit (anima/nexus/hexa-lang/papers/hive/void), (4) hexa-runtime upstream null-type classification fix (option C). cycle 18 alien-grade pre/post 동일 4.6742 (no lean / mvp / paper / collision / falsifier component 변경).",
+  "ts_kick": "2026-04-28T22:00:00Z",
+  "schema": "design/kick/omega_cycle_v1"
+}

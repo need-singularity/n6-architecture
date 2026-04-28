@@ -1,0 +1,119 @@
+#!hexa strict
+// tool/lean4_axiom_count_check.hexa — lean4 axiom keyword count vs proposal claim verifier
+//   Cycle 17 task #15 — pre-commit / post-build axiom-count anomaly prevention
+//   (cycle 13/15 anomaly: proposals committed but lean4 code change not applied;
+//    axiom keyword count diverged from proposal claim — caught only by cycle 14/16
+//    re-audit agents). This tool surfaces such divergences at build time.
+//
+// @tool(slug="lean4_axiom_count_check", desc="lean4 axiom-count vs proposal-claim divergence check (anti-cycle-13/15-anomaly): scans Foundation/Axioms.lean for `^axiom ` keywords, compares against an expected count (CLI arg / proposal sentinel / SSOT)")
+// @usage(hexa /Users/ghost/core/n6-architecture/tool/lean4_axiom_count_check.hexa --expected <N> [--file <path>] [--severity warn|block])
+// @omega-saturation-exempt("text-grep over a single SSOT file (Axioms.lean); converges in O(N) per pass")
+// @exit_codes(0=PASS, 1=usage/io error, 2=block-mode mismatch with raw 66 ai-native trailer)
+//
+// CONTRACT (cycle-17 anti-anomaly v1)
+//   The tool counts `^axiom ` keyword occurrences (BOL-anchored to skip
+//   docstring mentions and comment text) in the target lean4 file
+//   (default: lean4-n6/N6/MechVerif/Foundation/Axioms.lean) and compares
+//   against an expected integer. On mismatch:
+//     - severity=warn: emit raw 66 ai-native trailer + exit 0
+//     - severity=block (default): emit raw 66 ai-native trailer + exit 2
+//
+// EMISSIONS
+//   - stdout JSON summary (one line)
+//   - last stdout line (raw 80 sentinel): __LEAN4_AXIOM_COUNT_CHECK_RESULT__ PASS|FAIL
+//   - on FAIL: raw 66 ai-native trailer "ai-native: claimed=<X> actual=<Y> delta=<Z>"
+//
+// SCOPE / NON-GOALS
+//   - The tool DOES NOT parse lean4 syntax — it greps `^axiom `.
+//     Multi-line axiom declarations are still counted by their first line.
+//   - Cross-file axiom set check (e.g. transitive `#print axioms`) is NOT
+//     implemented in cycle 17; deferred to cycle 18+ pre-commit hook.
+//
+// raw 91 C3 DECLARED LIMITS
+//   L1. The grep is BOL-anchored; a hypothetical mid-line `axiom`
+//       declaration would be missed. mathlib4 + n6-architecture style
+//       always puts `axiom` at column 0, so this is a non-issue in
+//       practice but called out for honesty.
+//   L2. The expected count is a CLI argument; the tool does not
+//       cross-reference proposals/ markdown for the claim. The cycle 18+
+//       pre-commit hook integration plan is to extract the claim from
+//       the latest proposal's `axiom-count delta` row using a separate
+//       extractor.
+//   L3. Anti-anomaly scope: catches the cycle-13/15 pattern (lemma added,
+//       axiom keyword still present). Does not catch a separate
+//       failure mode where the lemma itself is also missing.
+//
+// @allow-bare-exec
+// @no-sandbox
+
+fn main() {
+    let argv = args()
+    let mode_block = true
+    let expected = -1
+    let file = "/Users/ghost/core/n6-architecture/lean4-n6/N6/MechVerif/Foundation/Axioms.lean"
+    let i = 0
+    while i < len(argv) {
+        let a = argv[i]
+        if a == "--expected" {
+            if i + 1 < len(argv) {
+                expected = to_int(argv[i + 1])
+                i = i + 1
+            }
+        }
+        if a == "--file" {
+            if i + 1 < len(argv) {
+                file = argv[i + 1]
+                i = i + 1
+            }
+        }
+        if a == "--severity" {
+            if i + 1 < len(argv) {
+                if argv[i + 1] == "warn" {
+                    mode_block = false
+                }
+                i = i + 1
+            }
+        }
+        i = i + 1
+    }
+    if expected < 0 {
+        println("usage: lean4_axiom_count_check --expected <N> [--file <path>] [--severity warn|block]")
+        println("__LEAN4_AXIOM_COUNT_CHECK_RESULT__ FAIL")
+        exit(1)
+    }
+    let cmd = "grep -c '^axiom ' " + file + " 2>/dev/null || echo 0"
+    let raw = to_string(exec(cmd))
+    let actual = to_int(_rstrip(raw))
+    let delta = actual - expected
+    let pass = (delta == 0)
+    let status = "PASS"
+    if !pass {
+        status = "FAIL"
+    }
+    let summary = "{\"file\":\"" + file + "\",\"expected\":" + to_string(expected) + ",\"actual\":" + to_string(actual) + ",\"delta\":" + to_string(delta) + ",\"status\":\"" + status + "\"}"
+    println(summary)
+    if !pass {
+        // raw 66 ai-native trailer
+        println("ai-native: cycle-13/15-anomaly axiom-count divergence detected. claimed=" + to_string(expected) + " actual=" + to_string(actual) + " delta=" + to_string(delta) + " — proposal count and HEAD lean4 file disagree. Verify the lemma + axiom→theorem conversion was actually committed (not just the proposal markdown).")
+        println("__LEAN4_AXIOM_COUNT_CHECK_RESULT__ FAIL")
+        if mode_block {
+            exit(2)
+        }
+        exit(0)
+    }
+    println("__LEAN4_AXIOM_COUNT_CHECK_RESULT__ PASS")
+    exit(0)
+}
+
+fn _rstrip(s: string) -> string {
+    let mut end = len(s)
+    while end > 0 {
+        let c = s.substring(end - 1, end)
+        if c == " " || c == "\t" || c == "\r" || c == "\n" {
+            end = end - 1
+        } else {
+            break
+        }
+    }
+    return s.substring(0, end)
+}

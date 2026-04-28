@@ -1,22 +1,45 @@
-# HEXA-WEAVE Zenodo Deposit — Landing Page (cycle 14 auto-prep)
+# HEXA-WEAVE Zenodo Deposit — Landing Page (cycle 14 auto-prep; cycle-18 manifest re-spin)
 
-> **Status (2026-04-28):** AUTO-PREP only. NO Zenodo upload performed.
-> NO DOI minted. NO ORCID linked. NO public-GitHub push. The five
-> user-decision items in
-> `proposals/hexa_weave_zenodo_auto_prep_2026_04_28.md` §4 must be
-> resolved before any deposit is executed.
+> **Status (2026-04-28, cycle-18 update):** AUTO-PREP only. NO Zenodo
+> upload performed. NO DOI minted. NO ORCID linked. NO public-GitHub
+> push. The seven user-decision items in
+> `tool/zenodo/USER_INPUT_CHECKLIST.md` must be resolved before any
+> deposit is executed.
 
 ## What is this artifact?
 
 This is the cycle-14 1-click deposit-prep bundle for the
 HEXA-WEAVE Formal-Mechanical Verification paper (W2 milestone), authored
-inside the n6-architecture private research framework.
+inside the n6-architecture private research framework. The bundle is
+re-spun at cycle-18 to reflect the §19 ACCEPTANCE / §20 APPENDIX / §21
+IMPACT precision updates and the cycle-18 axiom-keyword count.
 
 The companion paper proves, in Lean 4, the n=6 master uniqueness
 identity `sigma(n) * phi(n) = n * tau(n)  iff  n = 6`, sorry-free under
-**19 named axioms** (cycle-12 atomic decomposition; cycles 11/12 W8+/W8++
-mechanically convert 4 of those axioms into derived theorems via
-mathlib4 ZFSet / Cardinal infrastructure).
+**11 named axioms** (cycle-18 measured; 11/11 Felgner Hauptsatz §3
+atomics now have a `vkappa_*_mechanical` mathlib4-derived companion
+theorem at the semantic-kernel level — 4 of those companions
+(step1.c / step3.a / step3.b / step3.c) discharge only the semantic
+shape because the *syntactic* L_ZFC BoundedFormula complexity-class
+statement requires `ModelTheory.Bounded` infrastructure absent in
+mathlib4 per cycle-6 W4 audit; the F-CL-FORMAL-4 closure status is
+PARTIAL-RESOLVED accordingly).
+
+## Cycle progression (cycle-7 → cycle-18)
+
+| Cycle | Axiom count | Mechanical Felgner atomics | Status |
+|---|---|---|---|
+| 7  | 7  | 0  | sorry-free milestone |
+| 9  | 15 | 0  | W7 step-down |
+| 10 | 23 | 0  | W8 atomic decomposition |
+| 11 | 22 | 1  | step1.b mechanical |
+| 12 | 19 | 3  | step2.b + step2.d mechanical |
+| 13 | 19 (claim 17) | 3 | proposal-only anomaly (F-W9-3/F-W9-4 raised cycle-14) |
+| 14 | 19 | 3 | Zenodo prep complete; anomaly remains |
+| 15 | 19 (claim 16) | 3 | second anomaly (step3.d proposal-only) |
+| 16 | 17 | 5 | cycle-13 owed re-applied |
+| 17 | 14-15 transient | 7 | cycle-15 owed step3.d re-applied + step1.a |
+| **18** | **11** | **11** | full Felgner atomic semantic-kernel coverage; F-CL-FORMAL-4 PARTIAL-RESOLVED |
 
 ## Deposit contents
 
@@ -50,8 +73,13 @@ echo '#print axioms AX2_strand_class_closed_under_hexa_comp' | lake env lean --s
 ```
 
 Expected: build succeeds in < 60s on Mac M2 warm cache; **zero `sorry`
-tokens** in proof terms; 19 named axioms surfaced (excluding Lean
-kernel `propext` / `Classical.choice` / `Quot.sound`).
+tokens** in proof terms; **11 named axioms** surfaced at cycle-18
+(excluding Lean kernel `propext` / `Classical.choice` / `Quot.sound`).
+The 11 axioms decompose into: 5 Strand A.1-A.5 ZFSet-encoding witness
+axioms + 1 Felgner-bridge axiom + 4 HEXA-COMP closure axioms
+(C.2/C.3/C.4 + closure_atom) + 1 Robin-Hardy-Wright AX-1 tail axiom;
+**0 Felgner Hauptsatz step axioms** at cycle-18 (all step axioms now
+discharged via `vkappa_*_mechanical` derived theorems).
 
 ## How to reproduce the numerical sanity check
 
@@ -84,15 +112,18 @@ AX-1 verify-embedded PASS:
   framing is the *target domain* the formal layer supports;
   empirical milestones are gated separately on F-TP5-b 90-day MVP
   (2026-07-28).
-- **19 named axioms.** All axioms are explicitly named (not silent
-  `sorry`), surfaced via `#print axioms`, cited from published
+- **11 named axioms (cycle-18).** All axioms are explicitly named (not
+  silent `sorry`), surfaced via `#print axioms`, cited from published
   literature (Felgner 1971 + Drake 1974 + Jech 2003 + Williams 1976 +
   Robin 1984 + Hardy-Wright + Wigert 1907) and the n6-architecture
-  private SSOT (HEXA-COMP). 3 of those 19 axioms (Felgner step1.b /
-  step2.b / step2.d) are additionally backed by derived mechanical
-  theorems (`vkappa_definable_to_set_mechanical` /
-  `vkappa_powerset_closure_mechanical` / `vkappa_foundation_mechanical`)
-  showing that the named-axiom layer is shrinking via mathlib4.
+  private SSOT (HEXA-COMP). All 11 Felgner Hauptsatz §3 atomics now
+  have a `vkappa_*_mechanical` mathlib4-derived companion theorem at
+  the semantic-kernel level; 4 of those companions
+  (step1.c / step3.a / step3.b / step3.c) discharge only the semantic
+  shape because the syntactic L_ZFC BoundedFormula complexity-class
+  statement requires `ModelTheory.Bounded` infrastructure absent in
+  mathlib4 per cycle-6 W4 audit. F-CL-FORMAL-4 closure status:
+  PARTIAL-RESOLVED.
 
 ## Cite as
 

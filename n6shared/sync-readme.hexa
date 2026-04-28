@@ -81,6 +81,12 @@ fn resolve_path(env_key: string, default_path: string) {
 }
 
 // ───────── 유틸: 안전 필드 접근 ─────────
+// 2026-04-28 cycle 18 hexa-runtime-pipeline-fix (B.2):
+//   hexa runtime classifies JSON null as type_of() == "void" (not "null"
+//   or "nil"). The previous {null,nil} guard let raw void slip through to
+//   to_string() which yields the literal string "void" — corrupting README
+//   with "DSE void", "산업void%", "실험void%" jaywalk text.
+//   fix: also guard "void". Defensive triple-check keeps forward-compat.
 fn get_or(obj, key: string, default_val) {
     try {
         let v = obj[key]
@@ -89,6 +95,9 @@ fn get_or(obj, key: string, default_val) {
             return default_val
         }
         if t == "nil" {
+            return default_val
+        }
+        if t == "void" {
             return default_val
         }
         return v
@@ -105,6 +114,9 @@ fn has_field(obj, key: string) {
             return false
         }
         if t == "nil" {
+            return false
+        }
+        if t == "void" {
             return false
         }
         return true
@@ -507,6 +519,63 @@ fn resolve_generator(section: string, data) {
 // ───────── 마커 스캔: README 전체 -> 등장 섹션 이름 리스트 ─────────
 // "<!-- AUTO:NAME:START -->" 패턴을 찾아 NAME 만 모은다 (순서 보존).
 // 중복 NAME 은 1회만 수록 (replace_marker 가 idempotent 이므로 안전).
+//
+// 2026-04-28 cycle 18 hexa-runtime-pipeline-fix (B falsifier preregistered):
+//   was: prefix="<!-- AUTO:" + suffix=":START -->" 를 분리 검색.
+//   `<!-- AUTO:BADGE:END -->` 도 prefix 와 매치되어 after_prefix 가
+//   "BADGE:END -->\n...<!-- SHARED:PROJECTS\n...COMMON_LINKS" 로 시작,
+//   :START -->를 다음 (다른) marker 의 START 에서 잡아 NAME 으로
+//   "BADGE:END -->\n...COMMON_LINKS" 같은 잡음 블록을 만들었다.
+//   결과: 64 markers 중 BADGE/COMMON_LINKS 첫 2개만 "clean" NAME 추출,
+//   나머지 62 개는 잡음 NAME → resolve_generator nil → skip.
+//   증상: dry-run 이 변경 시도 0 건 → "up to date" 거짓 보고.
+//   fix: NAME 후보가 ":" 나 newline 등 허용되지 않는 문자를 포함하면
+//   reject. NAME 은 [A-Za-z0-9_-] 로 제한 — readme-data.json domain id
+//   convention 과 일치 (life-culture / tech-industry 등 hyphen 허용).
+fn is_valid_marker_name(name: string) {
+    let n = len(name)
+    if n == 0 {
+        return false
+    }
+    if n > 64 {
+        return false
+    }
+    let mut i = 0
+    while i < n {
+        let c = name.substring(i, i + 1)
+        let is_az = false
+        let is_az2 = c >= "a"
+        let is_az3 = c <= "z"
+        let mut ok = false
+        if c >= "A" {
+            if c <= "Z" {
+                ok = true
+            }
+        }
+        if c >= "a" {
+            if c <= "z" {
+                ok = true
+            }
+        }
+        if c >= "0" {
+            if c <= "9" {
+                ok = true
+            }
+        }
+        if c == "_" {
+            ok = true
+        }
+        if c == "-" {
+            ok = true
+        }
+        if ok == false {
+            return false
+        }
+        i = i + 1
+    }
+    return true
+}
+
 fn scan_markers(text: string) {
     let mut out = []
     let prefix = "<!-- AUTO:"
@@ -526,6 +595,14 @@ fn scan_markers(text: string) {
             break
         }
         let name = after_prefix.substring(0, end_rel)
+        // 2026-04-28 cycle 18 fix: NAME 검증.
+        // BADGE:END --> 같은 잡음 prefix 매치를 거른다.
+        // 잡음 NAME 인 경우 prefix 다음 1 char 만 advance 해서
+        // 진짜 :START --> 위치를 다시 찾는다.
+        if is_valid_marker_name(name) == false {
+            rest = rest.substring(idx + lp, len(rest))
+            continue
+        }
         // 중복 제거
         let mut dup = false
         let mut di = 0

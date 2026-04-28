@@ -1,0 +1,176 @@
+{
+  "kick_id": "2026-04-28_alien-grade-5-unlock-cycle18",
+  "schema": "omega_cycle.v1",
+  "ts": "2026-04-28T12:00:00Z",
+  "fan_out": "ad-hoc/cycle-18",
+  "cycle": 18,
+  "mission": "alien-grade 5.0 unlock 정밀 census + biology 4th sister 후보 census. cycle 17 ledger 4.6742 / cycle 18 working tree 4.7913 → 5.0 component-별 marginal gain 산출 + HEXA-VIROCAPSID (71/80 A+) 4th sister 권고. 등재 미수행 (read-only meta-report). raw 91 C3 honest: 모든 marginal gain 은 deterministic measurement, fabricated novelty 거부.",
+
+  "parent_proposals": [
+    "proposals/hexa_weave_alien_grade_ceiling_census_2026_04_28.md",
+    "proposals/hexa_weave_alien_grade_audit_tool_2026_04_28.md"
+  ],
+
+  "predecessor_witnesses": [
+    "design/kick/2026-04-28_hexa-weave-alien-grade-ceiling-census_omega_cycle.json",
+    "design/kick/2026-04-28_alien-grade-audit-tool-cycle17_omega_cycle.json",
+    "design/kick/2026-04-28_hexa-ribozyme-registration-cycle15_omega_cycle.json",
+    "design/kick/2026-04-28_hexa-nanobot-domain-registration_omega_cycle.json",
+    "design/kick/2026-04-28_lean4-w9-remaining-cycle18_omega_cycle.json"
+  ],
+
+  "user_directive": "HEXA-WEAVE alien-grade 5+ unlock 경로 census + biology 4th sister 도메인 후보 census. weave 완성 expansion 검토.",
+
+  "scope": {
+    "created": [
+      "proposals/hexa_weave_alien_grade_5_unlock_path_2026_04_28.md",
+      "proposals/hexa_weave_biology_4th_sister_census_2026_04_28.md",
+      "design/kick/2026-04-28_alien-grade-5-unlock-cycle18_omega_cycle.json"
+    ],
+    "modified": [
+      "state/discovery_absorption/registry.jsonl"
+    ],
+    "not_modified_intentionally": [
+      "domains/biology/_index.json (no virocapsid registration in this cycle)",
+      "domains/_index.json (no axis count change)",
+      "state/audit/alien_grade_events.jsonl (no re-emit; ledger remains at cycle-17 row)",
+      "tool/alien_grade_audit.hexa (no schema change)",
+      "lean4-n6/N6/MechVerif/Foundation/Axioms.lean (no axiom mutation)"
+    ]
+  },
+
+  "alien_grade_5_unlock_breakdown": {
+    "baseline_cycle17_ledger": 4.6742,
+    "baseline_cycle18_working_tree": 4.7913,
+    "baseline_delta_explanation": "cycle 18 W9-remaining-atomics audit found lean_mechanical 8/11 (ledger) → 11/11 (working tree); falsifier_resolution 10/60 (ledger) → 15/61 (working tree, +5 RESOLVED in cycle 15-18 absorption rows). cycle 19 alien_grade_audit re-measurement will collapse the gap.",
+    "marginal_gain_table_from_ledger": {
+      "lean_8_to_11_of_11": 0.1091,
+      "mvp_5_to_6_of_6_w5_pass": 0.0333,
+      "paper_0.5_to_1.0_zenodo_deposit": 0.1000,
+      "falsifier_0.1667_to_0.5": 0.0333,
+      "falsifier_0.1667_to_1.0_full": 0.0833,
+      "combined_lean_paper_falsifier_to_0.5": 0.2424,
+      "combined_resulting_grade": 4.9167
+    },
+    "marginal_gain_table_from_working_tree": {
+      "paper_alone_zenodo_deposit": 0.1000,
+      "paper_plus_falsifier_to_0.5": 0.1254,
+      "paper_plus_falsifier_to_1.0_plus_mvp_to_1.0": 0.2087,
+      "resulting_grade_full_saturation": 5.0000
+    },
+    "most_efficient_path": [
+      {"step": 1, "action": "cycle 19 alien_grade_audit --measure (ledger refresh)", "user_gate": "none", "delta": 0.1171, "cumulative": 4.7913},
+      {"step": 2, "action": "Zenodo deposit", "user_gate": "1 approval", "delta": 0.1000, "cumulative": 4.8913},
+      {"step": 3, "action": "falsifier resolution 0.2459 → 0.5 (cycle 19-22)", "user_gate": "none", "delta": 0.0254, "cumulative": 4.9167},
+      {"step": 4, "action": "W5 sandbox PASS", "user_gate": "1 dispatch", "delta": 0.0333, "cumulative": 4.9500},
+      {"step": 5, "action": "falsifier 0.5 → 1.0", "user_gate": "none", "delta": 0.0500, "cumulative": 5.0000}
+    ],
+    "user_gates_total": 2,
+    "wall_clock_estimate": "cycle 19-25 (Zenodo) + cycle 22-30 (W5 dispatch) + cycle 25-30 (falsifier saturation) ≈ 6-12 cycles ≈ 2-6 weeks",
+    "grade_6_unlock_blocker": "5-component model caps at grade 5.0; grade 6 requires arxiv_preprint + peer_review components (separate dimensions). cycle 11 census wall-clock 3-12 months external actor dependency unchanged.",
+    "grade_8_ceiling_unchanged": "single user + AI collaboration ceiling = grade 8 (cycle 11 census conclusion unchanged); grade 9-10 reality wall holds"
+  },
+
+  "biology_4th_sister_census": {
+    "current_3_sister_state": {
+      "hexa_weave": "composition (write-side multi-strand)",
+      "hexa_nanobot": "actuation (mechanical work output)",
+      "hexa_ribozyme": "catalysis (chemical bond cleavage)"
+    },
+    "candidates_evaluated": 7,
+    "evaluation_criteria": [
+      "OWN3 (one-doc-per-domain)",
+      "OWN4 (15-section)",
+      "OWN16 (_index.json fit)",
+      "raw_47 (cross-repo)",
+      "raw_106 (multi-realizability)",
+      "n6_invariant_projection",
+      "ORTHO (composition orthogonality)",
+      "AG (alien-grade contribution)"
+    ],
+    "ranking": [
+      {"rank": 1, "candidate": "HEXA-VIROCAPSID", "score": "71/80", "tier": "A+", "key_strength": "σ=12 = icosahedron 12 vertex STRUCTURAL-EXACT"},
+      {"rank": 2, "candidate": "HEXA-MEMBRANE", "score": "68/80", "tier": "A", "key_strength": "composition orthogonal + corpus rich"},
+      {"rank": 3, "candidate": "HEXA-RIBOSOME", "score": "60/80", "tier": "B+", "key_caveat": "ribozyme catalytic core overlap"},
+      {"rank": 4, "candidate": "HEXA-CHAPERONE", "score": "53/80", "tier": "C+", "key_caveat": "proteostasis nesting"},
+      {"rank": 4, "candidate": "HEXA-EPIGENOME", "score": "53/80", "tier": "C+", "key_caveat": "n6 invariant approximate fit"},
+      {"rank": 6, "candidate": "HEXA-PROTEOSTASIS", "score": "50/80", "tier": "C", "key_caveat": "network axis-level not sister-tier"},
+      {"rank": 7, "candidate": "HEXA-METABOLOME", "score": "46/80", "tier": "D", "key_caveat": "thousands of metabolites; σ=12 mapping infeasible"}
+    ],
+    "selected_4th_sister_recommendation": "HEXA-VIROCAPSID",
+    "selection_justification": [
+      "σ(6)=12 = icosahedron 12 vertex (T=1 capsid) STRUCTURAL-EXACT (vs HEXA-RIBOZYME STRUCTURAL-APPROXIMATE)",
+      "J₂=24 octahedral as natural subgroup of icosahedral I order 60 (disclose)",
+      "τ(6)=4 capsid assembly states (free-CP / pentamer / hexamer / capsid)",
+      "φ(6)=2 binary (filled / empty)",
+      "composition orthogonal: covalent multi-strand (HEXA-WEAVE) vs non-covalent self-assembly (HEXA-VIROCAPSID)",
+      "corpus rich: Caspar-Klug 1962 / Rossmann 1985 / Twarock 2016 / Zlotnick 2003",
+      "raw 106 multi-realizability: T=1 / T=3 / T=7 channels + Caspar-Klug geometric / Zlotnick kinetic frameworks + helical capsid (TMV) counter-example"
+    ],
+    "registration_deferred_to_cycle": 19,
+    "registration_user_gate_required": true,
+    "raw_142_d2_registration_procedure": [
+      "cp -p domains/biology/_index.json /tmp/biology_index.json.backup",
+      "cp -p domains/_index.json /tmp/_index.json.backup",
+      "create domains/biology/hexa-virocapsid/hexa-virocapsid.md (15-section)",
+      "domains/biology/_index.json _count 3 → 4; _changelog 1.3.0",
+      "domains/_index.json _total 381 → 382; biology axis count 3 → 4",
+      "README.md biology section refresh (sync-readme.hexa)",
+      "lake build / own_doc_lint",
+      "revert path: lint or build FAIL → restore backup",
+      "raw 138 sentinel: __VIROCAPSID_REGISTRATION_RESULT__ PASS|FAIL"
+    ]
+  },
+
+  "raw_91_c3_disclose": {
+    "estimate_vs_measurement_separation": "all marginal gains are deterministic measurements (file existence, regex count, ledger row); future cycle pct upgrades are estimates pending falsifier preregistration F-AG5-1..5",
+    "fabricated_novelty_rejected": "cycle 11 census +0.13 (paper + falsifier 0.5) claim verified equal to working-tree +0.1254; raw 91 C3 pass",
+    "stale_ledger_disclosed": "cycle 17 ledger 4.6742 vs cycle 18 working tree 4.7913 = +0.1171; cycle 19 audit re-emit will collapse the gap (no fabrication; tool-driven audit lapse documented)",
+    "cycle_18_register_no_modification": "this kick is read-only meta-report; no domain registration, no _index.json mutation, no Axioms.lean mutation",
+    "fourth_sister_motivation_check": "addition not justified by 'tetrahedron is nice' alone; HEXA-VIROCAPSID selected for σ=12 STRUCTURAL-EXACT n6 invariant fit + composition orthogonality + raw 106 multi-realizability pass; HEXA-RIBOSOME / PROTEOSTASIS / etc rejected at <60/80 not by ad-hominem but by criteria scoring"
+  },
+
+  "falsifiers_preregistered": [
+    {"id": "F-AG5-1", "predicate": "cycle 19 ledger re-measurement shows lean_mechanical_pct ≠ 1.0", "alert": "alarm", "deadline": "cycle 19"},
+    {"id": "F-AG5-2", "predicate": "alien_grade ≥ 5.0 reported without paper Zenodo deposit ID", "alert": "warn", "deadline": "open"},
+    {"id": "F-AG5-3", "predicate": "falsifier_resolution_pct still <0.5 by cycle 22", "alert": "warn", "deadline": "cycle 22"},
+    {"id": "F-AG5-4", "predicate": "weighted sum exceeds 1.0 (formula error)", "alert": "alarm", "deadline": "open"},
+    {"id": "F-AG5-5", "predicate": "grade-6 component addition breaks weight normalization continuity with cycle 11/12 census", "alert": "warn", "deadline": "cycle 19"},
+    {"id": "F-VIROCAPSID-1", "predicate": "HEXA-VIROCAPSID registration introduces σ=12 STRUCTURAL-APPROXIMATE rather than EXACT", "alert": "warn", "deadline": "cycle 19+"},
+    {"id": "F-VIROCAPSID-2", "predicate": "HEXA-VIROCAPSID and HEXA-RIBOZYME catalytic-RNA capsid (HDV-class) overlap not disclosed", "alert": "warn", "deadline": "cycle 19+"},
+    {"id": "F-VIROCAPSID-3", "predicate": "registration of HEXA-VIROCAPSID inflates alien_grade by >+0.05 without deterministic measurement justification", "alert": "alarm", "deadline": "open"}
+  ],
+
+  "raw_invocations": {
+    "raw_9_hexa_only": true,
+    "raw_13_no_external_comms": true,
+    "raw_47_cross_repo": "sister repo ~/core/hexa-weave (not yet created); no impact this cycle",
+    "raw_65_68_idempotent": true,
+    "raw_71_falsifier_preregistration": 8,
+    "raw_77_append_only_audit_ledger": "registry.jsonl row only; alien_grade_events.jsonl unchanged",
+    "raw_91_c3_honest": "estimate vs measurement separation enforced; stale ledger disclosed",
+    "raw_106_multi_realizability": "HEXA-VIROCAPSID T=1/T=3/T=7 + Caspar-Klug/Zlotnick + TMV counter-example",
+    "raw_138_sentinel_target": "__ALIEN_GRADE_5_UNLOCK_CENSUS_RESULT__ PASS",
+    "raw_142_d2_revertible": "no mutation in this cycle; backup procedure documented for cycle 19+ registration"
+  },
+
+  "next_cycle_path": {
+    "cycle_19": [
+      "tool/alien_grade_audit.hexa --measure (ledger refresh; cycle 18 working tree 4.7913 → ledger row)",
+      "HEXA-VIROCAPSID registration (user approval required) per raw 142 D2 procedure",
+      "Zenodo deposit (user approval) → paper_published 0.5 → 1.0 (+0.10)",
+      "F-W9-1/2/6/7/8 RESOLVED retire row in falsifier_monitor/audit.jsonl",
+      "papers/hexa-weave-formal-mechanical-w2-2026-04-28.md §17/§21 11/11 atomics update"
+    ],
+    "cycle_20_22": [
+      "falsifier_resolution_pct cumulative gain (cycle 19-22 absorption rows)",
+      "HEXA-MEMBRANE 5th sister candidate review",
+      "grade 6 component addition design (arxiv_preprint + peer_review weights)"
+    ],
+    "cycle_22_30": [
+      "W5 sandbox dispatch (user gate) → mvp_empirical 5/6 → 6/6 (+0.0333)",
+      "alien_grade ≥5.0 ledger anchor",
+      "grade 6 path (peer review + DOI cycle)"
+    ]
+  }
+}

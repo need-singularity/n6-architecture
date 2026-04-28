@@ -1,0 +1,109 @@
+{
+  "kick_id": "2026-04-28_lean4-w9-remaining-cycle18",
+  "schema": "omega_cycle.v1",
+  "ts": "2026-04-28T11:25:54Z",
+  "fan_out": "cycle 18",
+  "cycle": 18,
+  "mission": "Cycle 18 W9-remaining-atomics audit. Kick claimed axiom_count=15 with 4 Felgner atomics (step1.c / step3.a / step3.b / step3.c) outstanding; live measurement via tool/lean4_axiom_count_check.hexa shows axiom_count=11 with ALL 11 Felgner atomics already mechanical (cycle-17 conversions). 3rd-occurrence cycle-13/15-anomaly pattern (under-count direction). Deliverable becomes audit-rectification: 5 F-W9-* falsifier rows RESOLVED + 1 new F-W9-CYCLE18-ANOMALY-3 DETECTED + alien-grade re-measurement deferred to cycle 19.",
+  "parent_proposals": [
+    "proposals/hexa_weave_mvp_w9_remaining_atomics_2026_04_28.md",
+    "proposals/hexa_weave_alien_grade_audit_tool_2026_04_28.md",
+    "proposals/hexa_weave_mvp_w9_step2ac_reapply_2026_04_28.md"
+  ],
+  "predecessor_witnesses": [
+    "design/kick/2026-04-28_lean4-w9-step3d-remaining-cycle17_omega_cycle.json",
+    "design/kick/2026-04-28_alien-grade-audit-tool-cycle17_omega_cycle.json",
+    "design/kick/2026-04-28_falsifier-audit-cycle15_omega_cycle.json"
+  ],
+  "scope": {
+    "modified": [],
+    "untracked": [
+      "proposals/hexa_weave_mvp_w9_remaining_atomics_2026_04_28.md",
+      "design/kick/2026-04-28_lean4-w9-remaining-cycle18_omega_cycle.json",
+      "state/falsifier_monitor/audit.jsonl (+6 rows)",
+      "state/discovery_absorption/registry.jsonl (+1 row)"
+    ],
+    "lean4_unchanged_rationale": "All 11 Felgner Hauptsatz atomics in HEAD Foundation/Axioms.lean are already derived theorems with mechanical lemma bodies (cycle-10/11/12/16/17 conversions). The kick's 4 named targets (step1.c / step3.a / step3.b / step3.c) are theorem-shape since cycle-17. No mechanical conversion possible in cycle 18 within the Felgner Hauptsatz scope."
+  },
+  "audit_findings": {
+    "axiom_count_kick_claimed": 15,
+    "axiom_count_HEAD_actual": 11,
+    "axiom_count_delta": -4,
+    "felgner_atomics_mechanical_kick_claimed": 7,
+    "felgner_atomics_mechanical_HEAD_actual": 11,
+    "felgner_atomics_mechanical_alien_grade_event_cycle17": 8,
+    "anomaly_classification": "cycle-13/15-anomaly 3rd occurrence (under-count direction)",
+    "tool_used": "tool/lean4_axiom_count_check.hexa --expected 15 --severity warn",
+    "tool_verdict_at_15": "FAIL (delta=-4)",
+    "tool_verdict_at_11": "PASS (delta=0)",
+    "lake_build": "PASS (8 jobs)",
+    "sorry_count": 0
+  },
+  "atomics_state_in_HEAD": {
+    "step1.a": {"keyword": "theorem", "mechanical_lemma": "vkappa_definability_classical_mechanical", "uses": ["Classical.allZFSetDefinable"], "lines": "204-219"},
+    "step1.b": {"keyword": "theorem", "mechanical_lemma": "vkappa_definable_to_set_mechanical", "uses": ["ZFSet.sep", "ZFSet.rank_powerset"], "lines": "258-282"},
+    "step1.c": {"keyword": "theorem", "mechanical_lemma": "vkappa_step1c_pi1_translation_mechanical", "uses": ["universal restriction"], "lines": "319-332"},
+    "step2.a": {"keyword": "theorem", "mechanical_lemma": "vkappa_replacement_cofinality_mechanical", "uses": ["IsRegular.cof_ord"], "lines": "373-386"},
+    "step2.b": {"keyword": "theorem", "mechanical_lemma": "vkappa_powerset_closure_mechanical", "uses": ["rank_powerset", "IsSuccLimit.succ_lt"], "lines": "428-447"},
+    "step2.c": {"keyword": "theorem", "mechanical_lemma": "vkappa_choice_mechanical", "uses": ["Classical.choice"], "lines": "474-485"},
+    "step2.d": {"keyword": "theorem", "mechanical_lemma": "vkappa_foundation_mechanical", "uses": ["ZFSet.mem_wf"], "lines": "516-529"},
+    "step3.a": {"keyword": "theorem", "mechanical_lemma": "vkappa_delta0_bounded_absoluteness_mechanical", "uses": ["IsTransitive.mem_trans"], "lines": "588-605"},
+    "step3.b": {"keyword": "theorem", "mechanical_lemma": "vkappa_sigma1_upward_absoluteness_mechanical", "uses": ["existential forgetfulness"], "lines": "636-649"},
+    "step3.c": {"keyword": "theorem", "mechanical_lemma": "vkappa_pi1_downward_absoluteness_mechanical", "uses": ["universal restriction"], "lines": "679-692"},
+    "step3.d": {"keyword": "theorem", "mechanical_lemma": "vkappa_membership_induction_mechanical", "uses": ["ZFSet.inductionOn"], "lines": "729-745"}
+  },
+  "axioms_remaining_in_HEAD_breakdown": {
+    "strand_zfc_encoding_a1_a5": ["axiom_strand_zfc_witness_amino", "axiom_strand_zfc_witness_rna", "axiom_strand_zfc_witness_dna", "axiom_strand_zfc_witness_small_ligand", "axiom_strand_zfc_witness_antibody"],
+    "felgner_bridge_to_mk": ["axiom_felgner_bridge_to_MK"],
+    "hexa_comp_closure_c2_c4_atom": ["axiom_hexa_comp_associativity", "axiom_hexa_comp_identity", "axiom_hexa_comp_zfc_class_closure", "axiom_hexa_comp_closure_atom"],
+    "ax1_robin_tail": ["axiom_robin_hardy_wright_ax1_tail"],
+    "total": 11
+  },
+  "falsifier_audit_actions": {
+    "retired_resolved": [
+      {"id": "F-W9-1-STEP1A", "reason": "cycle-17 already discharged via Classical.allZFSetDefinable; audit lapse caused stale active row"},
+      {"id": "F-W9-2-STEP1C", "reason": "cycle-17 already discharged via universal restriction; audit lapse caused stale active row"},
+      {"id": "F-W9-6-STEP3B", "reason": "cycle-17 already discharged via existential forgetfulness; audit lapse caused stale active row"},
+      {"id": "F-W9-7-STEP3C", "reason": "cycle-17 already discharged via universal restriction; audit lapse caused stale active row"},
+      {"id": "F-W9-8-STEP3D", "reason": "cycle-17 already discharged via ZFSet.inductionOn; audit lapse caused stale active row"}
+    ],
+    "registered": [
+      {"id": "F-W9-CYCLE18-ANOMALY-3", "kind": "cycle-13/15-anomaly 3rd occurrence (under-count); alien_grade lean_mechanical_pct=0.7273 stale; corrected estimate 11/11=1.0; cycle-19 official re-measurement deferred", "alert_level": "warn", "deadline": "2026-05-28"}
+    ]
+  },
+  "raw_91_c3_honest": "3rd-occurrence anomaly is itself a finding. Cycle-17 commit message correctly stated 7/11 mechanical Felgner atomics, but the cycle-17 alien_grade tool recorded 8/11, and direct grep on HEAD shows 11/11 (all step1+step2+step3 atomics are derived theorems). The cycle-15 falsifier rows F-W9-1/2/6/7/8 were never retired after cycle-17, propagating a stale 'active' state into cycle-18 kick formulation. Honest disclose: this kick was a NO-OP for lean4 mechanical work — audit-rectification IS the deliverable. raw 91 C3 forbids fabricated PASS for atomics that don't need conversion; instead document the true state and surface the 3rd anomaly.",
+  "raw_47_external_dependency": "mathlib4 ModelTheory.Bounded BoundedFormula infrastructure remains absent per cycle-6 W4 audit. Same blocker that has gated W10+ since cycle 6 — unchanged in cycle 18. The 11 cycle-10/11/12/16/17 mechanical lemmas prove the SEMANTIC shape; the SYNTACTIC formula-complexity-class preservation requires ModelTheory.Bounded and is W10+ work.",
+  "raw_71_pre_registration_retire": ["F-W9-1-STEP1A RESOLVED", "F-W9-2-STEP1C RESOLVED", "F-W9-6-STEP3B RESOLVED", "F-W9-7-STEP3C RESOLVED", "F-W9-8-STEP3D RESOLVED", "F-W9-CYCLE18-ANOMALY-3 DETECTED"],
+  "raw_142_d2_revertible": "Pure audit/documentation cycle. State changes append-only (audit.jsonl + registry.jsonl raw_77_append_only). No lean4-n6/ modifications. lake build PASS preserved.",
+  "raw_138_sentinel": "__W9_REMAINING_RESULT__ PASS",
+  "raw_138_sentinel_rationale": "Sentinel reflects audit verdict, not lean code change. PASS = audit completed honestly with no fabricated conversions; STALE state rectified; falsifier rows retired; ratchet preserved at axiom_count=11 / sorry=0 / lake build PASS.",
+  "alien_grade_state": {
+    "cycle17_declared": 4.6742,
+    "cycle17_components": {"lean_mechanical_pct": 0.7273, "mvp_empirical_pct": 0.8333, "paper_published_pct": 0.5, "cross_axis_collision_pct": 1.0, "falsifier_resolution_pct": 0.1667},
+    "cycle18_recomputed_estimate": 4.7833,
+    "cycle18_corrected_lean_mechanical_pct": 1.0,
+    "cycle18_recomputed_components": {"lean_mechanical_pct": 1.0, "mvp_empirical_pct": 0.8333, "paper_published_pct": 0.5, "cross_axis_collision_pct": 1.0, "falsifier_resolution_pct": 0.1667},
+    "cycle18_recomputed_weighted_sum": 0.7833,
+    "cycle19_official_remeasurement": "deferred to cycle 19 (scope-decision required: Felgner-atomics-only vs all-axioms)"
+  },
+  "next_cycle_path": {
+    "cycle19_step1": "scope-decision for tool/alien_grade_audit.hexa lean_mechanical_pct (Felgner-atomics-only=11/11 vs all-axioms-felgner-discharged-only=11/22 vs all-axioms-zero-axioms-felgner=0/11)",
+    "cycle19_step2": "papers/hexa-weave-formal-mechanical-w2-2026-04-28.md §17 + §21 update to 11/11 atomics",
+    "cycle19_step3_target": "HEXA-COMP closure axioms (C.2 axiom_hexa_comp_associativity / C.3 axiom_hexa_comp_identity / C.4 axiom_hexa_comp_zfc_class_closure / closure_atom) — independent of ModelTheory.Bounded; natural next-wave mechanical conversion",
+    "cycle19_step4_pre_commit_hook": "integrate tool/lean4_axiom_count_check.hexa into .git/hooks/pre-commit with --expected 11 --severity block (cycle 17 task #15 root-cause fix); future axiom additions must update tool expected value AND proposal claim atomically",
+    "cycle19_step5_w10_plus": "Mathlib.ModelTheory.Bounded BoundedFormula syntactic preservation (Felgner step1.{a,c} / step3.{a,b,c} syntactic layer) — vs cycle-17 semantic layer already discharged; deferred per cycle-6 W4 audit"
+  },
+  "deliverables_produced": [
+    "proposals/hexa_weave_mvp_w9_remaining_atomics_2026_04_28.md",
+    "design/kick/2026-04-28_lean4-w9-remaining-cycle18_omega_cycle.json",
+    "state/falsifier_monitor/audit.jsonl (+6 rows: 5 RESOLVED + 1 DETECTED)",
+    "state/discovery_absorption/registry.jsonl (+1 row: lean4-w9-remaining-cycle18-2026-04-28)",
+    "lean4-n6/N6/MechVerif/Foundation/Axioms.lean UNCHANGED (no conversion possible; all 11 atomics already mechanical)"
+  ],
+  "weave_completion_proximity": {
+    "axiom_count_progression": "W4 cycle-6 = 4 axioms (single felgner_meta) -> W7 cycle-9 = 7 axioms (axiom step-down 7 named) -> W8 cycle-10 = 23 axioms (Felgner atomic decomposition + Strand A.1-A.5 + HEXA-COMP C.1-C.4) -> cycle 11 = 22 (step1.b mechanical) -> cycle 12 = 19 (step2.b/d mechanical) -> cycle 16 = 17 (step2.a/c re-apply) -> cycle 17 = 15 (step1.a + step3.d) -> cycle 17 (silent) = 11 (step1.c + step3.a/b/c discharged in same commit, audit-noted only at cycle 18) -> cycle 18 = 11 (audit-confirmed)",
+    "felgner_atomics_mechanical_pct": 1.0,
+    "axioms_remaining_categorized": "5 strand-zfc-encoding + 4 hexa-comp-closure + 1 felgner-bridge-to-MK + 1 ax1-robin-tail = 11",
+    "weave_completion_estimate_cycle19_target": "if 4 hexa-comp axioms convert mechanically in cycle 19, axiom_count drops to 7 (-4), within reach of W4 cycle-6 baseline (4 named axioms) by cycle 21+"
+  }
+}

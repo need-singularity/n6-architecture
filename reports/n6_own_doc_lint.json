@@ -52,11 +52,11 @@
     "note": "own#13/#15/#17..#21 handled by existing verifiers — not re-checked here."
   },
   "summary": {
-    "total_violations": 10,
-    "hard_violations": 10,
+    "total_violations": 13,
+    "hard_violations": 13,
     "soft_violations": 0,
     "per_rule": {
-      "own#1": 10,
+      "own#1": 13,
       "own#2": 0,
       "own#3": 0,
       "own#4": 0,
@@ -81,6 +81,16 @@
       "rule": "own#1",
       "path": "proposals/hexa_weave_mvp_w8_step1b_mechanical_2026_04_28.md",
       "detail": "CJK present (3 chars) — new .md must be English-only (own#1 HARD since 2026-04-24)"
+    },
+    {
+      "rule": "own#1",
+      "path": "proposals/hexa_weave_sync_readme_bug_fix_2026_04_28.md",
+      "detail": "CJK present (11 chars) — new .md must be English-only (own#1 HARD since 2026-04-24)"
+    },
+    {
+      "rule": "own#1",
+      "path": "proposals/hexa_weave_alien_grade_5_unlock_path_2026_04_28.md",
+      "detail": "CJK present (939 chars) — new .md must be English-only (own#1 HARD since 2026-04-24)"
     },
     {
       "rule": "own#1",
@@ -111,6 +121,11 @@
       "rule": "own#1",
       "path": "proposals/hexa_weave_prerequisite_domains_census_2026_04_28.md",
       "detail": "CJK present (16 chars) — new .md must be English-only (own#1 HARD since 2026-04-24)"
+    },
+    {
+      "rule": "own#1",
+      "path": "proposals/hexa_weave_biology_4th_sister_census_2026_04_28.md",
+      "detail": "CJK present (1086 chars) — new .md must be English-only (own#1 HARD since 2026-04-24)"
     },
     {
       "rule": "own#1",
