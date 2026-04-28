@@ -1,0 +1,125 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — raw 45 (omega-blocker-autofire) parallel-fanout enhancement
+# source: user request 2026-04-28 — "raw 의 loop raw 개선 필요 위 모두 kick 할수 있도록 병렬로"
+# constraints:
+#   raw 91 C3 honest disclosure (gap acknowledged: DAG-cycle detection complexity inherits raw 79)
+#   raw 22 INFRA-ONLY  raw 24 axiom-immutable  raw 23 schema-guard
+#   raw 2 self-format (multi-line list keys per .raw grammar)
+#   own#11 strict (NO Clay BT 'resolution' claims — schema design only)
+#   atlas.n6 + .raw DSL only (no foreign theory imports)
+# date: 2026-04-28
+# parent raws: hive .raw raw 45 (line 847) + raw 79 (1580) + raw 80 (1613) +
+#              raw 77 (1514) + raw 44 (821) + raw 91 (1989) + raw 2 (52)
+# ══════════════════════════════════════════════════════════════
+
+# ── primary spec witness ────────────────────────────────────
+@C raw-45-parallel-fanout-enhancement-spec :: meta [4!]
+  <- raw-45-omega-blocker-autofire-current-serial-only
+  <- raw-79-parallel-DAG-scheduler-witness
+  <- raw-80-execution-sentinel-result-decoding
+  <- raw-77-execution-audit-append-only-ledger
+  <- raw-44-subagent-parent-propagation
+  <- raw-91-C3-honest-disclosure
+  <- raw-2-self-format-multi-line-list-grammar
+  -> raw-45-new-fields-additions
+  -> raw-45-back-compat-path
+  -> raw-45-cross-ref-raw-79-and-raw-44
+  -> raw-45-concrete-usage-example
+  -> raw-45-failure-mode-handling
+  => "★ enhancement: single blocker entry fires N parallel sub-agents simultaneously"
+  => "current serial single fire-cmd → fanout N-cmd with DAG deps + aggregate-resolution"
+  => "user driver: 6 atlas-self-arch axes spawn-1-blocker-each is wasteful — fan from one"
+  => "design-only — implementation deferred to tool/blocker_autofire.hexa follow-up"
+
+# ── (R1) new-fields-additions ──────────────────────────────
+@R new-fields-additions :: meta [4]
+  <- raw-45-parallel-fanout-enhancement-spec
+  => "fire-parallel-fanout — multi-line list per raw 2 grammar; each line = independent shell cmd"
+  => "fire-fanout-host — list of hosts (1-per-cmd OR fewer with auto-LB round-robin)"
+  => "fire-fanout-cwd — list of cwds (defaults to fire-cwd if absent or shorter than fanout)"
+  => "fire-fanout-deps — DAG edges <from-idx>:<to-idx> (e.g. 0:1 means cmd-0 must finish before cmd-1)"
+  => "fire-fanout-deps empty = full parallel; cycle = lint exit 4 per raw 79 strict-acyclic default"
+  => "aggregate-resolution-metric ∈ {all-pass, any-pass, quorum-N} — gates status flip active→resolved"
+  => "fire-fanout-max-concurrent — saturation guard (default 3 per iter-55 hetzner finding)"
+  => "fire-fanout-retry-per-cmd — int >=0 (default 0)"
+  => "fire-fanout-timeout-sec — per-cmd wallclock (default 600)"
+  => "fire-fanout-on-failure ∈ {abort-remaining, continue-remaining} — cascade policy (default continue-remaining matching raw 79 FSM)"
+  => "raw 2 schema-guard whitelist additions: fire-parallel-fanout, fire-fanout-host, fire-fanout-cwd, fire-fanout-deps, aggregate-resolution-metric, fire-fanout-max-concurrent, fire-fanout-retry-per-cmd, fire-fanout-timeout-sec, fire-fanout-on-failure"
+
+# ── (R2) back-compat-path ──────────────────────────────────
+@R back-compat-path :: meta [4]
+  <- raw-45-parallel-fanout-enhancement-spec
+  => "existing fire-cmd (single) still works — degenerate fanout=[fire-cmd], aggregate=all-pass implicit"
+  => "when fire-parallel-fanout present, fire-cmd OPTIONAL — if both present, fire-cmd treated as additive 0-th entry of fanout list"
+  => "schema-guard rule: parser allows EITHER fire-cmd OR fire-parallel-fanout (XOR-of-presence relaxed to OR; both = merge)"
+  => "tool/blocker_autofire_lint.hexa update: when fire-parallel-fanout present, require aggregate-resolution-metric, allow fire-cmd absent, validate fanout-deps idx in [0, len(fanout))"
+  => "existing 1 entry blocker registry (state/blockers/v3_metric_redesign.hexa per raw 45 line 866) unaffected — no field migration needed"
+  => "verification: parser dual-path test = (a) old single fire-cmd entry parses identically (b) new fanout entry parses with degenerate=1-entry fanout matching old single behavior"
+
+# ── (R3) cross-ref-raw-79-and-raw-44 ───────────────────────
+@R cross-ref-raw-79-and-raw-44 :: meta [4]
+  <- raw-45-parallel-fanout-enhancement-spec
+  <- raw-79-parallel-DAG-scheduler-witness
+  <- raw-44-subagent-parent-propagation
+  <- raw-77-execution-audit-append-only-ledger
+  <- raw-80-execution-sentinel-result-decoding
+  => "raw 79 binding: when fire-fanout-deps non-empty, raw 45 fanout MUST use raw 79 DAG-scheduler — topological sort + DFS w/g/b cycle detection + max_parallel slot limit"
+  => "per-task FSM (pending→running→done|failed|timeout) emitted to raw 77 audit ledger state/blockers/<slug>.fires/<ts>.fanout.jsonl per raw 79 (d) clause"
+  => "sentinel-string completion marker per raw 80: __BLOCKER_FANOUT_RESULT__ PASS|FAIL [+payload-json]"
+  => "payload-json schema (raw 80 sentinel-payload-schema field): {fanout_results:[{idx, status, exit, duration_sec}], aggregate: PASS|FAIL, metric: <all-pass|any-pass|quorum-N>}"
+  => "raw 44 binding: when a fanout entry uses subagent_dispatch (heuristic match on hexa-cli|hive-cli|node packages/coding-agent/dist/cli.js -p OR explicit dispatch-mode subagent), parent-SID flows blocker-SID → subagent_dispatch --parent-sid → child SSE relay back to blocker SID"
+  => "wire path: blocker.tick → tool/blocker_autofire.hexa → raw 79 scheduler → N × subagent_dispatch.hexa <blocker-SID> <fanout-cmd-i> → child events SSE rewrite to parent blocker-SID"
+  => "raw 79 cycle-handling default = strict (cycle = lint exit 4); fire-fanout-cycle-handling field optional override = catalogued (per raw 79 (f) — requires per-cycle justification text)"
+
+# ── (R4) concrete-usage-example ────────────────────────────
+@R concrete-usage-example :: meta [4]
+  <- raw-45-parallel-fanout-enhancement-spec
+  <- raw-2-self-format-multi-line-list-grammar
+  => "atlas-self-arch 6-axis migration scenario (axes D/E/F1/F2 sketch from prior sub-agents):"
+  => "  slug atlas-self-arch-6-axis-migration"
+  => "  status active"
+  => "  fire-parallel-fanout"
+  => "    hexa run tool/atlas_self_arch_axis_d.hexa     # @I invariant migration"
+  => "    hexa run tool/atlas_self_arch_axis_e.hexa     # [10**] population"
+  => "    hexa run tool/atlas_self_arch_axis_f1.hexa    # <-> equivalence"
+  => "    hexa run tool/atlas_self_arch_axis_f2.hexa    # -| blocking"
+  => "  fire-fanout-deps 0:1 0:2 0:3"
+  => "  aggregate-resolution-metric all-pass"
+  => "  fire-fanout-max-concurrent 3"
+  => "  fire-fanout-timeout-sec 1200"
+  => "  fire-fanout-retry-per-cmd 1"
+  => "  fire-fanout-on-failure continue-remaining"
+  => "  interval 1800"
+  => "  omega-stop fixpoint-convergence"
+  => "semantics: cmd-0 (@I) gate → on PASS → cmd-1/2/3 fan parallel (max 3 concurrent)"
+  => "resolution flip active→resolved iff all 4 cmds report PASS via __BLOCKER_FANOUT_RESULT__ PASS sentinel"
+  => "any FAIL with continue-remaining = remaining cmds still execute, aggregate=FAIL recorded, blocker stays active for next interval tick (raw 45 default loop)"
+
+# ── (R5) failure-mode-handling ─────────────────────────────
+@R failure-mode-handling :: meta [4]
+  <- raw-45-parallel-fanout-enhancement-spec
+  => "per-cmd retry: fire-fanout-retry-per-cmd <int>=0 — each fanout entry retried locally up to N times before marked failed in FSM"
+  => "per-cmd timeout: fire-fanout-timeout-sec <int>=600 — wallclock SIGTERM after N seconds, sentinel TIMEOUT distinct from FAIL per raw 80 (a) clause"
+  => "aggregate cascade policy: fire-fanout-on-failure <enum>"
+  => "  abort-remaining: 1 cmd FAIL → SIGTERM all running cmds, skip pending cmds (raw 79 max_parallel slots released, FSM marks skipped pending→cancelled)"
+  => "  continue-remaining (default): cmds keep running, aggregate computed at end — matches raw 79 FSM semantics where one task failure does not abort siblings"
+  => "DAG dep failure propagation: when cmd-A fails AND cmd-B has fire-fanout-deps A:B, cmd-B status FSM auto = blocked (never starts) — recorded in raw 77 ledger"
+  => "single-flight guard inheritance from raw 45 line 855: pidfile per-fanout-entry state/blockers/<slug>.fires/<ts>.idx-<i>.pid; running fanout = skip-running mode for next interval tick (whole blocker, not per-cmd)"
+  => "interval gate primary: even with continue-remaining, the next tick will not start until current fanout completes OR exceeds (max-concurrent × timeout-sec) deadline"
+  => "audit ledger entry per raw 77 schema: ts, ts_unix, mode, slug, fanout_idx, cmd, pid, run_log, status, exit, duration_sec, retry_count, prev_line_sha (hash-chain per raw 1)"
+
+# ── (R6) raw-91-C3-honest-disclosure ───────────────────────
+@R raw-91-C3-honest-disclosure :: meta [4]
+  <- raw-45-parallel-fanout-enhancement-spec
+  => "this shard is DESIGN-SPEC ONLY — no implementation, no measurement, no resolution claim"
+  => "scope = atlas.n6 + .raw DSL only; no foreign theory imports (no Clay BT manifold reasoning, no arXiv-borrowed scheduler theory)"
+  => "own#11 strict: NO Clay BT 'resolution' claim — 'aggregate-resolution-metric' field uses 'resolution' in raw 45 sense (status flip active→resolved per raw 45 line 855), NOT manifold/proof resolution"
+  => "gap-1 (DAG-cycle detection complexity): raw 45 fanout inherits raw 79 DFS w/g/b detector — for fanout N>~20 with dense deps, lint cost O(V+E) is acceptable but max-concurrent default 3 means runtime parallelism caps below N regardless of detection efficiency; cycle detection runs once at lint time, not per-tick"
+  => "gap-2 (auto-LB host distribution): when fire-fanout-host has fewer entries than fanout cmds, round-robin assignment is naive — hetzner saturation iter-55 finding (max 3 concurrent) implies host-aware scheduling future work, NOT covered by this enhancement"
+  => "gap-3 (subagent-dispatch heuristic): raw 44 dispatch-mode subagent currently triggered by string-match heuristic on cmd text — false positives/negatives possible; explicit per-fanout-entry dispatch-mode field deferred follow-up"
+  => "gap-4 (sentinel ordering): with continue-remaining policy, sentinels from N parallel cmds may arrive out-of-order; payload aggregator MUST be order-independent (sort by idx before computing aggregate metric)"
+  => "gap-5 (back-compat XOR→OR relaxation): allowing both fire-cmd AND fire-parallel-fanout merges as additive 0-th entry — silent merge could surprise users who set fire-cmd as override; lint should warn on dual-presence"
+  => "gap-6 (resolution semantics for any-pass): if any-pass and 1 of 6 cmds passes immediately, blocker flips resolved while 5 cmds still running — caller must decide: cancel remaining (abort-remaining) or let them complete for audit completeness; current spec defers to fire-fanout-on-failure but 'on-success' counterpart not specified"
+  => "no measurement made — N=0 fanout blockers exist in state/blockers/ at spec time; first canonical entry would be atlas-self-arch-6-axis-migration per (R4) example"
+  => "follow-up gates: design-spec → warn after tool/blocker_autofire.hexa fanout impl + tool/blocker_autofire_lint.hexa schema-guard update + 1 live fanout entry; warn → live after 30-day zero-violation streak per raw 45 line 871 standard pattern"

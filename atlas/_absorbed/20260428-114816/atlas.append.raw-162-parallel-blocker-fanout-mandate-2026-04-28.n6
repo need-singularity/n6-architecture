@@ -1,0 +1,177 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — raw 162 parallel-blocker-fanout-mandate (DRAFT)
+# source: user directive 2026-04-28 "raw 의 loop raw 개선 필요 위 모두 kick 할수 있도록 병렬로"
+# next-raw-number: 162  (verified via grep -oE "^raw [0-9]+" /Users/ghost/core/hive/.raw
+#                        | sort -u | tail -1  →  raw 161 ; max+1 = 162)
+# total-raw-count: 151 unique slots, max 161 (slots 162+ are open)
+# constraints:
+#   raw 91 C3 honest — companion to in-flight raw 45 enhancement (Agent A), NOT duplicate
+#   raw 117 deterministic 5-check (genus + ≥2 frameworks + ≥3 channels + counter-ex + falsifier)
+#   raw 106 multi-realizability (genus-level slug, no -via-X species suffix)
+#   raw 95 triad-mandate (3 enforce layers: hive-agent / os-level / cli-lint)
+#   raw 87 paired-roadmap-id sync
+#   raw 98 taxonomy 3-tuple (category / applies-to / phase)
+#   own#11 strict — NO Clay BT 'resolution' claims; this is a routing-discipline rule only
+#   .raw SSOT = github.com/need-singularity/hive  (mirrored via .raw-ref pinned-hash)
+# date: 2026-04-28
+# status: DRAFT in atlas (not yet appended to hive .raw — append handled by user/sync tool
+#   tool/raw_sync.hexa or manual cross-repo write per raw 47)
+# ══════════════════════════════════════════════════════════════
+
+# ── primary witness ─────────────────────────────────────────
+@C raw-162-parallel-blocker-fanout-mandate-draft-witness :: meta [4!]
+  <- raw-45-omega-blocker-autofire
+  <- raw-79-execution-parallel-DAG-scheduler-witness
+  <- raw-44-subagent-parent-propagation
+  <- raw-100-bottleneck-gap-paradigm-via-nexus-kick
+  <- raw-117-design-novelty-counter-example-5check-mandate
+  <- raw-106-strategy-multi-realizability-mandate
+  <- raw-95-triad-universal-mandate
+  <- raw-87-roadmap-raw-status-sync-witness
+  <- raw-98-raw-taxonomy-tagging-required
+  <- raw-91-design-honesty-triad-process-quality
+  <- own-11-no-resolution-claim
+  -> hive-dot-raw-slot-162-pending-cross-repo-append
+  -> roadmap-paired-id-162-pending
+  => "RAW DRAFT raw 162 parallel-blocker-fanout-mandate — multi-target blockers MUST declare fire-parallel-fanout + fire-fanout-deps + aggregate-resolution-metric"
+  => "next available raw slot = 162 (verified .raw grep: max=161, slots 162+ open)"
+  => "companion to raw 45 enhancement (Agent A in flight, serial-only autofire) — separate axis: SCHEMA mandate vs runtime upgrade"
+
+# ── (1) directive provenance ────────────────────────────────
+@C raw-162-directive-provenance :: meta [4]
+  <- raw-162-parallel-blocker-fanout-mandate-draft-witness
+  => "user directive 2026-04-28: 'raw 의 loop raw 개선 필요 위 모두 kick 할수 있도록 병렬로'"
+  => "translation: improve loop raw so multiple targets can be kicked in parallel"
+  => "Agent A (companion) = raw 45 runtime enhancement (extend tool/blocker_autofire.hexa to fan out fire-cmd over N targets)"
+  => "Agent B (this draft) = raw 162 SCHEMA mandate (every multi-target blocker MUST declare fanout fields canonically)"
+  => "axes are orthogonal: A patches the executor, B patches the SSOT contract — both required for parallel-fanout to be the DEFAULT"
+
+# ── (2) raw 162 full draft text (R block, ready-to-append to hive .raw) ─
+@R raw-162-parallel-blocker-fanout-mandate-full-draft :: meta [4!]
+  <- raw-162-parallel-blocker-fanout-mandate-draft-witness
+  -> hive-dot-raw-append-target
+  => "BEGIN raw 162 draft (canonical hive .raw line format):"
+  raw 162 new "parallel-blocker-fanout-mandate - every blocker SSOT entry whose fire-target spans ≥2 independent objectives (axes / repos / sub-agents / hosts) MUST declare fire-parallel-fanout (N>=2 entries, 1-line each) + fire-fanout-deps (DAG edges, empty = full-parallel) + aggregate-resolution-metric so multi-target loops fan out canonically instead of serializing through a single fire-cmd"
+    slug parallel-blocker-fanout-mandate
+    enforce tool/parallel_fanout_lint.hexa
+    enforce-layer hive-agent
+    enforce-layer-rationale parse-time SSOT lint over state/blockers/*.hexa entries; detects multi-target blockers (≥2 distinct repo OR ≥2 distinct sub-agent OR ≥2 distinct objective_id) and verifies fire-parallel-fanout+fire-fanout-deps+aggregate-resolution-metric triple is present; algorithm core (multi-target detector + DAG cycle check via raw 79 reuse + schema validator) is a hive-agent runtime executor.
+    enforce-layer-secondary os-level
+    enforce-layer-secondary-rationale raw 1 chflags + tier2 path-pattern lock on tool/parallel_fanout_lint.hexa and state/blockers/ — lint binary cannot be silently bypassed; immutability inherits raw 45's existing os-lock on state/blockers/.
+    enforce-layer-tertiary cli-lint
+    enforce-layer-tertiary-rationale ./hexa tool/parallel_fanout_lint.hexa --selftest fixtures (positive: 2-target blocker w/ fanout fields PASS ; negative: 2-target blocker w/o fanout fields FAIL ; cycle: A→B→A FAIL via raw 79 strict ; single-target exempt PASS) gates the lint at tool registration time and on every CI push — distinct from runtime hive-agent enforcement.
+    decl tool/parallel_fanout_lint.hexa
+    scope every blocker SSOT entry under state/blockers/<slug>.hexa whose fire-target spans ≥2 independent objectives — independence detected via (i) ≥2 distinct repo paths in fire-cwd, OR (ii) ≥2 distinct sub-agent slugs in dispatch-mode subagent agent-list, OR (iii) ≥2 distinct objective_id / axis_id / target_id fields, OR (iv) explicit multi-target=true flag — MUST declare three fields: (a) fire-parallel-fanout = N entries (1-line each, format `<target_id> <fire-cmd>` per entry, N>=2); (b) fire-fanout-deps = DAG edges (`<from_target_id> -> <to_target_id>` per line ; empty block = full-parallel default ; cycles forbidden by raw 79 strict topological sort); (c) aggregate-resolution-metric = boolean aggregator over per-target resolution (default = ALL must flip resolved ; alternates ANY / N-of-M / weighted ; explicit aggregator-op required). single-target blockers (only one objective in fire-cwd × dispatch-mode × objective_id) are scope-EXEMPT — no fanout fields required (counter-example clause). resolution semantics inherit raw 45 omega-blocker-autofire (status active → resolved per witness collector); fanout adds per-target attempt-log split (state/blockers/<slug>.fires/<target_id>/<ts>.log) so per-target convergence is observable.
+    why serial firing of a multi-target blocker wastes wall-clock by N× (each tick fires only one target, so N-target blocker takes N ticks minimum to make first contact with all targets) AND admits the "first-cmd-blocks-rest" failure cascade (when target 1's fire-cmd hangs / errors out / pid-locks the slot, targets 2..N never fire under raw 45's single-flight pidfile guard). parallel-canonical fanout removes both: (i) wall-clock reduces from N×interval to max(per-target interval) under raw 79's parallel-DAG scheduler ; (ii) per-target single-flight guards are independent (one target stuck does not block the others). user 2026-04-28 directive 'raw 의 loop raw 개선 필요 위 모두 kick 할수 있도록 병렬로' = make parallel firing the DEFAULT/CANONICAL pattern, not an opt-in. companion to raw 45 RUNTIME enhancement (Agent A in flight) — Agent A patches tool/blocker_autofire.hexa to fan out at execution time ; raw 162 patches the SCHEMA so the SSOT entries declaring multi-target fanout are themselves canonical (orthogonal axes, both required).
+    deps raw:omega-blocker-autofire
+    deps raw:execution-parallel-DAG-scheduler-witness
+    deps raw:subagent-parent-propagation
+    deps raw:bottleneck-gap-paradigm-via-nexus-kick
+    deps raw:design-novelty-counter-example-5check-mandate
+    deps raw:strategy-multi-realizability-mandate
+    deps raw:triad-universal-mandate
+    proof tool/parallel_fanout_lint.hexa --selftest
+    proof raw-162-self-apply-PASS-at-registration (5-check schema_validate + multi-target detector positive/negative/cycle/exempt fixtures)
+    measurement-axis parallel-fanout-coverage
+    measurement-axis-formula parallel-fanout-coverage = blockers_with_fanout_field_declared / total_multi_target_blockers_detected
+    measurement-threshold parallel-fanout-coverage>=0.50-at-30d ; >=0.85-at-90d
+    falsifier 30d post-registration parallel-fanout-coverage < 0.50 → retire (mandate ineffective ; multi-target blockers not adopting canonical fields)
+    falsifier 3+ legitimate multi-target blockers cannot use fanout (genuinely sequential dependency where target B's fire-cmd requires target A's resolution as input) → exempt clause needed (add fanout-exempt-rationale field)
+    falsifier fanout DAG-cycle detected at parse → MUST abort (raw 79 strict topological sort, no cycles permitted)
+    realization-channel-1 SSOT-schema-lint (parse state/blockers/*.hexa, detect multi-target via repo/agent/objective heuristics, validate fanout-triple presence)
+    realization-channel-2 runtime-fanout-dispatch (raw 45 executor + Agent A enhancement reads fire-parallel-fanout block, spawns N parallel fire-cmds via raw 79 DAG scheduler, attempts-log split per target)
+    realization-channel-3 ci-pre-push-gate (./hexa tool/parallel_fanout_lint.hexa --check across all state/blockers/*.hexa, fail push if any multi-target blocker missing fanout fields or contains DAG cycle)
+    cognitive-framework-1 fan-out / map-reduce parallelism (Dean & Ghemawat 2004 MapReduce, Lamport 1979 sequential consistency dual)
+    cognitive-framework-2 parallel-DAG topological scheduling (raw 79 + Cormen-Leiserson-Rivest-Stein CLRS Ch.22 DFS w/g/b cycle detection + critical-path-method PERT/CPM)
+    counter-example single-target blockers — when a blocker has exactly one fire-cmd targeting one objective (e.g., state/blockers/v3_metric_redesign.hexa raw 45 example), fanout fields are NOT required and add only ceremony ; scope-exempt clause prevents over-application
+    novelty-falsifier if 30d coverage < 0.50 OR 3+ legitimate exemptions surface OR DAG-cycle false-positives appear → retire/revise (strictly testable disconfirmation criteria, not aspirational)
+    paired-roadmap-id 162
+    triad-exempt forward-spec-meta-rule
+    category routing-dispatch
+    applies-to ssot-registration
+    phase pre-write
+    severity warn
+  => "END raw 162 draft (52 contract lines including header)"
+
+# ── (3) 5-check verification (raw 117 self-apply at registration) ─
+@C raw-162-self-apply-5-check-verification :: meta [4!]
+  <- raw-162-parallel-blocker-fanout-mandate-full-draft
+  -> raw-117-deterministic-5-check-PASS
+  => "GATE 1 / 5 — genus-level slug per raw 106 ✓"
+  => "  slug='parallel-blocker-fanout-mandate' contains NO species suffix (-via-X / -with-Y / -api / -sdk / -tool / -cli / -daemon / -script)"
+  => "  fanout = generic move (not 'parallel-blocker-fanout-via-tmux' or '-via-launchd')"
+  => "GATE 2 / 5 — ≥3 realization-channels per raw 106 ✓"
+  => "  ch1 = SSOT-schema-lint (parse-time)"
+  => "  ch2 = runtime-fanout-dispatch (execution-time)"
+  => "  ch3 = ci-pre-push-gate (CI-time)"
+  => "  3 distinct MECHANISMS (not 3 vendors of same mechanism)"
+  => "GATE 3 / 5 — ≥2 cognitive-frameworks per raw 106 ✓"
+  => "  cf1 = fan-out / map-reduce parallelism (Dean-Ghemawat 2004)"
+  => "  cf2 = parallel-DAG topological scheduling (CLRS Ch.22 + PERT/CPM)"
+  => "  both name the same move (fan-out parallel dispatch) from different lineages"
+  => "GATE 4 / 5 — counter-example per raw 106 ✓"
+  => "  single-target blockers = scope-exempt (e.g., state/blockers/v3_metric_redesign.hexa)"
+  => "  prevents over-application to genuinely-sequential blockers"
+  => "GATE 5 / 5 — novelty-falsifier per raw 71 ✓"
+  => "  falsifier-1 = 30d coverage < 0.50 → retire"
+  => "  falsifier-2 = 3+ legitimate exemptions → revise to add fanout-exempt-rationale"
+  => "  falsifier-3 = DAG-cycle false-positives → strict-mode parse abort"
+  => "  3 strictly testable disconfirmation criteria"
+  => "VERDICT: 5-check PASS — raw 162 satisfies raw 117 deterministic gate"
+
+# ── (4) triad-mandate verification (raw 95) ──────────────────
+@C raw-162-triad-mandate-verification :: meta [4]
+  <- raw-162-parallel-blocker-fanout-mandate-full-draft
+  -> raw-95-triad-PASS
+  => "enforce-layer hive-agent (primary) — runtime lint executor"
+  => "enforce-layer-secondary os-level — raw 1 chflags + tier2 path-pattern lock"
+  => "enforce-layer-tertiary cli-lint — selftest fixture gate"
+  => "3 distinct layers from {os-level, hive-agent, cli-lint, kernel-EPERM, parser-owner-self-test, external-lint} ✓"
+  => "raw 95 triad-mandate PASS"
+
+# ── (5) taxonomy verification (raw 98) ───────────────────────
+@C raw-162-taxonomy-verification :: meta [4]
+  <- raw-162-parallel-blocker-fanout-mandate-full-draft
+  -> raw-98-taxonomy-PASS
+  => "category = routing-dispatch (15-enum member)"
+  => "applies-to = ssot-registration (10-enum member)"
+  => "phase = pre-write (5-enum member ; lint runs at SSOT entry write-time before persistence)"
+  => "raw 98 3-tuple PASS"
+
+# ── (6) companion vs duplicate disambiguation (raw 91 C3) ────
+@C raw-162-companion-vs-duplicate-disambiguation :: meta [4!]
+  <- raw-162-parallel-blocker-fanout-mandate-full-draft
+  <- raw-91-design-honesty-triad-C3-no-fabrication
+  => "★ HONEST DISCLOSURE — raw 162 is COMPANION to raw 45 enhancement (Agent A), NOT a duplicate"
+  => "axis-A (raw 45 + Agent A enhancement) = RUNTIME executor upgrade — patches tool/blocker_autofire.hexa to fan out fire-cmd over N targets at dispatch-time"
+  => "axis-B (raw 162 this draft) = SCHEMA mandate — patches SSOT contract so multi-target blockers MUST declare fire-parallel-fanout/fire-fanout-deps/aggregate-resolution-metric fields"
+  => "orthogonal axes: Agent A without raw 162 = executor can fan out but no SSOT entries declare fanout-targets canonically (silent advisory) ; raw 162 without Agent A = SSOT entries declare fanout but executor still serializes (mandate without teeth)"
+  => "BOTH required for parallel-fanout to be the DEFAULT canonical pattern per user directive"
+  => "raw 102 binary disposition (UPDATE-existing vs ADD-new) → ADD-new path justified: different scope axis (schema vs runtime), different enforce-layer signature, different falsifier set"
+
+# ── (7) own#11 strict — NO Clay BT resolution claim ──────────
+@C raw-162-own-11-strict-disclosure :: meta [4]
+  <- raw-162-parallel-blocker-fanout-mandate-full-draft
+  <- own-11-no-resolution-claim
+  => "raw 162 is a ROUTING-DISCIPLINE rule (multi-target blocker SSOT schema)"
+  => "NO Clay Millennium / BT Navier-Stokes / breakthrough-resolution claim made or implied"
+  => "the word 'resolution' in aggregate-resolution-metric refers to blocker.status active→resolved transition (raw 45 inheritance), NOT mathematical proof resolution"
+  => "own#11 strict PASS"
+
+# ── (8) cross-repo append plan (raw 47) ──────────────────────
+@C raw-162-cross-repo-append-plan :: meta [4]
+  <- raw-162-parallel-blocker-fanout-mandate-full-draft
+  -> hive-dot-raw-pending-append-slot-162
+  -> n6-architecture-dot-raw-ref-pinned-hash-bump-pending
+  => "step 1 — append @R block contents to /Users/ghost/core/hive/.raw at line 5780+ (after existing raw 161 block)"
+  => "step 2 — recompute pinned-hash, update /Users/ghost/core/n6-architecture/.raw-ref pinned-hash + checked-at + hive-commit-ref"
+  => "step 3 — implement tool/parallel_fanout_lint.hexa stub (multi-target detector + schema validator + DAG cycle reuse from raw 79)"
+  => "step 4 — paired-roadmap-id 162 entry per raw 87 sync"
+  => "step 5 — Agent A coordination — raw 45 runtime enhancement (Agent A in flight) consumes raw 162 fanout fields when present, falls back to single fire-cmd path when scope-exempt single-target"
+  => "draft-only at this stage ; cross-repo append handled by user / tool/raw_sync.hexa per raw 47"
+
+# ══════════════════════════════════════════════════════════════
+# end shard — raw 162 draft + 5-check verification
+# next-step: cross-repo append to /Users/ghost/core/hive/.raw + .raw-ref hash bump
+# ══════════════════════════════════════════════════════════════

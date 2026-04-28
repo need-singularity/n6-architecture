@@ -1,0 +1,187 @@
+@C blocker_autofire-parallel-fanout-impl-sketch-2026-04-28
+  paradigm sketch-only-no-mutation
+  date 2026-04-28
+  scope back-compat-extension-for-raw-45-fire-parallel-fanout
+  triad sketch-design + impl-migration-order + atlas-witness
+  own #11 strict — sketch only, no Clay-BT 'resolution' claims
+  raw 91 C3 honest — acknowledge missing primitives
+@END
+
+@R audit-current-state-of-blocker-autofire
+  ssot-path /Users/ghost/core/hive/tool/blocker_autofire.hexa
+    note task-given-path /Users/ghost/core/hexa-lang/tool/blocker_autofire.hexa does NOT exist
+    actual-location hive/tool (companion lint also there: blocker_autofire_lint.hexa)
+  size 28668-bytes 685-lines
+  lock-state chflags-uchg-locked (`ls -lO` → "uchg")
+    impl-block must `chflags nouchg` BEFORE Edit, then re-lock after
+  parse-helpers
+    L146 _parse_field(line) → [key, value]   single-token-key + rest-of-line value
+    L159 _load_entry(path) → [header, fields]  one-blocker-per-file
+    L77  _field(fields, key, default) → single string  (NO multi-line / list support yet)
+  dispatch-points
+    L355 _fire_one(slug, host, cwd, cmd, log_path, interval, dry, dispatch_mode, parent_sid)
+    L401 detach branch (async fire) + subagent_dispatch wrap heuristic at L322,L345
+    L540-556 main loop pulls fire-cmd via single _field, calls _fire_one once per blocker
+  back-compat-cap
+    fire-cmd parsed as single line → adding fire-parallel-fanout requires
+    NEW multi-line list parser (parse_indented_block_list) — not present today
+@END
+
+@R sketch-pseudo-hexa-dispatch-extension
+  // ─── New parse helper (sketch only) ──────────────────────────
+  // Reads contiguous indented sub-lines under a list-style key:
+  //   fire-parallel-fanout
+  //     - cmd "hexa cli/run.hexa drill axis-A"
+  //     - cmd "hexa cli/run.hexa drill axis-B"
+  //     - cmd "hexa cli/run.hexa drill axis-C"
+  fn _parse_list_field(lines: array, key: string) -> array {
+      // returns array of strings (each `cmd` payload), [] if key absent
+      // back-compat: if key missing, return [] → caller falls through to single
+  }
+
+  // ─── Dispatch variant detection (drop-in at L540) ────────────
+  let fanout_list = _parse_list_field(raw_lines, "fire-parallel-fanout")
+  let single_cmd  = _field(fields, "fire-cmd", "")
+  let mode = if len(fanout_list) > 0 { "fanout" } else { "single" }
+
+  if mode == "single" {
+      // existing path UNCHANGED — back-compat preserved
+      let rc = _fire_one(slug, host, cwd, single_cmd, log_path,
+                         interval, dry, dispatch_mode, parent_sid)
+      continue
+  }
+
+  // ─── fanout mode ─────────────────────────────────────────────
+  let deps_str       = _field(fields, "fire-fanout-deps", "")        // e.g., "0:1,1:2"
+  let aggregate      = _field(fields, "aggregate-resolution-metric", "all-pass")
+  let max_concurrent = parse_int(_field(fields, "fire-fanout-max-concurrent", "3"))
+
+  // Raw 79 hook: reuse parallel_scheduler.hexa topo + cycle detect
+  // NOTE: parallel_scheduler.hexa lives at /Users/ghost/core/hexa-lang/tool/
+  //       — cross-repo import or shimmed via `use "hexa-lang/tool/parallel_scheduler"`
+  let order = topo_sort(fanout_list, parse_dag_edges(deps_str))
+  if has_cycle(order) {
+      ai_err.emit("dag-cycle-detected", "fire-fanout-deps forms a cycle",
+                  /*fix*/ "remove edge to break cycle, ref raw 79")
+      continue
+  }
+
+  // Slot-pool dispatch
+  // GAP raw-91-C3-honest: hexa stdlib has no canonical wait_one_done() primitive
+  //                        — must (a) busy-poll spawn_async PIDs OR
+  //                          (b) wire into bt_compute_scheduler.hexa wait-set,
+  //                          OR (c) extend stdlib with proc_wait_any().
+  let pids    = []
+  let active  = 0
+  for (idx, cmd) in order.entries() {
+      while active >= max_concurrent {
+          let done_idx = wait_one_done(pids)   // <-- MISSING PRIMITIVE
+          active -= 1
+      }
+      let pid = spawn_async(cmd, host, cwd)
+      pids.push([idx, pid])
+      active += 1
+      audit_ledger_append(slug, idx, "running")   // raw 77 FSM
+  }
+
+  let results = wait_all(pids)
+  for r in results { audit_ledger_append(slug, r.idx,
+                          if r.rc == 0 { "done" } else { "failed" }) }
+
+  // Aggregate verdict
+  let verdict = if      aggregate == "all-pass" { results.all(|r| r.rc == 0) }
+                else if aggregate == "any-pass" { results.any(|r| r.rc == 0) }
+                else if aggregate.starts_with("quorum-") {
+                    let n = parse_int(aggregate.substring(7, len(aggregate)))
+                    results.count(|r| r.rc == 0) >= n
+                } else { false }   // unknown → fail-safe
+
+  // Raw 80 sentinel emission
+  let tag = if verdict { "PASS" } else { "FAIL" }
+  println("__BLOCKER_FANOUT_RESULT__ " + tag + " slug=" + slug +
+          " n=" + to_string(len(results)) +
+          " ok=" + to_string(results.count(|r| r.rc == 0)) +
+          " agg=" + aggregate)
+
+  if !verdict {
+      // raw 66 ai-native error trailer
+      ai_err.emit("blocker-fanout-fail",
+                  "aggregate=" + aggregate + " produced FAIL",
+                  /*fix*/ "inspect attempts-log + per-cmd witnesses, ref raw 80")
+  }
+@END
+
+@R cross-references-to-existing-tools
+  raw-79-dag-scheduler
+    canonical /Users/ghost/core/hexa-lang/tool/parallel_scheduler.hexa
+    note absent in hive/tool — must cross-repo import or duplicate topo+cycle helpers
+  raw-80-sentinel
+    pattern __BLOCKER_FANOUT_RESULT__ PASS|FAIL slug=<slug> n=N ok=K agg=<mode>
+    consumer downstream omega-cycle convergence + atlas append
+  raw-77-audit-ledger
+    extend attempts-log JSONL with {idx, fanout-cmd, fsm: pending|running|done|failed}
+    NEW field per line: "fanout_idx": <int> when mode=fanout
+  raw-66-ai-native-error
+    use stdlib/ai_err on (cycle | fanout-fail | unknown-aggregate)
+    must include reason + fix + ref-raw + path
+  raw-45-schema
+    new fields fire-parallel-fanout (list), fire-fanout-deps (DAG edges),
+               aggregate-resolution-metric, fire-fanout-max-concurrent
+@END
+
+@R schema-guard-update-sketch
+  target /Users/ghost/core/hive/tool/blocker_autofire_lint.hexa
+  current state lints required: slug, fire-cmd, omega-stop, resolution-{metric,op,value} or resolution-fallback, why, attempts-log
+  new lint rules
+    R1 if fire-parallel-fanout present:
+       - fire-cmd MAY be absent (mutex with fanout) — relax existing have_fire check
+       - require aggregate-resolution-metric ∈ {all-pass, any-pass, quorum-N}
+       - require fire-fanout-max-concurrent > 0 (default 3 acceptable)
+    R2 if fire-fanout-deps present without fire-parallel-fanout → lint error (orphan deps)
+    R3 fire-fanout-deps format "i:j[,i:j]*" — validate indices < len(fanout_list)
+    R4 detect cycles statically (warning only — runtime guard is authoritative)
+  test scenarios (if no schema-guard yet — propose)
+    T1 legacy single fire-cmd → no warnings (back-compat)
+    T2 fanout-only with all-pass + 3 cmds + no deps → ok
+    T3 fanout with cycle 0:1,1:0 → lint warns + runtime errors
+    T4 fanout with quorum-5 but only 3 cmds → lint errors (impossible)
+    T5 both fire-cmd AND fire-parallel-fanout present → lint warns (ambiguous; runtime prefers fanout)
+@END
+
+@R migration-step-order-5
+  step-1 extend-parse-only
+    add _parse_list_field helper + raw-line retention in _load_entry
+    behavior: read fire-parallel-fanout but DO NOT dispatch yet
+    test: legacy blockers fire identically; new field appears in introspection JSON
+  step-2 add-parallel-dispatch-with-slot-pool
+    implement spawn_async wrapper + slot-pool loop (max_concurrent=3 default)
+    GAP wait_one_done — pick path-a (poll PIDs) for first cut, file FOLLOWUP for stdlib primitive
+    flat dispatch (NO deps yet) — equivalent to fully-parallel with cap
+  step-3 add-DAG-topo-and-cycle-detect
+    cross-repo import parallel_scheduler.hexa OR copy topo_sort+has_cycle into hive/tool
+    enforce ordering via slot-pool with predecessor-ready gate
+  step-4 aggregate-verdict-and-sentinel
+    implement match on aggregate + emit __BLOCKER_FANOUT_RESULT__
+    raw-66 trailer on FAIL or unknown-aggregate
+  step-5 audit-ledger-format-extension
+    extend _build_log_line + JSONL writer with fanout_idx + fsm fields
+    update blocker_autofire_lint.hexa with R1-R4 rules in same shard
+@END
+
+@R c3-honest-gaps-and-risks
+  gap-1 wait_one_done() / proc_wait_any()
+    not in hexa stdlib (verified by absence in tool/_init + ai_err)
+    workaround: poll PIDs every N ms — adds wakeup overhead, NOT race-free
+    proper fix: extend stdlib (separate FOLLOWUP shard)
+  gap-2 parallel_scheduler.hexa cross-repo
+    lives in hexa-lang, not hive — import path resolution unverified
+    workaround: inline copy of topo_sort + has_cycle (~30 LOC) into blocker_autofire.hexa
+  gap-3 _parse_list_field design
+    current _load_entry strips empty lines + comments; list parsing needs
+    indent-sensitive grouping → may need _load_entry refactor (risk of regressing legacy)
+  gap-4 chflags-uchg
+    file is uchg-locked → impl phase needs `chflags nouchg` + re-lock dance
+    failure mode: forgot-to-relock leaves file mutable post-deploy
+  own-11-strict no Clay-BT 'resolution' claims in this shard — sketch is design-intent only
+  raw-91-C3 sketch only; zero file mutations performed; no claim of working code
+@END
