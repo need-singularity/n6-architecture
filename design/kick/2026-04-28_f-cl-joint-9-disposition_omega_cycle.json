@@ -1,0 +1,149 @@
+{
+  "schema": "anima/kick_witness/v1",
+  "id": "f-cl-joint-9-disposition-2026-04-28",
+  "ts": "2026-04-28T18:00:00Z",
+  "title": "F-CL-JOINT-9 disposition (cycle 6 / fan-out 4/5) — SCOPE-NARROW",
+  "task_label": "F-CL-JOINT-9 imminent (D-1 deadline 2026-04-29) — auto status flip + raw 71 falsifier-retire-rule",
+  "parent_falsifier": "F-CL-JOINT-9",
+  "parent_falsifier_condition": "F-MX-3-c rebuild-clean not attempted by 2026-04-29",
+
+  "f_mx_3_c_sub_action_audit": {
+    "B.1_hetzner_oauth_refresh": {
+      "witness": "design/kick/2026-04-28_b1-hetzner-oauth-refresh_omega_cycle.json",
+      "outcome": "PARTIAL",
+      "detail": "claude3 1/12 profile auto-refreshed; 11 profiles require manual /login (user-side TTY)",
+      "side": "user (manual login dependency)",
+      "attempted": true,
+      "passed": false
+    },
+    "B.2_slot_saturation_cap": {
+      "witness": "design/kick/2026-04-28_b2-slot-saturation-cap_omega_cycle.json",
+      "outcome": "FIXED",
+      "detail": "slot-saturation cap fix landed; root cause + fix + test_evidence captured",
+      "side": "infra",
+      "attempted": true,
+      "passed": true
+    },
+    "B.3_docker_hexa_runner_rebuild": {
+      "witness": "design/kick/2026-04-28_b3-docker-hexa-runner-rebuild_omega_cycle.json",
+      "outcome": "FIXED-MAC-ONLY",
+      "detail": "image rebuilt locally on Mac; registry push blocked (raw 91 C3)",
+      "side": "infra",
+      "attempted": true,
+      "passed": true
+    },
+    "B.4_silent_timeout_rca": {
+      "witness": "design/kick/2026-04-28_b4-silent-timeout-rca_omega_cycle.json",
+      "outcome": "FIXED",
+      "detail": "RCA + fix + synthetic + live kick test all green",
+      "side": "infra",
+      "attempted": true,
+      "passed": true
+    },
+    "B.5_cascade_block_prevention": {
+      "witness": "design/kick/2026-04-28_b5-cascade-block-prevention_omega_cycle.json",
+      "outcome": "investigated_existing_implementation",
+      "detail": "verdict: raw 91 C3 honest — sandbox-bound investigation; existing implementation already prevents cascade",
+      "side": "infra",
+      "attempted": true,
+      "passed": true
+    },
+    "summary": {
+      "attempted_total": "5/5",
+      "passed_total": "4/5",
+      "infra_side_passed": "4/4",
+      "user_side_passed": "0/1 (B.1 11-profile manual /login pending)"
+    }
+  },
+
+  "disposition_options_considered": {
+    "option_1_SATISFIED": {
+      "rationale": "rebuild-clean attempted (5/5 attempted, 4/5 passed); falsifier condition strictly is 'not attempted'",
+      "weakness": "11-profile manual /login still blocking full kick infra recovery"
+    },
+    "option_2_FIRED": {
+      "rationale": "strict reading: rebuild-clean implies 5/5 PASS; not 5/5 hence FIRED",
+      "weakness": "4/5 PASS being RETIRED is disproportionate to actual progress"
+    },
+    "option_3_SCOPE_NARROW": {
+      "rationale": "redefine F-CL-JOINT-9 condition as 'infrastructure-side rebuild-clean attempted'; 4/4 infra PASS hence RESOLVED. User-side manual /login moves to new F-MANUAL-LOGIN with own deadline.",
+      "weakness": "raw 71 strict reading slightly retreated — partial rescue not full satisfaction; explicit responsibility-handoff to F-MANUAL-LOGIN required"
+    }
+  },
+
+  "disposition_decision": {
+    "selected_option": "option_3_SCOPE_NARROW",
+    "F-CL-JOINT-9_status_transition": "active -> RESOLVED",
+    "F-CL-JOINT-9_disposition": "SCOPE-NARROW",
+    "new_falsifier_introduced": "F-MANUAL-LOGIN",
+    "F-MANUAL-LOGIN_condition": "11 profile manual /login not completed by 2026-04-29 24:00 UTC",
+    "F-MANUAL-LOGIN_status": "active",
+    "F-MANUAL-LOGIN_auto_check": "no (user TTY required)",
+    "F-MANUAL-LOGIN_alert_level": "warn",
+    "rationale": "raw 91 C3 honest path: separate infra-side completion (4/4 PASS) from user-side blocker (11 profiles). Total RETIRE would erase real infra progress; total SATISFIED would conceal user-side dependency. SCOPE-NARROW is the truthful split."
+  },
+
+  "raw_71_falsifier_retire_rule_compliance": {
+    "rule": "raw 71 falsifier-retire-rule: a falsifier may not be retired without (a) explicit disposition decision, (b) audit row recording disposition, (c) evidence list, (d) any uncovered residual concern recapitulated as a new falsifier",
+    "compliance_a_disposition_decision": "SCOPE-NARROW (this witness)",
+    "compliance_b_audit_row": "audit.jsonl 2 rows appended (F-CL-JOINT-9 RESOLVED + F-MANUAL-LOGIN active)",
+    "compliance_c_evidence_list": [
+      "design/kick/2026-04-28_b1-hetzner-oauth-refresh_omega_cycle.json (PARTIAL)",
+      "design/kick/2026-04-28_b2-slot-saturation-cap_omega_cycle.json (FIXED)",
+      "design/kick/2026-04-28_b3-docker-hexa-runner-rebuild_omega_cycle.json (FIXED-MAC-ONLY)",
+      "design/kick/2026-04-28_b4-silent-timeout-rca_omega_cycle.json (FIXED)",
+      "design/kick/2026-04-28_b5-cascade-block-prevention_omega_cycle.json (already-FIXED)"
+    ],
+    "compliance_d_residual_falsifier": "F-MANUAL-LOGIN (carries the 11-profile user-side residual)",
+    "manual_review_required": true,
+    "manual_review_marker": "raw_71_retire_rule applied; SCOPE-NARROW path slightly relaxes strict reading vs 5/5 PASS; reviewer must validate the infra/user split is honest"
+  },
+
+  "meta_falsifiers_for_this_disposition_decision": {
+    "F-DISPO-1": {
+      "claim_summary": "SCOPE-NARROW infra/user split is empirically defensible (B.1 truly user-blocked, not infra-fixable)",
+      "falsified_if": "evidence emerges that 11-profile /login can be infra-automated without TTY (e.g., headless OAuth refresh path)",
+      "deadline": "2026-05-05",
+      "auto_check": "partial",
+      "alert_level": "warn"
+    },
+    "F-DISPO-2": {
+      "claim_summary": "F-MANUAL-LOGIN successfully captures the residual responsibility (will fire if 11-profile /login not done by 2026-04-29 24:00)",
+      "falsified_if": "F-MANUAL-LOGIN does not fire/auto-flip when 11 profiles remain unlogged at 2026-04-29 24:00",
+      "deadline": "2026-04-30",
+      "auto_check": "partial",
+      "alert_level": "warn"
+    },
+    "F-DISPO-3": {
+      "claim_summary": "raw 71 retire-rule was honored (no silent retirement; disposition + audit + evidence + residual all present)",
+      "falsified_if": "audit log lacks any of the 4 compliance items, or F-CL-JOINT-9 disposition is changed without new audit row",
+      "deadline": "2026-05-01",
+      "auto_check": "yes",
+      "alert_level": "warn"
+    }
+  },
+
+  "raw_91_c3_disclosure": {
+    "honest_limits": [
+      "SCOPE-NARROW slightly retreats from raw 71 strict 'rebuild-clean = 5/5' reading; trade-off explicit",
+      "B.3 registry push remains blocked — Mac-only build is partial victory not full deployment",
+      "B.5 verdict 'investigated_existing_implementation' means the cycle did not land a NEW patch; relies on existing infra",
+      "F-MANUAL-LOGIN auto_check=no — depends on user manual completion, no automated detection",
+      "this disposition decision itself is a meta-action; the 3 meta-falsifiers (F-DISPO-1..3) are the audit hook"
+    ],
+    "not_done": [
+      "registry push for B.3 image (deferred)",
+      "11-profile manual /login (handed off to user via F-MANUAL-LOGIN)",
+      "B.5 fresh patch (not required — existing impl sufficient per investigation)"
+    ]
+  },
+
+  "outputs": {
+    "audit_jsonl_appends": 2,
+    "registry_jsonl_appends": 1,
+    "witness_path": "design/kick/2026-04-28_f-cl-joint-9-disposition_omega_cycle.json",
+    "meta_falsifiers_count": 3
+  },
+
+  "korean_report_400char": "F-MX-3-c 5 sub-action: B.1 PARTIAL(claude3 1/12 auto, 11 profile manual /login 잔존), B.2 FIXED(slot-saturation cap), B.3 FIXED-MAC-ONLY(registry push 차단), B.4 FIXED(timeout RCA + 라이브 kick 통과), B.5 already-FIXED(기존 구현 cascade 차단 확인). F-CL-JOINT-9 disposition: SCOPE-NARROW 채택 — infra-side 4/4 PASS 로 RESOLVED, user-side 11-profile manual /login 은 신규 F-MANUAL-LOGIN(deadline 2026-04-29 24:00, auto_check=no, active) 으로 책임 이관. audit.jsonl 2 row append (RESOLVED + active), registry.jsonl 1 absorption, meta-falsifier F-DISPO-1/2/3 등재. raw 91 C3: SCOPE-NARROW 가 raw 71 strict 5/5 해석에서 약간 후퇴 — 단 전체 RETIRED 보다 정직, B.1 user-blocked 명시 + B.3 registry push 미완 명시 + F-MANUAL-LOGIN auto_check=no 명시."
+}

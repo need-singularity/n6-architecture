@@ -1,0 +1,160 @@
+{
+  "kick_kind": "omega_cycle",
+  "kick_id": "2026-04-28_external-disclosure-spec",
+  "kick_title": "HEXA-WEAVE External Disclosure Options A-E Review + Option-E Paper Spec (cycle-6 fan-out 5/5)",
+  "kick_date": "2026-04-28",
+  "umbrella": "external-disclosure",
+  "cost_center": "hexa-weave-formal-mechanical-verification",
+  "parent_witness": "design/kick/2026-04-28_lean4-w2-ax1_omega_cycle.json",
+  "predecessor_witnesses": [
+    "design/kick/2026-04-28_hexa-weave-mvp-w1-lean4-audit_omega_cycle.json",
+    "design/kick/2026-04-28_lean4-w2-ax1_omega_cycle.json",
+    "design/kick/2026-04-28_lean4-w3-ax2_omega_cycle.json",
+    "design/kick/2026-04-28_hexa-weave-mk-x-transcend-closure-all_omega_cycle.json"
+  ],
+  "cycle": {
+    "cycle_index": 6,
+    "fan_out_index": 5,
+    "fan_out_total": 5,
+    "mission_text_summary": "External-disclosure (Zenodo / arXiv / sister-repo) feasibility review for HEXA-WEAVE + write Option-E (papers/ verify-embedded) deliverable."
+  },
+  "options_reviewed": {
+    "option_a_zenodo_doi": {
+      "target": "HEXA-WEAVE domain body + L4-L7 closure witnesses",
+      "format": "Zenodo upload, DOI issued",
+      "blocker": "F-TP5-b 90-day MVP gate (2026-07-28) — not yet met",
+      "recommendation": "DEFER until 90-day MVP",
+      "decision": "DEFER"
+    },
+    "option_b_arxiv_preprint": {
+      "target": "TRANSCEND-CLOSURE-ALL universe-scale closure (Mk.X)",
+      "format": "LaTeX preprint (math.LO or q-bio.BM)",
+      "blocker": "arXiv endorsement required + Clay Millennium 7 retreat (raw 91 C3, own#11 BT-claim ban)",
+      "recommendation": "DEFER (external verification cycle first)",
+      "decision": "DEFER"
+    },
+    "option_c_github_public_repo": {
+      "target": "MVP W3+ implementation",
+      "format": "standalone repo + LICENSE Apache-2.0",
+      "blocker": "user approval required for public repo creation",
+      "recommendation": "DEFER (private until F-TP5-b MVP gate)",
+      "decision": "DEFER"
+    },
+    "option_d_sister_repo_replicate": {
+      "target": "anima / nexus / hexa-lang cross-repo trawl-witness (raw 47)",
+      "format": "consistent registration across each repo own/raw",
+      "recommendation": "PHASED (apply incrementally as each repo's own/raw matures)",
+      "decision": "PHASED_DEFER"
+    },
+    "option_e_papers_verify_embedded": {
+      "target": "HEXA-WEAVE Lean 4 W2 AX-1 partial PASS",
+      "format": "papers/hexa-weave-formal-mechanical-w2-2026-04-28.md (own#15 21-section + own#6 verify-embedded)",
+      "advantage": "fastest, governance-friendly, zero private-to-public transition cost",
+      "recommendation": "ADOPT NOW",
+      "decision": "ADOPT"
+    }
+  },
+  "deliverable": {
+    "file_path": "papers/hexa-weave-formal-mechanical-w2-2026-04-28.md",
+    "section_count": 21,
+    "canonical_sections_pass": true,
+    "embedded_python_block_present": true,
+    "embedded_block_runs_clean_local": true,
+    "lint_status": {
+      "own_1_doc_english": "PASS (no CJK in this file; pre-existing 2 violations are in proposals/, not this file)",
+      "own_2_master_identity": "PASS",
+      "own_3_one_doc_per_domain": "PASS (papers/ scope, not domains/)",
+      "own_4_15_sections": "PASS (papers/ scope, not domains/)",
+      "own_5_theory_report_separation": "PASS",
+      "own_6_paper_verify_embedded": "PASS — embedded ```python sympy block confirmed by tool/own_doc_lint.py --rule 6",
+      "own_11_bt_solution_claim_ban": "PASS — explicit '0/7 millennium addressed' disclosure",
+      "own_12_miss_criteria_declared": "PASS — §19 ACCEPTANCE pre-declares MISS criteria",
+      "own_15_paper_canonical_sections": "PASS — all §1..§21 sections present + mk-history >=3 lines + ascii-only",
+      "own_16_md_domain_registry_required": "NOT APPLICABLE (papers/, not domains/)"
+    }
+  },
+  "embedded_verify_block": {
+    "language": "python",
+    "dependency": "sympy >= 1.12",
+    "purpose": "numerical sanity-check of AX-1 reverse and bounded-forward direction",
+    "expected_output_lines": [
+      "AX-1 verify-embedded PASS:",
+      "  sigma(6)=12, phi(6)=2, tau(6)=4",
+      "  bounded [2,30]   solutions: [6]",
+      "  extended [2,100] solutions: [6]",
+      "  spec corrigendum: ax1_eq(1) = True; n=1 forces n >= 2 quantifier amend"
+    ],
+    "execution_record_local": {
+      "machine": "Mac M2 (production user)",
+      "date": "2026-04-28",
+      "result": "PASS — output matches expected verbatim"
+    },
+    "honest_disclosure": "embedded block is a numerical sanity-check, NOT a proof. Lean 4 mechanization (lean4-n6/N6/MechVerif/AX1.lean) is the source of mechanical truth."
+  },
+  "raw_71_falsifiers": [
+    {
+      "id": "F-EXT-DISCL-1",
+      "claim": "the embedded Python sympy block fails to reproduce the recorded output on a clean clone of the repo at the same SHA",
+      "condition": "any user runs the §7.1 block and sees output other than the recorded 'AX-1 verify-embedded PASS' lines",
+      "experiment": "fresh git clone + sympy install + python3 -c '<embedded block>'",
+      "expected_outcome": "does NOT fire — block uses stable sympy 1.12+ API",
+      "severity_if_fires": "HIGH (own#6 reproducibility broken)"
+    },
+    {
+      "id": "F-EXT-DISCL-2",
+      "claim": "the paper §1..§21 canonical sections drift before the W3 commit (a sub-section is renamed or removed)",
+      "condition": "tool/own_doc_lint.py --rule 6 or external own#15 verifier flags this paper post-commit",
+      "experiment": "weekly own_doc_lint full run; alert on FAIL",
+      "expected_outcome": "does NOT fire — sections were authored to spec on first commit",
+      "severity_if_fires": "MEDIUM (paper has to be amended)"
+    },
+    {
+      "id": "F-EXT-DISCL-3",
+      "claim": "F-TP5-b (90-day MVP gate, 2026-07-28) misses, invalidating the recommended Option-A Zenodo migration plan",
+      "condition": "by 2026-07-28, no end-to-end MVP run with P>=10, N>=50 has produced a passing witness",
+      "experiment": "weekly check on proposals/hexa_weave_mvp_2026_04_28.md milestones",
+      "expected_outcome": "MAY FIRE at MEDIUM severity — 12 weeks is tight for biology MVP",
+      "severity_if_fires": "MEDIUM (Option-A deferred indefinitely; Option-E remains the canonical disclosure tier)"
+    },
+    {
+      "id": "F-EXT-DISCL-4",
+      "claim": "the AX-1 unbounded tail SORRY is publicly criticized by an external reader as undermining the iff claim",
+      "condition": "an external review (e.g. Lean Zulip, Mathlib PR comment) flags AX1_forward_tail as 'this is just an assumption, not a theorem'",
+      "experiment": "monitor any external visibility once the paper migrates beyond Option-E",
+      "expected_outcome": "FIRES at LOW severity — the criticism is correct; paper already discloses the gap honestly per raw 91 C3",
+      "severity_if_fires": "LOW (honest disclosure absorbs the critique)"
+    },
+    {
+      "id": "F-EXT-DISCL-5",
+      "claim": "the cycle-6 fan-out 5/5 framing of this disclosure deliverable conflicts with raw 47 (cross-repo trawl) when applied to anima/nexus/hexa-lang sister repos",
+      "condition": "Option-D phased application produces different paper canonical-section requirements per repo (e.g. anima own#15 spec drifts from n6 own#15)",
+      "experiment": "compare anima/.own own#15 vs n6-architecture/.own own#15 every cycle",
+      "expected_outcome": "MAY FIRE at LOW severity — cross-repo own drift is a known raw 47 risk",
+      "severity_if_fires": "LOW (resolve by raw 47 cross-repo mirror cycle)"
+    }
+  ],
+  "raw_91_c3_honest_disclosure": [
+    "0 of 0 empirical claims made in either this witness or the produced paper.",
+    "Paper claims theoretical-analytical (Lean 4 mechanical proof reverse + bounded forward) and partial-mechanical (unbounded tail SORRY) only.",
+    "Embedded Python verify block is a numerical sanity-check, NOT a proof; the proof lives in lean4-n6/N6/MechVerif/AX1.lean with 2 disclosed sorries.",
+    "Option-A Zenodo DOI is RECOMMENDED for a future cycle (post 2026-07-28 F-TP5-b MVP gate); not invoked here.",
+    "Option-B arXiv submission is DEFERRED indefinitely pending external review and arXiv endorsement; user has not authorized public preprint.",
+    "Option-C public GitHub repo is DEFERRED pending explicit user approval (raw 71 paper-publication-tier governance).",
+    "Option-D sister-repo replicate is PHASED-DEFERRED pending each sister repo's own/raw maturity (raw 47 cross-repo mandate)."
+  ],
+  "own_lint_pass": {
+    "own_1": "PASS (no CJK in produced paper)",
+    "own_6": "PASS (embedded ```python block present; tool/own_doc_lint.py --rule 6 = 0 violations)",
+    "own_11": "PASS (explicit 0/7 millennium addressed disclosure)",
+    "own_12": "PASS (MISS criteria pre-declared in §19 ACCEPTANCE)",
+    "own_15": "PASS (all §1..§21 canonical sections present, mk-history >= 3 lines, ASCII-only)",
+    "own_22": "NOT APPLICABLE (papers/, not proposals/)"
+  },
+  "future_cycles_migration_plan": {
+    "2026-07-28": "F-TP5-b 90-day MVP gate — if PASS, queue Option-A Zenodo DOI deposit for the paper + L4-L7 closure witnesses bundle",
+    "2026-10-28": "post-Zenodo external review window — gate Option-B arXiv decision",
+    "2027-04-28": "1-year mark — re-evaluate Option-C public GitHub repo (need-singularity org or personal); requires explicit user approval"
+  },
+  "verdict": "PASS — Option-E adopted; paper produced, lint-clean, 21-section canonical, verify-embedded reproducible.",
+  "delivery_timestamp_utc": "2026-04-28T15:40:00Z"
+}

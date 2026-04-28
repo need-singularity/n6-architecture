@@ -1,0 +1,70 @@
+{
+  "kick_kind": "omega_cycle",
+  "kick_id": "2026-04-28_cycle6-commit-push",
+  "kick_title": "Cycle 6 fan-out 1/5 — n6-architecture multi-repo monolithic commit + push",
+  "kick_date": "2026-04-28",
+  "umbrella": "session-governance",
+  "cost_center": "cycle6-multi-repo-commit",
+  "predecessor_witness": "design/kick/2026-04-28_cycle5-commit-push_omega_cycle.json",
+  "parent_brief": "user mission cycle-6 fan-out 1/5 (cycle 6 deliverable absorption + push)",
+  "scope": {
+    "files_modified": [
+      "lean4-n6/N6/MechVerif/AX1.lean",
+      "state/discovery_absorption/registry.jsonl",
+      "state/falsifier_monitor/audit.jsonl"
+    ],
+    "files_created": [
+      "lean4-n6/N6/MechVerif/MKBridge.lean",
+      "papers/hexa-weave-formal-mechanical-w2-2026-04-28.md",
+      "proposals/hexa_weave_mvp_w4_lean4_mk_decision_2026_04_28.md",
+      "design/kick/2026-04-28_lean4-w4-mk-decision_omega_cycle.json",
+      "design/kick/2026-04-28_f-cl-joint-9-disposition_omega_cycle.json",
+      "design/kick/2026-04-28_external-disclosure-spec_omega_cycle.json",
+      "design/kick/2026-04-28_cycle6-commit-push_omega_cycle.json"
+    ],
+    "summary": {
+      "ax1_sorry": "2 -> 1 (n=1 case via decide counter-example + bounded threshold 30 -> 50)",
+      "mkbridge_loc": 215,
+      "mkbridge_sorry": 0,
+      "mkbridge_axioms": 4,
+      "mkbridge_w4_decision": "ii_zfc_inacc_felgner ADOPTED (mathlib4 native; MK port REJECTED)",
+      "papers_w2_external_disclosure": "first hexa-weave external mechanical-verification paper",
+      "falsifier_audit_rows": "+2 (F-CL-JOINT-9 -> RESOLVED/SCOPE-NARROW + F-MANUAL-LOGIN active)",
+      "registry_absorption_rows": "+1 (f-cl-joint-9-disposition)"
+    }
+  },
+  "excluded_pre_existing_dirty": [
+    "tool/atlas_self_arch_lint.hexa (parallel atlas probe instrumentation)",
+    "reports/n6_own_doc_lint.json (auto-regenerated lint report; reflects new W3 .md violations)",
+    "state/markers/probe*.marker x ~17 (parallel probe markers)",
+    "state/markers/atlas_self_arch_lint_1777361862.marker"
+  ],
+  "raw_91_c3_honest": {
+    "ax1_sorry_residual": "1 sorry remains in AX1_forward_tail (n > 50 asymptotic; deferred to W4-W5 capstone via Robin/case-analysis composition)",
+    "mkbridge_axiom_count": "4 named axioms (Felgner_1971_conservativity_axiom + 3 supporting) — not theorems; conservativity meta-result asserted",
+    "papers_status": "draft (external disclosure not yet socialised)",
+    "f-cl-joint-9_disposition": "SCOPE-NARROW (B.1 11-profile manual /login still user-side residual)",
+    "lean4-w3-ax1-sorry-resolution_md": "OPTIONAL per brief; not authored this cycle",
+    "ax1_lean_n1_case": "now closed via AX1_n6_uniqueness_n1_counterexample explicit witness; main theorem premise hardened to n>=2"
+  },
+  "safety_gates": {
+    "secrets_scan": "PASS (no sk-/ghp_/AKIA/Bearer literals across cycle-6 staged files)",
+    "chflags_uchg": "n/a (.raw not present in n6-architecture; .own not chflag-locked but unmodified this cycle)",
+    "raw_13_hooks": "deferred — pre-commit hook runs at git commit time",
+    "destructive_ops": 0,
+    "git_history_modified": false
+  },
+  "commit_strategy": {
+    "monolithic": true,
+    "commit_message_short": "feat(hexa-weave): cycle 6 W4 Felgner+MKBridge + AX1 sorry 2->1 + papers/ + F-CL-JOINT-9 SCOPE-NARROW",
+    "language": "english_primary (own#1)",
+    "co_author": "Claude Opus 4.7 (1M context)"
+  },
+  "push_target": {
+    "remote": "origin",
+    "branch": "main"
+  },
+  "other_repos_note": "hive cycle-5 ahead 9 commits — no direct cycle-6 modifications; deferred per brief.",
+  "ts_kick": "2026-04-28T07:40:00Z",
+  "schema": "design/kick/omega_cycle_v1"
+}

@@ -70,11 +70,26 @@ theorem AX1_forward_bounded_30 (n : ℕ) (h_lo : 2 ≤ n) (h_hi : n ≤ 30)
   unfold AX1Eq at h_eq
   interval_cases n <;> first | rfl | (exfalso; revert h_eq; decide)
 
-/-- Unbounded tail (n > 30): asymptotic argument PLACEHOLDER.
-    Spec §4 unit 1 calls for a Robin-style tail bound. W2 carries `sorry`. -/
-theorem AX1_forward_tail (n : ℕ) (h_big : 30 < n) (h_eq : AX1Eq n) : n = 6 := by
-  -- raw 91 C3: tail asymptotic NOT mechanically proved in W2.
-  -- Outline (deferred to W3 / W4):
+/-- Extended bounded forward: for `n ∈ [2, 50]` with `AX1Eq n`, we have `n = 6`.
+    W3 cycle-6: bounded threshold pushed from 30 → 50, reducing tail residual.
+    Proof identical to `AX1_forward_bounded_30` with widened `interval_cases`. -/
+theorem AX1_forward_bounded_50 (n : ℕ) (h_lo : 2 ≤ n) (h_hi : n ≤ 50)
+    (h_eq : AX1Eq n) : n = 6 := by
+  unfold AX1Eq at h_eq
+  interval_cases n <;> first | rfl | (exfalso; revert h_eq; decide)
+
+/-- Unbounded tail (n > 50): asymptotic argument PLACEHOLDER.
+    Spec §4 unit 1 calls for a Robin-style tail bound. W3 cycle-6 carries `sorry`.
+
+    W3 cycle-6 update: tail threshold raised 30 → 50 by widened `decide`
+    (`AX1_forward_bounded_50`). Residual gap is n > 50 only.
+
+    mathlib4 master rev `19c4978` does NOT contain Robin's theorem
+    (verified by grep cycle-6 2026-04-28); composition path uses the
+    existing TheoremB_Case3 / TheoremB_Case4{a,b,c}_* shards. -/
+theorem AX1_forward_tail (n : ℕ) (h_big : 50 < n) (h_eq : AX1Eq n) : n = 6 := by
+  -- raw 91 C3: tail asymptotic NOT mechanically proved in W3 cycle-6.
+  -- Outline (deferred to W3 / W4 capstone composition):
   --   1. For n with ω(n) ≥ 5 prime factors, σ(n)·φ(n) > n·τ(n) by
   --      Robin's bound σ(n)/n ≥ Π_p (1 + 1/p) and corresponding φ bound.
   --   2. For n = p^a, p prime, a ≥ 1: case-analysis (TheoremB_Case3
@@ -90,31 +105,37 @@ theorem AX1_forward_tail (n : ℕ) (h_big : 30 < n) (h_eq : AX1Eq n) : n = 6 := 
 
 /-- **`thm.AX1_n6_uniqueness`** — main W2 statement.
 
-    Per Spec §4 unit 1: forward direction is partial (bounded ≤ 30 PASS,
-    unbounded tail `sorry`); reverse direction PASS via `decide`. -/
+    W3 UPDATE (cycle 6, 2026-04-28): premise hardened to `n ≥ 2` per Spec §4
+    unit 1 corrigendum (W2 falsifier F-W2-AX1-1). The original `n ≥ 1` form
+    is unprovable: at n=1, σ(1)·φ(1) = 1·1 = 1 = 1·τ(1), so LHS holds but
+    RHS (n = 6) fails — the iff is FALSE at n=1.
+
+    Per Spec §4 unit 1 (corrected): forward direction is partial (bounded
+    ≤ 30 PASS, unbounded tail `sorry`); reverse direction PASS via `decide`.
+    See `AX1_n6_uniqueness_n1_counterexample` below for the retired n=1 case. -/
 theorem AX1_n6_uniqueness :
-    ∀ n : ℕ, 1 ≤ n →
+    ∀ n : ℕ, 2 ≤ n →
       (σ 1 n * Nat.totient n = n * (Nat.divisors n).card ↔ n = 6) := by
-  intro n _h_pos
+  intro n h_lo
   constructor
   · -- forward: equality → n = 6
     intro h_eq
-    by_cases h_lo : 2 ≤ n
-    · by_cases h_hi : n ≤ 30
-      · exact AX1_forward_bounded_30 n h_lo h_hi h_eq
-      · exact AX1_forward_tail n (Nat.lt_of_not_le h_hi) h_eq
-    · -- n = 1 case: σ(1)·φ(1) = 1·1 = 1 = 1·τ(1), equality holds trivially.
-      -- Therefore the iff at n=1 is FALSE (LHS holds but RHS demands n=6).
-      -- Spec §4 unit 1's `n ≥ 1` premise should be `n ≥ 2`; W2 corrigendum.
-      have : n = 1 := by
-        have h_lt : n < 2 := Nat.lt_of_not_le h_lo
-        omega
-      -- The placeholder `sorry` admits this Spec-level inconsistency.
-      sorry
+    by_cases h_hi : n ≤ 50
+    · exact AX1_forward_bounded_50 n h_lo h_hi h_eq
+    · exact AX1_forward_tail n (Nat.lt_of_not_le h_hi) h_eq
   · -- reverse: n = 6 → equality
     intro h_n6
     subst h_n6
     exact AX1_reverse_n6
+
+/-- **n=1 counter-example to the un-corrected `n ≥ 1` form** —
+    explicit witness that the original Spec §4 unit 1 quantifier was wrong.
+    σ(1)·φ(1) = 1 = 1·τ(1), but 1 ≠ 6. -/
+theorem AX1_n6_uniqueness_n1_counterexample :
+    AX1Eq 1 ∧ (1 : ℕ) ≠ 6 := by
+  refine ⟨?_, ?_⟩
+  · unfold AX1Eq; decide
+  · decide
 
 /-! ## Spec §4 unit 1 corrigendum surfaced in W2
 
@@ -125,19 +146,12 @@ theorem AX1_n6_uniqueness :
     n = 1, and the iff holds. This is reported as W2 falsifier F-W2-AX1-1
     (low severity, statement-only correction). -/
 
-/-- Corrected statement: `n ≥ 2` premise. This version is provable up to
-    the unbounded tail `sorry`. -/
+/-- Backwards-compat alias: prior W2 cycles named the n ≥ 2 form
+    `AX1_n6_uniqueness_corrected`. Now identical to `AX1_n6_uniqueness`
+    after the W3 cycle-6 hardening of the main theorem's premise. -/
 theorem AX1_n6_uniqueness_corrected :
     ∀ n : ℕ, 2 ≤ n →
-      (σ 1 n * Nat.totient n = n * (Nat.divisors n).card ↔ n = 6) := by
-  intro n h_lo
-  constructor
-  · intro h_eq
-    by_cases h_hi : n ≤ 30
-    · exact AX1_forward_bounded_30 n h_lo h_hi h_eq
-    · exact AX1_forward_tail n (Nat.lt_of_not_le h_hi) h_eq
-  · intro h_n6
-    subst h_n6
-    exact AX1_reverse_n6
+      (σ 1 n * Nat.totient n = n * (Nat.divisors n).card ↔ n = 6) :=
+  AX1_n6_uniqueness
 
 end N6Mathlib.MechVerif
