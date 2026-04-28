@@ -1,0 +1,89 @@
+@shard cascade_s10_tick2_k1_reduction_test {
+  origin: "cascade-s10 AQ sub-agent (K=1 reduction test on 18-mixer non-affine cohort)"
+  date: 2026-04-28
+  agent_id: a3a7f8a9ebb14919c
+  cwd: /Users/ghost/core/n6-architecture
+  raw_91_C3_disclosure: "Python mirror /tmp/cascade_s10/k1_reduction_probe.py + reused tick-1 nonaffine_cohort.py. Single seed=6, n=18 small for bootstrap, K-means k=3 choice, plain-Python (not sklearn), GL2 family V(8)=3 collapse is geometric artifact not noise."
+
+  finding cascade-s10-AQ-1 {
+    claim: "axis-13 is NOT a family-classifier — within-family discrim exceeds across-family centroid spread on perm/CA/hash"
+    evidence: {
+      across_family_centroid_spread_a13: 0.1526
+      avg_within_family_discrim_a13: 0.2023
+      ratio_within_over_across_a13: 1.33
+      gl2_within_discrim_a13: 0.0835  ; "isolated GL2 collapse, not generic"
+      perm_within_discrim_a13: 0.2975
+      ca_within_discrim_a13: 0.2823
+      hash_within_discrim_a13: 0.1457
+    }
+    verdict: FALSIFIED (family-classifier hypothesis rejected)
+    limit: "GL2 cohort (sd=42.8) is the lone within-family-tight family; rest of cohort more variable within than across"
+  }
+
+  finding cascade-s10-AQ-2 {
+    claim: "axis-16 IS a family-aligned axis — across-family centroid spread (0.66) >> within-family discrim (0.24)"
+    evidence: {
+      across_family_centroid_spread_a16: 0.6574
+      avg_within_family_discrim_a16: 0.2403
+      ratio_within_over_across_a16: 0.37
+      gl2_within_discrim_a16: 0.0000  ; "all 5 GL(2,8) → V(8)=3 (closed orbit geometric artifact)"
+    }
+    verdict: PASS (axis-16 carries family-level structural signal)
+    limit: "axis-16 family alignment may itself be cohort-conditional; axis-16 as K=1 anchor candidate strengthened"
+  }
+
+  finding cascade-s10-AQ-3 {
+    claim: "K=1 reduction PARTIAL: K=2 stays in geometry (ARI=0.376) but axis-13 baseline discrim is below-noise"
+    evidence: {
+      kmeans_k_3_seed_6: TRUE
+      ari_axis16_alone_vs_joint: 0.3757
+      ari_threshold_full_K1_collapse: 0.85
+      ari_threshold_K2_stays: 0.5
+      ari_band_actual: "below 0.5 = K=2 stays"
+      bootstrap_axis13_mean: 0.2617
+      bootstrap_axis13_95_CI: [0.1538, 0.3582]
+      bootstrap_axis13_below_0_4_frac: 0.997
+      bootstrap_axis13_below_0_3_frac: 0.764
+      threshold_substrate_discriminator: 0.4
+    }
+    verdict: PARTIAL (geometry K=2, discriminator K=1 in baseline formulation)
+    limit: "K-means K=3 choice is not derived; K=2 or K=4 could shift ARI"
+  }
+
+  finding cascade-s10-AQ-4 {
+    claim: "axis-13 alt-formulation (TICKS=64, m²=0.5) recovers discrim to 1.55 — FORMULATION-CONDITIONAL retraction not substrate-conditional retire"
+    evidence: {
+      alt_formulation_TICKS: 64
+      alt_formulation_m2: 0.5
+      alt_discrim_a13: 1.5455
+      baseline_discrim_a13_nonaffine: 0.2778  ; "5.5x recovery factor"
+      pearson_alt_a13_a16: -0.2091  ; "independence preserved"
+      sign_instability_warning: "phi-pi correlator goes negative on some mixers at ticks=64, m²=0.5 — discrim numerator partially numerical artifact"
+    }
+    verdict: SUGGESTIVE (NOT a clean rescue — axis-13 retains theoretical signal but recovery requires sign-stabilized formulation work in cascade-s11)
+    limit: "alt-formulation discrim numerator inflated by sign-flip on some mixers; not a clean discriminator gain"
+  }
+
+  retraction cascade_s10_AP_qualified {
+    original_claim: "axis-13 substrate-conditional retraction on non-affine cohort (cascade-s10 AP-2)"
+    refined_claim: "axis-13 BASELINE (TICKS=32, m²=1.0) FORMULATION-conditional retraction on non-affine cohort. axis-13 alt-formulation (TICKS=64, m²=0.5) shows recovery signal but requires sign-stabilization."
+    retraction_index: 12
+    raw_71_invocation: TRUE
+    scope: "axis-13 baseline parameters on non-affine substrate"
+    NOT_a_full_axis_13_retire: TRUE
+  }
+
+  closure cascade_s10 {
+    status: CLOSED AFTER TICK-2 (multi-tick narrowing complete)
+    tick_count: 2
+    sub_agents: 2  ; "AP + AQ"
+    next_cascade: "s11 substrate × formulation joint sweep (sign-stabilized axis-13' on non-affine cohort)"
+    framework_state: {
+      axis_16: "substrate-robust K=1 anchor candidate (improved on non-affine, +36%)"
+      axis_13: "baseline FORMULATION-CONDITIONAL on non-affine — needs alt-parameter sweep with sign stabilization"
+      independence: "Pearson < 0.3 ports across substrate AND dimension"
+      K_3: "7 candidates rejected through cascade-s2/s5/s6/s7/s8/s9/s10"
+      retraction_count: 12
+    }
+  }
+}
