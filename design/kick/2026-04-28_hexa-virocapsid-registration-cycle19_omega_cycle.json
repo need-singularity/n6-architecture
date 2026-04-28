@@ -1,0 +1,64 @@
+{
+  "schema": "omega_cycle.witness_v2_domain_registration",
+  "ts": "2026-04-28T11:46:00Z",
+  "topic": "hexa-virocapsid-registration-cycle19",
+  "cycle": "19",
+  "fan_out": "4/4",
+  "synthesis_mode": "in_context",
+  "predecessor_witnesses": [
+    "design/kick/2026-04-28_hexa-weave-closure_omega_cycle.json",
+    "design/kick/2026-04-28_hexa-weave-abstraction-to-limits_omega_cycle.json",
+    "design/kick/2026-04-28_hexa-nanobot-domain-registration_omega_cycle.json",
+    "design/kick/2026-04-28_hexa-ribozyme-registration-cycle15_omega_cycle.json"
+  ],
+  "predecessor_verdict_chain": "PARTIAL -> PASS (hexa-weave closure) -> SISTER-DOMAIN-REGISTRATION (hexa-nanobot cycle 13/2-of-5) -> THIRD-SISTER-DOMAIN-REGISTRATION (hexa-ribozyme cycle 15/3-of-3) -> FOURTH-SISTER-DOMAIN-REGISTRATION (this witness; cycle 19/4-of-4 closing biology-axis tetrahedron)",
+  "candidate_evaluation": {
+    "raw_91_C3_honest": "Selected from cycle 18 4th-sister census (proposals/hexa_weave_biology_4th_sister_census_2026_04_28.md). Selection justified on genus-distinction (non-covalent thermodynamic/kinetic self-assembly distinct from covalent composition / mechanical actuation / chemical catalysis), n6 invariant projection STRUCTURAL-EXACT (T=1 icosahedral capsid sigma(6)=12 vertex, octahedral subgroup of icosahedral I via 5-inscribed-cube outer action, tau(6)=4 assembly states free-CP / pentamer / hexamer / capsid, phi(6)=2 closed/open shell), multi-realizability (>=4 capsid families CCMV / TYMV / SV40 / MS2; >=2 frameworks Caspar-Klug 1962 / Bruinsma-Gelbart 2003), and absence of axis collision (no life/virocapsid; closest life/vaccinology uses VLPs as vehicle, not architectural primitive).",
+    "selection": "hexa-virocapsid",
+    "deferred_candidates": [
+      "hexa-ribosome",
+      "hexa-proteostasis",
+      "hexa-chaperone",
+      "hexa-membrane",
+      "hexa-prion",
+      "hexa-bioluminescence"
+    ]
+  },
+  "registration_intent": {
+    "axis": "biology",
+    "domain": "hexa-virocapsid",
+    "sister_of": "hexa-weave",
+    "sister_of_2": "hexa-nanobot",
+    "sister_of_3": "hexa-ribozyme",
+    "domain_class": "viral capsid self-assembly architecture / non-covalent thermodynamic-kinetic protein-shell formation",
+    "rationale": "HEXA-WEAVE registers write-side multi-strand molecular design composition (covalent linear chain bundle, primary constraint Landauer x NP-search ceiling, primary oracle AlphaFold-class fold inference). HEXA-NANOBOT registers single molecular nano-machine architecture (primary constraint Brownian thermal floor at 310K, primary oracle molecular-dynamics simulation). HEXA-RIBOZYME registers catalytic RNA architecture (primary constraint diffusion-limit ceiling, primary oracle chemical-kinetics simulation + RNA-secondary-structure prediction). HEXA-VIROCAPSID registers a fourth orthogonal sub-axis covering viral capsid self-assembly (primary constraint thermodynamic stability vs kinetic trap competition under Caspar-Klug T-number quasi-equivalence, primary oracle coarse-grained MD + master-equation kinetic models a la Zlotnick / Hagan). The four-way split is genus-level: WEAVE composes covalent strands; NANOBOT actuates atoms; RIBOZYME catalyses bonds; VIROCAPSID self-assembles non-covalent shells. Caspar-Klug 1962, Crick-Watson 1956, Zlotnick 1994, Bruinsma 2003, and Reddy 2001 (VIPERdb) define the capsid-architecture literature corpus."
+  },
+  "n6_invariant_projection": {
+    "sigma_6_eq_12": "T=1 icosahedral capsid: 12 vertices = 12 pentameric capsomers (STRUCTURAL-EXACT)",
+    "tau_6_eq_4": "4 assembly states: free-CP / pentamer / hexamer / capsid",
+    "J_2_eq_24": "octahedral subgroup of icosahedral I (order 60) via 5-inscribed-cube outer action",
+    "phi_6_eq_2": "binary shell state: closed (mature) / open (assembly intermediate, swelling, uncoating)"
+  },
+  "verdict_tier": "APPROACH",
+  "verdict_classification_basis": "raw 69 ceiling-classification: theoretical-analytical only; no empirical capsid-MD-simulation or in-vitro reconstitution executed in this cycle; F-VIROCAPSID-3 90-day MVP gate 2026-07-28",
+  "falsifiers_preregistered": [
+    "F-VIROCAPSID-1: T-number quasi-equivalence violation under coarse-grained MD",
+    "F-VIROCAPSID-2: kinetic trap dominates over thermodynamic minimum (Hagan-Chandler 2006)",
+    "F-VIROCAPSID-3: 90-day MVP gate (CCMV-class single capsid coarse-grained MD assembly within 1k CPU-hours)",
+    "F-VIROCAPSID-4: cross-axis collision with life/vaccinology VLP usage",
+    "F-VIROCAPSID-5: n6 invariant T=1 sigma=12 fails on T>=3 capsids (icosahedral but more vertices)"
+  ],
+  "raw_91_C3_disclosure": "Domain registration is theoretical-analytical APPROACH tier. No mechanical Lean4 proof, no MD simulation, no in-vitro reconstitution. Domain entry creates the structural skeleton for cycle 20+ MVP work. T=1 sigma=12 is STRUCTURAL-EXACT for the simplest icosahedral capsid only; T>=3 capsids (60T>12) need separate stratification. raw 142 D2 try-and-revert: registration is reversible by removing the domain entry from biology/_index.json and the canonical body doc.",
+  "registration_outputs": {
+    "canonical_body_doc": "domains/biology/hexa-virocapsid/hexa-virocapsid.md",
+    "index_entry": "domains/biology/_index.json (1.2.0 -> 1.3.0)",
+    "axis_count_change": "biology axis _count 3 -> 4",
+    "predecessor_census": "proposals/hexa_weave_biology_4th_sister_census_2026_04_28.md"
+  },
+  "signature": {
+    "raw_92_audit_marker_sealed": true,
+    "own_3_one_doc_per_domain": "PASS (single canonical hexa-virocapsid.md)",
+    "own_4_15_section_template": "PASS (per body doc structure)",
+    "own_16_md_domain_registry": "PASS (entry added to biology/_index.json)"
+  }
+}

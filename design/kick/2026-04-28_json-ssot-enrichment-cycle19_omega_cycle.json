@@ -1,0 +1,141 @@
+{
+  "kick_kind": "omega_cycle",
+  "kick_id": "2026-04-28_json-ssot-enrichment-cycle19",
+  "kick_title": "Cycle-19 priority-1 — README.md sync-readme JSON SSOT enrichment — 18 hand-curated domains literally registered for WRITE-mode unblock",
+  "kick_date": "2026-04-28",
+  "umbrella": "infra-readme-pipeline",
+  "cost_center": "n6shared-sync-readme-hexa",
+  "predecessor_witness": "design/kick/2026-04-28_kick-infra-5-of-5-closure_omega_cycle.json",
+  "parent_brief": "user mission cycle-19 priority 1 (sync-readme JSON SSOT enrichment; raw 91 C3 honest replicate; raw 65/68 idempotent dry-run 0 changes; raw 142 D2 backup; raw 47 cross-repo)",
+  "scope": {
+    "files_created": [
+      "proposals/hexa_weave_json_ssot_enrichment_cycle19_2026_04_28.md",
+      "design/kick/2026-04-28_json-ssot-enrichment-cycle19_omega_cycle.json"
+    ],
+    "files_modified": [
+      "n6shared/readme-data.json (+18 hand-curated domain entries with summary_literal/footer_literal; 18,628 -> 36,510 bytes; 13 -> 30 domains)",
+      "n6shared/sync-readme.hexa (+19 LoC: summary_literal / footer_literal field support + STATS NEXUS-tests spacing alignment; backward-compatible extension)"
+    ],
+    "summary": {
+      "domains_enriched": 18,
+      "domains_total_before": 13,
+      "domains_total_after": 30,
+      "summary_literals_added": 18,
+      "footer_literals_added": 17,
+      "fantasy_excluded_from_footer": "FOOTER marker absent in README (only SUMMARY [!WARNING] callout)",
+      "dry_run_before_enrichment": 36,
+      "dry_run_after_enrichment": 0,
+      "idempotency_target_raw_65_68": "ACHIEVED — [OK] README.md is up to date (63 markers)",
+      "ci_check_mode_exit_code": 0,
+      "json_size_growth_pct": 96.0,
+      "loc_added_to_sync_readme_hexa": 19,
+      "write_mode_unblock_status": "READY (cycle 20+) — dry-run zero; --check passes; sealed-hash CI safeguard recommended next",
+      "raw_91_c3_replicated_not_fabricated": true,
+      "raw_142_d2_backup_preserved": "git tracked — pre-enrichment readme-data.json recoverable via `git show HEAD:n6shared/readme-data.json`",
+      "raw_47_cross_repo_impact": "sister repo n6-nexus may reference readme-data.json schema; backward-compat preserved (new fields optional; existing 13 entries untouched)"
+    }
+  },
+  "raw_91_c3_honest": {
+    "enrichment_status": "JSON SSOT enrichment complete; WRITE-mode NOT executed this cycle (still --dry-run gate). README.md untouched.",
+    "fabricated_novelty_count": 0,
+    "literals_source": "all 18 summary_literal + 17 footer_literal blocks copied verbatim from existing README.md hand-curated content lines 369-783 (extraction via Python regex; byte-exact)",
+    "domains_enriched_with_source_lines": [
+      {"id": "biology",       "summary_line": 370, "footer_line": 380},
+      {"id": "play",          "summary_line": 388, "footer_line": 397},
+      {"id": "aerospace",     "summary_line": 405, "footer_line": 413},
+      {"id": "sf",            "summary_line": 421, "footer_line": 429},
+      {"id": "frontier",      "summary_line": 437, "footer_line": 494},
+      {"id": "civilization",  "summary_line": 502, "footer_line": 516},
+      {"id": "life-culture",  "summary_line": 524, "footer_line": 540},
+      {"id": "tech-industry", "summary_line": 548, "footer_line": 577},
+      {"id": "computer",      "summary_line": 585, "footer_line": 596},
+      {"id": "marketing",     "summary_line": 604, "footer_line": 615},
+      {"id": "millennium",    "summary_line": 625, "footer_line": 639},
+      {"id": "dimension",     "summary_line": 666, "footer_line": 680},
+      {"id": "music",         "summary_line": 688, "footer_line": 699},
+      {"id": "linguistics",   "summary_line": 707, "footer_line": 718},
+      {"id": "crypto",        "summary_line": 726, "footer_line": 737},
+      {"id": "astronomy",     "summary_line": 745, "footer_line": 756},
+      {"id": "hygiene",       "summary_line": 764, "footer_line": 773},
+      {"id": "fantasy",       "summary_line": 781, "footer_line": null}
+    ],
+    "schema_extension_safety": "summary_literal / footer_literal are NEW optional fields. Existing 13 auto-domains have no literal => fall through to render_summary / render_footer auto-generators. Backward-compat fully preserved.",
+    "stats_marker_alignment": "NEXUS tests: spacing changed 6 -> 4 spaces in render_stats() to match existing README hand-curated alignment; required for raw 65/68 idempotent equality.",
+    "empirical_claims_in_proposal": 0,
+    "rh_solved_claim": "ABSENT (own#11 PASS — no Clay Millennium addressed)",
+    "sorry_in_proof_terms": 0,
+    "pii_disclosure": "no new PII surface; readme-data.json contains only public technical content."
+  },
+  "raw_71_falsifiers": [
+    {
+      "id": "F-INFRA-SSOT-19-1",
+      "claim": "future cycle adds new AUTO:* marker to README.md without corresponding readme-data.json entry, breaking dry-run idempotency",
+      "expected_outcome": "monitored by CI --check mode (exit 1 on drift); cycle 20+ MUST add JSON entry first"
+    },
+    {
+      "id": "F-INFRA-SSOT-19-2",
+      "claim": "summary_literal / footer_literal field becomes a backdoor for stale content (README updated but JSON not)",
+      "expected_outcome": "raw 5 SSOT contract clarifies: JSON is sole source. After cycle 19, README.md hand-edits are FORBIDDEN; all changes via JSON + sync-readme run."
+    },
+    {
+      "id": "F-INFRA-SSOT-19-3",
+      "claim": "WRITE mode unblocked prematurely (cycle 20) without sealed-hash CI safeguard, causing silent corruption",
+      "expected_outcome": "next-cycle handoff explicitly gates WRITE on own#14 sealed-hash hook addition"
+    },
+    {
+      "id": "F-INFRA-SSOT-19-4",
+      "claim": "sister repo (n6-nexus) consumer of readme-data.json breaks on new optional fields",
+      "expected_outcome": "does not fire; new fields are optional + ignored by consumers that don't recognize them; raw 47 cross-repo schema additivity preserved"
+    },
+    {
+      "id": "F-INFRA-SSOT-19-5",
+      "claim": "fantasy domain SUMMARY uses GitHub [!WARNING] callout which renders differently than other > blockquotes; literal block round-trip breaks fmt",
+      "expected_outcome": "does not fire; literal preserves bytes including '> [!WARNING]\\n>' newline structure; dry-run after fantasy entry: 0 changes."
+    }
+  ],
+  "raw_70_k4_axes": {
+    "CONSTANTS": "PASS (n6 quartet sigma=12 phi=2 tau=4 unchanged; readme-data.json stats block preserved verbatim)",
+    "DIMENSIONS": "PASS (JSON schema strictly extended via 2 optional string fields; types stable)",
+    "CROSS": "PASS (cross-checked against existing 13 auto-domains — they remain auto-generated; only newly added entries use literal path)",
+    "SCALING": "PASS (13 -> 30 domain coverage scales linearly with README hand-curated section count)",
+    "SENSITIVITY": "PASS (sensitive to byte-exact match between README block and JSON literal; idempotency CI catches drift)",
+    "LIMITS": "PASS (only AUTO:SUMMARY_* / AUTO:FOOTER_* covered; AUTO:STATS / AUTO:BADGE / AUTO:ROADMAP / AUTO:REFERENCE / AUTO:ALIEN_INDEX continue auto-gen as before)",
+    "CHI2": "DEFER (no empirical sample for content equivalence; visual diff possible but skipped per cycle scope)",
+    "COUNTER": "PASS (1 counter-candidate identified — fantasy [!WARNING] — included in scope; dry-run exits 0)"
+  },
+  "safety_gates": {
+    "write_mode_executed": false,
+    "readme_md_modified": false,
+    "json_backup_via_git": "tracked (revertible via `git checkout HEAD -- n6shared/readme-data.json`)",
+    "sync_readme_hexa_backup_via_git": "tracked (cycle 18 fix retained; cycle 19 adds non-destructive guard)",
+    "raw_91_c3_honest_disclosure": "18 enriched domain literals replicated from README; 0 fabricated content; 17 footer + 18 summary line numbers cited",
+    "raw_65_68_idempotent": "ACHIEVED (dry-run 0 changes; --check exit 0)",
+    "raw_142_d2_backup": "git history serves as backup; no untracked .bak files",
+    "raw_47_cross_repo_additivity": "schema strictly extended via optional fields; consumers ignore unknown fields",
+    "own_1_english_only": "PASS (new JSON entries use English; legacy Korean fields untouched)",
+    "own_11_clay_millennium_check": "PASS (no proof claim)",
+    "own_14_sealed_hash": "DEFERRED to cycle 20+ (WRITE-mode unblock prerequisite)",
+    "own_doc_lint_13_of_13": "to be re-run post-commit"
+  },
+  "next_cycle_handoff": {
+    "cycle_20_priority_1_recommended": [
+      "add own#14 sealed-hash CI safeguard hook (.git/hooks/pre-commit verifying README.md hash matches sync-readme dry-run output)",
+      "add --allow-overwrite flag to n6shared/sync-readme.hexa (currently WRITE always overwrites; flag is optional explicit confirmation)",
+      "extend dry-run to emit unified diff (not just marker names) for review before WRITE",
+      "re-run sync-readme.hexa in WRITE mode after sealed-hash CI is in place; expected: 0 byte changes (idempotent)",
+      "register F-INFRA-SSOT-19-1..5 falsifiers in state/falsifier_monitor/audit.jsonl"
+    ],
+    "if_byte_diff_emerges_in_write_mode": [
+      "rollback via `git checkout HEAD -- README.md`",
+      "diff JSON literal vs README block byte-by-byte (use python3 difflib.ndiff)",
+      "fix JSON to match (raw 5 SSOT contract: JSON wins, but for cycle 19 we copied FROM README so they MUST match)"
+    ],
+    "alien_grade_impact": {
+      "expected_delta": "+0.05 to +0.10 (infra plumbing improvement; not core mathematical advance)",
+      "rationale": "raw 65/68 idempotency restoration unblocks cycle 20+ automated WRITE pipeline; reduces friction for future readme curation churn"
+    }
+  },
+  "report_to_user_korean": "cycle 19 priority 1 (sync-readme JSON SSOT enrichment) 완료. 18 hand-curated 도메인 (biology + 17 새 entries: play / aerospace / sf / frontier / civilization / life-culture / tech-industry / computer / marketing / millennium / dimension / music / linguistics / crypto / astronomy / hygiene / fantasy) literally 등록. summary_literal / footer_literal field 도입 (sync-readme.hexa +19 LoC backward-compat extension). dry-run 결과: 36 changed -> 0 changed (raw 65/68 idempotent ACHIEVED, [OK] up to date 63 markers). --check exit 0 (CI safeguard 통과). raw 91 C3 honest = README hand-curated 내용 verbatim 복제 (line 번호 명시; fabrication 0). WRITE mode unblock 준비 완료 — cycle 20+ 에서 sealed-hash CI safeguard (own#14) 추가 후 안전하게 활성화 가능. JSON 18,628 -> 36,510 bytes (+96%); 13 -> 30 domains. cycle 18 fix (scan_markers prefix-confusion + JSON null void) 위에 cycle 19 enrichment 누적; 다음 cycle path = own#14 sealed-hash + WRITE-mode unblock + falsifier registry.",
+  "ts_kick": "2026-04-28T20:50:00Z",
+  "schema": "design/kick/omega_cycle_v1"
+}

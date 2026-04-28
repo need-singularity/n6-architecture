@@ -1,7 +1,7 @@
 {
   "_doc": "도메인 SSOT — 304 도메인을 10축으로 분류. 축 변경 시 이 파일만 수정.",
-  "_version": "1.0.8",
-  "_total": 381,
+  "_version": "1.0.9",
+  "_total": 382,
   "_axes": 11,
   "_changelog": [
     "1.0.1 (2026-04-11): compute 축에 4 도메인 추가 — chip-rtl-gen, chip-dse-pipeline, chip-isa-n6, chip-npu-n6 (칩 설계 축 확장)",
@@ -28,6 +28,10 @@
     {
       "date": "2026-04-28",
       "change": "1.0.8 (cycle 16 README curation): readme-data.json sync — stats.dse_domains 379 -> 381; biology section docs +2 (hexa-nanobot/, hexa-ribozyme/); SUMMARY/FOOTER markers updated by manual fallback (cycle-11 hexa-runtime sync-readme bug persists for per-domain SUMMARY/FOOTER markers per item-5 of cycle-16 kick spec; AUTO:BADGE marker auto-syncs cleanly); README.md.sealed.hash regenerated"
+    },
+    {
+      "date": "2026-04-28",
+      "change": "1.0.9 — register hexa-virocapsid fourth sister domain under biology axis (cycle 19 fan-out 4/4; viral capsid self-assembly architecture; non-covalent thermodynamic/kinetic genus distinct from composition (hexa-weave) / actuation (hexa-nanobot) / catalysis (hexa-ribozyme); biology-axis tetrahedron closed at 4 sisters; n6 invariant projection sigma(6)=12 T=1 icosahedral 12 vertex STRUCTURAL-EXACT (stronger than hexa-ribozyme STRUCTURAL-APPROXIMATE) / tau(6)=4 assembly states free-CP/pentamer/hexamer/capsid / J_2=24 octahedral subgroup of icosahedral I (order 60) via 5-inscribed-cube outer action / phi(6)=2 closed/open shell binary; APPROACH grade; F-VIROCAPSID-3 90-day MVP gate 2026-07-28; F-VIROCAPSID-COLLISION-AUDIT life/virology+life/vaccine 2026-05-28; witness design/kick/2026-04-28_hexa-virocapsid-registration-cycle19_omega_cycle.json); _total 381 -> 382; biology axis count 3 -> 4"
     }
   ],
   "_template": "각 도메인: domains/<axis>/<name>/{CLAUDE.md, <name>.md, verify.hexa}",
@@ -75,7 +79,7 @@
     },
     "biology": {
       "path": "biology/_index.json",
-      "count": 3
+      "count": 4
     }
   },
   "physics": [
@@ -407,6 +411,7 @@
   "biology": [
     "hexa-weave",
     "hexa-nanobot",
-    "hexa-ribozyme"
+    "hexa-ribozyme",
+    "hexa-virocapsid"
   ]
 }

@@ -1,21 +1,22 @@
 {
-  "_doc": "biology axis sub-SSOT — parent: ../_index.json (biology key). Created 2026-04-28 to host the hexa-weave domain (write-side multi-strand molecular design composition) under a new top-level biology axis. 2026-04-28 cycle 13 fan-out 2/5: hexa-nanobot sister domain registered (single molecular nano-machine architecture; counterpart to hexa-weave multi-strand composition). 2026-04-28 cycle 15 fan-out 3/3: hexa-ribozyme third sister domain registered (catalytic RNA architecture; chemical-catalysis genus distinct from composition (hexa-weave) and actuation (hexa-nanobot)). Distinct from the life axis (which carries clinical / agricultural / pharmacological domains); biology axis is for fundamental molecular-design / write-side composition / nano-machine actuation / catalytic-RNA systems.",
+  "_doc": "biology axis sub-SSOT — parent: ../_index.json (biology key). Created 2026-04-28 to host the hexa-weave domain (write-side multi-strand molecular design composition) under a new top-level biology axis. 2026-04-28 cycle 13 fan-out 2/5: hexa-nanobot sister domain registered (single molecular nano-machine architecture; counterpart to hexa-weave multi-strand composition). 2026-04-28 cycle 15 fan-out 3/3: hexa-ribozyme third sister domain registered (catalytic RNA architecture; chemical-catalysis genus distinct from composition (hexa-weave) and actuation (hexa-nanobot)). 2026-04-28 cycle 19 fan-out 4/4: hexa-virocapsid fourth sister domain registered (viral capsid self-assembly architecture; non-covalent thermodynamic/kinetic genus distinct from composition (hexa-weave) / actuation (hexa-nanobot) / catalysis (hexa-ribozyme); biology-axis tetrahedron closed at 4 sisters). Distinct from the life axis (which carries clinical / agricultural / pharmacological / virological / vaccinological domains); biology axis is for fundamental molecular-design / write-side composition / nano-machine actuation / catalytic-RNA / capsid-self-assembly architecture systems.",
   "_axis": "biology",
   "_parent": "../_index.json",
-  "_version": "1.2.0",
+  "_version": "1.3.0",
   "_meta": {
-    "_category_name": "molecular biology, write-side multi-strand design composition, proteome inverse-design, molecular nano-machine architecture, catalytic-RNA architecture",
-    "_domains_count": 3,
+    "_category_name": "molecular biology, write-side multi-strand design composition, proteome inverse-design, molecular nano-machine architecture, catalytic-RNA architecture, viral capsid self-assembly architecture",
+    "_domains_count": 4,
     "_verified_count": null,
     "_alien_index_avg": null,
-    "_honesty_note": "_verified_count / _alien_index_avg null on creation; populate from atlas.n6 aggregation once the first MVP runs land per F-TP5-b 90-day gate (hexa-weave deadline 2026-07-28), F-NB-4 90-day gate (hexa-nanobot deadline 2026-07-28), and F-RB-4 90-day gate (hexa-ribozyme deadline 2026-07-28)",
+    "_honesty_note": "_verified_count / _alien_index_avg null on creation; populate from atlas.n6 aggregation once the first MVP runs land per F-TP5-b 90-day gate (hexa-weave deadline 2026-07-28), F-NB-4 90-day gate (hexa-nanobot deadline 2026-07-28), F-RB-4 90-day gate (hexa-ribozyme deadline 2026-07-28), and F-VIROCAPSID-3 90-day gate (hexa-virocapsid deadline 2026-07-28)",
     "_updated": "2026-04-28"
   },
-  "_count": 3,
+  "_count": 4,
   "_changelog": [
     "1.0.0 (2026-04-28): biology axis sub-SSOT created. hexa-weave registered (write-side multi-strand molecular design composition; counterpart to AlphaFold 3 read-side single-chain prediction; tri-axis Omega-saturation closure witness PASS at workload ceiling per design/kick/2026-04-28_hexa-weave-closure_omega_cycle.json; verdict tier APPROACH per raw 69 ceiling-classification; theoretical-analytical not yet empirical; F-TP5-b 90-day MVP gate 2026-07-28).",
     "1.1.0 (2026-04-28): hexa-nanobot sister domain registered (single molecular nano-machine architecture; counterpart to hexa-weave multi-strand composition; n6 invariant projection tau(6)=4 motor states / sigma(6)=12 vertex / J_2=24 symmetry / phi(6)=2 binary actuator; verdict tier APPROACH per raw 69; theoretical-analytical not yet empirical; F-NB-4 90-day MVP gate 2026-07-28; 5 raw 71 falsifiers preregistered; witness design/kick/2026-04-28_hexa-nanobot-domain-registration_omega_cycle.json).",
-    "1.2.0 (2026-04-28): hexa-ribozyme third sister domain registered (catalytic RNA architecture; chemical-catalysis genus distinct from composition (hexa-weave) and actuation (hexa-nanobot); n6 invariant projection tau(6)=4 reaction states / sigma(6)=12 catalytic-core nucleotides / J_2=24 trigonal-bipyramidal TS pose-symmetry / phi(6)=2 binary cleavage outcome; verdict tier APPROACH per raw 69; theoretical-analytical not yet empirical; F-RB-4 90-day MVP gate 2026-07-28; 5 raw 71 falsifiers preregistered; cycle 15 fan-out 3/3; witness design/kick/2026-04-28_hexa-ribozyme-registration-cycle15_omega_cycle.json)."
+    "1.2.0 (2026-04-28): hexa-ribozyme third sister domain registered (catalytic RNA architecture; chemical-catalysis genus distinct from composition (hexa-weave) and actuation (hexa-nanobot); n6 invariant projection tau(6)=4 reaction states / sigma(6)=12 catalytic-core nucleotides / J_2=24 trigonal-bipyramidal TS pose-symmetry / phi(6)=2 binary cleavage outcome; verdict tier APPROACH per raw 69; theoretical-analytical not yet empirical; F-RB-4 90-day MVP gate 2026-07-28; 5 raw 71 falsifiers preregistered; cycle 15 fan-out 3/3; witness design/kick/2026-04-28_hexa-ribozyme-registration-cycle15_omega_cycle.json).",
+    "1.3.0 (2026-04-28): hexa-virocapsid fourth sister domain registered (viral capsid self-assembly architecture; non-covalent thermodynamic/kinetic genus distinct from composition (hexa-weave) and actuation (hexa-nanobot) and catalysis (hexa-ribozyme); biology-axis tetrahedron closed at 4 sisters; n6 invariant projection sigma(6)=12 T=1 icosahedral 12 vertex STRUCTURAL-EXACT (stronger than hexa-ribozyme STRUCTURAL-APPROXIMATE) / tau(6)=4 assembly states free-CP/pentamer/hexamer/capsid / J_2=24 octahedral subgroup of icosahedral I (order 60) via 5-inscribed-cube outer action / phi(6)=2 closed/open shell binary; verdict tier APPROACH per raw 69; theoretical-analytical not yet empirical; F-VIROCAPSID-3 90-day MVP gate 2026-07-28; 5 raw 71 falsifiers preregistered; cycle 19 fan-out 4/4; witness design/kick/2026-04-28_hexa-virocapsid-registration-cycle19_omega_cycle.json)."
   ],
   "domains": [
     {
@@ -87,6 +88,52 @@
         "biology_sisters": ["hexa-weave", "hexa-nanobot"],
         "life_collision_audit_pending": ["crispr-gene-editing", "synbio"],
         "cognitive_speculative": ["hexa-mind"]
+      }
+    },
+    {
+      "slug": "hexa-virocapsid",
+      "files": 1,
+      "has_claude_md": false,
+      "has_domain_md": true,
+      "has_hexa": false,
+      "has_verify": false,
+      "status": "registered",
+      "tier": "APPROACH",
+      "sister_of": "hexa-weave",
+      "sister_of_2": "hexa-nanobot",
+      "sister_of_3": "hexa-ribozyme",
+      "registration_witness": "design/kick/2026-04-28_hexa-virocapsid-registration-cycle19_omega_cycle.json",
+      "mvp_gate_falsifier": "F-VIROCAPSID-3",
+      "mvp_gate_deadline": "2026-07-28",
+      "genus": "non-covalent-self-assembly-shell (distinct from composition / actuation / catalysis)",
+      "biology_tetrahedron_role": "fourth vertex; closes composition + actuation + catalysis + assembly tetrahedron",
+      "n6_invariant_mapping": {
+        "sigma_6_eq_12": "T=1 icosahedral capsid 12 vertex (STRUCTURAL-EXACT — stronger than hexa-ribozyme STRUCTURAL-APPROXIMATE; Caspar-Klug 1962 quasi-equivalence theory; T-number = h^2 + h*k + k^2; vertex count is topological invariant of the icosahedron at every T-number)",
+        "tau_6_eq_4": "4 assembly states (free-CP / pentamer / hexamer / capsid; Zlotnick 2003 nucleation-elongation kinetic model)",
+        "J_2_eq_24": "octahedral group O (order 24) as natural subgroup of icosahedral group I (order 60) via 5-inscribed-cube outer action",
+        "phi_6_eq_2": "binary closed/open shell outcome (sealed / aperture-bearing)"
+      },
+      "primary_constraint": "kinetic-trap ceiling: aberrant-assembly fraction must remain below closed-shell yield (Zlotnick 2003 nucleation-elongation)",
+      "literature_corpus": [
+        "Caspar-Klug 1962 (quasi-equivalence theory)",
+        "Crick-Watson 1956 (small virus geometry)",
+        "Rossmann-Johnson 1985 (icosahedral RNA virus structure)",
+        "Harrison 1978 (TBSV T=3 atomic model)",
+        "Liljas 1982 (STNV T=1 atomic model)",
+        "Zlotnick 2003 (nucleation-elongation kinetic theory)",
+        "Twarock-Luque 2016 (generalized PCK)",
+        "Bruinsma 2003 (thermodynamic self-assembly)"
+      ],
+      "cross_links": {
+        "biology_sisters": ["hexa-weave", "hexa-nanobot", "hexa-ribozyme"],
+        "life_collision_audit_pending": ["virology", "vaccine"],
+        "life_soft_collision_documented": "life/virology references icosahedral capsid T=3,13 Caspar-Klug as one-line summary; HEXA-VIROCAPSID provides the architectural primitives layer (vertex / assembly-path / pose-symmetry / closure-binary) absent from life/virology"
+      },
+      "raw_106_multi_realizability": {
+        "genus_naming": "HEXA-VIROCAPSID (no -via/-with/-api suffix)",
+        "channels_at_least_3": ["T=1 (60-subunit minimal)", "T=3 (180-subunit; TBSV / CCMV)", "T=7 (420-subunit; HSV / HK97)"],
+        "frameworks_at_least_2": ["Caspar-Klug 1962 geometric (T-number = h^2 + h*k + k^2)", "Zlotnick 2003 kinetic (nucleation-elongation master equation)"],
+        "counter_example_documented": "helical TMV (rod-shape, not icosahedral) — explicitly preregistered as counter-class in F-VIROCAPSID-2"
       }
     }
   ]

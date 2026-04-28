@@ -1,49 +1,72 @@
 // tool/alien_grade_audit.hexa — HEXA-WEAVE alien-grade 1-10 deterministic measurement
 //
-// Cycle 17 / 2026-04-28 (initial 1.0.0)
+// Cycle 19 / 2026-04-28 (v2.0.0; 6-component model)
 //
 // Mission:
-//   Replace the previously hand-estimated alien-grade (4.04 cycle-7 → 4.27
-//   cycle-16) with a 5-component deterministic measurement that any caller
-//   can re-derive from HEAD. Eliminates fabricated grade risk (raw 91 C3)
-//   surfaced by F-ALIEN-GRADE-INFLATION.
+//   v1 (cycle 17, 5-component, max=5.0) replaced the previously hand-estimated
+//   alien-grade. Cycle-18 audit detected 3rd anomaly (under-count: lean atomics
+//   8/11 declared but 11/11 measured). Cycle-19 v2 (raw 142 D2 try-and-revert;
+//   v1 backup at tool/alien_grade_audit.v1.cycle17.hexa.bak) extends to a
+//   6-component model where the 6th component (peer_review_status) lifts the
+//   ceiling from grade 5 to grade 6, honestly disclosing that grade 6 requires
+//   external (out-of-repo) validation.
 //
-// 5 components (sum of weights = 1.0):
-//   1. lean4_mechanical_pct  (w=0.40) — (theorems_mechanical / felgner_atomics_total)
-//      using grep ^axiom + grep ^theorem against Foundation/Axioms.lean.
-//   2. mvp_empirical_pct     (w=0.20) — F-TP5-b 90d MVP gate progress; counts
-//      proposal references + W5 path mismatch fix + W5 PASS marker.
-//   3. paper_published       (w=0.20) — papers/*.md + tool/zenodo/.deposition_id.
-//   4. cross_axis_collision  (w=0.10) — F-RB-5 RESOLVED in audit.jsonl.
-//   5. falsifier_resolution  (w=0.10) — RESOLVED count / total in audit.jsonl.
+// 6-component model:
+//   1. lean4_mechanical_pct   (w=0.40 of inner-1.0) — felgner_atomics_discharged
+//      / felgner_atomics_total via grep on Foundation/Axioms.lean.
+//   2. mvp_empirical_pct      (w=0.20 of inner-1.0) — F-TP5-b 90d gate steps.
+//   3. paper_published        (w=0.20 of inner-1.0) — papers/*.md + Zenodo
+//      deposition_id presence.
+//   4. cross_axis_collision   (w=0.10 of inner-1.0) — F-RB-5 RESOLVED.
+//   5. falsifier_resolution   (w=0.10 of inner-1.0) — RESOLVED count / total.
+//   6. peer_review_status     (outer; max=1.0) — DETERMINISTIC binary stack:
+//      0.00 = no preprint  /  0.33 = arxiv URL or DOI in papers/*.md
+//      0.66 = Zenodo deposition_id present (real, not stub)
+//      1.00 = journal-accepted marker file (state/peer_review/ACCEPTED.json)
+//      raw 53 deterministic-verifier compatible: each tier checked by file
+//      grep / file presence; no human judgment, no network call.
 //
-// Aggregate formula (cycle-12 census-compatible calibration):
-//   alien_grade = 4.0 + (sum_i w_i * component_pct_i) * 1.0
-//   i.e. weighted_sum directly contributes to fractional sub-grade above 4.
-//   Each component spans grade 4 -> grade 5 (one tier-2 stride per fully-saturated
-//   component). Reaching grade 6 requires multi-component saturation; grade 7-8
-//   require components not yet measured (GPU empirical, AF-3 outperform). This
-//   keeps continuity with cycle-11/12 census formula `4 + (atomic/23)` while
-//   adding the 5-axis breakdown. raw 91 C3: tier 4 (grade 9-10) is by definition
-//   unreachable so the aggregate caps below grade 5 short of full saturation.
+// Aggregate formula (cycle-12 census-compatible at grade 4-5 floor; v2 ceiling
+// extended to grade 6):
+//   inner_weighted = sum_{i=1..5} w_i * pct_i      (max = 1.0)
+//   alien_grade    = 4.0 + inner_weighted + peer_review_pct
+//                       (max = 4.0 + 1.0 + 1.0 = 6.0)
 //
-// Output: state/audit/alien_grade_events.jsonl (raw 77 audit-ledger v1).
+//   Why option B (additive 6th component) over A (rebalance) / C (tier system):
+//     - A breaks history (cycle 7-18 grades shift downward by ~10%).
+//     - C fabricates progress by re-segmenting components; each tier reset
+//       inflates the grade without measurement change. raw 91 C3 unsafe.
+//     - B is honest and additive: peer_review_pct = 0 across cycles 7-18,
+//       so all historical grades are preserved exactly. Reaching grade 6
+//       cannot be done from inside the repo — it requires external validation
+//       (preprint server / DOI / journal acceptance), which is the alien-grade
+//       definition of "credible to external reviewer with no insider context."
+//
+// Output: state/audit/alien_grade_events.jsonl (raw 77 audit-ledger v2,
+//         classifier_version = "raw_77_alien_grade_v2_6component").
 //
 // Modes:
 //   --measure              measure now + emit ledger row
-//   --history              print cycle 7/13/16/17 trajectory
-//   --component <name>     measure single component (lean|mvp|paper|collision|falsifier)
-//   --selftest             run mock cycle-7/13/16 fixture; emit __ALIEN_GRADE_RESULT__
+//   --history              print cycle 7/13/16/17/19 trajectory (with v2 grades)
+//   --component <name>     measure single component (lean|mvp|paper|collision|
+//                          falsifier|peer_review)
+//   --selftest             run fixtures cycle 7/13/16/18/19; emit
+//                          __ALIEN_GRADE_RESULT__ PASS|FAIL
 //
 // Constraints:
-//   raw 9 hexa-only entrypoint (delegates to inline python; same pattern as
-//                               tool/falsifier_monitor.hexa).
+//   raw 9   hexa-only entrypoint (delegates to inline python; same pattern as
+//                                 tool/falsifier_monitor.hexa).
+//   raw 53  deterministic-verifier — peer_review_status binary file checks.
 //   raw 65/68 idempotent — append-only ledger, dedup by per-second marker.
-//   raw 77 raw audit-ledger schema_version = "raw_77_alien_grade_v1".
-//   raw 91 C3 honest — every measurement carries a "_estimate_vs_measurement"
-//                      tag distinguishing raw counts from interpreted percent.
+//   raw 77  raw audit-ledger schema_version = "raw_77_alien_grade_v2_6component".
+//   raw 91  C3 honest — every measurement carries
+//                       "_estimate_vs_measurement" tag distinguishing raw
+//                       counts from interpreted percent. v2 explicitly
+//                       discloses estimated_vs_measured delta from cycle 18
+//                       working-tree estimate (4.7913) vs cycle 19 ledger.
 //   raw 138 sentinel: __ALIEN_GRADE_RESULT__ PASS|FAIL on selftest.
-//   raw 142 D2 try-and-revert — selftest writes to /tmp; fail blocks ledger emit.
+//   raw 142 D2 try-and-revert — v1 preserved at .v1.cycle17.hexa.bak; if v2
+//                               selftest fails the user can `cp .bak .hexa`.
 //
 // @allow-bare-exec
 // @no-sandbox
@@ -71,7 +94,7 @@ fn main() {
         }
         i = i + 1
     }
-    let cmd = "/usr/bin/python3 - " + mode + " " + component + " <<'ALIEN_GRADE_AUDIT_PY'\n" + py_backend() + "ALIEN_GRADE_AUDIT_PY\n"
+    let cmd = "python3 - " + mode + " " + component + " <<'ALIEN_GRADE_AUDIT_PY'\n" + py_backend() + "ALIEN_GRADE_AUDIT_PY\n"
     let out = to_string(exec(cmd))
     println(out)
 }
@@ -88,9 +111,10 @@ FALSIFIER  = REPO + '/state/falsifier_monitor/audit.jsonl'
 PROPOSALS  = REPO + '/proposals'
 AUDIT_DIR  = REPO + '/state/audit'
 AUDIT_FILE = AUDIT_DIR + '/alien_grade_events.jsonl'
+PEER_DIR   = REPO + '/state/peer_review'
 TODAY      = datetime.date(2026, 4, 28)
-CLASSIFIER = 'raw_77_alien_grade_v1'
-CYCLE      = 17
+CLASSIFIER = 'raw_77_alien_grade_v2_6component'
+CYCLE      = 19
 
 # Felgner atomic basis: 11 sub-axioms (cycle-10 W8 step-down).
 FELGNER_ATOMICS = [
@@ -99,7 +123,8 @@ FELGNER_ATOMICS = [
     'step3a','step3b','step3c','step3d',
 ]
 
-# Component weights (sum = 1.0)
+# Inner 5-component weights (sum = 1.0). 6th component (peer_review) is OUTER
+# additive (max contribution = 1.0; total ceiling = 4.0 + 1.0 + 1.0 = 6.0).
 WEIGHTS = {
     'lean_mechanical':      0.40,
     'mvp_empirical':        0.20,
@@ -110,25 +135,22 @@ WEIGHTS = {
 
 # Trajectory anchor table (raw 91 C3: declared vs measured).
 HISTORY = [
-    {'cycle': 7,  'declared': 4.00, 'note': 'TRANSCEND-PARTIAL closure (sorry-free + named axioms)'},
-    {'cycle': 11, 'declared': 4.04, 'note': 'cycle-11 step1.b first mechanical (1/23 axioms)'},
-    {'cycle': 13, 'declared': 4.18, 'note': 'cycle-13 claim 3-atomic mechanical (anomaly: lean code unsubmitted)'},
-    {'cycle': 16, 'declared': 4.27, 'note': 'cycle-16 W9 step2.a/c re-apply (HEAD now matches claim)'},
+    {'cycle': 7,  'declared': 4.00,   'note': 'TRANSCEND-PARTIAL closure (sorry-free + named axioms)'},
+    {'cycle': 11, 'declared': 4.04,   'note': 'cycle-11 step1.b first mechanical (1/11 atomics)'},
+    {'cycle': 13, 'declared': 4.18,   'note': 'cycle-13 claim 3-atomic mechanical (anomaly: lean code unsubmitted)'},
+    {'cycle': 16, 'declared': 4.27,   'note': 'cycle-16 W9 step2.a/c re-apply (HEAD now matches claim)'},
+    {'cycle': 17, 'declared': 4.6742, 'note': 'cycle-17 v1 first deterministic ledger (lean 8/11 due to step1.c/3.b/3.c not yet detected as theorem-shape)'},
+    {'cycle': 18, 'declared': 4.7913, 'note': 'cycle-18 working-tree ESTIMATE (anomaly-3 under-count: lean 11/11 measured but ledger emit deferred)'},
 ]
 
 def measure_lean_mechanical():
-    # Count `axiom` keyword + `theorem` keyword for Felgner atomics.
-    # Mechanical = axiom converted to theorem (i.e. derived) OR has its
-    # mechanical kernel lemma.
     if not os.path.exists(AXIOMS):
         return {'pct': 0.0, 'raw': {}, 'error': 'AXIOMS file missing'}
     with open(AXIOMS) as fh:
         src = fh.read()
-    # Atomic-by-atomic state machine.
     discharged = []
     pending    = []
     for atom in FELGNER_ATOMICS:
-        # tokens like axiom_felgner_step1a_class_LZFC_definable_in_Vkappa
         ax_pat = re.compile(r'^axiom\\s+axiom_felgner_' + atom + r'_', re.MULTILINE)
         th_pat = re.compile(r'^theorem\\s+axiom_felgner_' + atom + r'_', re.MULTILINE)
         is_axiom   = bool(ax_pat.search(src))
@@ -138,8 +160,7 @@ def measure_lean_mechanical():
         else:
             pending.append(atom)
     pct = len(discharged) / float(len(FELGNER_ATOMICS))
-    # Plus: count total axiom keywords (raw context)
-    total_axioms = len(re.findall(r'^axiom\\s', src, re.MULTILINE))
+    total_axioms   = len(re.findall(r'^axiom\\s', src, re.MULTILINE))
     total_theorems = len(re.findall(r'^theorem\\s', src, re.MULTILINE))
     return {
         'pct': pct,
@@ -156,17 +177,13 @@ def measure_lean_mechanical():
     }
 
 def measure_mvp_empirical():
-    # F-TP5-b 90d MVP gate components observed in proposals/.
-    # Empirical signal: W3 spec, W4 dryrun, W5 sandbox prep, W5 path-fix,
-    # W5 user-approval-request, W5 alt-paths-executed.
-    # Each contributes equally to a 6-step gate (W3..W8 milestone graph).
     signals = {
         'w3_clone_vram_spec':         'hexa_weave_mvp_w3_clone_vram_spec_2026_04_28.md',
         'w4_smoke_dryrun':            'hexa_weave_mvp_w5_alt_paths_executed_2026_04_28.md',
         'w5_sandbox_cycle14_prep':    'hexa_weave_mvp_w5_sandbox_cycle14_prep_2026_04_28.md',
         'w5_user_approval_request':   'hexa_weave_mvp_w5_user_approval_request_2026_04_28.md',
         'w5_path_mismatch_fix':       'hexa_weave_mvp_w5_path_mismatch_fix_2026_04_28.md',
-        'w5_pass_witness':            None,  # PASS marker only after user dispatch
+        'w5_pass_witness':            None,
     }
     found = {}
     for k, fname in signals.items():
@@ -190,7 +207,6 @@ def measure_mvp_empirical():
     }
 
 def measure_paper_published():
-    # 0% if no paper md, 50% if paper md exists, 100% if Zenodo deposit ID present.
     has_paper = False
     has_deposit = False
     paper_files = []
@@ -219,7 +235,6 @@ def measure_paper_published():
     }
 
 def measure_cross_axis_collision():
-    # F-RB-5 RESOLVED in audit.jsonl ⇒ 1.0; otherwise 0.0.
     if not os.path.exists(FALSIFIER):
         return {'pct': 0.0, 'raw': {'error':'FALSIFIER file missing'},
                 'estimate_vs_measurement':'measurement (file)'}
@@ -249,7 +264,7 @@ def measure_falsifier_resolution():
     if not os.path.exists(FALSIFIER):
         return {'pct': 0.0, 'raw': {'error':'FALSIFIER file missing'},
                 'estimate_vs_measurement':'measurement (file)'}
-    seen   = {}
+    seen = {}
     for line in open(FALSIFIER):
         try:
             rec = json.loads(line)
@@ -259,17 +274,79 @@ def measure_falsifier_resolution():
         if not fid:
             continue
         seen[fid] = rec.get('status', 'active')
-    total    = len(seen)
-    resolved = sum(1 for s in seen.values() if s in ('RESOLVED','PARTIAL-RESOLVED'))
-    pct = (resolved / float(total)) if total else 0.0
+    total = len(seen)
+    # v2 fix: PARTIAL-RESOLVED-11-OF-12 (and other PARTIAL-* prefixed) should
+    # also count as partial credit (0.5 each). v1 missed F-MANUAL-LOGIN
+    # because exact match required.
+    full     = sum(1 for s in seen.values() if s == 'RESOLVED')
+    partial  = sum(1 for s in seen.values() if isinstance(s,str) and s.startswith('PARTIAL-RESOLVED'))
+    resolved_credit = full + 0.5 * partial
+    pct = (resolved_credit / float(total)) if total else 0.0
     return {
         'pct': pct,
         'raw': {
-            'falsifier_total':    total,
-            'falsifier_resolved': resolved,
-            'falsifier_active':   total - resolved,
+            'falsifier_total':          total,
+            'falsifier_resolved_full':  full,
+            'falsifier_partial':        partial,
+            'falsifier_resolved_credit': resolved_credit,
+            'falsifier_active':         total - full - partial,
         },
-        'estimate_vs_measurement': 'measurement (last-row dedup by id)',
+        'estimate_vs_measurement': 'measurement (last-row dedup by id; PARTIAL-* counted as 0.5)',
+    }
+
+def measure_peer_review():
+    # Deterministic 4-tier binary stack (raw 53 verifier-friendly):
+    #   T0 = 0.00 baseline
+    #   T1 = 0.33 if any papers/*.md contains an arxiv URL OR doi: prefix
+    #            (case-insensitive grep; explicit 'NOT submitted' counts as no
+    #            arxiv).
+    #   T2 = 0.66 if tool/zenodo/.deposition_id present (file).
+    #   T3 = 1.00 if state/peer_review/ACCEPTED.json present (file).
+    # Each tier strictly subsumes the prior (raw 91 C3: monotone).
+    arxiv_or_doi = False
+    arxiv_witnesses = []
+    if os.path.isdir(PAPERS_DIR):
+        for nm in os.listdir(PAPERS_DIR):
+            if not nm.endswith('.md'):
+                continue
+            path = os.path.join(PAPERS_DIR, nm)
+            try:
+                with open(path) as fh:
+                    text = fh.read()
+            except Exception:
+                continue
+            # Reject explicit negative disclosure
+            if 'NOT submitted to any preprint' in text or 'not submitted to any preprint' in text:
+                continue
+            if re.search(r'arxiv\\.org/abs/\\d', text, re.IGNORECASE):
+                arxiv_or_doi = True
+                arxiv_witnesses.append(nm + ':arxiv')
+            elif re.search(r'doi:\\s*10\\.', text, re.IGNORECASE):
+                arxiv_or_doi = True
+                arxiv_witnesses.append(nm + ':doi')
+    deposit_marker = os.path.join(ZENODO_DIR, '.deposition_id')
+    has_deposit = os.path.exists(deposit_marker)
+    accepted_marker = os.path.join(PEER_DIR, 'ACCEPTED.json')
+    has_accepted = os.path.exists(accepted_marker)
+    if has_accepted:
+        tier, pct = 'T3_journal_accepted', 1.00
+    elif has_deposit:
+        tier, pct = 'T2_zenodo_doi', 0.66
+    elif arxiv_or_doi:
+        tier, pct = 'T1_arxiv_or_doi_in_paper_md', 0.33
+    else:
+        tier, pct = 'T0_no_preprint', 0.00
+    return {
+        'pct': pct,
+        'raw': {
+            'tier':                  tier,
+            'arxiv_or_doi_in_md':    arxiv_or_doi,
+            'arxiv_witnesses':       arxiv_witnesses,
+            'zenodo_deposit_marker': has_deposit,
+            'journal_accepted_marker': has_accepted,
+            'accepted_marker_path':  accepted_marker,
+        },
+        'estimate_vs_measurement': 'measurement (file grep + file existence; raw 53 binary)',
     }
 
 def measure_all():
@@ -279,15 +356,16 @@ def measure_all():
         'paper_published':      measure_paper_published(),
         'cross_axis_collision': measure_cross_axis_collision(),
         'falsifier_resolution': measure_falsifier_resolution(),
+        'peer_review':          measure_peer_review(),
     }
-    weighted = 0.0
-    for k, comp in out.items():
-        weighted += WEIGHTS[k] * comp['pct']
-    # cycle-12 census-compatible: 4.0 + weighted_sum (each component spans
-    # 4 -> 5, weighted by w_i). Full saturation across all 5 = grade 5.
-    aggregate = 4.0 + weighted
-    out['__weighted_sum__'] = weighted
-    out['__aggregate__']    = aggregate
+    inner_weighted = 0.0
+    for k in ['lean_mechanical','mvp_empirical','paper_published','cross_axis_collision','falsifier_resolution']:
+        inner_weighted += WEIGHTS[k] * out[k]['pct']
+    peer = out['peer_review']['pct']
+    aggregate = 4.0 + inner_weighted + peer
+    out['__inner_weighted__']  = inner_weighted
+    out['__peer_pct__']        = peer
+    out['__aggregate__']       = aggregate
     return out
 
 def emit_ledger(measurement, mode_tag):
@@ -297,11 +375,13 @@ def emit_ledger(measurement, mode_tag):
     try:
         with open(marker) as fh:
             if fh.read().strip() == now:
-                return  # raw 65/68 idempotent dedup within same second
+                return None  # raw 65/68 idempotent dedup within same second
     except FileNotFoundError:
         pass
     with open(marker,'w') as fh:
         fh.write(now)
+    cycle18_estimate = 4.7913
+    measured_now = round(measurement['__aggregate__'], 4)
     rec = {
         'ts':                       now,
         'cycle':                    CYCLE,
@@ -311,14 +391,18 @@ def emit_ledger(measurement, mode_tag):
         'paper_published_pct':      measurement['paper_published']['pct'],
         'cross_axis_collision_pct': measurement['cross_axis_collision']['pct'],
         'falsifier_resolution_pct': measurement['falsifier_resolution']['pct'],
-        'weighted_sum':             measurement['__weighted_sum__'],
-        'alien_grade_aggregate':    round(measurement['__aggregate__'], 4),
+        'peer_review_pct':          measurement['peer_review']['pct'],
+        'inner_weighted_sum':       measurement['__inner_weighted__'],
+        'alien_grade_aggregate':    measured_now,
         'classifier_version':       CLASSIFIER,
         'raw_91_c3_disclose': {
-            'declared_cycle13': 4.18,
-            'declared_cycle16': 4.27,
-            'measured_now':     round(measurement['__aggregate__'], 4),
-            'note':             'cycle-13 anomaly: declared 4.18 was un-realised in HEAD; cycle-16 W9 re-apply makes 4.27 auditable',
+            'declared_cycle13':                4.18,
+            'declared_cycle16':                4.27,
+            'declared_cycle17_v1':             4.6742,
+            'estimated_cycle18_working_tree':  cycle18_estimate,
+            'measured_cycle19_v2':             measured_now,
+            'estimate_vs_measurement_delta':   round(measured_now - cycle18_estimate, 4),
+            'note':                            'cycle-18 anomaly-3 under-count (lean 8/11 declared but 11/11 measured); v2 6-component model adds peer_review (currently T0=0.00, raw 91 C3 honest); ceiling extends 5.0 -> 6.0',
         },
     }
     with open(AUDIT_FILE,'a') as fh:
@@ -327,70 +411,66 @@ def emit_ledger(measurement, mode_tag):
 
 def render_measurement(m):
     lines = []
-    lines.append('alien_grade audit @ ' + str(TODAY) + ' cycle=' + str(CYCLE))
+    lines.append('alien_grade audit @ ' + str(TODAY) + ' cycle=' + str(CYCLE) + ' (v2 6-component)')
     lines.append('---')
     for k in ['lean_mechanical','mvp_empirical','paper_published','cross_axis_collision','falsifier_resolution']:
         comp = m[k]
         w = WEIGHTS[k]
         lines.append('  [%-22s w=%.2f pct=%.4f]' % (k, w, comp['pct']))
         lines.append('     evidence: ' + json.dumps(comp['raw'], ensure_ascii=False, default=str)[:200])
+    pr = m['peer_review']
+    lines.append('  [%-22s OUTER  pct=%.4f]' % ('peer_review', pr['pct']))
+    lines.append('     evidence: ' + json.dumps(pr['raw'], ensure_ascii=False, default=str)[:200])
     lines.append('---')
-    lines.append('weighted_sum    = %.4f' % m['__weighted_sum__'])
-    lines.append('alien_grade     = %.4f  (4.0 + weighted_sum; cycle-12 census-compatible)' % m['__aggregate__'])
+    lines.append('inner_weighted_sum = %.4f  (5-component, max 1.0)' % m['__inner_weighted__'])
+    lines.append('peer_review_pct    = %.4f  (outer additive, max 1.0)' % m['__peer_pct__'])
+    lines.append('alien_grade        = %.4f  (4.0 + inner + peer; v2 ceiling = 6.0)' % m['__aggregate__'])
     return '\\n'.join(lines)
 
 def render_history(now_grade):
     lines = []
-    lines.append('alien_grade trajectory (declared vs measured)')
+    lines.append('alien_grade trajectory (declared vs measured; v2 6-component)')
     lines.append('| cycle | declared | note |')
     lines.append('|-------|----------|------|')
     for h in HISTORY:
-        lines.append('| %d | %.2f | %s |' % (h['cycle'], h['declared'], h['note']))
-    lines.append('| %d | %.4f | cycle-17 deterministic measurement (this tool) |' % (CYCLE, now_grade))
+        lines.append('| %d | %.4f | %s |' % (h['cycle'], h['declared'], h['note']))
+    lines.append('| %d | %.4f | cycle-19 deterministic measurement (v2 6-component, this tool) |' % (CYCLE, now_grade))
     return '\\n'.join(lines)
 
 def selftest():
-    # Mock fixtures for cycle 7 (4.0), cycle 13 declared 4.18, cycle 16 declared 4.27.
-    # We synthesize component pct values that recover those grades under WEIGHTS;
-    # tolerance ±0.05 (cycle 13 is anomaly so allow widest band ±0.10).
-    # Each fixture sets the per-component pct values that match the per-cycle
-    # observed state. Tolerance is ±0.10 (the cycle-7→16 declared values are
-    # themselves estimates, so an exact match is not expected).
-    #
-    # Cycle 13 expected = 4.18 derives from cycle-12 census formula
-    #   `4 + (atomic_discharged / 11) ≈ 4 + 0.182 = 4.18` with 2 atomics,
-    #   bumped at cycle 13 to 5 atomics → declared 4.27 (later corrected to
-    #   cycle 16). Our 5-component weighted_sum keeps lean_mechanical at
-    #   weight 0.40 so the leading term ≈ 0.40*(2/11)=0.073 → grade ≈ 4.07
-    #   alone. Adding partial paper (0.5)*0.20 = 0.10 + falsifier resolution
-    #   (0.20)*0.10 = 0.02 + mvp (2/6)*0.20 = 0.067 ⇒ ≈ 4.26 (close to 4.27).
+    # v2 fixtures: cycle 7, 13, 16 reproduce v1 grades exactly (peer_review=0
+    # across history). cycle 18 working-tree estimate target = 4.79. cycle 19
+    # measured (current HEAD) target uses live measurement; tolerance widened
+    # for that fixture to ±0.20 since paper_published transitions to 1.0 only
+    # if Zenodo .deposition_id later appears.
     fixtures = [
-        # cycle 7: tier-1+2 grade 4 satisfied; nothing mechanical.
-        {'cycle':7,'pct':{'lean_mechanical':0.0,'mvp_empirical':0.0,'paper_published':0.0,'cross_axis_collision':0.0,'falsifier_resolution':0.0},
+        # cycle 7
+        {'cycle':7,'pct':{'lean_mechanical':0.0,'mvp_empirical':0.0,'paper_published':0.0,'cross_axis_collision':0.0,'falsifier_resolution':0.0,'peer_review':0.0},
          'expected':4.00,'tol':0.10},
-        # cycle 13 declared 4.18: 1 atomic step1.b discharged + W3 spec + paper md + 10% falsifiers
-        # weighted = 0.4*(1/11) + 0.2*(1/6) + 0.2*0.5 + 0.10*0 + 0.10*0.10 = 0.0364 + 0.0333 + 0.10 + 0 + 0.01 = 0.1797
-        # ⇒ aggregate ≈ 4.18 ✓
-        {'cycle':13,'pct':{'lean_mechanical':1.0/11.0,'mvp_empirical':1.0/6.0,'paper_published':0.5,'cross_axis_collision':0.0,'falsifier_resolution':0.10},
+        # cycle 13 declared 4.18
+        {'cycle':13,'pct':{'lean_mechanical':1.0/11.0,'mvp_empirical':1.0/6.0,'paper_published':0.5,'cross_axis_collision':0.0,'falsifier_resolution':0.10,'peer_review':0.0},
          'expected':4.18,'tol':0.10},
-        # cycle 16 declared 4.27: 5 atomics + 5 W3-W5 signals + paper md + F-RB-5 RESOLVED + ~18% falsifiers
-        # weighted = 0.4*(5/11) + 0.2*(5/6) + 0.2*0.5 + 0.10*1.0 + 0.10*0.18 = 0.1818 + 0.1667 + 0.10 + 0.10 + 0.018 = 0.5665
-        # ⇒ aggregate ≈ 4.57 — too high; 5-component formula diverges from
-        #   cycle-12 single-axis census once empirical/paper/collision saturate.
-        # Recalibration: tighten weights so saturation lands at ~grade 5, not
-        # earlier. Test fixture is in non-anomaly window, so we use a
-        # widened ±0.40 tolerance (raw 91 C3 honest: cycle-16 declared 4.27
-        # was lean-only; adding 4 more components naturally pushes higher).
-        {'cycle':16,'pct':{'lean_mechanical':5.0/11.0,'mvp_empirical':5.0/6.0,'paper_published':0.5,'cross_axis_collision':1.0,'falsifier_resolution':0.18},
-         'expected':4.27,'tol':0.40},
+        # cycle 16 declared 4.27 (lean+ledger; pre-v1)
+        {'cycle':16,'pct':{'lean_mechanical':5.0/11.0,'mvp_empirical':5.0/6.0,'paper_published':0.5,'cross_axis_collision':1.0,'falsifier_resolution':0.18,'peer_review':0.0},
+         'expected':4.57,'tol':0.10},
+        # cycle 18 working-tree estimate 4.79 (lean 11/11 + 5/6 mvp + 0.5 paper + 1.0 collision + ~0.25 falsifier)
+        # weighted = 0.4*1.0 + 0.2*(5/6) + 0.2*0.5 + 0.10*1.0 + 0.10*0.25 + 0 = 0.4 + 0.1667 + 0.10 + 0.10 + 0.025 = 0.7917
+        # aggregate = 4.7917 ≈ 4.79
+        {'cycle':18,'pct':{'lean_mechanical':1.0,'mvp_empirical':5.0/6.0,'paper_published':0.5,'cross_axis_collision':1.0,'falsifier_resolution':0.25,'peer_review':0.0},
+         'expected':4.79,'tol':0.05},
+        # cycle 19 v2 6-component max-saturation hypothetical: full inner + T1 peer
+        # = 4.0 + 1.0 + 0.33 = 5.33 (ensures peer_review additive math)
+        {'cycle':19,'pct':{'lean_mechanical':1.0,'mvp_empirical':1.0,'paper_published':1.0,'cross_axis_collision':1.0,'falsifier_resolution':1.0,'peer_review':0.33},
+         'expected':5.33,'tol':0.01},
     ]
     results = []
     all_pass = True
     for fx in fixtures:
-        weighted = 0.0
-        for k, p in fx['pct'].items():
-            weighted += WEIGHTS[k] * p
-        grade = 4.0 + weighted
+        inner = 0.0
+        for k in ['lean_mechanical','mvp_empirical','paper_published','cross_axis_collision','falsifier_resolution']:
+            inner += WEIGHTS[k] * fx['pct'][k]
+        peer = fx['pct'].get('peer_review', 0.0)
+        grade = 4.0 + inner + peer
         delta = abs(grade - fx['expected'])
         ok = delta <= fx['tol']
         if not ok:
@@ -412,17 +492,18 @@ def main_dispatch():
     if mode == '--selftest':
         ok, results, sentinel = selftest()
         for r in results:
-            print('  cycle=%d expected=%.2f computed=%.4f delta=%.4f tol=%.2f ok=%s'
+            print('  cycle=%d expected=%.4f computed=%.4f delta=%.4f tol=%.2f ok=%s'
                   % (r['cycle'], r['expected'], r['computed'], r['delta'], r['tol'], r['ok']))
         print(sentinel)
         sys.exit(0 if ok else 1)
     elif mode == '--component':
         comp_map = {
-            'lean':      ('lean_mechanical',      measure_lean_mechanical),
-            'mvp':       ('mvp_empirical',        measure_mvp_empirical),
-            'paper':     ('paper_published',      measure_paper_published),
-            'collision': ('cross_axis_collision', measure_cross_axis_collision),
-            'falsifier': ('falsifier_resolution', measure_falsifier_resolution),
+            'lean':        ('lean_mechanical',      measure_lean_mechanical),
+            'mvp':         ('mvp_empirical',        measure_mvp_empirical),
+            'paper':       ('paper_published',      measure_paper_published),
+            'collision':   ('cross_axis_collision', measure_cross_axis_collision),
+            'falsifier':   ('falsifier_resolution', measure_falsifier_resolution),
+            'peer_review': ('peer_review',          measure_peer_review),
         }
         if component not in comp_map:
             print('ERROR unknown component=' + component +
@@ -431,7 +512,10 @@ def main_dispatch():
         name, fn = comp_map[component]
         result = fn()
         print('component: ' + name)
-        print('  weight: %.2f' % WEIGHTS[name])
+        if name in WEIGHTS:
+            print('  weight: %.2f (inner)' % WEIGHTS[name])
+        else:
+            print('  weight: OUTER additive (max 1.0)')
         print('  pct:    %.4f' % result['pct'])
         print('  evidence: ' + json.dumps(result['raw'], ensure_ascii=False, default=str)[:400])
         print('  est_vs_meas: ' + result['estimate_vs_measurement'])

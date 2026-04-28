@@ -230,11 +230,13 @@ fn render_stats(data) {
             nx = get_or(s, "nexus6_tests", 0)
         }
     }
+    // 2026-04-28 cycle 19: NEXUS tests spacing aligned to README hand-curated
+    // existing format (4 spaces, not 6) for idempotent WRITE-mode equality.
     let mut out = "```"
     out = out + "\n  AI techniques:    " + ai_t
     out = out + "\n  DSE domains:      " + dse_d
     out = out + "\n  DSE paths:        " + dse_p
-    out = out + "\n  NEXUS tests:      " + to_string(nx)
+    out = out + "\n  NEXUS tests:    " + to_string(nx)
     out = out + "\n```"
     return out
 }
@@ -353,6 +355,19 @@ fn render_summary(data, domain_id: string) {
         //   coverage expansion is opt-in by adding the domain entry.
         return nil
     }
+    // 2026-04-28 cycle 19 JSON SSOT enrichment:
+    //   summary_literal field allows verbatim block content (raw 91 C3
+    //   honest: README hand-curated content is replicated, not fabricated).
+    //   When present, takes priority over the auto-generated form.
+    //   Backward-compat: existing 13 auto-domains have no summary_literal
+    //   so they keep auto-generation. Newly enriched ~18 domains store
+    //   their hand-curated rich content (extracted from README) verbatim.
+    let lit = get_or(d, "summary_literal", "")
+    if type_of(lit) == "string" {
+        if len(lit) > 0 {
+            return to_string(lit)
+        }
+    }
     let mut parts = []
     parts.push("**🛸" + to_string(get_or(d, "alien", 0)) + "**")
     if get_or(d, "ceiling", false) == true {
@@ -440,6 +455,13 @@ fn render_footer(data, domain_id: string) {
         // — return nil so sync_all preserves hand-curated AUTO:FOOTER_*
         // markers for domains absent from readme-data.json.
         return nil
+    }
+    // 2026-04-28 cycle 19 JSON SSOT enrichment: footer_literal mirror
+    let lit = get_or(d, "footer_literal", "")
+    if type_of(lit) == "string" {
+        if len(lit) > 0 {
+            return to_string(lit)
+        }
     }
     let mut parts = []
 

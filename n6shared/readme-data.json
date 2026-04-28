@@ -12,7 +12,8 @@
       "AUTO:FOOTER_<domain_id>   (per-domain footer links)"
     ],
     "_changelog": [
-      "2026-04-28 cycle 16 readme curation: dse_domains 379 -> 381 (cycle 13 fan-out 2/5 hexa-nanobot + cycle 15 fan-out 3/3 hexa-ribozyme registered under biology axis); biology axis count 1 -> 3 (HEXA-WEAVE + HEXA-NANOBOT + HEXA-RIBOZYME); biology extras + footer_extra refreshed to reflect tri-sister triangle (composition / actuation / catalysis) + alien-grade 4.18 disclosure"
+      "2026-04-28 cycle 16 readme curation: dse_domains 379 -> 381 (cycle 13 fan-out 2/5 hexa-nanobot + cycle 15 fan-out 3/3 hexa-ribozyme registered under biology axis); biology axis count 1 -> 3 (HEXA-WEAVE + HEXA-NANOBOT + HEXA-RIBOZYME); biology extras + footer_extra refreshed to reflect tri-sister triangle (composition / actuation / catalysis) + alien-grade 4.18 disclosure",
+      "2026-04-28 cycle 19 JSON SSOT enrichment priority 1: 17 hand-curated domains literally registered (summary_literal + footer_literal fields) — biology / play / aerospace / sf / frontier / civilization / life-culture / tech-industry / computer / marketing / millennium / dimension / music / linguistics / crypto / astronomy / hygiene. Fantasy domain intentionally excluded (uses [!WARNING] callout, FOOTER absent — hand-curation preserved). raw 91 C3 honest: content replicated from README.md verbatim, not fabricated novelty. raw 65/68 idempotent: dry-run target = 0 changed markers. STATS NEXUS-tests spacing aligned (4 spaces) for WRITE-mode equality."
     ]
   },
   "stats": {
@@ -443,7 +444,196 @@
         "biology/hexa-ribozyme/"
       ],
       "tools": [],
-      "footer_extra": "TRANSCEND-CLOSURE-ALL chain (L4-L7 cosmological extension) PASS-WITH-C3-CAVEATS — STRONG-CONJECTURE chain (AdS/CFT + Bousso dS), not theorem chain. Tri-sister biology triangle: HEXA-WEAVE (composition / Landauer-x-NP-search ceiling) + HEXA-NANOBOT (actuation / Brownian thermal floor) + HEXA-RIBOZYME (catalysis / diffusion-limit ceiling) — three orthogonal n=6 architectural lenses on molecular biology"
+      "footer_extra": "TRANSCEND-CLOSURE-ALL chain (L4-L7 cosmological extension) PASS-WITH-C3-CAVEATS — STRONG-CONJECTURE chain (AdS/CFT + Bousso dS), not theorem chain. Tri-sister biology triangle: HEXA-WEAVE (composition / Landauer-x-NP-search ceiling) + HEXA-NANOBOT (actuation / Brownian thermal floor) + HEXA-RIBOZYME (catalysis / diffusion-limit ceiling) — three orthogonal n=6 architectural lenses on molecular biology",
+      "summary_literal": "> **🛸7** | 3 sister-domains (composition / actuation / catalysis triangle) | τ(6)=4 axes · σ(6)=12 raw-strategies · φ(6)=2 verdict-bit · J₂=24 master | σφ=nτ=J₂=24 invariant trace | HEXA-WEAVE write-side composition + HEXA-NANOBOT actuation + HEXA-RIBOZYME catalysis | tri-axis Ω-saturation PASS at workload ceiling (APPROACH grade per raw 69) | alien-grade 4.18 (cycle 15 close) | F-TP5-b / F-NB-4 / F-RB-4 90-day MVP gates 2026-07-28",
+      "footer_literal": "> 도메인: [biology/hexa-weave/](docs/biology/hexa-weave/) · [biology/hexa-nanobot/](docs/biology/hexa-nanobot/) · [biology/hexa-ribozyme/](docs/biology/hexa-ribozyme/) · TRANSCEND-CLOSURE-ALL chain (L4-L7 cosmological extension) PASS-WITH-C3-CAVEATS — STRONG-CONJECTURE chain (AdS/CFT + Bousso dS), not theorem chain. Tri-sister biology triangle: HEXA-WEAVE (composition / Landauer×NP-search ceiling) + HEXA-NANOBOT (actuation / Brownian thermal floor) + HEXA-RIBOZYME (catalysis / diffusion-limit ceiling) — three orthogonal n=6 architectural lenses on molecular biology; alien-grade 4.18 (cycle 15 close)",
+      "_n6_invariant": "tau(6)=4 sister-axes / sigma(6)=12 raw-strategies / phi(6)=2 verdict-bit / J2=24 master / sigma*phi = n*tau = J2 = 24"
+    },
+    {
+      "id": "play",
+      "emoji": "🎪",
+      "name": "Play",
+      "name_en": "Play",
+      "anchor": "-play",
+      "summary_literal": "> **🛸10** | ✅ | BT 14 · 100% EXACT | DSE 160,920combos, Fun-Car+Motorcycle integrated | industry100% (GT3 RS/F1/McLaren/Ducati V4R) | experiment100% 209/209 EXACT (Fun-Car 133 + Motorcycle 76) | physical-limit8 | TP6 | discoveries1 | Mk.V",
+      "footer_literal": "> domains: [fun-car/](docs/fun-car/) · [motorcycle/](docs/motorcycle/)",
+      "_n6_invariant": "Fun-Car DSE 155,520 + Motorcycle DSE 5,400; sigma=12 + IMU 6axis + sigma^2=144kg + J2=24km/L",
+      "_source": "README.md hand-curated content replicated verbatim (raw 91 C3 honest: not fabricated novelty)"
+    },
+    {
+      "id": "aerospace",
+      "emoji": "🚀",
+      "name": "Aerospace",
+      "name_en": "Aerospace",
+      "anchor": "-aerospace",
+      "summary_literal": "> **🛸10** | ✅ | BT 38 · 100% EXACT | 150/150 EXACT, Egyptian 3+2+1=n, GN&C 12/12, ECLSS 14/14, ISRU 13/13, radiationline ladder, 304L/Ti-6Al-4V n=6 | industry100% (SpaceX Starship/Falcon 9/ISS/NASA SLS/DSN/MOXIE) | experiment100% 150/150 EXACT (100%) — 18 all subsystems perfect | physical-limit14 | TP6 | discoveries8 | Mk.V",
+      "footer_literal": "> domains: [hexa-starship/](docs/hexa-starship/) · [aerospace/](docs/aerospace/) · [space-engineering/](docs/space-engineering/)",
+      "_n6_invariant": "Egyptian 3+2+1=n, Isp 384s=sigma*2^sopfr, GN&C 12/12, ECLSS 14/14, ISRU 13/13",
+      "_source": "README.md hand-curated content replicated verbatim (raw 91 C3 honest: not fabricated novelty)"
+    },
+    {
+      "id": "sf",
+      "emoji": "🛸",
+      "name": "HEXA-UFO (RT-SC VTOL)",
+      "name_en": "HEXA-UFO",
+      "anchor": "-hexa-ufo-rt-sc-vtol",
+      "summary_literal": "> **🛸10** | ✅ | BT 43 · 100% EXACT | RT-SC Meissner powerless levitation + 48T MHD Mach 10 + Tabletop Fusion Q=10 infinite Energy, D=J₂=24m disc VTOL, 49/49 EXACT, DSE 2,400 combos | industry100% (RT-SC/MHD/Meissner/ITER/SMES) | experiment100% 49/49 EXACT (UFO pre params 100.0%) | physical-limit7 | TP10 | discoveries8 | Mk.V",
+      "footer_literal": "> domains: [sf/](docs/sf/)",
+      "_n6_invariant": "RT-SC Meissner + 48T MHD Mach 10 + Tabletop Fusion Q=10; D=J2=24m disc VTOL; Stage-3..15+ unlimited navigation",
+      "_source": "README.md hand-curated content replicated verbatim (raw 91 C3 honest: not fabricated novelty)"
+    },
+    {
+      "id": "frontier",
+      "emoji": "🔭",
+      "name": "Frontier Discoveries",
+      "name_en": "Frontier",
+      "anchor": "-frontier-discoveries-next-gen-rt-sc-tech",
+      "summary_literal": "> **🛸10** | ✅ | BT 264 · 100% EXACT | 20  generationsdiscoveries (1~10: NEURO/GRAV/CLOAK/DEFENSE/TELEPORT/HOVER/MRAM/SEABED/ACCEL/WEATHER, 11~20: MIND/TELEPATHY/HOLO/DREAM/SKYWAY/TSUNAMI/ANTIMATTER/COSMIC/DESAL/ORACLE) | industry100% (Neuralink/LIGO/LHC/HAARP grade) | experiment99% 1039/1041 EXACT | physical-limit10 | TP163 | discoveries71 | Mk.V",
+      "footer_literal": "> domains: [neuro/](docs/neuro/) · [gravity-wave/](docs/gravity-wave/) · [cloak/](docs/cloak/) · [earth-defense/](docs/earth-defense/) · [quantum-network/](docs/quantum-network/) · [hover/](docs/hover/) · [sc-memory/](docs/sc-memory/) · [seabed-grid/](docs/seabed-grid/) · [mini-accelerator/](docs/mini-accelerator/) · [weather-control/](docs/weather-control/) · [mind-upload/](docs/mind-upload/) · [telepathy/](docs/telepathy/) · [holography/](docs/holography/) · [dream-recorder/](docs/dream-recorder/) · [skyway/](docs/skyway/) · [tsunami-shield/](docs/tsunami-shield/) · [antimatter-factory/](docs/antimatter-factory/) · [cosmic-observatory/](docs/cosmic-observatory/) · [desalination/](docs/desalination/) · [quantum-oracle/](docs/quantum-oracle/) · [simulation-theory/](docs/simulation-theory/) · [therapeutic-nanobot/](docs/therapeutic-nanobot/)",
+      "_n6_invariant": "20 generations discoveries (NEURO/GRAV/CLOAK/DEFENSE/TELEPORT/HOVER/MRAM/SEABED/ACCEL/WEATHER + MIND/TELEPATHY/HOLO/DREAM/SKYWAY/TSUNAMI/ANTIMATTER/COSMIC/DESAL/ORACLE)",
+      "_source": "README.md hand-curated content replicated verbatim (raw 91 C3 honest: not fabricated novelty)"
+    },
+    {
+      "id": "civilization",
+      "emoji": "🏛️",
+      "name": "Civilization & Humanities",
+      "name_en": "Civilization",
+      "anchor": "-civilization--humanities",
+      "summary_literal": "> **🛸10** | ✅ | BT 12 · 100% EXACT | 6domains full 20/20 EXACT ceiling breakthroughs 2026-04-06 | industry30% (literature cross verification complete (6 religions/global legal systems/writing systems Compare)) | experiment40% hypotheses verification complete (60/72 EXACT) | TP6 | discoveries120",
+      "footer_literal": "> domains: [religion/](docs/religion/) · [jurisprudence/](docs/jurisprudence/) · [writing-systems/](docs/writing-systems/) · [archaeology/](docs/archaeology/) · [monetary-history/](docs/monetary-history/) · [dance-choreography/](docs/dance-choreography/)",
+      "_n6_invariant": "6 domains 20/20 EXACT ceiling: Religion / Jurisprudence / Writing-systems / Archaeology / Monetary-history / Dance-choreography / Horology",
+      "_source": "README.md hand-curated content replicated verbatim (raw 91 C3 honest: not fabricated novelty)"
+    },
+    {
+      "id": "life-culture",
+      "emoji": "🍷",
+      "name": "Life & Culture",
+      "name_en": "Life & Culture",
+      "anchor": "-life--culture",
+      "summary_literal": "> **🛸10** | ✅ | BT 10 · 100% EXACT | BT-358 Insurance add, vampire structure breakthroughs 2026-04-06 | industry25% (fermentationratelearning/Insurancestatistics industry cross verified) | experiment35% hypotheses verified (40/62 EXACT) | TP5 | discoveries8",
+      "footer_literal": "> domains: [fermentation/](docs/fermentation/) · [wine-enology/](docs/wine-enology/) · [fashion-textile/](docs/fashion-textile/) · [aquaculture/](docs/aquaculture/) · [insurance/](docs/insurance/) · [dolphin/](docs/dolphin/)",
+      "_n6_invariant": "Fermentation C6H12O6 -> 2C2H5OH+2CO2 n=6 stoichiometry; 9 cultural domains",
+      "_source": "README.md hand-curated content replicated verbatim (raw 91 C3 honest: not fabricated novelty)"
+    },
+    {
+      "id": "tech-industry",
+      "emoji": "🔧",
+      "name": "Tech & Industry",
+      "name_en": "Tech & Industry",
+      "anchor": "-tech--industry",
+      "summary_literal": "> **🛸10** | ✅ | BT 13 · 100% EXACT | BT-354/355/357 + BT-1104 HBM 10domains  generationsintegrated (58/58 EXACT) | industry50% (HBM/UCIe industry spec verified + CRISPR paper verified) | experiment55% hypotheses verified (77/77 EXACT=100%) | TP10 | discoveries13",
+      "footer_literal": "> domains: [advanced-packaging/](docs/advanced-packaging/) · [synthetic-biology/](docs/synthetic-biology/) · [spatial-computing/](docs/spatial-computing/) · [digital-twin/](docs/digital-twin/) · [architecture/](docs/architecture/) · [underground-tunnel/](docs/underground-tunnel/) · [ecommerce-fintech/](docs/ecommerce-fintech/) · [nylon/](docs/nylon/) · [aramid/](docs/aramid/) · [tire-cord/](docs/tire-cord/) · [epoxy/](docs/epoxy/) · [pet-film/](docs/pet-film/) · [airbag/](docs/airbag/) · [water-treatment/](docs/water-treatment/) · [pemfc/](docs/pemfc/) · [concrete/](docs/concrete/) · [bio-pharma/](docs/bio-pharma/) · [hvac-system/](docs/hvac-system/) · [earthquake-engineering/](docs/earthquake-engineering/) · [concrete-technology/](docs/concrete-technology/) · [smart-city/](docs/smart-city/) · [civil-engineering/](docs/civil-engineering/)",
+      "_n6_invariant": "HBM tau->sigma-tau->sigma->phi^tau stacking; UCIe 4-stage ladder; 22 industrial domains",
+      "_source": "README.md hand-curated content replicated verbatim (raw 91 C3 honest: not fabricated novelty)"
+    },
+    {
+      "id": "computer",
+      "emoji": "💻",
+      "name": "Computer",
+      "name_en": "Computer",
+      "anchor": "-computer",
+      "summary_literal": "> **🛸10** | ✅ | BT 10+ | Keyboard 31hypotheses 30 EXACT, BCI 36/40 EXACT, Quantum Computer 20/24 EXACT | USB HID/Brain-Computer/qubit full n=6 convergence",
+      "footer_literal": "> domains: [keyboard/](domains/compute/keyboard/) · [mouse/](domains/compute/mouse/) · [brain-computer-interface/](domains/cognitive/brain-computer-interface/) · [quantum-computer/](domains/physics/quantum-computer/) · BT: 49, 1115~1128 · human-sys Interface full n=6 paramsrate",
+      "_n6_invariant": "Keyboard USB 6KRO/8bytes/12Mbps; BCI sigma=12 EEG channels; Quantum NeutralAtom n=6 atoms; HEXA-MOUSE PS/2 n=6pin",
+      "_source": "README.md hand-curated content replicated verbatim (raw 91 C3 honest: not fabricated novelty)"
+    },
+    {
+      "id": "marketing",
+      "emoji": "📢",
+      "name": "Marketing",
+      "name_en": "Marketing",
+      "anchor": "-marketing",
+      "summary_literal": "> **🛸10** | ✅ | BT 10 · 100% EXACT | Marketing Inviolable Laws 12items, 720=6! combos discoveries, Egyptian media-mix 1/2+1/3+1/6=1 | industry40% (Kotler 4P + Krugman 3rotation iterate + NPS 0-10 scaled independent verified + AIDA τ=4stages + Egyptian media-mix 1/2+1/3+1/6=1 industry validation) | experiment50% hypotheses 24/24 EXACT (100%, N65 NEAR 2 items alt-verify promoted), n=28  generationsJ realpack confirmed, BT-548~587 40breakthroughs 5Product 🛸10 ceiling reach | physical-limit8 | TP10 | discoveries5 | Mk.V",
+      "footer_literal": "> domains: [marketing/](domains/infra/marketing/) · [nexus-service/](domains/compute/nexus-service/) · [anima-service/](domains/cognitive/anima-service/) · [unified-service/](domains/compute/unified-service/)",
+      "_n6_invariant": "12 inviolable laws (sigma=12 touchpoints, tau=4P, phi=2 binary, sopfr=5 segmentation, Egyptian 1/2+1/3+1/6=1)",
+      "_source": "README.md hand-curated content replicated verbatim (raw 91 C3 honest: not fabricated novelty)"
+    },
+    {
+      "id": "millennium",
+      "emoji": "🧮",
+      "name": "Millennium Problems",
+      "name_en": "Millennium",
+      "anchor": "-millennium-problems",
+      "summary_literal": "> **🛸10** | ✅ | BT 7 · 94% EXACT | 7 generations open-problem full n=6 paramsrate | φ→n/φ rankphase-transition universality discoveries | industryvoid% | experiment94% | TP0 | discoveries7 | Mk.V",
+      "footer_literal": "> domains: [millennium-riemann/](docs/millennium-riemann/) · [millennium-p-vs-np/](docs/millennium-p-vs-np/) · [millennium-yang-mills/](docs/millennium-yang-mills/) · [millennium-navier-stokes/](docs/millennium-navier-stokes/) · [millennium-hodge/](docs/millennium-hodge/) · [millennium-bsd/](docs/millennium-bsd/) · [millennium-poincare/](docs/millennium-poincare/)",
+      "_n6_invariant": "7 generations open-problem n=6 reduction: Riemann / P=NP / Yang-Mills / Navier-Stokes / Hodge / BSD / Poincare; phi -> n/phi rank phase-transition universality",
+      "_source": "README.md hand-curated content replicated verbatim (raw 91 C3 honest: not fabricated novelty)"
+    },
+    {
+      "id": "dimension",
+      "emoji": "👁️",
+      "name": "Dimensional Perception",
+      "name_en": "Dimensional Perception",
+      "anchor": "-dimensional-perception",
+      "summary_literal": "> **🛸10** | ✅ | BT 10 · 100% EXACT | countlearning(4Dgeometry)·brain(grid cells·visual cortex)·tech(prephoton-shipcount·Display) trimid n=6 convergence | industryvoid% | experiment100% 100/100 EXACT | TP0 | discoveries10 | Mk.V",
+      "footer_literal": "> domains: [hexa-holo/](docs/hexa-holo/) · [display-8stack/](docs/display-8stack/) · [consciousness-chip/](docs/consciousness-chip/)",
+      "_n6_invariant": "4D regular polytope max n=6; SO(4) DOF n=6; grid cells n=6 hexagonal (Nobel 2014); V1~V6 visual cortex n=6 layers",
+      "_source": "README.md hand-curated content replicated verbatim (raw 91 C3 honest: not fabricated novelty)"
+    },
+    {
+      "id": "music",
+      "emoji": "🎵",
+      "name": "Music & Acoustics",
+      "name_en": "Music",
+      "anchor": "-music--acoustics",
+      "summary_literal": "> **🛸10** | ✅ | BT 10 · 100% EXACT | 12-tonesysσ, Guitar6stringsn, overtone series1:2:3:4:5:6, J₂=24keys | industryvoid% | experiment100% 100/100 EXACT | TP0 | discoveries10 | Mk.V",
+      "footer_literal": "> domains: [music/](docs/music/)",
+      "_n6_invariant": "12-tone sigma; Guitar 6-string n; overtone 1:2:3:4:5:6; J2=24 keys",
+      "_source": "README.md hand-curated content replicated verbatim (raw 91 C3 honest: not fabricated novelty)"
+    },
+    {
+      "id": "linguistics",
+      "emoji": "📝",
+      "name": "Linguistics",
+      "name_en": "Linguistics",
+      "anchor": "-linguistics",
+      "summary_literal": "> **🛸10** | ✅ | BT 10 · 100% EXACT | Chomskyτ=4, KoreanJ₂=24, θ-rolesn=6, word-order3!=n=6 | industryvoid% | experiment100% 100/100 EXACT | TP0 | discoveries10 | Mk.V",
+      "footer_literal": "> domains: [linguistics/](docs/linguistics/)",
+      "_n6_invariant": "Chomsky tau=4; Korean jamo J2=24; theta-roles n=6; word-order 3!=n=6; Jakobson 6 functions",
+      "_source": "README.md hand-curated content replicated verbatim (raw 91 C3 honest: not fabricated novelty)"
+    },
+    {
+      "id": "crypto",
+      "emoji": "🔐",
+      "name": "Cryptography & Infosec",
+      "name_en": "Crypto",
+      "anchor": "-cryptography--infosec",
+      "summary_literal": "> **🛸10** | ✅ | BT 10 · 100% EXACT | AES τ×τ, RSA φ(N), SHA σ-τ=8, TLS n=6, ECC n=6 | industryvoid% | experiment100% 100/100 EXACT | TP0 | discoveries10 | Mk.V",
+      "footer_literal": "> domains: [software-crypto/](docs/software-crypto/)",
+      "_n6_invariant": "AES tau x tau; RSA phi(N); SHA sigma-tau=8; TLS n=6; ECC n=6",
+      "_source": "README.md hand-curated content replicated verbatim (raw 91 C3 honest: not fabricated novelty)"
+    },
+    {
+      "id": "astronomy",
+      "emoji": "🔭",
+      "name": "Astronomy & Cosmology",
+      "name_en": "Astronomy",
+      "anchor": "-astronomy--cosmology",
+      "summary_literal": "> **🛸10** | ✅ | BT 10 · 100% EXACT | ΛCDM n=6, BBN n=6, C-12 σ=12, Kepler n/φ=3, BAO σ²=144 | industryvoid% | experiment100% 100/100 EXACT | TP0 | discoveries10 | Mk.V",
+      "footer_literal": "> domains: [particle-cosmology/](docs/particle-cosmology/) · [space-systems/](docs/space-systems/)",
+      "_n6_invariant": "LCDM 6 params; BBN n=6 nuclides; C-12 sigma=12 triple-alpha; Kepler n/phi=3 laws; BAO sigma^2=144 Mpc",
+      "_source": "README.md hand-curated content replicated verbatim (raw 91 C3 honest: not fabricated novelty)"
+    },
+    {
+      "id": "hygiene",
+      "emoji": "🧴",
+      "name": "Hygiene",
+      "name_en": "Hygiene",
+      "anchor": "-hygiene",
+      "summary_literal": "> **🛸10** | ✅ | BT 2 · 100% EXACT | BT-1157 Men's Cleanser + BT-1158 Women's Cleanser 100% ossified 2026-04-10 | industry80% (bluePayment market OEM immediate) | experiment100% 50/50 EXACT (Men 25 + Women 25) | TP2 | discoveries2",
+      "footer_literal": "> domains: [mens-intimate-cleanser/](docs/mens-intimate-cleanser/) · [womens-intimate-cleanser/](docs/womens-intimate-cleanser/)",
+      "_n6_invariant": "Men's Cleanser glans pH=n=6, lauryl C12=sigma; Women's Cleanser Lactobacillus 6 types, vaginal pH=tau=4, CST 5 types",
+      "_source": "README.md hand-curated content replicated verbatim (raw 91 C3 honest: not fabricated novelty)"
+    },
+    {
+      "id": "fantasy",
+      "emoji": "🐉",
+      "name": "Fantasy",
+      "name_en": "Fantasy",
+      "anchor": "-fantasy",
+      "summary_literal": "> [!WARNING]\n> Mythology/fantasy exploration — not an engineering target · 2 domains · 60 hypotheses · 16 EXACT (26.7%) · BT cross 16",
+      "_n6_invariant": "Mythology/fantasy exploration — not an engineering target; 2 domains, 60 hypotheses, 16 EXACT (26.7%)",
+      "_source": "README.md hand-curated [!WARNING] callout replicated verbatim (raw 91 C3 honest)"
     }
   ],
   "roadmap": [

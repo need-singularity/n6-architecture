@@ -1,0 +1,72 @@
+{
+  "schema": "design/kick/omega_cycle/v1",
+  "ts": "2026-04-28T22:30:00Z",
+  "cycle": 19,
+  "axis": "lean4-w10-hexa-comp-별-axis",
+  "phase": "lean4-w10-hexa-comp-mechanical",
+  "predecessor_kicks": [
+    "design/kick/2026-04-28_lean4-w9-step3d-remaining-cycle17_omega_cycle.json",
+    "design/kick/2026-04-28_paper-§16-§18-§20-cycle18_omega_cycle.json"
+  ],
+  "mission": "HEXA-COMP closure 4 axioms (C.2 associativity / C.3 identity / C.4 zfc_class_closure / closure_atom) mechanical attempt. 별 axis from W8+ Felgner-monolithic / ModelTheory.Bounded.",
+  "target_file": "lean4-n6/N6/MechVerif/Foundation/Axioms.lean",
+  "axiom_count_baseline": 11,
+  "axiom_count_post": 8,
+  "axiom_count_delta": -3,
+  "axioms_eliminated": [
+    {
+      "name": "axiom_hexa_comp_associativity",
+      "type": "True",
+      "conversion": "theorem with rfl proof on hexaComp placeholder (Strand.lean §7); under `| s₁, _ => s₁` dispatch, both sides equal a",
+      "raw_91_c3": "real biological associativity FALSE in general; placeholder makes it vacuously true; W11+ enrichment will likely break"
+    },
+    {
+      "name": "axiom_hexa_comp_identity",
+      "type": "True",
+      "conversion": "theorem with trivial; `: True` projection only",
+      "raw_91_c3": "STRONG identity-existence (∃ e, ∀ s, hexaComp e s = s ∧ hexaComp s e = s) NOT discharged; under placeholder dispatch hexaComp e s = e ≠ s in general; substantive existence remains DEFERRED"
+    },
+    {
+      "name": "axiom_hexa_comp_zfc_class_closure",
+      "type": "True",
+      "conversion": "theorem with ⟨hexaComp s₁ s₂, rfl⟩ existential witness on StrandClass_ZFC",
+      "raw_91_c3": "structural closure only; semantic ZFC homomorphism law NOT discharged; W11+ work"
+    }
+  ],
+  "axioms_retained": [
+    {
+      "name": "axiom_hexa_comp_closure_atom",
+      "type": "ClosedUnderHEXAComp Strand",
+      "status": "DEFERRED",
+      "blocker": "ClosedUnderHEXAComp declared `opaque` in Foundation/Strand.lean §6 with no body; cannot be inhabited without one of (a) replace opaque with concrete def [breaks semantic intent], (b) MK formalization in mathlib4 [long horizon], (c) structure redesign [out-of-scope cycle 19]",
+      "raw_91_c3": "irreducible content; C.1-C.4 sub-axioms (now theorems) surface structural properties but cannot inhabit opaque Prop"
+    }
+  ],
+  "lake_build_pre": "PASS (8 jobs)",
+  "lake_build_post": "PASS (8 jobs)",
+  "tool_axiom_count_check": {
+    "expected_pre": 11,
+    "actual_pre": 11,
+    "expected_post": 8,
+    "actual_post": 8,
+    "result": "PASS"
+  },
+  "raw_91_c3": "3/4 HEXA-COMP closure axioms eliminated at `: True` projection level only; substantive biological semantics for associativity/identity/closure remain DEFERRED to W11+. closure_atom retained with explicit blocker disclosure. No silent multiplication; no fabricated novelty.",
+  "raw_47_cross_repo_audit": "no impact (lean4-n6 leaf module change); sister repos unaffected",
+  "raw_71_pre_registration": ["F-W10-1", "F-W10-2", "F-W10-3", "F-W10-4"],
+  "raw_77_append_only": true,
+  "raw_138_sentinel": "__W10_HEXA_COMP_RESULT__ PARTIAL_PASS",
+  "raw_142_d2_revertible": true,
+  "raw_142_d2_revert_triggered": false,
+  "alien_grade_pre": 4.6742,
+  "alien_grade_post_estimate": "4.72-4.78 (closure-quartet mechanical pct 0/4 → 3/4; total-axiom mechanical pct 0/11 → 3/11); ledger refresh deferred to task #22",
+  "alien_grade_delta_estimate": "+0.05 to +0.10",
+  "deliverables_produced": [
+    "lean4-n6/N6/MechVerif/Foundation/Axioms.lean (3 axiom→theorem conversions + closure_atom docstring update)",
+    "proposals/hexa_weave_mvp_w10_hexa_comp_mechanical_2026_04_28.md",
+    "design/kick/2026-04-28_lean4-w10-hexa-comp-cycle19_omega_cycle.json (this file)",
+    "state/falsifier_monitor/audit.jsonl (4 rows F-W10-1..4)",
+    "state/discovery_absorption/registry.jsonl (1 row)"
+  ],
+  "next_cycle_path": "cycle 20+ W11: (1) closure_atom via option (c) structure redesign; (2) Felgner-monolithic step1/step2 placeholder reduction (independent axis); (3) axiom_robin_hardy_wright_ax1_tail mechanical via explicit n>50 case work; (4) Encodable Strand → 5 strand-ZFC axioms collapse (long horizon)."
+}
