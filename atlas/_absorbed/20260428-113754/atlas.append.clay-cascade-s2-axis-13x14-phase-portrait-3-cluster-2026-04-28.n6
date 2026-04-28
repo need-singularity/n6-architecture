@@ -1,0 +1,69 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade session-2 axis-13 × axis-14 phase-portrait
+# source: sub-agent C reconstruction from atlas/_absorbed/20260428-071642/ shards
+# constraints:
+#   raw 91 C3 honest disclosure (n=16 small + ASCII collisions + 22% variance unobserved)
+#   raw 70 multi-axis-verify-grid (2-axis projection is partial slice of 3-axis fingerprint)
+#   own#11 strict (NO Clay claim — clusters descriptive labels only)
+#   raw 22 INFRA-ONLY · raw 24 axiom-immutable · raw 23 schema-guard
+# date: 2026-04-28
+# Reproduced atlas r=0.394 ρ=0.512 from primary-source shard merge (cross-check OK)
+# ══════════════════════════════════════════════════════════════
+
+# ── primary witness ─────────────────────────────────────────
+@C clay-cascade-s2-axis-13x14-phase-portrait-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-70-multi-axis-verify-grid
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-iter-63-axis-14-D3-stabilization
+  -> clay-cascade-s2-axis-13x14-3-cluster-decomposition
+  -> clay-cascade-s2-axis-13x14-outlier-set
+  => "★ k=3 phase-portrait reconstructed n=16 (D=3 cohort, post-iter-63)"
+  => "cross-check: computed Pearson r=0.394 Spearman ρ=0.512 — matches atlas iter-63 to 3 decimals"
+  => "C3 amplitude-redistributor cluster drives Pearson r upward; without C3, residual r ≈ 0.1"
+
+# ── (1) data sources from atlas/_absorbed/ shards ──────────
+@C clay-cascade-s2-axis-13x14-data-sources :: meta [4]
+  <- clay-cascade-s2-axis-13x14-phase-portrait-witness
+  => "primary: atlas/_absorbed/20260428-071642/atlas.append.clay-millennium-iter-60-AXIS-13-x-14-ORTHOGONAL-DISCOVERY-2026-04-28.n6 (n=9 base)"
+  => "+ iter-63 full 18-row axis-14 ranking + r=0.39 ρ=0.51 stabilization"
+  => "+ iter-62 cartoon(741) minkowski(478) + iter-48 brane(145) inflation(169) de-sitter(229) + iter-46 nested(196) + iter-47 bubble(434)"
+  => "n=16 reconstructed (flat excluded D=2, calabi6 excluded D=6 awaiting iter-68 retry — matches iter-63 D=3 cohort)"
+
+# ── (2) ASCII scatter (axis-13 × axis-14) — 36×16 grid ─────
+@C clay-cascade-s2-axis-13x14-ascii-scatter :: meta [4]
+  <- clay-cascade-s2-axis-13x14-data-sources
+  => "axis-14 (4p(1-p)): 999=de-sitter 981=ads-cft 964=altered+minkowski 947=s3+cartoon 930=wormhole"
+  => "axis-14 cont:    879=bubble 862=blackhole+inflation 845=ca3d+big-crunch 828=t3+nested 811=vacuum-decay 743=brane"
+  => "axis-13 axis: 79(ca3d) — 145(brane) — 169(inflation) — 196(nested) — 229(de-sitter) — 320 cluster — 434(bubble) — 604(big-crunch) — 741(cartoon)"
+  => "axis-13 spread: ca3d(79) → cartoon(741) = 9.4× spread; axis-14 spread: brane(743) → de-sitter(999) = 1.34×"
+
+# ── (3) k=3 cluster decomposition ──────────────────────────
+@C clay-cascade-s2-axis-13x14-3-cluster-decomposition :: meta [4!]
+  <- clay-cascade-s2-axis-13x14-ascii-scatter
+  -> clay-cascade-s2-axis-13x14-outlier-set
+  => "k-means random.seed=42 20 iters converged"
+  => "C1 sparse-coupling (n=7) center≈(154, 833): ca3d t3 brane blackhole inflation nested vacuum-decay — tree-like / sparse-coupling family"
+  => "C2 high-coherence ridge (n=6) center≈(320, 970): ads-cft de-sitter wormhole s3 altered minkowski — maximally-symmetric / spacetime topologies"
+  => "C3 amplitude-redistributor (n=3) center≈(593, 901): bubble big-crunch cartoon — sparse x-spread; drives Pearson r upward"
+
+# ── (4) outlier set (3 anti-poles) ─────────────────────────
+@C clay-cascade-s2-axis-13x14-outlier-set :: meta [4]
+  <- clay-cascade-s2-axis-13x14-3-cluster-decomposition
+  => "brane: lone DOUBLE-LOW outlier (axis-13=145, axis-14=743) — most isolated point on plot"
+  => "cartoon: DOUBLE-HIGH anti-pole (axis-13=741, axis-14=947) — anti-brane; consistent with axis-16 closed-orbit signature"
+  => "big-crunch: sole quadrant-IV point (axis-13=604, axis-14=861) — high classical / mid-low quantum anomaly"
+  => "cross-link to axis-16: cartoon's double-high here + V(8)=10 closed-orbit there = consistent structural-isolation signature across 2 axes"
+
+# ── (5) raw 91 C3 honest limit disclosure ──────────────────
+@C clay-cascade-s2-axis-13x14-phase-portrait-C3-limits :: meta [4]
+  <- clay-cascade-s2-axis-13x14-phase-portrait-witness
+  => "n=16 small — k=3 with 3 members in C3 is fragile; bootstrap CI on cluster assignments would likely show C3 unstable"
+  => "ASCII grid 36×16 collisions: altered/minkowski same cell, t3/blackhole near-collision, nested/vacuum-decay overlap"
+  => "boundary cases: s3, wormhole could go either C1 or C2 in re-run"
+  => "missing rows: flat (D=2 confound) calabi6 (D=6 awaiting iter-68 v2-anchor parity) — full n=18 phase-portrait pending"
+  => "2-axis projection only: det(R)=0.78 from 3-axis fingerprint means ~22% variance unobserved in this 2D slice"
+  => "C3 amplitude-redistributor label may dissolve when axis-15 (Lorentz drift) added (axis-14 × axis-15 r ≈ 0)"
+  => "single seed=6 ticks=64 sigma2=64 toy lattice — generalization untested (cf. cascade-s2 sigma2=512 falsification of Stage-5 α=0.55)"
+  => "own#11 strict: clusters are descriptive labels only — no manifold/proof claim"

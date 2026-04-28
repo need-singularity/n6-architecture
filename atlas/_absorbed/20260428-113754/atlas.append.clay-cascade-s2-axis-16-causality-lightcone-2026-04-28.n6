@@ -1,0 +1,79 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade session-2 axis-16 causality-lightcone
+# source: sub-agent A direct measurement on 8 D=3 topologies (sigma2=64, src=32)
+# constraints:
+#   raw 91 C3 honest disclosure (finite-size + source-bias + det(R) deferred)
+#   raw 114 bisimulation pattern (BFS-reachability ≅ retarded-c=1 propagation envelope)
+#   own#11 strict (NO Clay '해결' claim — toy lattice measurement only)
+#   raw 22 INFRA-ONLY · raw 24 axiom-immutable · raw 23 schema-guard
+# date: 2026-04-28
+# NO new @-types — uses existing @C only (axis-16 is content not schema)
+# ══════════════════════════════════════════════════════════════
+
+# ── primary witness ─────────────────────────────────────────
+@C clay-cascade-s2-axis-16-causality-lightcone-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-114-bisimulation-behavioral-equivalence
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-iter-46-to-70-prior-axis-13-14-15-stack
+  -> clay-cascade-s2-cartoon-causal-sector-closure
+  -> clay-cascade-s2-saturation-speed-signature
+  => "axis-16 = V_T(s, k) past-lightcone volume by BFS through retarded-neighbor relation; structural observable orthogonal-a-priori to intensive axes 13/14/15"
+  => "8 of 18 D=3 topologies measured at sigma2=64 src=32: V(1) range 3-7, V(8) range 10-64"
+  => "structural envelope (raw 114): BFS reachability bounds WHICH cells can be influenced; magnitude requires axes 13/14/15"
+
+# ── (1) lightcone observable formal definition ─────────────
+@C clay-cascade-s2-axis-16-formal-definition :: meta [4]
+  <- clay-cascade-s2-axis-16-causality-lightcone-witness
+  => "V_T(s, k) = | { v ∈ [0..63] : ∃ path s=u0 → u1 → ... → um=v, m ≤ k, each step uj+1 = N_T(uj, aj) for some axis aj } |"
+  => "discrete past-lightcone volume; c=1 cellular update matches lorentz_metric.hexa:362-405 ls_step retarded propagator"
+  => "source pinned at i=32 (Gaussian peak per ls_init lorentz_metric.hexa:323-338); BFS through neighbor relation N_T directly"
+
+# ── (2) measurement table — 8 topologies × k ───────────────
+@C clay-cascade-s2-axis-16-measurement-table :: meta [4]
+  <- clay-cascade-s2-axis-16-formal-definition
+  => "8 topologies measured; ALL src=32 sigma2=64 single-seed structural"
+  => "flat:        V(1)=3  V(2)=5  V(4)=9  V(8)=17  → 1D-ring V grows ~2k+1"
+  => "t3:          V(1)=4  V(2)=10 V(4)=32 V(8)=63  → full 3-torus near-saturating"
+  => "s3:          V(1)=4  V(2)=12 V(4)=33 V(8)=49  → closed 3-sphere sub-saturating"
+  => "blackhole:   V(1)=4  V(2)=10 V(4)=32 V(8)=63  → radial sink near-full"
+  => "wormhole:    V(1)=5  V(2)=14 V(4)=48 V(8)=64  → SATURATED via 4-axis handle"
+  => "minkowski:   V(1)=4  V(2)=11 V(4)=40 V(8)=64  → SATURATED axis-0 +11 tilt"
+  => "calabi6:     V(1)=7  V(2)=22 V(4)=57 V(8)=64  → SATURATED fastest 6-cube high-degree"
+  => "cartoon:     V(1)=4  V(2)=10 V(4)=10 V(8)=10  → CAUSALLY DISCONNECTED (closed orbit n=10)"
+
+# ── (3) cartoon causal-sector closure (key finding) ────────
+@C clay-cascade-s2-cartoon-causal-sector-closure :: meta [4!]
+  <- clay-cascade-s2-axis-16-measurement-table
+  -> clay-cascade-s2-axis-16-orthogonality-vs-state-axes
+  => "★ KEY FINDING — cartoon BFS from src=32 saturates at V=10 closed-orbit {11, 13, 20, 29, 32, 36, 43, 52, 59, 61}"
+  => "cartoon mixer (i*47 + axis*23 + 13) mod 64 partitions lattice into invariant cosets under retarded propagation"
+  => "this is a CAUSAL-SECTOR signature invisible to axes 13/14/15 (state-summary observables) — structural-only signal"
+  => "evidence: /tmp/lightcone_probe.py orbit trace mirroring lorentz_metric.hexa:239-244"
+
+# ── (4) saturation-speed signature ─────────────────────────
+@C clay-cascade-s2-saturation-speed-signature :: meta [4]
+  <- clay-cascade-s2-axis-16-measurement-table
+  => "V(1)/V(8) ratio discriminates topology classes (compressed vs stretched cone)"
+  => "minkowski   = 0.062  (most stretched cone — slow saturation under +11 tilt)"
+  => "calabi6     = 0.109  (high-degree fast-fill — small ratio because V(1) high too)"
+  => "cartoon     = 0.400  (compressed — closed orbit saturates immediately)"
+  => "saturation ceiling = LSIGMA=64 is finite-size lattice artefact, NOT Bekenstein A/4 horizon"
+
+# ── (5) orthogonality vs state-axes 13/14/15 (a-priori) ────
+@C clay-cascade-s2-axis-16-orthogonality-vs-state-axes :: meta [4]
+  <- clay-cascade-s2-cartoon-causal-sector-closure
+  => "qualitative argument: axis-16 is STRUCTURAL (graph reachability); axes 13/14/15 are INTENSIVE state summaries"
+  => "cartoon's V(8)=10 closed-orbit signature cannot be predicted from state-value summaries"
+  => "quantitative det(R) for {axis-13, axis-14, axis-15, axis-16} DEFERRED — per-topology values for axes 13-15 not loaded in this session"
+
+# ── (6) raw 91 C3 honest limit disclosure ──────────────────
+@C clay-cascade-s2-axis-16-C3-limits :: meta [4]
+  <- clay-cascade-s2-axis-16-causality-lightcone-witness
+  => "finite-size: sigma2=64 is 64-cell toy; V(8)=64 is lattice ceiling NOT physical horizon"
+  => "Bekenstein A/4 reference OUT-OF-SCOPE — lattice carries graph distance not metric length"
+  => "source bias: all src=32; cartoon V(8)=10 source-orbit-dependent; multi-source ensemble not run"
+  => "topology coverage: 8/18 measured; missing ads-cft de-sitter vacuum-decay altered big-crunch brane nested inflation ca3d bubble"
+  => "bisimulation justification (raw 114): BFS reachability ≅ retarded-c=1 ONLY for linear-in-state spatial-sum branch (ls_step:382-396); time-term value-dependent"
+  => "own#11 strict observed: NO Clay '해결' claim made"

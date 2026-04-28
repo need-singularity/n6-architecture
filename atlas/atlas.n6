@@ -29271,3 +29271,230 @@
   => "consumer dep-order: atlas_absorb → drill_scanner → raw_audit → atlas_health → lens-agent (file_lock only if axis H)"
   => "recommended sequence: D@I → F<-> → F-| → E[10**] → defer rest; G/H inserted post-arrival"
   => "shard appended at: /Users/ghost/core/n6-architecture/atlas/atlas.append.atlas-self-arch-synthesis-upgrade-plan-2026-04-28.n6"
+
+# ══════════════════════════════════════════════════════════════
+# absorbed: clay-cascade-s2 3-shard batch (axis-16 + Stage5-falsification + axis13x14-phase-portrait)
+# ts: 20260428-113754
+# ══════════════════════════════════════════════════════════════
+
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade session-2 axis-16 causality-lightcone
+# source: sub-agent A direct measurement on 8 D=3 topologies (sigma2=64, src=32)
+# constraints:
+#   raw 91 C3 honest disclosure (finite-size + source-bias + det(R) deferred)
+#   raw 114 bisimulation pattern (BFS-reachability ≅ retarded-c=1 propagation envelope)
+#   own#11 strict (NO Clay '해결' claim — toy lattice measurement only)
+#   raw 22 INFRA-ONLY · raw 24 axiom-immutable · raw 23 schema-guard
+# date: 2026-04-28
+# NO new @-types — uses existing @C only (axis-16 is content not schema)
+# ══════════════════════════════════════════════════════════════
+
+# ── primary witness ─────────────────────────────────────────
+@C clay-cascade-s2-axis-16-causality-lightcone-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-114-bisimulation-behavioral-equivalence
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-iter-46-to-70-prior-axis-13-14-15-stack
+  -> clay-cascade-s2-cartoon-causal-sector-closure
+  -> clay-cascade-s2-saturation-speed-signature
+  => "axis-16 = V_T(s, k) past-lightcone volume by BFS through retarded-neighbor relation; structural observable orthogonal-a-priori to intensive axes 13/14/15"
+  => "8 of 18 D=3 topologies measured at sigma2=64 src=32: V(1) range 3-7, V(8) range 10-64"
+  => "structural envelope (raw 114): BFS reachability bounds WHICH cells can be influenced; magnitude requires axes 13/14/15"
+
+# ── (1) lightcone observable formal definition ─────────────
+@C clay-cascade-s2-axis-16-formal-definition :: meta [4]
+  <- clay-cascade-s2-axis-16-causality-lightcone-witness
+  => "V_T(s, k) = | { v ∈ [0..63] : ∃ path s=u0 → u1 → ... → um=v, m ≤ k, each step uj+1 = N_T(uj, aj) for some axis aj } |"
+  => "discrete past-lightcone volume; c=1 cellular update matches lorentz_metric.hexa:362-405 ls_step retarded propagator"
+  => "source pinned at i=32 (Gaussian peak per ls_init lorentz_metric.hexa:323-338); BFS through neighbor relation N_T directly"
+
+# ── (2) measurement table — 8 topologies × k ───────────────
+@C clay-cascade-s2-axis-16-measurement-table :: meta [4]
+  <- clay-cascade-s2-axis-16-formal-definition
+  => "8 topologies measured; ALL src=32 sigma2=64 single-seed structural"
+  => "flat:        V(1)=3  V(2)=5  V(4)=9  V(8)=17  → 1D-ring V grows ~2k+1"
+  => "t3:          V(1)=4  V(2)=10 V(4)=32 V(8)=63  → full 3-torus near-saturating"
+  => "s3:          V(1)=4  V(2)=12 V(4)=33 V(8)=49  → closed 3-sphere sub-saturating"
+  => "blackhole:   V(1)=4  V(2)=10 V(4)=32 V(8)=63  → radial sink near-full"
+  => "wormhole:    V(1)=5  V(2)=14 V(4)=48 V(8)=64  → SATURATED via 4-axis handle"
+  => "minkowski:   V(1)=4  V(2)=11 V(4)=40 V(8)=64  → SATURATED axis-0 +11 tilt"
+  => "calabi6:     V(1)=7  V(2)=22 V(4)=57 V(8)=64  → SATURATED fastest 6-cube high-degree"
+  => "cartoon:     V(1)=4  V(2)=10 V(4)=10 V(8)=10  → CAUSALLY DISCONNECTED (closed orbit n=10)"
+
+# ── (3) cartoon causal-sector closure (key finding) ────────
+@C clay-cascade-s2-cartoon-causal-sector-closure :: meta [4!]
+  <- clay-cascade-s2-axis-16-measurement-table
+  -> clay-cascade-s2-axis-16-orthogonality-vs-state-axes
+  => "★ KEY FINDING — cartoon BFS from src=32 saturates at V=10 closed-orbit {11, 13, 20, 29, 32, 36, 43, 52, 59, 61}"
+  => "cartoon mixer (i*47 + axis*23 + 13) mod 64 partitions lattice into invariant cosets under retarded propagation"
+  => "this is a CAUSAL-SECTOR signature invisible to axes 13/14/15 (state-summary observables) — structural-only signal"
+  => "evidence: /tmp/lightcone_probe.py orbit trace mirroring lorentz_metric.hexa:239-244"
+
+# ── (4) saturation-speed signature ─────────────────────────
+@C clay-cascade-s2-saturation-speed-signature :: meta [4]
+  <- clay-cascade-s2-axis-16-measurement-table
+  => "V(1)/V(8) ratio discriminates topology classes (compressed vs stretched cone)"
+  => "minkowski   = 0.062  (most stretched cone — slow saturation under +11 tilt)"
+  => "calabi6     = 0.109  (high-degree fast-fill — small ratio because V(1) high too)"
+  => "cartoon     = 0.400  (compressed — closed orbit saturates immediately)"
+  => "saturation ceiling = LSIGMA=64 is finite-size lattice artefact, NOT Bekenstein A/4 horizon"
+
+# ── (5) orthogonality vs state-axes 13/14/15 (a-priori) ────
+@C clay-cascade-s2-axis-16-orthogonality-vs-state-axes :: meta [4]
+  <- clay-cascade-s2-cartoon-causal-sector-closure
+  => "qualitative argument: axis-16 is STRUCTURAL (graph reachability); axes 13/14/15 are INTENSIVE state summaries"
+  => "cartoon's V(8)=10 closed-orbit signature cannot be predicted from state-value summaries"
+  => "quantitative det(R) for {axis-13, axis-14, axis-15, axis-16} DEFERRED — per-topology values for axes 13-15 not loaded in this session"
+
+# ── (6) raw 91 C3 honest limit disclosure ──────────────────
+@C clay-cascade-s2-axis-16-C3-limits :: meta [4]
+  <- clay-cascade-s2-axis-16-causality-lightcone-witness
+  => "finite-size: sigma2=64 is 64-cell toy; V(8)=64 is lattice ceiling NOT physical horizon"
+  => "Bekenstein A/4 reference OUT-OF-SCOPE — lattice carries graph distance not metric length"
+  => "source bias: all src=32; cartoon V(8)=10 source-orbit-dependent; multi-source ensemble not run"
+  => "topology coverage: 8/18 measured; missing ads-cft de-sitter vacuum-decay altered big-crunch brane nested inflation ca3d bubble"
+  => "bisimulation justification (raw 114): BFS reachability ≅ retarded-c=1 ONLY for linear-in-state spatial-sum branch (ls_step:382-396); time-term value-dependent"
+  => "own#11 strict observed: NO Clay '해결' claim made"
+
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade session-2 Stage-5 α=0.55 FALSIFICATION
+# source: sub-agent B 3-seed sigma2=64→512 ensemble on 3 topologies (chain1d/torus2d/complete)
+# constraints:
+#   raw 91 C3 honest disclosure (n=3 seeds + single sigma2 jump + new topology not apples-to-apples)
+#   raw 71 falsifier-retire-rule (Stage-5 α=0.55 sub-extensive claim NARROWED)
+#   own#11 strict (NO Clay '해결' claim — toy lattice numerical experiment)
+#   raw 22 INFRA-ONLY · raw 24 axiom-immutable · raw 23 schema-guard
+# date: 2026-04-28
+# Falsification finding — prior cascade Stage-5 conclusion narrowed to scheme-specific
+# ══════════════════════════════════════════════════════════════
+
+# ── primary witness ─────────────────────────────────────────
+@C clay-cascade-s2-stage5-alpha055-falsification-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-71-falsifier-retire-rule
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-stage5-prior-alpha-055-sub-extensive-claim
+  -> clay-cascade-s2-energy-intensive-not-sub-extensive
+  -> clay-cascade-s2-stage5-reconciliation-two-reads
+  => "★ FALSIFICATION — Stage-5 α=0.55 sub-extensive law DOES NOT hold for φ⁴ Hamiltonian ensemble at sigma2=512"
+  => "9 runs total (3 seeds × 3 topologies × ticks=32); observed α_E ∈ [-0.024, +0.072] across all topologies"
+  => "energy is approximately INTENSIVE (per-site bounded) NOT sub-extensive on this ensemble"
+
+# ── (1) ensemble run config ────────────────────────────────
+@C clay-cascade-s2-ensemble-run-config :: meta [4]
+  <- clay-cascade-s2-stage5-alpha055-falsification-witness
+  => "runner: /tmp/cascade_s2/ensemble_param.hexa (parametric sigma2 adapted from universe_ensemble.hexa)"
+  => "topologies: chain1d (1D ring), torus2d (sqrt(N)×sqrt(N)), complete (all-to-all proxy) — generic, not canonical t3"
+  => "seeds: 3 per cell (6, 13, 17); ticks: 32 primary + 64 stationarity check on torus2d"
+  => "sigma2 values: 64 baseline → 512 (chain, complete) / 484=22² (torus perfect-square)"
+  => "wall-clock: ~8s total — well under 20-min budget"
+
+# ── (2) scaling table — α exponents per axis per topology ──
+@C clay-cascade-s2-scaling-table :: meta [4]
+  <- clay-cascade-s2-ensemble-run-config
+  => "α = log(ratio) / log(N_512 / N_64); per-axis stddev across 3 seeds in parens"
+  => "chain1d  64→512: α_E=-0.024  α_C=-0.667  α_S=+0.016  drift_pct=-15.3%"
+  => "torus2d  64→484: α_E=+0.007  α_C=-0.685  α_S=+0.098  drift_pct=+1.3%"
+  => "complete 64→512: α_E=-0.010  α_C=-0.723  α_S=+0.056  drift_pct=-0.8%"
+  => "torus2d  ticks=64: α_E=+0.072 α_C=-0.764 α_S=+0.014  drift_pct=+15.6% — ticks-window changes α_E sign"
+  => "stddev/mean: E ~3-15% / correl ~25% / entropy ~1-7% / drift ~5-25%"
+
+# ── (3) energy intensive verdict (key finding) ─────────────
+@C clay-cascade-s2-energy-intensive-not-sub-extensive :: meta [4!]
+  <- clay-cascade-s2-scaling-table
+  => "★ α_E ∈ [-0.024, +0.072] ≈ 0 across all 3 topologies — energy INTENSIVE not sub-extensive"
+  => "Stage-5 α=0.55 prediction OVER-PREDICTS E_512 by ~3× (obs/pred ≈ 0.31)"
+  => "axis-13 correlator scales N^(-0.70 ± 0.03) — finite-range correlation diluted on growing lattice as expected"
+  => "axis-14 Shannon-proxy near-saturated (~0.9-1.0) at both scales — proxy ceiling reached"
+  => "axis-15 drift cells-INDEPENDENT at fixed ticks; integrator-drift dominated by ticks-count not cells-count"
+
+# ── (4) Stage-5 α=0.55 reconciliation (two honest reads) ───
+@C clay-cascade-s2-stage5-reconciliation-two-reads :: meta [4]
+  <- clay-cascade-s2-energy-intensive-not-sub-extensive
+  => "READ-1 different observable: Stage-5 used non-Hamiltonian advection update (run_stage5_scale n=1000); this ensemble is φ⁴ Hamiltonian leapfrog — α=0.55 may be diffusive-scheme-specific"
+  => "READ-2 finite-size dominated: at sigma2=64 Hamiltonian E in same ballpark as sigma2=512 — steady-state set by m²/coupling not cell count"
+  => "Gaussian initial profile 1/(1 + d²/2) localizes near i=N/2 regardless of N — energy concentrated not distributed"
+  => "raw 71 retire/narrow: Stage-5 α=0.55 NARROWED from universal claim to diffusive-scheme-specific finding"
+
+# ── (5) raw 91 C3 honest limit disclosure ──────────────────
+@C clay-cascade-s2-stage5-falsification-C3-limits :: meta [4]
+  <- clay-cascade-s2-stage5-alpha055-falsification-witness
+  => "n=3 seeds is small — stddev/mean ratios up to 25% on correlator; α_E uncertainty ≥ ±0.05 from seed variance alone"
+  => "single sigma2 jump (64→512): 2-point fit cannot distinguish power-law from logarithmic or saturation"
+  => "ticks-window shift: tick=32 vs tick=64 changed α_E sign on torus from +0.007 to +0.072 — observable not steady-state-converged"
+  => "topology choice: my torus2d uses sqrt(N) indexing — NEW topology not apples-to-apples with canonical 4³ T3"
+  => "Bekenstein bound exempt — sigma2=512 still ~10⁹ orders below holographic bound"
+  => "own#11 strict: NO Clay '해결' claim; pure toy-lattice integer-arithmetic numerical experiment"
+  => "follow-up needed: sigma2 ∈ {64, 128, 256, 512, 1024} 5-point fit for real exponent + multi-source ensemble + canonical T3 8³ extension"
+
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — clay cascade session-2 axis-13 × axis-14 phase-portrait
+# source: sub-agent C reconstruction from atlas/_absorbed/20260428-071642/ shards
+# constraints:
+#   raw 91 C3 honest disclosure (n=16 small + ASCII collisions + 22% variance unobserved)
+#   raw 70 multi-axis-verify-grid (2-axis projection is partial slice of 3-axis fingerprint)
+#   own#11 strict (NO Clay claim — clusters descriptive labels only)
+#   raw 22 INFRA-ONLY · raw 24 axiom-immutable · raw 23 schema-guard
+# date: 2026-04-28
+# Reproduced atlas r=0.394 ρ=0.512 from primary-source shard merge (cross-check OK)
+# ══════════════════════════════════════════════════════════════
+
+# ── primary witness ─────────────────────────────────────────
+@C clay-cascade-s2-axis-13x14-phase-portrait-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-70-multi-axis-verify-grid
+  <- own#11-strict-no-resolution-claim
+  <- clay-cascade-iter-63-axis-14-D3-stabilization
+  -> clay-cascade-s2-axis-13x14-3-cluster-decomposition
+  -> clay-cascade-s2-axis-13x14-outlier-set
+  => "★ k=3 phase-portrait reconstructed n=16 (D=3 cohort, post-iter-63)"
+  => "cross-check: computed Pearson r=0.394 Spearman ρ=0.512 — matches atlas iter-63 to 3 decimals"
+  => "C3 amplitude-redistributor cluster drives Pearson r upward; without C3, residual r ≈ 0.1"
+
+# ── (1) data sources from atlas/_absorbed/ shards ──────────
+@C clay-cascade-s2-axis-13x14-data-sources :: meta [4]
+  <- clay-cascade-s2-axis-13x14-phase-portrait-witness
+  => "primary: atlas/_absorbed/20260428-071642/atlas.append.clay-millennium-iter-60-AXIS-13-x-14-ORTHOGONAL-DISCOVERY-2026-04-28.n6 (n=9 base)"
+  => "+ iter-63 full 18-row axis-14 ranking + r=0.39 ρ=0.51 stabilization"
+  => "+ iter-62 cartoon(741) minkowski(478) + iter-48 brane(145) inflation(169) de-sitter(229) + iter-46 nested(196) + iter-47 bubble(434)"
+  => "n=16 reconstructed (flat excluded D=2, calabi6 excluded D=6 awaiting iter-68 retry — matches iter-63 D=3 cohort)"
+
+# ── (2) ASCII scatter (axis-13 × axis-14) — 36×16 grid ─────
+@C clay-cascade-s2-axis-13x14-ascii-scatter :: meta [4]
+  <- clay-cascade-s2-axis-13x14-data-sources
+  => "axis-14 (4p(1-p)): 999=de-sitter 981=ads-cft 964=altered+minkowski 947=s3+cartoon 930=wormhole"
+  => "axis-14 cont:    879=bubble 862=blackhole+inflation 845=ca3d+big-crunch 828=t3+nested 811=vacuum-decay 743=brane"
+  => "axis-13 axis: 79(ca3d) — 145(brane) — 169(inflation) — 196(nested) — 229(de-sitter) — 320 cluster — 434(bubble) — 604(big-crunch) — 741(cartoon)"
+  => "axis-13 spread: ca3d(79) → cartoon(741) = 9.4× spread; axis-14 spread: brane(743) → de-sitter(999) = 1.34×"
+
+# ── (3) k=3 cluster decomposition ──────────────────────────
+@C clay-cascade-s2-axis-13x14-3-cluster-decomposition :: meta [4!]
+  <- clay-cascade-s2-axis-13x14-ascii-scatter
+  -> clay-cascade-s2-axis-13x14-outlier-set
+  => "k-means random.seed=42 20 iters converged"
+  => "C1 sparse-coupling (n=7) center≈(154, 833): ca3d t3 brane blackhole inflation nested vacuum-decay — tree-like / sparse-coupling family"
+  => "C2 high-coherence ridge (n=6) center≈(320, 970): ads-cft de-sitter wormhole s3 altered minkowski — maximally-symmetric / spacetime topologies"
+  => "C3 amplitude-redistributor (n=3) center≈(593, 901): bubble big-crunch cartoon — sparse x-spread; drives Pearson r upward"
+
+# ── (4) outlier set (3 anti-poles) ─────────────────────────
+@C clay-cascade-s2-axis-13x14-outlier-set :: meta [4]
+  <- clay-cascade-s2-axis-13x14-3-cluster-decomposition
+  => "brane: lone DOUBLE-LOW outlier (axis-13=145, axis-14=743) — most isolated point on plot"
+  => "cartoon: DOUBLE-HIGH anti-pole (axis-13=741, axis-14=947) — anti-brane; consistent with axis-16 closed-orbit signature"
+  => "big-crunch: sole quadrant-IV point (axis-13=604, axis-14=861) — high classical / mid-low quantum anomaly"
+  => "cross-link to axis-16: cartoon's double-high here + V(8)=10 closed-orbit there = consistent structural-isolation signature across 2 axes"
+
+# ── (5) raw 91 C3 honest limit disclosure ──────────────────
+@C clay-cascade-s2-axis-13x14-phase-portrait-C3-limits :: meta [4]
+  <- clay-cascade-s2-axis-13x14-phase-portrait-witness
+  => "n=16 small — k=3 with 3 members in C3 is fragile; bootstrap CI on cluster assignments would likely show C3 unstable"
+  => "ASCII grid 36×16 collisions: altered/minkowski same cell, t3/blackhole near-collision, nested/vacuum-decay overlap"
+  => "boundary cases: s3, wormhole could go either C1 or C2 in re-run"
+  => "missing rows: flat (D=2 confound) calabi6 (D=6 awaiting iter-68 v2-anchor parity) — full n=18 phase-portrait pending"
+  => "2-axis projection only: det(R)=0.78 from 3-axis fingerprint means ~22% variance unobserved in this 2D slice"
+  => "C3 amplitude-redistributor label may dissolve when axis-15 (Lorentz drift) added (axis-14 × axis-15 r ≈ 0)"
+  => "single seed=6 ticks=64 sigma2=64 toy lattice — generalization untested (cf. cascade-s2 sigma2=512 falsification of Stage-5 α=0.55)"
+  => "own#11 strict: clusters are descriptive labels only — no manifold/proof claim"
