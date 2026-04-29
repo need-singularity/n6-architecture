@@ -1076,13 +1076,15 @@ def _check_one_toolkit_section(text: str, lines: list[str], heading: str,
         return out  # optional + no heading → silent pass
 
     # heading present → header row + min_rows + doc link checks all apply
-    # axis (b): header row template — final cell is "Doc"; second-to-last is
-    # "<X> contrast" allowing the "AlphaFold" / "Mainstream" / "Classical" etc.
-    # variation. We accept any exact `| Tool | One-liner | Everyday analogy |
-    # What it does | <something> | Doc |` shape. Search is SECTION-SCOPED:
-    # only look at lines AFTER the heading and BEFORE the next H1 / H2 boundary.
+    # axis (b): header row template — first cell is "🛸" (alien-grade reach,
+    # cycle 29 strengthening 2026-04-29); final cell is "Doc"; second-to-last
+    # is "<X> contrast" allowing the "AlphaFold" / "Mainstream" / "Classical"
+    # etc. variation. We accept any exact `| 🛸 | Tool | One-liner | Everyday
+    # analogy | What it does | <something> | Doc |` shape (7 columns). Search
+    # is SECTION-SCOPED: only look at lines AFTER the heading and BEFORE the
+    # next H1 / H2 boundary.
     header_re = _re.compile(
-        r"^\|\s*Tool\s*\|\s*One-liner\s*\|\s*Everyday analogy\s*\|\s*"
+        r"^\|\s*🛸\s*\|\s*Tool\s*\|\s*One-liner\s*\|\s*Everyday analogy\s*\|\s*"
         r"What it does\s*\|\s*[^|]+\|\s*Doc\s*\|\s*$"
     )
     section_end = len(lines)
@@ -1101,7 +1103,7 @@ def _check_one_toolkit_section(text: str, lines: list[str], heading: str,
         out.append({
             "rule": "own#29",
             "path": "README.md",
-            "detail": f"[{axis}] heading '{heading}' present but no 6-column toolkit header row found within section",
+            "detail": f"[{axis}] heading '{heading}' present but no 7-column toolkit header row found within section (expect leading 🛸 column)",
         })
         return out
 
@@ -1127,7 +1129,32 @@ def _check_one_toolkit_section(text: str, lines: list[str], heading: str,
         doc_re = _re.compile(rf"\[doc\]\((domains/{_re.escape(axis)}/[^)]+)\)")
     else:
         doc_re = _re.compile(r"\[doc\]\((domains/[^)]+)\)")
+    # cycle 29 strengthening 2026-04-29: first cell = 🛸 alien-grade reach
+    # integer 0-10. Validate per data row.
+    reach_re = _re.compile(r"^\|\s*(\d+)\s*\|")
     for row in data_rows:
+        rm = reach_re.match(row)
+        if rm is None:
+            out.append({
+                "rule": "own#29",
+                "path": "README.md",
+                "detail": f"[{axis}] toolkit row missing 🛸 reach integer in first cell: {row[:80]!r}",
+            })
+        else:
+            try:
+                reach_val = int(rm.group(1))
+                if reach_val < 0 or reach_val > 10:
+                    out.append({
+                        "rule": "own#29",
+                        "path": "README.md",
+                        "detail": f"[{axis}] toolkit row 🛸 reach value out of range 0-10 (got {reach_val}): {row[:80]!r}",
+                    })
+            except ValueError:
+                out.append({
+                    "rule": "own#29",
+                    "path": "README.md",
+                    "detail": f"[{axis}] toolkit row 🛸 reach not an integer: {row[:80]!r}",
+                })
         m = doc_re.search(row)
         if m is None:
             out.append({
@@ -1157,16 +1184,19 @@ def check_rule_29_readme_friendly_toolkit(rules: dict[int, dict[str, Any]]) -> l
     Mandatory: heading absent → violation.
     Optional: heading absent → silent pass; heading present → full 4-axis check.
 
-    Per-section 4-axis check:
+    Per-section 5-axis check (cycle 29 strengthening 2026-04-29):
       (a) H2 heading line present in README.md
-      (b) 6-column header row matching template `| Tool | One-liner |
+      (b) 7-column header row matching template `| 🛸 | Tool | One-liner |
           Everyday analogy | What it does | <Mainstream> contrast | Doc |`
       (c) >=min_rows data rows under the table block
-      (d) each data row's last cell contains `[doc](domains/<axis>/<slug>/<slug>.md)`
+      (d) each data row's first cell is integer 0-10 (🛸 alien-grade reach)
+      (e) each data row's last cell contains `[doc](domains/<axis>/<slug>/<slug>.md)`
           link resolving to an existing file under repo root
 
     Established 2026-04-29 (cycle 25) via user 'lint 강화' + 'README 의 모든
-    도메인 섹션들에 반영되도록 lint 수정' directive.
+    도메인 섹션들에 반영되도록 lint 수정' directive. Cycle 29 strengthening
+    2026-04-29 prepended 🛸 alien-grade reach column per user '외계인 지수 /
+    현재 도달지수 / 🛸 이모지 단독 / lint 반드시 필요'.
     """
     violations: list[dict[str, str]] = []
     readme_path = REPO_ROOT / "README.md"

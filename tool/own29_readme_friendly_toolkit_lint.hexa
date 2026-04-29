@@ -13,7 +13,7 @@
 // dispatch (mandatory + optional) is the python lint's responsibility per
 // own 29 declarative-spec contract.
 //
-// @tool(slug="own29_readme_friendly_toolkit_lint", desc="own 29 HARD lint on README.md — biology mandatory friendly Molecular Toolkit (HEXA family) 6-column table: H2 heading present + 6-column header (Tool / One-liner / Everyday analogy / What it does / <Mainstream> contrast / Doc) + >=4 data rows + each row's [doc](domains/biology/<slug>/<slug>.md) link resolves to existing file")
+// @tool(slug="own29_readme_friendly_toolkit_lint", desc="own 29 HARD lint on README.md — biology mandatory friendly Molecular Toolkit (HEXA family) 7-column table (cycle 29 strengthening 2026-04-29): H2 heading present + 7-column header (🛸 / Tool / One-liner / Everyday analogy / What it does / <Mainstream> contrast / Doc) + >=4 data rows + first cell integer 0-10 alien-grade reach + each row's [doc](domains/biology/<slug>/<slug>.md) link resolves to existing file")
 // @usage(hexa /Users/ghost/core/n6-architecture/tool/own29_readme_friendly_toolkit_lint.hexa [--selftest])
 // @omega-saturation-exempt("README is single-file SSOT; lint is O(file-size) line-walk + N=4 file-existence checks; converges trivially")
 // @exit_codes(0=PASS, 1=violation found and HARD block, 2=internal/usage error)
@@ -22,7 +22,7 @@ let REPO_ROOT = "/Users/ghost/core/n6-architecture"
 let README_PATH = REPO_ROOT + "/README.md"
 // MANDATORY section: biology (others are optional per .own own 29 spec, checked by python lint)
 let HEADING_LINE = "## 🧬 Molecular Toolkit (HEXA family)"
-let HEADER_ROW   = "| Tool | One-liner | Everyday analogy | What it does | AlphaFold contrast | Doc |"
+let HEADER_ROW   = "| 🛸 | Tool | One-liner | Everyday analogy | What it does | AlphaFold contrast | Doc |"
 
 fn _starts_with(s: string, p: string) -> bool {
   if len(s) < len(p) { return false }
@@ -58,6 +58,51 @@ fn _file_exists(path: string) -> bool {
   return r == "y"
 }
 
+// cycle 29 strengthening 2026-04-29: parse first cell after leading "|" as
+// integer reach grade (0-10). Returns the integer on success, -1 on parse
+// failure or out-of-range value.
+fn _is_digit(c: string) -> bool {
+  return c == "0" || c == "1" || c == "2" || c == "3" || c == "4"
+      || c == "5" || c == "6" || c == "7" || c == "8" || c == "9"
+}
+
+fn _parse_reach(row: string) -> int {
+  if !_starts_with(row, "|") { return -1 }
+  let n = len(row)
+  // Find first non-space char after leading "|"
+  let mut start = 1
+  let mut found_start = false
+  let mut iter1 = 1
+  while iter1 < n && !found_start {
+    let c = row.substring(iter1, iter1 + 1)
+    if c == " " || c == "\t" {
+      iter1 = iter1 + 1
+    } else {
+      start = iter1
+      found_start = true
+    }
+  }
+  if !found_start { return -1 }
+  // Read consecutive digits from start
+  let mut end = start
+  let mut iter2 = start
+  let mut stop = false
+  while iter2 < n && !stop {
+    let c = row.substring(iter2, iter2 + 1)
+    if _is_digit(c) {
+      iter2 = iter2 + 1
+      end = iter2
+    } else {
+      stop = true
+    }
+  }
+  if end == start { return -1 }
+  let num_str = row.substring(start, end)
+  let v = to_int(num_str)
+  if v < 0 || v > 10 { return -1 }
+  return v
+}
+
 fn _run_lint(text: string) -> int {
   let mut violations = 0
 
@@ -69,12 +114,12 @@ fn _run_lint(text: string) -> int {
     println("[own29] PASS axis (a) — H2 heading present")
   }
 
-  // axis (b) — exact 6-column header row
+  // axis (b) — exact 7-column header row (cycle 29 strengthening 🛸 first)
   if !_contains(text, HEADER_ROW) {
-    println("[own29] FAIL axis (b) — missing exact 6-column header row")
+    println("[own29] FAIL axis (b) — missing exact 7-column header row (expect leading 🛸 column)")
     return violations + 1
   }
-  println("[own29] PASS axis (b) — 6-column header row present")
+  println("[own29] PASS axis (b) — 7-column header row present")
 
   // axes (c)+(d) — locate header line index, walk data rows
   let lines = split(text, "\n")
@@ -120,30 +165,43 @@ fn _run_lint(text: string) -> int {
     println("[own29] PASS axis (c) — " + to_string(row_count) + " data rows present")
   }
 
-  // axis (d) — each row's [doc](...) link resolves
+  // axis (d) — each row's first cell = integer 0-10 🛸 reach grade
+  // (cycle 29 strengthening 2026-04-29)
   let mut k = 0
   while k < row_count {
     let row = data_rows[k]
+    let reach = _parse_reach(row)
+    if reach < 0 {
+      println("[own29] FAIL axis (d) — row " + to_string(k+1) + " missing/invalid 🛸 reach integer (expect 0-10)")
+      violations = violations + 1
+    }
+    k = k + 1
+  }
+
+  // axis (e) — each row's [doc](...) link resolves
+  let mut m = 0
+  while m < row_count {
+    let row = data_rows[m]
     let doc_open = _find_from(row, "[doc](", 0)
     if doc_open < 0 {
-      println("[own29] FAIL axis (d) — row " + to_string(k+1) + " missing [doc](...) link")
+      println("[own29] FAIL axis (e) — row " + to_string(m+1) + " missing [doc](...) link")
       violations = violations + 1
     } else {
       let path_start = doc_open + 6
       let path_end = _find_from(row, ")", path_start)
       if path_end < 0 {
-        println("[own29] FAIL axis (d) — row " + to_string(k+1) + " malformed [doc] link")
+        println("[own29] FAIL axis (e) — row " + to_string(m+1) + " malformed [doc] link")
         violations = violations + 1
       } else {
         let link_path = row.substring(path_start, path_end)
         let abs_path = REPO_ROOT + "/" + link_path
         if !_file_exists(abs_path) {
-          println("[own29] FAIL axis (d) — row " + to_string(k+1) + " unresolved doc link: " + link_path)
+          println("[own29] FAIL axis (e) — row " + to_string(m+1) + " unresolved doc link: " + link_path)
           violations = violations + 1
         }
       }
     }
-    k = k + 1
+    m = m + 1
   }
 
   return violations
@@ -154,16 +212,16 @@ fn _selftest() -> void {
   let mut pass_count = 0
   let mut total = 0
 
-  // Fixture 1: PASS — minimal 4-row table with real doc links
+  // Fixture 1: PASS — minimal 4-row table with real doc links + valid reach
   total = total + 1
   let pass_text = HEADING_LINE + "\n\n"
     + "> Friendly entry point.\n\n"
     + HEADER_ROW + "\n"
-    + "|:---:|---|---|---|---|:---:|\n"
-    + "| 🧶 **HEXA-WEAVE** | a | b | c | d | [doc](domains/biology/hexa-weave/hexa-weave.md) |\n"
-    + "| 🤖 **HEXA-NANOBOT** | a | b | c | d | [doc](domains/biology/hexa-nanobot/hexa-nanobot.md) |\n"
-    + "| ✂️ **HEXA-RIBOZYME** | a | b | c | d | [doc](domains/biology/hexa-ribozyme/hexa-ribozyme.md) |\n"
-    + "| 🦠 **HEXA-VIROCAPSID** | a | b | c | d | [doc](domains/biology/hexa-virocapsid/hexa-virocapsid.md) |\n\n"
+    + "|:--:|:---:|---|---|---|---|:---:|\n"
+    + "| 7 | 🧶 **HEXA-WEAVE** | a | b | c | d | [doc](domains/biology/hexa-weave/hexa-weave.md) |\n"
+    + "| 7 | 🤖 **HEXA-NANOBOT** | a | b | c | d | [doc](domains/biology/hexa-nanobot/hexa-nanobot.md) |\n"
+    + "| 7 | ✂️ **HEXA-RIBOZYME** | a | b | c | d | [doc](domains/biology/hexa-ribozyme/hexa-ribozyme.md) |\n"
+    + "| 7 | 🦠 **HEXA-VIROCAPSID** | a | b | c | d | [doc](domains/biology/hexa-virocapsid/hexa-virocapsid.md) |\n\n"
     + "Tail.\n"
   let v1 = _run_lint(pass_text)
   if v1 == 0 {
@@ -176,8 +234,8 @@ fn _selftest() -> void {
   // Fixture 2: FAIL — heading missing
   total = total + 1
   let fix2 = HEADER_ROW + "\n"
-    + "|:---:|---|---|---|---|:---:|\n"
-    + "| 🧶 **HEXA-WEAVE** | a | b | c | d | [doc](domains/biology/hexa-weave/hexa-weave.md) |\n"
+    + "|:--:|:---:|---|---|---|---|:---:|\n"
+    + "| 7 | 🧶 **HEXA-WEAVE** | a | b | c | d | [doc](domains/biology/hexa-weave/hexa-weave.md) |\n"
   let v2 = _run_lint(fix2)
   if v2 >= 1 {
     println("[own29] fixture 2 PASS — missing heading rejected (" + to_string(v2) + " viol)")
@@ -190,10 +248,10 @@ fn _selftest() -> void {
   total = total + 1
   let fix3 = HEADING_LINE + "\n\n"
     + HEADER_ROW + "\n"
-    + "|:---:|---|---|---|---|:---:|\n"
-    + "| 🧶 **HEXA-WEAVE** | a | b | c | d | [doc](domains/biology/hexa-weave/hexa-weave.md) |\n"
-    + "| 🤖 **HEXA-NANOBOT** | a | b | c | d | [doc](domains/biology/hexa-nanobot/hexa-nanobot.md) |\n"
-    + "| ✂️ **HEXA-RIBOZYME** | a | b | c | d | [doc](domains/biology/hexa-ribozyme/hexa-ribozyme.md) |\n"
+    + "|:--:|:---:|---|---|---|---|:---:|\n"
+    + "| 7 | 🧶 **HEXA-WEAVE** | a | b | c | d | [doc](domains/biology/hexa-weave/hexa-weave.md) |\n"
+    + "| 7 | 🤖 **HEXA-NANOBOT** | a | b | c | d | [doc](domains/biology/hexa-nanobot/hexa-nanobot.md) |\n"
+    + "| 7 | ✂️ **HEXA-RIBOZYME** | a | b | c | d | [doc](domains/biology/hexa-ribozyme/hexa-ribozyme.md) |\n"
   let v3 = _run_lint(fix3)
   if v3 >= 1 {
     println("[own29] fixture 3 PASS — 3-row table rejected (" + to_string(v3) + " viol)")
@@ -206,17 +264,51 @@ fn _selftest() -> void {
   total = total + 1
   let fix4 = HEADING_LINE + "\n\n"
     + HEADER_ROW + "\n"
-    + "|:---:|---|---|---|---|:---:|\n"
-    + "| 🧶 **HEXA-WEAVE** | a | b | c | d | [doc](domains/biology/nonexistent/x.md) |\n"
-    + "| 🤖 **HEXA-NANOBOT** | a | b | c | d | [doc](domains/biology/hexa-nanobot/hexa-nanobot.md) |\n"
-    + "| ✂️ **HEXA-RIBOZYME** | a | b | c | d | [doc](domains/biology/hexa-ribozyme/hexa-ribozyme.md) |\n"
-    + "| 🦠 **HEXA-VIROCAPSID** | a | b | c | d | [doc](domains/biology/hexa-virocapsid/hexa-virocapsid.md) |\n"
+    + "|:--:|:---:|---|---|---|---|:---:|\n"
+    + "| 7 | 🧶 **HEXA-WEAVE** | a | b | c | d | [doc](domains/biology/nonexistent/x.md) |\n"
+    + "| 7 | 🤖 **HEXA-NANOBOT** | a | b | c | d | [doc](domains/biology/hexa-nanobot/hexa-nanobot.md) |\n"
+    + "| 7 | ✂️ **HEXA-RIBOZYME** | a | b | c | d | [doc](domains/biology/hexa-ribozyme/hexa-ribozyme.md) |\n"
+    + "| 7 | 🦠 **HEXA-VIROCAPSID** | a | b | c | d | [doc](domains/biology/hexa-virocapsid/hexa-virocapsid.md) |\n"
   let v4 = _run_lint(fix4)
   if v4 >= 1 {
     println("[own29] fixture 4 PASS — bad doc link rejected (" + to_string(v4) + " viol)")
     pass_count = pass_count + 1
   } else {
     println("[own29] fixture 4 FAIL — should reject unresolved doc link")
+  }
+
+  // Fixture 5: FAIL — first cell not an integer (cycle 29 reach axis)
+  total = total + 1
+  let fix5 = HEADING_LINE + "\n\n"
+    + HEADER_ROW + "\n"
+    + "|:--:|:---:|---|---|---|---|:---:|\n"
+    + "| ?? | 🧶 **HEXA-WEAVE** | a | b | c | d | [doc](domains/biology/hexa-weave/hexa-weave.md) |\n"
+    + "| 7 | 🤖 **HEXA-NANOBOT** | a | b | c | d | [doc](domains/biology/hexa-nanobot/hexa-nanobot.md) |\n"
+    + "| 7 | ✂️ **HEXA-RIBOZYME** | a | b | c | d | [doc](domains/biology/hexa-ribozyme/hexa-ribozyme.md) |\n"
+    + "| 7 | 🦠 **HEXA-VIROCAPSID** | a | b | c | d | [doc](domains/biology/hexa-virocapsid/hexa-virocapsid.md) |\n"
+  let v5 = _run_lint(fix5)
+  if v5 >= 1 {
+    println("[own29] fixture 5 PASS — non-integer 🛸 reach rejected (" + to_string(v5) + " viol)")
+    pass_count = pass_count + 1
+  } else {
+    println("[own29] fixture 5 FAIL — should reject non-integer reach cell")
+  }
+
+  // Fixture 6: FAIL — reach value out of range (>10)
+  total = total + 1
+  let fix6 = HEADING_LINE + "\n\n"
+    + HEADER_ROW + "\n"
+    + "|:--:|:---:|---|---|---|---|:---:|\n"
+    + "| 11 | 🧶 **HEXA-WEAVE** | a | b | c | d | [doc](domains/biology/hexa-weave/hexa-weave.md) |\n"
+    + "| 7 | 🤖 **HEXA-NANOBOT** | a | b | c | d | [doc](domains/biology/hexa-nanobot/hexa-nanobot.md) |\n"
+    + "| 7 | ✂️ **HEXA-RIBOZYME** | a | b | c | d | [doc](domains/biology/hexa-ribozyme/hexa-ribozyme.md) |\n"
+    + "| 7 | 🦠 **HEXA-VIROCAPSID** | a | b | c | d | [doc](domains/biology/hexa-virocapsid/hexa-virocapsid.md) |\n"
+  let v6 = _run_lint(fix6)
+  if v6 >= 1 {
+    println("[own29] fixture 6 PASS — out-of-range 🛸 reach (>10) rejected (" + to_string(v6) + " viol)")
+    pass_count = pass_count + 1
+  } else {
+    println("[own29] fixture 6 FAIL — should reject reach > 10")
   }
 
   if pass_count == total {

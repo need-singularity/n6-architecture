@@ -175,12 +175,12 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 
 > Friendly entry point — the AI / ML core tools as a compact toolkit. Same n=6 invariant lattice (σ(6)=12 / τ(6)=4 / φ(6)=2 / J₂=24), four orthogonal compute-axis verbs.
 
-| Tool | One-liner | Everyday analogy | What it does | Mainstream contrast | Doc |
-|:----:|-----------|------------------|--------------|---------------------|:---:|
-| 🧠 **HEXA-LLM-EFFICIENT** | Slim-LLM | Heavy encyclopedia compressed to a palm-sized book | 71% FLOPs ↓, 67% params ↓, 225 techniques integrated | GPT-4 full vs 6× lighter same quality | [doc](domains/compute/ai-efficiency/ai-efficiency.md) |
-| 🎬 **HEXA-VIDEO** | Quick-Frame | Same movie drawn 3× faster | 3× video generation throughput | Sora-class diffusion accelerated | [doc](domains/compute/ai-efficiency/ai-efficiency.md) |
-| 🦠 **HEXA-MEDICAL-AI** | Bedside Sensor | Diagnostic device inside the doctor's bag | Medical paradigm 8-axis integrated | GPT-medQA single Q&A vs multi-axis diagnostic chain | [doc](domains/compute/ai-efficiency/ai-efficiency.md) |
-| 🤖 **HEXA-NATIVE-ARCH** | AI-shaped Chip | Chip carved to fit the AI like a custom shoe | AI-native architecture pipeline | von-Neumann CPU vs neuromorphic-class native compute | [doc](domains/compute/ai-native-architecture/ai-native-architecture.md) |
+| 🛸 | Tool | One-liner | Everyday analogy | What it does | Mainstream contrast | Doc |
+|:--:|:----:|-----------|------------------|--------------|---------------------|:---:|
+| 10 | 🧠 **HEXA-LLM-EFFICIENT** | Slim-LLM | Heavy encyclopedia compressed to a palm-sized book | 71% FLOPs ↓, 67% params ↓, 225 techniques integrated | GPT-4 full vs 6× lighter same quality | [doc](domains/compute/ai-efficiency/ai-efficiency.md) |
+| 10 | 🎬 **HEXA-VIDEO** | Quick-Frame | Same movie drawn 3× faster | 3× video generation throughput | Sora-class diffusion accelerated | [doc](domains/compute/ai-efficiency/ai-efficiency.md) |
+| 10 | 🦠 **HEXA-MEDICAL-AI** | Bedside Sensor | Diagnostic device inside the doctor's bag | Medical paradigm 8-axis integrated | GPT-medQA single Q&A vs multi-axis diagnostic chain | [doc](domains/compute/ai-efficiency/ai-efficiency.md) |
+| 10 | 🤖 **HEXA-NATIVE-ARCH** | AI-shaped Chip | Chip carved to fit the AI like a custom shoe | AI-native architecture pipeline | von-Neumann CPU vs neuromorphic-class native compute | [doc](domains/compute/ai-native-architecture/ai-native-architecture.md) |
 
 | 🛸 | Closure | ver | Product | Core | Link |
 |:--:|:-------:|:---:|---------|------|------|
@@ -210,12 +210,12 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 
 > Friendly entry point — Power-stack tools as a compact toolkit. Same n=6 invariant lattice (σ(6)=12 / τ(6)=4 / φ(6)=2 / J₂=24), four orthogonal energy-axis verbs.
 
-| Tool | One-liner | Everyday analogy | What it does | Mainstream contrast | Doc |
-|:----:|-----------|------------------|--------------|---------------------|:---:|
-| 🔋 **HEXA-BATTERY** | Stack-the-Cells | 6 cells stacked like Lego batteries in a flashlight | 8-stage battery design, 131/131 EXACT, 10 impossibility theorems | Single-chemistry Li-ion vs σ(6)=6-cell n-axis stack | [doc](domains/energy/battery-architecture/battery-architecture.md) |
-| ☀️ **HEXA-SOLAR** | Sun-to-Wire | Roof panels turning sunlight into wall-socket power | Ultimate solar cell, 78/78 EXACT, 7 BTs, physical-limit 5 | Single-junction Si vs τ(6)=4-state full-stack panel | [doc](domains/energy/solar-architecture/solar-architecture.md) |
-| 🏭 **HEXA-DC-REACTOR** | Datacenter Boiler | Tiny nuclear reactor inside the server farm | TRISO + He + sCO₂ + n=6 modules; 10 breakthroughs 95/96 EXACT | Grid-fed datacenter vs on-prem σ(6)=12-module SMR | [doc](domains/energy/smr-datacenter/smr-datacenter.md) |
-| 🚗 **HEXA-AUTO-BATTERY** | EV Pack | Car battery built like 96 stacked notebooks | Automotive SLI+EV integrated design, 78/100 EXACT | Single-pack Tesla 4680 vs 96S σ(σ-τ)-axis EV stack | [doc](domains/energy/battery-architecture/battery-architecture.md) |
+| 🛸 | Tool | One-liner | Everyday analogy | What it does | Mainstream contrast | Doc |
+|:--:|:----:|-----------|------------------|--------------|---------------------|:---:|
+| 10 | 🔋 **HEXA-BATTERY** | Stack-the-Cells | 6 cells stacked like Lego batteries in a flashlight | 8-stage battery design, 131/131 EXACT, 10 impossibility theorems | Single-chemistry Li-ion vs σ(6)=6-cell n-axis stack | [doc](domains/energy/battery-architecture/battery-architecture.md) |
+| 10 | ☀️ **HEXA-SOLAR** | Sun-to-Wire | Roof panels turning sunlight into wall-socket power | Ultimate solar cell, 78/78 EXACT, 7 BTs, physical-limit 5 | Single-junction Si vs τ(6)=4-state full-stack panel | [doc](domains/energy/solar-architecture/solar-architecture.md) |
+| 10 | 🏭 **HEXA-DC-REACTOR** | Datacenter Boiler | Tiny nuclear reactor inside the server farm | TRISO + He + sCO₂ + n=6 modules; 10 breakthroughs 95/96 EXACT | Grid-fed datacenter vs on-prem σ(6)=12-module SMR | [doc](domains/energy/smr-datacenter/smr-datacenter.md) |
+| 10 | 🚗 **HEXA-AUTO-BATTERY** | EV Pack | Car battery built like 96 stacked notebooks | Automotive SLI+EV integrated design, 78/100 EXACT | Single-pack Tesla 4680 vs 96S σ(σ-τ)-axis EV stack | [doc](domains/energy/battery-architecture/battery-architecture.md) |
 
 | 🛸 | Closure | ver | Product | Core | Link |
 |:--:|:-------:|:---:|---------|------|------|
@@ -241,12 +241,12 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 
 > Friendly entry point — Earth-care infrastructure tools as a compact toolkit. Same n=6 invariant lattice (σ(6)=12 / τ(6)=4 / φ(6)=2 / J₂=24), four orthogonal infra-axis verbs.
 
-| Tool | One-liner | Everyday analogy | What it does | Mainstream contrast | Doc |
-|:----:|-----------|------------------|--------------|---------------------|:---:|
-| 🌬️ **HEXA-CARBON-CAPTURE** | Air Vacuum | Air cleaner that only sucks CO₂ out of the sky | 8-stage capture pipeline (30/30 EXACT, DSE 3.6M) | DAC single-stage rig vs n=6 8-stage chain | [doc](domains/infra/carbon-capture/carbon-capture.md) |
-| 💧 **HEXA-MICROPLASTICS** | Ocean Sieve | A six-tier sieve filtering microplastics out of the sea | 6-stage pipeline, 6-nines removal, CN=6 catalyst tri-Trinity | Single mesh filter vs σ(6)=6-stage chain | [doc](domains/infra/environmental-protection/environmental-protection.md) |
-| 🛡️ **HEXA-ENV-PROTECT** | Forest Guardian | Forest-watching security system covering eight gates | 8-stage sensor → monitor → capture → purify → restore → cycle → ecosystem → Omega | EPA single-metric audit vs 8-stage closure | [doc](domains/infra/environmental-protection/environmental-protection.md) |
-| 💦 **HEXA-WATER-TREATMENT** | Tap Whisperer | Plant that turns river / sea / waste water into safe tap water | n=6 multi-stage purification + reuse loop | Single-pass treatment vs τ(6)=4-state full-cycle plant | [doc](domains/infra/water-treatment/water-treatment.md) |
+| 🛸 | Tool | One-liner | Everyday analogy | What it does | Mainstream contrast | Doc |
+|:--:|:----:|-----------|------------------|--------------|---------------------|:---:|
+| 10 | 🌬️ **HEXA-CARBON-CAPTURE** | Air Vacuum | Air cleaner that only sucks CO₂ out of the sky | 8-stage capture pipeline (30/30 EXACT, DSE 3.6M) | DAC single-stage rig vs n=6 8-stage chain | [doc](domains/infra/carbon-capture/carbon-capture.md) |
+| 10 | 💧 **HEXA-MICROPLASTICS** | Ocean Sieve | A six-tier sieve filtering microplastics out of the sea | 6-stage pipeline, 6-nines removal, CN=6 catalyst tri-Trinity | Single mesh filter vs σ(6)=6-stage chain | [doc](domains/infra/environmental-protection/environmental-protection.md) |
+| 10 | 🛡️ **HEXA-ENV-PROTECT** | Forest Guardian | Forest-watching security system covering eight gates | 8-stage sensor → monitor → capture → purify → restore → cycle → ecosystem → Omega | EPA single-metric audit vs 8-stage closure | [doc](domains/infra/environmental-protection/environmental-protection.md) |
+| 10 | 💦 **HEXA-WATER-TREATMENT** | Tap Whisperer | Plant that turns river / sea / waste water into safe tap water | n=6 multi-stage purification + reuse loop | Single-pass treatment vs τ(6)=4-state full-cycle plant | [doc](domains/infra/water-treatment/water-treatment.md) |
 
 | 🛸 | Closure | ver | Product | Core | Link |
 |:--:|:-------:|:---:|---------|------|------|
@@ -294,11 +294,11 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 
 > Friendly entry point — Robot-stack tools as a compact toolkit. Same n=6 invariant lattice (σ(6)=12 / τ(6)=4 / φ(6)=2 / J₂=24), three orthogonal infra-axis verbs.
 
-| Tool | One-liner | Everyday analogy | What it does | Mainstream contrast | Doc |
-|:----:|-----------|------------------|--------------|---------------------|:---:|
-| 🦾 **HEXA-ROBOT** | 6-DOF Arm | Six-jointed robot arm reaching anywhere on a tabletop | 8-stage robot design, 49/49 PASS, SE(3)=6 + k(3)=12 + Thue=6 invariants | Single-purpose pick-and-place vs n=6 8-stage σ(6)=12 vertex skeleton | [doc](domains/infra/robotics/robotics.md) |
-| 🚚 **HEXA-ROBOT-TRANSPORT** | Auto Mover | Self-driving cart shuttling crates between docks | Robotics-transport architecture, autonomous routing on infra | Single-vehicle delivery vs τ(6)=4-state full-loop fleet | [doc](domains/infra/robotics-transport/robotics-transport.md) |
-| 🚗 **HEXA-AUTODRIVE** | Self-Driver | Car that drives itself without a human at the wheel | Autonomous-driving architecture | Single-sensor lane-keep vs σ(6)=12-sensor τ(6)=4-state full-stack | [doc](domains/infra/autonomous-driving/autonomous-driving.md) |
+| 🛸 | Tool | One-liner | Everyday analogy | What it does | Mainstream contrast | Doc |
+|:--:|:----:|-----------|------------------|--------------|---------------------|:---:|
+| 10 | 🦾 **HEXA-ROBOT** | 6-DOF Arm | Six-jointed robot arm reaching anywhere on a tabletop | 8-stage robot design, 49/49 PASS, SE(3)=6 + k(3)=12 + Thue=6 invariants | Single-purpose pick-and-place vs n=6 8-stage σ(6)=12 vertex skeleton | [doc](domains/infra/robotics/robotics.md) |
+| 10 | 🚚 **HEXA-ROBOT-TRANSPORT** | Auto Mover | Self-driving cart shuttling crates between docks | Robotics-transport architecture, autonomous routing on infra | Single-vehicle delivery vs τ(6)=4-state full-loop fleet | [doc](domains/infra/robotics-transport/robotics-transport.md) |
+| 10 | 🚗 **HEXA-AUTODRIVE** | Self-Driver | Car that drives itself without a human at the wheel | Autonomous-driving architecture | Single-sensor lane-keep vs σ(6)=12-sensor τ(6)=4-state full-stack | [doc](domains/infra/autonomous-driving/autonomous-driving.md) |
 
 | 🛸 | Closure | ver | Product | Core | Link |
 |:--:|:-------:|:---:|---------|------|------|
@@ -321,12 +321,12 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 
 > Friendly entry point — Physics + math tools as a compact toolkit. Same n=6 invariant lattice (σ(6)=12 / τ(6)=4 / φ(6)=2 / J₂=24), four orthogonal physics-axis verbs.
 
-| Tool | One-liner | Everyday analogy | What it does | Mainstream contrast | Doc |
-|:----:|-----------|------------------|--------------|---------------------|:---:|
-| ➕ **HEXA-PURE-MATH** | Number Compass | Multiplication table that points back at n=6 every time | Pure-math foundation, 71/71 PASS, 11 theorems, BT-105~112 + 205 + 207 + 229 + 232 + 240 | Standalone proof vs σ·φ=n·τ=24 master-identity backbone | [doc](domains/physics/pure-mathematics/pure-mathematics.md) |
-| 🌌 **HEXA-COSMO** | Sky Atlas | Map of the universe drawn on the σ(6)=12 grid | Cosmology / particle architecture, 63/63 PASS, BT-134+137+143+165~172+208+209+214 | ΛCDM single-line vs τ(6)=4-component lattice | [doc](domains/physics/cosmology/cosmology.md) |
-| 🪞 **HEXA-HOLO** | Holographic Slate | 3D reality projected on a 2D boundary | AdS/CFT-class boundary correspondence | Bulk-only single-frame vs J₂=24 octahedral boundary code | [doc](domains/physics/holography/holography.md) |
-| 🧬 **HEXA-TOPO** | Knot Library | Catalog of knots and surfaces sorted by σ(6)=12 axis | Topology / hexa-topo invariants | Single-Euler classification vs n=6 χ-bin sorted lattice | [doc](domains/physics/topology/topology.md) |
+| 🛸 | Tool | One-liner | Everyday analogy | What it does | Mainstream contrast | Doc |
+|:--:|:----:|-----------|------------------|--------------|---------------------|:---:|
+| 10 | ➕ **HEXA-PURE-MATH** | Number Compass | Multiplication table that points back at n=6 every time | Pure-math foundation, 71/71 PASS, 11 theorems, BT-105~112 + 205 + 207 + 229 + 232 + 240 | Standalone proof vs σ·φ=n·τ=24 master-identity backbone | [doc](domains/physics/pure-mathematics/pure-mathematics.md) |
+| 10 | 🌌 **HEXA-COSMO** | Sky Atlas | Map of the universe drawn on the σ(6)=12 grid | Cosmology / particle architecture, 63/63 PASS, BT-134+137+143+165~172+208+209+214 | ΛCDM single-line vs τ(6)=4-component lattice | [doc](domains/physics/cosmology/cosmology.md) |
+| 10 | 🪞 **HEXA-HOLO** | Holographic Slate | 3D reality projected on a 2D boundary | AdS/CFT-class boundary correspondence | Bulk-only single-frame vs J₂=24 octahedral boundary code | [doc](domains/physics/holography/holography.md) |
+| 10 | 🧬 **HEXA-TOPO** | Knot Library | Catalog of knots and surfaces sorted by σ(6)=12 axis | Topology / hexa-topo invariants | Single-Euler classification vs n=6 χ-bin sorted lattice | [doc](domains/physics/topology/topology.md) |
 
 | 🛸 | Closure | ver | Product | Core | Link |
 |:--:|:-------:|:---:|---------|------|------|
@@ -428,12 +428,12 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 
 > Friendly entry point — the 4 sister-domains explained as a molecular toolkit. Same n=6 invariant lattice (σ(6)=12 / τ(6)=4 / φ(6)=2 / J₂=24), four orthogonal verbs.
 
-| Tool | One-liner | Everyday analogy | What it does | AlphaFold contrast | Doc |
-|:----:|-----------|------------------|--------------|--------------------|:---:|
-| 🧶 **HEXA-WEAVE** | Knit-AI | Knitting a sweater from many yarns | Designs how protein + DNA + drug interlace | AlphaFold = paper-folding 1 strand; WEAVE = weaving many strands | [doc](domains/biology/hexa-weave/hexa-weave.md) |
-| 🤖 **HEXA-NANOBOT** | Molecular gripper | Tiny robot arm — open/close, grab/release | Designs how molecules move (actuate) | DNA-origami switches, single-device kinematics | [doc](domains/biology/hexa-nanobot/hexa-nanobot.md) |
-| ✂️ **HEXA-RIBOZYME** | RNA scissors | RNA cutting itself without a protein enzyme | Catalysis by RNA alone (chemistry-by-RNA) | hammerhead / HDV / hairpin / ribosome PTC | [doc](domains/biology/hexa-ribozyme/hexa-ribozyme.md) |
-| 🦠 **HEXA-VIROCAPSID** | Virus shell | 60 identical Lego blocks self-organize into a soccer-ball shape | Self-assembly of icosahedral protein cages | T=1 60-subunit cage, vaccine VLP, drug capsule, nano-cage | [doc](domains/biology/hexa-virocapsid/hexa-virocapsid.md) |
+| 🛸 | Tool | One-liner | Everyday analogy | What it does | AlphaFold contrast | Doc |
+|:--:|:----:|-----------|------------------|--------------|--------------------|:---:|
+| 7 | 🧶 **HEXA-WEAVE** | Knit-AI | Knitting a sweater from many yarns | Designs how protein + DNA + drug interlace | AlphaFold = paper-folding 1 strand; WEAVE = weaving many strands | [doc](domains/biology/hexa-weave/hexa-weave.md) |
+| 7 | 🤖 **HEXA-NANOBOT** | Molecular gripper | Tiny robot arm — open/close, grab/release | Designs how molecules move (actuate) | DNA-origami switches, single-device kinematics | [doc](domains/biology/hexa-nanobot/hexa-nanobot.md) |
+| 7 | ✂️ **HEXA-RIBOZYME** | RNA scissors | RNA cutting itself without a protein enzyme | Catalysis by RNA alone (chemistry-by-RNA) | hammerhead / HDV / hairpin / ribosome PTC | [doc](domains/biology/hexa-ribozyme/hexa-ribozyme.md) |
+| 7 | 🦠 **HEXA-VIROCAPSID** | Virus shell | 60 identical Lego blocks self-organize into a soccer-ball shape | Self-assembly of icosahedral protein cages | T=1 60-subunit cage, vaccine VLP, drug capsule, nano-cage | [doc](domains/biology/hexa-virocapsid/hexa-virocapsid.md) |
 
 > 4-sister tetrahedron closure (cycle 19→22): the four verbs cover the molecular world in four orthogonal moves — **weave** (compose) + **actuate** (move) + **catalyse** (cut) + **assemble** (build). σ(6)=12 STRUCTURAL-EXACT only on HEXA-VIROCAPSID (Caspar-Klug T=1 12 vertices, posterior 0.9668 Bayesian audit RESOLVED); STRUCTURAL-APPROXIMATE on HEXA-RIBOZYME (catalytic-core ~12 nt window). All four are APPROACH grade per raw 69 — theoretical-analytical, 90-day MVP gates pending 2026-07-28.
 
