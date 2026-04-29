@@ -8,7 +8,8 @@ parent_followup: reports/anomaly/btAI2c_h1_summary.md
 silicon_primitives: [provenance-bit, promotion-counter-mmu, bt-id-isa]
 principles: [honesty-triad, write-barrier, constraint-honesty]
 verify: domains/compute/ai-native-architecture/verify_ai-native-architecture.hexa
-verify_legacy_py: [verify_ai-native-architecture.py, btAI3_rtl_design_verify.py, verify_ai-native-architecture_extended.py]
+verify_retired_py: [verify_ai-native-architecture.py, btAI3_rtl_design_verify.py, verify_ai-native-architecture_extended.py]
+verify_retired_note: domains/compute/ai-native-architecture/RETIRED_python_verifiers.md
 ---
 
 # AI-native architecture (beyond GPU)
@@ -128,9 +129,10 @@ and machine-checkable by the verify script.
 
 ### Verify script
 
-- domains/compute/ai-native-architecture/verify_ai-native-architecture.py
-- run via /tmp/btai2-venv/bin/python or python3 (stdlib + json only)
-- target: 10/10 EXACT, exit code 0
+- domains/compute/ai-native-architecture/verify_ai-native-architecture.hexa
+- run via `hexa <path>` (raw 9 hexa-only SSOT; legacy `.py` retired — see
+  `RETIRED_python_verifiers.md`)
+- target: 21/21 EXACT (Block A: 10 base + Block B: 3 RTL + Block C: 8 extended), exit code 0
 
 ### Cross-domain links
 
@@ -1392,10 +1394,11 @@ if __name__ == "__main__":
 
 ## §13 TOOLS
 
-- `verify_ai-native-architecture.hexa` — primary verify, 21/21 EXACT.
-- `verify_ai-native-architecture.py` — legacy Python verifier (mirror).
-- `verify_ai-native-architecture_extended.py` — extended falsifier coverage.
-- `btAI3_rtl_design_verify.py` — symbolic verifier for the RTL design spec.
+- `verify_ai-native-architecture.hexa` — primary verify, 21/21 EXACT (raw 9 hexa-only SSOT).
+- `RETIRED_python_verifiers.md` — retire note for the three legacy `.py` verifiers
+  (`verify_ai-native-architecture.py`, `btAI3_rtl_design_verify.py`,
+  `verify_ai-native-architecture_extended.py`); all consolidated into the
+  hexa SSOT above per raw 9 cycle 30.
 - `analysis/btAI3_rtl_design.md` — silicon-tier design spec (design-only).
 - `analysis/six_vendor_gap_analysis_2026-04-26.md` — F-DESIGN-A 6-vendor commercial gap analysis.
 

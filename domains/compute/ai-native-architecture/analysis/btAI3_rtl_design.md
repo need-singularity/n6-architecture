@@ -6,7 +6,9 @@ parent_session: reports/sessions/omega-cycle-ai-native-arch-beyond-gpu-2026-04-2
 tier: design-only (NO synthesis, NO tape-out, NO measurement)
 target_pdk_candidates: [SKY130 (open-source), TSMC N5 (placeholder), Samsung SF3P (placeholder)]
 silicon_primitives_specified: 3
-verify: domains/compute/ai-native-architecture/btAI3_rtl_design_verify.py
+verify: domains/compute/ai-native-architecture/verify_ai-native-architecture.hexa
+verify_retired_py: domains/compute/ai-native-architecture/btAI3_rtl_design_verify.py
+verify_retired_note: domains/compute/ai-native-architecture/RETIRED_python_verifiers.md
 ---
 
 # BT-AI3 RTL design spec (silicon-tier, design-only)
