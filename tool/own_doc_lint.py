@@ -88,9 +88,17 @@ def parse_own_file(path: Path) -> dict[int, dict[str, Any]]:
             m_field = field_re.match(line)
             if m_field:
                 key, value = m_field.group(1), m_field.group(2).strip()
-                # Multiple fields with same name (e.g. decl) — keep first, append later.
-                if key in current and isinstance(current[key], str):
+                # Keys that should always be lists (own 29 multi-section spec etc.)
+                LIST_KEYS = {"mandatory-sections", "optional-sections"}
+                if key in LIST_KEYS:
+                    if key not in current:
+                        current[key] = []
+                    current[key].append(value)
+                elif key in current and isinstance(current[key], str):
+                    # Multiple fields with same name (e.g. decl) — string concat.
                     current[key] = current[key] + " " + value
+                elif key in current and isinstance(current[key], list):
+                    current[key].append(value)
                 else:
                     current[key] = value
     if current is not None:
@@ -1014,66 +1022,77 @@ def check_rule_12_miss_criteria() -> list[dict[str, str]]:
 # Orchestrator
 # -----------------------------------------------------------------------------
 
-def check_rule_29_readme_friendly_toolkit() -> list[dict[str, str]]:
-    """own#29 HARD enforcement — README.md must contain the friendly Molecular
-    Toolkit (HEXA family) table immediately before the Biology product table.
-
-    4-axis check:
-      (a) `## 🧬 Molecular Toolkit (HEXA family)` H2 heading present
-      (b) 6-column header row exact: `| Tool | One-liner | Everyday analogy |
-          What it does | AlphaFold contrast | Doc |`
-      (c) >=4 data rows (one per HEXA biology sister)
-      (d) each data row's last cell contains a markdown link
-          `[doc](domains/biology/<slug>/<slug>.md)` where the file exists
-
-    Established 2026-04-29 (cycle 25) via user 'lint 강화' directive.
+def _parse_own29_section_spec(line: str) -> tuple[str, str, int, str] | None:
+    """Parse a single mandatory-sections / optional-sections value:
+        '<key>=<heading>|min_rows=<N>|axis=<axis_slug>'
+    Returns (key, heading, min_rows, axis_slug) or None if malformed.
     """
-    violations: list[dict[str, str]] = []
-    readme_path = REPO_ROOT / "README.md"
-    if not readme_path.is_file():
-        return [{
-            "rule": "own#29",
-            "path": "README.md",
-            "detail": "README.md missing at repo root",
-        }]
-    text = readme_path.read_text(encoding="utf-8", errors="replace")
+    parts = line.split("|")
+    if len(parts) < 3:
+        return None
+    head_part = parts[0].strip()
+    if "=" not in head_part:
+        return None
+    key, heading = head_part.split("=", 1)
+    min_rows = 4
+    axis = ""
+    for p in parts[1:]:
+        p = p.strip()
+        if p.startswith("min_rows="):
+            try:
+                min_rows = int(p.split("=", 1)[1])
+            except ValueError:
+                pass
+        elif p.startswith("axis="):
+            axis = p.split("=", 1)[1].strip()
+    return (key.strip(), heading.strip(), min_rows, axis)
 
-    # axis (a): heading
-    heading = "## 🧬 Molecular Toolkit (HEXA family)"
-    if heading not in text:
-        violations.append({
+
+def _check_one_toolkit_section(text: str, lines: list[str], heading: str,
+                               min_rows: int, axis: str,
+                               mandatory: bool) -> list[dict[str, str]]:
+    """Run the 4-axis toolkit table check for one registered section.
+
+    Returns a list of violation dicts. Empty list = PASS for this section.
+    For optional sections: if heading absent AND no toolkit-table-shaped
+    block found via heading, returns []; otherwise full check applies.
+    """
+    import re as _re
+    out: list[dict[str, str]] = []
+
+    heading_present = heading in text
+    if not heading_present:
+        if mandatory:
+            out.append({
+                "rule": "own#29",
+                "path": "README.md",
+                "detail": f"[mandatory] missing heading line: '{heading}' (axis={axis})",
+            })
+        return out  # optional + no heading → silent pass
+
+    # heading present → header row + min_rows + doc link checks all apply
+    # axis (b): header row template — final cell is "Doc"; second-to-last is
+    # "<X> contrast" allowing the "AlphaFold" / "Mainstream" / "Classical" etc.
+    # variation. We accept any exact `| Tool | One-liner | Everyday analogy |
+    # What it does | <something> | Doc |` shape.
+    header_re = _re.compile(
+        r"^\|\s*Tool\s*\|\s*One-liner\s*\|\s*Everyday analogy\s*\|\s*"
+        r"What it does\s*\|\s*[^|]+\|\s*Doc\s*\|\s*$"
+    )
+    header_idx = -1
+    for i, ln in enumerate(lines):
+        if header_re.match(ln):
+            header_idx = i
+            break
+    if header_idx < 0:
+        out.append({
             "rule": "own#29",
             "path": "README.md",
-            "detail": f"missing heading line: '{heading}'",
+            "detail": f"[{axis}] heading '{heading}' present but no 6-column toolkit header row found",
         })
+        return out
 
-    # axis (b): header row exact
-    expected_header = "| Tool | One-liner | Everyday analogy | What it does | AlphaFold contrast | Doc |"
-    if expected_header not in text:
-        violations.append({
-            "rule": "own#29",
-            "path": "README.md",
-            "detail": f"missing 6-column header row exact: '{expected_header}'",
-        })
-        # Without the header, downstream row checks become noisy; return early.
-        return violations
-
-    # axes (c)+(d): locate the table block immediately after the header line and
-    # walk data rows until a non-table line ends the block.
-    lines = text.splitlines()
-    try:
-        header_idx = lines.index(expected_header)
-    except ValueError:
-        # Defensive: header substring matched but exact-line lookup failed
-        # (e.g. trailing whitespace). Treat as failed axis (b).
-        violations.append({
-            "rule": "own#29",
-            "path": "README.md",
-            "detail": "header row substring present but no exact line match (check trailing whitespace)",
-        })
-        return violations
-
-    # Skip the alignment row (`|:----:|...`) right after the header.
+    # axes (c)+(d)
     data_start = header_idx + 2
     data_rows: list[str] = []
     for i in range(data_start, min(data_start + 50, len(lines))):
@@ -1084,33 +1103,106 @@ def check_rule_29_readme_friendly_toolkit() -> list[dict[str, str]]:
             break
         data_rows.append(ln)
 
-    if len(data_rows) < 4:
-        violations.append({
+    if len(data_rows) < min_rows:
+        out.append({
             "rule": "own#29",
             "path": "README.md",
-            "detail": f"need >=4 data rows (one per HEXA sister); found {len(data_rows)}",
+            "detail": f"[{axis}] need >={min_rows} data rows under '{heading}'; found {len(data_rows)}",
         })
 
-    # axis (d): each row's last non-empty cell must be a `[doc](...)` link
-    # resolving to an existing file.
-    import re as _re
-    doc_re = _re.compile(r"\[doc\]\((domains/biology/[^)]+)\)")
+    if axis:
+        doc_re = _re.compile(rf"\[doc\]\((domains/{_re.escape(axis)}/[^)]+)\)")
+    else:
+        doc_re = _re.compile(r"\[doc\]\((domains/[^)]+)\)")
     for row in data_rows:
         m = doc_re.search(row)
         if m is None:
-            violations.append({
+            out.append({
                 "rule": "own#29",
                 "path": "README.md",
-                "detail": f"toolkit row missing [doc](domains/biology/...) link: {row[:80]!r}",
+                "detail": f"[{axis}] toolkit row missing [doc](domains/{axis}/...) link: {row[:80]!r}",
             })
             continue
         link_path = m.group(1)
         if not (REPO_ROOT / link_path).is_file():
-            violations.append({
+            out.append({
                 "rule": "own#29",
                 "path": "README.md",
-                "detail": f"toolkit doc link unresolved: {link_path}",
+                "detail": f"[{axis}] toolkit doc link unresolved: {link_path}",
             })
+
+    return out
+
+
+def check_rule_29_readme_friendly_toolkit(rules: dict[int, dict[str, Any]]) -> list[dict[str, str]]:
+    """own#29 HARD enforcement — README.md per-section friendly toolkit
+    table contract, generalized 2026-04-29 from Biology-only to multi-section.
+
+    Reads `mandatory-sections` and `optional-sections` arrays from .own:
+      <key>=<H2 heading>|min_rows=<N>|axis=<axis_slug>
+
+    Mandatory: heading absent → violation.
+    Optional: heading absent → silent pass; heading present → full 4-axis check.
+
+    Per-section 4-axis check:
+      (a) H2 heading line present in README.md
+      (b) 6-column header row matching template `| Tool | One-liner |
+          Everyday analogy | What it does | <Mainstream> contrast | Doc |`
+      (c) >=min_rows data rows under the table block
+      (d) each data row's last cell contains `[doc](domains/<axis>/<slug>/<slug>.md)`
+          link resolving to an existing file under repo root
+
+    Established 2026-04-29 (cycle 25) via user 'lint 강화' + 'README 의 모든
+    도메인 섹션들에 반영되도록 lint 수정' directive.
+    """
+    violations: list[dict[str, str]] = []
+    readme_path = REPO_ROOT / "README.md"
+    if not readme_path.is_file():
+        return [{
+            "rule": "own#29",
+            "path": "README.md",
+            "detail": "README.md missing at repo root",
+        }]
+    text = readme_path.read_text(encoding="utf-8", errors="replace")
+    lines = text.splitlines()
+
+    rule29 = rules.get(29, {})
+    mandatory_specs = rule29.get("mandatory-sections", []) or []
+    optional_specs = rule29.get("optional-sections", []) or []
+
+    if not isinstance(mandatory_specs, list):
+        mandatory_specs = [mandatory_specs]
+    if not isinstance(optional_specs, list):
+        optional_specs = [optional_specs]
+
+    # Process each registered section
+    for spec_line in mandatory_specs:
+        parsed = _parse_own29_section_spec(spec_line)
+        if parsed is None:
+            violations.append({
+                "rule": "own#29",
+                "path": ".own",
+                "detail": f"malformed mandatory-sections spec: '{spec_line}'",
+            })
+            continue
+        _, heading, min_rows, axis = parsed
+        violations.extend(_check_one_toolkit_section(text, lines, heading,
+                                                     min_rows, axis,
+                                                     mandatory=True))
+
+    for spec_line in optional_specs:
+        parsed = _parse_own29_section_spec(spec_line)
+        if parsed is None:
+            violations.append({
+                "rule": "own#29",
+                "path": ".own",
+                "detail": f"malformed optional-sections spec: '{spec_line}'",
+            })
+            continue
+        _, heading, min_rows, axis = parsed
+        violations.extend(_check_one_toolkit_section(text, lines, heading,
+                                                     min_rows, axis,
+                                                     mandatory=False))
 
     return violations
 
@@ -1129,7 +1221,7 @@ CHECKERS = [
     ("own#11", lambda rules: check_rule_11_bt_solution_ban()),
     ("own#12", lambda rules: check_rule_12_miss_criteria()),
     ("own#16", lambda rules: check_rule_16_domain_registry()),
-    ("own#29", lambda rules: check_rule_29_readme_friendly_toolkit()),
+    ("own#29", lambda rules: check_rule_29_readme_friendly_toolkit(rules)),
 ]
 
 

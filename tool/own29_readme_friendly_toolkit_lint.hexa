@@ -1,19 +1,26 @@
 #!hexa strict
-// tool/own29_readme_friendly_toolkit_lint.hexa — README.md friendly Molecular
-// Toolkit (HEXA family) table HARD-block enforcement (own 29).
+// tool/own29_readme_friendly_toolkit_lint.hexa — README.md friendly toolkit
+// table HARD-block enforcement (own 29).
 //
 // Authored 2026-04-29 (cycle 25) under user 'lint 강화' + 'hexa 로 작성' directive.
-// Companion to python `tool/own_doc_lint.py` own#29 checker (which keeps the
-// unified report writer); this hexa tool is the standalone canonical gate
-// per raw 9 hexa-only and is what cron / CI may invoke directly.
+// Generalized 2026-04-29 (cycle 25) under user 'README 의 모든 도메인 섹션들에
+// 반영되도록 lint 수정' directive — biology mandatory + optional sections
+// (AI / Environment / Energy / Robotics / Physics) checked when present via
+// python `tool/own_doc_lint.py` own#29 unified scanner.
 //
-// @tool(slug="own29_readme_friendly_toolkit_lint", desc="own 29 HARD lint on README.md — Biology friendly Molecular Toolkit (HEXA family) 6-column table mandatory: H2 heading present + exact 6-column header + ≥4 data rows + each row's [doc](domains/biology/<slug>/<slug>.md) link resolves to existing file")
+// This hexa tool is the standalone canonical gate per raw 9 hexa-only for
+// the MANDATORY biology section only (lint 강화 baseline). Multi-section
+// dispatch (mandatory + optional) is the python lint's responsibility per
+// own 29 declarative-spec contract.
+//
+// @tool(slug="own29_readme_friendly_toolkit_lint", desc="own 29 HARD lint on README.md — biology mandatory friendly Molecular Toolkit (HEXA family) 6-column table: H2 heading present + 6-column header (Tool / One-liner / Everyday analogy / What it does / <Mainstream> contrast / Doc) + >=4 data rows + each row's [doc](domains/biology/<slug>/<slug>.md) link resolves to existing file")
 // @usage(hexa /Users/ghost/core/n6-architecture/tool/own29_readme_friendly_toolkit_lint.hexa [--selftest])
 // @omega-saturation-exempt("README is single-file SSOT; lint is O(file-size) line-walk + N=4 file-existence checks; converges trivially")
 // @exit_codes(0=PASS, 1=violation found and HARD block, 2=internal/usage error)
 
 let REPO_ROOT = "/Users/ghost/core/n6-architecture"
 let README_PATH = REPO_ROOT + "/README.md"
+// MANDATORY section: biology (others are optional per .own own 29 spec, checked by python lint)
 let HEADING_LINE = "## 🧬 Molecular Toolkit (HEXA family)"
 let HEADER_ROW   = "| Tool | One-liner | Everyday analogy | What it does | AlphaFold contrast | Doc |"
 

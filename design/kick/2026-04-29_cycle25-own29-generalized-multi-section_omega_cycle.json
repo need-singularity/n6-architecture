@@ -1,0 +1,64 @@
+{
+  "schema": "omega_cycle.witness_v1",
+  "ts": "2026-04-29T02:05:00Z",
+  "cycle": 25,
+  "phase": "own-29-generalized-multi-section-toolkit-lint",
+  "topic": "own 29 (cycle 25 base = Biology only) → generalized declarative-spec multi-section toolkit lint (mandatory + optional registries in .own)",
+  "verdict": "GENERALIZED-AND-VERIFIED",
+  "verdict_detail": "User directive 'README 의 모든 도메인 섹션들에 반영되도록 lint 수정' 후 own 29 declarative-spec generalize. .own 안에 mandatory-sections + optional-sections list registry. mandatory: heading absent → violation; optional: heading absent → silent pass + heading present → full 4-axis check. tool/own_doc_lint.py 의 check_rule_29_readme_friendly_toolkit() 가 _parse_own29_section_spec() + _check_one_toolkit_section() 으로 분해 + LIST_KEYS parser fix (multi-line same-key list handling). hexa standalone gate 는 mandatory biology 만 (raw 9 hexa-only baseline).",
+  "registered_sections": {
+    "mandatory": [
+      {"key": "biology", "heading": "## 🧬 Molecular Toolkit (HEXA family)", "min_rows": 4, "axis": "biology"}
+    ],
+    "optional_pre_registered": [
+      {"key": "ai_ml", "heading": "## 🤖 AI Toolkit (HEXA-AI family)", "min_rows": 3, "axis": "compute"},
+      {"key": "environment", "heading": "## 🌿 Environment Toolkit (HEXA-Earth family)", "min_rows": 3, "axis": "infra"},
+      {"key": "energy", "heading": "## ⚡ Energy Toolkit (HEXA-Power family)", "min_rows": 3, "axis": "infra"},
+      {"key": "robotics", "heading": "## 🤖 Robotics Toolkit (HEXA-Mech family)", "min_rows": 3, "axis": "robotics"},
+      {"key": "physics_math", "heading": "## 🔬 Physics Toolkit (HEXA-Phys family)", "min_rows": 3, "axis": "physics"}
+    ]
+  },
+  "expected_header_template": "| Tool | One-liner | Everyday analogy | What it does | <Mainstream> contrast | Doc |",
+  "header_template_flexibility": "5th column allows per-section variation (e.g. 'AlphaFold contrast' / 'Mainstream contrast' / 'Classical contrast') — regex column-shape preserved, content varies per-section",
+  "files_modified": [
+    ".own (own 29 entry rewritten with mandatory/optional/expected-header-row keys)",
+    "tool/own_doc_lint.py (parse_own_file LIST_KEYS handling + _parse_own29_section_spec + _check_one_toolkit_section helpers + check_rule_29 generalized)",
+    "tool/own29_readme_friendly_toolkit_lint.hexa (docstring updated; mandatory-only scope explicit per raw 9 hexa-only)"
+  ],
+  "files_created": [
+    "design/kick/2026-04-29_cycle25-own29-generalized-multi-section_omega_cycle.json (this witness)"
+  ],
+  "verification": {
+    "python_lint_full_sweep": "0 HARD / 0 SOFT — all 14 HARD rules PASS",
+    "own_29_specifically": "OK (mandatory biology PASS + 5 optional sections silent pass on heading absent)",
+    "hexa_lint_production": "__OWN29_RESULT__ PASS (production README)",
+    "hexa_selftest": "__OWN29_SELFTEST_RESULT__ PASS (4/4 fixtures)",
+    "synthetic_optional_check": "PASS — optional section with bad rows + bad doc link reported 2 violations as expected",
+    "synthetic_optional_absent": "PASS — heading absent → silent pass (0 violations)"
+  },
+  "growth_path": {
+    "phase_1_today_cycle25": "biology mandatory + 5 optional pre-registered (silent until filled)",
+    "phase_2_cycle_26plus": "user fills AI Toolkit table → optional → mandatory promotion (.own mandatory-sections list extension)",
+    "phase_3_cycle_27plus": "Environment / Energy / Robotics / Physics 점진 fill",
+    "phase_4_cycle_30plus": "all 32 README domain sections potentially registered; lint scope full coverage"
+  },
+  "raw_91_c3_disclose": [
+    "lint generalize 는 declarative spec 기반 (.own 안의 mandatory-sections / optional-sections list)",
+    "5 optional pre-registered headings 는 cycle 25 author 가 추정 — 실제 user-OK 받은 것은 biology 1개만; 다른 5 sections 의 heading 양식 / icon / 단어 선택은 cycle 26+ user fill 시 수정 가능 (declarative 라 변경 쉬움)",
+    "hexa lint 는 mandatory-only — multi-section dispatch 는 python 책임 (raw 9 deviation 이지만 cycle 14 design 잔재; cycle 30+ rewrite 가능)",
+    "header template flexibility: '<Mainstream> contrast' 5th column 은 regex 로 임의 1-cell content 허용; 너무 strict 하면 sister section 마다 자연스러운 contrast 표현 막힘",
+    "cycle 26+ user 가 새 section 의 toolkit table 채워줬을 때 own 29 자동 PASS — pre-registered optional 6 sections (mandatory 1 + optional 5)"
+  ],
+  "raw_71_falsifiers": [
+    {"id": "F-CYCLE25-OWN29-GENERAL-1", "condition": "user fills AI Toolkit but pre-registered heading/axis 가 mismatch (예: heading='## 🧠 AI Toolkit' / axis='ai-ml') → lint fail despite user intent", "deadline": "2026-05-29", "status": "preregistered"},
+    {"id": "F-CYCLE25-OWN29-GENERAL-2", "condition": "header template '<Mainstream> contrast' 5th column regex 가 너무 loose 해서 unintended structure 통과 (예: 5th column 이 'Doc' 인 5-column malformed)", "deadline": "2026-05-29", "status": "preregistered"},
+    {"id": "F-CYCLE25-OWN29-GENERAL-3", "condition": "mandatory-sections list 에 같은 axis 가 2+ entries 등장 → lint dispatch double check (false positive)", "deadline": "2026-07-29", "status": "preregistered"},
+    {"id": "F-CYCLE25-OWN29-GENERAL-4", "condition": "parse_own_file LIST_KEYS extension 이 다른 own rule 의 same-key concat 의도 깨뜨림 (회귀)", "deadline": "2026-05-13", "status": "preregistered"}
+  ],
+  "raw_47_cross_repo": "n6-architecture only — sister repo 의 README 패턴 cycle 26+ propagation candidate (raw 47 cross-repo trawl-witness 패턴)",
+  "raw_9_hexa_only": "python lint generalize OK; hexa lint 는 mandatory baseline (deviation 잔재, cycle 30+ rewrite)",
+  "raw_53_deterministic": "lint exit code + JSON report path = deterministic verifier; declarative spec 의 mandatory/optional list parsing 은 deterministic regex",
+  "raw_77_append_only": true,
+  "raw_142_d2_revertible": true,
+  "raw_138_sentinel": "__CYCLE25_OWN29_GENERAL_RESULT__ GENERALIZED-AND-VERIFIED"
+}
