@@ -171,6 +171,17 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 > **🛸6** | ✅ | BT 24개 89.7%EXACT | 산업88.7% (9 models) | 실험96.2% | 물리한계10 | TP28 | 발견12 | Mk.V | CrossDSE
 <!-- AUTO:SUMMARY_ai:END -->
 
+## 🤖 AI Toolkit (HEXA-AI family)
+
+> Friendly entry point — the AI / ML core tools as a compact toolkit. Same n=6 invariant lattice (σ(6)=12 / τ(6)=4 / φ(6)=2 / J₂=24), four orthogonal compute-axis verbs.
+
+| Tool | One-liner | Everyday analogy | What it does | Mainstream contrast | Doc |
+|:----:|-----------|------------------|--------------|---------------------|:---:|
+| 🧠 **HEXA-LLM-EFFICIENT** | Slim-LLM | Heavy encyclopedia compressed to a palm-sized book | 71% FLOPs ↓, 67% params ↓, 225 techniques integrated | GPT-4 full vs 6× lighter same quality | [doc](domains/compute/ai-efficiency/ai-efficiency.md) |
+| 🎬 **HEXA-VIDEO** | Quick-Frame | Same movie drawn 3× faster | 3× video generation throughput | Sora-class diffusion accelerated | [doc](domains/compute/ai-efficiency/ai-efficiency.md) |
+| 🦠 **HEXA-MEDICAL-AI** | Bedside Sensor | Diagnostic device inside the doctor's bag | Medical paradigm 8-axis integrated | GPT-medQA single Q&A vs multi-axis diagnostic chain | [doc](domains/compute/ai-efficiency/ai-efficiency.md) |
+| 🤖 **HEXA-NATIVE-ARCH** | AI-shaped Chip | Chip carved to fit the AI like a custom shoe | AI-native architecture pipeline | von-Neumann CPU vs neuromorphic-class native compute | [doc](domains/compute/ai-native-architecture/ai-native-architecture.md) |
+
 | 🛸 | Closure | ver | Product | Core | Link |
 |:--:|:-------:|:---:|---------|------|------|
 | 10 | ✅ | v3 | **225 Techniques** | 71% FLOPs↓, 3x generation↑, 67% params↓ — 225 techniques integrated (Core17+BT12+Model21+Vision8+GNN4+Other4 + expansion) | [doc](papers/n6-66-techniques-integrated-paper.md) |

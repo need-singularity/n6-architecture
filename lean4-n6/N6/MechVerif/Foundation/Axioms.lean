@@ -1106,28 +1106,28 @@ theorem axiom_hexa_comp_closure_via_ZFC : ClosedUnderHEXAComp Strand := by
   exact axiom_hexa_comp_closure_atom
 
 /-- Robin 1984 + Hardy-Wright 322/328 + Wigert 1907 asymptotic separation:
-    for n > 1000, the AX-1 equality fails.
+    for n > 3000, the AX-1 equality fails.
 
-    W13 cycle-21 stage-1 mechanical UPDATE (2026-04-28): bounded threshold
-    extended 100 → 1000 via `AX1_forward_bounded_1000` interval_cases dispatch
-    (`AX1.lean`). The axiomatic surface is now n > 1000 (was n > 100). raw 91
-    C3 honest disclose:
+    W13 cycle-26 stage-3a mechanical UPDATE (2026-04-29): bounded threshold
+    extended 2000 → 3000 via `AX1_forward_bounded_3000` interval_cases dispatch
+    (`AX1.lean`). The axiomatic surface is now n > 3000 (was n > 2000 cycle 22,
+    n > 1000 cycle 21, n > 100 cycle 20). raw 91 C3 honest disclose:
       * mathlib4 has NO Robin/Hardy-Wright/Wigert asymptotic results
         (verified via grep on `Mathlib/NumberTheory/ArithmeticFunction/Misc.lean`
         which only provides the trivial `sigma_le_pow_succ : σ k n ≤ n^(k+1)`).
       * Full mechanical conversion to a `theorem` would require formalizing
         Robin's 1984 inequality `σ(n)/n < e^γ · ln ln n` (n > 5040 unconditional;
         RH-conditional for smaller n) — outside-mathlib dependency, deferred.
-      * Cycle 21 W13 stage-1 reduces the axiomatic-surface threshold
-        incrementally (n > 100 → n > 1000); axiom count UNCHANGED at 7
-        (PARTIAL outcome — RH-conditional regime remains for 1000 < n ≤ 5040).
-      * Stage-2 (cycle 21) targets 1000 → 5040; if achieved, the axiom
+      * Cycle 26 W13 stage-3a reduces the axiomatic-surface threshold
+        incrementally (n > 100 → 1000 → 2000 → 3000); axiom count UNCHANGED at 1
+        (PARTIAL outcome — RH-conditional regime remains for 3000 < n ≤ 5040).
+      * Stage-3b (cycle 27+) targets 3000 → 5040; if achieved, the axiom
         statement reaches Robin's *unconditional* regime and may cite
-        Robin 1984 Theorem 1 directly without RH. raw 91 C3: stage-2 may
-        fail mechanically due to interval_cases scaling — disclosed honestly
+        Robin 1984 Theorem 1 directly without RH. raw 91 C3: stage-3b deferred
+        for build-time + heartbeat budget reasons; honest partial disclosed
         rather than fabricated PASS. -/
 axiom axiom_robin_hardy_wright_ax1_tail :
-    ∀ n : ℕ, 1000 < n → ¬ AX1Eq n
+    ∀ n : ℕ, 3000 < n → ¬ AX1Eq n
 
 /-! ## §4 Direct-Strand bridge accessors (collapse AX2 mirrors)
 

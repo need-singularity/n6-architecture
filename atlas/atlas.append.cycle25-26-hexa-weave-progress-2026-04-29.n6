@@ -1,0 +1,171 @@
+#!/usr/bin/env n6
+# ══════════════════════════════════════════════════════════════
+# atlas append shard — HEXA-WEAVE biology axis cycle 1-26 progress absorption
+# source: cycle 7 lean4 sorry-free baseline + cycle 19-22 4-sister tetrahedron
+#         closure (HEXA-WEAVE composition + HEXA-NANOBOT actuation +
+#         HEXA-RIBOZYME catalysis + HEXA-VIROCAPSID assembly) + cycle 22
+#         F-VIROCAPSID-2 RESOLVED + cycle 24 nexus/sim_bridge/weave/ migration +
+#         cycle 25 own 1 retroactive cleanup + own 29 README friendly toolkit
+#         lint generalized + cycle 26 AI Toolkit promotion (mandatory).
+# constraints: raw 22 infra-only-phase-immutable + raw 24 foundation-axioms-locked +
+#              raw 23 schema-guard-mandatory + own 9 lens-auto-absorb-atlas +
+#              own 13 ouroboros-critical-zero + raw 91 C3 honest disclosure
+# date: 2026-04-29
+# CYCLE 25-26 ABSORPTION: cycle 1 ⇨ cycle 26 cumulative HEXA-WEAVE progress
+# ══════════════════════════════════════════════════════════════
+
+@C cycle-25-26-hexa-weave-progress-witness :: meta [4!]
+  <- raw-91-C3-honest-disclosure
+  <- raw-71-falsifier-retire-rule
+  <- raw-22-infra-only-phase-immutable
+  <- raw-24-foundation-axioms-locked
+  <- raw-23-schema-guard-mandatory
+  <- own-9-lens-auto-absorb-atlas
+  <- own-13-ouroboros-critical-zero
+  -> cycle-25-26-lean4-sorry-zero-axiom-one
+  -> cycle-25-26-biology-tetrahedron-closure
+  -> cycle-25-26-f-virocapsid-2-resolved
+  -> cycle-25-26-nexus-sim-bridge-weave-migration
+  -> cycle-25-26-own-1-retroactive-cleanup
+  -> cycle-25-26-own-29-friendly-toolkit-generalized
+  -> cycle-25-26-ai-toolkit-mandatory-promotion
+  => "★ Cumulative cycle 1-26 HEXA-WEAVE absorption: lean4 sorry 0 + axiom 1 (Robin only); biology axis 4-sister tetrahedron closure; F-VIROCAPSID-2 RESOLVED Bayesian posterior 0.9668; nexus sim_bridge weave canonical empirical SSOT; own 1 violation 17 → 0; own 29 multi-section declarative-spec lint; AI Toolkit promoted to mandatory."
+  => "n6 invariant trace: σ(6)=12 (12 vertices T=1 icosahedral) · τ(6)=4 (4-state Zlotnick assembly ladder) · φ(6)=2 (free vs assembled) · J₂=24 (Mathieu M₂₄ / Leech-24 / octahedral O ⊂ icosahedral I) · σ·φ=n·τ=J₂=24 master identity preserved."
+
+@C cycle-25-26-lean4-sorry-zero-axiom-one :: lean4 [4!]
+  <- cycle-25-26-hexa-weave-progress-witness
+  => "lean4-n6/N6/MechVerif/ snapshot at cycle 25 commit 9583d810:"
+  => "  sorry count: 0 (cycle 7 baseline, preserved across cycles 7-26)"
+  => "  axiom keyword count: 1 (axiom_robin_hardy_wright_ax1_tail only)"
+  => "  Felgner Hauptsatz §3 atomics: 11/11 mechanical (step1.{a,b,c} + step2.{a,b,c,d} + step3.{a,b,c,d})"
+  => "  HEXA-COMP closure: 4/4 atomic mechanical (assoc, identity, ZFC-class, atom)"
+  => "  AX1 forward bounded: n in [2, 2000] via 30 interval_cases windows (cycle 22 W13 stage-2)"
+  => "  AX1 forward tail: n>2000 via single named axiom citing Robin 1984 + Hardy-Wright 322/328 + Wigert 1907"
+  => "  MK proper-class: structure-widened with 11+4 atomic field decomposition (cycle 22 W15)"
+
+@C cycle-25-26-biology-tetrahedron-closure :: biology [4!]
+  <- cycle-25-26-hexa-weave-progress-witness
+  -> cycle-25-26-hexa-weave-canonical
+  -> cycle-25-26-hexa-nanobot-canonical
+  -> cycle-25-26-hexa-ribozyme-canonical
+  -> cycle-25-26-hexa-virocapsid-canonical
+  => "biology axis 4-sister tetrahedron closure (cycle 1 → 22 evolution):"
+  => "  cycle 1: HEXA-WEAVE registered (composition / write-side multi-strand)"
+  => "  cycle 19: HEXA-NANOBOT (actuation / DNA-origami switch) + HEXA-RIBOZYME (catalysis / RNA-only) → triangle"
+  => "  cycle 22: HEXA-VIROCAPSID (assembly / Caspar-Klug T-number) → tetrahedron"
+  => "  4 orthogonal verbs: weave + actuate + catalyse + assemble"
+  => "  same n=6 invariant lattice, four different axis projections"
+
+@C cycle-25-26-hexa-weave-canonical :: biology [4]
+  <- cycle-25-26-biology-tetrahedron-closure
+  => "HEXA-WEAVE = write-side multi-strand molecular design"
+  => "  AlphaFold 3 / IsoDDE read-side counterpart"
+  => "  P=10⁴ proteins ≈ J₂×417 proteome scale, N=350 aa mod-12 σ-bin"
+  => "  declarative SSOT: domains/biology/hexa-weave/hexa-weave.md"
+  => "  empirical SSOT: ~/core/nexus/sim_bridge/weave/ (cycle 24 migration canonical)"
+  => "  alien-grade 4.78 (cycle 22 close)"
+
+@C cycle-25-26-hexa-nanobot-canonical :: biology [4]
+  <- cycle-25-26-biology-tetrahedron-closure
+  => "HEXA-NANOBOT = single molecular nano-machine actuation"
+  => "  τ(6)=4 motor states (idle / forward / backward / reset)"
+  => "  σ(6)=12-vertex polyhedral skeleton (DNA-origami truncated icosahedron)"
+  => "  declarative SSOT: domains/biology/hexa-nanobot/hexa-nanobot.md"
+  => "  Drexler 1986 + Seeman 1982 + Rothemund 2006 anchors"
+
+@C cycle-25-26-hexa-ribozyme-canonical :: biology [4]
+  <- cycle-25-26-biology-tetrahedron-closure
+  => "HEXA-RIBOZYME = catalytic RNA chemistry"
+  => "  τ(6)=4 reaction states (substrate-bound / transition / cleaved / product)"
+  => "  σ(6)=12 conserved catalytic-core nucleotides (STRUCTURAL-APPROXIMATE; hammerhead/HDV/hairpin minimal cores)"
+  => "  declarative SSOT: domains/biology/hexa-ribozyme/hexa-ribozyme.md"
+  => "  Cech 1982 + Guerrier-Takada 1983 + Symons 1981 + Steitz 1993 anchors"
+
+@C cycle-25-26-hexa-virocapsid-canonical :: biology [4!]
+  <- cycle-25-26-biology-tetrahedron-closure
+  -> cycle-25-26-f-virocapsid-2-resolved
+  => "HEXA-VIROCAPSID = icosahedral protein cage self-assembly"
+  => "  τ(6)=4 assembly states (free CP / pentamer / hexamer / closed cage)"
+  => "  σ(6)=12 pentameric vertices on T=1 icosahedron — STRUCTURAL-EXACT by Caspar-Klug 1962 + Euler V-E+F=2 invariant"
+  => "  declarative SSOT: domains/biology/hexa-virocapsid/hexa-virocapsid.md"
+  => "  Caspar-Klug 1962 + Zlotnick 1994/2003 + Rossmann-Johnson 1985 + Liljas 1982 anchors"
+  => "  cycle 22 F-VIROCAPSID-2 Bayesian audit RESOLVED on n=34 textbook corpus"
+
+@C cycle-25-26-f-virocapsid-2-resolved :: falsifier [4!]
+  <- cycle-25-26-hexa-virocapsid-canonical
+  => "F-VIROCAPSID-2 polyhedral cage Bayesian audit RESOLVED (cycle 22):"
+  => "  posterior(STRUCTURAL-EXACT) = 0.9668 ≥ 0.95 threshold"
+  => "  log Bayes factor H1/H0 = 3.37 (decisive per Jeffreys 1961)"
+  => "  Caspar-Klug n=34 textbook corpus (no live PDB scrape, raw 9 hexa-only)"
+  => "  32/32 CK-admissible cages exhibit vertex=12 (Euler V-E+F=2 geometric tautology confirmed)"
+  => "  comparison: VIROCAPSID σ(6)=12 STRUCTURAL-EXACT > RIBOZYME σ(6)=12 STRUCTURAL-APPROXIMATE"
+  => "  raw 91 C3 honest disclosure: vertex=12 is geometric tautology; Bayesian audit confirms textbook consistency, not independent empirical refutation"
+
+@C cycle-25-26-nexus-sim-bridge-weave-migration :: empirical [4!]
+  <- cycle-25-26-hexa-weave-progress-witness
+  => "cycle 24 empirical SSOT canonical migration:"
+  => "  source: ~/core/n6-architecture/scripts/{cage_assembly_simulation,polyhedral_cage_bayesian_audit}.py (cycle 22)"
+  => "  target: ~/core/nexus/sim_bridge/weave/ (sim_bridge sub-module pattern, peer of multiverse / bostrom_test / godel_q)"
+  => "  files: cage_assembly_simulation.py + polyhedral_cage_bayesian_audit.py + README.md + runner.sh + runs/"
+  => "  n6 measurement directive: declarative SSOT stays in n6/domains/biology/; formal SSOT stays in n6/lean4-n6/; paper SSOT stays in n6/papers/; empirical SSOT now lives in nexus/sim_bridge/weave/"
+  => "  4-axis SSOT separation: declarative + formal + paper + empirical"
+
+@C cycle-25-26-own-1-retroactive-cleanup :: governance [4!]
+  <- cycle-25-26-hexa-weave-progress-witness
+  => "cycle 25 Step A: 17 proposals/*.md retroactive Korean → English translation"
+  => "  before: own 1 HARD violation 17 (CJK 1086c biggest, 1c smallest)"
+  => "  after: own 1 OK (0 HARD / 0 SOFT across 14 HARD rules)"
+  => "  3-round batch keyword translation; 16 files modified; 1 file already clean"
+  => "  raw 91 C3: best-effort translation may have introduced minor semantic drift on dense Korean prose"
+
+@C cycle-25-26-own-29-friendly-toolkit-generalized :: governance [4!]
+  <- cycle-25-26-hexa-weave-progress-witness
+  -> cycle-25-26-ai-toolkit-mandatory-promotion
+  => "cycle 25: own 29 README friendly toolkit lint declarative-spec multi-section generalized"
+  => "  base (cycle 25 init): Biology mandatory only"
+  => "  generalized (cycle 25 follow-up): mandatory-sections + optional-sections lists in .own"
+  => "  parser: tool/own_doc_lint.py LIST_KEYS + _parse_own29_section_spec + _check_one_toolkit_section + section-scoped header search"
+  => "  hexa standalone: tool/own29_readme_friendly_toolkit_lint.hexa (mandatory-only baseline per raw 9)"
+  => "  pre-registered optional: ai_ml + environment + energy + robotics + physics_math (5 sections silent until filled)"
+
+@C cycle-25-26-ai-toolkit-mandatory-promotion :: governance [4!]
+  <- cycle-25-26-own-29-friendly-toolkit-generalized
+  => "cycle 26 AI Toolkit (HEXA-AI family) first fill + mandatory promotion:"
+  => "  README.md AI / ML section now contains 6-column friendly toolkit table"
+  => "  4 rows: HEXA-LLM-EFFICIENT + HEXA-VIDEO + HEXA-MEDICAL-AI + HEXA-NATIVE-ARCH"
+  => "  axis=compute, all rows linking to existing domains/compute/<slug>/<slug>.md docs"
+  => "  ai_ml entry promoted in .own from optional-sections → mandatory-sections"
+  => "  remaining optional pre-registered: environment / energy / robotics / physics_math (4 sections)"
+
+@C cycle-25-26-cumulative-falsifier-status :: falsifier [4]
+  <- cycle-25-26-hexa-weave-progress-witness
+  => "cumulative falsifier status across cycle 7-26:"
+  => "  RESOLVED: F-VIROCAPSID-2 (Bayesian posterior 0.9668)"
+  => "  PARTIAL-RESOLVED: F-MANUAL-LOGIN (cycle 23 SCOPE-NARROW, Keychain single-row)"
+  => "  preregistered active: F-VIROCAPSID-1/3/4/5 + F-CAGE-MVP-1..4 + F-W13-* + F-W15-* + F-CYCLE23-*..F-CYCLE26-*"
+  => "  4 sister biology axis 90-day MVP gates due 2026-07-28 (F-TP5-b + F-NB-4 + F-RB-4 + F-VIROCAPSID-3)"
+
+@C cycle-25-26-raw-91-C3-honest-cumulative :: meta [4]
+  <- cycle-25-26-hexa-weave-progress-witness
+  => "raw 91 C3 cumulative honest disclosure:"
+  => "  TRANSCEND-CLOSURE-ALL chain (cycle 7-22) = STRONG-CONJECTURE (AdS/CFT + Bousso dS), NOT theorem chain"
+  => "  4-sister biology axis = APPROACH grade per raw 69 — theoretical-analytical, not yet empirical"
+  => "  HEXA-RIBOZYME σ(6)=12 = STRUCTURAL-APPROXIMATE (10-30 nt corpus span)"
+  => "  HEXA-VIROCAPSID σ(6)=12 = STRUCTURAL-EXACT but vertex=12 is geometric tautology (Euler V-E+F=2)"
+  => "  cage MVP yield 0.68 plateau under default rate constants = calibration gap, not theoretical refutation"
+  => "  90-day MVP gates due 2026-07-28 (84 days from 2026-04-29 cycle 26 close)"
+  => "  alien-grade 4.78 (cycle 22 close); not yet 5+ (gated on user manual actions per cycle 23 4-track)"
+
+@C cycle-25-26-end-marker :: meta [3]
+  => "shard appended at: /Users/ghost/core/n6-architecture/atlas/atlas.append.cycle25-26-hexa-weave-progress-2026-04-29.n6"
+  => "DO NOT auto-absorb. shard awaits human review per scope contract (own 9 + own 13 + raw 22 + raw 24)."
+  => "ouroboros invariant: this shard cites cycle 1-26 EXTERNAL milestones (lean build / Bayesian posterior / file paths / commit hashes); no self-reference cycle introduced."
+
+# ══════════════════════════════════════════════════════════════
+# END OF SHARD — cycle 25-26 HEXA-WEAVE progress absorption
+# next-step: cycle 27+ optional → mandatory promotion (Environment / Energy /
+#            Robotics / Physics toolkit fills); F-VIROCAPSID-3 cage MVP
+#            calibration cycle (HBV/CCMV/STNV preset literature fitting)
+# raw 22 invariant: blowup 9-phase semantics unchanged by this absorption
+# raw 24 invariant: [11*] foundation axiom block untouched
+# ══════════════════════════════════════════════════════════════

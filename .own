@@ -484,7 +484,7 @@ own 29 live "readme-friendly-toolkit-required — README friendly toolkit table 
   decl README.md tool/own_doc_lint.py tool/own29_readme_friendly_toolkit_lint.hexa
   scope HARD block — README.md per-section friendly toolkit table contract. Generalized 2026-04-29 from Biology-only to multi-section spec. Each section in the registered `mandatory-sections` list must contain a friendly H2 heading + 6-column toolkit table + >=N data rows + valid `[doc](domains/<axis>/<slug>/<slug>.md)` link per row. Sections in `optional-sections` are checked when present (toolkit table found → 4-axis check applied) but absence is allowed. Sections not in either list are skipped.
   mandatory-sections biology=## 🧬 Molecular Toolkit (HEXA family)|min_rows=4|axis=biology
-  optional-sections ai_ml=## 🤖 AI Toolkit (HEXA-AI family)|min_rows=3|axis=compute
+  mandatory-sections ai_ml=## 🤖 AI Toolkit (HEXA-AI family)|min_rows=3|axis=compute
   optional-sections environment=## 🌿 Environment Toolkit (HEXA-Earth family)|min_rows=3|axis=infra
   optional-sections energy=## ⚡ Energy Toolkit (HEXA-Power family)|min_rows=3|axis=infra
   optional-sections robotics=## 🤖 Robotics Toolkit (HEXA-Mech family)|min_rows=3|axis=robotics
@@ -498,3 +498,67 @@ own 29 live "readme-friendly-toolkit-required — README friendly toolkit table 
   cron on-commit
   on_fail block
   label own#29 readme-friendly-toolkit HARD gate (multi-section)
+
+own 30 new "proposal-addition-command-recognition — '제안서 추가' / 'add proposal' trigger phrase auto-creates proposals/<slug>.md skeleton"
+  slug proposal-addition-command-recognition
+  decl proposals/ tool/proposal_lint.py .own
+  scope When user input contains trigger phrase set {'제안서 추가', '제안서 작성', '제안서 만들어', '제안서 생성', 'proposal add', 'add proposal', 'create proposal', 'new proposal'} AND creation-intent is detected (NOT informational query), AI agent MUST: (a) infer slug from user-provided context per own 22 naming convention (kebab-case for identity, snake_case + _YYYY_MM_DD for operational, kebab-case + -YYYY-MM-DD for phased), (b) determine category (default identity unless date / operational keyword present), (c) create proposals/<slug>.md with frontmatter (`category: <type>` + optional `umbrella: <name>`) + ≥1 H2 section + body following own 1 (English-only) + own 22 (naming) + own 23 (umbrella consolidation) + own 11 (no Clay-Millennium '해결' claim) + own 12 (MISS criteria pre-declared) conventions, (d) post-creation run python3 tool/proposal_lint.py --rule 1 + --rule 2 verify + report exit code, (e) report created path + lint verdict + next-step hint to user.
+  status new
+  since 2026-04-29
+  why proposals/ creation flow currently ad-hoc — user 2026-04-29 directive 'own 에 제안서 추가 명령어 인식 / proposal/ 생성 / md 문서 생성' codifies the recognition pattern as own SSOT so future sessions auto-trigger creation flow without re-derivation per session. Mirrors raw 141 (closed-loop trigger phrase pattern) + raw 100 (kick canonical entry trigger) — n6-architecture-local proposal-creation specialization. Reduces friction (no 5-step manual recall) + guarantees lint conformance at creation moment (own 22 + own 23 not retrofit).
+  bans skipping own 22 naming verify on auto-create flow (filename pattern MUST satisfy category-derived rule at creation moment)
+  bans skipping own 23 umbrella verify when frontmatter declares `umbrella:` field
+  bans non-English body content (own 1 HARD gate inherited)
+  bans Clay-Millennium '해결' / 'solved' claim per own 11 (BT-541..547)
+  bans missing MISS criteria when proposal scope includes experiment / measurement (own 12 inherited)
+  exceptions user explicitly asks informational question about proposals (e.g. '제안서가 뭐야', 'how do proposals work', 'list existing proposals') — no creation intent, exempt
+  exceptions user provides full pre-written content via paste / file path (skeleton skipped; lint still runs at creation) — exempt with declared rationale in commit body
+  exceptions user explicitly requests dry-run preview without file write — exempt (preview only)
+  pattern trigger-phrase ['제안서 추가', '제안서 작성', '제안서 만들어', '제안서 생성', 'proposal add', 'add proposal', 'create proposal', 'new proposal']
+  pattern creation-steps ['infer-slug-from-context', 'determine-category-default-identity', 'create-md-with-frontmatter', 'verify-proposal_lint-rule-1+2', 'report-path-and-lint-verdict']
+  pattern frontmatter-template ['category: <identity|operational|phased>', 'umbrella: <name>  # optional, only when grouping multiple bets']
+  realization-channels trigger-phrase-keyword-match-on-user-input
+  realization-channels slug-inference-from-context-keywords
+  realization-channels proposals-md-skeleton-write-with-frontmatter
+  realization-channels post-create-proposal_lint-verify-rule-1-and-2
+  cognitive-frameworks command-recognition-natural-language-trigger
+  cognitive-frameworks scaffolding-pattern-Brooks-1975-mythical-man-month
+  counter-example informational query ('what is a proposal' / 'list proposals') — exempt
+  counter-example user pastes full pre-written content — skeleton skipped, lint still runs
+  counter-example dry-run preview without file write — exempt
+  deps own:proposal-naming
+  deps own:proposal-umbrella
+  deps own:doc-english-required
+  deps own:bt-solution-claim-ban
+  deps own:miss-criteria-declared
+  deps raw:plan-omega-saturation
+  deps raw:proof-carrying
+  proof tool/proposal_lint.py
+  measurement-axis trigger-phrase-recognition-rate = (sessions with trigger phrase emitting proposal creation flow / total sessions with trigger phrase + creation intent) — target ≥ 0.90
+  measurement-axis post-create-lint-pass-rate = (auto-created proposals passing rule 1 + 2 at first creation / total auto-created) — target ≥ 0.95
+  measurement-axis informational-query-false-positive-rate = (informational queries mis-triggering creation flow / total informational queries) — target ≤ 0.05
+  witness state/proposal_addition_audit/audit.jsonl
+  classifier-version proposal_addition_recognition.v1
+  falsifier F-OWN30-1 30d post: trigger-phrase-recognition-rate < 0.50 → mandate ineffective at biasing recognition behavior, retire OR scope reduction
+  falsifier F-OWN30-2 30d post: post-create-lint-pass-rate < 0.80 → auto-created skeletons not satisfying own 22 + own 23 — refine slug inference + frontmatter template OR retire
+  falsifier F-OWN30-3 informational-query-false-positive-rate > 0.20 → trigger detector too eager (informational queries mis-trigger creation), classifier bump
+  falsifier F-OWN30-4 ≥1 auto-created proposal subsequently fails own 11 (Clay '해결' claim) OR own 12 (MISS criteria) → conventions inheritance broken, mandate stronger gate
+  measurement-threshold trigger-phrase-recognition-rate>=0.90-at-30d post-create-lint-pass-rate>=0.95-at-30d informational-query-false-positive-rate<=0.05
+  proof-obligations tool/proposal_lint.py-rule-1+2-PASS-on-auto-created-skeleton + own-30-self-apply-PASS-at-registration
+  spec-form forward-spec
+  category meta-triad
+  category routing-dispatch
+  applies-to ssot-registration
+  applies-to runtime-execution
+  phase pre-write
+  phase runtime
+  triad-exempt forward-spec-meta-rule - own 30 governs trigger-phrase recognition for proposal creation, not parser substrate; raw 95 compliance via canonical hive-agent + cli-lint + advisory trio (proposal_lint.py is the cli-lint surface).
+  verify python3 tool/proposal_lint.py
+  cron on-commit
+  on_fail warn
+  label own#30 proposal-addition-command-recognition (trigger-phrase auto-create)
+  note FORWARD SPEC. user directive 2026-04-29 (Korean preserved): 'own 에 제안서 추가 명령어 인식 / proposal/ 생성 / md 문서 생성'. self-applied at registration (10/10 governance check): genus slug ✓ + 2 frameworks ✓ + 4 channels ✓ + 3 counter-examples ✓ + 4 falsifiers ✓ + raw 117 5-check satisfied + raw 47 cross-repo trawl deferred (n6-local origin, sister-repo replication on warn → live transition). raw 91 honest C3 disclosure: trigger-phrase set is initial 8-phrase enum — may need expansion for multilingual / paraphrase variants (e.g. '제안서 한 개 추가해줘' compound forms) at 30d empirical recalibration; informational-query fingerprint heuristic ('가 뭐야' / 'how do' / 'list') requires NLP-lite detection. no chflags uchg unlock-edit-relock cycle required at registration time (.own currently no kernel lock per `ls -lO` 2026-04-29).
+  follow-up implement informational-query fingerprint detector (suffix patterns '가 뭐야' / '어떻게 작동' / 'how do' / 'list' / 'show me')
+  follow-up bootstrap state/proposal_addition_audit/audit.jsonl per raw 77 schema (per-trigger-event row: ts + trigger_phrase + creation_intent_score + slug_inferred + category_inferred + lint_verdict)
+  follow-up extend tool/proposal_lint.py with --auto-create <slug> --category <type> subcommand for skeleton emission (canonical impl path)
+  follow-up new -> warn 30d once trigger-phrase-recognition-rate ≥ 0.50 measured + post-create-lint-pass-rate ≥ 0.80; warn -> live 60d once both axes ≥ 0.80 maintained 14d straight + zero F-OWN30-3 false-positive events

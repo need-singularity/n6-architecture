@@ -1060,8 +1060,13 @@ def _check_one_toolkit_section(text: str, lines: list[str], heading: str,
     import re as _re
     out: list[dict[str, str]] = []
 
-    heading_present = heading in text
-    if not heading_present:
+    # Locate the H2 heading line; section-scoped scan starts from there.
+    heading_idx = -1
+    for i, ln in enumerate(lines):
+        if ln == heading:
+            heading_idx = i
+            break
+    if heading_idx < 0:
         if mandatory:
             out.append({
                 "rule": "own#29",
@@ -1074,21 +1079,29 @@ def _check_one_toolkit_section(text: str, lines: list[str], heading: str,
     # axis (b): header row template — final cell is "Doc"; second-to-last is
     # "<X> contrast" allowing the "AlphaFold" / "Mainstream" / "Classical" etc.
     # variation. We accept any exact `| Tool | One-liner | Everyday analogy |
-    # What it does | <something> | Doc |` shape.
+    # What it does | <something> | Doc |` shape. Search is SECTION-SCOPED:
+    # only look at lines AFTER the heading and BEFORE the next H1 / H2 boundary.
     header_re = _re.compile(
         r"^\|\s*Tool\s*\|\s*One-liner\s*\|\s*Everyday analogy\s*\|\s*"
         r"What it does\s*\|\s*[^|]+\|\s*Doc\s*\|\s*$"
     )
+    section_end = len(lines)
+    for j in range(heading_idx + 1, len(lines)):
+        ln_j = lines[j]
+        # Stop scan at next H1 or H2 (markdown heading boundary)
+        if ln_j.startswith("# ") or ln_j.startswith("## "):
+            section_end = j
+            break
     header_idx = -1
-    for i, ln in enumerate(lines):
-        if header_re.match(ln):
+    for i in range(heading_idx + 1, section_end):
+        if header_re.match(lines[i]):
             header_idx = i
             break
     if header_idx < 0:
         out.append({
             "rule": "own#29",
             "path": "README.md",
-            "detail": f"[{axis}] heading '{heading}' present but no 6-column toolkit header row found",
+            "detail": f"[{axis}] heading '{heading}' present but no 6-column toolkit header row found within section",
         })
         return out
 
