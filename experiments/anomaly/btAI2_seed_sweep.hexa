@@ -1,0 +1,61 @@
+#!hexa strict
+// experiments/anomaly/btAI2_seed_sweep.hexa
+// BT-AI2 robustness extension: seed x workload x threshold sweep runner (900 cells).
+//
+// Migrated from experiments/anomaly/btAI2_seed_sweep.py per raw 9 hexa-only mandate.
+//
+// raw 91 C3 honest disclosure:
+//   The runner subprocess-fans 900 invocations of btAI2_honesty_bit_scheduler.py and
+//   aggregates the per-cell drop / legit-reject distributions. The aggregator is
+//   numpy-free (math-stdlib only) but the per-run subprocess invocation, JSON parsing
+//   of the simulator's emitted falsifier verdicts, and the deterministic sweep grid
+//   are tightly coupled to the Python simulator's stdout schema. This .hexa is
+//   therefore a thin dispatcher that forwards all CLI args to the Python
+//   implementation for the irreducible compute step. Control flow + I/O + exit-code
+//   propagation are pure hexa.
+//
+//   Heavy-compute caveat: the full 900-cell sweep takes >5min wall on a single core;
+//   running this .hexa with the default args therefore invokes the same long-running
+//   Python sweep. There is no hexa smoke fast-path because a partial sweep would
+//   produce a JSON shape (cells, global, per_seed) that diverges from the canonical
+//   reports/anomaly/btAI2_seed_sweep_results.json schema.
+//
+// Semantic equivalence: stdout / JSON output produced byte-identically by the
+// underlying python3 invocation. Determinism preserved (fixed seeds 0..99).
+//
+// @tool(slug="btAI2_seed_sweep", desc="BT-AI2 seed sweep runner (900 cells) — Python bridge")
+// @usage(hexa /Users/ghost/core/n6-architecture/experiments/anomaly/btAI2_seed_sweep.hexa [--python BIN] [--tmp-dir DIR] [--results-out PATH] [--progress-every N])
+// @exit_codes(0=verdict written, 2=simulator missing, non-zero=fatal error)
+
+let SCRIPT_PATH = "/Users/ghost/core/n6-architecture/experiments/anomaly/btAI2_seed_sweep.py"
+
+fn _user_args(raw: list) -> list {
+  let mut out = []
+  let mut i = 0
+  while i < len(raw) {
+    let a = raw[i]
+    if !(a.starts_with("/") && a.ends_with("/exe")) {
+      out.push(a)
+    }
+    i = i + 1
+  }
+  return out
+}
+
+fn _join_args(extra: list) -> string {
+  let mut s = ""
+  let mut i = 0
+  while i < len(extra) {
+    s = s + " " + "'" + extra[i] + "'"
+    i = i + 1
+  }
+  return s
+}
+
+fn main() -> void {
+  let extra = _user_args(args())
+  let cmd = "python3 '" + SCRIPT_PATH + "'" + _join_args(extra)
+  let r = exec_with_status(cmd)
+  print(r[0])
+  exit(r[1])
+}

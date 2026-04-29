@@ -1,0 +1,57 @@
+#!hexa strict
+// experiments/anomaly/btAI2c_h1_rollback_sweep.hexa
+// BT-AI2c H1 rollback-rate sensitivity sweep (5 rates x 50 seeds, break-even search).
+//
+// Migrated from experiments/anomaly/btAI2c_h1_rollback_sweep.py per raw 9 hexa-only mandate.
+//
+// raw 91 C3 honest disclosure:
+//   Extends the H1 wrapper with non-zero rollback_rate (charges
+//   int(rollback_rate * cost * downstream_count) cycles per refused write) and
+//   linearly interpolates the break-even rate where mean drop crosses 5%. Hard
+//   requirement on simpy + numpy + the parent btAI2 simulator classes. This .hexa
+//   is therefore a thin dispatcher that forwards all CLI args to the Python
+//   implementation for the irreducible compute step. Control flow + I/O +
+//   exit-code propagation are pure hexa.
+//
+//   Heavy-compute caveat: 5 rates * 50 seeds = 250 simulations at cycles_budget=10000
+//   takes >5min wall.
+//
+// Semantic equivalence: stdout / JSON output produced byte-identically by the
+// underlying python3 invocation. Determinism preserved (fixed seeds 0..49).
+//
+// @tool(slug="btAI2c_h1_rollback_sweep", desc="BT-AI2c H1 rollback sensitivity sweep — SimPy bridge")
+// @usage(hexa /Users/ghost/core/n6-architecture/experiments/anomaly/btAI2c_h1_rollback_sweep.hexa)
+// @exit_codes(0=verdict written, non-zero=fatal error)
+
+let SCRIPT_PATH = "/Users/ghost/core/n6-architecture/experiments/anomaly/btAI2c_h1_rollback_sweep.py"
+
+fn _user_args(raw: list) -> list {
+  let mut out = []
+  let mut i = 0
+  while i < len(raw) {
+    let a = raw[i]
+    if !(a.starts_with("/") && a.ends_with("/exe")) {
+      out.push(a)
+    }
+    i = i + 1
+  }
+  return out
+}
+
+fn _join_args(extra: list) -> string {
+  let mut s = ""
+  let mut i = 0
+  while i < len(extra) {
+    s = s + " " + "'" + extra[i] + "'"
+    i = i + 1
+  }
+  return s
+}
+
+fn main() -> void {
+  let extra = _user_args(args())
+  let cmd = "python3 '" + SCRIPT_PATH + "'" + _join_args(extra)
+  let r = exec_with_status(cmd)
+  print(r[0])
+  exit(r[1])
+}

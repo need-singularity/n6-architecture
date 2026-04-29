@@ -1,72 +1,57 @@
-// DSE-P8-3: Fisher 메트릭 + OUROBOROS B_{2k} 계층 검증
-// 관련 문서: theory/proofs/fisher-ouroboros-reformulation-2026-04-15.md
-// 실제 수치 검증: experiments/anomaly/verify_fisher_bernoulli.py (sympy 정밀 유리수 필요)
-// 본 hexa: 결과 요약 + 구조 기록 (stub)
+#!hexa strict
+// experiments/anomaly/verify_fisher_bernoulli.hexa — DSE-P8-3 Fisher/OUROBOROS verifier.
+//
+// Migrated from experiments/anomaly/verify_fisher_bernoulli.py per raw 9 hexa-only mandate.
+// Previous stub-style .hexa (hard-coded summary text) replaced 2026-04-29 by an honest
+// bridge that re-runs the actual sympy compute in-process via python3.
+//
+// raw 91 C3 honest disclosure:
+//   The numerical core requires sympy.bernoulli / divisors / totient / primerange with
+//   exact rational arithmetic. There is no pure-hexa equivalent for B_{2k} closed-form
+//   rationals at this fidelity. This .hexa is therefore a thin dispatcher that shells
+//   out to `python3 verify_fisher_bernoulli.py` for the irreducible compute step.
+//   Control flow + I/O + exit-code propagation are pure hexa.
+//
+// Semantic equivalence: byte-identical stdout (the Python script is fully deterministic;
+// no RNG; sympy exact-rational outputs are stable across versions).
+//
+// @tool(slug="verify_fisher_bernoulli", desc="DSE-P8-3 Fisher/B_{2k} verifier — sympy bridge")
+// @usage(hexa /Users/ghost/core/n6-architecture/experiments/anomaly/verify_fisher_bernoulli.hexa)
+// @exit_codes(0=PASS B1+B2+B3+A1+A2, 1=any fail)
 
-fn main() {
-    println("=== DSE-P8-3 Fisher + Bernoulli 재정식화 검증 ===")
-    println("")
+let SCRIPT_PATH = "/Users/ghost/core/n6-architecture/experiments/anomaly/verify_fisher_bernoulli.py"
 
-    println("[Part B1] von Staudt-Clausen: 6 | denom(B_{2k}) 전 k 검증")
-    println("  k=1, 2k=2:  primes (p-1)|2 = {2,3}  → denom=6, 6|6  YES")
-    println("  k=2, 2k=4:  primes (p-1)|4 = {2,3,5} → denom=30, 6|30 YES")
-    println("  k=3, 2k=6:  primes (p-1)|6 = {2,3,7} → denom=42, 6|42 YES")
-    println("  k=4, 2k=8:  primes (p-1)|8 = {2,3,5} → denom=30, 6|30 YES")
-    println("  k=5, 2k=10: primes (p-1)|10 = {2,3,11} → denom=66, 6|66 YES")
-    println("  k=6, 2k=12: primes (p-1)|12 = {2,3,5,7,13} → denom=2730, 6|2730 YES")
-    println("  k=7, 2k=14: primes (p-1)|14 = {2,3} → denom=6, 6|6 YES")
-    println("  ... k=20 까지 전수 20/20 match")
-    println("")
-    println("  핵심: p=2, p=3 은 모든 k에서 (p-1)|2k ({1|2k, 2|2k} 항상)")
-    println("  따라서 6 = 2*3 | denom(B_{2k}) 전 k≥1 EXACT")
-    println("")
+// Skip leading argv[0] entries that the hexa runtime injects.
+// Convention observed (hexa 0.1.0-dispatch): args() = [<exe>, <exe>, ...user_args]
+// where <exe> is a path inside .hexa-cache/<hash>/exe.
+fn _user_args(raw: list) -> list {
+  let mut out = []
+  let mut i = 0
+  while i < len(raw) {
+    let a = raw[i]
+    if !(a.starts_with("/") && a.ends_with("/exe")) {
+      out.push(a)
+    }
+    i = i + 1
+  }
+  return out
+}
 
-    println("[Part B2] Euler-Maclaurin 첫 보정 계수")
-    println("  B_2 / 2! = (1/6) / 2 = 1/12 = 1/(2n)   — n=6 직접 등장")
-    println("  B_4 / 4! = -1/720")
-    println("  B_6 / 6! = 1/30240")
-    println("")
+fn _join_args(extra: list) -> string {
+  let mut s = ""
+  let mut i = 0
+  while i < len(extra) {
+    s = s + " " + "'" + extra[i] + "'"
+    i = i + 1
+  }
+  return s
+}
 
-    println("[Part B3] ζ(1-2k) 분모의 6 배수 빈도")
-    println("  ζ(-1)=-1/12   (denom=12=2n)  6|12 YES")
-    println("  ζ(-3)= 1/120  (denom=120)    6|120 YES")
-    println("  ζ(-5)=-1/252  (denom=252)    6|252 YES")
-    println("  ζ(-7)= 1/240  (denom=240)    6|240 YES")
-    println("  ζ(-9)=-1/132  (denom=132)    6|132 YES")
-    println("  ζ(-11)=691/32760 (denom=32760) 6|32760 YES")
-    println("  ... k=1..20 전수 20/20 YES")
-    println("")
-
-    println("[Part A1] Fisher 대칭 텐서 자유도 n_ax(n_ax+1)/2")
-    println("  n_ax=2: 3 자유도")
-    println("  n_ax=3: 6 자유도  ← (S,F,C) 3축 → n=6 등장 EXACT")
-    println("  n_ax=4: 10 자유도")
-    println("")
-
-    println("[Part A2] n·τ(n) - σ(n)·φ(n) 유일 영점")
-    println("  n=2: 6-12·..   실제 1·2-3·1 = -1  (교정: 2·2-3·1 = 1)")
-    println("  n=3: 3·2-4·2 = -2")
-    println("  n=4: 4·3-7·2 = -2")
-    println("  n=5: 5·2-6·4 = -14")
-    println("  n=6: 6·4-12·2 = 0  ← 유일 영점 EXACT")
-    println("  n=7: 7·2-8·6 = -34")
-    println("  n=12: 12·6-28·4 = -40")
-    println("  (Theorem 0 재진술, sigma*phi=n*tau iff n=6)")
-    println("")
-
-    println("[Part A3] Watanabe SLT: d=sigma(n)=12 → lambda=n=6 가설 [7?]")
-    println("  regular model 에서 RLCT lambda = d/2")
-    println("  d = sigma(6) = 12 → lambda = 6 = n")
-    println("  (singular model 로 확장 시 BSD/L-func 와 연결 가능성)")
-    println("")
-
-    println("=== 최종 판정 ===")
-    println("Part A (Fisher): PARTIAL — A1 EXACT, A2 MISS, A3 CONJECTURE")
-    println("Part B (Bernoulli): PASS — B1/B2/B3 전부 EXACT")
-    println("")
-    println("미션 종합: PARTIAL — atlas.n6 [7?] 2건 등재 권고")
-    println("  @? ouroboros-bernoulli-hierarchy :: OUROBOROS [7?]")
-    println("  @? fisher-symmetric-dof-6 :: information-geometry [7?]")
-    println("")
-    println("정밀 수치 검증: verify_fisher_bernoulli.py 실행 필요 (sympy)")
+fn main() -> void {
+  let extra = _user_args(args())
+  let cmd = "python3 '" + SCRIPT_PATH + "'" + _join_args(extra)
+  let r = exec_with_status(cmd)
+  // r[0] is captured stdout; r[1] is exit code.
+  print(r[0])
+  exit(r[1])
 }

@@ -1,0 +1,56 @@
+#!hexa strict
+// experiments/anomaly/btAI2_honesty_bit_scheduler.hexa
+// BT-AI2 honesty-bit scheduler simulator (cycle-level SimPy model).
+//
+// Migrated from experiments/anomaly/btAI2_honesty_bit_scheduler.py per raw 9 hexa-only mandate.
+//
+// raw 91 C3 honest disclosure:
+//   The simulator core is a SimPy event-driven cycle-level model with numpy RNG and
+//   custom dataclasses for tile statistics, tensor DAGs, and falsifier evaluation
+//   (F-AI2-A, F-AI2-B). SimPy has no hexa-runtime equivalent and the existing 900-LoC
+//   Python is the source of truth for downstream sweeps (btAI2_seed_sweep,
+//   btAI2c_h1_sweep, btAI2c_h1_rollback_sweep) that import its symbols directly.
+//   This .hexa is therefore a thin dispatcher that forwards all CLI args to the
+//   Python implementation. The .py also stays in place as the import target for
+//   the H1 wrapper / sweep scripts. Control flow + I/O + exit-code propagation
+//   are pure hexa.
+//
+// Semantic equivalence: stdout / JSON output produced byte-identically by the
+// underlying python3 invocation. Determinism preserved (fixed integer seed).
+//
+// @tool(slug="btAI2_honesty_bit_scheduler", desc="BT-AI2 honesty-bit scheduler simulator — SimPy bridge")
+// @usage(hexa /Users/ghost/core/n6-architecture/experiments/anomaly/btAI2_honesty_bit_scheduler.hexa --seed 42 --cycles 10000 --workload full [--baseline] [--paired] [--results-out PATH])
+// @exit_codes(0=PASS F-AI2-A and F-AI2-B, 1=at least one falsifier FAIL)
+
+let SCRIPT_PATH = "/Users/ghost/core/n6-architecture/experiments/anomaly/btAI2_honesty_bit_scheduler.py"
+
+fn _user_args(raw: list) -> list {
+  let mut out = []
+  let mut i = 0
+  while i < len(raw) {
+    let a = raw[i]
+    if !(a.starts_with("/") && a.ends_with("/exe")) {
+      out.push(a)
+    }
+    i = i + 1
+  }
+  return out
+}
+
+fn _join_args(extra: list) -> string {
+  let mut s = ""
+  let mut i = 0
+  while i < len(extra) {
+    s = s + " " + "'" + extra[i] + "'"
+    i = i + 1
+  }
+  return s
+}
+
+fn main() -> void {
+  let extra = _user_args(args())
+  let cmd = "python3 '" + SCRIPT_PATH + "'" + _join_args(extra)
+  let r = exec_with_status(cmd)
+  print(r[0])
+  exit(r[1])
+}

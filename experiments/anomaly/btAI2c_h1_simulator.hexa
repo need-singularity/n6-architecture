@@ -1,0 +1,62 @@
+#!hexa strict
+// experiments/anomaly/btAI2c_h1_simulator.hexa
+// BT-AI2c H1 simulator wrapper (zero-bubble barrier variant of HonestyBitScheduler).
+//
+// Migrated from experiments/anomaly/btAI2c_h1_simulator.py per raw 9 hexa-only mandate.
+//
+// raw 91 C3 honest disclosure:
+//   This is a Python class library (subclass of HonestyBitScheduler) consumed by
+//   btAI2c_h1_sweep.py via `from btAI2c_h1_simulator import run_h1_simulation`.
+//   It cannot run as a CLI on its own — invoking it as a script just imports and
+//   exits. The .py file MUST remain in place as the import target for the sweep
+//   scripts; this .hexa is a documentation / convention shim that signals "this
+//   library is part of the hexa surface" while transparently delegating any
+//   accidental CLI invocation to python3 for sanity checks.
+//
+//   Why no hexa port: SimPy generators (`yield env.timeout(0)`) are core to the
+//   H1 zero-bubble semantics; there is no hexa-runtime equivalent of SimPy's
+//   discrete-event simulation engine.
+//
+// @tool(slug="btAI2c_h1_simulator", desc="BT-AI2c H1 zero-bubble HonestyBitScheduler — SimPy library bridge")
+// @usage(hexa /Users/ghost/core/n6-architecture/experiments/anomaly/btAI2c_h1_simulator.hexa  # smoke import only — see btAI2c_h1_sweep.hexa)
+// @exit_codes(0=import OK, non-zero=python import error)
+
+let SCRIPT_PATH = "/Users/ghost/core/n6-architecture/experiments/anomaly/btAI2c_h1_simulator.py"
+
+fn _user_args(raw: list) -> list {
+  let mut out = []
+  let mut i = 0
+  while i < len(raw) {
+    let a = raw[i]
+    if !(a.starts_with("/") && a.ends_with("/exe")) {
+      out.push(a)
+    }
+    i = i + 1
+  }
+  return out
+}
+
+fn _join_args(extra: list) -> string {
+  let mut s = ""
+  let mut i = 0
+  while i < len(extra) {
+    s = s + " " + "'" + extra[i] + "'"
+    i = i + 1
+  }
+  return s
+}
+
+fn main() -> void {
+  let extra = _user_args(args())
+  // Library file: smoke-import via python3 -c so a `hexa run` never silently
+  // becomes a long-running simulation. Forwarding extra args is preserved
+  // for symmetry with the sibling shims even though the library has no CLI.
+  let extra_str = _join_args(extra)
+  let cmd = "python3 -c 'import sys; sys.path.insert(0, \"" +
+            "/Users/ghost/core/n6-architecture/experiments/anomaly\"); " +
+            "import btAI2c_h1_simulator; print(\"btAI2c_h1_simulator: import OK\")' " +
+            extra_str
+  let r = exec_with_status(cmd)
+  print(r[0])
+  exit(r[1])
+}
