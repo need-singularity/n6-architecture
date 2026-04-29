@@ -501,6 +501,10 @@ own 29 live "readme-friendly-toolkit-required — README friendly toolkit table 
   mandatory-sections ufo=## 🛸 HEXA-UFO Toolkit (HEXA-Disc family)|min_rows=3|axis=sf-ufo
   mandatory-sections frontier=## 🔭 Frontier Toolkit (HEXA-Beyond family)|min_rows=3|axis=physics
   mandatory-sections civilization=## 🏛️ Civilization Toolkit (HEXA-Heritage family)|min_rows=3|axis=culture
+  mandatory-sections life_culture=## 🍷 Life & Culture Toolkit (HEXA-Living family)|min_rows=3|axis=life
+  mandatory-sections tech_industry=## 🔧 Tech & Industry Toolkit (HEXA-Industrial family)|min_rows=3|axis=infra
+  mandatory-sections computer=## 💻 Computer Toolkit (HEXA-Input family)|min_rows=2|axis=compute
+  mandatory-sections marketing=## 📢 Marketing Toolkit (HEXA-Service family)|min_rows=2|axis=compute
   expected-header-row | 🛸 | Tool | One-liner | Everyday analogy | What it does | <Mainstream> contrast | Doc |
   status live
   since 2026-04-29

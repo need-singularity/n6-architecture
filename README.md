@@ -717,6 +717,17 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 > **🛸10** | ✅ | BT 10 · 100% EXACT | BT-358 Insurance add, vampire structure breakthroughs 2026-04-06 | industry25% (fermentationratelearning/Insurancestatistics industry cross verified) | experiment35% hypotheses verified (40/62 EXACT) | TP5 | discoveries8
 <!-- AUTO:SUMMARY_life-culture:END -->
 
+## 🍷 Life & Culture Toolkit (HEXA-Living family)
+
+> Friendly entry point — Life-stack tools as a compact toolkit. Same n=6 invariant lattice (σ(6)=12 / τ(6)=4 / φ(6)=2 / J₂=24), four orthogonal life-axis verbs (wine / aquaculture / dolphin / coffee).
+
+| 🛸 | Tool | One-liner | Everyday analogy | What it does | Mainstream contrast | Doc |
+|:--:|:----:|-----------|------------------|--------------|---------------------|:---:|
+| 10 | 🍷 **HEXA-WINE** | Sommelier Lattice | Wine class with the same 6-step grid every sommelier knows | 10/10 EXACT — 6S tasting=n, 12°C serving=σ, 12mo aging=σ, 24°Brix=J₂ | Single-grape tasting note vs σ(6)=12 J₂=24 multi-axis grid | [doc](domains/life/wine-enology/wine-enology.md) |
+| 10 | 🐟 **HEXA-AQUACULTURE** | Sea-Farm | Tank that raises fish on a hex schedule like a clock | 10/10 EXACT — 24°C style=J₂, salinity 3.5%≈n/φ, 6-generation style types, body 12 ratio=σ | Single-species farm vs τ(6)=4-life-stage σ(6)=12-tank rotation | [doc](domains/life/aquaculture/aquaculture.md) |
+| 10 | 🐬 **HEXA-DOLPHIN** | Dolphin Decoder | Field guide to dolphin clicks, whistles + body language | 30/30 EXACT — anatomy + physiology + ethology + acoustic-direction 4 systems + 11-pair telepathy isomorphism | Single-call ethogram vs n=6 4-system + 11-pair multi-channel | [doc](domains/life/dolphin/dolphin.md) |
+| 10 | ☕ **HEXA-COFFEE** | Bean Lattice | Espresso recipe locked to the same 6-step grid worldwide | 15/15 EXACT — caffeine J₂=24 atoms / espresso 9bar / roasting τ=4 / grind n=6 / brewing n=6 / coffee-belt sopfr²=25° | Single-roast brew guide vs τ(6)=4-roast σ(6)=12-grind grid | [doc](domains/life/coffee-science/coffee-science.md) |
+
 | 🛸 | Closure | ver | Product | Core | Link |
 |:--:|:-------:|:---:|---------|------|------|
 | 10 | ✅ | v2 | **Fermentation/Brewing n=6 Perfect-Number Stoichiometry** | BT-371: 18/18 EXACT — C₆H₁₂O₆→2C₂H₅OH+2CO₂ precoefficientsn=6, brewing6-stage=n, larger12°C=σ | [doc](papers/n6-fermentation-integrated-paper.md) |
@@ -740,6 +751,17 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 <!-- AUTO:SUMMARY_tech-industry:START -->
 > **🛸10** | ✅ | BT 13 · 100% EXACT | BT-354/355/357 + BT-1104 HBM 10domains  generationsintegrated (58/58 EXACT) | industry50% (HBM/UCIe industry spec verified + CRISPR paper verified) | experiment55% hypotheses verified (77/77 EXACT=100%) | TP10 | discoveries13
 <!-- AUTO:SUMMARY_tech-industry:END -->
+
+## 🔧 Tech & Industry Toolkit (HEXA-Industrial family)
+
+> Friendly entry point — Tech & Industry-stack tools as a compact toolkit. Same n=6 invariant lattice (σ(6)=12 / τ(6)=4 / φ(6)=2 / J₂=24), four orthogonal infra-axis verbs (architecture / fintech / airbag / smart-city).
+
+| 🛸 | Tool | One-liner | Everyday analogy | What it does | Mainstream contrast | Doc |
+|:--:|:----:|-----------|------------------|--------------|---------------------|:---:|
+| 10 | 🏗️ **HEXA-ARCH-STRUCT** | Lattice Building | Building made of hexagonal honeycomb braces | 16/16 EXACT — 6 architectural styles=n, honeycomb truss=n-angle, D6/D13/D25 ladder, seismic 6 grades=n | Single-style I-beam vs n=6 6-style honeycomb-truss σ-lattice | [doc](domains/infra/construction-structural/construction-structural.md) |
+| 10 | 💳 **HEXA-FINTECH** | Six-Layer Wallet | Payment app whose security stack has 6 nested locks | 12/12 EXACT — PCI σ=12 / card φ^τ=16 / BIN n=6 / EMV n/φ=3 / OAuth τ=4 / TLS n=6 | Single-protocol POS vs σ(6)=12 PCI + n=6 EMV + τ=4 OAuth stack | [doc](domains/infra/ecommerce-fintech/ecommerce-fintech.md) |
+| 10 | 🛞 **HEXA-AIRBAG** | Hex-Bag Crash | Car airbag inflating in 6 cushion zones across n=6 layers | 18/18 EXACT — n=6 per car, 30ms deployment = σ·φ + n, 60L volume = σ·sopfr, J₂=24 thread density | Single-driver airbag vs n=6 per-car σ-thread-density nets | [doc](domains/infra/airbag/airbag.md) |
+| 10 | 🌆 **HEXA-SMART-CITY** | Lattice City | City planned on a hex grid with 6 microgrid nodes | 63/63 EXACT — Christaller 6-angle shape, 6-direction intersection, microgrid 6 nodes, 1/2+1/3+1/6=1 energy distribution, IoT σ=12 sensor | Single-grid city plan vs n=6 Christaller-hex 1/2+1/3+1/6=1 distribution | [doc](domains/infra/smart-city/smart-city.md) |
 
 | 🛸 | Closure | ver | Product | Core | Link |
 |:--:|:-------:|:---:|---------|------|------|
@@ -778,6 +800,15 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 > **🛸10** | ✅ | BT 10+ | Keyboard 31hypotheses 30 EXACT, BCI 36/40 EXACT, Quantum Computer 20/24 EXACT | USB HID/Brain-Computer/qubit full n=6 convergence
 <!-- AUTO:SUMMARY_computer:END -->
 
+## 💻 Computer Toolkit (HEXA-Input family)
+
+> Friendly entry point — Computer-input tools as a compact toolkit. Same n=6 invariant lattice (σ(6)=12 / τ(6)=4 / φ(6)=2 / J₂=24), two orthogonal compute-axis verbs (keyboard / mouse).
+
+| 🛸 | Tool | One-liner | Everyday analogy | What it does | Mainstream contrast | Doc |
+|:--:|:----:|-----------|------------------|--------------|---------------------|:---:|
+| 10 | ⌨️ **HEXA-KEYBOARD** | Hex-Keys | Keyboard with travel + force tuned across 6 ergonomic axes | 30/31 EXACT — 10 layout types presub C(n,2) combos, USB 6KRO/8bytes/12Mbps, switch 4mm(τ)/2mm(φ)/5ms(sopfr) | Single-layout QWERTY vs n=6 ergonomic-axis σ(6)=12 layout grid | [doc](domains/compute/keyboard/keyboard.md) |
+| 10 | 🖱️ **HEXA-MOUSE** | Hex-Pointer | Mouse with 5 buttons + 3 tracking axes laid out on a hex grid | 25/25 EXACT — PS/2 n=6 pin, sopfr=5 buttons/fingers, n/φ=3 tracking-axis/grip, σ-τ=8kHz polling, σ=12 MMO/notch, J₂=24 encoders | Single-axis 2-button mouse vs n=6 sopfr=5 button + 3-axis grid | [doc](domains/compute/mouse/mouse.md) |
+
 | 🛸 | Closure | ver | Product | Core | Link |
 |:--:|:-------:|:---:|---------|------|------|
 | 10 | ✅ | v1 | **Keyboard n=6 Ergonomic Architecture** | BT-1125~1128: 30/31 EXACT — layouts 10types presub C(n,2) combos, USB 6KRO/8bytes/12Mbps, switches 4mm(tau)/2mm(phi)/5ms(sopfr) | [doc](domains/compute/keyboard/keyboard.md) |
@@ -796,6 +827,15 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 <!-- AUTO:SUMMARY_marketing:START -->
 > **🛸10** | ✅ | BT 10 · 100% EXACT | Marketing Inviolable Laws 12items, 720=6! combos discoveries, Egyptian media-mix 1/2+1/3+1/6=1 | industry40% (Kotler 4P + Krugman 3rotation iterate + NPS 0-10 scaled independent verified + AIDA τ=4stages + Egyptian media-mix 1/2+1/3+1/6=1 industry validation) | experiment50% hypotheses 24/24 EXACT (100%, N65 NEAR 2 items alt-verify promoted), n=28  generationsJ realpack confirmed, BT-548~587 40breakthroughs 5Product 🛸10 ceiling reach | physical-limit8 | TP10 | discoveries5 | Mk.V
 <!-- AUTO:SUMMARY_marketing:END -->
+
+## 📢 Marketing Toolkit (HEXA-Service family)
+
+> Friendly entry point — Marketing-service tools as a compact toolkit. Same n=6 invariant lattice (σ(6)=12 / τ(6)=4 / φ(6)=2 / J₂=24), two orthogonal compute-axis verbs (NEXUS / UNIFIED service platforms).
+
+| 🛸 | Tool | One-liner | Everyday analogy | What it does | Mainstream contrast | Doc |
+|:--:|:----:|-----------|------------------|--------------|---------------------|:---:|
+| 10 | 🏢 **HEXA-NEXUS** | Corp Diagnostic | Doctor's checkup for an entire company across 1022 lenses | NEXUS-6 1022-lens corporate diagnostic, σ=12 axis, knowledge graph 50K+, CDO SaaS, BT-558~567 | Standalone BCG framework vs σ=12-axis 1022-lens NEXUS lattice | [doc](domains/compute/nexus-service/nexus-service.md) |
+| 10 | 🧠 **HEXA-UNIFIED** | Whole-Brain Service | Left-brain analytics + right-brain emotion in one platform | NEXUS+Anima=n=6 complete cognition, 1/2(data)+1/3(affective)+1/6(intuition)=1 Egyptian, BT-578~587 | Analytics-only BI tool vs n=6 left+right hemispheric integration | [doc](domains/compute/unified-service/unified-service.md) |
 
 | 🛸 | Closure | ver | Product | Core | Link |
 |:--:|:-------:|:---:|---------|------|------|
