@@ -1,0 +1,183 @@
+#!hexa strict
+// tool/own_roadmap_review.hexa — own#19 weekly roadmap review reminder.
+//
+// Scans known roadmap artifacts and reports any with no git commit activity
+// within THRESHOLD_DAYS. Emits JSON report to reports/n6_own19_roadmap_review.json
+// and exits non-zero on staleness (SOFT — wrapped with continue-on-error in
+// cron workflow per own#19 on_fail=log).
+//
+// Migrated from tool/own_roadmap_review.py (123 lines) per raw 9 hexa-only
+// + raw 47 cross-repo + raw 65 idempotent (same JSON schema, same exit codes).
+//
+// @tool(slug="own_roadmap_review", desc="own#19 weekly roadmap-review reminder — scans known roadmap artifacts (millennium.json / ROADMAP.md / theory/roadmap-v3/ / etc) for staleness > THRESHOLD_DAYS=7 since last git commit, emits JSON report, exits non-zero on staleness.")
+// @usage(hexa /Users/ghost/core/n6-architecture/tool/own_roadmap_review.hexa)
+// @omega-saturation-exempt("simple cron reminder — single-file scan over fixed candidate list, converges trivially")
+// @exit_codes(0=fresh, 1=stale roadmap detected, 2=internal error)
+
+let REPO_ROOT       = "/Users/ghost/core/n6-architecture"
+let THRESHOLD_DAYS  = 7
+let REPORT_PATH     = REPO_ROOT + "/reports/n6_own19_roadmap_review.json"
+
+// Ordered list of roadmap paths to inspect (relative to repo root)
+let CANDIDATES = [
+  "shared/roadmaps/millennium.json",
+  "millennium.json",
+  "ROADMAP.md",
+  "theory/roadmap-v3",
+  "theory/roadmap-v2",
+  "roadmap",
+]
+
+fn _path_exists(rel: string) -> bool {
+  let abs = REPO_ROOT + "/" + rel
+  let r = to_string(exec("test -e '" + abs + "' && echo y || echo n")).trim()
+  return r == "y"
+}
+
+fn _last_commit_epoch(rel: string) -> int {
+  // Return epoch seconds of last commit touching rel, or -1 on failure.
+  let cmd = "cd '" + REPO_ROOT + "' && git log -1 --format=%ct -- '" + rel + "' 2>/dev/null"
+  let raw = to_string(exec(cmd)).trim()
+  if len(raw) == 0 { return -1 }
+  return to_int(raw)
+}
+
+fn _now_epoch() -> int {
+  let raw = to_string(exec("date +%s")).trim()
+  return to_int(raw)
+}
+
+fn _round2(x: float) -> float {
+  // Round to 2 decimal places via integer arithmetic
+  let scaled = x * 100.0
+  let rounded = to_int(scaled + 0.5)
+  return to_float(rounded) / 100.0
+}
+
+fn _esc_json(s: string) -> string {
+  // Escape backslashes and double quotes for JSON string literal
+  let mut out = ""
+  let mut i = 0
+  while i < len(s) {
+    let c = s.substring(i, i + 1)
+    if c == "\\" {
+      out = out + "\\\\"
+    } else {
+      if c == "\"" {
+        out = out + "\\\""
+      } else {
+        out = out + c
+      }
+    }
+    i = i + 1
+  }
+  return out
+}
+
+fn _emit_report(checked_at: int, inspected: list, stale: list, missing: list, verdict: string) -> void {
+  // Build JSON manually (stdlib-only, no JSON encoder dependency)
+  let mut out = "{\n"
+  out = out + "  \"own_rule\": 19,\n"
+  out = out + "  \"slug\": \"roadmap-review-weekly\",\n"
+  out = out + "  \"threshold_days\": " + to_string(THRESHOLD_DAYS) + ",\n"
+  out = out + "  \"checked_at_epoch\": " + to_string(checked_at) + ",\n"
+  out = out + "  \"candidates_checked\": " + to_string(len(inspected)) + ",\n"
+
+  // inspected array
+  out = out + "  \"inspected\": ["
+  let mut i = 0
+  while i < len(inspected) {
+    let row = inspected[i]
+    if i > 0 { out = out + "," }
+    out = out + "\n    {\"path\": \"" + _esc_json(row["path"]) + "\", \"last_commit_epoch\": " + to_string(row["last_commit_epoch"]) + ", \"age_days\": " + to_string(row["age_days"]) + "}"
+    i = i + 1
+  }
+  if len(inspected) > 0 { out = out + "\n  " }
+  out = out + "],\n"
+
+  // stale_roadmaps array
+  out = out + "  \"stale_roadmaps\": ["
+  i = 0
+  while i < len(stale) {
+    let row = stale[i]
+    if i > 0 { out = out + "," }
+    out = out + "\n    {\"path\": \"" + _esc_json(row["path"]) + "\", \"last_commit_epoch\": " + to_string(row["last_commit_epoch"]) + ", \"age_days\": " + to_string(row["age_days"]) + "}"
+    i = i + 1
+  }
+  if len(stale) > 0 { out = out + "\n  " }
+  out = out + "],\n"
+
+  // missing_history array
+  out = out + "  \"missing_history\": ["
+  i = 0
+  while i < len(missing) {
+    if i > 0 { out = out + ", " }
+    out = out + "\"" + _esc_json(missing[i]) + "\""
+    i = i + 1
+  }
+  out = out + "],\n"
+
+  out = out + "  \"verdict\": \"" + verdict + "\"\n"
+  out = out + "}\n"
+
+  // Ensure reports/ directory exists
+  let _r = exec("mkdir -p '" + REPO_ROOT + "/reports'")
+  write_file(REPORT_PATH, out)
+}
+
+fn main() -> void {
+  let now = _now_epoch()
+  let mut inspected = []
+  let mut stale = []
+  let mut missing = []
+  let mut found_count = 0
+
+  let mut i = 0
+  while i < len(CANDIDATES) {
+    let rel = CANDIDATES[i]
+    if _path_exists(rel) {
+      found_count = found_count + 1
+      let last = _last_commit_epoch(rel)
+      if last < 0 {
+        missing.push(rel)
+      } else {
+        let age_secs = now - last
+        let age_days = _round2(to_float(age_secs) / 86400.0)
+        let mut entry = {}
+        entry["path"] = rel
+        entry["last_commit_epoch"] = last
+        entry["age_days"] = age_days
+        inspected.push(entry)
+        if age_days > to_float(THRESHOLD_DAYS) {
+          stale.push(entry)
+        }
+      }
+    }
+    i = i + 1
+  }
+
+  let mut verdict = "fresh"
+  if len(stale) > 0 { verdict = "stale" }
+  _emit_report(now, inspected, stale, missing, verdict)
+
+  if found_count == 0 {
+    println("[own#19] no roadmap candidates found in repo")
+    exit(0)
+  }
+
+  if len(stale) > 0 {
+    println("[own#19] STALE roadmap files (" + to_string(len(stale)) + "):")
+    let mut j = 0
+    while j < len(stale) {
+      let s = stale[j]
+      println("  - " + s["path"] + " (" + to_string(s["age_days"]) + " days since last commit)")
+      j = j + 1
+    }
+    println("[own#19] report: reports/n6_own19_roadmap_review.json")
+    exit(1)
+  }
+
+  println("[own#19] all " + to_string(len(inspected)) + " roadmap target(s) fresh (< " + to_string(THRESHOLD_DAYS) + " days)")
+  println("[own#19] report: reports/n6_own19_roadmap_review.json")
+  exit(0)
+}
