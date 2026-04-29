@@ -1,0 +1,306 @@
+#!hexa strict
+// tool/own4_fifteen_sections_lint.hexa — own#4 domain 15-section template HARD lint.
+//
+// Rule: domains/<axis>/<name>/<name>.md MUST contain §1..§15 section headers.
+// Legacy allowlist: 13 grandfathered domain bodies pre-HARD-promotion (frozen).
+//
+// Migrated from tool/own_doc_lint_legacy.py:343-370 + 326-340 per raw 9.
+// Regex SECTION_HEAD_RE replaced with manual line-walk: heading lines start
+// with '#' (1-6 hashes) + whitespace + '§' + digits + word-boundary.
+//
+// @tool(slug="own4_fifteen_sections_lint", desc="own#4 domain 15-section HARD — domains/<axis>/<name>/<name>.md must contain §1..§15 headers; 13-entry legacy allowlist")
+// @usage(hexa /Users/ghost/core/n6-architecture/tool/own4_fifteen_sections_lint.hexa [--selftest])
+// @exit_codes(0=PASS, 1=violations, 2=internal error)
+
+let REPO_ROOT = "/Users/ghost/core/n6-architecture"
+let DOMAINS_ROOT = REPO_ROOT + "/domains"
+
+// Frozen 13-entry legacy allowlist
+let OWN4_LEGACY_ALLOWLIST = [
+  "domains/culture/ethnomusicology/ethnomusicology.md",
+  "domains/infra/forensic-science/forensic-science.md",
+  "domains/life/gastrointestinal-medicine/gastrointestinal-medicine.md",
+  "domains/life/music-therapy/music-therapy.md",
+  "domains/life/nuclear-medicine/nuclear-medicine.md",
+  "domains/life/radiation-biology/radiation-biology.md",
+  "domains/life/sleep-medicine/sleep-medicine.md",
+  "domains/life/tibetan-medicine/tibetan-medicine.md",
+  "domains/life/urban-farming/urban-farming.md",
+  "domains/physics/computational-fluid-dynamics/computational-fluid-dynamics.md",
+  "domains/space/astrobiology/astrobiology.md",
+  "domains/space/astrodynamics/astrodynamics.md",
+  "domains/space/space-medicine/space-medicine.md",
+]
+
+fn _file_exists(path: string) -> bool {
+  let r = to_string(exec("test -f '" + path + "' && echo y || echo n")).trim()
+  return r == "y"
+}
+
+fn _dir_exists(path: string) -> bool {
+  let r = to_string(exec("test -d '" + path + "' && echo y || echo n")).trim()
+  return r == "y"
+}
+
+fn _starts_with(s: string, p: string) -> bool {
+  if len(s) < len(p) { return false }
+  return s.substring(0, len(p)) == p
+}
+
+fn _is_digit(c: string) -> bool {
+  return c >= "0" && c <= "9"
+}
+
+fn _list_dirs(path: string) -> list {
+  let raw = to_string(exec("find '" + path + "' -mindepth 1 -maxdepth 1 -type d 2>/dev/null | sort"))
+  let mut out = []
+  let lines = split(raw, "\n")
+  let mut i = 0
+  while i < len(lines) {
+    let p = lines[i].trim()
+    if len(p) > 0 { out.push(p) }
+    i = i + 1
+  }
+  return out
+}
+
+fn _basename(path: string) -> string {
+  let mut last_slash = -1
+  let mut i = 0
+  while i < len(path) {
+    if path.substring(i, i + 1) == "/" { last_slash = i }
+    i = i + 1
+  }
+  if last_slash < 0 { return path }
+  return path.substring(last_slash + 1, len(path))
+}
+
+fn _rel(path: string) -> string {
+  let prefix = REPO_ROOT + "/"
+  if len(path) > len(prefix) && path.substring(0, len(prefix)) == prefix {
+    return path.substring(len(prefix), len(path))
+  }
+  return path
+}
+
+fn _in_legacy(rel: string) -> bool {
+  let mut i = 0
+  while i < len(OWN4_LEGACY_ALLOWLIST) {
+    if OWN4_LEGACY_ALLOWLIST[i] == rel { return true }
+    i = i + 1
+  }
+  return false
+}
+
+// Extract §N section numbers from text; returns set of present integers (as list).
+// Pattern: ^\s*#{1,6}\s*§(\d+)\b
+fn _extract_sections(text: string) -> list {
+  let mut present = []
+  let lines = split(text, "\n")
+  let mut li = 0
+  while li < len(lines) {
+    let line = lines[li]
+    // Skip leading whitespace
+    let n = len(line)
+    let mut p = 0
+    while p < n && (line.substring(p, p + 1) == " " || line.substring(p, p + 1) == "\t") {
+      p = p + 1
+    }
+    // Check for 1..6 '#' chars
+    let mut hash_count = 0
+    while p < n && line.substring(p, p + 1) == "#" && hash_count < 6 {
+      hash_count = hash_count + 1
+      p = p + 1
+    }
+    if hash_count >= 1 && hash_count <= 6 {
+      // Skip whitespace
+      while p < n && (line.substring(p, p + 1) == " " || line.substring(p, p + 1) == "\t") {
+        p = p + 1
+      }
+      // Look for '§' (3 bytes UTF-8: 0xC2 0xA7)
+      // hexa string substring is byte-based; '§' takes 2 bytes
+      if p + 1 < n && line.substring(p, p + 2) == "§" {
+        p = p + 2
+        // Read digits
+        let mut digit_start = p
+        while p < n && _is_digit(line.substring(p, p + 1)) {
+          p = p + 1
+        }
+        if p > digit_start {
+          let num_str = line.substring(digit_start, p)
+          let num = to_int(num_str)
+          // dedupe via list scan
+          let mut found = false
+          let mut k = 0
+          while k < len(present) {
+            if present[k] == num { found = true }
+            k = k + 1
+          }
+          if !found { present.push(num) }
+        }
+      }
+    }
+    li = li + 1
+  }
+  return present
+}
+
+fn _missing_sections(present: list) -> list {
+  let mut missing = []
+  let mut n = 1
+  while n <= 15 {
+    let mut found = false
+    let mut k = 0
+    while k < len(present) {
+      if present[k] == n { found = true }
+      k = k + 1
+    }
+    if !found { missing.push(n) }
+    n = n + 1
+  }
+  return missing
+}
+
+fn _format_int_list(xs: list) -> string {
+  let mut out = "["
+  let mut i = 0
+  while i < len(xs) {
+    if i > 0 { out = out + ", " }
+    out = out + to_string(xs[i])
+    i = i + 1
+  }
+  return out + "]"
+}
+
+fn _scan() -> list {
+  let mut violations = []
+  if !_dir_exists(DOMAINS_ROOT) { return violations }
+  let axes = _list_dirs(DOMAINS_ROOT)
+  let mut ai = 0
+  while ai < len(axes) {
+    let axis_dir = axes[ai]
+    let axis_name = _basename(axis_dir)
+    if !_starts_with(axis_name, "_") {
+      let domains = _list_dirs(axis_dir)
+      let mut di = 0
+      while di < len(domains) {
+        let domain_dir = domains[di]
+        let domain_name = _basename(domain_dir)
+        if !_starts_with(domain_name, "_") {
+          let body_path = domain_dir + "/" + domain_name + ".md"
+          if _file_exists(body_path) {
+            let rel = _rel(body_path)
+            if !_in_legacy(rel) {
+              let text = read_file(body_path)
+              let present = _extract_sections(text)
+              let missing = _missing_sections(present)
+              if len(missing) > 0 {
+                let mut v = {}
+                v["path"] = rel
+                v["detail"] = "missing sections: " + _format_int_list(missing)
+                violations.push(v)
+              }
+            }
+          }
+        }
+        di = di + 1
+      }
+    }
+    ai = ai + 1
+  }
+  return violations
+}
+
+fn _selftest() -> void {
+  println("[own#4] selftest — fixture matrix")
+  let mut total = 0
+  let mut pass = 0
+
+  // F1: PASS — text has §1..§15 all
+  total = total + 1
+  let mut t1 = ""
+  let mut n = 1
+  while n <= 15 {
+    t1 = t1 + "## §" + to_string(n) + " Section\n"
+    n = n + 1
+  }
+  let p1 = _extract_sections(t1)
+  let m1 = _missing_sections(p1)
+  if len(m1) == 0 {
+    println("[own#4] fixture 1 PASS — all 15 sections detected")
+    pass = pass + 1
+  }
+
+  // F2: FAIL — missing §7
+  total = total + 1
+  let mut t2 = ""
+  let mut k = 1
+  while k <= 15 {
+    if k != 7 {
+      t2 = t2 + "## §" + to_string(k) + " Section\n"
+    }
+    k = k + 1
+  }
+  let p2 = _extract_sections(t2)
+  let m2 = _missing_sections(p2)
+  if len(m2) == 1 && m2[0] == 7 {
+    println("[own#4] fixture 2 PASS — missing §7 detected")
+    pass = pass + 1
+  }
+
+  // F3: PASS — legacy allowlist match
+  total = total + 1
+  if _in_legacy("domains/culture/ethnomusicology/ethnomusicology.md") {
+    println("[own#4] fixture 3 PASS — legacy allowlist hit")
+    pass = pass + 1
+  }
+
+  // F4: heading variants — '# §1', '### §1', '#### §1' all match
+  total = total + 1
+  let t4 = "# §1 a\n### §2 b\n###### §3 c\n## §15 last\n"
+  let p4 = _extract_sections(t4)
+  let mut all_4 = true
+  if len(p4) != 4 { all_4 = false }
+  if all_4 {
+    println("[own#4] fixture 4 PASS — heading depth 1..6 matched")
+    pass = pass + 1
+  } else {
+    println("[own#4] fixture 4 FAIL — got " + to_string(len(p4)) + " sections")
+  }
+
+  if pass == total {
+    println("__OWN4_SELFTEST_RESULT__ PASS (" + to_string(pass) + "/" + to_string(total) + " fixtures)")
+    exit(0)
+  } else {
+    println("__OWN4_SELFTEST_RESULT__ FAIL (" + to_string(pass) + "/" + to_string(total) + " fixtures)")
+    exit(1)
+  }
+}
+
+fn main() -> void {
+  let raw_args = args()
+  let mut want_selftest = false
+  let mut i = 0
+  while i < len(raw_args) {
+    if raw_args[i] == "--selftest" || raw_args[i] == "selftest" { want_selftest = true }
+    i = i + 1
+  }
+
+  if want_selftest { _selftest(); return }
+
+  let violations = _scan()
+  let mut k = 0
+  while k < len(violations) {
+    let v = violations[k]
+    println("[own#4] FAIL " + v["path"] + " — " + v["detail"])
+    k = k + 1
+  }
+
+  if len(violations) == 0 {
+    println("__OWN4_RESULT__ PASS")
+    exit(0)
+  } else {
+    println("__OWN4_RESULT__ FAIL (" + to_string(len(violations)) + " violations)")
+    exit(1)
+  }
+}

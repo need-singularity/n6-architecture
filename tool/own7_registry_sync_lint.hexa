@@ -1,0 +1,218 @@
+#!hexa strict
+// tool/own7_registry_sync_lint.hexa — own#7 registry-sync HARD lint.
+//
+// Rule: every bridge/origins/<name>/ MUST appear in bridge/_registry.json.
+// Origins missing from registry = sync drift (block commit).
+//
+// Migrated from tool/own_doc_lint_legacy.py:432-462 per raw 9.
+// JSON parsing replaced with raw-text grep `origins/<name>/` token scan
+// (matches py impl which is itself regex-on-raw-text rather than full JSON
+// schema walk).
+//
+// @tool(slug="own7_registry_sync_lint", desc="own#7 registry sync HARD — bridge/origins/<name>/ must appear in bridge/_registry.json (raw-text token scan)")
+// @usage(hexa /Users/ghost/core/n6-architecture/tool/own7_registry_sync_lint.hexa [--selftest])
+// @exit_codes(0=PASS, 1=violations, 2=internal error)
+
+let REPO_ROOT = "/Users/ghost/core/n6-architecture"
+let ORIGINS_DIR = REPO_ROOT + "/bridge/origins"
+let REGISTRY_PATH = REPO_ROOT + "/bridge/_registry.json"
+
+fn _file_exists(path: string) -> bool {
+  let r = to_string(exec("test -f '" + path + "' && echo y || echo n")).trim()
+  return r == "y"
+}
+
+fn _dir_exists(path: string) -> bool {
+  let r = to_string(exec("test -d '" + path + "' && echo y || echo n")).trim()
+  return r == "y"
+}
+
+fn _starts_with(s: string, p: string) -> bool {
+  if len(s) < len(p) { return false }
+  return s.substring(0, len(p)) == p
+}
+
+fn _list_dirs(path: string) -> list {
+  let raw = to_string(exec("find '" + path + "' -mindepth 1 -maxdepth 1 -type d 2>/dev/null | sort"))
+  let mut out = []
+  let lines = split(raw, "\n")
+  let mut i = 0
+  while i < len(lines) {
+    let p = lines[i].trim()
+    if len(p) > 0 { out.push(p) }
+    i = i + 1
+  }
+  return out
+}
+
+fn _basename(path: string) -> string {
+  let mut last_slash = -1
+  let mut i = 0
+  while i < len(path) {
+    if path.substring(i, i + 1) == "/" { last_slash = i }
+    i = i + 1
+  }
+  if last_slash < 0 { return path }
+  return path.substring(last_slash + 1, len(path))
+}
+
+fn _rel(path: string) -> string {
+  let prefix = REPO_ROOT + "/"
+  if len(path) > len(prefix) && path.substring(0, len(prefix)) == prefix {
+    return path.substring(len(prefix), len(path))
+  }
+  return path
+}
+
+// Extract `origins/<name>/` tokens from raw text.
+// Returns list of unique <name> strings.
+// Simpler approach: split text on "origins/" then walk each segment for delim.
+fn _extract_origin_refs(text: string) -> list {
+  let mut refs = []
+  let parts = split(text, "origins/")
+  // parts[0] is prefix before first 'origins/'; parts[1..] each start with <name>/...
+  let mut i = 1
+  while i < len(parts) {
+    let seg = parts[i]
+    let n = len(seg)
+    let mut end = 0
+    let mut found = false
+    while end < n && !found {
+      let c = seg.substring(end, end + 1)
+      if c == "/" || c == "\"" { found = true }
+      else { end = end + 1 }
+    }
+    if found && end > 0 {
+      let name = seg.substring(0, end)
+      // dedupe
+      let mut already = false
+      let mut k = 0
+      while k < len(refs) {
+        if refs[k] == name { already = true }
+        k = k + 1
+      }
+      if !already { refs.push(name) }
+    }
+    i = i + 1
+  }
+  return refs
+}
+
+fn _scan() -> list {
+  let mut violations = []
+  if !_dir_exists(ORIGINS_DIR) { return violations }
+  if !_file_exists(REGISTRY_PATH) { return violations }
+
+  let reg_text = read_file(REGISTRY_PATH)
+  let ref_names = _extract_origin_refs(reg_text)
+
+  let origins = _list_dirs(ORIGINS_DIR)
+  let mut i = 0
+  while i < len(origins) {
+    let origin_dir = origins[i]
+    let name = _basename(origin_dir)
+    if !_starts_with(name, "_") && !_starts_with(name, ".") {
+      // Check if name in ref_names
+      let mut in_reg = false
+      let mut k = 0
+      while k < len(ref_names) {
+        if ref_names[k] == name { in_reg = true }
+        k = k + 1
+      }
+      if !in_reg {
+        let mut v = {}
+        v["path"] = _rel(origin_dir)
+        v["detail"] = "bridge origin absent from bridge/_registry.json"
+        violations.push(v)
+      }
+    }
+    i = i + 1
+  }
+  return violations
+}
+
+fn _selftest() -> void {
+  println("[own#7] selftest — fixture matrix")
+  let mut total = 0
+  let mut pass = 0
+
+  // F1: PASS — registry contains 'origins/foo/'
+  total = total + 1
+  let reg1 = "{\"items\": [{\"path\": \"origins/foo/manifest.json\"}, {\"path\": \"origins/bar/x.hexa\"}]}"
+  let refs1 = _extract_origin_refs(reg1)
+  let mut has_foo = false
+  let mut has_bar = false
+  let mut k = 0
+  while k < len(refs1) {
+    if refs1[k] == "foo" { has_foo = true }
+    if refs1[k] == "bar" { has_bar = true }
+    k = k + 1
+  }
+  if has_foo && has_bar {
+    println("[own#7] fixture 1 PASS — extracted 'foo' + 'bar' refs")
+    pass = pass + 1
+  } else {
+    println("[own#7] fixture 1 FAIL — refs missing")
+  }
+
+  // F2: PASS — empty registry returns empty refs
+  total = total + 1
+  let refs2 = _extract_origin_refs("{}")
+  if len(refs2) == 0 {
+    println("[own#7] fixture 2 PASS — empty registry no refs")
+    pass = pass + 1
+  }
+
+  // F3: dedupe — 'origins/foo/' appearing twice yields single ref
+  total = total + 1
+  let reg3 = "origins/foo/a origins/foo/b origins/baz/c"
+  let refs3 = _extract_origin_refs(reg3)
+  let mut foo_count = 0
+  let mut k3 = 0
+  while k3 < len(refs3) {
+    if refs3[k3] == "foo" { foo_count = foo_count + 1 }
+    k3 = k3 + 1
+  }
+  if foo_count == 1 && len(refs3) == 2 {
+    println("[own#7] fixture 3 PASS — dedup 'foo' single, total=2")
+    pass = pass + 1
+  } else {
+    println("[own#7] fixture 3 FAIL — count=" + to_string(foo_count) + " total=" + to_string(len(refs3)))
+  }
+
+  if pass == total {
+    println("__OWN7_SELFTEST_RESULT__ PASS (" + to_string(pass) + "/" + to_string(total) + " fixtures)")
+    exit(0)
+  } else {
+    println("__OWN7_SELFTEST_RESULT__ FAIL (" + to_string(pass) + "/" + to_string(total) + " fixtures)")
+    exit(1)
+  }
+}
+
+fn main() -> void {
+  let raw_args = args()
+  let mut want_selftest = false
+  let mut i = 0
+  while i < len(raw_args) {
+    if raw_args[i] == "--selftest" || raw_args[i] == "selftest" { want_selftest = true }
+    i = i + 1
+  }
+
+  if want_selftest { _selftest(); return }
+
+  let violations = _scan()
+  let mut k = 0
+  while k < len(violations) {
+    let v = violations[k]
+    println("[own#7] FAIL " + v["path"] + " — " + v["detail"])
+    k = k + 1
+  }
+
+  if len(violations) == 0 {
+    println("__OWN7_RESULT__ PASS")
+    exit(0)
+  } else {
+    println("__OWN7_RESULT__ FAIL (" + to_string(len(violations)) + " violations)")
+    exit(1)
+  }
+}

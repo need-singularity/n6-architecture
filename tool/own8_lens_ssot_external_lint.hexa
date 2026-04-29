@@ -1,0 +1,319 @@
+#!hexa strict
+// tool/own8_lens_ssot_external_lint.hexa — own#8 lens-ssot-external HARD lint.
+//
+// Rule: lens references in .md should point at external nexus SSOT
+// ($NEXUS/shared/lenses/...). Two violation classes:
+//   (a) `bridge/src/telescope/lenses/<name>.rs` — legacy citation
+//   (b) `](lenses/...)` markdown link — bypasses external SSOT
+//
+// Migrated from tool/own_doc_lint_legacy.py:728-778 + 723-725 per raw 9.
+//
+// @tool(slug="own8_lens_ssot_external_lint", desc="own#8 lens external-SSOT HARD — flag legacy Rust-lens refs + relative lens links bypassing $NEXUS/shared/lenses/")
+// @usage(hexa /Users/ghost/core/n6-architecture/tool/own8_lens_ssot_external_lint.hexa [--selftest])
+// @exit_codes(0=PASS, 1=violations, 2=internal error)
+
+let REPO_ROOT = "/Users/ghost/core/n6-architecture"
+
+let SCAN_ROOTS = [
+  REPO_ROOT,
+  REPO_ROOT + "/bridge",
+  REPO_ROOT + "/theory",
+  REPO_ROOT + "/papers",
+  REPO_ROOT + "/domains",
+]
+
+let LEGACY_LENS_PREFIX = "bridge/src/telescope/lenses/"
+
+fn _dir_exists(path: string) -> bool {
+  let r = to_string(exec("test -d '" + path + "' && echo y || echo n")).trim()
+  return r == "y"
+}
+
+fn _file_exists(path: string) -> bool {
+  let r = to_string(exec("test -f '" + path + "' && echo y || echo n")).trim()
+  return r == "y"
+}
+
+fn _is_alnum_or_path_char(c: string) -> bool {
+  // Per regex [A-Za-z0-9_./-] for legacy lens path
+  if c >= "A" && c <= "Z" { return true }
+  if c >= "a" && c <= "z" { return true }
+  if c >= "0" && c <= "9" { return true }
+  if c == "_" { return true }
+  if c == "." { return true }
+  if c == "/" { return true }
+  if c == "-" { return true }
+  return false
+}
+
+fn _walk_md_top_only(root: string) -> list {
+  // Top-level .md files only (per py impl _walk_md follows top-level)
+  let raw = to_string(exec("find '" + root + "' -mindepth 1 -maxdepth 1 -type f -name '*.md' 2>/dev/null"))
+  let mut out = []
+  let lines = split(raw, "\n")
+  let mut i = 0
+  while i < len(lines) {
+    let p = lines[i].trim()
+    if len(p) > 0 { out.push(p) }
+    i = i + 1
+  }
+  return out
+}
+
+fn _walk_md_recursive(root: string) -> list {
+  let raw = to_string(exec("find '" + root + "' -type f -name '*.md' 2>/dev/null"))
+  let mut out = []
+  let lines = split(raw, "\n")
+  let mut i = 0
+  while i < len(lines) {
+    let p = lines[i].trim()
+    if len(p) > 0 { out.push(p) }
+    i = i + 1
+  }
+  return out
+}
+
+fn _rel(path: string) -> string {
+  let prefix = REPO_ROOT + "/"
+  if len(path) > len(prefix) && path.substring(0, len(prefix)) == prefix {
+    return path.substring(len(prefix), len(path))
+  }
+  return path
+}
+
+// Find all 'bridge/src/telescope/lenses/...rs' substrings in line; return list of matched substrings.
+fn _find_legacy_lens_refs(line: string) -> list {
+  let mut hits = []
+  let parts = split(line, LEGACY_LENS_PREFIX)
+  let mut i = 1
+  while i < len(parts) {
+    let seg = parts[i]
+    let n = len(seg)
+    let mut end = 0
+    let mut found_rs = false
+    while end < n {
+      let c = seg.substring(end, end + 1)
+      if !_is_alnum_or_path_char(c) { end = n + 1 }  // break
+      else { end = end + 1 }
+    }
+    // Now end is the position past the last path char (or n+1 if hit non-path)
+    // Recompute proper end via second walk
+    let mut real_end = 0
+    let mut stop = false
+    while real_end < n && !stop {
+      let c = seg.substring(real_end, real_end + 1)
+      if !_is_alnum_or_path_char(c) { stop = true }
+      else { real_end = real_end + 1 }
+    }
+    if real_end >= 3 {
+      // Check ends with .rs
+      let path_part = seg.substring(0, real_end)
+      if len(path_part) > 3 {
+        let tail3 = path_part.substring(len(path_part) - 3, len(path_part))
+        if tail3 == ".rs" {
+          hits.push(LEGACY_LENS_PREFIX + path_part)
+        }
+      }
+    }
+    i = i + 1
+  }
+  return hits
+}
+
+// Find ](lenses/...) markdown links in line. Returns list of snippet strings.
+fn _find_internal_lens_links(line: string) -> list {
+  let mut hits = []
+  let n = len(line)
+  let mut i = 0
+  while i < n - 9 {
+    // Look for "](lenses/" or "](./lenses/"
+    let win10 = line.substring(i, i + 10)
+    let win12 = line.substring(i, i + 12)
+    let mut start = -1
+    if win10.substring(0, 9) == "](lenses/" {
+      start = i
+    }
+    if i + 12 <= n && win12.substring(0, 11) == "](./lenses/" {
+      start = i
+    }
+    if start >= 0 {
+      // Walk until closing ')'
+      let mut end = start + 2  // skip "]("
+      while end < n && line.substring(end, end + 1) != ")" {
+        end = end + 1
+      }
+      if end < n {
+        let snippet = line.substring(start, end + 1)
+        hits.push(snippet)
+        i = end + 1
+      } else {
+        i = i + 1
+      }
+    } else {
+      i = i + 1
+    }
+  }
+  return hits
+}
+
+fn _line_has_external_ok(line: string) -> bool {
+  if line.contains("$NEXUS/shared/lenses") { return true }
+  if line.contains("nexus/shared/lenses") { return true }
+  return false
+}
+
+fn _scan_text(path: string, text: string) -> list {
+  let mut violations = []
+  let lines = split(text, "\n")
+  let mut li = 0
+  while li < len(lines) {
+    let lineno = li + 1
+    let line = lines[li]
+    // (a) legacy Rust lens refs
+    let legacy = _find_legacy_lens_refs(line)
+    let mut k = 0
+    while k < len(legacy) {
+      let mut v = {}
+      v["path"] = _rel(path)
+      v["detail"] = "line " + to_string(lineno) + ": legacy Rust-lens reference '" + legacy[k] + "' — replace with $NEXUS/shared/lenses/<domain>_<topic>.hexa"
+      violations.push(v)
+      k = k + 1
+    }
+    // (b) internal lens links — skipped if line cites external SSOT
+    if !_line_has_external_ok(line) {
+      let internal = _find_internal_lens_links(line)
+      let mut m = 0
+      while m < len(internal) {
+        let mut v = {}
+        v["path"] = _rel(path)
+        v["detail"] = "line " + to_string(lineno) + ": relative lens link '" + internal[m] + "' bypasses $NEXUS/shared/lenses/ SSOT"
+        violations.push(v)
+        m = m + 1
+      }
+    }
+    li = li + 1
+  }
+  return violations
+}
+
+fn _scan() -> list {
+  let mut violations = []
+  // Build deduplicated MD list
+  let mut seen = []
+  let mut ri = 0
+  while ri < len(SCAN_ROOTS) {
+    let root = SCAN_ROOTS[ri]
+    if _dir_exists(root) {
+      let mut mds = []
+      if root == REPO_ROOT {
+        mds = _walk_md_top_only(root)
+      } else {
+        mds = _walk_md_recursive(root)
+      }
+      let mut i = 0
+      while i < len(mds) {
+        let p = mds[i]
+        // dedupe
+        let mut already = false
+        let mut k = 0
+        while k < len(seen) {
+          if seen[k] == p { already = true }
+          k = k + 1
+        }
+        if !already {
+          seen.push(p)
+          let text = read_file(p)
+          let v_list = _scan_text(p, text)
+          let mut vk = 0
+          while vk < len(v_list) {
+            violations.push(v_list[vk])
+            vk = vk + 1
+          }
+        }
+        i = i + 1
+      }
+    }
+    ri = ri + 1
+  }
+  return violations
+}
+
+fn _selftest() -> void {
+  println("[own#8] selftest — fixture matrix")
+  let mut total = 0
+  let mut pass = 0
+
+  // F1: PASS — clean line, no lens refs
+  total = total + 1
+  let v1 = _scan_text("/tmp/f1", "# clean\nNo lens here.")
+  if len(v1) == 0 {
+    println("[own#8] fixture 1 PASS — clean text accepted")
+    pass = pass + 1
+  }
+
+  // F2: FAIL — legacy Rust lens reference
+  total = total + 1
+  let v2 = _scan_text("/tmp/f2", "see bridge/src/telescope/lenses/foo.rs for impl")
+  if len(v2) >= 1 {
+    println("[own#8] fixture 2 PASS — legacy .rs ref flagged")
+    pass = pass + 1
+  } else {
+    println("[own#8] fixture 2 FAIL — should detect legacy ref")
+  }
+
+  // F3: FAIL — internal ](lenses/...) link without external SSOT
+  total = total + 1
+  let v3 = _scan_text("/tmp/f3", "click [here](lenses/foo.hexa) for the lens")
+  if len(v3) >= 1 {
+    println("[own#8] fixture 3 PASS — internal lens link flagged")
+    pass = pass + 1
+  } else {
+    println("[own#8] fixture 3 FAIL — should detect internal link")
+  }
+
+  // F4: PASS — internal link OK because line cites $NEXUS/shared/lenses
+  total = total + 1
+  let v4 = _scan_text("/tmp/f4", "external SSOT: $NEXUS/shared/lenses/foo, fallback at [here](lenses/foo.hexa)")
+  if len(v4) == 0 {
+    println("[own#8] fixture 4 PASS — external SSOT cite exempts internal link")
+    pass = pass + 1
+  } else {
+    println("[own#8] fixture 4 FAIL — line citing nexus should exempt; got " + to_string(len(v4)))
+  }
+
+  if pass == total {
+    println("__OWN8_SELFTEST_RESULT__ PASS (" + to_string(pass) + "/" + to_string(total) + " fixtures)")
+    exit(0)
+  } else {
+    println("__OWN8_SELFTEST_RESULT__ FAIL (" + to_string(pass) + "/" + to_string(total) + " fixtures)")
+    exit(1)
+  }
+}
+
+fn main() -> void {
+  let raw_args = args()
+  let mut want_selftest = false
+  let mut i = 0
+  while i < len(raw_args) {
+    if raw_args[i] == "--selftest" || raw_args[i] == "selftest" { want_selftest = true }
+    i = i + 1
+  }
+
+  if want_selftest { _selftest(); return }
+
+  let violations = _scan()
+  let mut k = 0
+  while k < len(violations) {
+    let v = violations[k]
+    println("[own#8] FAIL " + v["path"] + " — " + v["detail"])
+    k = k + 1
+  }
+
+  if len(violations) == 0 {
+    println("__OWN8_RESULT__ PASS")
+    exit(0)
+  } else {
+    println("__OWN8_RESULT__ FAIL (" + to_string(len(violations)) + " violations)")
+    exit(1)
+  }
+}
