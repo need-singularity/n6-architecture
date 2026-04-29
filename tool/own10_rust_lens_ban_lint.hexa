@@ -1,0 +1,239 @@
+#!hexa strict
+// tool/own10_rust_lens_ban_lint.hexa — own#10 rust-lens-ban HARD lint.
+//
+// Rule: any .rs under bridge/src/telescope/ OR top-level lenses/ — FORBIDDEN.
+// Two-axis check:
+//   (a) present-state — .rs files currently in those paths
+//   (b) rolling 90-day git additions — catches even files later deleted
+//
+// Migrated from tool/own_doc_lint_legacy.py:898-926 + 873-895 per raw 9.
+//
+// @tool(slug="own10_rust_lens_ban_lint", desc="own#10 rust-lens-ban HARD — any .rs under bridge/src/telescope/ or top-level lenses/ flagged + 90d git-log addition scan")
+// @usage(hexa /Users/ghost/core/n6-architecture/tool/own10_rust_lens_ban_lint.hexa [--selftest])
+// @exit_codes(0=PASS, 1=violations, 2=internal error)
+
+let REPO_ROOT = "/Users/ghost/core/n6-architecture"
+let TELE_DIR = REPO_ROOT + "/bridge/src/telescope"
+let LENSES_DIR = REPO_ROOT + "/lenses"
+
+fn _dir_exists(path: string) -> bool {
+  let r = to_string(exec("test -d '" + path + "' && echo y || echo n")).trim()
+  return r == "y"
+}
+
+fn _rel(path: string) -> string {
+  let prefix = REPO_ROOT + "/"
+  if len(path) > len(prefix) && path.substring(0, len(prefix)) == prefix {
+    return path.substring(len(prefix), len(path))
+  }
+  return path
+}
+
+fn _list_rs_recursive(root: string) -> list {
+  let raw = to_string(exec("find '" + root + "' -type f -name '*.rs' 2>/dev/null"))
+  let mut out = []
+  let lines = split(raw, "\n")
+  let mut i = 0
+  while i < len(lines) {
+    let p = lines[i].trim()
+    if len(p) > 0 { out.push(p) }
+    i = i + 1
+  }
+  return out
+}
+
+// Match LENS_RS_PATH_RE pattern:
+//   ^(?:bridge/src/telescope/(?:lenses/)?[^/\s]+\.rs|lenses/[^\s]+\.rs)$
+fn _is_lens_rs_path(rel: string) -> bool {
+  // Pattern 1: bridge/src/telescope/<name>.rs OR bridge/src/telescope/lenses/<name>.rs
+  let prefix1a = "bridge/src/telescope/"
+  let prefix1b = "bridge/src/telescope/lenses/"
+  if len(rel) > 3 {
+    let tail3 = rel.substring(len(rel) - 3, len(rel))
+    if tail3 == ".rs" {
+      // Check pattern 1
+      if len(rel) > len(prefix1b) && rel.substring(0, len(prefix1b)) == prefix1b {
+        // Inside bridge/src/telescope/lenses/ — must have no further '/' between prefix and .rs
+        let inner = rel.substring(len(prefix1b), len(rel) - 3)
+        let mut has_slash = false
+        let mut i = 0
+        while i < len(inner) {
+          if inner.substring(i, i + 1) == "/" { has_slash = true }
+          i = i + 1
+        }
+        if !has_slash { return true }
+      } else {
+        if len(rel) > len(prefix1a) && rel.substring(0, len(prefix1a)) == prefix1a {
+          let inner = rel.substring(len(prefix1a), len(rel) - 3)
+          let mut has_slash = false
+          let mut i = 0
+          while i < len(inner) {
+            if inner.substring(i, i + 1) == "/" { has_slash = true }
+            i = i + 1
+          }
+          if !has_slash { return true }
+        }
+      }
+      // Pattern 2: lenses/<name>.rs (any depth, no whitespace)
+      let prefix2 = "lenses/"
+      if len(rel) > len(prefix2) && rel.substring(0, len(prefix2)) == prefix2 {
+        let inner = rel.substring(len(prefix2), len(rel) - 3)
+        // Must have no whitespace
+        let mut has_ws = false
+        let mut i = 0
+        while i < len(inner) {
+          let c = inner.substring(i, i + 1)
+          if c == " " || c == "\t" || c == "\n" { has_ws = true }
+          i = i + 1
+        }
+        if !has_ws { return true }
+      }
+    }
+  }
+  return false
+}
+
+fn _git_recent_rs_files(since_days: int) -> list {
+  let cmd = "cd '" + REPO_ROOT + "' && git log --since='" + to_string(since_days) + " days ago' --name-only --pretty=format: --diff-filter=A 2>/dev/null | grep '\\.rs$' | sort -u"
+  let raw = to_string(exec(cmd))
+  let mut out = []
+  let lines = split(raw, "\n")
+  let mut i = 0
+  while i < len(lines) {
+    let p = lines[i].trim()
+    if len(p) > 0 { out.push(p) }
+    i = i + 1
+  }
+  return out
+}
+
+fn _scan() -> list {
+  let mut violations = []
+
+  // (a) present-state in bridge/src/telescope/
+  if _dir_exists(TELE_DIR) {
+    let rs1 = _list_rs_recursive(TELE_DIR)
+    let mut i = 0
+    while i < len(rs1) {
+      let mut v = {}
+      v["path"] = _rel(rs1[i])
+      v["detail"] = "legacy Rust lens present in bridge/src/telescope — freeze / migrate to HEXA"
+      violations.push(v)
+      i = i + 1
+    }
+  }
+
+  // (a) present-state in lenses/
+  if _dir_exists(LENSES_DIR) {
+    let rs2 = _list_rs_recursive(LENSES_DIR)
+    let mut i = 0
+    while i < len(rs2) {
+      let mut v = {}
+      v["path"] = _rel(rs2[i])
+      v["detail"] = "legacy Rust lens present under /lenses — freeze / migrate to HEXA"
+      violations.push(v)
+      i = i + 1
+    }
+  }
+
+  // (b) rolling 90-day git additions — catches even deleted files
+  let recent = _git_recent_rs_files(90)
+  let mut i = 0
+  while i < len(recent) {
+    let candidate = recent[i]
+    if _is_lens_rs_path(candidate) {
+      // Dedupe: skip if already flagged from present-state scan
+      let mut already = false
+      let mut k = 0
+      while k < len(violations) {
+        if violations[k]["path"] == candidate { already = true }
+        k = k + 1
+      }
+      if !already {
+        let mut v = {}
+        v["path"] = candidate
+        v["detail"] = "new Rust lens added in rolling 90-day window (git history)"
+        violations.push(v)
+      }
+    }
+    i = i + 1
+  }
+  return violations
+}
+
+fn _selftest() -> void {
+  println("[own#10] selftest — fixture matrix")
+  let mut total = 0
+  let mut pass = 0
+
+  // F1: PASS — bridge/src/telescope/foo.rs matches
+  total = total + 1
+  if _is_lens_rs_path("bridge/src/telescope/foo.rs") {
+    println("[own#10] fixture 1 PASS — telescope/foo.rs detected")
+    pass = pass + 1
+  }
+
+  // F2: PASS — bridge/src/telescope/lenses/bar.rs matches
+  total = total + 1
+  if _is_lens_rs_path("bridge/src/telescope/lenses/bar.rs") {
+    println("[own#10] fixture 2 PASS — telescope/lenses/bar.rs detected")
+    pass = pass + 1
+  }
+
+  // F3: PASS — lenses/baz.rs (top-level) matches
+  total = total + 1
+  if _is_lens_rs_path("lenses/baz.rs") {
+    println("[own#10] fixture 3 PASS — top-level lenses/baz.rs detected")
+    pass = pass + 1
+  }
+
+  // F4: FAIL — random other .rs path NOT matched
+  total = total + 1
+  if !_is_lens_rs_path("src/main.rs") {
+    println("[own#10] fixture 4 PASS — non-lens path correctly skipped")
+    pass = pass + 1
+  }
+
+  // F5: FAIL — bridge/src/other/foo.rs NOT matched (different path)
+  total = total + 1
+  if !_is_lens_rs_path("bridge/src/other/foo.rs") {
+    println("[own#10] fixture 5 PASS — bridge/src/other/foo.rs not flagged")
+    pass = pass + 1
+  }
+
+  if pass == total {
+    println("__OWN10_SELFTEST_RESULT__ PASS (" + to_string(pass) + "/" + to_string(total) + " fixtures)")
+    exit(0)
+  } else {
+    println("__OWN10_SELFTEST_RESULT__ FAIL (" + to_string(pass) + "/" + to_string(total) + " fixtures)")
+    exit(1)
+  }
+}
+
+fn main() -> void {
+  let raw_args = args()
+  let mut want_selftest = false
+  let mut i = 0
+  while i < len(raw_args) {
+    if raw_args[i] == "--selftest" || raw_args[i] == "selftest" { want_selftest = true }
+    i = i + 1
+  }
+
+  if want_selftest { _selftest(); return }
+
+  let violations = _scan()
+  let mut k = 0
+  while k < len(violations) {
+    let v = violations[k]
+    println("[own#10] FAIL " + v["path"] + " — " + v["detail"])
+    k = k + 1
+  }
+
+  if len(violations) == 0 {
+    println("__OWN10_RESULT__ PASS")
+    exit(0)
+  } else {
+    println("__OWN10_RESULT__ FAIL (" + to_string(len(violations)) + " violations)")
+    exit(1)
+  }
+}

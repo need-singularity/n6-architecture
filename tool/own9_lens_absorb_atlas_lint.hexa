@@ -1,0 +1,267 @@
+#!hexa strict
+// tool/own9_lens_absorb_atlas_lint.hexa — own#9 lens-auto-absorb-atlas HARD lint.
+//
+// Rule: lens commits in last 30 days SHOULD result in atlas.n6 lens markers.
+// If recent lens commits exist but atlas.n6 has zero lens markers, flag drift.
+// Also: lens_registry declares lenses → atlas should have lens entries.
+//
+// Migrated from tool/own_doc_lint_legacy.py:811-867 + 787-808 per raw 9.
+// Regex _ATLAS_LENS_PATTERN_RE + _ATLAS_INLINE_LENS_RE replaced with
+// case-insensitive substring scan over canonical token set.
+//
+// @tool(slug="own9_lens_absorb_atlas_lint", desc="own#9 lens-absorb-atlas HARD — atlas.n6 must contain lens markers when lens commits exist (30d window) or lens_registry declares lenses")
+// @usage(hexa /Users/ghost/core/n6-architecture/tool/own9_lens_absorb_atlas_lint.hexa [--selftest])
+// @exit_codes(0=PASS, 1=violations, 2=internal error)
+
+let REPO_ROOT = "/Users/ghost/core/n6-architecture"
+let ATLAS_PATH = REPO_ROOT + "/atlas/atlas.n6"
+let ATLAS_ALT = REPO_ROOT + "/n6shared/atlas.n6"
+let LENS_REGISTRY = REPO_ROOT + "/n6shared/config/lens_registry.json"
+
+fn _file_exists(path: string) -> bool {
+  let r = to_string(exec("test -f '" + path + "' && echo y || echo n")).trim()
+  return r == "y"
+}
+
+fn _rel(path: string) -> string {
+  let prefix = REPO_ROOT + "/"
+  if len(path) > len(prefix) && path.substring(0, len(prefix)) == prefix {
+    return path.substring(len(prefix), len(path))
+  }
+  return path
+}
+
+// POSIX tr is O(n) at native speed — orders of magnitude faster than
+// per-byte 26-branch hexa loop on multi-MB atlas texts.
+fn _to_lower_via_tr(path: string) -> string {
+  let cmd = "tr 'A-Z' 'a-z' < '" + path + "' 2>/dev/null"
+  return to_string(exec(cmd))
+}
+
+// In-string lowercase for selftest fixtures (small inputs OK)
+fn _to_lower(s: string) -> string {
+  let mut out = ""
+  let mut i = 0
+  while i < len(s) {
+    let c = s.substring(i, i + 1)
+    if c >= "A" && c <= "Z" {
+      if c == "A" { out = out + "a" }
+      if c == "B" { out = out + "b" }
+      if c == "C" { out = out + "c" }
+      if c == "D" { out = out + "d" }
+      if c == "E" { out = out + "e" }
+      if c == "F" { out = out + "f" }
+      if c == "G" { out = out + "g" }
+      if c == "H" { out = out + "h" }
+      if c == "I" { out = out + "i" }
+      if c == "J" { out = out + "j" }
+      if c == "K" { out = out + "k" }
+      if c == "L" { out = out + "l" }
+      if c == "M" { out = out + "m" }
+      if c == "N" { out = out + "n" }
+      if c == "O" { out = out + "o" }
+      if c == "P" { out = out + "p" }
+      if c == "Q" { out = out + "q" }
+      if c == "R" { out = out + "r" }
+      if c == "S" { out = out + "s" }
+      if c == "T" { out = out + "t" }
+      if c == "U" { out = out + "u" }
+      if c == "V" { out = out + "v" }
+      if c == "W" { out = out + "w" }
+      if c == "X" { out = out + "x" }
+      if c == "Y" { out = out + "y" }
+      if c == "Z" { out = out + "z" }
+    } else {
+      out = out + c
+    }
+    i = i + 1
+  }
+  return out
+}
+
+// Lowercase-input variant (assumes input already lowercased)
+fn _atlas_lens_pattern_count_lower(lower: string) -> int {
+  let mut count = 0
+  let parts1 = split(lower, "lens_id")
+  count = count + len(parts1) - 1
+  let parts2 = split(lower, "lens_origin")
+  count = count + len(parts2) - 1
+  let parts3 = split(lower, "lens:")
+  count = count + len(parts3) - 1
+  let parts4 = split(lower, "source=lens")
+  count = count + len(parts4) - 1
+  let parts5 = split(lower, "source = lens")
+  count = count + len(parts5) - 1
+  return count
+}
+
+// Wrapper: lowercase first (slow on large inputs — only for selftest)
+fn _atlas_lens_pattern_count(text: string) -> int {
+  return _atlas_lens_pattern_count_lower(_to_lower(text))
+}
+
+fn _atlas_inline_lens_count_lower(lower: string) -> int {
+  let mut count = 0
+  let seps = ["-lens", "_lens", "/lens"]
+  let mut si = 0
+  while si < len(seps) {
+    let parts = split(lower, seps[si])
+    let mut i = 1
+    while i < len(parts) {
+      let seg = parts[i]
+      if len(seg) == 0 {
+        count = count + 1
+      } else {
+        let nc = seg.substring(0, 1)
+        if !(nc >= "a" && nc <= "z") {
+          count = count + 1
+        }
+      }
+      i = i + 1
+    }
+    si = si + 1
+  }
+  return count
+}
+
+fn _atlas_inline_lens_count(text: string) -> int {
+  return _atlas_inline_lens_count_lower(_to_lower(text))
+}
+
+fn _git_recent_lens_subjects(since_days: int) -> list {
+  let cmd = "cd '" + REPO_ROOT + "' && git log --since='" + to_string(since_days) + " days ago' --grep=lens -i --pretty=format:%s 2>/dev/null"
+  let raw = to_string(exec(cmd))
+  let mut out = []
+  let lines = split(raw, "\n")
+  let mut i = 0
+  while i < len(lines) {
+    let p = lines[i].trim()
+    if len(p) > 0 { out.push(p) }
+    i = i + 1
+  }
+  return out
+}
+
+fn _scan() -> list {
+  let mut violations = []
+  let mut atlas_path = ATLAS_PATH
+  if !_file_exists(atlas_path) {
+    if _file_exists(ATLAS_ALT) { atlas_path = ATLAS_ALT }
+  }
+  if !_file_exists(atlas_path) {
+    let mut v = {}
+    v["path"] = "atlas/atlas.n6"
+    v["detail"] = "atlas.n6 SSOT not found — cannot verify lens absorption"
+    violations.push(v)
+    return violations
+  }
+
+  // Use tr for fast atlas lowercase (37k+ lines)
+  let atlas_lower = _to_lower_via_tr(atlas_path)
+  let lens_pat = _atlas_lens_pattern_count_lower(atlas_lower)
+  let lens_inline = _atlas_inline_lens_count_lower(atlas_lower)
+  let total_lens_signal = lens_pat + lens_inline
+
+  let recent_commits = _git_recent_lens_subjects(30)
+  if len(recent_commits) > 0 && total_lens_signal == 0 {
+    let mut v = {}
+    v["path"] = _rel(atlas_path)
+    v["detail"] = to_string(len(recent_commits)) + " lens-tagged commits in last 30d but atlas.n6 contains 0 lens markers — absorption may have stalled"
+    violations.push(v)
+  }
+
+  // Independent invariant: lens_registry declares lenses but atlas silent
+  if _file_exists(LENS_REGISTRY) && total_lens_signal == 0 {
+    let reg_text = read_file(LENS_REGISTRY)
+    if reg_text.contains("\"lens") || reg_text.contains("lens_id") {
+      let mut v = {}
+      v["path"] = _rel(LENS_REGISTRY)
+      v["detail"] = "lens_registry.json declares lenses but atlas.n6 has no lens-originated entries"
+      violations.push(v)
+    }
+  }
+
+  return violations
+}
+
+fn _selftest() -> void {
+  println("[own#9] selftest — fixture matrix")
+  let mut total = 0
+  let mut pass = 0
+
+  // F1: PASS — atlas with lens_id pattern
+  total = total + 1
+  let t1 = "entry { lens_id: 42 }"
+  let c1 = _atlas_lens_pattern_count(t1)
+  if c1 >= 1 {
+    println("[own#9] fixture 1 PASS — lens_id detected (count=" + to_string(c1) + ")")
+    pass = pass + 1
+  }
+
+  // F2: PASS — atlas with /lens word boundary
+  total = total + 1
+  let t2 = "ref: source/lens which absorbs"
+  let c2 = _atlas_inline_lens_count(t2)
+  if c2 >= 1 {
+    println("[own#9] fixture 2 PASS — /lens inline detected (count=" + to_string(c2) + ")")
+    pass = pass + 1
+  }
+
+  // F3: 0-count on atlas without lens markers
+  total = total + 1
+  let t3 = "no lensy markers here, just data"
+  let c3a = _atlas_lens_pattern_count(t3)
+  let c3b = _atlas_inline_lens_count(t3)
+  // 'no lens' has space before lens, won't match [-_/]lens; pattern_count won't match either
+  if c3a == 0 && c3b == 0 {
+    println("[own#9] fixture 3 PASS — atlas without lens-markers correctly silent")
+    pass = pass + 1
+  } else {
+    println("[own#9] fixture 3 FAIL — pattern=" + to_string(c3a) + " inline=" + to_string(c3b))
+  }
+
+  // F4: source = lens variant
+  total = total + 1
+  let t4 = "config { source = lens }"
+  let c4 = _atlas_lens_pattern_count(t4)
+  if c4 >= 1 {
+    println("[own#9] fixture 4 PASS — 'source = lens' detected")
+    pass = pass + 1
+  }
+
+  if pass == total {
+    println("__OWN9_SELFTEST_RESULT__ PASS (" + to_string(pass) + "/" + to_string(total) + " fixtures)")
+    exit(0)
+  } else {
+    println("__OWN9_SELFTEST_RESULT__ FAIL (" + to_string(pass) + "/" + to_string(total) + " fixtures)")
+    exit(1)
+  }
+}
+
+fn main() -> void {
+  let raw_args = args()
+  let mut want_selftest = false
+  let mut i = 0
+  while i < len(raw_args) {
+    if raw_args[i] == "--selftest" || raw_args[i] == "selftest" { want_selftest = true }
+    i = i + 1
+  }
+
+  if want_selftest { _selftest(); return }
+
+  let violations = _scan()
+  let mut k = 0
+  while k < len(violations) {
+    let v = violations[k]
+    println("[own#9] FAIL " + v["path"] + " — " + v["detail"])
+    k = k + 1
+  }
+
+  if len(violations) == 0 {
+    println("__OWN9_RESULT__ PASS")
+    exit(0)
+  } else {
+    println("__OWN9_RESULT__ FAIL (" + to_string(len(violations)) + " violations)")
+    exit(1)
+  }
+}

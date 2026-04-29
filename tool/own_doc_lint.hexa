@@ -77,13 +77,15 @@ fn _join_int_list(xs: list) -> string {
 }
 
 fn _is_hexa_native_rule(rid: int) -> bool {
-  // Rules with native hexa impls. own#3,4,5,6,7,8,11,12,29 native (incremental migration).
+  // Rules with native hexa impls. own#3,4,5,6,7,8,9,10,11,12,29 native (incremental migration).
   if rid == 3 { return true }
   if rid == 4 { return true }
   if rid == 5 { return true }
   if rid == 6 { return true }
   if rid == 7 { return true }
   if rid == 8 { return true }
+  if rid == 9 { return true }
+  if rid == 10 { return true }
   if rid == 11 { return true }
   if rid == 12 { return true }
   if rid == 29 { return true }
@@ -151,6 +153,16 @@ fn _run_native_rule(rid: int) -> int {
     let cmd = "hexa '" + REPO_ROOT + "/tool/own8_lens_ssot_external_lint.hexa' 2>&1"
     let raw = to_string(exec(cmd))
     return _parse_rc_count(raw, "__OWN8_RESULT__")
+  }
+  if rid == 9 {
+    let cmd = "hexa '" + REPO_ROOT + "/tool/own9_lens_absorb_atlas_lint.hexa' 2>&1"
+    let raw = to_string(exec(cmd))
+    return _parse_rc_count(raw, "__OWN9_RESULT__")
+  }
+  if rid == 10 {
+    let cmd = "hexa '" + REPO_ROOT + "/tool/own10_rust_lens_ban_lint.hexa' 2>&1"
+    let raw = to_string(exec(cmd))
+    return _parse_rc_count(raw, "__OWN10_RESULT__")
   }
   if rid == 11 {
     let cmd = "hexa '" + REPO_ROOT + "/tool/own11_bt_solution_ban_lint.hexa' 2>&1"
