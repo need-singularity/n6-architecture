@@ -1,0 +1,50 @@
+#!hexa strict
+// scripts/flatten_imports_py.hexa — thin-shim wrapper.
+//
+// raw 91 C3 honest disclosure: flatten_imports_py performs `use "name"`
+// graph inlining for hexa-lang source files. The full pure-hexa port WIP
+// produced under cycle 30 (archive/_deprecated/2026-04-29-cycle30-py-to-hexa-wip/
+// flatten_imports_py.hexa.wip, 299 LoC) hit hexa runtime argv-prefix
+// silent-fail behavior. Until the runtime gap closes, this shim delegates
+// to the legacy python3 script preserved in-tree as
+// scripts/flatten_imports_py.legacy.py.
+//
+// Activated by .github/workflows/ci.yml flatten-preflight when hexa-lang's
+// canonical flatten_imports.hexa is absent.
+//
+// USAGE:
+//   hexa scripts/flatten_imports_py.hexa <target.hexa> <output.hexa>
+//
+// EXIT CODES: passthrough from python3 backend (0 PASS, non-zero FAIL).
+
+let REPO_ROOT = "/Users/ghost/core/n6-architecture"
+let LEGACY_PY = REPO_ROOT + "/scripts/flatten_imports_py.legacy.py"
+
+fn _user_args() -> string {
+  // hexa runtime argv: [<cache_exe>, <cache_exe>, ...user_args]
+  // Filter out cache_exe duplicates by keeping args that don't end with "/exe".
+  let raw = args()
+  let mut out = ""
+  let mut i = 0
+  while i < len(raw) {
+    let a = raw[i]
+    let alen = len(a)
+    let mut is_exe = false
+    if alen >= 4 {
+      if a.substring(alen - 4, alen) == "/exe" { is_exe = true }
+    }
+    if !is_exe {
+      // Shell-escape: wrap in single quotes, escape internal single quotes.
+      out = out + " '" + a + "'"
+    }
+    i = i + 1
+  }
+  return out
+}
+
+fn main() -> void {
+  let argv = _user_args()
+  let cmd = "python3 '" + LEGACY_PY + "'" + argv
+  let rc = exec_with_status(cmd)
+  exit(rc)
+}

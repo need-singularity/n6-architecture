@@ -1,0 +1,51 @@
+#!hexa strict
+// scripts/monotone/ouroboros_detector_v2.hexa — thin-shim wrapper.
+//
+// raw 91 C3 honest disclosure: ouroboros_detector_v2 enforces own#13
+// (atlas.n6 R14 acyclicity for CRITICAL prefixes — exit 1 on any
+// CRITICAL cycle, exit 0 otherwise; ADVISORY cycles warn-only). The
+// full pure-hexa port WIP produced under cycle 30 (archive/_deprecated/
+// 2026-04-29-cycle30-py-to-hexa-wip/ouroboros_detector_v2.hexa.wip,
+// 736 LoC) was incomplete when the agent ran out of token budget.
+// Until the port lands, this shim delegates to the legacy python3
+// detector preserved in-tree as ouroboros_detector_v2.legacy.py.
+//
+// Activated by .github/workflows/ci.yml line 380 (own#13 HARD gate)
+// and .own own#13 declaration. Exit-code semantic preserved
+// passthrough so HARD-block behavior is unchanged.
+//
+// USAGE:
+//   hexa scripts/monotone/ouroboros_detector_v2.hexa
+//
+// EXIT CODES: passthrough from python3 backend.
+//   0 — no CRITICAL cycle
+//   1 — at least one CRITICAL cycle detected (own#13 BLOCK)
+
+let REPO_ROOT = "/Users/ghost/core/n6-architecture"
+let LEGACY_PY = REPO_ROOT + "/scripts/monotone/ouroboros_detector_v2.legacy.py"
+
+fn _user_args() -> string {
+  let raw = args()
+  let mut out = ""
+  let mut i = 0
+  while i < len(raw) {
+    let a = raw[i]
+    let alen = len(a)
+    let mut is_exe = false
+    if alen >= 4 {
+      if a.substring(alen - 4, alen) == "/exe" { is_exe = true }
+    }
+    if !is_exe {
+      out = out + " '" + a + "'"
+    }
+    i = i + 1
+  }
+  return out
+}
+
+fn main() -> void {
+  let argv = _user_args()
+  let cmd = "python3 '" + LEGACY_PY + "'" + argv
+  let rc = exec_with_status(cmd)
+  exit(rc)
+}

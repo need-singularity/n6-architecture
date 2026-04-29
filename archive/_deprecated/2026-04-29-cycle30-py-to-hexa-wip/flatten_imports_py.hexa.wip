@@ -1,0 +1,299 @@
+#!hexa strict
+// scripts/flatten_imports_py.hexa — pure-hexa fallback for hexa-lang's
+// tool/flatten_imports.hexa. Same contract: inline the `use "name"` graph
+// of a .hexa file into a single flat .hexa translation unit.
+//
+// Ported from scripts/flatten_imports_py.py per raw 9 hexa-only mandate
+// (cycle 30 / 2026-04-29).
+//
+// Activated by .github/workflows/ci.yml line 82 (Job 2 step "Flatten-preflight")
+// when hexa-lang's flatten_imports.hexa is absent (CI runner does not provision
+// hexa-lang toolchain; this script is the python-substitute now ported to hexa).
+//
+// RESOLUTION ORDER for `use "NAME"`:
+//   1. caller-dir/NAME.hexa
+//   2. cwd/NAME.hexa
+//   3. cwd/self/NAME.hexa
+//
+// USAGE:
+//   hexa scripts/flatten_imports_py.hexa <target.hexa> <output.hexa>
+//
+// EXIT CODES:
+//   0 PASS — output.hexa written
+//   2 USAGE — argv error or target not found
+
+// ─── argv prefix skip (inlined; hexa-lang interp pub-fn cross-module
+//     call with array arg silently aborts main in this build) ─────────
+
+fn _skip_invocation_prefix(raw: array) -> int {
+  let mut i = 0
+  while i < len(raw) {
+    let a = raw[i]
+    if a.ends_with("/hexa") || a.ends_with("/hexa_real") || a.ends_with("/exe") || a.ends_with("/hexa_interp") {
+      i = i + 1
+    } else {
+      break
+    }
+  }
+  if i < len(raw) {
+    if raw[i] == "run" {
+      i = i + 1
+      // After "run", the next arg is the script path (.hexa) — skip it.
+      if i < len(raw) {
+        if raw[i].ends_with(".hexa") { i = i + 1 }
+      }
+    }
+  }
+  return i
+}
+
+// ─── helpers ──────────────────────────────────────────────────────────
+
+fn _file_exists(path: string) -> bool {
+  let r = to_string(exec("test -f '" + path + "' && echo Y || echo N")).trim()
+  return r == "Y"
+}
+
+fn _ltrim(s: string) -> string {
+  let mut i = 0
+  while i < len(s) {
+    let c = s.substring(i, i + 1)
+    if c == " " || c == "\t" { i = i + 1 } else { break }
+  }
+  return s.substring(i, len(s))
+}
+
+fn _rtrim(s: string) -> string {
+  let mut e = len(s)
+  while e > 0 {
+    let c = s.substring(e - 1, e)
+    if c == " " || c == "\t" || c == "\r" { e = e - 1 } else { break }
+  }
+  return s.substring(0, e)
+}
+
+// USE_RE: r'^\s*use\s+"([^"]+)"\s*$'
+// Returns the inner name string if line matches, else "".
+fn _match_use(line: string) -> string {
+  let s = _ltrim(line)
+  if len(s) < 4 { return "" }
+  if s.substring(0, 3) != "use" { return "" }
+  let after = s.substring(3, 4)
+  if after != " " && after != "\t" { return "" }
+  // skip "use" then ws
+  let mut i = 3
+  while i < len(s) {
+    let c = s.substring(i, i + 1)
+    if c == " " || c == "\t" { i = i + 1 } else { break }
+  }
+  if i >= len(s) { return "" }
+  if s.substring(i, i + 1) != "\"" { return "" }
+  i = i + 1
+  let start = i
+  while i < len(s) {
+    if s.substring(i, i + 1) == "\"" { break }
+    i = i + 1
+  }
+  if i >= len(s) { return "" }
+  let name = s.substring(start, i)
+  // remaining must be whitespace only
+  i = i + 1
+  while i < len(s) {
+    let c = s.substring(i, i + 1)
+    if c != " " && c != "\t" && c != "\r" { return "" }
+    i = i + 1
+  }
+  return name
+}
+
+fn _resolve_abs(path: string) -> string {
+  let r = to_string(exec("python3 -c 'import os,sys; print(os.path.realpath(sys.argv[1]))' '" + path + "' 2>/dev/null")).trim()
+  if len(r) > 0 { return r }
+  if path.substring(0, 1) == "/" { return path }
+  let cwd = to_string(exec("pwd")).trim()
+  return cwd + "/" + path
+}
+
+fn _dirname(path: string) -> string {
+  let last = path.last_index_of("/")
+  if last < 0 { return "." }
+  if last == 0 { return "/" }
+  return path.substring(0, last)
+}
+
+fn _basename(path: string) -> string {
+  let last = path.last_index_of("/")
+  if last < 0 { return path }
+  return path.substring(last + 1, len(path))
+}
+
+fn _resolve_use(name: string, caller_dir: string, cwd: string) -> string {
+  let mut base = name
+  if base.ends_with(".hexa") { base = base.substring(0, len(base) - 5) }
+  let cands = [
+    caller_dir + "/" + base + ".hexa",
+    cwd + "/" + base + ".hexa",
+    cwd + "/self/" + base + ".hexa",
+  ]
+  for c in cands {
+    if _file_exists(c) { return _resolve_abs(c) }
+  }
+  return ""
+}
+
+fn _arr_contains(arr: array, v: string) -> bool {
+  for x in arr {
+    if x == v { return true }
+  }
+  return false
+}
+
+// Returns array of resolved dep paths for the given .hexa file.
+fn _parse_uses(path: string, cwd_inner: string) -> array {
+  let text = to_string(read_file(path))
+  let lines = split(text, "\n")
+  let parent = _dirname(path)
+  let mut deps = []
+  for raw in lines {
+    let line = _rtrim(raw)
+    let name = _match_use(line)
+    if len(name) == 0 { continue }
+    let resolved = _resolve_use(name, parent, cwd_inner)
+    if len(resolved) > 0 {
+      deps.push(resolved)
+    } else {
+      eprintln("[flatten_imports_py] WARN: unresolved use \"" + name + "\" in " + path)
+    }
+  }
+  return deps
+}
+
+// flatten: returns rendered string
+fn _flatten(target: string) -> string {
+  let cwd = to_string(exec("pwd")).trim()
+  let target_abs = _resolve_abs(target)
+
+  let mut order = []   // post-order list of paths
+  let mut seen = []
+  let mut stack = []   // [path, idx]
+  stack.push([target_abs, 0])
+  let mut all_uses_paths = []   // [[path, [dep1, dep2, ...]], ...]
+
+  while len(stack) > 0 {
+    let top = stack[len(stack) - 1]
+    let path = top[0]
+    let ci = top[1]
+    let mut found_idx = -1
+    let mut k = 0
+    for entry in all_uses_paths {
+      if entry[0] == path { found_idx = k ; break }
+      k = k + 1
+    }
+    let mut deps = []
+    if found_idx < 0 {
+      if _arr_contains(seen, path) {
+        stack.pop()
+        continue
+      }
+      seen.push(path)
+      deps = _parse_uses(path, cwd)
+      all_uses_paths.push([path, deps])
+    } else {
+      deps = all_uses_paths[found_idx][1]
+    }
+    if ci < len(deps) {
+      let next_path = deps[ci]
+      stack[len(stack) - 1] = [path, ci + 1]
+      if !_arr_contains(seen, next_path) {
+        stack.push([next_path, 0])
+      }
+    } else {
+      if !_arr_contains(order, path) {
+        order.push(path)
+      }
+      stack.pop()
+    }
+  }
+
+  // sort: target first, rest in order.
+  let mut sorted = []
+  sorted.push(target_abs)
+  for p in order {
+    if p != target_abs { sorted.push(p) }
+  }
+
+  let mut parts = []
+  parts.push("// === FLATTENED by scripts/flatten_imports_py.hexa ===")
+  parts.push("// target: " + target)
+  parts.push("// files:  " + to_string(len(sorted)))
+  parts.push("// order:  post-order DFS (leaves-first)")
+  parts.push("")
+  for path in sorted {
+    parts.push("// ----- BEGIN " + _basename(path) + " -----")
+    let text = to_string(read_file(path))
+    let lines = split(text, "\n")
+    let mut stripped = []
+    for raw in lines {
+      let line = _rtrim(raw)
+      let name = _match_use(line)
+      if len(name) > 0 {
+        stripped.push("// [flatten_imports_py] stripped: use \"" + name + "\"")
+      } else {
+        stripped.push(raw)
+      }
+    }
+    parts.push(stripped.join("\n"))
+    parts.push("// ----- END " + _basename(path) + " -----")
+    parts.push("")
+  }
+  return parts.join("\n")
+}
+
+fn _count_substr(s: string, needle: string) -> int {
+  let mut count = 0
+  let mut from_i = 0
+  let nlen = len(needle)
+  if nlen == 0 { return 0 }
+  while from_i < len(s) {
+    let tail = s.substring(from_i, len(s))
+    let rel = tail.index_of(needle)
+    if rel < 0 { break }
+    count = count + 1
+    from_i = from_i + rel + nlen
+  }
+  return count
+}
+
+fn main() -> void {
+  let raw_args = args()
+  let mut cli = []
+  let mut ai = _skip_invocation_prefix(raw_args)
+  while ai < len(raw_args) {
+    cli.push(raw_args[ai])
+    ai = ai + 1
+  }
+
+  if len(cli) != 2 {
+    eprintln("usage: flatten_imports_py.hexa <target.hexa> <output.hexa>")
+    eprintln("  (got " + to_string(len(cli)) + " args; raw_args=" + to_string(len(raw_args)) + ")")
+    let mut dbg = 0
+    while dbg < len(raw_args) {
+      eprintln("  raw[" + to_string(dbg) + "]=" + raw_args[dbg])
+      dbg = dbg + 1
+    }
+    exit(2)
+  }
+
+  let target = cli[0]
+  let output = cli[1]
+  if !_file_exists(target) {
+    eprintln("[flatten_imports_py] target not found: " + target)
+    exit(2)
+  }
+
+  let flat = _flatten(target)
+  write_file(output, flat)
+  let count = _count_substr(flat, "BEGIN")
+  println("[flatten_imports_py] wrote " + output + " (" + to_string(count) + " files)")
+  exit(0)
+}

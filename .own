@@ -188,10 +188,10 @@ own 12 live "miss-criteria-declared — 실험/계산 MISS 판정 기준 사전 
 own 13 live "ouroboros-critical-zero — atlas.n6 entry 추가 시 OUROBOROS CRITICAL 0 유지"
   slug ouroboros-critical-zero
   decl CONTRIBUTING.md
-  scope shared/n6/atlas.n6 신규 entry 추가 시 scripts/monotone/ouroboros_detector_v2.py 가 CRITICAL 0 유지함을 확인. 자기참조 cycle 포함된 entry reject.
+  scope shared/n6/atlas.n6 신규 entry 추가 시 scripts/monotone/ouroboros_detector_v2.hexa 가 CRITICAL 0 유지함을 확인. 자기참조 cycle 포함된 entry reject.
   status live
   since 2026-04-21
-  why CONTRIBUTING.md 정직성 헌장 4 + scripts/monotone/ouroboros_detector.py "R14 규칙: 자기참조 검증 금지 (외부 데이터/이론만 허용)" — atlas SSOT 무결성 gate.
+  why CONTRIBUTING.md 정직성 헌장 4 + scripts/monotone/ouroboros_detector.hexa "R14 규칙: 자기참조 검증 금지 (외부 데이터/이론만 허용)" — atlas SSOT 무결성 gate.
   deps raw:schema-guard-mandatory
 
 own 14 live "readme-sealed-required — 루트 README.md sealed 필수"

@@ -65,7 +65,7 @@ jobs:
 
       - name: Flatten-preflight — Stage A migrated verify files
         # hexa-lang toolchain is not provisioned on the runner; we use the pure-python
-        # fallback (scripts/flatten_imports_py.py) which has the same `use` resolution
+        # fallback (scripts/flatten_imports_py.hexa thin-shim → legacy.py) which has the same `use` resolution
         # contract. This validates that every migrated file flattens cleanly.
         run: |
           set -e
@@ -79,7 +79,7 @@ jobs:
               echo "MISSING: $f"; exit 1
             fi
             out=$(mktemp --suffix=.hexa)
-            python3 scripts/flatten_imports_py.py "$f" "$out"
+            hexa scripts/flatten_imports_py.hexa "$f" "$out"
             # Sanity: the flattened file must contain the SSOT block.
             grep -q "let SIGMA = 12" "$out" || { echo "FAIL: SSOT block not inlined in $f"; exit 1; }
             grep -q "let sigma = SIGMA" "$out" || { echo "FAIL: lowercase aliases not inlined in $f"; exit 1; }
@@ -350,7 +350,7 @@ jobs:
 
   # ── Job 6: own#13 — OUROBOROS CRITICAL=0 enforcement (HARD block) ──
   # Enforces .own rule #13 (R14 atlas acyclicity for CRITICAL prefixes).
-  # Tool: scripts/monotone/ouroboros_detector_v2.py.
+  # Tool: scripts/monotone/ouroboros_detector_v2.hexa.
   # The script exits 1 when any CRITICAL cycle is detected and exits 0
   # otherwise (ADVISORY cycles are warn-only); no --exit-on-critical
   # flag is needed — that behaviour is the default contract.
@@ -370,13 +370,13 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if [ ! -f scripts/monotone/ouroboros_detector_v2.py ]; then
-            echo "::error::scripts/monotone/ouroboros_detector_v2.py missing — cannot enforce own#13"
+          if [ ! -f scripts/monotone/ouroboros_detector_v2.hexa ]; then
+            echo "::error::scripts/monotone/ouroboros_detector_v2.hexa missing — cannot enforce own#13"
             exit 1
           fi
 
       - name: OUROBOROS CRITICAL=0 enforcement (own#13)
-        run: python3 scripts/monotone/ouroboros_detector_v2.py
+        run: hexa scripts/monotone/ouroboros_detector_v2.hexa
 
   # ── Job 7: own#14 — README sealed-hash enforcement (HARD block) ──
   # Enforces .own rule #14 (readme-sealed-required).

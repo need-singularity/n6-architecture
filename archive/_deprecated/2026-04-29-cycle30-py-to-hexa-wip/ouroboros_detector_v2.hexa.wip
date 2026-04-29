@@ -1,0 +1,736 @@
+#!hexa strict
+// scripts/monotone/ouroboros_detector_v2.hexa — OUROBOROS 2.0 namespace-aware
+// SCC detector for n6 atlas. Ported from ouroboros_detector_v2.py per raw 9
+// hexa-only mandate (cycle 30 / 2026-04-29).
+//
+// SEMANTIC CONTRACT (preserved bit-for-bit from .py original):
+//   - MILL-* / BT-*  : CRITICAL — exit 1 if cycle detected (own#13 HARD block)
+//   - L0..L7         : ADVISORY — warn only, exit 0
+//   - L8..L10        : DATA_OK  — observation catalog cycles legitimate, exit 0
+//   - other          : UNKNOWN  — exit 0
+//
+// SOFT-skip path: atlas.n6 missing → WARN_NO_ATLAS report + exit 0
+// (preserves original .py defensive behaviour for shallow / fixture-less checkouts).
+//
+// CALLER:
+//   - .github/workflows/ci.yml line 379 (Job 6: ouroboros-integrity, HARD block)
+//   - .own line 191 (rule #13 OUROBOROS-CRITICAL-zero)
+//
+// EXIT CODES:
+//   0 = R14 CLEAN, ADVISORY-only, DATA_OK-only, UNKNOWN-only, or WARN_NO_ATLAS
+//   1 = CRITICAL cycle detected → CI HARD block
+//
+// USAGE:
+//   hexa scripts/monotone/ouroboros_detector_v2.hexa [--atlas <path>] [--report <path>] [--exit-on-critical]
+
+// ─── argv prefix skip (inlined from self/stdlib/argv_skip per local
+//     interp limitation: cross-module pub-fn call with array arg can
+//     silently abort main in this hexa-lang build) ───────────────────
+
+fn _skip_invocation_prefix(raw: array) -> int {
+  let mut i = 0
+  while i < len(raw) {
+    let a = raw[i]
+    if a.ends_with("/hexa") || a.ends_with("/hexa_real") || a.ends_with("/exe") || a.ends_with("/hexa_interp") {
+      i = i + 1
+    } else {
+      break
+    }
+  }
+  if i < len(raw) {
+    if raw[i] == "run" { i = i + 1 }
+  }
+  if i < len(raw) {
+    if raw[i].ends_with(".hexa") { i = i + 1 }
+  }
+  return i
+}
+
+// ─── helpers ──────────────────────────────────────────────────────────
+
+fn _starts_with(s: string, prefix: string) -> bool {
+  if len(prefix) > len(s) { return false }
+  return s.substring(0, len(prefix)) == prefix
+}
+
+fn _file_exists(path: string) -> bool {
+  let r = to_string(exec("test -f '" + path + "' && echo Y || echo N")).trim()
+  return r == "Y"
+}
+
+fn _ts_iso_utc() -> string {
+  return to_string(exec("date -u +%Y-%m-%dT%H:%M:%SZ")).trim()
+}
+
+fn _find_repo_root() -> string {
+  // Use the script's location: __file__-equivalent — assume invoked from
+  // repo root, fall back to git rev-parse.
+  let r = to_string(exec("git rev-parse --show-toplevel 2>/dev/null || pwd")).trim()
+  return r
+}
+
+fn _resolve_atlas(repo_root: string) -> string {
+  let cands = [
+    repo_root + "/n6shared/atlas.n6",
+    repo_root + "/atlas/atlas.n6",
+  ]
+  for c in cands {
+    if _file_exists(c) { return c }
+  }
+  return ""
+}
+
+// ─── classification ───────────────────────────────────────────────────
+
+let CRITICAL_PREFIXES = ["MILL-", "BT-"]
+let ADVISORY_PREFIXES = ["L0-", "L1-", "L2-", "L3-", "L4-", "L5-", "L6-", "L7-"]
+let DATA_OK_PREFIXES  = ["L8-", "L9-", "L10-"]
+
+fn _classify(entry_id: string) -> string {
+  for pfx in CRITICAL_PREFIXES {
+    if _starts_with(entry_id, pfx) { return "CRITICAL" }
+  }
+  for pfx in ADVISORY_PREFIXES {
+    if _starts_with(entry_id, pfx) { return "ADVISORY" }
+  }
+  for pfx in DATA_OK_PREFIXES {
+    if _starts_with(entry_id, pfx) { return "DATA_OK" }
+  }
+  return "UNKNOWN"
+}
+
+// ─── atlas parsing ────────────────────────────────────────────────────
+
+// Match Python regex: ^@[RX]\s+([\w\-]+)\s*=
+// Returns the entry id if line opens a new entry, else "".
+fn _is_id_char(c: string) -> bool {
+  if len(c) == 0 { return false }
+  // \w in python = [A-Za-z0-9_]; we add '-' for atlas slugs.
+  if c == "_" || c == "-" { return true }
+  let b = c.substring(0, 1)
+  return (b >= "A" && b <= "Z") || (b >= "a" && b <= "z") || (b >= "0" && b <= "9")
+}
+
+fn _entry_header_id(line: string) -> string {
+  if len(line) < 3 { return "" }
+  if line.substring(0, 1) != "@" { return "" }
+  let t = line.substring(1, 2)
+  if t != "R" && t != "X" { return "" }
+  // Skip required whitespace after @[RX].
+  let mut i = 2
+  let mut seen_ws = false
+  while i < len(line) {
+    let c = line.substring(i, i + 1)
+    if c == " " || c == "\t" {
+      seen_ws = true
+      i = i + 1
+    } else {
+      break
+    }
+  }
+  if !seen_ws { return "" }
+  // Read id chars.
+  let id_start = i
+  while i < len(line) {
+    let c = line.substring(i, i + 1)
+    if _is_id_char(c) { i = i + 1 } else { break }
+  }
+  if i == id_start { return "" }
+  let id_str = line.substring(id_start, i)
+  // Optional whitespace then '='.
+  while i < len(line) {
+    let c = line.substring(i, i + 1)
+    if c == " " || c == "\t" { i = i + 1 } else { break }
+  }
+  if i >= len(line) { return "" }
+  if line.substring(i, i + 1) != "=" { return "" }
+  return id_str
+}
+
+// Parses atlas text → array of [id, body_string] pairs.
+// Preserves Python parse_atlas() ordering: entries dict insertion order.
+fn _parse_atlas(text: string) -> array {
+  let lines = split(text, "\n")
+  let mut entries = []   // array of [id, body]
+  let mut cur_id = ""
+  let mut cur_block = []
+  for line in lines {
+    let new_id = _entry_header_id(line)
+    if len(new_id) > 0 {
+      if len(cur_id) > 0 {
+        entries.push([cur_id, cur_block.join("\n")])
+      }
+      cur_id = new_id
+      cur_block = [line]
+    } else if len(cur_id) > 0 {
+      cur_block.push(line)
+    }
+  }
+  if len(cur_id) > 0 {
+    entries.push([cur_id, cur_block.join("\n")])
+  }
+  return entries
+}
+
+// ─── ref extraction ───────────────────────────────────────────────────
+//
+// Python: re.finditer(r"<-\s*(.+?)(?:\n\s*[#@]|$)", body, re.DOTALL)
+//   For each match, split the captured group by [,\s]+ and intersect with all_ids.
+//   The match captures from "<-" until the next "\n<ws>[#@]" or end of body.
+
+fn _is_ws(c: string) -> bool {
+  return c == " " || c == "\t" || c == "\n" || c == "\r"
+}
+
+fn _strip_punct(tok: string) -> string {
+  // Python: tok.strip().rstrip(".,;:")
+  let mut t = tok.trim()
+  while len(t) > 0 {
+    let last = t.substring(len(t) - 1, len(t))
+    if last == "." || last == "," || last == ";" || last == ":" {
+      t = t.substring(0, len(t) - 1)
+    } else {
+      break
+    }
+  }
+  return t
+}
+
+fn _id_set_contains(ids: array, tok: string) -> bool {
+  for r in ids {
+    if r[0] == tok { return true }
+  }
+  return false
+}
+
+// Find next "<-" starting from index `from_i`. Returns -1 if absent.
+fn _find_arrow(body: string, from_i: int) -> int {
+  if from_i < 0 { return -1 }
+  if from_i >= len(body) { return -1 }
+  let tail = body.substring(from_i, len(body))
+  let rel = tail.index_of("<-")
+  if rel < 0 { return -1 }
+  return from_i + rel
+}
+
+// From `start` (just after "<-"), find end of capture per regex:
+//   end at first "\n<ws>[#@]" or end of body
+// Python's "<ws>" in `\n\s*[#@]` allows zero or more whitespace chars before # or @.
+fn _capture_end(body: string, start: int) -> int {
+  let mut i = start
+  let n = len(body)
+  while i < n {
+    if body.substring(i, i + 1) == "\n" {
+      // skip whitespace-but-not-newline after the \n
+      let mut j = i + 1
+      while j < n {
+        let c = body.substring(j, j + 1)
+        if c == " " || c == "\t" {
+          j = j + 1
+        } else {
+          break
+        }
+      }
+      if j < n {
+        let c = body.substring(j, j + 1)
+        if c == "#" || c == "@" { return i }
+      }
+    }
+    i = i + 1
+  }
+  return n
+}
+
+// Split a captured group by [,\s]+ and emit non-empty tokens.
+fn _split_refs(captured: string) -> array {
+  let mut toks = []
+  let mut cur = ""
+  let mut i = 0
+  let n = len(captured)
+  while i < n {
+    let c = captured.substring(i, i + 1)
+    if c == "," || _is_ws(c) {
+      if len(cur) > 0 { toks.push(cur) ; cur = "" }
+    } else {
+      cur = cur + c
+    }
+    i = i + 1
+  }
+  if len(cur) > 0 { toks.push(cur) }
+  return toks
+}
+
+// Returns array of ref id strings (deduped, intersected with all_ids).
+fn _extract_refs(body: string, all_ids: array) -> array {
+  let mut refs = []
+  let mut from_i = 0
+  let n = len(body)
+  while from_i < n {
+    let arr = _find_arrow(body, from_i)
+    if arr < 0 { break }
+    let cap_start = arr + 2
+    let cap_end = _capture_end(body, cap_start)
+    let captured = body.substring(cap_start, cap_end)
+    let toks = _split_refs(captured)
+    for t in toks {
+      let tok = _strip_punct(t)
+      if len(tok) == 0 { continue }
+      if !_id_set_contains(all_ids, tok) { continue }
+      // dedup
+      let mut already = false
+      for r in refs {
+        if r == tok { already = true ; break }
+      }
+      if !already { refs.push(tok) }
+    }
+    from_i = cap_end
+  }
+  return refs
+}
+
+// ─── Tarjan SCC ───────────────────────────────────────────────────────
+//
+// graph: array of [from_id, to_id_array]
+// Returns: array of SCCs (each SCC is array of ids).
+
+fn _idx_of(ids: array, id_str: string) -> int {
+  let mut k = 0
+  for v in ids {
+    if v == id_str { return k }
+    k = k + 1
+  }
+  return -1
+}
+
+fn _node_idx(node_ids: array, eid: string) -> int {
+  let mut k = 0
+  for v in node_ids {
+    if v == eid { return k }
+    k = k + 1
+  }
+  return -1
+}
+
+// Iterative Tarjan SCC implementation (matches Python tarjan_scc semantics).
+fn _tarjan_scc(graph: array) -> array {
+  // Build node-id list and adjacency-by-index.
+  let mut node_ids = []
+  for entry in graph {
+    let eid = entry[0]
+    if _node_idx(node_ids, eid) < 0 { node_ids.push(eid) }
+  }
+  // Also include any target ids not in node list (Python dict.get returns []).
+  // graph[v] in Python returns [] for missing keys, so we don't add them as nodes.
+  let n = len(node_ids)
+  let mut adj = []
+  let mut i = 0
+  while i < n { adj.push([]) ; i = i + 1 }
+  for entry in graph {
+    let eid = entry[0]
+    let nbrs = entry[1]
+    let fi = _node_idx(node_ids, eid)
+    for nb in nbrs {
+      let ti = _node_idx(node_ids, nb)
+      if ti >= 0 { adj[fi].push(to_string(ti)) }
+    }
+  }
+
+  // Tarjan state
+  let mut indices = []
+  let mut lowlinks = []
+  let mut on_stack = []
+  let mut k0 = 0
+  while k0 < n {
+    indices.push(-1)
+    lowlinks.push(-1)
+    on_stack.push(false)
+    k0 = k0 + 1
+  }
+  let mut stack = []
+  let mut idx_counter = 0
+  let mut sccs = []
+
+  let mut start = 0
+  while start < n {
+    if indices[start] < 0 {
+      // call_stack: [v_idx, child_iter_idx]
+      let mut cs = [[start, 0]]
+      indices[start] = idx_counter
+      lowlinks[start] = idx_counter
+      idx_counter = idx_counter + 1
+      stack.push(start)
+      on_stack[start] = true
+      while len(cs) > 0 {
+        let top = cs[len(cs) - 1]
+        let v = top[0]
+        let ci = top[1]
+        let nbrs = adj[v]
+        if ci < len(nbrs) {
+          let w = parse_int(nbrs[ci])
+          cs[len(cs) - 1] = [v, ci + 1]
+          if indices[w] < 0 {
+            indices[w] = idx_counter
+            lowlinks[w] = idx_counter
+            idx_counter = idx_counter + 1
+            stack.push(w)
+            on_stack[w] = true
+            cs.push([w, 0])
+          } else if on_stack[w] {
+            if indices[w] < lowlinks[v] { lowlinks[v] = indices[w] }
+          }
+        } else {
+          // pop frame
+          if lowlinks[v] == indices[v] {
+            let mut scc = []
+            let mut done = false
+            while !done {
+              let w = stack[len(stack) - 1]
+              stack.pop()
+              on_stack[w] = false
+              scc.push(node_ids[w])
+              if w == v { done = true }
+            }
+            sccs.push(scc)
+          }
+          cs.pop()
+          if len(cs) > 0 {
+            let parent_top = cs[len(cs) - 1]
+            let p = parent_top[0]
+            if lowlinks[v] < lowlinks[p] { lowlinks[p] = lowlinks[v] }
+          }
+        }
+      }
+    }
+    start = start + 1
+  }
+  return sccs
+}
+
+// ─── JSON emit (manual; raw 9 stdlib-only) ────────────────────────────
+
+fn _esc_json(s: string) -> string {
+  let mut r = s.replace("\\", "\\\\")
+  r = r.replace("\"", "\\\"")
+  r = r.replace("\n", "\\n")
+  r = r.replace("\r", "\\r")
+  r = r.replace("\t", "\\t")
+  return r
+}
+
+fn _arr_to_json_strarr(arr: array) -> string {
+  let mut parts = ["["]
+  let mut k = 0
+  for v in arr {
+    if k > 0 { parts.push(", ") }
+    parts.push("\"")
+    parts.push(_esc_json(v))
+    parts.push("\"")
+    k = k + 1
+  }
+  parts.push("]")
+  return parts.join("")
+}
+
+fn _cycles_to_json(cycles: array, max_n: int, slice_inner: int) -> string {
+  // Each entry: {"size": <len>, "nodes": [...]}
+  // If slice_inner > 0, slice nodes to first slice_inner.
+  let mut parts = ["["]
+  let mut k = 0
+  let mut emitted = 0
+  for c in cycles {
+    if emitted >= max_n { break }
+    if k > 0 { parts.push(",") }
+    parts.push("\n    {\"size\": ")
+    parts.push(to_string(len(c)))
+    parts.push(", \"nodes\": ")
+    if slice_inner > 0 && len(c) > slice_inner {
+      let mut sliced = []
+      let mut i = 0
+      while i < slice_inner { sliced.push(c[i]) ; i = i + 1 }
+      parts.push(_arr_to_json_strarr(sliced))
+    } else {
+      parts.push(_arr_to_json_strarr(c))
+    }
+    parts.push("}")
+    k = k + 1
+    emitted = emitted + 1
+  }
+  parts.push("\n  ]")
+  return parts.join("")
+}
+
+fn _mkdir_p(path: string) -> void {
+  exec("mkdir -p '" + path + "'")
+}
+
+fn _parent_dir(path: string) -> string {
+  let last = path.last_index_of("/")
+  if last < 0 { return "." }
+  return path.substring(0, last)
+}
+
+// ─── arg parsing ──────────────────────────────────────────────────────
+
+fn _flag_value(args_arr: array, name: string, dflt: string) -> string {
+  let mut i = 0
+  while i < len(args_arr) - 1 {
+    if args_arr[i] == name { return args_arr[i + 1] }
+    i = i + 1
+  }
+  return dflt
+}
+
+fn _has_flag(args_arr: array, name: string) -> bool {
+  for a in args_arr {
+    if a == name { return true }
+  }
+  return false
+}
+
+// ─── main ─────────────────────────────────────────────────────────────
+
+fn main() -> void {
+  eprintln("[OUROBOROS v2] main entry")
+  let raw_args = args()
+  let mut cli = []
+  let mut ai = _skip_invocation_prefix(raw_args)
+  while ai < len(raw_args) {
+    cli.push(raw_args[ai])
+    ai = ai + 1
+  }
+
+  let atlas_arg = _flag_value(cli, "--atlas", "")
+  let report_arg = _flag_value(cli, "--report", "")
+  // --exit-on-critical is explicit no-op (default behaviour); flag accepted for back-compat.
+
+  let repo_root = _find_repo_root()
+  let mut atlas_path = ""
+  if len(atlas_arg) > 0 {
+    atlas_path = atlas_arg
+  } else {
+    atlas_path = _resolve_atlas(repo_root)
+  }
+
+  let mut report_path = ""
+  if len(report_arg) > 0 {
+    report_path = report_arg
+  } else {
+    report_path = repo_root + "/reports/ouroboros_v2_report.json"
+  }
+
+  // SOFT-skip if atlas missing.
+  if len(atlas_path) == 0 || !_file_exists(atlas_path) {
+    let mut where_str = ""
+    if len(atlas_path) > 0 {
+      where_str = atlas_path
+    } else {
+      where_str = repo_root + "/{n6shared,atlas}/atlas.n6"
+    }
+    eprintln("[OUROBOROS v2] WARN_NO_ATLAS: atlas.n6 not found at " + where_str + ". Skipping cycle detection (SOFT skip, exit 0).")
+    let mut parts = []
+    parts.push("{\n  \"timestamp\": \"")
+    parts.push(_ts_iso_utc())
+    parts.push("\",\n  \"version\": \"v2_namespace_aware\",\n  \"atlas_path\": ")
+    if len(atlas_path) > 0 {
+      parts.push("\"")
+      parts.push(_esc_json(atlas_path))
+      parts.push("\"")
+    } else {
+      parts.push("null")
+    }
+    parts.push(",\n  \"verdict\": \"WARN_NO_ATLAS\"")
+    parts.push(",\n  \"detail\": \"atlas.n6 not found under repo_root; SOFT skip\"\n}")
+    let body = parts.join("")
+    _mkdir_p(_parent_dir(report_path))
+    write_file(report_path, body)
+    exit(0)
+  }
+
+  eprintln("[OUROBOROS v2] repo_root=" + repo_root)
+  eprintln("[OUROBOROS v2] atlas=" + atlas_path)
+  eprintln("[OUROBOROS v2] report=" + report_path)
+
+  let text = to_string(read_file(atlas_path))
+  let entries = _parse_atlas(text)
+  eprintln("[OUROBOROS v2] " + to_string(len(entries)) + " entries")
+
+  // Build graph: array of [eid, refs_array]
+  let mut graph = []
+  for ent in entries {
+    let eid = ent[0]
+    let body = ent[1]
+    let refs_all = _extract_refs(body, entries)
+    // discard self-ref
+    let mut refs = []
+    for r in refs_all {
+      if r != eid { refs.push(r) }
+    }
+    graph.push([eid, refs])
+  }
+
+  let sccs = _tarjan_scc(graph)
+  let mut cycles = []
+  for s in sccs {
+    if len(s) > 1 { cycles.push(s) }
+  }
+
+  // self-loops
+  let mut self_loops = []
+  for ent in graph {
+    let eid = ent[0]
+    let nbrs = ent[1]
+    for nb in nbrs {
+      if nb == eid { self_loops.push(eid) ; break }
+    }
+  }
+
+  // Severity classification of cycles.
+  let mut severity_counts_critical = 0
+  let mut severity_counts_advisory = 0
+  let mut severity_counts_data_ok = 0
+  let mut severity_counts_unknown = 0
+  let mut critical_cycles = []
+  let mut advisory_cycles = []
+  let mut data_ok_cycles = []
+  let mut unknown_cycles = []
+
+  for scc in cycles {
+    let mut has_critical = false
+    let mut has_advisory = false
+    let mut has_data_ok = false
+    let mut has_unknown = false
+    for eid in scc {
+      let sev = _classify(eid)
+      if sev == "CRITICAL" {
+        has_critical = true
+        severity_counts_critical = severity_counts_critical + 1
+      } else if sev == "ADVISORY" {
+        has_advisory = true
+        severity_counts_advisory = severity_counts_advisory + 1
+      } else if sev == "DATA_OK" {
+        has_data_ok = true
+        severity_counts_data_ok = severity_counts_data_ok + 1
+      } else {
+        has_unknown = true
+        severity_counts_unknown = severity_counts_unknown + 1
+      }
+    }
+    if has_critical {
+      critical_cycles.push(scc)
+    } else if has_advisory {
+      advisory_cycles.push(scc)
+    } else if has_data_ok {
+      data_ok_cycles.push(scc)
+    } else {
+      unknown_cycles.push(scc)
+    }
+  }
+
+  println("")
+  println("======================================================================")
+  println("[OUROBOROS v2 namespace-aware report]")
+  println("======================================================================")
+  println("  total cycles: " + to_string(len(cycles)))
+  println("  total self-loops: " + to_string(len(self_loops)))
+  println("")
+  println("  CRITICAL cycles (MILL-*, BT-*): " + to_string(len(critical_cycles)))
+  println("  ADVISORY cycles (L0-L7):        " + to_string(len(advisory_cycles)))
+  println("  DATA_OK cycles (L8+):           " + to_string(len(data_ok_cycles)))
+  println("  UNKNOWN cycles:                 " + to_string(len(unknown_cycles)))
+  println("")
+
+  let mut exit_code = 0
+  if len(critical_cycles) > 0 {
+    println("CRITICAL detected — R14 violation suspected:")
+    let mut idx = 0
+    for scc in critical_cycles {
+      if idx >= 5 { break }
+      println("  Cycle " + to_string(idx + 1) + ": " + _arr_to_json_strarr(scc))
+      idx = idx + 1
+    }
+    println("  -> exit 1 (CI fail)")
+    exit_code = 1
+  } else if len(advisory_cycles) > 0 {
+    println("ADVISORY " + to_string(len(advisory_cycles)) + " cycles — L0-L7 domain review recommended")
+    let mut idx = 0
+    for scc in advisory_cycles {
+      if idx >= 3 { break }
+      let mut sliced = []
+      let mut i = 0
+      while i < 3 && i < len(scc) { sliced.push(scc[i]) ; i = i + 1 }
+      println("  Cycle " + to_string(idx + 1) + ": " + _arr_to_json_strarr(sliced) + "...")
+      idx = idx + 1
+    }
+    println("  -> exit 0 (warn only)")
+    exit_code = 0
+  } else {
+    println("CRITICAL / ADVISORY 0 — R14 CLEAN")
+    exit_code = 0
+  }
+
+  if len(data_ok_cycles) > 0 {
+    println("")
+    println("DATA_OK " + to_string(len(data_ok_cycles)) + " cycles (L8+ astronomical observables — legitimate)")
+  }
+
+  // JSON report
+  let mut p = []
+  p.push("{\n  \"timestamp\": \"")
+  p.push(_ts_iso_utc())
+  p.push("\",\n  \"version\": \"v2_namespace_aware\"")
+  p.push(",\n  \"atlas_path\": \"")
+  p.push(_esc_json(atlas_path))
+  p.push("\",\n  \"n_entries\": ")
+  p.push(to_string(len(entries)))
+  p.push(",\n  \"total_cycles\": ")
+  p.push(to_string(len(cycles)))
+  p.push(",\n  \"total_self_loops\": ")
+  p.push(to_string(len(self_loops)))
+  p.push(",\n  \"severity_distribution\": {")
+  p.push("\n    \"CRITICAL\": ")
+  p.push(to_string(len(critical_cycles)))
+  p.push(",\n    \"ADVISORY\": ")
+  p.push(to_string(len(advisory_cycles)))
+  p.push(",\n    \"DATA_OK\": ")
+  p.push(to_string(len(data_ok_cycles)))
+  p.push(",\n    \"UNKNOWN\": ")
+  p.push(to_string(len(unknown_cycles)))
+  p.push("\n  }")
+  p.push(",\n  \"namespace_entry_counts\": {")
+  p.push("\n    \"CRITICAL\": ")
+  p.push(to_string(severity_counts_critical))
+  p.push(",\n    \"ADVISORY\": ")
+  p.push(to_string(severity_counts_advisory))
+  p.push(",\n    \"DATA_OK\": ")
+  p.push(to_string(severity_counts_data_ok))
+  p.push(",\n    \"UNKNOWN\": ")
+  p.push(to_string(severity_counts_unknown))
+  p.push("\n  }")
+  p.push(",\n  \"critical_cycles\": ")
+  p.push(_cycles_to_json(critical_cycles, 10, 0))
+  p.push(",\n  \"advisory_cycles\": ")
+  p.push(_cycles_to_json(advisory_cycles, 10, 0))
+  p.push(",\n  \"data_ok_cycles\": ")
+  p.push(_cycles_to_json(data_ok_cycles, 10, 5))
+  p.push(",\n  \"verdict\": \"")
+  if len(critical_cycles) > 0 {
+    p.push("R14_VIOLATION")
+  } else {
+    p.push("R14_CLEAN")
+  }
+  p.push("\"")
+  p.push(",\n  \"severity_policy\": {")
+  p.push("\n    \"CRITICAL_prefixes\": ")
+  p.push(_arr_to_json_strarr(CRITICAL_PREFIXES))
+  p.push(",\n    \"ADVISORY_prefixes\": ")
+  p.push(_arr_to_json_strarr(ADVISORY_PREFIXES))
+  p.push(",\n    \"DATA_OK_prefixes\": ")
+  p.push(_arr_to_json_strarr(DATA_OK_PREFIXES))
+  p.push("\n  }\n}")
+
+  _mkdir_p(_parent_dir(report_path))
+  write_file(report_path, p.join(""))
+  println("")
+  println("[saved] " + report_path)
+  exit(exit_code)
+}
