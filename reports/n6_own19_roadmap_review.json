@@ -1,0 +1,15 @@
+{
+  "own_rule": 19,
+  "slug": "roadmap-review-weekly",
+  "threshold_days": 7,
+  "checked_at_epoch": 1777465660,
+  "candidates_checked": 3,
+  "inspected": [
+    {"path": "shared/roadmaps/millennium.json", "last_commit_epoch": 1777016615, "age_days": 5.2},
+    {"path": "theory/roadmap-v3", "last_commit_epoch": 1777052828, "age_days": 4.78},
+    {"path": "theory/roadmap-v2", "last_commit_epoch": 1777069167, "age_days": 4.59}
+  ],
+  "stale_roadmaps": [],
+  "missing_history": [],
+  "verdict": "fresh"
+}

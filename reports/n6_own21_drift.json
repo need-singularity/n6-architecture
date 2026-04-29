@@ -2,30 +2,11 @@
   "schema": "n6-architecture/n6_own21_drift/1",
   "rule": "own#21",
   "slug": "readme-nexus6-tests-count-drift",
-  "ts": "2026-04-28T10:47:29Z",
+  "ts": "2026-04-29T12:27:35Z",
   "drift_pattern": "tests:\\s+(\\d+)",
-  "authoritative": {
-    "count": 51,
-    "source": "reports/n6_selftest.json#total"
-  },
-  "readme": {
-    "path": "README.md",
-    "claims": [
-      {
-        "line": 70,
-        "match": "tests:    1116",
-        "count": 1116
-      }
-    ],
-    "claim_count": 1
-  },
-  "mismatches": [
-    {
-      "line": 70,
-      "match": "tests:    1116",
-      "count": 1116
-    }
-  ],
+  "authoritative": {"count": 51, "source": "reports/n6_selftest.json#total"},
+  "readme": {"path": "README.md", "claim_count": 1, "claims": [{"line": 70, "match": "tests:    1116", "count": 1116}]},
+  "mismatches": [{"line": 70, "match": "tests:    1116", "count": 1116}],
   "verdict": "DRIFT",
   "detail": "1 README token(s) disagree with authoritative count=51"
 }
