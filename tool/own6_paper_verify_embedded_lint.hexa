@@ -1,0 +1,269 @@
+#!hexa strict
+// tool/own6_paper_verify_embedded_lint.hexa — own#6 paper verify-embedded HARD lint.
+//
+// Rule: papers/*.md MUST contain inline ```python ...``` verify block.
+// Sibling separate verify file (e.g. paper_verify.py / paper-verify.hexa)
+// FORBIDDEN — embed verify into paper .md instead.
+// Allowlist: 16 grandfathered papers (frozen, shrink-only).
+//
+// Migrated from tool/own_doc_lint_legacy.py:399-428 + lines 379-396 per raw 9.
+//
+// @tool(slug="own6_paper_verify_embedded_lint", desc="own#6 paper verify-embedded HARD — papers/*.md must contain inline ```python verify block; sibling verify files forbidden")
+// @usage(hexa /Users/ghost/core/n6-architecture/tool/own6_paper_verify_embedded_lint.hexa [--selftest])
+// @exit_codes(0=PASS, 1=violations, 2=internal error)
+
+let REPO_ROOT = "/Users/ghost/core/n6-architecture"
+let PAPERS_ROOT = REPO_ROOT + "/papers"
+
+// Frozen 16-entry legacy allowlist (relative paths from repo root)
+let OWN6_LEGACY_ALLOWLIST = [
+  "papers/M10star-21-unified-theorem-2026-04-15.md",
+  "papers/bernoulli-18-arxiv-stub-2026-04-15.md",
+  "papers/bernoulli-b6-sign-2026-04-22.md",
+  "papers/consciousness-measurement-protocol-2026-04-15.md",
+  "papers/consciousness-red-team-n6-failure-2026-04-15.md",
+  "papers/doob-talagrand-tau-2026-04-22.md",
+  "papers/embody-p10-1-l13-l14-unified-spec-2026-04-15.md",
+  "papers/embody-p11-2-nanobot-gen2-2026-04-15.md",
+  "papers/embody-p12-2-quantum-sensor-design-2026-04-15.md",
+  "papers/embody-p13-1-qkd-6state-design-2026-04-15.md",
+  "papers/enriques-abelian-6fold-link-2026-04-22.md",
+  "papers/lemmas-A3-A4-conditional-2026-04-15.md",
+  "papers/monte-carlo-control-e-2026-04-22.md",
+  "papers/n=6-convergence-80-domains-2026-04-19.md",
+  "papers/plunnecke-6-2026-04-22.md",
+  "papers/yang-mills-beta0-rewriting-2026-04-22.md",
+]
+
+let META_STEMS = ["readme", "claude", "index", "_index"]
+
+fn _dir_exists(path: string) -> bool {
+  let r = to_string(exec("test -d '" + path + "' && echo y || echo n")).trim()
+  return r == "y"
+}
+
+fn _basename(path: string) -> string {
+  let mut last_slash = -1
+  let mut i = 0
+  while i < len(path) {
+    if path.substring(i, i + 1) == "/" { last_slash = i }
+    i = i + 1
+  }
+  if last_slash < 0 { return path }
+  return path.substring(last_slash + 1, len(path))
+}
+
+fn _stem(name: string) -> string {
+  if len(name) > 3 && name.substring(len(name) - 3, len(name)) == ".md" {
+    return name.substring(0, len(name) - 3)
+  }
+  return name
+}
+
+fn _to_lower(s: string) -> string {
+  let mut out = ""
+  let mut i = 0
+  while i < len(s) {
+    let c = s.substring(i, i + 1)
+    if c >= "A" && c <= "Z" {
+      // 26-branch lowercase (hexa lacks ord())
+      if c == "A" { out = out + "a" }
+      if c == "B" { out = out + "b" }
+      if c == "C" { out = out + "c" }
+      if c == "D" { out = out + "d" }
+      if c == "E" { out = out + "e" }
+      if c == "F" { out = out + "f" }
+      if c == "G" { out = out + "g" }
+      if c == "H" { out = out + "h" }
+      if c == "I" { out = out + "i" }
+      if c == "J" { out = out + "j" }
+      if c == "K" { out = out + "k" }
+      if c == "L" { out = out + "l" }
+      if c == "M" { out = out + "m" }
+      if c == "N" { out = out + "n" }
+      if c == "O" { out = out + "o" }
+      if c == "P" { out = out + "p" }
+      if c == "Q" { out = out + "q" }
+      if c == "R" { out = out + "r" }
+      if c == "S" { out = out + "s" }
+      if c == "T" { out = out + "t" }
+      if c == "U" { out = out + "u" }
+      if c == "V" { out = out + "v" }
+      if c == "W" { out = out + "w" }
+      if c == "X" { out = out + "x" }
+      if c == "Y" { out = out + "y" }
+      if c == "Z" { out = out + "z" }
+    } else {
+      out = out + c
+    }
+    i = i + 1
+  }
+  return out
+}
+
+fn _is_meta(stem: string) -> bool {
+  let lower = _to_lower(stem)
+  let mut i = 0
+  while i < len(META_STEMS) {
+    if META_STEMS[i] == lower { return true }
+    i = i + 1
+  }
+  return false
+}
+
+fn _rel(path: string) -> string {
+  let prefix = REPO_ROOT + "/"
+  if len(path) > len(prefix) && path.substring(0, len(prefix)) == prefix {
+    return path.substring(len(prefix), len(path))
+  }
+  return path
+}
+
+fn _in_legacy(rel: string) -> bool {
+  let mut i = 0
+  while i < len(OWN6_LEGACY_ALLOWLIST) {
+    if OWN6_LEGACY_ALLOWLIST[i] == rel { return true }
+    i = i + 1
+  }
+  return false
+}
+
+fn _list_papers_md() -> list {
+  let raw = to_string(exec("find '" + PAPERS_ROOT + "' -mindepth 1 -maxdepth 1 -type f -name '*.md' 2>/dev/null | sort"))
+  let mut out = []
+  let lines = split(raw, "\n")
+  let mut i = 0
+  while i < len(lines) {
+    let p = lines[i].trim()
+    if len(p) > 0 { out.push(p) }
+    i = i + 1
+  }
+  return out
+}
+
+fn _has_sibling_verify(path: string, stem: string) -> list {
+  // Find files matching <stem>_verify.* or <stem>-verify.* in same dir
+  let dir = path.substring(0, len(path) - len(_basename(path)))
+  let pat1 = dir + stem + "_verify.*"
+  let pat2 = dir + stem + "-verify.*"
+  let raw = to_string(exec("ls " + pat1 + " 2>/dev/null; ls " + pat2 + " 2>/dev/null"))
+  let mut out = []
+  let lines = split(raw, "\n")
+  let mut i = 0
+  while i < len(lines) {
+    let p = lines[i].trim()
+    if len(p) > 0 { out.push(p) }
+    i = i + 1
+  }
+  return out
+}
+
+fn _scan() -> list {
+  let mut violations = []
+  if !_dir_exists(PAPERS_ROOT) { return violations }
+  let papers = _list_papers_md()
+  let mut i = 0
+  while i < len(papers) {
+    let path = papers[i]
+    let name = _basename(path)
+    let stem = _stem(name)
+    if !_is_meta(stem) {
+      let rel = _rel(path)
+      let is_legacy = _in_legacy(rel)
+      let text = read_file(path)
+      // Check for ```python block
+      if !text.contains("```python") {
+        if !is_legacy {
+          let mut v = {}
+          v["path"] = rel
+          v["detail"] = "paper missing embedded ```python verify block"
+          violations.push(v)
+        }
+      }
+      // Check for sibling verify file (applies regardless of legacy)
+      let siblings = _has_sibling_verify(path, stem)
+      let mut s = 0
+      while s < len(siblings) {
+        let mut v = {}
+        v["path"] = _rel(siblings[s])
+        v["detail"] = "separate verify file forbidden — inline into paper .md"
+        violations.push(v)
+        s = s + 1
+      }
+    }
+    i = i + 1
+  }
+  return violations
+}
+
+fn _selftest() -> void {
+  println("[own#6] selftest — fixture matrix")
+  let mut total = 0
+  let mut pass = 0
+
+  // F1: PASS — text has ```python block
+  total = total + 1
+  let f1 = "# Paper\n```python\nprint('verify')\n```\n"
+  if f1.contains("```python") {
+    println("[own#6] fixture 1 PASS — embedded ```python block detected")
+    pass = pass + 1
+  }
+
+  // F2: FAIL — text missing ```python
+  total = total + 1
+  let f2 = "# Paper\nNo embedded code block.\n"
+  if !f2.contains("```python") {
+    println("[own#6] fixture 2 PASS — missing block detected")
+    pass = pass + 1
+  }
+
+  // F3: PASS — meta stem readme exempt
+  total = total + 1
+  if _is_meta("README") || _is_meta("readme") {
+    println("[own#6] fixture 3 PASS — README meta stem exempted")
+    pass = pass + 1
+  }
+
+  // F4: PASS — legacy allowlist match
+  total = total + 1
+  if _in_legacy("papers/bernoulli-18-arxiv-stub-2026-04-15.md") {
+    println("[own#6] fixture 4 PASS — legacy allowlist hit")
+    pass = pass + 1
+  }
+
+  if pass == total {
+    println("__OWN6_SELFTEST_RESULT__ PASS (" + to_string(pass) + "/" + to_string(total) + " fixtures)")
+    exit(0)
+  } else {
+    println("__OWN6_SELFTEST_RESULT__ FAIL (" + to_string(pass) + "/" + to_string(total) + " fixtures)")
+    exit(1)
+  }
+}
+
+fn main() -> void {
+  let raw_args = args()
+  let mut want_selftest = false
+  let mut i = 0
+  while i < len(raw_args) {
+    if raw_args[i] == "--selftest" || raw_args[i] == "selftest" { want_selftest = true }
+    i = i + 1
+  }
+
+  if want_selftest { _selftest(); return }
+
+  let violations = _scan()
+  let mut k = 0
+  while k < len(violations) {
+    let v = violations[k]
+    println("[own#6] FAIL " + v["path"] + " — " + v["detail"])
+    k = k + 1
+  }
+
+  if len(violations) == 0 {
+    println("__OWN6_RESULT__ PASS")
+    exit(0)
+  } else {
+    println("__OWN6_RESULT__ FAIL (" + to_string(len(violations)) + " violations)")
+    exit(1)
+  }
+}
