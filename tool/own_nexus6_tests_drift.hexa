@@ -1,0 +1,256 @@
+#!hexa strict
+// tool/own_nexus6_tests_drift.hexa — own#21 readme-nexus6-tests-count-drift checker.
+//
+// Compares README.md `tests: NNNN` tokens against authoritative count
+// from reports/n6_selftest.json#total. Emits reports/n6_own21_drift.json.
+//
+// Migrated from tool/own_nexus6_tests_drift.py (233 LoC) per raw 9 hexa-only.
+// Regex pattern `tests:\s+(\d+)` replaced with manual scanner using
+// _is_digit + _is_ws helpers (raw 18 self-host fixpoint, no regex dep).
+//
+// JSON parsing for n6_selftest.json#total field uses POSIX awk fallback —
+// pure-hexa JSON parser deferred to follow-up cycle.
+//
+// @tool(slug="own_nexus6_tests_drift", desc="own#21 readme-nexus6-tests-count-drift checker — extracts `tests: NNNN` tokens from README.md, compares against reports/n6_selftest.json#total, emits drift report")
+// @usage(hexa /Users/ghost/core/n6-architecture/tool/own_nexus6_tests_drift.hexa [--verbose])
+// @exit_codes(0=PASS or WARN_NO_TOKEN or WARN_NO_SELFTEST, 1=DRIFT, 2=ERROR)
+
+let REPO_ROOT     = "/Users/ghost/core/n6-architecture"
+let README_PATH   = REPO_ROOT + "/README.md"
+let SELFTEST_PATH = REPO_ROOT + "/reports/n6_selftest.json"
+let REPORT_PATH   = REPO_ROOT + "/reports/n6_own21_drift.json"
+let DRIFT_PATTERN = "tests:\\s+(\\d+)"  // documented for report.drift_pattern field
+
+fn _file_exists(path: string) -> bool {
+  let r = to_string(exec("test -f '" + path + "' && echo y || echo n")).trim()
+  return r == "y"
+}
+
+fn _is_digit(c: string) -> bool {
+  return c >= "0" && c <= "9"
+}
+
+fn _is_ws(c: string) -> bool {
+  return c == " " || c == "\t"
+}
+
+fn _utc_now() -> string {
+  return to_string(exec("date -u +%Y-%m-%dT%H:%M:%SZ")).trim()
+}
+
+fn _esc_json(s: string) -> string {
+  let mut out = ""
+  let mut i = 0
+  while i < len(s) {
+    let c = s.substring(i, i + 1)
+    if c == "\\" { out = out + "\\\\" }
+    else {
+      if c == "\"" { out = out + "\\\"" }
+      else { out = out + c }
+    }
+    i = i + 1
+  }
+  return out
+}
+
+fn _load_authoritative() -> list {
+  // Returns [count_string_or_empty, source_desc]
+  // Pure-hexa awk fallback — extracts "total": <int> from JSON.
+  let mut result = []
+  if !_file_exists(SELFTEST_PATH) {
+    result.push("")
+    result.push("missing:reports/n6_selftest.json")
+    return result
+  }
+  // Use awk to extract the "total" field (handles spaces around colon)
+  let cmd = "awk '/\"total\"[[:space:]]*:[[:space:]]*[0-9]+/ { for (i=1;i<=NF;i++) if ($i ~ /^[0-9]+,?$/) { gsub(\",\", \"\", $i); print $i; exit } }' '" + SELFTEST_PATH + "'"
+  let raw = to_string(exec(cmd)).trim()
+  if len(raw) == 0 {
+    result.push("")
+    result.push("field-missing:reports/n6_selftest.json:total")
+    return result
+  }
+  // Validate raw is all digits
+  let mut all_digits = true
+  let mut k = 0
+  while k < len(raw) {
+    if !_is_digit(raw.substring(k, k + 1)) { all_digits = false }
+    k = k + 1
+  }
+  if !all_digits {
+    result.push("")
+    result.push("field-invalid:reports/n6_selftest.json:total")
+    return result
+  }
+  result.push(raw)
+  result.push("reports/n6_selftest.json#total")
+  return result
+}
+
+fn _extract_claims(text: string) -> list {
+  // Walk lines, find `tests:` followed by whitespace + digits.
+  // Returns list of dicts with line / match / count.
+  let mut claims = []
+  let lines = split(text, "\n")
+  let mut lineno = 1
+  let mut li = 0
+  while li < len(lines) {
+    let line = lines[li]
+    let n = len(line)
+    let mut i = 0
+    while i < n {
+      // Look for "tests:" substring at position i
+      if i + 6 <= n && line.substring(i, i + 6) == "tests:" {
+        // Skip whitespace after colon
+        let mut j = i + 6
+        while j < n && _is_ws(line.substring(j, j + 1)) {
+          j = j + 1
+        }
+        // Read consecutive digits
+        let digit_start = j
+        while j < n && _is_digit(line.substring(j, j + 1)) {
+          j = j + 1
+        }
+        if j > digit_start {
+          // Found `tests: NNN` token
+          let count_str = line.substring(digit_start, j)
+          let match_str = line.substring(i, j)
+          let mut entry = {}
+          entry["line"] = lineno
+          entry["match"] = match_str
+          entry["count"] = to_int(count_str)
+          claims.push(entry)
+          i = j
+        } else {
+          i = i + 6
+        }
+      } else {
+        i = i + 1
+      }
+    }
+    lineno = lineno + 1
+    li = li + 1
+  }
+  return claims
+}
+
+fn _emit_report(verdict: string, detail: string, authoritative: string,
+                source_desc: string, claims: list, mismatches: list) -> void {
+  let mut out = "{\n"
+  out = out + "  \"schema\": \"n6-architecture/n6_own21_drift/1\",\n"
+  out = out + "  \"rule\": \"own#21\",\n"
+  out = out + "  \"slug\": \"readme-nexus6-tests-count-drift\",\n"
+  out = out + "  \"ts\": \"" + _utc_now() + "\",\n"
+  out = out + "  \"drift_pattern\": \"" + _esc_json(DRIFT_PATTERN) + "\",\n"
+
+  // authoritative
+  out = out + "  \"authoritative\": {"
+  if len(authoritative) == 0 {
+    out = out + "\"count\": null, \"source\": \"" + _esc_json(source_desc) + "\"}"
+  } else {
+    out = out + "\"count\": " + authoritative + ", \"source\": \"" + _esc_json(source_desc) + "\"}"
+  }
+  out = out + ",\n"
+
+  // readme claims
+  out = out + "  \"readme\": {\"path\": \"README.md\", \"claim_count\": " + to_string(len(claims)) + ", \"claims\": ["
+  let mut i = 0
+  while i < len(claims) {
+    let c = claims[i]
+    if i > 0 { out = out + "," }
+    out = out + "{\"line\": " + to_string(c["line"]) + ", \"match\": \"" + _esc_json(c["match"]) + "\", \"count\": " + to_string(c["count"]) + "}"
+    i = i + 1
+  }
+  out = out + "]},\n"
+
+  // mismatches (if any)
+  out = out + "  \"mismatches\": ["
+  let mut j = 0
+  while j < len(mismatches) {
+    let m = mismatches[j]
+    if j > 0 { out = out + "," }
+    out = out + "{\"line\": " + to_string(m["line"]) + ", \"match\": \"" + _esc_json(m["match"]) + "\", \"count\": " + to_string(m["count"]) + "}"
+    j = j + 1
+  }
+  out = out + "],\n"
+
+  out = out + "  \"verdict\": \"" + verdict + "\",\n"
+  out = out + "  \"detail\": \"" + _esc_json(detail) + "\"\n"
+  out = out + "}\n"
+
+  let _r = exec("mkdir -p '" + REPO_ROOT + "/reports'")
+  write_file(REPORT_PATH, out)
+}
+
+fn main() -> void {
+  let raw_args = args()
+  let mut verbose = false
+  let mut ai = 0
+  while ai < len(raw_args) {
+    if raw_args[ai] == "--verbose" { verbose = true }
+    ai = ai + 1
+  }
+
+  // 1) authoritative count
+  let auth_pair = _load_authoritative()
+  let authoritative = auth_pair[0]
+  let source_desc = auth_pair[1]
+
+  if len(authoritative) == 0 {
+    let detail = "authoritative source unavailable (" + source_desc + "); SOFT skip — nothing to compare README tokens against"
+    _emit_report("WARN_NO_SELFTEST", detail, "", source_desc, [], [])
+    println("[own#21] WARN_NO_SELFTEST: cannot load authoritative count (" + source_desc + ") — SOFT skip (exit 0)")
+    exit(0)
+  }
+
+  let auth_int = to_int(authoritative)
+
+  // 2) README claims
+  if !_file_exists(README_PATH) {
+    _emit_report("ERROR", "README.md missing at " + README_PATH, authoritative, source_desc, [], [])
+    println("[own#21] ERROR: README.md missing")
+    exit(2)
+  }
+
+  let readme_text = read_file(README_PATH)
+  let claims = _extract_claims(readme_text)
+
+  // 3) verdict
+  if len(claims) == 0 {
+    let detail = "README.md carries no `tests: N` token matching drift_pattern; nothing to compare against authoritative count=" + authoritative + ". Add a canonical token to README.md to enable hard drift enforcement."
+    _emit_report("WARN_NO_TOKEN", detail, authoritative, source_desc, [], [])
+    if verbose { println("[own#21] WARN_NO_TOKEN authoritative=" + authoritative) }
+    exit(0)
+  }
+
+  // Find mismatches
+  let mut mismatches = []
+  let mut k = 0
+  while k < len(claims) {
+    let c = claims[k]
+    if c["count"] != auth_int {
+      mismatches.push(c)
+    }
+    k = k + 1
+  }
+
+  if len(mismatches) > 0 {
+    let detail = to_string(len(mismatches)) + " README token(s) disagree with authoritative count=" + authoritative
+    _emit_report("DRIFT", detail, authoritative, source_desc, claims, mismatches)
+    println("[own#21] DRIFT: authoritative=" + authoritative + " but README has " + to_string(len(mismatches)) + " mismatching token(s):")
+    let mut m = 0
+    while m < len(mismatches) {
+      let mm = mismatches[m]
+      println("  README.md:" + to_string(mm["line"]) + "  " + mm["match"] + "  (claimed=" + to_string(mm["count"]) + ")")
+      m = m + 1
+    }
+    exit(1)
+  }
+
+  let detail = "all " + to_string(len(claims)) + " README token(s) match authoritative count=" + authoritative
+  _emit_report("PASS", detail, authoritative, source_desc, claims, [])
+  if verbose {
+    println("[own#21] PASS authoritative=" + authoritative + " claims=" + to_string(len(claims)))
+  }
+  exit(0)
+}
