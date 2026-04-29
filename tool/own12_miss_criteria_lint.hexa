@@ -1,0 +1,286 @@
+#!hexa strict
+// tool/own12_miss_criteria_lint.hexa — own#12 miss-criteria HARD lint.
+//
+// Rule: experiments/ + reports/experiments/ + theory/experiments/ .md files
+// MUST declare MISS / 실패 조건 / failure-criteria section before data
+// collection. Allowlist: 26 grandfathered legacy experiment docs.
+//
+// Migrated from tool/own_doc_lint_legacy.py:978-1018 + 932-975 per raw 9.
+// Regex _MISS_TOKEN_RE replaced with case-insensitive substring scan over
+// 6 token variants (miss-criteria/miss criteria/실패 조건/실패 기준/
+// failure criteria/## MISS/### MISS/MISS: ).
+//
+// @tool(slug="own12_miss_criteria_lint", desc="own#12 MISS criteria HARD — experiments .md files must declare MISS/실패 조건/failure-criteria section; 26-entry legacy allowlist")
+// @usage(hexa /Users/ghost/core/n6-architecture/tool/own12_miss_criteria_lint.hexa [--selftest])
+// @exit_codes(0=PASS, 1=violations, 2=internal error)
+
+let REPO_ROOT = "/Users/ghost/core/n6-architecture"
+
+let SCAN_ROOTS = [
+  REPO_ROOT + "/experiments",
+  REPO_ROOT + "/reports/experiments",
+  REPO_ROOT + "/theory/experiments",
+]
+
+let META_WHITELIST = ["README.md", "CLAUDE.md", "INDEX.md"]
+
+// Frozen 26-entry legacy allowlist
+let OWN12_LEGACY_ALLOWLIST = [
+  "experiments/anu_mc_verification/promote_candidate.md",
+  "experiments/atlas_promotion_p5_report.md",
+  "experiments/blowup/p4_breakthrough_attempt.md",
+  "experiments/blowup/p4_dfs_5module_report.md",
+  "experiments/chip-verify/boot_matrix_report.md",
+  "experiments/chip-verify/n6_speak_integration_bench_report.md",
+  "experiments/chip-verify/soc_bench_promotion_report.md",
+  "experiments/chip-verify/stage0_rerun_report.md",
+  "experiments/chip-verify/verify_chain.md",
+  "experiments/conjecture_to_10star_20.md",
+  "experiments/dse/arch_unified_fuse50_report.md",
+  "experiments/dse/atlas_promotion_candidates_p2.md",
+  "experiments/dse/atlas_promotion_manual_checklist_40.md",
+  "experiments/dse/cross_dse_fusion_v2_design.md",
+  "experiments/dse/cross_matrix_112x10_summary.md",
+  "experiments/dse/cross_matrix_v3_summary.md",
+  "experiments/dse/dse_400_expansion_plan.md",
+  "experiments/dse/dse_500_expansion_plan.md",
+  "experiments/dse/energy_pareto_sweep_plan.md",
+  "experiments/dse/p2_alien_210_plan.md",
+  "experiments/grover_n6_uniqueness/paper_snippet.md",
+  "experiments/paper/bipartite_audit_top10.md",
+  "experiments/paper/bipartite_v2_report.md",
+  "experiments/paper_ranking_p3_top48.md",
+  "experiments/red_team_cycle1.md",
+  "experiments/tier1_experiment_protocols.md",
+]
+
+fn _dir_exists(path: string) -> bool {
+  let r = to_string(exec("test -d '" + path + "' && echo y || echo n")).trim()
+  return r == "y"
+}
+
+fn _basename(path: string) -> string {
+  let mut last_slash = -1
+  let mut i = 0
+  while i < len(path) {
+    if path.substring(i, i + 1) == "/" { last_slash = i }
+    i = i + 1
+  }
+  if last_slash < 0 { return path }
+  return path.substring(last_slash + 1, len(path))
+}
+
+fn _to_lower(s: string) -> string {
+  let mut out = ""
+  let mut i = 0
+  while i < len(s) {
+    let c = s.substring(i, i + 1)
+    if c >= "A" && c <= "Z" {
+      if c == "A" { out = out + "a" }
+      if c == "B" { out = out + "b" }
+      if c == "C" { out = out + "c" }
+      if c == "D" { out = out + "d" }
+      if c == "E" { out = out + "e" }
+      if c == "F" { out = out + "f" }
+      if c == "G" { out = out + "g" }
+      if c == "H" { out = out + "h" }
+      if c == "I" { out = out + "i" }
+      if c == "J" { out = out + "j" }
+      if c == "K" { out = out + "k" }
+      if c == "L" { out = out + "l" }
+      if c == "M" { out = out + "m" }
+      if c == "N" { out = out + "n" }
+      if c == "O" { out = out + "o" }
+      if c == "P" { out = out + "p" }
+      if c == "Q" { out = out + "q" }
+      if c == "R" { out = out + "r" }
+      if c == "S" { out = out + "s" }
+      if c == "T" { out = out + "t" }
+      if c == "U" { out = out + "u" }
+      if c == "V" { out = out + "v" }
+      if c == "W" { out = out + "w" }
+      if c == "X" { out = out + "x" }
+      if c == "Y" { out = out + "y" }
+      if c == "Z" { out = out + "z" }
+    } else {
+      out = out + c
+    }
+    i = i + 1
+  }
+  return out
+}
+
+fn _rel(path: string) -> string {
+  let prefix = REPO_ROOT + "/"
+  if len(path) > len(prefix) && path.substring(0, len(prefix)) == prefix {
+    return path.substring(len(prefix), len(path))
+  }
+  return path
+}
+
+fn _in_meta(name: string) -> bool {
+  let mut i = 0
+  while i < len(META_WHITELIST) {
+    if META_WHITELIST[i] == name { return true }
+    i = i + 1
+  }
+  return false
+}
+
+fn _in_legacy(rel: string) -> bool {
+  let mut i = 0
+  while i < len(OWN12_LEGACY_ALLOWLIST) {
+    if OWN12_LEGACY_ALLOWLIST[i] == rel { return true }
+    i = i + 1
+  }
+  return false
+}
+
+// 6 MISS-token variants (case-insensitive on ASCII tokens; Korean preserves bytes).
+fn _has_miss_token(text: string) -> bool {
+  let lower = _to_lower(text)
+  // ASCII variants on lowercased text
+  if lower.contains("miss-criteria") { return true }
+  if lower.contains("miss_criteria") { return true }
+  if lower.contains("miss criteria") { return true }
+  if lower.contains("failure criteria") { return true }
+  if lower.contains("## miss") { return true }
+  if lower.contains("### miss") { return true }
+  if lower.contains("miss:") { return true }
+  // Korean variants on original text (case-insensitive irrelevant for Korean)
+  if text.contains("실패 조건") { return true }
+  if text.contains("실패조건") { return true }
+  if text.contains("실패 기준") { return true }
+  if text.contains("실패기준") { return true }
+  return false
+}
+
+fn _walk_md_top_and_one_deep(root: string) -> list {
+  // Top-level + one-deep .md files (matches py iterdir + sub.iterdir pattern)
+  let raw1 = to_string(exec("find '" + root + "' -mindepth 1 -maxdepth 1 -type f -name '*.md' 2>/dev/null"))
+  let raw2 = to_string(exec("find '" + root + "' -mindepth 2 -maxdepth 2 -type f -name '*.md' 2>/dev/null"))
+  let mut out = []
+  let lines1 = split(raw1, "\n")
+  let lines2 = split(raw2, "\n")
+  let mut i = 0
+  while i < len(lines1) {
+    let p = lines1[i].trim()
+    if len(p) > 0 { out.push(p) }
+    i = i + 1
+  }
+  i = 0
+  while i < len(lines2) {
+    let p = lines2[i].trim()
+    if len(p) > 0 { out.push(p) }
+    i = i + 1
+  }
+  return out
+}
+
+fn _scan() -> list {
+  let mut violations = []
+  let mut ri = 0
+  while ri < len(SCAN_ROOTS) {
+    let root = SCAN_ROOTS[ri]
+    if _dir_exists(root) {
+      let mds = _walk_md_top_and_one_deep(root)
+      let mut i = 0
+      while i < len(mds) {
+        let path = mds[i]
+        let name = _basename(path)
+        let rel = _rel(path)
+        if !_in_meta(name) {
+          if !_in_legacy(rel) {
+            let text = read_file(path)
+            if !_has_miss_token(text) {
+              let mut v = {}
+              v["path"] = rel
+              v["detail"] = "no MISS / 실패 조건 / failure-criteria section detected — declare miss_criteria before data collection"
+              violations.push(v)
+            }
+          }
+        }
+        i = i + 1
+      }
+    }
+    ri = ri + 1
+  }
+  return violations
+}
+
+fn _selftest() -> void {
+  println("[own#12] selftest — fixture matrix")
+  let mut total = 0
+  let mut pass = 0
+
+  // F1: PASS — text has MISS criteria token
+  total = total + 1
+  if _has_miss_token("# Plan\n## MISS criteria\nDeclared upfront.") {
+    println("[own#12] fixture 1 PASS — '## MISS' header detected")
+    pass = pass + 1
+  }
+
+  // F2: FAIL — text missing token
+  total = total + 1
+  if !_has_miss_token("# Plan\nNothing about failure conditions.") {
+    println("[own#12] fixture 2 PASS — missing token correctly absent")
+    pass = pass + 1
+  }
+
+  // F3: PASS — Korean 실패 조건 present
+  total = total + 1
+  if _has_miss_token("실험 계획\n실패 조건: data drift > 0.1") {
+    println("[own#12] fixture 3 PASS — Korean 실패 조건 detected")
+    pass = pass + 1
+  }
+
+  // F4: PASS — case-insensitive 'failure criteria' phrase
+  total = total + 1
+  if _has_miss_token("# Plan\nFailure Criteria: count < 5") {
+    println("[own#12] fixture 4 PASS — case-insensitive 'Failure Criteria'")
+    pass = pass + 1
+  }
+
+  // F5: PASS — legacy allowlist match
+  total = total + 1
+  if _in_legacy("experiments/red_team_cycle1.md") {
+    println("[own#12] fixture 5 PASS — legacy allowlist hit")
+    pass = pass + 1
+  }
+
+  if pass == total {
+    println("__OWN12_SELFTEST_RESULT__ PASS (" + to_string(pass) + "/" + to_string(total) + " fixtures)")
+    exit(0)
+  } else {
+    println("__OWN12_SELFTEST_RESULT__ FAIL (" + to_string(pass) + "/" + to_string(total) + " fixtures)")
+    exit(1)
+  }
+}
+
+fn main() -> void {
+  let raw_args = args()
+  let mut want_selftest = false
+  let mut i = 0
+  while i < len(raw_args) {
+    if raw_args[i] == "--selftest" || raw_args[i] == "selftest" { want_selftest = true }
+    i = i + 1
+  }
+
+  if want_selftest { _selftest(); return }
+
+  let violations = _scan()
+  let mut k = 0
+  while k < len(violations) {
+    let v = violations[k]
+    println("[own#12] FAIL " + v["path"] + " — " + v["detail"])
+    k = k + 1
+  }
+
+  if len(violations) == 0 {
+    println("__OWN12_RESULT__ PASS")
+    exit(0)
+  } else {
+    println("__OWN12_RESULT__ FAIL (" + to_string(len(violations)) + " violations)")
+    exit(1)
+  }
+}
