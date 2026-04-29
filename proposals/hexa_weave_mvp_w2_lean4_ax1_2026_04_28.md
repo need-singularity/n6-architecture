@@ -127,7 +127,7 @@ Disclosure: this deviation surfaces a minor inconsistency between mission text (
 
 **W2 evidence**:
 - W2 partial PASS: `AX1_n6_uniqueness` reverse direction + bounded forward direction green CI; `lake build` 11.7 s, 2 expected `sorry`.
-- **probability adjustment**: −2pp (W2 partial PASS per mission honesty mandate "W2 partial PASS 시 −2pp"); BUT n=1 corrigendum surface adds +0.5pp (Spec authoring quality concern reaffirmed).
+- **probability adjustment**: −2pp (W2 partial PASS per mission honesty mandate "W2 partial PASS on −2pp"); BUT n=1 corrigendum surface adds +0.5pp (Spec authoring quality concern reaffirmed).
 - **net**: from HIGH 65-75% → HIGH **63.5-72.5%** (rounded to 64-73% for reporting).
 - Caveat: this adjustment is ONLY for W2 work; W3 (capstone composition + 11 sub-case integration) and W4-W5 (MK port / ZFC fallback) remain the highest-risk gates.
 

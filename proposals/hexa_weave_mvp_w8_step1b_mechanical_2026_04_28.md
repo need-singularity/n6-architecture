@@ -123,7 +123,7 @@ New imports added:
 Both already transitively imported via `Mathlib.SetTheory.ZFC.Class`, so
 no new mathlib dependency surface (audit of mathlib direct deps:
 unchanged set, just made explicit). User constraint
-"`Mathlib.SetTheory.ZFC.Basic` 만 사용" honored at the **dependency
+"`Mathlib.SetTheory.ZFC.Basic` only use" honored at the **dependency
 class** level — both new explicit imports are sub-modules of the same
 ZFC cluster already in use.
 

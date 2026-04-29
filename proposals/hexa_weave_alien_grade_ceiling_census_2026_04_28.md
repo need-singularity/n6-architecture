@@ -69,7 +69,7 @@ genuinely post-human paradigm shifts. It is NOT a peer-reviewed scale.
 
 | # | ceiling | current state | unblocks |
 |---|---------|---------------|----------|
-| 5 | GPU 실측 검증 (theoretical → real numerics) | not run; W5 sandbox blocked on user approval | grade 7 |
+| 5 | GPU measurement verification (theoretical → real numerics) | not run; W5 sandbox blocked on user approval | grade 7 |
 | 6 | AF-3 outperform benchmark | not run | grade 8 |
 | 7 | multi-strand actual execution | dry-run only (W4 openfold dryrun) | grade 7 |
 | 8 | drug discovery experiment | not started | grade 8-9 |

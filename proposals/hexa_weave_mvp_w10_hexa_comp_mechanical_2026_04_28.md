@@ -1,7 +1,7 @@
 # HEXA-WEAVE MVP — W10 HEXA-COMP closure 4 axioms mechanical (cycle 19)
 
 Date: 2026-04-28
-Cycle: 19 (W10 —별 axis from W8+ Felgner-monolithic / ModelTheory.Bounded)
+Cycle: 19 (W10 — separate axis from W8+ Felgner-monolithic / ModelTheory.Bounded)
 Predecessor: cycle 17 commit 74612447 (Felgner-atomic 11/11 mechanical), cycle 18 paper §16/§18/§20 precision
 Author: dancinlife (Claude Opus 4.7 1M context, agent thread)
 
@@ -13,12 +13,12 @@ Cycle 18 audit identified 11 axioms in `lean4-n6/N6/MechVerif/Foundation/Axioms.
 With Felgner-atomic 11/11 mechanical (cycle 17), the remaining axiom decomposition was:
   - Felgner-monolithic placeholder (≤4)
   - **HEXA-COMP closure (4)** ← THIS WORK
-  - 기타 (≤3): bridge / misc
+  - other (≤3): bridge / misc
 
 W10 attacks the HEXA-COMP closure quartet — `axiom_hexa_comp_associativity`,
 `axiom_hexa_comp_identity`, `axiom_hexa_comp_zfc_class_closure`,
 `axiom_hexa_comp_closure_atom` — independent of ModelTheory.Bounded
-(별 axis from W8+ Felgner-monolithic).
+(separate axis from W8+ Felgner-monolithic).
 
 Goal: convert 4 axioms to derived theorems where mechanically achievable;
 honestly disclose blockers for any that cannot be converted (raw 91 C3).
@@ -114,7 +114,7 @@ honestly disclose blockers for any that cannot be converted (raw 91 C3).
     (c) Convert `ClosedUnderHEXAComp` to a `structure` with a constructor
         accepting C.1-C.4 + an HEXA-COMP encoding witness. Surfaces the four
         sub-properties as the decomposition target but redefines the closure
-        semantics — out-of-scope for cycle 19 별 axis.
+        semantics — out-of-scope for cycle 19 separate axis.
 
   Result: AXIOM RETAINED, status DEFERRED to W11+ (F-W10-4 raw 71 retire-and-replace
   schedule). Updated docstring discloses the three options honestly.

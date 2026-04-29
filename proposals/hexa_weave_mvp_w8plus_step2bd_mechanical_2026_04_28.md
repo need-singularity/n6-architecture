@@ -162,7 +162,7 @@ No new mathlib imports added. The new lemmas use:
   `Mathlib.SetTheory.Ordinal.Arithmetic`)
 - `Mathlib.Order.SuccPred.Limit` (transitively via Regular)
 
-User constraint "추가 mathlib 의존성 금지" honored: zero new explicit
+User constraint "add mathlib dependency forbidden" honored: zero new explicit
 imports.
 
 ## 6. F-D-3 re-evaluation

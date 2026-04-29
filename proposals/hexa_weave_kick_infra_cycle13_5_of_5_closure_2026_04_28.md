@@ -3,7 +3,7 @@ category: operational
 date: 2026-04-28
 parent_witness: design/kick/2026-04-28_kick-infra-5-of-5-closure_omega_cycle.json
 parent_proposal: proposals/hexa_weave_kick_infra_cycle12_countdown_2026_04_28.md
-mission: F-MX-3-c kick infra — cycle 13 / fan-out 5/5 — F-MANUAL-LOGIN deadline 처리 + raw 51 4-gate audit 5/5 closure (옵션 A user-side handoff 정식 적용)
+mission: F-MX-3-c kick infra — cycle 13 / fan-out 5/5 — F-MANUAL-LOGIN deadline handling + raw 51 4-gate audit 5/5 closure (option A user-side handoff official apply)
 status: ADVISORY (read-only audit; no infra mutation; option-A user-side handoff declared)
 ---
 

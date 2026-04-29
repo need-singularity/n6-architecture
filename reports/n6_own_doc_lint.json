@@ -15,7 +15,8 @@
       "own#10",
       "own#11",
       "own#12",
-      "own#16"
+      "own#16",
+      "own#29"
     ],
     "auto_verifiable": [
       "own#1",
@@ -30,7 +31,8 @@
       "own#10",
       "own#11",
       "own#12",
-      "own#16"
+      "own#16",
+      "own#29"
     ],
     "manual_only": {},
     "hard_rules": [
@@ -46,17 +48,18 @@
       "own#10",
       "own#11",
       "own#12",
-      "own#16"
+      "own#16",
+      "own#29"
     ],
     "rule_filter": null,
     "note": "own#13/#15/#17..#21 handled by existing verifiers — not re-checked here."
   },
   "summary": {
-    "total_violations": 17,
-    "hard_violations": 17,
+    "total_violations": 0,
+    "hard_violations": 0,
     "soft_violations": 0,
     "per_rule": {
-      "own#1": 17,
+      "own#1": 0,
       "own#2": 0,
       "own#3": 0,
       "own#4": 0,
@@ -68,94 +71,9 @@
       "own#10": 0,
       "own#11": 0,
       "own#12": 0,
-      "own#16": 0
+      "own#16": 0,
+      "own#29": 0
     }
   },
-  "violations": [
-    {
-      "rule": "own#1",
-      "path": "proposals/hexa_weave_mvp_w10_hexa_comp_mechanical_2026_04_28.md",
-      "detail": "CJK present (5 chars) — new .md must be English-only (own#1 HARD since 2026-04-24)"
-    },
-    {
-      "rule": "own#1",
-      "path": "proposals/hexa_weave_zenodo_auto_prep_2026_04_28.md",
-      "detail": "CJK present (9 chars) — new .md must be English-only (own#1 HARD since 2026-04-24)"
-    },
-    {
-      "rule": "own#1",
-      "path": "proposals/hexa_weave_mvp_w3_lean4_ax2_2026_04_28.md",
-      "detail": "CJK present (2 chars) — new .md must be English-only (own#1 HARD since 2026-04-24)"
-    },
-    {
-      "rule": "own#1",
-      "path": "proposals/hexa_weave_mvp_w8_step1b_mechanical_2026_04_28.md",
-      "detail": "CJK present (3 chars) — new .md must be English-only (own#1 HARD since 2026-04-24)"
-    },
-    {
-      "rule": "own#1",
-      "path": "proposals/hexa_weave_sync_readme_bug_fix_2026_04_28.md",
-      "detail": "CJK present (11 chars) — new .md must be English-only (own#1 HARD since 2026-04-24)"
-    },
-    {
-      "rule": "own#1",
-      "path": "proposals/hexa_weave_alien_grade_5_unlock_path_2026_04_28.md",
-      "detail": "CJK present (939 chars) — new .md must be English-only (own#1 HARD since 2026-04-24)"
-    },
-    {
-      "rule": "own#1",
-      "path": "proposals/hexa_weave_b3_ghcr_user_guide_2026_04_28.md",
-      "detail": "CJK present (606 chars) — new .md must be English-only (own#1 HARD since 2026-04-24)"
-    },
-    {
-      "rule": "own#1",
-      "path": "proposals/hexa_weave_mvp_w2_lean4_ax1_2026_04_28.md",
-      "detail": "CJK present (1 chars) — new .md must be English-only (own#1 HARD since 2026-04-24)"
-    },
-    {
-      "rule": "own#1",
-      "path": "proposals/hexa_weave_alien_grade_ceiling_census_2026_04_28.md",
-      "detail": "CJK present (4 chars) — new .md must be English-only (own#1 HARD since 2026-04-24)"
-    },
-    {
-      "rule": "own#1",
-      "path": "proposals/hexa_weave_mvp_w5_mac_cpu_fallback_2026_04_28.md",
-      "detail": "CJK present (6 chars) — new .md must be English-only (own#1 HARD since 2026-04-24)"
-    },
-    {
-      "rule": "own#1",
-      "path": "proposals/hexa_weave_mvp_w8plus_step2bd_mechanical_2026_04_28.md",
-      "detail": "CJK present (7 chars) — new .md must be English-only (own#1 HARD since 2026-04-24)"
-    },
-    {
-      "rule": "own#1",
-      "path": "proposals/hexa_weave_mvp_w4_lean4_mk_decision_2026_04_28.md",
-      "detail": "CJK present (52 chars) — new .md must be English-only (own#1 HARD since 2026-04-24)"
-    },
-    {
-      "rule": "own#1",
-      "path": "proposals/hexa_weave_prerequisite_domains_census_2026_04_28.md",
-      "detail": "CJK present (16 chars) — new .md must be English-only (own#1 HARD since 2026-04-24)"
-    },
-    {
-      "rule": "own#1",
-      "path": "proposals/hexa_weave_biology_4th_sister_census_2026_04_28.md",
-      "detail": "CJK present (1086 chars) — new .md must be English-only (own#1 HARD since 2026-04-24)"
-    },
-    {
-      "rule": "own#1",
-      "path": "proposals/hexa_weave_mvp_w5_sandbox_cycle14_prep_2026_04_28.md",
-      "detail": "CJK present (46 chars) — new .md must be English-only (own#1 HARD since 2026-04-24)"
-    },
-    {
-      "rule": "own#1",
-      "path": "proposals/hexa_weave_zenodo_deposit_prep_2026_04_28.md",
-      "detail": "CJK present (9 chars) — new .md must be English-only (own#1 HARD since 2026-04-24)"
-    },
-    {
-      "rule": "own#1",
-      "path": "proposals/hexa_weave_kick_infra_cycle13_5_of_5_closure_2026_04_28.md",
-      "detail": "CJK present (8 chars) — new .md must be English-only (own#1 HARD since 2026-04-24)"
-    }
-  ]
+  "violations": []
 }

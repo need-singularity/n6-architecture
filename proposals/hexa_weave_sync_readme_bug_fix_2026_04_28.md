@@ -9,7 +9,7 @@
 
 ## 1. Background
 
-Since the cycle-11 README curation episode (Korean directive `README 에 노출`),
+Since the cycle-11 README curation episode (Korean directive `README in exposure`),
 the hexa-runtime sync pipeline `n6shared/sync-readme.hexa` has been emitting
 the false `[OK] README.md is up to date with readme-data.json (64 markers)`
 status while only 0–2 of 64 markers were actually being processed. The
@@ -63,8 +63,8 @@ A second, independent hexa-runtime quirk was discovered during fix
 verification: JSON `null` values produce `type_of(v) == "void"` (not
 `"null"` or `"nil"`), so the existing `get_or` / `has_field` guards let
 raw void slip through. `to_string(void) == "void"` then injected literal
-`void` text into rendered markers (`DSE void`, `산업void%`, `실험void%`,
-`물리한계void`).
+`void` text into rendered markers (`DSE void`, `industryvoid%`, `experimentvoid%`,
+`physical-limitvoid`).
 
 ## 3. Cycle-18 fix (option A — n6shared/sync-readme.hexa upstream)
 

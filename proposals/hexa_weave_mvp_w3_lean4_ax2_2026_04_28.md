@@ -148,12 +148,12 @@ Both predicates are stated via `opaque IsMKProperClass : Type → Prop` and `opa
 **Pre-W3 baseline** (per W2 report §6): F-D-3 probability **HIGH 64-73%**.
 
 **W3 evidence**:
-- W3 partial PASS (mission honesty mandate "W3 partial 시 −1pp"): −1pp on lower bound.
+- W3 partial PASS (mission honesty mandate "W3 partial on −1pp"): −1pp on lower bound.
 - BUT W3 surfaces a STRUCTURAL gap (MK absent in mathlib4) that was already known from W1 audit but is now load-bearing in code: NO additional ppm change but RISK CONCENTRATION confirmed.
 - HEXA-COMP closure surfaced as second load-bearing `sorry` (was not on W3 critical path explicitly; mission §raw-91-C3 honest mandate to surface it now).
 - **probability adjustment**: −1pp (W3 partial PASS); the +0pp neutral on MK-bridge already priced into the 64-73% range from W1.
 - **net**: from HIGH 64-73% → HIGH **63-72%**.
-- Per mission §F-D-3 "fail 시 +3pp": NOT applicable here (W3 is partial PASS, not fail).
+- Per mission §F-D-3 "fail on +3pp": NOT applicable here (W3 is partial PASS, not fail).
 
 **Caveat**: W4-W5 (MK port / ZFC fallback) is now the highest-risk gate. If `IsMKProperClass Strand` cannot be discharged by W6, then AX-2 (and dependent AX-3/AX-4) cannot reach GREEN-CI without an explicit `axiom` extension to lean4, which would itself require user approval per mission §safety jetsam.
 

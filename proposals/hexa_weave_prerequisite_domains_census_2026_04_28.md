@@ -2,7 +2,7 @@
 
 **Date**: 2026-04-28
 **Cycle**: 12 / fan-out 1/5
-**Trigger**: user directive — "선행도메인 있을시 선행도메인 도 모두 kick"
+**Trigger**: user directive — "prerequisite-domain when-present prerequisite-domain also all kick"
 **Companion witness**: `design/kick/2026-04-28_prerequisite-domains-census_omega_cycle.json`
 
 ---

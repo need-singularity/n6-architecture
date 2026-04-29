@@ -1,4 +1,4 @@
-# HEXA-WEAVE MVP W4 — lean4 MK port vs ZFC+V_κ Felgner 1971 fallback DECISION + 부분 실행
+# HEXA-WEAVE MVP W4 — lean4 MK port vs ZFC+V_κ Felgner 1971 fallback DECISION + part execute
 
 **Date**: 2026-04-28 (cycle 6 fan-out 3/5)
 **Parent spec**: `proposals/hexa-weave-formal-mechanical-verification-prep.md`
@@ -77,7 +77,7 @@ Total project sorry count: **3** (1 in AX1, 2 in AX2; MKBridge introduces zero n
 - `axiom_felgner_bridge_to_MK` (conservativity application, W7+)
 - `axiom_hexa_comp_closure_via_ZFC` (HEXA-COMP, W6+)
 
-**Note on AX2.lean integration**: Per W4 mission §safety mandate ("AX2.lean의 메인 PASS 정리 보존"), AX2.lean is NOT modified in this commit. The `AX2_strand_is_MK_class` and `AX2_strand_closed_under_HEXAComp` sorrys remain in place; W5 integration step (pending user approval) will rewrite these to invoke `MKBridge.AX2_strand_is_MK_class_via_ZFC` / `..._via_ZFC`.
+**Note on AX2.lean integration**: Per W4 mission §safety mandate ("AX2.leanof main PASS cleanup preserve"), AX2.lean is NOT modified in this commit. The `AX2_strand_is_MK_class` and `AX2_strand_closed_under_HEXAComp` sorrys remain in place; W5 integration step (pending user approval) will rewrite these to invoke `MKBridge.AX2_strand_is_MK_class_via_ZFC` / `..._via_ZFC`.
 
 ---
 
@@ -132,4 +132,4 @@ Total project sorry count: **3** (1 in AX1, 2 in AX2; MKBridge introduces zero n
 
 ## §8 Summary (Korean ≤400 chars)
 
-W4 결정: Option (ii) ZFC+V_κ + Felgner 1971 채택. MK port 거부 (90d 불가능). mathlib4 의 `Class`/`ZFSet`/`IsInaccessible` 활용. 새 파일 `MKBridge.lean` (215 LOC, 0 sorry, lake build PASS 10s) — `StrandClass_ZFC` 정의 + `AX2_strand_is_MK_class_via_ZFC` derivable theorem 추가. AX2.lean 의 2 sorry 는 4개 named axiom 으로 변환 가능 (W5 integration 시). F-D-3: 63-72% → 58-66% (-3~6pp). raw 91 C3 honest 한계: Felgner 자체 증명/explicit Encodable/conservativity 적용/HEXA-COMP 4개 axiom 미증명.
+W4 decision: Option (ii) ZFC+V_κ + Felgner 1971 adoption. MK port reject (90d impossible). mathlib4 of `Class`/`ZFSet`/`IsInaccessible` use. new file `MKBridge.lean` (215 LOC, 0 sorry, lake build PASS 10s) — `StrandClass_ZFC` definition + `AX2_strand_is_MK_class_via_ZFC` derivable theorem add. AX2.lean of 2 sorry  4count named axiom to conversion possible (W5 integration on). F-D-3: 63-72% → 58-66% (-3~6pp). raw 91 C3 honest limit: Felgner itself proof/explicit Encodable/conservativity apply/HEXA-COMP 4count axiom unproven.

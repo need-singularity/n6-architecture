@@ -1,8 +1,8 @@
 <!--
 DEPRECATED: 2026-04-28
-deprecated_reason: papers CLI 위임 (papers/.own own 9)
-migration: paper 발행은 papers/bin/papers publish <id> --target=all 사용
-historical: cycle 8 deposit prep 작업 — archived as record
+deprecated_reason: papers CLI delegation (papers/.own own 9)
+migration: paper publishing papers/bin/papers publish <id> --target=all use
+historical: cycle 8 deposit prep task — archived as record
 -->
 
 # HEXA-WEAVE Formal-Mechanical W2/W3/W5 Paper — Zenodo Deposit (Option-A) Prep Checklist

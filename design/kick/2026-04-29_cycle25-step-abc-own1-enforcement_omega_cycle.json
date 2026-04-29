@@ -1,0 +1,81 @@
+{
+  "schema": "omega_cycle.witness_v1",
+  "ts": "2026-04-29T01:59:24Z",
+  "cycle": 25,
+  "phase": "step-a-cleanup-step-b-launchd-step-c-hive-spec",
+  "topic": "own 1 HARD English-only enforcement 3-phase path: retroactive cleanup (Step A) + daily detection (Step B) + atomic prevention forward-spec (Step C)",
+  "verdict": "STEP-A-COMPLETE-STEP-B-COMPLETE-STEP-C-FORWARD-SPEC-AUTHORED",
+  "verdict_detail": "User directive 'english only 인데 안지켜진다 . lint 체크' 후 3-step path 모두 진행. (A) cycle 1-22 누적 17 proposals CJK 1086c → 0c 일괄 영어 번역 (own 1 violation 17→0). (B) launchd plist com.n6-architecture.own-doc-lint 신설 + tool/own_doc_lint_with_alert.sh wrapper (raw 66 trailer + raw 77 ledger). (C) proposals/hexa-weave-hive-lock-own-doc-lint-integration-2026-04-29.md forward-spec (cycle 27+ implementation, hive raw 99 가 atomic gate path). 5/5 sub-agent 모두 server-side rate-limited; 메인 thread 직접 진행.",
+  "step_a_results": {
+    "phase": "retroactive cleanup of 17 proposals",
+    "before_total_cjk": 2843,
+    "after_total_cjk": 0,
+    "files_modified": 16,
+    "files_already_clean_after_round_1": 1,
+    "translation_rounds": 3,
+    "round_1_small_files_10": "all 10 files 0c CJK (단순 keyword swap)",
+    "round_2_medium_files_3": "w4_mk + prerequisite + w5_sandbox 0c CJK",
+    "round_3_large_files_3": "alien_grade_5 939c→0c, b3_ghcr 606c→0c, biology_4th_sister 1086c→0c (3-pass batch)",
+    "own_1_lint_final_state": "OK (0 violations)",
+    "own_doc_lint_full_sweep": "0 HARD / 0 SOFT — all 14 HARD rules PASS"
+  },
+  "step_b_results": {
+    "phase": "launchd plist + daily own_doc_lint",
+    "files_created": [
+      "config/launchd/com.n6-architecture.own-doc-lint.plist (plutil OK)",
+      "tool/own_doc_lint_with_alert.sh (executable, smoke test PASS PASS)"
+    ],
+    "plist_schedule": "StartInterval 86400 (daily) + RunAtLoad true",
+    "wrapper_emits": "raw 66 ai-native-error trailer (reason + fix + ssot) on violation > 0",
+    "audit_ledger": "state/audit/own_doc_lint_events.jsonl (raw 77 schema, append-only)",
+    "user_install_command": "cp config/launchd/com.n6-architecture.own-doc-lint.plist ~/Library/LaunchAgents/ && launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.n6-architecture.own-doc-lint.plist",
+    "agent_executes_install": false,
+    "smoke_test_pass": "__OWN_DOC_LINT_RESULT__ PASS  ts=2026-04-29T01:56:56Z"
+  },
+  "step_c_results": {
+    "phase": "hive raw 99 lock-time integration forward-spec",
+    "files_created": [
+      "proposals/hexa-weave-hive-lock-own-doc-lint-integration-2026-04-29.md (15-section template, own 22 phased category, own 23 single-umbrella resolved by removing umbrella frontmatter, proposal_lint own#1+own#2 PASS)"
+    ],
+    "spec_form": "forward-spec only — agent does not modify ~/core/hive",
+    "implementation_target": "cycle 27+ once hive raw 99 production",
+    "core_thesis": "raw 13 OS-level git-hook deny → hive raw 99 dispatcher is canonical commit-time gate path (atomic prevention, ms latency vs Step B 24h lag)",
+    "spec_15_sections": "WHY / COMPARE / REQUIRES / STRUCT / FLOW / EVOLVE / VERIFY / IDEAS / METRICS / RISKS / DEPENDENCIES / TIMELINE / TOOLS / TEAM / REFERENCES",
+    "falsifiers_preregistered": 4
+  },
+  "raw_91_c3_disclose": [
+    "5/5 sub-agent (Step A / Step B / Step C / fan-out cycle 25 A-E) 모두 server-side rate-limit 차단 → 메인 thread 직접 진행",
+    "Step A 번역 = best-effort batch keyword replacement; technical precision 일부 영향 가능 (Korean 'Korean' → 'Korean', 'directory' / 'file' / 'mechanical' 등 대부분 self-evident; 1086c file 의 일부 micro-context 의미 손실 risk)",
+    "Step B launchd plist 는 사용자 manual install 필요 (agent 가 launchctl bootstrap 안 함, raw 91 C3)",
+    "Step C 는 forward-spec only — hive 측 implementation 사용자 결정 cycle 27+",
+    "own 1 lint OK 도달했지만 enforcement gate 가 launchd daily (Step B) 까지만 — 진정한 atomic prevention 은 Step C (hive lock --pre-lint) 후",
+    "δ recheck 결과: nexus fix/kick-infra-recovery 에 cycle 24 commit 후 사용자 별도 작업 142bb9a1 + acec1771 추가됨 (raw 172 + 400/401 auto-rotate); cycle 24/25 weave migration 과 격리"
+  ],
+  "raw_71_falsifiers": [
+    {"id": "F-CYCLE25-STEP-A-1", "condition": "round 1-3 batch translation 의미 손실 → user reports 30d 안 5+ 건 수정 필요", "deadline": "2026-05-29", "status": "preregistered"},
+    {"id": "F-CYCLE25-STEP-A-2", "condition": "own 1 lint 가 30d 안 다시 5+ violation 등장 (Step B daily fire 누적)", "deadline": "2026-05-29", "status": "preregistered"},
+    {"id": "F-CYCLE25-STEP-B-1", "condition": "사용자 launchctl bootstrap 안 해서 30d 안 daily lint 0회 fire", "deadline": "2026-05-29", "status": "preregistered"},
+    {"id": "F-CYCLE25-STEP-B-2", "condition": "raw 66 trailer 가 violation 발견했는데 사용자 ack 후속 0회", "deadline": "2026-07-29", "status": "preregistered"},
+    {"id": "F-CYCLE25-STEP-C-1", "condition": "hive raw 99 production not deployed by 2026-08-29 → Step C blocked indefinitely", "deadline": "2026-08-29", "status": "preregistered"}
+  ],
+  "verification_summary": {
+    "own_doc_lint_full_sweep": "0 HARD / 0 SOFT — all 14 HARD rules PASS",
+    "proposal_lint_full_sweep": "19 violations (all pre-existing, 0 new from cycle 25 Step C spec)",
+    "step_b_smoke_test": "PASS",
+    "plutil_config_launchd": "OK",
+    "step_c_proposal_passes_proposal_lint": true
+  },
+  "files_changed": [
+    "16 proposals/*.md (Step A — Korean translation rounds)",
+    "tool/own_doc_lint_with_alert.sh (Step B wrapper, executable)",
+    "config/launchd/com.n6-architecture.own-doc-lint.plist (Step B plist, plutil OK)",
+    "proposals/hexa-weave-hive-lock-own-doc-lint-integration-2026-04-29.md (Step C forward-spec)",
+    "design/kick/2026-04-29_cycle25-step-abc-own1-enforcement_omega_cycle.json (this witness)"
+  ],
+  "raw_47_cross_repo": "Step C spec cite hive raw 99 + raw 13 + raw 66 + raw 77 + raw 142 cross-repo dependency; ~/core/hive 측 file modify 0",
+  "raw_9_hexa_only": "Step A python batch (raw 9 deviation for translation; hexa-only equivalent missing); Step B bash wrapper (sim_bridge 패턴 호환); Step C markdown spec",
+  "raw_53_deterministic": "own_doc_lint exit code = deterministic verifier",
+  "raw_77_append_only": true,
+  "raw_142_d2_revertible": true,
+  "raw_138_sentinel": "__CYCLE25_STEP_ABC_RESULT__ A-COMPLETE-B-COMPLETE-C-FORWARD-SPEC"
+}

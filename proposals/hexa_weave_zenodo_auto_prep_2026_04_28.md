@@ -6,9 +6,9 @@ parent_proposal: proposals/hexa_weave_zenodo_deposit_prep_2026_04_28.md
 mission: cycle 13 / fan-out 4/5 — Zenodo deposit auto-prep — 1-click deposit prerequisites for alien-grade 6 unlock
 status: PREP only. No deposit performed. No Zenodo API call executed. User approval gates 5 items.
 deprecated: 2026-04-28
-deprecated_reason: papers CLI 위임 (papers/.own own 9)
-migration: paper 발행은 papers/bin/papers publish <id> --target=all 사용
-historical: cycle 13 deposit auto-prep 작업 — archived as record
+deprecated_reason: papers CLI delegation (papers/.own own 9)
+migration: paper publishing papers/bin/papers publish <id> --target=all use
+historical: cycle 13 deposit auto-prep task — archived as record
 ---
 
 # HEXA-WEAVE Zenodo deposit auto-prep (cycle 13 / fan-out 4/5)
