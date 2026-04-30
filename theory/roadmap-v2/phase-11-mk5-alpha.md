@@ -22,6 +22,8 @@ license: CC-BY-SA-4.0
 
 # P11 Mk.V-α — 47-Gap 3-Path Enclosure + L13 M1 Field Deployment + 3 Papers Submitted (Detailed Design)
 
+> **AI-native ETA SSOT (2026-05-01)**: For any closure / roadmap ETA in this repo, the authoritative computation is `$HIVE/tool/closure_eta.hexa` (LoC × parallel + bg × ∞ frame, rate 50,000 LoC/day/agent default, par+ser schema, DAG critical path). Static "+N 달" / "+N month" markdown estimates anchored to human single-developer baseline are DEPRECATED for closure-scope decisions per hive raw 257 (`ai-native-eta-closure-mandate`). Reference fixture: `--module critical-path --example gamebox --target CM-30` = 0.22d ≈ 5.3h vs static 630d (×2863 compression).
+
 > **Premise**: P9 partial_complete (8 done + 1 partial) + P10 informational (v2 roadmap completion record)
 > **Goal**: Enclose 47 primes of the BT-18 Moonshine 196883 gap via 3 independent mathematical paths + promote BT-19 candidate D time-consciousness + register Mk.IV τ²/σ=4/3 Lemma as BT-111 + specify L13 quantum-nuclear I/O 2027~2029 field-deployment device specs + complete 3 paper submission drafts + promote Red Team to A-.
 > **Emergent DSE principle**: All 12 tasks carry concrete outputs (file path + minimum line count) + explicit MISS conditions + self-reference prohibition (R14).
