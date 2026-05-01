@@ -1,4 +1,4 @@
-# n6-architecture /.own — L1 unified governance DSL (33 rules)
+# n6-architecture /.own — L1 unified governance DSL (35 rules)
 # Project-local SSOT: declarative rules + cron loop + forward-chain + drift checks.
 # Parallel to L0 (hexa-lang /.raw) with independent id namespace.
 # Grammar: hexa-lang self/raw_loader.hexa (same syntax as .raw / .loop / .chain).
@@ -781,3 +781,101 @@ own 33 live "ai-native-verify-pattern — AI agents generating domain verificati
   follow-up template emission tool — bin/n6 governance subcommand `n6 governance.hexa template-blockA-G --domain <slug> --precursor <axis>/<slug> [--precursor ...]` to emit a skeleton §7 from cat-litter pattern
   follow-up cross-project propagation per raw 47 — sister repos (nexus / anima / hexa-lang / airgenome / hive) inherit if they adopt own#31 + own#32 axis pair; own#33 follows as the natural positive companion (deferred — n6-local origin first, sister replication on warn → live transition)
   follow-up retroactive audit — identify existing §7 verify blocks under domains/ that already match Block A-G structure but were never tagged as own#33-compliant; backfill the cognitive-frameworks attribution
+
+own 34 live "ai-native-tier2-runtime — own#31 Tier 2 standalone tools (tool/own31_ast_visitor.py + tool/own31_runtime_sandbox.py) closing AST-class adversarial gaps (compile-deferred / getattr-split / __import__ concat / decorator-mutation / type-annotation-hijack) + runtime-class gaps (globals injection / frame manipulation / coroutine / generator-deferred). HARD-OPT-IN; standalone CLI invocation only at this revision (no hexa lint dispatch wiring per own#35 hive-resource-only-mandate constraint)."
+  slug ai-native-tier2-runtime
+  decl tool/own31_ast_visitor.py + tool/own31_runtime_sandbox.py (standalone CLI; no lint hexa dispatch yet)
+  scope OPT-IN — invoke standalone via python3 tool/own31_ast_visitor.py <block-source-file> OR python3 tool/own31_runtime_sandbox.py <block-source-file> [--seed N]; lint hexa dispatch deferred until own#35 hive-resource integration completes
+  status live
+  since 2026-05-01
+  why own#31 v3.19 closes ~99% of practical adversarial bypass surface; remaining 17 gaps split into Tier 1 (string-heuristic, closed in v3.19 by Tier 1 commit 84d63d93) and Tier 2 (AST + runtime-sandbox, requires python3 interpreter). Tier 2 standalone tools land here as CLI-invocable artifacts; auto-dispatch from lint hexa is gated on own#35 hive-resource-only resource provisioning (not host-detection Path α).
+  bans direct host python3 detection in lint hexa (`which python3` / `command -v python3`) — see own#35 for the resource-routing mandate
+  bans Tier 2 tools shipping with hardcoded /Users/<name>/ paths (raw 15 personal-path-leak-ban compliance)
+  exceptions standalone CLI invocation by user/CI (NOT the hexa lint dispatch path) is allowed at any time
+  exceptions raw 91 C3 honest fallback path: when Tier 2 tools unavailable, the lint hexa emits a "Tier 2 functionality skipped — install via hive resource add python3" suggestion and proceeds with Tier 1 v3.19 detection
+  realization-channels standalone CLI tools committed at commit 3c5d2c9a
+  realization-channels future hexa lint dispatch wiring (gated on own#35 hive-resource integration)
+  cognitive-frameworks own#31 verify-tautology-ban-mandate (parent — Tier 1 string heuristics)
+  cognitive-frameworks own#33 ai-native-verify-pattern (sister — AI-author guidance)
+  cognitive-frameworks own#35 hive-resource-only-mandate (constraint on dispatch path)
+  reference-example tool/own31_ast_visitor.py (5 AST detector signatures)
+  reference-example tool/own31_runtime_sandbox.py (literal-removal differential)
+  proof commit 3c5d2c9a (tool files landed)
+  measurement-axis tier2-coverage = (Tier 2 detector activations / total adversarial-suspect blocks) — populated once hexa lint dispatch wires up
+  falsifier F-OWN34-1 30d post LIVE: any commit ships Tier 2 tools with /Users/<name>/ literal → ramp HARD-block immediately
+  falsifier F-OWN34-2 hexa lint dispatch attempts to call python3 via $PATH detection — own#35 violation cross-fire
+  falsifier F-OWN34-3 Tier 2 tool standalone CLI exits with KeyError / unhandled exception on a valid input → tool quality regression
+  measurement-threshold tier2-coverage>=0-at-30d (tools land + standalone CLI works; dispatch coverage measured later)
+  spec-form forward-spec
+  enforce tool/own31_verify_tautology_ban_lint.hexa --selftest (Tier 1 selftest preserved)
+  enforce-layer hive-agent
+  enforce-layer-secondary cli-lint
+  enforce-layer-tertiary advisory
+  category meta-triad
+  category resource-governance
+  applies-to source-code
+  applies-to tool-infrastructure
+  phase pre-write
+  triad-exempt forward-spec-meta-rule — own#34 governs Tier 2 tool deployment policy
+  severity warn
+  verify python3 tool/own31_ast_visitor.py --help; python3 tool/own31_runtime_sandbox.py --help
+  cron on-commit
+  on_fail warn
+  label own#34 ai-native-tier2-runtime (HARD-OPT-IN)
+  note FORWARD SPEC. Tier 2 standalone tools committed at 3c5d2c9a (213 + 255 LoC). Lint hexa Tier 2 dispatch integration deferred until own#35 hive-resource path δ lands. raw 91 C3 honest: Tier 2 functionality is currently INVOCABLE only via standalone CLI; not auto-triggered during pre-commit lint runs.
+  follow-up wire hexa lint Tier 2 dispatch via hive resource exec python3 (post own#35)
+  follow-up bootstrap reports/own34_tier2_audit.json per raw 77 audit ledger schema
+  follow-up cross-project propagation per raw 47
+
+own 35 live "hive-resource-only-mandate — external resources (python3 interpreter, runtime sandbox infrastructure, AST tooling, any cross-host binary or library beyond the hexa-lang stdlib) MUST be provisioned and accessed exclusively via hive CLI 'resource add' / 'resource remove' / 'resource list' + the 'hive-resource' tool. Auto-detect / `which` / $PATH lookup paths are FORBIDDEN (HARD enforcement)."
+  slug hive-resource-only-mandate
+  decl ~/core/hive/bin/hive resource add|remove|list ; ~/core/hive/bin/hive-resource (if separate binary)
+  scope HARD enforcement — every external-resource-dependent tool under tool/**.hexa, scripts/**, and CI hooks MUST route through hive resource ops; no `which`/`command -v`/$PATH host-detection
+  status live
+  since 2026-05-01
+  why hive CLI is the cross-repo SSOT for resource provisioning. Host-detection paths bypass the SSOT, create audit holes, and lose reproducibility across the n6 / hive / nexus / anima / hexa-lang / airgenome / airgenome family. own#31 Tier 2 lint dispatch was originally proposed with Path α auto-detect (host python3 via `which python3`); user mandate 2026-05-01 ("자원들은 hive cli 의 리소스 add, remove + hive-resource 로만 완벽히 작동되어야 한다") replaces α with hive-resource-only path δ. own#35 codifies this for all future external-resource tooling.
+  bans `which X` / `command -v X` / `[ -x /usr/bin/X ]` style host-detection in any tool that needs external resources
+  bans direct $PATH binary lookup for python3 / ast / sandbox infrastructure
+  bans Dockerfile RUN apt-get install of external runtimes WITHOUT corresponding hive resource declaration
+  exceptions hive CLI itself (chicken-and-egg — hive must be reachable to begin with; allowed via standard PATH lookup)
+  exceptions raw 91 C3 honest fallback path: tool MAY emit "[tool] note: external resource <name> not provisioned via hive CLI; functionality skipped — register via 'hive resource add <name>' to enable" and proceed with reduced fidelity
+  realization-channels hive resource add / remove / list / exec
+  realization-channels hive-resource <name> -- <command> wrapper
+  realization-channels state/resources.{yaml,json} declarative manifests (if hive CLI supports — investigate during integration)
+  cognitive-frameworks own#31 verify-tautology-ban-mandate (Tier 2 dispatch path consumer)
+  cognitive-frameworks own#33 ai-native-verify-pattern (AI agents authoring resource invocations route through hive)
+  cognitive-frameworks own#34 ai-native-tier2-runtime (sister axis — runtime infrastructure tools)
+  cognitive-frameworks raw 47 cross-repo-trawl (hive is the cross-repo coordinator)
+  reference-example tool/own31_verify_tautology_ban_lint.hexa Tier 2 dispatch (FUTURE — uses hive-resource-only path δ post-integration)
+  reference-example .gitignore-style: any future tool requiring external runtime declares hive resource dependency
+  proof-obligations grep -rn 'which python3\|command -v python3' tool/ scripts/ → zero matches across whole repo (current state at 2026-05-01: zero, already compliant)
+  measurement-axis hive-resource-coverage = (tools using hive-resource invocation / total tools requiring external resources) — target 1.0 (100%)
+  measurement-axis bypass-incidence = (commits with `which`/`command -v` style detection added after own#35 LIVE) — target 0
+  falsifier F-OWN35-1 30d post LIVE: any tool/**.hexa or scripts/** introduces `which X` / `command -v X` / direct $PATH detection for an external runtime → ramp to HARD-block immediately
+  falsifier F-OWN35-2 hive CLI itself becomes unreachable on a clean host (chicken-and-egg break) → exception clause widens OR hive bootstrap RFC opened
+  falsifier F-OWN35-3 hive resource interface API changes break existing consumers → tool registry refactor cycle
+  falsifier F-OWN35-4 60d post LIVE: zero progress on Tier 2 hexa lint dispatch wiring via hive-resource → architectural reassessment
+  measurement-threshold hive-resource-coverage>=0.95-at-30d bypass-incidence==0
+  spec-form forward-spec
+  enforce tool/own31_verify_tautology_ban_lint.hexa (Tier 2 path δ when integrated)
+  enforce hive resource list (CI integration check; future)
+  enforce-layer hive-agent
+  enforce-layer-secondary cli-lint
+  enforce-layer-tertiary advisory
+  category meta-triad
+  category resource-governance
+  applies-to source-code
+  applies-to tool-infrastructure
+  applies-to ci-hooks
+  phase pre-commit
+  triad-exempt forward-spec-meta-rule — own#35 governs resource-routing policy, not a per-rule lint
+  severity hard
+  verify hexa tool/own31_verify_tautology_ban_lint.hexa --selftest (preserved Tier 1 v3.19 path; Tier 2 dispatch deferred)
+  cron on-commit
+  on_fail block
+  label own#35 hive-resource-only-mandate (HARD enforcement)
+  note FORWARD SPEC. Tier 2 dispatch was originally proposed with Path α auto-detect (host python3 via `which python3`); user mandate 2026-05-01 replaces α with hive-resource-only path δ. own#35 codifies this for all future external-resource tooling in n6-architecture and (per raw 47) cross-repo siblings. Current repo state is already compliant — zero `which X` / `command -v X` detection in tool/ scripts/ at 2026-05-01.
+  follow-up cross-project propagation per raw 47 — sister repos inherit if they have external-resource-dependent tools
+  follow-up bootstrap reports/own35_hive_resource_audit.json per raw 77 audit ledger schema
+  follow-up CI gate: pre-commit hook scans staged content for `which X` / `command -v X` patterns introduced after own#35 LIVE date
+  follow-up Tier 2 lint hexa dispatch wiring (post hive-resource integration RFC)
