@@ -1,7 +1,7 @@
 {
   "_doc": "도메인 SSOT — 304 도메인을 10축으로 분류. 축 변경 시 이 파일만 수정.",
-  "_version": "2.2.0",
-  "_total": 398,
+  "_version": "2.3.0",
+  "_total": 399,
   "_axes": 13,
   "_changelog": [
     "1.0.1 (2026-04-11): compute 축에 4 도메인 추가 — chip-rtl-gen, chip-dse-pipeline, chip-isa-n6, chip-npu-n6 (칩 설계 축 확장)",
@@ -72,6 +72,10 @@
     {
       "date": "2026-05-01",
       "change": "2.2.0 (2026-05-01): South Africa applied-tech bet #6 — lora-mesh-learning-terminal registered under infra axis at alien-grade 10 PHYSICAL-LIMIT (proposals/south-africa-applied-tech.md row 6). Solar-powered LoRa mesh + e-paper / low-power Android terminal stack delivering CAPS-aligned curriculum + AI-tutor responses to South African rural learners (~5M, DBE 2023) at USD 8-15/learner-year all-in vs commodity mobile-data OER USD 50-100/learner-year. Physical-limit anchors: Shannon 1948 channel capacity (BSTJ 27:379) C = B*log2(1+SNR); LoRa SF12 BW125 kHz 250 bps theoretical from Semtech SX127x Table 13 + ETSI EN 300 220 1% duty cycle = ~9.85 MB/yr per node + SF7-SF12 ladder ~331 MB/yr broadcast budget · Semtech SX127x datasheet §4.1.1.3 LoRa link budget 14 dBm Tx + -148 dBm Rx sensitivity = 162 dB link budget · Friis 1946 free-space-path-loss (IRE 34:254) + ITU-R P.833-9 6 dB/km foliage attenuation → 9 km practical rural ground-plane range with 10 dB fade margin · Fall 2003 (SIGCOMM) + Cerf 2007 (RFC 5050) Bundle Protocol delay-tolerant networking · PVGIS-Africa SA-Karoo 6 kWh/m²/d annual avg insolation (4.5 kWh/m²/d winter low) → 50 W mono-Si PV + 100 Wh LiFePO4 sustains 50.4 Wh/d gateway load with 5x annual harvest margin · Battery University BU-205 LiFePO4 3000 cycles @ 80% DoD = 8.2 yr cycle life · Comiskey 1998 (Nature 394:253) bistable electrophoretic e-paper foundational paper + Carsel-Hwang 2017 Mobile View §3.2 0 mW idle + 50-100 mW per refresh → 54 day mixed-workload battery life on 11 Wh Li-Po · Frantar 2023 GPTQ + Lin 2023 AWQ INT4 7B LLM = 3.5 GB fits gateway 8 GB RAM + Radford 2021 CLIP-ViT-B/32 (151 MB) terminal multimodal encoder · DBE 2011-2024 CAPS curriculum corpus 4.4 GB compressed (8 grades × 11 official languages) · BOM physics: gateway USD 500 / 200 learners / 5 yr amort = USD 0.50/yr + terminal USD 90 / 5 yr / 1.6 reuse = USD 11.25/yr + USD 1/yr field ops = USD 12.75/learner-year (target band USD 8-15). 6 precursors compute/5g-6g-network + compute/chip-architecture + cognitive/ai-multimodal + energy/solar-architecture + physics/electromagnetism + infra/calendar-time-geography. F-LORA-MVP-1..5 falsifier gates: F-MVP-1 + F-MVP-3 (2026-09-30 device-attrition > 25% / solar gateway uptime < 95% under SA Karoo seasonal cloud cover) + F-MVP-2 + F-MVP-5 (2026-12-31 LoRa link reliability < 95% PDR @ 5 km / per-learner cost > USD 18/yr at pilot scale) + F-MVP-4 (2027-03-31 DBE CAPS certification delayed > 18 mo). Hardest unknown per proposals row 6: device-attrition rate (5% sustains, 25% holds ceiling, 30% destroys unit economics); central estimate 10-20% based on Boox Palma 2 retail ~10% + Equip Africa 2023 SA-rural tablet 14%. Design-by-physics per own#32, NOT n=6 force-fit. Lint: own#31 v3.19 PASS; §7.1 Python Block A-G all PASS. _total 397 -> 398 (+1); infra axis count 58 -> 59; alien-grade 10 PHYSICAL-LIMIT."
+    },
+    {
+      "date": "2026-05-01",
+      "change": "2.3.0 (2026-05-01): South Africa applied-tech bet #1 — rooftop-pv-2nd-life-microgrid registered under energy axis at alien-grade 10 PHYSICAL-LIMIT (proposals/south-africa-applied-tech.md row 1). 50-500 kW rooftop PV + 100-500 kWh second-life NMC EV-battery microgrid for SA clinic/school/SME anchor sites; reference T2 100 kW PV + 250 kWh battery at USD 150,000 capex with 6.7-yr simple payback at SA loadshedding-blended avoided-cost tariff 0.17 USD/kWh (Eskom 0.11 base × 75% + diesel-genset 0.35 × 25% loadshedding share); LCOE 0.12 USD/kWh; discounted payback 11 yr at r=8%. Physical-limit anchors: Shockley-Queisser 1961 PV ceiling 33.7% at Eg=1.34 eV (commercial Si 22% = 65% of SQ peak; Tiedje 1984 + Ruhle 2016) + NREL TMY3 / SAURAN 2400 kWh/m^2/yr SA GHI (top decile globally; PR 0.80 → 1920 kWh/kW/yr) + Wood-Mackenzie 2023 NMC 2nd-life 1500-2500 cycles to 60% SOH at 80% DoD (10-yr calendar life; Schmalstieg 2014 + Wang 2014 cycle-life model; eta_RT 0.90; lifetime 972 kWh/kWh nameplate) + Spotnitz-Franklin 2003 Li-ion thermal runaway 80°C onset (Bernardi 1985 heat-gen + Incropera 2017 nat-conv h=7.5 W/m^2/K → 38°C steady-state runaway margin at 40°C SA design ambient with extended-fin radiator 32 m^2/250 kWh) + Esram-Chapman 2007 MPPT 99% theoretical × 96% inverter (SMA Sunny Tripower spec) + Cole 1990 LCOE financial-physics. 6 precursors energy/solar-architecture (SQ ceiling + insolation) + energy/battery-architecture (NMC electrochemistry + cycle life) + energy/power-grid (grid-tie inverter + microgrid topology + NRS-097-2/NERSA SSEG) + energy/thermal-management (passive cooling SA peak ambient) + physics/electromagnetism (semiconductor band gap) + materials/recycling (2nd-life EV pack reclamation; Nissan Leaf / Tesla Model S retired packs 70-80% SOH; BloombergNEF 2024 1 GWh/yr supply). F-PV2L-MVP-1..5 90-day MVP gates: F-PV2L-MVP-1 + F-PV2L-MVP-3 + F-PV2L-MVP-5 (2026-09-30 cycle-life < 1500 / SCR < 70% / thermal management > 35°C internal at SA peak summer) + F-PV2L-MVP-2 (2026-10-31 inverter MTBF < 10 yr in SA dust+heat) + F-PV2L-MVP-4 (2026-12-31 NERSA SSEG approval > 18 months). Hardest unknown per SA portfolio row 1: 2nd-life cycle-life data scarcity (Wood-Mackenzie 2023 industry data converges on 2000-cycle midpoint but SA-pilot validation needed). Design-by-physics per own#32, NOT n=6 force-fit. Lint: own#31 v3.19 PASS; own_doc_lint --rule 6 + 15 PASS; §7.1 Python Block A-G all PASS. _total 398 -> 399 (+1); energy axis count 25 -> 26 (master sub_indexes parity with energy/_index.json); alien-grade 10 PHYSICAL-LIMIT."
     }
   ],
   "_template": "각 도메인: domains/<axis>/<name>/{CLAUDE.md, <name>.md, verify.hexa}",
@@ -87,7 +91,7 @@
     },
     "energy": {
       "path": "energy/_index.json",
-      "count": 26
+      "count": 27
     },
     "compute": {
       "path": "compute/_index.json",
@@ -103,7 +107,7 @@
     },
     "infra": {
       "path": "infra/_index.json",
-      "count": 57
+      "count": 58
     },
     "cognitive": {
       "path": "cognitive/_index.json",
@@ -237,7 +241,8 @@
     "superconductor",
     "thermal-management",
     "hvac-system",
-    "amd-ree-mineshaft-phes"
+    "amd-ree-mineshaft-phes",
+    "rooftop-pv-2nd-life-microgrid"
   ],
   "compute": [
     "5g-6g-network",
@@ -388,7 +393,8 @@
     "hexa-exo",
     "hexa-skyway",
     "hexa-tsunami",
-    "hexa-weather"
+    "hexa-weather",
+    "lora-mesh-learning-terminal"
   ],
   "cognitive": [
     "anima-service",
