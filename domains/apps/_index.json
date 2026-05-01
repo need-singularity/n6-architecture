@@ -2,20 +2,21 @@
   "_doc": "apps axis sub-SSOT — consumer software application surface where mobile compute + cognitive AI + physical optics + sensor physics intersect. Distinct from compute axis (silicon engineering scope) and cognitive axis (AI research scope) and physics axis (fundamental physics scope): apps axis is for the consumer-software-product surface where real-time UX + mobile-power-budget + multi-axis precursor inheritance dominate.",
   "_axis": "apps",
   "_parent": "../_index.json",
-  "_version": "1.3.0",
+  "_version": "1.4.0",
   "_meta": {
     "_category_name": "consumer software apps: camera-filter / media / fitness / social / productivity / accessibility — mobile-compute + cognitive-AI + physics-optics intersection surface",
-    "_domains_count": 4,
+    "_domains_count": 5,
     "_verified_count": null,
     "_alien_index_avg": null,
     "_honesty_note": "_verified_count / _alien_index_avg null on creation; populate from atlas.n6 aggregation once the first MVP measurements land per per-domain falsifier deadlines.",
     "_updated": "2026-05-01"
   },
-  "_count": 4,
+  "_count": 5,
   "_changelog": [
     "1.0.0 (2026-05-01): apps axis sub-SSOT created. camera-filter-app registered (consumer mobile camera filter application; real-time 60-fps preview + AI-augmented stylization; precursors compute/chip-architecture + cognitive/ai-multimodal + cognitive/ai-inference-cost + cognitive/ai-quality-scale + physics/optics + physics/electromagnetism).",
     "1.1.0 (2026-05-01): hexa-filter-algebra registered (filter authoring/composition framework; sister to camera-filter-app — FILTER-ALGEBRA authors, camera-filter-app applies; 9 primitive operations + composition algebra + auto-generation from N=5 reference pairs + LPIPS/SSIM/PSNR provable quality bounds + 16.67 ms hard real-time ceiling; vs VSCO 1-2-week artist labor; 6 precursors compute/chip-architecture + cognitive/ai-multimodal + cognitive/ai-quality-scale + physics/optics + physics/electromagnetism + compute/chip-design; F-FA-MVP-1..5 falsifier gates 2026-08-30 / 2026-09-30; alien-grade 10 PHYSICAL-LIMIT).",
-    "1.2.0 (2026-05-01): hexa-parallel-self registered (consumer mobile selfie filter app; slot-machine 8-grid alternate-self generation via latent diffusion + InstantID + LoRA per-timeline weights; 5-axis identity exploration era/culture/profession/aesthetic/personal; 18 ms p95 inference; sister to camera-filter-app — PARALLEL-SELF generates alternate selves, camera-filter-app applies aesthetic filters; 6 precursors cognitive/ai-multimodal + cognitive/ai-inference-cost + cognitive/ai-quality-scale + compute/chip-architecture + cognitive/ai-alignment + cognitive/ai-eval-pipeline; F-PSELF-MVP-1..5 falsifier gates 2026-08-30 / 2026-09-30; alien-grade 10 PHYSICAL-LIMIT). Plus hexa-main-character registered (cinematic-look video filter app; 9 unified Hollywood effects — aspect/teal-orange/slow-mo/bokeh/lens-flare/grain/freeze/music/title; 16.67 ms real-time per camera-filter-app inheritance; main-character-energy market — TikTok #maincharacterenergy 5B+ views; 6 precursors compute/chip-architecture + cognitive/ai-multimodal + cognitive/ai-inference-cost + cognitive/ai-quality-scale + physics/optics + physics/electromagnetism; F-MC-MVP-1..5 falsifier gates 2026-08-30 / 2026-09-30; alien-grade 10 PHYSICAL-LIMIT). apps axis count 2 → 4."
+    "1.2.0 (2026-05-01): hexa-parallel-self registered (consumer mobile selfie filter app; slot-machine 8-grid alternate-self generation via latent diffusion + InstantID + LoRA per-timeline weights; 5-axis identity exploration era/culture/profession/aesthetic/personal; 18 ms p95 inference; sister to camera-filter-app — PARALLEL-SELF generates alternate selves, camera-filter-app applies aesthetic filters; 6 precursors cognitive/ai-multimodal + cognitive/ai-inference-cost + cognitive/ai-quality-scale + compute/chip-architecture + cognitive/ai-alignment + cognitive/ai-eval-pipeline; F-PSELF-MVP-1..5 falsifier gates 2026-08-30 / 2026-09-30; alien-grade 10 PHYSICAL-LIMIT). Plus hexa-main-character registered (cinematic-look video filter app; 9 unified Hollywood effects — aspect/teal-orange/slow-mo/bokeh/lens-flare/grain/freeze/music/title; 16.67 ms real-time per camera-filter-app inheritance; main-character-energy market — TikTok #maincharacterenergy 5B+ views; 6 precursors compute/chip-architecture + cognitive/ai-multimodal + cognitive/ai-inference-cost + cognitive/ai-quality-scale + physics/optics + physics/electromagnetism; F-MC-MVP-1..5 falsifier gates 2026-08-30 / 2026-09-30; alien-grade 10 PHYSICAL-LIMIT). apps axis count 2 → 4.",
+    "1.4.0 (2026-05-01): apps axis 5th domain hexa-vsco registered (consumer mobile pro photo editor; full VSCO feature parity — 200+ filter library / HSL panel / tone curve / recipe / Studio / Discover / Free vs Pro — PLUS 7 alien-grade-10 differentiators: LPIPS ≤ 0.15 / SSIM ≥ 0.95 / PSNR ≥ 35 dB mathematical quality bounds (Zhang 2018 / Wang-Bovik 2004 / Wallace 1991) + 16.67 ms real-time hard ceiling per single-tool adjust (Nyquist 60-fps inheritance from camera-filter-app) + filter library auto-generated via FILTER-ALGEBRA inverse problem (30 min vs 1-2 weeks artist labor) + algebraic transparency (plaintext expression `f = portra ∘ vignette(0.3) ∘ grain(0.2)`) + on-device first privacy + physics-based tools (Hurter-Driffield 1890 H&D curves / Wiener 1949 deconvolution / Cox 1955 grain / Planck 1900 blackbody WB 2000-12000 K / cos⁴θ paraxial vignette / MacAdam 1942 perceptual color ellipse / CIE 1931 standard observer) + open marketplace 70% royalty to creators. Sister to apps/camera-filter-app (verb-distinction: HEXA-VSCO EDITS post-capture; camera-filter-app CAPTURES + APPLIES real-time). Internal dependency on apps/hexa-filter-algebra (engine layer — uses 9-primitive algebra and inverse-problem auto-generation). 6 precursors compute/chip-architecture + cognitive/ai-multimodal + cognitive/ai-quality-scale + physics/optics + physics/electromagnetism + compute/chip-design. F-VSCO-MVP-1..5 90-day falsifier gates 2026-08-30 (latency p95 / library count / Recipe roundtrip) + 2026-09-30 (A/B preference vs actual VSCO / cloud sync data loss). Design-by-physics per own#32, NOT n=6 force-fit. apps axis count 4 → 5; alien-grade 10 PHYSICAL-LIMIT."
   ],
   "domains": [
     {
@@ -180,6 +181,57 @@
         "F-MC-MVP-3 (2026-08-30): genre auto-detection accuracy < 70% on 1000-clip labeled test set -> genre classifier retract",
         "F-MC-MVP-4 (2026-09-30): scene-music CLAP MOS < 4.0/5 on N=20 panel -> music suggestion claim retracted",
         "F-MC-MVP-5 (2026-09-30): aperture-shape lens flare diverges > 5° from 6-blade physical model -> physics fidelity retract"
+      ]
+    },
+    {
+      "slug": "hexa-vsco",
+      "files": 1,
+      "has_claude_md": false,
+      "has_domain_md": true,
+      "has_hexa": false,
+      "has_verify": false,
+      "status": "registered",
+      "tier": "PHYSICAL-LIMIT",
+      "alien_index_current": 10,
+      "alien_index_target": 10,
+      "registered_at": "2026-05-01",
+      "sister_domain": "apps/camera-filter-app",
+      "engine_dependency": "apps/hexa-filter-algebra",
+      "verb_distinction": "HEXA-VSCO EDITS + LIBRARY + DISCOVER (post-capture pro photo editor) vs camera-filter-app CAPTURES + APPLIES (real-time camera). Same apps axis, different verb. HEXA-VSCO uses hexa-filter-algebra internally as the engine layer.",
+      "physical_limit_anchors": {
+        "lpips_design_threshold": "Zhang 2018 LPIPS — design <= 0.15 vs perceptual indistinguishability 0.20 ceiling (BAPPS dataset; 25% headroom)",
+        "ssim_high_quality_floor": "Wang-Bovik 2004 SSIM — design >= 0.95 (LIVE dataset; structural similarity high-fidelity)",
+        "psnr_design_dB": "Wallace 1991 / mean-square-error fidelity — design >= 35 dB (commodity baseline 28 dB)",
+        "real_time_edit_budget_ms": "16.67 ms = 1000/60 fps single-tool-adjust hard ceiling (Nyquist visual perception >= 24 fps; Apple HIG 2023 / Google Material Design smooth UX 60 fps; camera-filter-app real-time inheritance)",
+        "filter_authoring_time_min": "30 min via FILTER-ALGEBRA inverse problem from N=5 reference image pairs each (vs VSCO 1-2 weeks artist labor per filter; apps/hexa-filter-algebra engine)",
+        "filter_representation": "plaintext algebra expression — function composition over 9 primitives (M color matrix / T tone curve / K convolution / C color-space / N grain / H histogram / L local tone / V vignette / U sharpening) with 4 operators (∘ compose / ^ power / / scale / blend(f, g, alpha))",
+        "hd_curve_regions": "Hurter-Driffield 1890 photographic transfer curve — toe gamma 0.6 / linear gamma 1.0 / shoulder gamma 1.4 / DMax 3.0 typical silver-halide saturation (Mees 1942 §6.3)",
+        "wiener_inverse_lower_bound": "Wiener 1949 deconvolution — sharpening tool 'amount' bounded by inverse-filter G = |H|^2 / (|H|^2 + K) in (0, 1) for K > 0 (cannot exceed PSF inverse without amplifying noise above SNR floor)",
+        "cox_grain": "Cox 1955 cluster Poisson model — grain primitive (Kodak Vision3 5219 D50 1.4 µm reference)",
+        "planck_wb_temp_range_K": "2000-12000 K — Planck 1900 blackbody radiation curve covers tungsten (3200 K) through overcast daylight (12000 K); design B(550, 5500) > B(550, 3200) (warmer-bias correction at 5500 K daylight)",
+        "cos4_theta_vignette": "Born-Wolf 1999 §4.7 paraxial cos^4 θ optical vignette falloff — at field angle 30°, falloff ≈ 0.5625 (1.5x EV correction full-frame)",
+        "macadam_jnd_uv": "MacAdam 1942 perceptual color ellipse — 1-step just-noticeable-difference ≈ 0.005 in u'v' uniform space (skin-tone protection mask anchor)",
+        "cie_1931_coverage_nm": "CIE 1931 2-degree standard observer — visible spectrum 360-830 nm = 470 nm coverage (HSL color space anchor; Wyszecki-Stiles 2000)",
+        "npu_compute_budget_TOPS": "17.5 TOPS = 50% of Apple A17 Pro 35 TOPS (camera-filter-app inheritance; 50% headroom for OS + concurrent apps)",
+        "roofline_OI_threshold": "Williams-Waterman-Patterson 2009 Roofline — operational intensity > 10 FLOPs/byte for compute-bound regime (kernel fusion compilation in editor pipeline)",
+        "marketplace_royalty_pct": "70% royalty to filter creators (vs VSCO 0%); 30% platform cut aligned with App Store / Google Play standard",
+        "feature_parity_count": "14 VSCO features matched in mk1 (filter library / 10 editor tools / skin tone protection / recipe / Studio / Discover / Free vs Pro) + 7 alien-grade-10 differentiators",
+        "inaugural_filter_library_count": "50 filters at MVP launch (FILTER-ALGEBRA-generated)"
+      },
+      "precursors": [
+        "compute/chip-architecture",
+        "cognitive/ai-multimodal",
+        "cognitive/ai-quality-scale",
+        "physics/optics",
+        "physics/electromagnetism",
+        "compute/chip-design"
+      ],
+      "falsifiers": [
+        "F-VSCO-MVP-1 (2026-08-30): editor latency p95 > 25 ms on iPhone 15 Pro under any single-tool adjustment -> real-time claim retracted",
+        "F-VSCO-MVP-2 (2026-08-30): mk1 inaugural filter library < 50 filters at launch -> mk1 incomplete",
+        "F-VSCO-MVP-3 (2026-08-30): Recipe URL share-load roundtrip failure rate > 5% across 1000 test transactions -> community share claim retracted",
+        "F-VSCO-MVP-4 (2026-09-30): N=30 user blind A/B preference vs actual VSCO < 50% on edited-photo-quality survey -> quality claim retracted",
+        "F-VSCO-MVP-5 (2026-09-30): cloud sync data loss rate > 0.001% across 100,000 sync transactions over 30 days -> reliability claim retracted"
       ]
     }
   ]

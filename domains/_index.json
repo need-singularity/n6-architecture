@@ -1,7 +1,7 @@
 {
   "_doc": "도메인 SSOT — 304 도메인을 10축으로 분류. 축 변경 시 이 파일만 수정.",
-  "_version": "1.4.0",
-  "_total": 391,
+  "_version": "1.6.0",
+  "_total": 392,
   "_axes": 13,
   "_changelog": [
     "1.0.1 (2026-04-11): compute 축에 4 도메인 추가 — chip-rtl-gen, chip-dse-pipeline, chip-isa-n6, chip-npu-n6 (칩 설계 축 확장)",
@@ -44,6 +44,14 @@
     {
       "date": "2026-05-01",
       "change": "1.3.0 (2026-05-01): apps axis 2nd domain hexa-filter-algebra registered (filter authoring/composition framework; sister to camera-filter-app — FILTER-ALGEBRA AUTHORS / COMPILES filters, camera-filter-app APPLIES them; both share 16.67 ms real-time budget; first intra-axis sister-pairing in n6-architecture). 9 primitive operations (M color matrix / T tone curve / K convolution / C color-space change / N grain / H histogram match / L local tone / V vignette / U sharpening) closed under composition algebra (∘ compose / ^ power / / scale / blend); auto-generation from N=5 reference image pairs (linear regression on 9 RGB unknowns + 1D regression on tone curve + FFT grain match + He 2015 residual CNN); LPIPS ≤ 0.15 / SSIM ≥ 0.95 / PSNR ≥ 35 dB provable quality bounds; 16.67 ms hard real-time ceiling at depth ≤ 4 (4 × 3.5 ms primitive avg = 14.0 ms ≤ 16.67 ms; depth 5 = 17.5 ms falsifier-trigger by construction). Physical-limit anchors: Shannon 1948 Data Processing Inequality (24 bits/pixel ceiling) + Wiener 1949 inverse filter (sharpening lower bound) + Tishby 1999 information bottleneck (33³ LUT optimal) + Cox 1955 cluster Poisson (grain) + Reinhard-Devlin 2002 (local tone) + Williams-Waterman-Patterson 2009 Roofline (scheduling) + Zhang 2018 LPIPS + Wang-Bovik 2004 SSIM + Hurter-Driffield 1890 (tone curve) + He 2015 residual + Radford 2021 CLIP + CIE 1931. 6 precursors compute/chip-architecture + cognitive/ai-multimodal + cognitive/ai-quality-scale + physics/optics + physics/electromagnetism + compute/chip-design. F-FA-MVP-1..5 90-day MVP gates 2026-08-30 (associativity / inverse-problem LPIPS / depth-4 real-time) + 2026-09-30 (A/B preference / commute correctness). Design-by-physics per own#32, NOT n=6 force-fit. _total 385 -> 386 (+1); apps axis count 1 -> 2; alien-grade 10 PHYSICAL-LIMIT."
+    },
+    {
+      "date": "2026-05-01",
+      "change": "1.5.0 (2026-05-01): apps axis 5th domain hexa-vsco registered (consumer mobile pro photo editor; full VSCO feature parity — 200+ filter library / HSL panel / tone curve / recipe / Studio / Discover / Free vs Pro — PLUS 7 alien-grade-10 differentiators: LPIPS ≤ 0.15 / SSIM ≥ 0.95 / PSNR ≥ 35 dB mathematical quality bounds (Zhang 2018 / Wang-Bovik 2004 / Wallace 1991) + 16.67 ms real-time hard ceiling per single-tool adjust (Nyquist 60-fps inheritance from camera-filter-app) + filter library auto-generated via FILTER-ALGEBRA inverse problem (30 min vs 1-2 weeks artist labor) + algebraic transparency (plaintext expression `f = portra ∘ vignette(0.3) ∘ grain(0.2)`) + on-device first privacy + physics-based tools (Hurter-Driffield 1890 H&D curves / Wiener 1949 deconvolution / Cox 1955 grain / Planck 1900 blackbody WB 2000-12000 K / cos⁴θ paraxial vignette / MacAdam 1942 perceptual color ellipse / CIE 1931 standard observer) + open marketplace 70% royalty to creators. Sister to apps/camera-filter-app (verb-distinction: HEXA-VSCO EDITS post-capture; camera-filter-app CAPTURES + APPLIES real-time). Internal dependency on apps/hexa-filter-algebra (engine layer — uses 9-primitive algebra and inverse-problem auto-generation). 6 precursors compute/chip-architecture + cognitive/ai-multimodal + cognitive/ai-quality-scale + physics/optics + physics/electromagnetism + compute/chip-design. F-VSCO-MVP-1..5 90-day MVP gates 2026-08-30 (latency p95 / library count / Recipe roundtrip) + 2026-09-30 (A/B preference vs actual VSCO / cloud sync data loss). Design-by-physics per own#32, NOT n=6 force-fit. _total 391 -> 392 (+1); apps axis count 4 -> 5; alien-grade 10 PHYSICAL-LIMIT."
+    },
+    {
+      "date": "2026-05-01",
+      "change": "1.6.0 (2026-05-01): pets axis cat-food domain alien-grade 10 -> 13+ ceiling-breach upgrade per GRADE_RUBRIC_1_TO_10PLUS dual-axis rubric (alien_index_current 10 -> 13; alien_index_target 10 -> 15; tier PHYSICAL-LIMIT -> PHYSICAL-LIMIT + CIVILIZATION-SCALE). Three new ceilings added on top of alien-10 physical-limit baseline: alien-11 thermodynamic-impossible-reversed (Carnot 1824 reversible heat-pump floor on extrusion ~0.021 kWh/kg; mk2 target 0.15 kWh/kg = 4× below Strahm 2013 commodity 0.6 kWh/kg + Landauer 1961 kT ln 2 floor on 288-bit provenance ~8e-19 J/kg; mk2 target 1 J/kg = 1000× below IBM Food Trust 2019 blockchain), alien-12 biological-impossible-reversed (Weindruch 1985 + Kirk 2012 cross-species discount + Sinclair 2019 NMN bioavailability + Shay-Wright 2007 telomere → ≥ 15% feline lifespan extension at 15% CR; Deusch 2017 + Cani 2017 microbiome → 24-strain Shannon H ≥ 4.0 vs commodity H ≈ 0), alien-13+ civilization-scale (IPCC AR6 + Smil 2017 + Poore-Nemecek 2018 → < 500 km regional sourcing 83% transport-emissions reduction; 600M+ pet cats Statista 2024 → ~3.6 Mt CO2e/yr global reduction at full mk2 adoption + FAO Climate-Smart 2013 60-ingredient redundancy registry + CC-BY-4.0 + WSAVA 2011 + FAO Codex endorsement pathway for universal-basic-nutrition). 4 new precursor domains added (physics/thermodynamics + cognitive/ai-quality-scale + life/cancer-therapy + physics/electromagnetism), bringing cat-food precursor count 6 -> 10. §7.1 verify extended with Blocks H/I/J/K/L (5 new physics-computed blocks; print summary renamed Block H -> Block M). 5 new falsifiers F-CF-MK2-1..5 added (2027-Q2 100-kg pilot wattmeter; 2027-Q2 16S rRNA Shannon; 2031 5-yr cohort lifespan; 2027-Q4 LCA audit; 2028-Q2 WSAVA/FAO endorsement). raw 91 C3 honest: theoretical-analytical at this revision; empirical realization gated on F-CF-MK2-1..5 + WSAVA/FAO endorsement. Lint: own#31 v3.19 PASS (file + 29/29 selftest); §7.1 Python Blocks A-L all PASS. Design-by-physics per own#32, NOT n=6 force-fit. _total unchanged (upgrade only)."
     }
   ],
   "_template": "각 도메인: domains/<axis>/<name>/{CLAUDE.md, <name>.md, verify.hexa}",
@@ -99,7 +107,7 @@
     },
     "apps": {
       "path": "apps/_index.json",
-      "count": 4
+      "count": 5
     }
   },
   "physics": [
@@ -445,6 +453,7 @@
     "camera-filter-app",
     "hexa-filter-algebra",
     "hexa-parallel-self",
-    "hexa-main-character"
+    "hexa-main-character",
+    "hexa-vsco"
   ]
 }
