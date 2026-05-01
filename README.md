@@ -524,6 +524,32 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 
 ---
 
+# 🐾 Pets
+
+<!-- AUTO:SUMMARY_pets:START -->
+> **🛸4** | 1 inaugural domain (cat-litter; pets axis = 12th, registered 2026-05-01) | σ(6)=12 swell × τ(6)=4 odor-tier × φ(6)=2 grain-mode × sopfr(6)=5 mineral × J₂=24h baseline | DRAFT tier (literature-anchored from Grim 1968 / supplier specs, not yet empirical) | F-CL-MVP-1..4 90-day MVP gates 2026-07-30 (3 axes) + 2026-08-30 (odor axis) | mk2 trial proposal: 24-household × 6-month × τ(6)=4 stage staged rollout (2026-Q4)
+<!-- AUTO:SUMMARY_pets:END -->
+
+## 🐾 Pets Toolkit (HEXA-Companion family)
+
+> Friendly entry point — companion-animal consumer surface where consumer-product engineering meets small-scale material science meets animal behavior. Distinct from life axis (clinical / agricultural / pharmacological scope) and materials axis (industrial-scale fabrics / concrete / ceramics scope). Same n=6 invariant lattice (σ(6)=12 / τ(6)=4 / φ(6)=2 / J₂=24).
+
+| 🛸 | Tool | One-liner | Everyday analogy | What it does | Commodity contrast | Doc |
+|:--:|:----:|-----------|------------------|--------------|--------------------|:---:|
+| 4 | 🐱 **HEXA-CAT-LITTER** | Number-Theory Litter | Cat sand engineered around the n=6 master identity | 5-mineral × 2-mode formulation, 12× swell + 4-tier odor + 24h baseline | Single-mineral commodity (Ca-bentonite 5–8× swell, 1-tier zeolite OR carbon, 12–18h odor) vs σ=12 × τ=4 × φ=2 × sopfr=5 × J₂=24 design lattice | [doc](domains/pets/cat-litter/cat-litter.md) |
+
+> 1-domain inaugural (pets axis = 12th, 2026-05-01). The pets axis is intentionally narrow at registration — companion-animal consumer surface intersects three existing axes (life biomedical / materials small-scale / culture behavioral) and is reserved as a dedicated narrow band so future entries (cat-food / habitat-substrate / dog-toy / aquarium) can join without polluting parent axes. Each pets-axis domain is held to the **same own#15 21-section template + own#31 v3.18 lint** as research papers — consumer-product domains do not get a fidelity-relaxed track.
+
+| 🛸 | Closure | ver | Product | Core | Link |
+|:--:|:-------:|:---:|---------|------|------|
+| 4 | DRAFT | mk1 | **HEXA-CAT-LITTER mk1 — companion-animal hygiene material via n=6 arithmetic design** | **n6 invariant projection (literature-anchored, NOT arbitrary)**: σ(6)=12 Wyoming Na-bentonite swelling ratio (12× dry vol per Grim 1968) · τ(6)=4 odor neutralization tiers (carbon adsorption / zeolite-Y NH4+ ion-exchange / pH-buffer / antimicrobial) · φ(6)=2 grain modes (fine-clumping for stay-at-home cats / coarse-non-clumping for high-volume households) · sopfr(6)=5 primary minerals (bentonite / silica-gel / zeolite / perlite / charcoal) · J₂(6)=24 hour industry-baseline odor-suppression target. **Master identity match**: σ(6)·φ(6) = 12·2 = 24 = 6·4 = n·τ(6) verified mechanically in `papers/hexa-weave-formal-mechanical-w2-2026-04-28.md` AX-1; this uniqueness pins absorbency × grain-mode product to the 24-hour suppression target. own#11 honest C3: bentonite was selected BECAUSE its swell falls in the 10-15× range bracketing σ=12 — design-by-arithmetic, not discovered coincidence. DRAFT grade per raw 69 — literature-anchored only, no lab measurement yet; F-CL-MVP-1..4 90-day falsifier gates trigger 2026-07-30 (3 axes) + 2026-08-30 (odor axis); mk2 trial proposal at `proposals/cat_litter_mk2_trial_2026_05_01.md` (J₂(6)=24 households × n=6 month × τ(6)=4 stages staged rollout, ~$8,340 total budget). Cross-link: [materials/ceramics](domains/materials/ceramics/) (zeolite framework family) · [life/biology-medical](domains/life/biology-medical/) (NH3/H2S toxicology bounds for the J₂ target). | [doc](domains/pets/cat-litter/cat-litter.md) |
+
+<!-- AUTO:FOOTER_pets:START -->
+> 도메인: [pets/cat-litter/](domains/pets/cat-litter/) · pets axis registered 2026-05-01 (12th axis). Inaugural-domain pattern: pets-axis entries hold the same own#15 21-section paper template + own#31 v3.18 verify-tautology-ban lint as research papers. mk1 status DRAFT (theoretical-analytical only, literature-anchored from Grim 1968 / NIST CODATA / supplier spec sheets). mk2 trial proposal `proposals/cat_litter_mk2_trial_2026_05_01.md` defines J₂(6)=24-household × n=6-month × τ(6)=4-stage staged rollout for 2026-Q4 (recruitment 2026-09-01 → 24-week active phase 2026-10-01..2027-04-30); F-CL-MVP-1..4 falsifier gates pre-declared per own#12. The 100 kg pilot batch + ~$8,340 budget is intentionally small — empirical signal-vs-noise on the 4 falsifier axes is sufficient at this scale to gate mk3 commercial 1-ton scale-up.
+<!-- AUTO:FOOTER_pets:END -->
+
+---
+
 # 🎪 Play
 
 <!-- AUTO:SUMMARY_play:START -->
