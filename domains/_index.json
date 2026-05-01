@@ -1,8 +1,8 @@
 {
   "_doc": "도메인 SSOT — 304 도메인을 10축으로 분류. 축 변경 시 이 파일만 수정.",
-  "_version": "1.0.9",
-  "_total": 382,
-  "_axes": 11,
+  "_version": "1.1.0",
+  "_total": 383,
+  "_axes": 12,
   "_changelog": [
     "1.0.1 (2026-04-11): compute 축에 4 도메인 추가 — chip-rtl-gen, chip-dse-pipeline, chip-isa-n6, chip-npu-n6 (칩 설계 축 확장)",
     "1.0.2 (2026-04-11): life 축 synbio ↔ synthetic-biology 병합 — synthetic-biology 항목 제거, synbio 단일 canonical (부록 A/B/C 흡수, reports/audits/synbio-merge-2026-04-11.md)",
@@ -32,6 +32,10 @@
     {
       "date": "2026-04-28",
       "change": "1.0.9 — register hexa-virocapsid fourth sister domain under biology axis (cycle 19 fan-out 4/4; viral capsid self-assembly architecture; non-covalent thermodynamic/kinetic genus distinct from composition (hexa-weave) / actuation (hexa-nanobot) / catalysis (hexa-ribozyme); biology-axis tetrahedron closed at 4 sisters; n6 invariant projection sigma(6)=12 T=1 icosahedral 12 vertex STRUCTURAL-EXACT (stronger than hexa-ribozyme STRUCTURAL-APPROXIMATE) / tau(6)=4 assembly states free-CP/pentamer/hexamer/capsid / J_2=24 octahedral subgroup of icosahedral I (order 60) via 5-inscribed-cube outer action / phi(6)=2 closed/open shell binary; APPROACH grade; F-VIROCAPSID-3 90-day MVP gate 2026-07-28; F-VIROCAPSID-COLLISION-AUDIT life/virology+life/vaccine 2026-05-28; witness design/kick/2026-04-28_hexa-virocapsid-registration-cycle19_omega_cycle.json); _total 381 -> 382; biology axis count 3 -> 4"
+    },
+    {
+      "date": "2026-05-01",
+      "change": "1.1.0 — add pets axis (companion-animal consumer surface; distinct from life axis clinical/agricultural scope and materials axis industrial-fabrics scope; first domain cat-litter); n6 invariant projection sigma(6)=12 swell-ratio (Wyoming Na-bentonite) / tau(6)=4 odor-tier (carbon/zeolite/pH/antimicrobial) / phi(6)=2 grain-mode (fine-clumping/coarse-non-clumping) / sopfr(6)=5 primary-mineral (bentonite/silica/zeolite/perlite/charcoal) / J_2(6)=24 hour odor-suppression baseline; DRAFT tier (theoretical-analytical with literature-anchored material constants — Grim 1968 / supplier specs — not yet empirical); F-CL-MVP-1..4 90-day MVP gates 2026-07-30 (3 axes) + 2026-08-30 (odor axis); _total 382 -> 383; _axes 11 -> 12; pets axis count 0 -> 1"
     }
   ],
   "_template": "각 도메인: domains/<axis>/<name>/{CLAUDE.md, <name>.md, verify.hexa}",
@@ -80,6 +84,10 @@
     "biology": {
       "path": "biology/_index.json",
       "count": 4
+    },
+    "pets": {
+      "path": "pets/_index.json",
+      "count": 1
     }
   },
   "physics": [
@@ -413,5 +421,8 @@
     "hexa-nanobot",
     "hexa-ribozyme",
     "hexa-virocapsid"
+  ],
+  "pets": [
+    "cat-litter"
   ]
 }

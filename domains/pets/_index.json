@@ -1,0 +1,44 @@
+{
+  "_doc": "pets axis sub-SSOT — parent: ../_index.json (pets key). Created 2026-05-01 to host companion-animal domains (consumer-product + animal-behavior + small-scale material-science intersection). Distinct from life axis (clinical/agricultural/pharmacological) and materials axis (industrial-scale fabrics/concrete/ceramics): pets axis is for the consumer-pet-care surface where consumer product engineering meets animal behavior + small-scale material science (litter / food / toy / habitat).",
+  "_axis": "pets",
+  "_parent": "../_index.json",
+  "_version": "1.0.0",
+  "_meta": {
+    "_category_name": "companion animal care: litter, food, toy, habitat, behavior — consumer-product + small-scale material-science + animal-behavior intersection",
+    "_domains_count": 1,
+    "_verified_count": null,
+    "_alien_index_avg": null,
+    "_honesty_note": "_verified_count / _alien_index_avg null on creation; populate from atlas.n6 aggregation once the first MVP measurements land per per-domain falsifier deadlines.",
+    "_updated": "2026-05-01"
+  },
+  "_count": 1,
+  "_changelog": [
+    "1.0.0 (2026-05-01): pets axis sub-SSOT created. cat-litter registered (consumer companion-animal hygiene material; n6 invariant projection sigma(6)=12 bentonite swelling ratio (12x dry volume; Wyoming Na-bentonite reference) / tau(6)=4 odor-neutralization tiers (carbon-adsorption / zeolite-ion-exchange / pH-buffer / antimicrobial) / phi(6)=2 grain-mode binary (fine-clumping / coarse-non-clumping) / sopfr(6)=5 primary minerals (bentonite / silica-gel / zeolite / perlite / charcoal) / J_2(6)=24 hour odor-suppression industry baseline; verdict tier DRAFT per raw 69 (theoretical-analytical with literature-anchored material constants, not yet empirical lab measurement); F-CL-MVP-1 90-day MVP gate 2026-07-30 — manufacture 1 kg test batch + measure swell-ratio / clump-strength / dust-PM2.5 against the 4 raw 71 falsifiers preregistered)."
+  ],
+  "domains": [
+    {
+      "slug": "cat-litter",
+      "files": 1,
+      "has_claude_md": false,
+      "has_domain_md": true,
+      "has_hexa": false,
+      "has_verify": false,
+      "status": "registered",
+      "tier": "DRAFT",
+      "registered_at": "2026-05-01",
+      "n6_mapping": {
+        "sigma_6_eq_12": "Wyoming Na-bentonite swelling ratio (12x dry volume; Grim 1968)",
+        "tau_6_eq_4": "4-tier odor neutralization (carbon adsorption / zeolite ion-exchange / pH-buffer / antimicrobial)",
+        "phi_6_eq_2": "2-mode grain (fine-clumping / coarse-non-clumping)",
+        "sopfr_6_eq_5": "5 primary minerals (bentonite / silica-gel / zeolite / perlite / charcoal)",
+        "J2_6_eq_24": "24-hour industry-baseline odor-suppression target"
+      },
+      "falsifiers": [
+        "F-CL-MVP-1 (2026-07-30): 1 kg test batch swell-ratio measurement < 8x → retract sigma=12 mapping",
+        "F-CL-MVP-2 (2026-07-30): clump 24h-failure-stress < 50 kPa @ saturation → retract clump-strength target",
+        "F-CL-MVP-3 (2026-07-30): dust PM2.5 emission > 200 µg/m³ during 1-min pour → retract dust-control claim",
+        "F-CL-MVP-4 (2026-08-30): odor (NH3 + H2S) breakthrough < 24h at 30°C / 70% RH → retract J_2=24 hour target"
+      ]
+    }
+  ]
+}
