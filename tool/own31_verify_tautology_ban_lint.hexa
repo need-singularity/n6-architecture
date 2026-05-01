@@ -862,7 +862,13 @@ fn _block_has_adversarial_tokens(block: list) -> bool {
   let toks = ["eval(", "exec(", "__eq__", "__ne__", "__lt__", "__le__",
               "__gt__", "__ge__", "__init_subclass__", "subprocess.run",
               "subprocess.check_output", "subprocess.Popen", "Popen(",
-              "__file__", "compile("]
+              "__file__", "compile(",
+              // Round F additions:
+              "b64decode(", "b64encode(", "urlsafe_b64decode(",
+              "urlsafe_b64encode(", "binascii.unhexlify(", "binascii.hexlify(",
+              "random.seed(", "np.random.seed(",
+              "requests.get(", "requests.post(", "urllib.request.urlopen(",
+              "urlopen("]
   let mut i = 0
   let n = len(block)
   while i < n {
@@ -1067,6 +1073,186 @@ fn _detect_metaclass_literal_injection(block: list) -> string {
   return ""
 }
 
+// Round F detectors below.
+
+fn _detect_base64_decoy(block: list) -> string {
+  // Pattern: block has b64decode(<literal>) or unhexlify(<literal>) AND a
+  // check line that compares the decoded bytes against a literal byte/str.
+  // The bypass: encode the hardcode as base64 ("MTI=" decodes to "12") so
+  // the heuristic sees real-decode but the assertion is still tautology.
+  let n = len(block)
+  let mut has_decode = false
+  let mut decode_target = ""
+  let mut i = 0
+  while i < n {
+    let ln = block[i]
+    let dec_toks = ["b64decode(", "urlsafe_b64decode(", "binascii.unhexlify("]
+    let mut k = 0
+    while k < len(dec_toks) {
+      let dt = dec_toks[k]
+      let idx = _index_of(ln, dt)
+      if idx >= 0 {
+        // Find the literal arg
+        let after = ln.substring(idx + len(dt), len(ln))
+        let qidx = if _index_of(after, "\"") >= 0 { _index_of(after, "\"") }
+                   else if _index_of(after, "'") >= 0 { _index_of(after, "'") }
+                   else { -1 }
+        if qidx >= 0 {
+          has_decode = true
+          decode_target = dt.substring(0, len(dt) - 1)
+        }
+      }
+      k = k + 1
+    }
+    i = i + 1
+  }
+  if !has_decode { return "" }
+  // Look for a check line that compares to a literal
+  let mut ci = 0
+  while ci < n {
+    let ln = block[ci]
+    if _is_check_line(ln) {
+      // Conservative: any equality / comparison in the assert
+      if _contains(ln, "==") || _contains(ln, "!=") {
+        return "base64-decode-decoy:" + decode_target
+      }
+    }
+    ci = ci + 1
+  }
+  return ""
+}
+
+fn _detect_random_seed_determinism(block: list) -> string {
+  // Pattern: block has random.seed(<int-literal>) or np.random.seed(<int>)
+  // AND a check line that compares random.<func>() output against a literal.
+  // Bypass: PRNG is deterministic; transcribing observed output as expected
+  // value is a hardcoded oracle.
+  let n = len(block)
+  let mut seeded = false
+  let mut i = 0
+  while i < n {
+    let ln = block[i]
+    if _contains(ln, "random.seed(") || _contains(ln, "np.random.seed(") {
+      // Quick check: arg looks like integer literal
+      let idx = _index_of(ln, "random.seed(")
+      let abs_idx = if idx >= 0 { idx + 12 } else {
+        let i2 = _index_of(ln, "np.random.seed(")
+        if i2 >= 0 { i2 + 15 } else { -1 }
+      }
+      if abs_idx >= 0 {
+        let after = ln.substring(abs_idx, len(ln))
+        let close = _index_of(after, ")")
+        if close > 0 {
+          let arg = after.substring(0, close).trim()
+          if _is_numeric_literal(arg) { seeded = true }
+        }
+      }
+    }
+    i = i + 1
+  }
+  if !seeded { return "" }
+
+  // Collect names bound to a random.* call (1-step indirection).
+  let random_toks = ["random.randint(", "random.random(", "random.choice(",
+                     "random.sample(", "random.gauss(", "random.uniform(",
+                     "random.choices(", "np.random."]
+  let mut bound_names = []
+  let mut ai = 0
+  while ai < n {
+    let ln = block[ai]
+    let t = ln.trim()
+    let eq = _index_of(t, "=")
+    if eq > 0 && (eq + 1 >= len(t) || t.substring(eq + 1, eq + 2) != "=") {
+      let lhs = t.substring(0, eq).trim()
+      let rhs = t.substring(eq + 1, len(t))
+      let mut hit = false
+      let mut tk = 0
+      while tk < len(random_toks) {
+        if _contains(rhs, random_toks[tk]) { hit = true; tk = len(random_toks) }
+        else { tk = tk + 1 }
+      }
+      if hit {
+        let parts = split(lhs, ",")
+        let mut p = 0
+        while p < len(parts) {
+          let nm = parts[p].trim()
+          if _is_identifier(nm) { bound_names.push(nm) }
+          p = p + 1
+        }
+      }
+    }
+    ai = ai + 1
+  }
+
+  // Check for assertion comparing random.<func> output (or a var bound to
+  // such a call) to a literal.
+  let mut ci = 0
+  while ci < n {
+    let ln = block[ci]
+    if _is_check_line(ln) {
+      let mut has_random_call = false
+      let mut tk = 0
+      while tk < len(random_toks) {
+        if _contains(ln, random_toks[tk]) { has_random_call = true; tk = len(random_toks) }
+        else { tk = tk + 1 }
+      }
+      if !has_random_call {
+        // Check bound names
+        let mut bn = 0
+        while bn < len(bound_names) {
+          if _word_match(ln, bound_names[bn]) { has_random_call = true; bn = len(bound_names) }
+          else { bn = bn + 1 }
+        }
+      }
+      if has_random_call && (_contains(ln, "==") || _contains(ln, "!=")) {
+        return "random-seed-determinism-as-oracle"
+      }
+    }
+    ci = ci + 1
+  }
+  return ""
+}
+
+fn _detect_url_fetch_fake(block: list) -> string {
+  // Pattern: block has requests.get(<literal-url>) or urllib urlopen(<literal>)
+  // AND a check line that compares response content against a literal.
+  // Bypass: a controlled fake server can return any value.
+  let n = len(block)
+  let mut has_url_fetch = false
+  let mut i = 0
+  while i < n {
+    let ln = block[i]
+    let toks = ["requests.get(", "requests.post(",
+                "urllib.request.urlopen(", "urlopen("]
+    let mut k = 0
+    while k < len(toks) {
+      let t = toks[k]
+      let idx = _index_of(ln, t)
+      if idx >= 0 {
+        // Argument starts with a quote → literal URL
+        let after = ln.substring(idx + len(t), len(ln))
+        if _starts_with(after.trim(), "\"") || _starts_with(after.trim(), "'") {
+          has_url_fetch = true
+        }
+      }
+      k = k + 1
+    }
+    i = i + 1
+  }
+  if !has_url_fetch { return "" }
+  let mut ci = 0
+  while ci < n {
+    let ln = block[ci]
+    if _is_check_line(ln) {
+      if _contains(ln, "==") || _contains(ln, "!=") {
+        return "url-fetch-with-literal-url-as-oracle"
+      }
+    }
+    ci = ci + 1
+  }
+  return ""
+}
+
 fn _adversarial_pattern_check(block: list) -> string {
   let r1 = _detect_eval_deferred_cmp(block)
   if len(r1) > 0 { return r1 }
@@ -1076,6 +1262,13 @@ fn _adversarial_pattern_check(block: list) -> string {
   if len(r3) > 0 { return r3 }
   let r4 = _detect_metaclass_literal_injection(block)
   if len(r4) > 0 { return r4 }
+  // Round F additions:
+  let r5 = _detect_base64_decoy(block)
+  if len(r5) > 0 { return r5 }
+  let r6 = _detect_random_seed_determinism(block)
+  if len(r6) > 0 { return r6 }
+  let r7 = _detect_url_fetch_fake(block)
+  if len(r7) > 0 { return r7 }
   return ""
 }
 
@@ -1436,6 +1629,30 @@ fn _scan_block(block: list, file_def_names: list, file_path: string,
     i = i + 1
   }
 
+  // Round B+F adversarial pattern check — runs BEFORE YES markers because
+  // adversarial patterns (eval-deferred / subprocess self-ref / operator
+  // override / metaclass injection / base64-decoy / random-seed-determinism
+  // / url-fetch-fake) are stronger signals than any YES marker. Without
+  // this ordering, a `random.seed(42); assert random.randint(1,100)==81`
+  // pattern would pass via the compute-lib YES marker (random imported,
+  // random.randint( token used) and skip Round F entirely.
+  // Round D budget cap also applies — skip on oversize blocks (raw 91 C3
+  // honest disclosure: adversarial pattern detection on >150-line blocks
+  // is gated on hexa interpreter substring opt RFC).
+  if n <= 150 && _block_has_adversarial_tokens(block) {
+    let adv_reason = _adversarial_pattern_check(block)
+    if len(adv_reason) > 0 {
+      println("[own31] FAIL " + file_path + ":" + to_string(block_start_line)
+              + " — adversarial pattern: " + adv_reason)
+      println("[own31]   fix: remove the adversarial pattern (eval/exec literal")
+      println("[own31]         comparison / subprocess self-ref / operator override /")
+      println("[own31]         metaclass literal injection / base64 decode-decoy /")
+      println("[own31]         random-seed-determinism / url-fetch-fake); use real")
+      println("[own31]         verification.")
+      return 1
+    }
+  }
+
   // YES markers — strong signals first. Round C (LLB override) only runs
   // when the YES that fired is compute-lib-call; the cocktail bypass risk
   // is highest there (a real lib-call elsewhere in block masks an unrelated
@@ -1505,28 +1722,6 @@ fn _scan_block(block: list, file_def_names: list, file_path: string,
     return 1
   }
 
-  // Round B (AST-based adversarial-pattern upgrade): if heuristic finds no
-  // tautology, run a Python AST visitor for patterns that string-walking
-  // can't detect:
-  //   - eval(<literal-string-with-cmp-op>)
-  //   - subprocess.run([__file__, ...])      (self-reference)
-  //   - class with __eq__ / __ne__ / __lt__ etc. returning a constant bool
-  //   - class metaclass __init_subclass__ injecting numeric literals as
-  //     class attributes that a later block then asserts
-  //   - exec(<literal-string-with-cmp-op>)
-  // Only run when block has a suspicious token (fast string filter) — avoids
-  // python invocation cost on the typical case.
-  if _block_has_adversarial_tokens(block) {
-    let ast_reason = _adversarial_pattern_check(block)
-    if len(ast_reason) > 0 {
-      println("[own31] FAIL " + file_path + ":" + to_string(block_start_line)
-              + " — adversarial pattern: " + ast_reason)
-      println("[own31]   fix: remove the adversarial pattern (eval/exec literal")
-      println("[own31]         comparison / subprocess self-ref / operator override /")
-      println("[own31]         metaclass literal injection); use real verification.")
-      return 1
-    }
-  }
   return 0
 }
 
@@ -1908,6 +2103,42 @@ fn _selftest() -> void {
             + " toks=" + to_string(len(toks)) + " — expect >=50/>=80)")
   }
   counters = [tp, pp]
+
+  // F22 (Round F base64-decoy): block uses b64decode("MTI=") (which decodes
+  // to "12") then asserts the decoded value == "12". Heuristic alone passes
+  // (b64decode is in func tokens, real call). Round F catches the decode-
+  // decoy pattern.
+  let f22 = [
+    "from base64 import b64decode",
+    "expected = b\"12\"",
+    "actual = b64decode(\"MTI=\")",
+    "assert actual == expected"
+  ]
+  counters = _check_block("F22-base64-decoy", f22, [], true,
+                          counters[0], counters[1])
+
+  // F23 (Round F random-seed-determinism): block seeds RNG with literal int,
+  // then asserts random output == literal. Since PRNG is deterministic, the
+  // assertion is just transcribing observed output.
+  let f23 = [
+    "import random",
+    "random.seed(42)",
+    "x = random.randint(1, 100)",
+    "assert x == 81"
+  ]
+  counters = _check_block("F23-random-seed-determinism", f23, [], true,
+                          counters[0], counters[1])
+
+  // F24 (Round F url-fetch-fake): block fetches from a literal URL and
+  // asserts response content == literal. A controlled fake server can serve
+  // anything.
+  let f24 = [
+    "import requests",
+    "r = requests.get(\"http://example.com/sigma\")",
+    "assert int(r.text) == 12"
+  ]
+  counters = _check_block("F24-url-fetch-fake", f24, [], true,
+                          counters[0], counters[1])
 
   let total = counters[0]
   let pass_count = counters[1]
