@@ -54,7 +54,7 @@ void
 
 Live research discussion, paper drops, stage-gate reviews, cross-project dispatch.
 
-<!-- private repos는 projects.json의 private_repos 필드에 저장됨 (노출 금지) -->
+<!-- private repos are stored in projects.json's private_repos field (do not expose) -->
 
 <!-- SHARED:PROJECTS:END -->
 
@@ -110,7 +110,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 # 🔥 Fusion
 
 <!-- AUTO:SUMMARY_fusion:START -->
-> **🛸8** | ✅ | BT 9개 82.2%EXACT | DSE 2,400+1M | 산업87% (7 devices) | 실험43% TP confirmed | 물리한계10 | TP35 | 발견15 | Cross-DSE 8 domains | evolution 5stages | Mk.V
+> **🛸8** | ✅ | BT 9 82.2%EXACT | DSE 2,400+1M | industry 87% (7 devices) | experiment 43% TP confirmed | physical-limit 10 | TP35 | discoveries 15 | Cross-DSE 8 domains | evolution 5stages | Mk.V
 <!-- AUTO:SUMMARY_fusion:END -->
 
 ## 🔥 Fusion Toolkit (HEXA-Fusion family)
@@ -133,7 +133,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 | 10 | ✅ | v2 | **Tabletop Fusion (HEXA-TTF)** | 1m³ p-¹¹B aneutronic, B=σ·τ=48T, T=n·(σ-φ)·sopfr=300keV, Q=τ=4, P_core=8.7kW / P_bldg=217kW, A=sopfr+n=11·Z=sopfr=5, 14/14 Python PASS, n=6 closure theorem F-TTF, **UFO Stage-2 prereq complete** | [doc](domains/energy/tabletop-fusion/tabletop-fusion.md) |
 
 <!-- AUTO:FOOTER_fusion:START -->
-> 도메인: [fusion/](docs/fusion/) · [plasma-physics/](docs/plasma-physics/) · [superconductor/](docs/superconductor/) · 도구: `fusion-calc` · `fusion-dse` · `fusion-verify` · `tokamak-shape` · `kstar-calc`
+> Domains: [fusion/](docs/fusion/) · [plasma-physics/](docs/plasma-physics/) · [superconductor/](docs/superconductor/) · Tools: `fusion-calc` · `fusion-dse` · `fusion-verify` · `tokamak-shape` · `kstar-calc`
 <!-- AUTO:FOOTER_fusion:END -->
 
 ---
@@ -141,7 +141,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 # 💻 Chip & Semiconductor
 
 <!-- AUTO:SUMMARY_chip:START -->
-> **🛸7** | ✅ | BT 13개 74.5%EXACT | DSE 3,000 | 산업92.6% (6 vendors) | 물리한계10 | TP28 | 발견12 | Mk.V
+> **🛸7** | ✅ | BT 13 74.5%EXACT | DSE 3,000 | industry 92.6% (6 vendors) | physical-limit 10 | TP28 | discoveries 12 | Mk.V
 <!-- AUTO:SUMMARY_chip:END -->
 
 ## 💻 Chip Toolkit (HEXA-Silicon family)
@@ -181,7 +181,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 | 10 | ✅ | v2 | **AI-Native Arch (beyond GPU)** | Honesty-triad silicon (provenance bit + promotion-counter MMU + BT-id ISA); H1 PASS robust across rollback_rate ∈ [0, 0.1]; F-AI2-B 0/900 robust; 18/18 EXACT verify PASS; 3/3 RTL design EXACT; 6-vendor gap = 0/18 implemented (novel substrate confirmed); design-HIGH (post-amend), silicon-CANDIDATE (BT-AI3 RTL design-tier) | [doc](reports/sessions/omega-cycle-ai-native-arch-beyond-gpu-2026-04-26.md) |
 
 <!-- AUTO:FOOTER_chip:START -->
-> 도메인: [chip-architecture/](docs/chip-architecture/) · 도구: `gpu-arch-calc` · `chip-n6-calc` · `dse-calc` · `semiconductor-calc`
+> Domains: [chip-architecture/](docs/chip-architecture/) · Tools: `gpu-arch-calc` · `chip-n6-calc` · `dse-calc` · `semiconductor-calc`
 <!-- AUTO:FOOTER_chip:END -->
 
 ---
@@ -189,7 +189,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 # 🤖 AI / ML
 
 <!-- AUTO:SUMMARY_ai:START -->
-> **🛸6** | ✅ | BT 24개 89.7%EXACT | 산업88.7% (9 models) | 실험96.2% | 물리한계10 | TP28 | 발견12 | Mk.V | CrossDSE
+> **🛸6** | ✅ | BT 24 89.7%EXACT | industry 88.7% (9 models) | experiment 96.2% | physical-limit 10 | TP28 | discoveries 12 | Mk.V | CrossDSE
 <!-- AUTO:SUMMARY_ai:END -->
 
 ## 🤖 AI Toolkit (HEXA-AI family)
@@ -216,7 +216,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 | 10 | ✅ | v1 | **N6 Reverse-Engineering Suite** | n=6 reversedesign — newmodels8line/learningtechniques8line/HW-SWpublicevolution/AGIroadmap/HEXA-CODER, BT-397~401 | [doc](domains/compute/ai-efficiency/ai-efficiency.md) |
 
 <!-- AUTO:FOOTER_ai:START -->
-> 도메인: [ai-efficiency/](docs/ai-efficiency/) · [learning-algorithm/](docs/learning-algorithm/) · 도구: `n6_calculator.py`
+> Domains: [ai-efficiency/](docs/ai-efficiency/) · [learning-algorithm/](docs/learning-algorithm/) · Tools: `n6_calculator.py`
 <!-- AUTO:FOOTER_ai:END -->
 
 ---
@@ -224,7 +224,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 # ⚡ Energy
 
 <!-- AUTO:SUMMARY_energy:START -->
-> **🛸8** | ✅ | BT 13개 88.7%EXACT | DSE 10,225 | 산업87% (6 companies) | 실험88% | 물리한계10 | TP28+19 | 발견10+8 | Battery+solarallbranch🛸10 | Mk.V
+> **🛸8** | ✅ | BT 13 88.7%EXACT | DSE 10,225 | industry 87% (6 companies) | experiment 88% | physical-limit 10 | TP28+19 | discoveries 10+8 | Battery+solarallbranch🛸10 | Mk.V
 <!-- AUTO:SUMMARY_energy:END -->
 
 ## ⚡ Energy Toolkit (HEXA-Power family)
@@ -247,7 +247,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 | 10 | ✅ | v1 | **HEXA-AUTO Automotive Battery** | Ultimate Automotive Battery SLI+EV integrated design — 6cells=n lead-axis/96S=sigma*(sigma-tau) EV/100 params, 78/100 EXACT | [doc](domains/energy/battery-architecture/battery-architecture.md) |
 
 <!-- AUTO:FOOTER_energy:START -->
-> 도메인: [battery-architecture/](docs/battery-architecture/) · [solar-architecture/](docs/solar-architecture/) · [energy-architecture/](docs/energy-architecture/) · [power-grid/](docs/power-grid/) · [thermal-management/](docs/thermal-management/) · 도구: `energy-calc` · `battery-dse` · `solar-dse`
+> Domains: [battery-architecture/](docs/battery-architecture/) · [solar-architecture/](docs/solar-architecture/) · [energy-architecture/](docs/energy-architecture/) · [power-grid/](docs/power-grid/) · [thermal-management/](docs/thermal-management/) · Tools: `energy-calc` · `battery-dse` · `solar-dse`
 <!-- AUTO:FOOTER_energy:END -->
 
 ---
@@ -255,7 +255,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 # 🌍 Environment
 
 <!-- AUTO:SUMMARY_environment:START -->
-> **🛸8** | ✅ | BT 5개 92.3%EXACT | DSE 3.6M | 산업82.9% | 실험82.4% | 물리한계10 | TP43 | 발견42 | 미세플라스틱🛸10 | CCUS100%EXACT | Mk.V
+> **🛸8** | ✅ | BT 5 92.3%EXACT | DSE 3.6M | industry 82.9% | experiment 82.4% | physical-limit 10 | TP43 | discoveries 42 | microplastic 🛸10 | CCUS 100%EXACT | Mk.V
 <!-- AUTO:SUMMARY_environment:END -->
 
 ## 🌿 Environment Toolkit (HEXA-Earth family)
@@ -279,7 +279,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 | 10 | ✅ | v1 | **Ultimate Recycling — HEXA-RECYCLE** | 6R cycle + σ=12 minclass + J₂=24 tracking + 5-DSE integrated (35,424 combos) | [doc](domains/materials/recycling/recycling.md) |
 
 <!-- AUTO:FOOTER_environment:START -->
-> 도메인: [environmental-protection/](docs/environmental-protection/) · [carbon-capture/](docs/carbon-capture/) · 도구: `carbon-capture-calc`
+> Domains: [environmental-protection/](docs/environmental-protection/) · [carbon-capture/](docs/carbon-capture/) · Tools: `carbon-capture-calc`
 <!-- AUTO:FOOTER_environment:END -->
 
 ---
@@ -287,7 +287,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 # 🧬 Materials
 
 <!-- AUTO:SUMMARY_materials:START -->
-> **🛸10** | ✅ | BT 11개 100%EXACT | DSE 3,600 | 산업100% | 실험100% | 물리한계10 | TP28 | 발견10 | CrossDSE 8domains | Mk.V
+> **🛸10** | ✅ | BT 11 100%EXACT | DSE 3,600 | industry 100% | experiment 100% | physical-limit 10 | TP28 | discoveries 10 | CrossDSE 8domains | Mk.V
 <!-- AUTO:SUMMARY_materials:END -->
 
 ## 🧬 Materials Toolkit (HEXA-Matter family)
@@ -311,7 +311,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 | 10 | ✅ | v5 | **physical-limit proof** | 10 impossibility-theorem (75/75 EXACT 100%) + Mk.V mathematical-limit, 229/229 verify | [doc](domains/materials/material-synthesis/material-synthesis.md) |
 
 <!-- AUTO:FOOTER_materials:START -->
-> 도메인: [material-synthesis/](docs/material-synthesis/) · 도구: `material-dse`
+> Domains: [material-synthesis/](docs/material-synthesis/) · Tools: `material-dse`
 <!-- AUTO:FOOTER_materials:END -->
 
 ---
@@ -319,7 +319,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 # 🤖 Robotics
 
 <!-- AUTO:SUMMARY_robotics:START -->
-> **🛸5** | ✅ | BT 5개 97.1%EXACT | DSE 270,000 | 산업99.1% (6 companies) | 실험97.1% | 물리한계10 | TP28 | 발견10 | Mk.V
+> **🛸5** | ✅ | BT 5 97.1%EXACT | DSE 270,000 | industry 99.1% (6 companies) | experiment 97.1% | physical-limit 10 | TP28 | discoveries 10 | Mk.V
 <!-- AUTO:SUMMARY_robotics:END -->
 
 ## 🤖 Robotics Toolkit (HEXA-Mech family)
@@ -338,7 +338,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 | 10 | ✅ | v1 | **ceiling-check** | 10 impossibility-theorem, SE(3)=6/k(3)=12/Thue=6, Mk.V physicalceiling proof, Python-verify PASS | [doc](domains/infra/robotics/robotics.md) |
 
 <!-- AUTO:FOOTER_robotics:START -->
-> 도메인: [robotics/](docs/robotics/) · [learning-algorithm/](docs/learning-algorithm/) · 도구: `robot-dse`
+> Domains: [robotics/](docs/robotics/) · [learning-algorithm/](docs/learning-algorithm/) · Tools: `robot-dse`
 <!-- AUTO:FOOTER_robotics:END -->
 
 ---
@@ -346,7 +346,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 # 🔬 Physics & Math
 
 <!-- AUTO:SUMMARY_physics:START -->
-> **🛸7** | ✅ | BT 14개 53~100%EXACT | DSE 66,824 | 산업(🛸10(SC)) | 실험11theorems(count학) | TP52 | 발견19+ | Superconducting🛸10 | 순countcount학🛸10 | Universe론🛸9
+> **🛸7** | ✅ | BT 14 53~100%EXACT | DSE 66,824 | industry (🛸10(SC)) | experiment 11 theorems (math) | TP52 | discoveries 19+ | Superconducting 🛸10 | pure math 🛸10 | Universe theory 🛸9
 <!-- AUTO:SUMMARY_physics:END -->
 
 ## 🔬 Physics Toolkit (HEXA-Phys family)
@@ -369,7 +369,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 | 10 | ✅ | v1 | **dimensionunfoldhands breakthroughs — tensor/mod3/log** | BT-361~365: n²=36attractor9/9, tensor-triple3/3, mod3subsamepoints10/10, 1/3efficient8/8, Ω_Λ=24/35(0.148%) | [doc](reports/breakthroughs/new-bt-dimensional-unfolding-2026-04-06.md) |
 
 <!-- AUTO:FOOTER_physics:START -->
-> 도메인: [superconductor/](docs/superconductor/) · [pure-mathematics/](docs/pure-mathematics/) · [cosmology-particle/](docs/cosmology-particle/) · [quantum-computing/](docs/quantum-computing/) · 도구: `sc-dse` · `gut-calc-rust` · `quantum-calc` · `optics-calc`
+> Domains: [superconductor/](docs/superconductor/) · [pure-mathematics/](docs/pure-mathematics/) · [cosmology-particle/](docs/cosmology-particle/) · [quantum-computing/](docs/quantum-computing/) · Tools: `sc-dse` · `gut-calc-rust` · `quantum-calc` · `optics-calc`
 <!-- AUTO:FOOTER_physics:END -->
 
 ---
@@ -377,7 +377,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 # 💬 Software & Infrastructure
 
 <!-- AUTO:SUMMARY_software:START -->
-> **🛸6** | ✅ | BT 5개 95.1%EXACT | 산업98.6% | 실험100% RFC/ISO/NIST | 물리한계10 | TP28 | 발견10 | Mk.V | CrossDSE5-Way
+> **🛸6** | ✅ | BT 5 95.1%EXACT | industry 98.6% | experiment 100% RFC/ISO/NIST | physical-limit 10 | TP28 | discoveries 10 | Mk.V | CrossDSE5-Way
 <!-- AUTO:SUMMARY_software:END -->
 
 ## 💬 Software & Infra Toolkit (HEXA-Stack family)
@@ -400,7 +400,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 | 10 | ✅ | v2 | **Ultimate Network Protocol** | 50/50 EXACT (ceiling-breakthrough), 6G/5G NR/WiFi6/Starlink/LoRaWAN/BT6.0, σ=12 subcarriers, J₂=24 WiFichannels, τ=4 TCP/IP | [doc](domains/compute/network-protocol/network-protocol.md) |
 
 <!-- AUTO:FOOTER_software:START -->
-> 도메인: [programming-language/](docs/programming-language/) · [compiler-os/](docs/compiler-os/) · [software-design/](docs/software-design/) · [cryptography/](docs/cryptography/) · [network-protocol/](docs/network-protocol/) · [blockchain/](docs/blockchain/) · 도구: `lang-dse` · `crypto-calc` · `interconnect-calc`
+> Domains: [programming-language/](docs/programming-language/) · [compiler-os/](docs/compiler-os/) · [software-design/](docs/software-design/) · [cryptography/](docs/cryptography/) · [network-protocol/](docs/network-protocol/) · [blockchain/](docs/blockchain/) · Tools: `lang-dse` · `crypto-calc` · `interconnect-calc`
 <!-- AUTO:FOOTER_software:END -->
 
 ---
@@ -408,7 +408,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 # 📺 Display
 
 <!-- AUTO:SUMMARY_display:START -->
-> **🛸5** | ✅ | BT 3개 86%EXACT | 산업81% (6 companies) | 실험93.9% | 물리한계10 | TP14 | 발견8 | Mk.V
+> **🛸5** | ✅ | BT 3 86%EXACT | industry 81% (6 companies) | experiment 93.9% | physical-limit 10 | TP14 | discoveries 8 | Mk.V
 <!-- AUTO:SUMMARY_display:END -->
 
 ## 📺 Display Toolkit (HEXA-Visual family)
@@ -427,7 +427,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 | 10 | ✅ | v1 | **ceiling-check** | BT 86%EXACT + physical-limit10 + industry6 companies81% + experiment93.9% + TP14 | [doc](domains/compute/display/display.md) |
 
 <!-- AUTO:FOOTER_display:START -->
-> 도메인: [display/](docs/display/) · BT-48 (J₂=24fps), BT-66 (ViT/CLIP), BT-71 (NeRF/3DGS)
+> Domains: [display/](docs/display/) · BT-48 (J₂=24fps), BT-66 (ViT/CLIP), BT-71 (NeRF/3DGS)
 <!-- AUTO:FOOTER_display:END -->
 
 ---
@@ -435,7 +435,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 # 🎵 Audio
 
 <!-- AUTO:SUMMARY_audio:START -->
-> **🛸5** | ✅ | BT 4개 86%EXACT | 산업92.6% (4 companies) | 실험90.9% | 물리한계8 | TP14 | 발견12 | Mk.V
+> **🛸5** | ✅ | BT 4 86%EXACT | industry 92.6% (4 companies) | experiment 90.9% | physical-limit 8 | TP14 | discoveries 12 | Mk.V
 <!-- AUTO:SUMMARY_audio:END -->
 
 ## 🎵 Audio Toolkit (HEXA-Sound family)
@@ -460,7 +460,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 | 10 | ✅ | v1 | **HEXA-SPEAKER ultimate Speaker** | Ultimate Speaker 6-stage Design — CNT thermoacoustic/sigma=12 driver array/Egyptian-fraction band split/LR4 crossover/ClassD 576W/144 spatial objects, 36/36 EXACT | [doc](domains/culture/audio/audio.md) |
 
 <!-- AUTO:FOOTER_audio:START -->
-> 도메인: [audio/](docs/audio/) · BT-48 (σ·τ=48kHz, σ=12 semitones), BT-72 (EnCodec), BT-108 (협chord), BT-76 (48 attractor)
+> Domains: [audio/](docs/audio/) · BT-48 (σ·τ=48kHz, σ=12 semitones), BT-72 (EnCodec), BT-108 (harmonic chord), BT-76 (48 attractor)
 <!-- AUTO:FOOTER_audio:END -->
 
 ---
@@ -468,7 +468,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 # 🛡️ Safety
 
 <!-- AUTO:SUMMARY_safety:START -->
-> **🛸3** | BT 66.7%EXACT | DSE 7,776 | TP5 | hypotheses 30+20극한 | 10 domains Safety Integrated
+> **🛸3** | BT 66.7%EXACT | DSE 7,776 | TP5 | hypotheses 30+20 extreme | 10 domains Safety Integrated
 <!-- AUTO:SUMMARY_safety:END -->
 
 ## 🛡️ Safety Toolkit (HEXA-Safe family)
@@ -487,7 +487,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 | 10 | ✅ | v2 | **hypotheses 30+extreme 20** | H-SF 20/30 + H-SFX 14/20 + H-SAFE-EX 8/10 + PL 12/12, total 54/72 EXACT(75%), Python-verify PASS | [doc](domains/infra/safety/safety.md) |
 
 <!-- AUTO:FOOTER_safety:START -->
-> 도메인: [safety/](docs/safety/) · n=6 Safety etc식: (1/10)^6 = 10⁻⁶ (roomnumberhierarchy=n, 위험reduction=σ-φ)
+> Domains: [safety/](docs/safety/) · n=6 Safety equation: (1/10)^6 = 10⁻⁶ (room-number-hierarchy=n, risk-reduction=σ-φ)
 <!-- AUTO:FOOTER_safety:END -->
 
 ---
@@ -519,7 +519,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 | 7 | APPROACH | v1 | **HEXA-VIROCAPSID — icosahedral protein cage self-assembly architecture (cycle 19→22)** | **n6 invariant projection**: τ(6)=4 assembly states (free CP / pentamer / hexamer / closed cage) · σ(6)=12 pentameric vertices on T=1 icosahedron — **STRUCTURAL-EXACT** by Caspar-Klug 1962 + Euler V−E+F=2 topological invariant (Bayesian audit posterior 0.9668 ≥ 0.95 RESOLVED on n=34 textbook corpus, log Bayes factor 3.37 decisive per Jeffreys 1961) · φ(6)=2 free-CP vs assembled dichotomy · J₂=24 octahedral O ⊂ icosahedral I subgroup. Fourth sister of HEXA-WEAVE / HEXA-NANOBOT / HEXA-RIBOZYME: WEAVE composes strands, NANOBOT actuates atoms, RIBOZYME catalyses bonds, VIROCAPSID **assembles cages** — closing the orthogonal four-way genus tetrahedron. Primary constraint: nucleation-elongation kinetic plateau (cycle 22 cage MVP yield 0.68 plateau under default rate constants; Zlotnick 2003 4-state ODE 5/6 raw 53 PASS, yield axis FAIL is calibration gap not theoretical refutation). Empirical SSOT migrated to `~/core/nexus/sim_bridge/weave/` (cycle 24). Literature anchors: Caspar-Klug 1962 (T-number theory) / Zlotnick 1994/2003 (assembly kinetics) / Rossmann-Johnson 1985 (capsid taxonomy) / Liljas 1982 (T=1 STNV). APPROACH grade per raw 69 — sigma-EXACT theoretical, kinetic empirical pending. F-VIROCAPSID-3 90-day MVP gate 2026-07-28; F-VIROCAPSID-2 RESOLVED cycle 22. Cross-link: [HEXA-WEAVE](domains/biology/hexa-weave/hexa-weave.md) · [HEXA-NANOBOT](domains/biology/hexa-nanobot/hexa-nanobot.md) · [HEXA-RIBOZYME](domains/biology/hexa-ribozyme/hexa-ribozyme.md) · [Therapeutic Nanobot](#-frontier-discoveries-next-gen-rt-sc-tech) (drug-capsule peer). | [doc](domains/biology/hexa-virocapsid/hexa-virocapsid.md) |
 
 <!-- AUTO:FOOTER_biology:START -->
-> 도메인: [biology/hexa-weave/](domains/biology/hexa-weave/) · [biology/hexa-nanobot/](domains/biology/hexa-nanobot/) · [biology/hexa-ribozyme/](domains/biology/hexa-ribozyme/) · [biology/hexa-virocapsid/](domains/biology/hexa-virocapsid/) · TRANSCEND-CLOSURE-ALL chain (L4-L7 cosmological extension) PASS-WITH-C3-CAVEATS — STRONG-CONJECTURE chain (AdS/CFT + Bousso dS), not theorem chain. Tetra-sister biology tetrahedron: HEXA-WEAVE (composition / Landauer×NP-search ceiling) + HEXA-NANOBOT (actuation / Brownian thermal floor) + HEXA-RIBOZYME (catalysis / diffusion-limit ceiling) + HEXA-VIROCAPSID (assembly / Caspar-Klug T-number topology) — four orthogonal n=6 architectural lenses on molecular biology; alien-grade 4.78 (cycle 22 close, cycle 7→24 saturation lean axiom 7→1, sorry 0); empirical SSOT at `~/core/nexus/sim_bridge/weave/` (cycle 24+ canonical for cage assembly + Caspar-Klug Bayesian audit)
+> Domains: [biology/hexa-weave/](domains/biology/hexa-weave/) · [biology/hexa-nanobot/](domains/biology/hexa-nanobot/) · [biology/hexa-ribozyme/](domains/biology/hexa-ribozyme/) · [biology/hexa-virocapsid/](domains/biology/hexa-virocapsid/) · TRANSCEND-CLOSURE-ALL chain (L4-L7 cosmological extension) PASS-WITH-C3-CAVEATS — STRONG-CONJECTURE chain (AdS/CFT + Bousso dS), not theorem chain. Tetra-sister biology tetrahedron: HEXA-WEAVE (composition / Landauer×NP-search ceiling) + HEXA-NANOBOT (actuation / Brownian thermal floor) + HEXA-RIBOZYME (catalysis / diffusion-limit ceiling) + HEXA-VIROCAPSID (assembly / Caspar-Klug T-number topology) — four orthogonal n=6 architectural lenses on molecular biology; alien-grade 4.78 (cycle 22 close, cycle 7→24 saturation lean axiom 7→1, sorry 0); empirical SSOT at `~/core/nexus/sim_bridge/weave/` (cycle 24+ canonical for cage assembly + Caspar-Klug Bayesian audit)
 <!-- AUTO:FOOTER_biology:END -->
 
 ---
@@ -1038,7 +1038,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 | 🛸 | Tool | One-liner | Everyday analogy | What it does | Mainstream contrast | Doc |
 |:--:|:----:|-----------|------------------|--------------|---------------------|:---:|
 | 10 | 🪜 **HEXA-CHOMSKY** | 4-Step Grammar | Language ladder with 4 rungs (regular → context-free → … → unrestricted) | τ=4 grammar hierarchy (regular/CFG/CSG/unrestricted) + n=6 word-orders + θ-roles n=6, 10/10 EXACT | Single-grammar parser vs τ(6)=4-tier hierarchy + n=6 θ-role grid | [doc](domains/culture/linguistics/linguistics.md) |
-| 10 | ㄱ **HEXA-HANGUL** | Jamo Lattice | Korean alphabet's 24 jamo on the J₂=24 grid | Consonants 14 + vowels 10 = J₂=24 + 11172=19×21×28 syllable map, 10/10 EXACT | Roman 26-letter alphabet vs J₂=24 jamo σ-φ=10-vowel lattice | [doc](domains/culture/linguistics/linguistics.md) |
+| 10 | 🔤 **HEXA-HANGUL** | Jamo Lattice | Korean alphabet's 24 jamo on the J₂=24 grid | Consonants 14 + vowels 10 = J₂=24 + 11172=19×21×28 syllable map, 10/10 EXACT | Roman 26-letter alphabet vs J₂=24 jamo σ-φ=10-vowel lattice | [doc](domains/culture/linguistics/linguistics.md) |
 | 10 | 📡 **HEXA-JAKOBSON** | 6-Function Speech | Every utterance does one of 6 jobs (referential / poetic / etc.) | Language n=6 functions (referential/emotive/conative/phatic/metalingual/poetic), 10/10 EXACT | Single-purpose speech-act vs n=6 Jakobson function-lattice | [doc](domains/culture/linguistics/linguistics.md) |
 
 | 🛸 | Closure | ver | Product | Core | Link |
@@ -1162,9 +1162,9 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 ## Reference
 
 <!-- AUTO:REFERENCE:START -->
-| 항목 | 링크 |
+| Item | Link |
 |------|------|
-| **n=6 상수표** | σ=12, τ=4, φ=2, sopfr=5, J₂=24, σ-τ=8, 1/(σ-φ)=0.1 |
+| **n=6 constants table** | σ=12, τ=4, φ=2, sopfr=5, J₂=24, σ-τ=8, 1/(σ-φ)=0.1 |
 | **130 Breakthrough Theorems** | [docs/breakthrough-theorems.md](docs/breakthrough-theorems.md) |
 | **700+ Atlas Constants** | [docs/atlas-constants.md](docs/atlas-constants.md) |
 | **45 Testable Predictions** | [docs/testable-predictions.md](docs/testable-predictions.md) |
@@ -1173,7 +1173,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 | **Cross-Domain Resonance** | [docs/cross-domain-resonance-2026-03-31.md](docs/cross-domain-resonance-2026-03-31.md) |
 | **Core Theorem Proof** | [docs/theorem-r1-uniqueness.md](docs/theorem-r1-uniqueness.md) |
 | **448 Calculators** | [docs/calculator-registry.md](docs/calculator-registry.md) |
-| **Universal DSE** | `tools/universal-dse/` — TOML 1개로 즉시 DSE |
+| **Universal DSE** | `tools/universal-dse/` — instant DSE with one TOML file |
 <!-- AUTO:REFERENCE:END -->
 
 ## Honest Limitations
