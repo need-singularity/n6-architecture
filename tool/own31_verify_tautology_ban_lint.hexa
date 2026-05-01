@@ -1118,6 +1118,238 @@ fn _ast_check_block(block: list) -> string {
   return out
 }
 
+// ---------- literal-provenance tracking (Round C) ----------
+//
+// Round C closes Limitation #2/3 cocktail bypass: a block that triggers a
+// YES marker (e.g. compute-lib import + call) but whose actual `assert`
+// targets are literal-bound variables completely independent of the real
+// computation.
+//
+// Example bypass:
+//     import numpy as np         # compute-lib YES triggers
+//     data = np.array([1,2,3])    # uses compute func token (np.)
+//     sigma = 12                   # literal binding
+//     assert sigma == 12          # tautology — completely unrelated to numpy
+//
+// Algorithm:
+//   1. Build var → provenance map by walking assignments.
+//   2. For each check line, extract referenced variables.
+//   3. If ALL referenced variables are literal-only AND the check line itself
+//      has no compute-lib token, then the assertion is literal-load-bearing
+//      and a tautology — override prior YES marker with FLAG.
+
+fn _is_arith_of_literals_only(rhs: string) -> bool {
+  // RHS is "literal" if it has only digits, arith ops, parens, dots,
+  // hex/oct/bin prefixes, underscore separators, e/E exponent, +/-, spaces.
+  // Identifier references break the literal-only condition.
+  let n = len(rhs)
+  let mut i = 0
+  let mut has_digit = false
+  while i < n {
+    let c = rhs.substring(i, i + 1)
+    if (c >= "0" && c <= "9") {
+      has_digit = true
+      i = i + 1
+    } else if c == "+" || c == "-" || c == "*" || c == "/" || c == "%"
+              || c == "(" || c == ")" || c == " " || c == "\t"
+              || c == "." || c == "e" || c == "E" || c == "_"
+              || c == "x" || c == "X" || c == "b" || c == "B"
+              || c == "o" || c == "O" {
+      i = i + 1
+    } else {
+      // any other character (letter, comma, brackets, quote) — not literal-only
+      return false
+    }
+  }
+  return has_digit
+}
+
+// Provenance string keys: "literal", "compute", "def-call", "iteration",
+// "external", "unknown".
+fn _classify_rhs(rhs: string, file_def_names: list) -> string {
+  let r = rhs.trim()
+  // Strip trailing comment
+  let hash = _index_of(r, " #")
+  let cleaned = if hash > 0 { r.substring(0, hash).trim() } else { r }
+  if len(cleaned) == 0 { return "unknown" }
+  if _line_has_compute_func_token(cleaned) { return "compute" }
+  // for-comprehension / generator
+  if _contains(cleaned, " for ") && _contains(cleaned, " in ") {
+    return "iteration"
+  }
+  // lambda
+  if _contains(cleaned, "lambda") { return "compute" }
+  // def-call from file
+  let mut k = 0
+  while k < len(file_def_names) {
+    let nm = file_def_names[k]
+    if _contains(cleaned, nm + "(") { return "def-call" }
+    k = k + 1
+  }
+  // String literal — if it starts with quote or b"
+  if _starts_with(cleaned, "\"") || _starts_with(cleaned, "'")
+     || _starts_with(cleaned, "b\"") || _starts_with(cleaned, "b'")
+     || _starts_with(cleaned, "f\"") || _starts_with(cleaned, "f'") {
+    return "literal"
+  }
+  // List / tuple / dict of literals only → still literal
+  if _starts_with(cleaned, "[") || _starts_with(cleaned, "(")
+     || _starts_with(cleaned, "{") {
+    return "literal"
+  }
+  if _is_arith_of_literals_only(cleaned) { return "literal" }
+  // Function call — anything else
+  if _contains(cleaned, "(") { return "external" }
+  return "unknown"
+}
+
+fn _build_provenance_map(block: list, file_def_names: list) -> list {
+  // Returns flat list [name1, prov1, name2, prov2, ...]
+  let mut out = []
+  let n = len(block)
+  let mut i = 0
+  while i < n {
+    let ln = block[i]
+    let t = ln.trim()
+    if _starts_with(t, "#") || len(t) == 0 { i = i + 1; continue }
+    let eq = _index_of(t, "=")
+    if eq <= 0 { i = i + 1; continue }
+    if eq + 1 < len(t) && t.substring(eq + 1, eq + 2) == "=" { i = i + 1; continue }
+    let lhs = t.substring(0, eq).trim()
+    let rhs = t.substring(eq + 1, len(t))
+    // type annotation `name: type = rhs` → strip annotation
+    let lhs_clean = if _index_of(lhs, ":") >= 0 {
+      lhs.substring(0, _index_of(lhs, ":")).trim()
+    } else { lhs }
+    let prov = _classify_rhs(rhs, file_def_names)
+    // Multi-target unpack `a, b = (12, 4)` → assign each name same provenance
+    let parts = split(lhs_clean, ",")
+    let mut p = 0
+    while p < len(parts) {
+      let nm = parts[p].trim()
+      if _is_identifier(nm) {
+        out.push(nm)
+        out.push(prov)
+      }
+      p = p + 1
+    }
+    i = i + 1
+  }
+  return out
+}
+
+fn _provenance_lookup(prov_map: list, name: string) -> string {
+  // Latest wins (linear scan returns last match)
+  let mut found = ""
+  let n = len(prov_map)
+  let mut i = 0
+  while i < n {
+    if prov_map[i] == name {
+      if i + 1 < n { found = prov_map[i + 1] }
+    }
+    i = i + 2
+  }
+  return found
+}
+
+fn _extract_identifiers(line: string) -> list {
+  // Index-based tokenizer (allocation-light per Round C OOM remediation):
+  // emit ONE substring per identifier instead of one per character.
+  let mut out = []
+  let n = len(line)
+  let mut i = 0
+  let mut tok_start = -1
+  while i < n {
+    let c = line.substring(i, i + 1)
+    let is_id_continue = (c >= "a" && c <= "z") || (c >= "A" && c <= "Z")
+                         || (c >= "0" && c <= "9") || c == "_"
+    if is_id_continue {
+      if tok_start < 0 { tok_start = i }
+    } else {
+      if tok_start >= 0 {
+        let nm = line.substring(tok_start, i)
+        if _is_identifier(nm) { out.push(nm) }
+        tok_start = -1
+      }
+    }
+    i = i + 1
+  }
+  if tok_start >= 0 {
+    let nm = line.substring(tok_start, n)
+    if _is_identifier(nm) { out.push(nm) }
+  }
+  return out
+}
+
+// Return true iff every check-line variable (excluding builtin/keyword
+// noise) is literal-provenance AND the check lines themselves have no
+// compute-func token. This indicates the assertions are pure tautologies
+// even when other lines in the block do real compute (cocktail bypass).
+fn _all_checks_literal_load_bearing(block: list, prov_map: list) -> bool {
+  // First: collect all check lines.
+  let n = len(block)
+  let mut check_lines = []
+  let mut i = 0
+  while i < n {
+    if _is_check_line(block[i]) { check_lines.push(block[i]) }
+    i = i + 1
+  }
+  if len(check_lines) == 0 { return false }
+
+  let builtins = ["True", "False", "None", "int", "float", "str", "list",
+                  "tuple", "dict", "set", "len", "abs", "max", "min",
+                  "sum", "any", "all", "range", "type", "isinstance",
+                  "print", "self", "cls", "and", "or", "not", "is", "in",
+                  "if", "else", "elif", "while", "for", "assert", "raise",
+                  "return", "lambda", "pass", "import", "from", "as", "with",
+                  "try", "except", "finally"]
+
+  let mut found_any_var = false
+  let mut all_literal = true
+  let mut ci = 0
+  while ci < len(check_lines) {
+    let ln = check_lines[ci]
+    if _line_has_compute_func_token(ln) { return false }
+    let toks = _extract_identifiers(ln)
+    let mut ti = 0
+    while ti < len(toks) {
+      let nm = toks[ti]
+      // Skip builtins / keywords / pure numeric tokens
+      let mut is_builtin = false
+      let mut bi = 0
+      while bi < len(builtins) {
+        if nm == builtins[bi] { is_builtin = true; bi = len(builtins) }
+        else { bi = bi + 1 }
+      }
+      if is_builtin { ti = ti + 1; continue }
+      // Pure digit token
+      let mut all_digit = true
+      let mut di = 0
+      while di < len(nm) {
+        let c = nm.substring(di, di + 1)
+        if !(c >= "0" && c <= "9") { all_digit = false; di = len(nm) }
+        else { di = di + 1 }
+      }
+      if all_digit { ti = ti + 1; continue }
+      // Look up provenance
+      let prov = _provenance_lookup(prov_map, nm)
+      if len(prov) == 0 {
+        // Not bound in this block — could be from prior block or external.
+        // Conservative: not literal-load-bearing (could be real).
+        return false
+      }
+      found_any_var = true
+      if prov != "literal" {
+        all_literal = false
+        return false
+      }
+      ti = ti + 1
+    }
+    ci = ci + 1
+  }
+  return found_any_var && all_literal
+}
+
 // ---------- block scan ----------
 
 fn _scan_block(block: list, file_def_names: list, file_path: string,
@@ -1132,7 +1364,15 @@ fn _scan_block(block: list, file_def_names: list, file_path: string,
     i = i + 1
   }
 
-  // YES marker 1: substantive def
+  // YES markers — strong signals first. Round C (LLB override) only runs
+  // when the YES that fired is compute-lib-call; the cocktail bypass risk
+  // is highest there (a real lib-call elsewhere in block masks an unrelated
+  // literal-only assertion). Other YES markers (substantive def / lambda /
+  // anchored-assert / file-def-call / iteration) are direct evidence that
+  // the assertions sit on real compute, so LLB scan is skipped to avoid
+  // OOM on large blocks.
+
+  // YES marker 1: substantive def — strong; skip LLB
   i = 0
   while i < n {
     if _is_def_line(block[i]) {
@@ -1141,23 +1381,35 @@ fn _scan_block(block: list, file_def_names: list, file_path: string,
     i = i + 1
   }
 
-  // YES marker 2: substantive lambda
+  // YES marker 2: substantive lambda — strong; skip LLB
   i = 0
   while i < n {
     if _lambda_substantive_in_line(block[i]) { return 0 }
     i = i + 1
   }
 
-  // YES marker 3: compute-lib import + call
-  if _has_compute_lib_call(block) { return 0 }
+  // YES marker 3: compute-lib import + call — Round C LLB-override applies.
+  if _has_compute_lib_call(block) {
+    let prov_map = _build_provenance_map(block, file_def_names)
+    if _all_checks_literal_load_bearing(block, prov_map) {
+      println("[own31] FAIL " + file_path + ":" + to_string(block_start_line)
+              + " — literal-load-bearing tautology (all check-line vars are "
+              + "literal-only provenance, despite compute-lib import elsewhere "
+              + "in block — cocktail bypass)")
+      println("[own31]   fix: replace literal bindings with computed values, OR")
+      println("[own31]         add `# raw 91 C3: <negation-keyword>` disclaimer.")
+      return 1
+    }
+    return 0
+  }
 
-  // YES marker 4: anchored assertion with fn call
+  // YES marker 4: anchored assertion with fn call — strong; skip LLB
   if _has_anchored_assertion(block) { return 0 }
 
-  // YES marker 5: file-wide def call
+  // YES marker 5: file-wide def call — strong; skip LLB
   if _has_file_def_call(block, file_def_names) { return 0 }
 
-  // YES marker 6: substantive iteration
+  // YES marker 6: substantive iteration — strong; skip LLB
   if _has_substantive_iteration(block) { return 0 }
 
   // Decision — threshold v3.18 = 1 (catches user-banned `a=1, a+a=2` pattern).
@@ -1503,6 +1755,43 @@ fn _selftest() -> void {
     "print('meta')"
   ]
   counters = _check_block("F16-metaclass-injection", f16, [], true,
+                          counters[0], counters[1])
+
+  // F17 (Round C): cocktail bypass — compute-lib YES marker fires (numpy
+  // import + np.array call), but the assertion is purely literal-load-bearing
+  // on a separately-bound literal. Heuristic alone said OK; literal-provenance
+  // override flags it.
+  let f17 = [
+    "import numpy as np",
+    "data = np.array([1, 2, 3])",
+    "sigma = 12",
+    "assert sigma == 12"
+  ]
+  counters = _check_block("F17-llb-cocktail", f17, [], true,
+                          counters[0], counters[1])
+
+  // F18 (Round C must not break legitimate compute-lib + computed-assertion
+  // pattern). Block has both a compute-lib usage AND the assertion is on a
+  // computed value (not literal) — must remain OK.
+  let f18 = [
+    "import numpy as np",
+    "data = np.array([1, 2, 3])",
+    "result = data.sum()",
+    "assert result == 6"
+  ]
+  counters = _check_block("F18-llb-real-compute-stays-ok", f18, [], false,
+                          counters[0], counters[1])
+
+  // F19 (Round C arithmetic-of-literals chain): all check-line vars trace
+  // back through pure literal arithmetic — should still flag.
+  let f19 = [
+    "import math  # decoy",
+    "a = 1",
+    "b = a + a",
+    "c = b * 2",
+    "assert c == 4"
+  ]
+  counters = _check_block("F19-llb-arith-chain", f19, [], true,
                           counters[0], counters[1])
 
   let total = counters[0]
