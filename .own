@@ -1,4 +1,4 @@
-# n6-architecture /.own — L1 unified governance DSL (32 rules)
+# n6-architecture /.own — L1 unified governance DSL (33 rules)
 # Project-local SSOT: declarative rules + cron loop + forward-chain + drift checks.
 # Parallel to L0 (hexa-lang /.raw) with independent id namespace.
 # Grammar: hexa-lang self/raw_loader.hexa (same syntax as .raw / .loop / .chain).
@@ -711,3 +711,73 @@ own 32 live "physical-limit-alternative-framing — domains MAY anchor design co
   follow-up cross-project propagation per raw 47 — sister repos (nexus / anima / hexa-lang / airgenome / hive) inherit if they have domain docs with §7 verify blocks (deferred — n6-local origin first, sister replication on warn → live transition)
   follow-up template emission for new domain docs declaring physical-limit framing — canonical Block A (own#2 master identity) + Block B+ (physical-limit models) + Block G (precursor cross-link attestation) skeleton, mirroring cat-litter §7 pattern
   follow-up retroactive audit of existing domain docs for n=6 force-fit pattern — produce candidate list for physical-limit re-derivation (non-blocking, advisory recommendation only per permissive rule scope)
+
+own 33 live "ai-native-verify-pattern — AI agents generating domain verification code SHOULD follow the cat-litter §7 Block A-G canonical template (own#2 separable identity + physical-limit physics + precursor cross-link). HARD-OPT-IN promotion path; permissive scope per 한계가 있으면 안됨 directive."
+  slug ai-native-verify-pattern
+  decl tool/own31_verify_tautology_ban_lint.hexa (v3.19+ AI-native fix-output references this rule on every FAIL emission) domains/**/*.md papers/**/*.md
+  scope OPT-IN guidance — domain authors AND AI-agent contributors writing python verification blocks under domains/**/*.md and papers/**/*.md. Positive template (NOT a prohibition): the rule provides a canonical Block A-G structure that AI agents can emit when generating new domain §7 verify content. own#31 lint enforces what NOT to do (tautology ban + 10 adversarial detectors); own#33 enforces what TO do (alien-grade-10 separable + physical-limit + precursor pattern). The two rules are complementary axes of the same alien-grade-10 verification standard.
+  status live
+  since 2026-05-01
+  why prior governance left AI-agent contributors without a positive template for verify-block authorship. own#31 (tautology ban) tells the agent what to avoid; own#32 (physical-limit alternative framing) tells the agent the engineering-design layer is decoupled from n=6 force-fit. Neither rule provides a ready-to-emit structural template. Result: agents generate locally-valid blocks that pass own#31 but score 4-7 on alien-grade because they miss separability (own#2 not in its own block), miss physical-limit grounding, or miss precursor cross-link attestation. own#33 codifies the cat-litter §7 Block A-G structure (alien-grade 10) as the canonical AI-native template, making it directly emittable. User directive 2026-05-01 (Korean preserved): "lint + own 에 ai-native" — both the lint output AND the .own rule must guide AI agents to the alien-grade-10 standard. Permissive per the same session directive ("한계가 있으면 안됨"): no cap on which precursors / how many.
+  bans (NONE — own#33 is a positive template, not a prohibition; permissive per "한계가 있으면 안됨" pattern from own#32)
+  guides Block A own#2 master identity verification — separable mathematical fact: prove sigma(6)*phi(6) = 6*tau(6) = J2 = 24 from divisor / sigma / tau / phi_eul primitives. NO physical constants. NO domain-specific assumptions. The check must succeed in any environment with python3 stdlib only.
+  guides Block B-F physical-limit physics models — each block anchors on ONE physical-limit law inherited from a precursor domain (Helmholtz double-layer / Yoon-Nelson breakthrough / BET surface area / Eigen-Hammes diffusion / Darcy permeability / Kozeny-Carman porosity / Carnot efficiency / Weibull reliability / etc.). Cite the literature (NIST CODATA / textbook / paper DOI). Compute the design constant from the physical model, then verify via assert against an envelope (not a literal point estimate).
+  guides Block G precursor cross-link attestation — explicit list of precursor domains inherited (e.g. for cat-litter: ceramics + life-water-clay + air-purification + zeolite-IX + dust-rheology + gas-diffusion). Each precursor cited by domains/<axis>/<slug>/<file>.md path. own#2 master identity must hold AFTER inheritance composition (not just at the precursor level).
+  guides assert lines must compute LHS from primitives or physical-limit formulas; compare against envelope bounds (≤ / ≥) or model uncertainty (abs(x - y) < tol). NEVER compare two literals. NEVER hardcode the expected value as a Python literal that simply mirrors a transcribed observation.
+  guides every Block must close with a one-line summary comment: `# Block <X>: <law>: <design constant>=<computed value> within <envelope>` — this is the AI-readable trace that own#33 verification consumes.
+  guides between blocks, separate with `# ---` and a Block header `# Block X: <name>` so the structural detector can split blocks unambiguously.
+  guides AI agents emitting a new domain §7 SHOULD start from the cat-litter §7 skeleton (lines 200-528 of domains/pets/cat-litter/cat-litter.md) and substitute domain-specific laws into Blocks B-F. Block A and Block G structures are universal — keep verbatim and only update precursor list in G.
+  reference-example domains/pets/cat-litter/cat-litter.md §7 (Blocks A-G with own#2 separable identity in A, physical-limit physics in B-F, precursor cross-link in G; alien-grade 10 — inaugural live precedent commit 5fd6825e)
+  reference-example domains/cognitive/hexa-dream/hexa-dream.md §7.0 CONSTANTS pattern (canonical Block A own#2 master-identity reference — divisor / sigma / tau / phi_eul / sopfr computed from primitives, then asserted; alien-grade 9 because no precursor inheritance — pure framework layer)
+  reference-example domains/sf-ufo/hexa-ufo/hexa-ufo.md §7 (Carnot / Weibull / P=Fv physical formulas — physical-limit Block B-F precedent at alien-grade 8)
+  cognitive-frameworks own#31 verify-tautology-ban-mandate (parent — what NOT to do; own#33 provides the positive template the FAIL output references)
+  cognitive-frameworks own#32 physical-limit-alternative-framing (parent — engineering-design layer decoupled from n=6 force-fit; own#33 codifies the structural template)
+  cognitive-frameworks own#2 n6-master-identity (the separable mathematical fact that Block A always proves; own#33 mandates Block A presence in any §7 declaring physical-limit framing per own#32)
+  cognitive-frameworks raw 91 C3 no-fabrication (precursor cross-link in Block G must cite REAL domains/ paths and REAL literature constants, not invented references)
+  cognitive-frameworks raw 117 alien-grade reproduction (target alien-grade for blocks following own#33 template = 10; reproducible from textbook physics + cited literature + own#2 master identity)
+  cognitive-frameworks raw 47 cross-project propagation (sister repos may inherit own#33 once n6-local rule reaches stable state)
+  proof commit 5fd6825e cat-litter alien-grade upgrade 4 → 10 via Block A-G re-derivation (live precedent that the template works)
+  proof tool/own31_verify_tautology_ban_lint.hexa v3.19 _emit_ai_native_fix_ref (every FAIL emission references own#33 template — operationalized link between negative enforcement and positive guidance)
+  proof reports/own33_ai_native_verify_pattern.json (forward-spec audit ledger per raw 77 schema — to be bootstrapped post-LIVE)
+  measurement-axis ai-author-template-adoption-rate = (new §7 verify blocks emitted by AI agents that match Block A-G structural pattern / total new §7 verify blocks emitted by AI agents) over rolling 90d — informational, no target floor (permissive rule)
+  measurement-axis blockA-own2-presence-rate = (new §7 blocks under own#32 physical-limit framing that contain a Block A own#2 master-identity verification / total new §7 blocks under own#32) — target = 1.0 (HARD floor inherited from own#32 F-OWN32-1)
+  measurement-axis blockG-precursor-link-rate = (§7 blocks under own#32 framing with explicit Block G precursor cross-link attestation / total such blocks) — target ≥ 0.80 at 90d
+  measurement-axis alien-grade-distribution-shift = mean alien-grade of new §7 blocks under own#32 framing post-own#33 LIVE vs pre-own#33 baseline — target monotone increase over rolling 90d
+  measurement-axis ai-native-fix-link-followthrough-rate = (FAIL emissions from own#31 lint that result in a Block A-G compliant fix in subsequent commit / total FAIL emissions) — target ≥ 0.50 at 90d
+  witness reports/own33_ai_native_verify_pattern.json
+  classifier-version own33_ai_native_verify_pattern.v1
+  falsifier F-OWN33-1 90d post: ai-author-template-adoption-rate < 0.10 (AI agents generating new §7 blocks essentially ignore the template) → guidance ineffective, classifier v2 OR template emission tool mandate
+  falsifier F-OWN33-2 90d post: blockA-own2-presence-rate < 1.0 (any new §7 under own#32 framing missing Block A own#2 separable verification) → enforcement gap inherited from own#32 F-OWN32-1, HARD-block ramp on missing-block detection
+  falsifier F-OWN33-3 90d post: alien-grade-distribution-shift NOT positive (mean alien-grade does not improve post-LIVE) → template adoption insufficient OR template wrong, structural revision required
+  falsifier F-OWN33-4 ≥3 instances of fabricated precursor cross-link (Block G cites domains/<axis>/<slug>/<file>.md paths that do not resolve in the tree) → raw 91 C3 violation, doc rejection + own#33 strengthening
+  falsifier F-OWN33-5 ai-native-fix-link-followthrough-rate < 0.20 at 90d (AI agents see the FAIL → own#33 link in lint output but do not act on it) → output format wrong OR template too heavy, lint fix-output revision required
+  measurement-threshold blockA-own2-presence-rate=1.0-mandatory blockG-precursor-link-rate>=0.80-at-90d alien-grade-distribution-shift-monotone-increase-90d
+  proof-obligations cat-litter-§7-Block-A-G-alien-grade-10-PASS + own31-v3.19-fix-output-references-own33 + reports/own33_ai_native_verify_pattern.json-bootstrap (post-LIVE)
+  spec-form forward-spec-with-live-precedent
+  enforce tool/own31_verify_tautology_ban_lint.hexa (v3.19+ AI-native fix-output)
+  enforce-layer hive-agent
+  enforce-layer-secondary cli-lint
+  enforce-layer-tertiary advisory
+  enforce-layer-rationale tri-layer (raw 95 triad-mandate): hive-agent verifies Block A own#2 presence + Block G precursor path resolution on commit when doc declares own#32 physical-limit framing; cli-lint emits the own#33 reference on every own#31 FAIL (operationalized via _emit_ai_native_fix_ref); advisory layer reports template-adoption-rate + alien-grade-distribution-shift over rolling 90d (no enforcement — permissive rule per user directive).
+  category meta-triad
+  category proof-truth
+  category framing-axis
+  category ai-native-guidance
+  applies-to design-doc
+  applies-to domain-spec
+  applies-to ai-agent-emission
+  phase pre-write
+  phase verify-block-authorship
+  phase ai-agent-template-emission
+  triad-exempt forward-spec-meta-rule — own#33 governs AI-agent verify-block template emission, not parser substrate; raw 95 compliance via canonical hive-agent + cli-lint + advisory trio.
+  severity warn
+  verify hexa tool/own31_verify_tautology_ban_lint.hexa --selftest
+  cron on-commit
+  on_fail warn
+  label own#33 ai-native-verify-pattern (live; permissive — no caps on precursor count or axis combinations; positive template companion to own#31 negative enforcement)
+  note FORWARD SPEC with live precedent. user directive 2026-05-01 (Korean preserved): "lint + own 에 ai-native" — both the v3.19 lint FAIL output AND the .own rule are now AI-native. own#33 is the positive companion to own#31: where own#31 enumerates 10 adversarial patterns to AVOID (eval-deferred / subprocess-self-ref / operator-override / metaclass-injection / base64-decoy / random-seed-determinism / url-fetch-fake / encoding-decoy / unicode-lookalike / aliased-import), own#33 enumerates the Block A-G structural template to FOLLOW. Inaugural live counter-example remains cat-litter §7 (alien-grade 10). Permissive: no cap on precursor count or axis combinations per own#32 inheritance. raw 91 C3 honest disclosure: structural-pattern detection (Block A-G presence) is currently advisory + AI-readable in lint output — automated enforcement gated on tool/own_doc_lint.hexa --rule 33 follow-up.
+  follow-up bootstrap reports/own33_ai_native_verify_pattern.json per raw 77 audit ledger schema (per-doc row: ts + doc_path + blockA_own2_present + blockBF_physical_limit_count + blockG_precursor_count + alien_index)
+  follow-up extend tool/own_doc_lint.hexa with --rule 33 subcommand: detect Block A own#2 master-identity + count Block B-F physical-limit blocks + verify Block G precursor paths resolve to existing domains/ tree
+  follow-up template emission tool — bin/n6 governance subcommand `n6 governance.hexa template-blockA-G --domain <slug> --precursor <axis>/<slug> [--precursor ...]` to emit a skeleton §7 from cat-litter pattern
+  follow-up cross-project propagation per raw 47 — sister repos (nexus / anima / hexa-lang / airgenome / hive) inherit if they adopt own#31 + own#32 axis pair; own#33 follows as the natural positive companion (deferred — n6-local origin first, sister replication on warn → live transition)
+  follow-up retroactive audit — identify existing §7 verify blocks under domains/ that already match Block A-G structure but were never tagged as own#33-compliant; backfill the cognitive-frameworks attribution

@@ -2,6 +2,27 @@
 // tool/own31_verify_tautology_ban_lint.hexa — verify-block tautology
 // HARD-block enforcement (own 31).
 //
+// v3.19 (2026-05-01): Tier-1 hardening over v3.18 (cycle 30 round F locked
+// ceiling). Adds 4 new detectors covering the gap surfaces identified in
+// post-Round-F review:
+//
+//   v3.18 gap (Tier 1)                            v3.19 fix
+//   ---------------------------------------       ---------------------------
+//   C1-C4 encoding-decoy (bytes.fromhex /         _detect_encoding_decoy
+//         int.from_bytes / pickle.loads /
+//         marshal.loads / zlib+base85 multi)
+//   D1   Unicode look-alike (Cyrillic 'е' for     _detect_unicode_lookalike
+//        Latin 'e' in eval/exec/lambda/etc.)
+//   D2   multilingual disclaimer keyword set      _is_substantive_disclaimer
+//        (Korean / Japanese / Chinese)            extended (KO/JA/ZH set)
+//   E1   aliased-import from sensitive stdlib     _detect_aliased_import
+//        (e.g. `from os import system as f`)
+//
+// Ai-native fix-output: every FAIL emission now appends a structured
+// reference to the cat-litter §7 Block A-G canonical template (own#33
+// ai-native-verify-pattern), guiding AI agents who write domain
+// verification code to follow the alien-grade-10 pattern.
+//
 // v3 (2026-05-01): heuristic upgrade from v2. Closes 9 bypasses + 2 runtime
 // bugs surfaced in cycle 30 wave 4 review:
 //
@@ -192,11 +213,15 @@ fn _is_check_line(line: string) -> bool {
 }
 
 // Disclaimer must mention `raw 91 C3` AND a negation keyword.
+// v3.19: extended with multilingual negation keyword set (Korean / Japanese /
+// Chinese). The `raw 91 C3` anchor is still required — the multilingual
+// extension only widens the negation-keyword check, not the anchor mandate.
 fn _is_substantive_disclaimer(line: string) -> bool {
   let t = line.trim()
   if !_starts_with(t, "#") { return false }
   if !_contains(t, "raw 91 C3") && !_contains(t, "raw 91 honest C3") { return false }
   let lc = _to_lower(t)
+  // English negation keywords
   if _contains(lc, "not verified")     { return true }
   if _contains(lc, "not empirical")    { return true }
   if _contains(lc, "not load-bearing") { return true }
@@ -208,6 +233,27 @@ fn _is_substantive_disclaimer(line: string) -> bool {
   if _contains(lc, "demonstration only"){ return true }
   if _contains(lc, "out of scope")     { return true }
   if _contains(lc, "theoretical projection") { return true }
+  // Korean negation keywords (raw bytes; case-insensitive _to_lower above is
+  // ASCII-only so the original `t` is what we test against — Korean has no
+  // case so this is fine).
+  if _contains(t, "검증 안됨")        { return true }
+  if _contains(t, "검증되지 않음")    { return true }
+  if _contains(t, "실증 아님")        { return true }
+  if _contains(t, "예시일 뿐")        { return true }
+  if _contains(t, "데모용")           { return true }
+  if _contains(t, "이론적 투영")      { return true }
+  // Japanese negation keywords
+  if _contains(t, "検証されていない") { return true }
+  if _contains(t, "実証ではない")     { return true }
+  if _contains(t, "例示のみ")         { return true }
+  if _contains(t, "デモ用")           { return true }
+  if _contains(t, "理論的投影")       { return true }
+  // Chinese negation keywords
+  if _contains(t, "未验证")           { return true }
+  if _contains(t, "不是实证")         { return true }
+  if _contains(t, "仅示例")           { return true }
+  if _contains(t, "演示用")           { return true }
+  if _contains(t, "理论投影")         { return true }
   return false
 }
 
@@ -868,7 +914,15 @@ fn _block_has_adversarial_tokens(block: list) -> bool {
               "urlsafe_b64encode(", "binascii.unhexlify(", "binascii.hexlify(",
               "random.seed(", "np.random.seed(",
               "requests.get(", "requests.post(", "urllib.request.urlopen(",
-              "urlopen("]
+              "urlopen(",
+              // v3.19 Tier-1 additions:
+              "bytes.fromhex(", "int.from_bytes(", "pickle.loads(",
+              "marshal.loads(", "zlib.decompress(", "b85decode(",
+              "import system as", "import popen as", "import call as",
+              "import getattr as", "import __import__ as",
+              // Cyrillic look-alike anchors (any one of these in the block
+              // triggers the unicode-lookalike scan).
+              "е", "а", "о", "р", "с", "х", "у", "ӏ"]
   let mut i = 0
   let n = len(block)
   while i < n {
@@ -1253,6 +1307,269 @@ fn _detect_url_fetch_fake(block: list) -> string {
   return ""
 }
 
+// ---------- v3.19 Tier-1 detectors ----------
+
+// C1-C4 _detect_encoding_decoy
+//
+// Pattern: a block decodes a literal payload via one of the encoding-decoy
+// vectors (bytes.fromhex / int.from_bytes / pickle.loads / marshal.loads /
+// zlib.decompress chained with base64/base85), then asserts the decoded
+// value against another literal. The bypass is that the heuristic sees a
+// "real" decode but the assertion is still tautological — both sides of
+// the comparison are author-supplied constants.
+//
+// Returns "encoding-decoy:<vector>" with the most-specific vector identified.
+fn _detect_encoding_decoy(block: list) -> string {
+  let n = len(block)
+  // Vector tokens, ordered by specificity. Each entry: [token, label].
+  let vectors = [
+    ["bytes.fromhex(",   "bytes.fromhex"],
+    ["int.from_bytes(",  "int.from_bytes"],
+    ["pickle.loads(",    "pickle.loads"],
+    ["marshal.loads(",   "marshal.loads"],
+    ["zlib.decompress(", "zlib.decompress"],
+    ["b85decode(",       "base85.b85decode"]
+  ]
+  let mut hit_vector = ""
+  let mut has_literal_arg = false
+  let mut i = 0
+  while i < n {
+    let ln = block[i]
+    let mut k = 0
+    while k < len(vectors) {
+      let tok = vectors[k][0]
+      let lbl = vectors[k][1]
+      let idx = _index_of(ln, tok)
+      if idx >= 0 {
+        // Look at the argument: literal if it begins with a quote, b" / b',
+        // or `0x` hex, or a numeric literal.
+        let after = ln.substring(idx + len(tok), len(ln))
+        let trimmed = after.trim()
+        let starts_quote = _starts_with(trimmed, "\"") || _starts_with(trimmed, "'")
+                           || _starts_with(trimmed, "b\"") || _starts_with(trimmed, "b'")
+                           || _starts_with(trimmed, "r\"") || _starts_with(trimmed, "r'")
+        // For int.from_bytes, the literal arg is a bytes literal — same check.
+        // For pickle/marshal, the bytes literal is the input.
+        if starts_quote {
+          has_literal_arg = true
+          if len(hit_vector) == 0 { hit_vector = lbl }
+        }
+        // Multi-stage: zlib.decompress(base64.b64decode("..."))  — the
+        // outer call has no quote, but the inner decode does. Scan the
+        // line for an inner b64decode/b85decode/unhexlify quote argument.
+        if !starts_quote {
+          let inner_toks = ["b64decode(", "b85decode(", "urlsafe_b64decode(",
+                            "binascii.unhexlify("]
+          let mut it = 0
+          while it < len(inner_toks) {
+            let itok = inner_toks[it]
+            let iidx = _index_of(ln, itok)
+            if iidx >= 0 {
+              let inner_after = ln.substring(iidx + len(itok), len(ln)).trim()
+              if _starts_with(inner_after, "\"") || _starts_with(inner_after, "'")
+                 || _starts_with(inner_after, "b\"") || _starts_with(inner_after, "b'") {
+                has_literal_arg = true
+                if len(hit_vector) == 0 { hit_vector = lbl + "+" + itok.substring(0, len(itok) - 1) }
+              }
+            }
+            it = it + 1
+          }
+        }
+      }
+      k = k + 1
+    }
+    i = i + 1
+  }
+  if !has_literal_arg { return "" }
+  // A check line that compares against a literal closes the trap.
+  let mut ci = 0
+  while ci < n {
+    let ln = block[ci]
+    if _is_check_line(ln) {
+      if _contains(ln, "==") || _contains(ln, "!=") {
+        return "encoding-decoy:" + hit_vector
+      }
+    }
+    ci = ci + 1
+  }
+  return ""
+}
+
+// D1 _detect_unicode_lookalike
+//
+// Pattern: any line in the block contains characters in the Cyrillic /
+// look-alike set that visually mimic Latin Python keywords. After
+// normalization (substituting each look-alike with its Latin counterpart),
+// if the line contains a banned keyword (eval, exec, lambda, return,
+// import, def, class, compile) AND a comparison operator or function-call
+// paren follows, we FLAG.
+//
+// Note: this is a string-substitution normalizer; it does NOT need a Unicode
+// codepoint API. We test for the literal multi-byte sequences in UTF-8.
+fn _normalize_lookalike(s: string) -> string {
+  // Map each Cyrillic look-alike to its Latin counterpart by replacing all
+  // occurrences. We do this by scanning and rebuilding.
+  // Pairs: (cyr, lat).
+  let pairs = [
+    ["а", "a"],  // U+0430
+    ["е", "e"],  // U+0435
+    ["о", "o"],  // U+043E
+    ["р", "p"],  // U+0440
+    ["с", "c"],  // U+0441
+    ["х", "x"],  // U+0445
+    ["у", "y"],  // U+0443 — Cyrillic 'у' looks like Latin 'y'
+    ["ӏ", "l"],  // U+04CF
+    ["ν", "v"],  // U+03BD Greek nu — looks like Latin v
+    ["ⅼ", "l"]   // U+217C small roman numeral L
+  ]
+  let mut out = s
+  let mut k = 0
+  while k < len(pairs) {
+    let cyr = pairs[k][0]
+    let lat = pairs[k][1]
+    // Replace all occurrences of cyr with lat by repeated _index_of.
+    let mut rebuilt = ""
+    let mut rest = out
+    while true {
+      let idx = _index_of(rest, cyr)
+      if idx < 0 { rebuilt = rebuilt + rest; rest = ""; break }
+      rebuilt = rebuilt + rest.substring(0, idx) + lat
+      rest = rest.substring(idx + len(cyr), len(rest))
+    }
+    out = rebuilt
+    k = k + 1
+  }
+  return out
+}
+
+fn _detect_unicode_lookalike(block: list) -> string {
+  let n = len(block)
+  let cyr_anchors = ["а", "е", "о", "р", "с", "х", "у", "ӏ", "ν", "ⅼ"]
+  let banned_kw = ["eval", "exec", "lambda", "return", "import", "def",
+                   "class", "compile"]
+  let mut i = 0
+  while i < n {
+    let ln = block[i]
+    // Skip lines that are pure Cyrillic prose with no Python ops — gate
+    // on the line containing one of `(` / `=` / `:` / `,` to avoid false
+    // positives on Korean / Russian / Greek prose comments.
+    if !_contains(ln, "(") && !_contains(ln, "=") {
+      i = i + 1; continue
+    }
+    let mut has_anchor = false
+    let mut a = 0
+    while a < len(cyr_anchors) {
+      if _contains(ln, cyr_anchors[a]) { has_anchor = true; a = len(cyr_anchors) }
+      else { a = a + 1 }
+    }
+    if !has_anchor { i = i + 1; continue }
+    let normalized = _normalize_lookalike(ln)
+    let mut k = 0
+    while k < len(banned_kw) {
+      let kw = banned_kw[k]
+      if _word_match(normalized, kw) {
+        // Confirm it's actually a callable / control-flow form: the
+        // normalized line must also have `(` (call) or `:` (lambda /
+        // colon-form) or `,` (return tuple / arg list).
+        if _contains(normalized, "(") || _contains(normalized, ":") {
+          return "unicode-lookalike-keyword:" + kw
+        }
+      }
+      k = k + 1
+    }
+    i = i + 1
+  }
+  return ""
+}
+
+// E1 _detect_aliased_import
+//
+// Pattern: block contains `from X import Y as Z` where X is in a sensitive
+// stdlib set (os, sys, ctypes, subprocess, builtins, __builtins__,
+// importlib) AND Z is later called inside an assert/check line. The bypass
+// is that the token registry doesn't catch the alias `Z`, so a tautology
+// of the form `assert Z("echo 12") == 0` (where Z is system) reads as
+// "real call" but is actually a side-effect smuggle.
+//
+// Returns "aliased-import-from-sensitive:X.Y->Z".
+fn _detect_aliased_import(block: list) -> string {
+  let n = len(block)
+  let sensitive = ["os", "sys", "ctypes", "subprocess", "builtins",
+                   "__builtins__", "importlib", "importlib.util",
+                   "posix", "nt", "_thread"]
+  // Pass 1: collect alias mappings (X.Y -> Z).
+  let mut aliases = []  // flat list: [X, Y, Z, X, Y, Z, ...]
+  let mut i = 0
+  while i < n {
+    let t = block[i].trim()
+    if !_starts_with(t, "from ") { i = i + 1; continue }
+    // Parse: from X import Y as Z [, W as V ...]
+    let after_from = t.substring(5, len(t))
+    let imp_idx = _index_of(after_from, " import ")
+    if imp_idx <= 0 { i = i + 1; continue }
+    let mod_name = after_from.substring(0, imp_idx).trim()
+    // Module must be in sensitive set
+    let mut is_sens = false
+    let mut s = 0
+    while s < len(sensitive) {
+      if mod_name == sensitive[s] { is_sens = true; s = len(sensitive) }
+      else { s = s + 1 }
+    }
+    if !is_sens { i = i + 1; continue }
+    let imports_part = after_from.substring(imp_idx + 8, len(after_from)).trim()
+    // Split on commas
+    let entries = split(imports_part, ",")
+    let mut e = 0
+    while e < len(entries) {
+      let entry = entries[e].trim()
+      // Strip trailing comment
+      let hash = _index_of(entry, "#")
+      let cleaned = if hash > 0 { entry.substring(0, hash).trim() } else { entry }
+      // Look for ` as `
+      let as_idx = _index_of(cleaned, " as ")
+      if as_idx > 0 {
+        let y = cleaned.substring(0, as_idx).trim()
+        let z = cleaned.substring(as_idx + 4, len(cleaned)).trim()
+        if _is_identifier(y) && _is_identifier(z) {
+          aliases.push(mod_name)
+          aliases.push(y)
+          aliases.push(z)
+        }
+      }
+      e = e + 1
+    }
+    i = i + 1
+  }
+  if len(aliases) == 0 { return "" }
+  // Pass 2: any check line contains alias call `Z(`.
+  let mut ci = 0
+  while ci < n {
+    let ln = block[ci]
+    if _is_check_line(ln) {
+      let mut ai = 0
+      while ai < len(aliases) {
+        let z = aliases[ai + 2]
+        let pat = z + "("
+        let idx = _index_of(ln, pat)
+        if idx >= 0 {
+          let prev_ok = if idx == 0 { true } else {
+            let pc = ln.substring(idx - 1, idx)
+            !((pc >= "a" && pc <= "z") || (pc >= "A" && pc <= "Z")
+              || (pc >= "0" && pc <= "9") || pc == "_")
+          }
+          if prev_ok {
+            return "aliased-import-from-sensitive:" + aliases[ai] + "."
+                   + aliases[ai + 1] + "->" + z
+          }
+        }
+        ai = ai + 3
+      }
+    }
+    ci = ci + 1
+  }
+  return ""
+}
+
 fn _adversarial_pattern_check(block: list) -> string {
   let r1 = _detect_eval_deferred_cmp(block)
   if len(r1) > 0 { return r1 }
@@ -1269,6 +1586,13 @@ fn _adversarial_pattern_check(block: list) -> string {
   if len(r6) > 0 { return r6 }
   let r7 = _detect_url_fetch_fake(block)
   if len(r7) > 0 { return r7 }
+  // v3.19 Tier-1 additions (C1-C4 / D1 / E1):
+  let r8 = _detect_encoding_decoy(block)
+  if len(r8) > 0 { return r8 }
+  let r9 = _detect_unicode_lookalike(block)
+  if len(r9) > 0 { return r9 }
+  let r10 = _detect_aliased_import(block)
+  if len(r10) > 0 { return r10 }
   return ""
 }
 
@@ -1581,6 +1905,20 @@ fn _all_checks_literal_load_bearing(block: list, prov_map: list) -> bool {
   return found_any_var && all_literal
 }
 
+// ---------- v3.19 AI-native fix-output ----------
+//
+// Emitted after every FAIL fix-suggestion line. References the cat-litter
+// §7 Block A-G canonical template (own#33 ai-native-verify-pattern) so that
+// AI agents writing domain verification code follow the alien-grade-10
+// pattern (own#2 separable identity in Block A + physical-limit physics in
+// Blocks B-F + precursor cross-link in Block G).
+fn _emit_ai_native_fix_ref() -> void {
+  println("[own31]   ai-native-fix: see domains/pets/cat-litter/cat-litter.md §7 Block A-G")
+  println("[own31]                  (own#2 separable identity + physical-limit physics +")
+  println("[own31]                   precursor cross-link). own#33 ai-native-verify-pattern")
+  println("[own31]                  for the canonical template.")
+}
+
 // ---------- block scan ----------
 
 fn _scan_block(block: list, file_def_names: list, file_path: string,
@@ -1617,6 +1955,7 @@ fn _scan_block(block: list, file_def_names: list, file_path: string,
               + "; oversize block — Round D budget-cap reduced-fidelity scan)")
       println("[own31]   note: full multi-marker analysis skipped on this")
       println("[own31]         block (>300 lines); raw 91 C3 honest disclosure.")
+      _emit_ai_native_fix_ref()
       return 1
     }
     return 0
@@ -1647,8 +1986,10 @@ fn _scan_block(block: list, file_def_names: list, file_path: string,
       println("[own31]   fix: remove the adversarial pattern (eval/exec literal")
       println("[own31]         comparison / subprocess self-ref / operator override /")
       println("[own31]         metaclass literal injection / base64 decode-decoy /")
-      println("[own31]         random-seed-determinism / url-fetch-fake); use real")
-      println("[own31]         verification.")
+      println("[own31]         random-seed-determinism / url-fetch-fake /")
+      println("[own31]         encoding-decoy / unicode-lookalike / aliased-import")
+      println("[own31]         use real verification.")
+      _emit_ai_native_fix_ref()
       return 1
     }
   }
@@ -1695,6 +2036,7 @@ fn _scan_block(block: list, file_def_names: list, file_path: string,
               + "in block — cocktail bypass)")
       println("[own31]   fix: replace literal bindings with computed values, OR")
       println("[own31]         add `# raw 91 C3: <negation-keyword>` disclaimer.")
+      _emit_ai_native_fix_ref()
       return 1
     }
     return 0
@@ -1719,6 +2061,7 @@ fn _scan_block(block: list, file_def_names: list, file_path: string,
     println("[own31]         divisor / sigma / phi_eul primitives — see canonical")
     println("[own31]         pattern at domains/cognitive/hexa-dream/hexa-dream.md §7.0")
     println("[own31]         OR add `# raw 91 C3: <negation-keyword>` disclaimer")
+    _emit_ai_native_fix_ref()
     return 1
   }
 
@@ -2138,6 +2481,66 @@ fn _selftest() -> void {
     "assert int(r.text) == 12"
   ]
   counters = _check_block("F24-url-fetch-fake", f24, [], true,
+                          counters[0], counters[1])
+
+  // F25 (v3.19 Tier-1 C1 encoding-decoy via bytes.fromhex): block decodes
+  // a hex literal then asserts the decoded value against another literal.
+  // Heuristic alone might pass (bytes.fromhex looks like real decode); the
+  // new detector catches the literal→literal tautology around the decode.
+  let f25 = [
+    "expected = b\"12\"",
+    "actual = bytes.fromhex(\"3132\")",
+    "assert actual == expected"
+  ]
+  counters = _check_block("F25-encoding-decoy-bytes-fromhex", f25, [], true,
+                          counters[0], counters[1])
+
+  // F26 (v3.19 Tier-1 C3 encoding-decoy via pickle.loads): block deserializes
+  // a literal pickle payload then asserts it equals a literal. Pickle provides
+  // no real verification — the payload was author-supplied.
+  let f26 = [
+    "import pickle",
+    "payload = b\"\\x80\\x04K\\x0c.\"",
+    "value = pickle.loads(payload)",
+    "assert value == 12"
+  ]
+  counters = _check_block("F26-encoding-decoy-pickle-loads", f26, [], true,
+                          counters[0], counters[1])
+
+  // F27 (v3.19 Tier-1 D1 unicode-lookalike): the keyword `eval` is spelled
+  // with a Cyrillic 'е' (U+0435). After normalization the line reads
+  // `eval(\"12 == 12\")`, which the detector recognizes as a banned-keyword
+  // call form. NB: the literal here uses the Cyrillic codepoint.
+  let f27 = [
+    "result = еval(\"12 == 12\")",
+    "assert result"
+  ]
+  counters = _check_block("F27-unicode-lookalike-eval", f27, [], true,
+                          counters[0], counters[1])
+
+  // F28 (v3.19 Tier-1 E1 aliased-import from sensitive stdlib): `os.system`
+  // is imported under an innocuous-looking alias `f`, then called inside an
+  // assert. The token registry doesn't know about `f`, but the alias detector
+  // tracks the `from os import system as f` mapping.
+  let f28 = [
+    "from os import system as f",
+    "assert f(\"echo 12\") == 0"
+  ]
+  counters = _check_block("F28-aliased-import-from-os", f28, [], true,
+                          counters[0], counters[1])
+
+  // F29 (v3.19 Tier-1 D2 multilingual disclaimer): Korean disclaimer with
+  // `raw 91 C3` anchor + Korean negation keyword `검증 안됨` ("not verified").
+  // Body is a hardcoded tautology; the multilingual disclaimer must exempt
+  // the block.
+  let f29 = [
+    "# raw 91 C3: 검증 안됨 — illustrative only (Korean)",
+    "sigma, tau, n = 12, 4, 6",
+    "assert sigma == 12",
+    "assert tau == 4",
+    "assert n == 6"
+  ]
+  counters = _check_block("F29-multilingual-disclaimer-korean", f29, [], false,
                           counters[0], counters[1])
 
   let total = counters[0]
