@@ -1,4 +1,4 @@
-# n6-architecture /.own — L1 unified governance DSL (23 rules)
+# n6-architecture /.own — L1 unified governance DSL (32 rules)
 # Project-local SSOT: declarative rules + cron loop + forward-chain + drift checks.
 # Parallel to L0 (hexa-lang /.raw) with independent id namespace.
 # Grammar: hexa-lang self/raw_loader.hexa (same syntax as .raw / .loop / .chain).
@@ -454,7 +454,7 @@ own 28 new "n6-local: user-facing-response-friendliness — hive raw 165 cross-r
   deps raw:design-paper-lineage-formal-proof-tracing
   deps raw:proof-carrying
   strategy-source hive raw 165 + nexus own 9 (T1 #1) + anima own 13 (T2 #2) + 2026-04-28 raw 100 fallback in-context T4 propagation (kick infra unwired — see raw 100 strengthening 2026-04-27 fallback clause). 5-sister-repo set corrected airgenome → hive (off-domain) per hive commit 5f12e1829.
-  cross-repo-trawl-witness /Users/ghost/core/hive/state/raw_addition_requests/registry.jsonl req-raw165-user-facing-response-friendliness-mandate (approval 2026-04-28T14:13:21Z signer manual-user-via-hive-cli)
+  cross-repo-trawl-witness <user>/core/hive/state/raw_addition_requests/registry.jsonl req-raw165-user-facing-response-friendliness-mandate (approval 2026-04-28T14:13:21Z signer manual-user-via-hive-cli)
   measurement-axis n6-theory-docs-acronym-first-use-expansion-rate = (acronyms expanded on first occurrence / total first-acronym occurrences in theory/) — target ≥ 0.80
   measurement-axis n6-domains-docs-jargon-ratio = jargon-tokens / total-tokens on stdout — target ≤ 0.30
   measurement-threshold n6-theory-docs-acronym-first-use-expansion-rate>=0.80 n6-domains-docs-jargon-ratio<=0.30
